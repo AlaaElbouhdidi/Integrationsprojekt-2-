@@ -1,0 +1,14 @@
+version: "3"
+services:
+  angular:
+    build: .
+    restart: always
+    ports:
+        - "4200:80"
+  nest:
+    build:
+      context: server
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+        - "8000:8000"

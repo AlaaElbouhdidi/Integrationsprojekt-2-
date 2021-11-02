@@ -1,5 +1,7 @@
 # Integrationsprojekt 2 - Frontend
 
+[![pipeline status](https://git.thm.de/cbkr81/integrationsprojekt-2/badges/main/pipeline.svg)](https://git.thm.de/cbkr81/integrationsprojekt-2/-/commits/main)
+
 ## Installation
 
 ```bash
@@ -17,6 +19,13 @@ npm run start
 ```
 
 View production build locally at <http://localhost:4000>
+
+## Docker
+
+```bash
+# Build app with docker-compose
+./install.sh
+```
 
 ## Test
 

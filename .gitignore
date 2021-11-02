@@ -55,3 +55,5 @@ cypress/videos/*
 node_modules/.bin
 **/node_modules/
 **/dist
+
+server/coverage
