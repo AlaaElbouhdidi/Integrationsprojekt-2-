@@ -27,23 +27,44 @@
     "functions:shell": "npm run build && firebase functions:shell",
     "functions:start": "npm run shell",
     "functions:deploy": "firebase deploy --only functions",
-    "functions:logs": "firebase functions:log"
+    "functions:logs": "firebase functions:log",
+    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
+    "test:doc": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
+    "serve:doc": "compodoc -p tsconfig.doc.json --language de-DE -r 8001 -s"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.15",
-    "@nestjs/core": "^7.6.15",
-    "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/axios": "0.0.3",
+    "@nestjs/common": "^8.1.2",
+    "@nestjs/config": "^1.0.3",
+    "@nestjs/core": "^8.1.2",
+    "@nestjs/mongoose": "^9.0.1",
+    "@nestjs/platform-express": "^8.1.2",
+    "@nestjs/platform-socket.io": "^8.1.2",
+    "@nestjs/serve-static": "^2.2.2",
+    "@nestjs/swagger": "^5.1.4",
+    "@nestjs/terminus": "^8.0.1",
+    "@nestjs/typeorm": "^8.0.2",
+    "@nestjs/websockets": "^8.1.2",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "express-session": "^1.17.2",
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1",
+    "mongoose": "^6.0.12",
+    "mysql2": "^2.3.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
-    "firebase-admin": "^9.8.0",
-    "firebase-functions": "^3.14.1"
+    "swagger-ui-express": "^4.1.6",
+    "typeorm": "^0.2.38"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.15",
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.0",
     "@nestjs/testing": "^7.6.15",
     "@types/express": "^4.17.11",
+    "@types/express-session": "^1.17.4",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.36",
     "@types/supertest": "^2.0.10",
@@ -52,6 +73,7 @@
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "firebase-functions-test": "^0.2.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "supertest": "^6.1.3",
@@ -59,8 +81,7 @@
     "ts-loader": "^8.0.18",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.2.3",
-    "firebase-functions-test": "^0.2.0"
+    "typescript": "^4.2.3"
   },
   "jest": {
     "moduleFileExtensions": [
