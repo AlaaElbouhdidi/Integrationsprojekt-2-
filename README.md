@@ -1,27 +1,46 @@
-# Integrationsprojekt2
+# Integrationsprojekt 2 - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
+## Installation
 
-## Development server
+```bash
+npm install
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Running the app
 
-## Code scaffolding
+```bash
+# Development - View locally at <http://localhost:4200>
+npm run start:dev
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Production
+npm run start
+```
 
-## Build
+View production build locally at <http://localhost:4000>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Test
 
-## Running unit tests
+```bash
+# Unit tests with Jest
+npm run test
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# e2e tests with Cypress
+npm run e2e
 
-## Running end-to-end tests
+# e2e tests with Cypress
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Run frontend first
+npm run start
+npm run cy:run
+```
 
-## Further help
+## Deployment
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+# Deploy with firebase hosting
+npm run deploy
+
+# Deploys frontend at https://integrationsprojekt2.web.app
+```
+
+View production build at <https://integrationsprojekt2.web.app>

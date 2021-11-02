@@ -4,14 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:dev": "npm run watch && npm run serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "e2e": "ng e2e",
-    "predeploy": "npm run build && npm run test",
-    "deploy": "ng deploy"
+    "deploy": "ng deploy",
+    "deploy:all": "npm run deploy && npm run --prefix server functions:deploy"
   },
   "private": true,
   "dependencies": {

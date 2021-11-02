@@ -8,7 +8,7 @@
 /bazel-out
 
 # dependencies
-/node_modules
+**/node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -52,3 +52,6 @@ Thumbs.db
 # Cypress
 cypress/screenshots/*
 cypress/videos/*
+node_modules/.bin
+**/node_modules/
+**/dist
