@@ -57,3 +57,5 @@ node_modules/.bin
 **/dist
 
 server/coverage
+documentation
+server/documentation
