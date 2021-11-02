@@ -1,5 +1,7 @@
 # Integrationsprojekt 2 - Frontend
 
+[![pipeline status](https://git.thm.de/cbkr81/integrationsprojekt-2/badges/main/pipeline.svg)](https://git.thm.de/cbkr81/integrationsprojekt-2/-/commits/main)
+
 ## Installation
 
 ```bash
