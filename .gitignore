@@ -52,4 +52,6 @@ Thumbs.db
 # Cypress
 cypress/screenshots/*
 cypress/videos/*
-server/node_modules
+node_modules/.bin
+**/node_modules/
+**/dist
