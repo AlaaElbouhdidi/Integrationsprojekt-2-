@@ -20,6 +20,13 @@ npm run start
 
 View production build locally at <http://localhost:4000>
 
+## Docker
+
+```bash
+# Build app with docker-compose
+./install.sh
+```
+
 ## Test
 
 ```bash
