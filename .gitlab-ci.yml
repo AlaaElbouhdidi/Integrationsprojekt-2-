@@ -24,7 +24,6 @@ cache:
 
 build-frontend:
   stage: build
-  image: node:14-alpine
   script:
     - echo "Building Angular"
     - npm ci
@@ -99,6 +98,7 @@ e2e-frontend:
   needs: ["test-frontend"]
   before_script:
     - npm install cypress
+    - cypress install
   script:
     - npm run test:cy:run
 
