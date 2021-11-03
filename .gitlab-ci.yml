@@ -11,11 +11,8 @@ workflow:
 
 stages:
   - build
-  - format
-  - lint
-  - doc
   - test
-  - docker
+  - package
   - deploy
 
 cache:
@@ -41,14 +38,14 @@ build-backend:
     - npm run build
 
 format-frontend:
-  stage: format
+  stage: test
   needs: ["build-frontend"]
   script:
     - echo "Formatting Angular"
     - npm run format
 
 format-backend:
-  stage: format
+  stage: test
   needs: ["build-backend"]
   script:
     - echo "Formatting Nest"
@@ -56,14 +53,14 @@ format-backend:
     - npm run format
 
 lint-frontend:
-  stage: lint
+  stage: test
   needs: ["format-frontend"]
   script:
     - echo "Linting Angular"
     - npm run lint
 
 lint-backend:
-  stage: lint
+  stage: test
   needs: ["format-backend"]
   script:
     - echo "Linting Nest"
@@ -71,14 +68,14 @@ lint-backend:
     - npm run lint
 
 doc-frontend:
-  stage: doc
+  stage: test
   needs: ["lint-frontend"]
   script:
     - echo "Documenting Angular"
     - npm run doc
 
 doc-backend:
-  stage: doc
+  stage: test
   needs: ["lint-backend"]
   script:
     - echo "Documenting Nest"
@@ -116,7 +113,7 @@ e2e-backend:
     - npm run test:e2e
 
 docker-frontend:
-  stage: docker
+  stage: package
   needs: ["e2e-frontend"]
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
@@ -126,7 +123,7 @@ docker-frontend:
     - scripts/push_frontend_container.sh
 
 docker-backend:
-  stage: docker
+  stage: package
   needs: ["e2e-backend"]
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
