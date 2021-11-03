@@ -25,6 +25,7 @@ build-frontend:
   stage: build
   script:
     - echo "Building Angular"
+    - chown -R 65534:0 "/root/.npm"
     - npm ci
     - npx cypress cache path
     - npx cypress cache list
@@ -118,7 +119,6 @@ deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend", "test-frontend"]
   before_script:
-    - sudo chown -R 65534:0 "/root/.npm"
     - npm i -g firebase-tools
   script:
     - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
