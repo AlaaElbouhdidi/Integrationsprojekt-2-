@@ -9,10 +9,6 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "push"'
       when: never
 
-variables:
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
-
 stages:
   - build
   - lint
@@ -103,9 +99,9 @@ e2e-frontend:
   stage: test
   needs: ["test-frontend"]
   image: cypress/base
-  before_script:
-      - npx cypress install
   script:
+    - npm ci
+    - npm run start &
     - npm run test:cy:run
   artifacts:
     when: always
