@@ -5,16 +5,17 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint",
+    "format": "prettier --write \"**/*.{js,scss,ts,html}\"",
+    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
+    "doc:cov": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
+    "doc:serve": "compodoc -p tsconfig.doc.json --language de-DE -s -r 4201",
     "test": "ng test",
+    "e2e": "ng e2e",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e": "ng e2e",
     "deploy": "ng deploy",
-    "deploy:all": "npm run deploy && npm run --prefix server functions:deploy",
-    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
-    "test:doc": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
-    "serve:doc": "compodoc -p tsconfig.doc.json --language de-DE -s -r 4201"
+    "deploy:all": "npm run deploy && npm run --prefix server functions:deploy"
   },
   "private": true,
   "dependencies": {
@@ -38,17 +39,39 @@
   "devDependencies": {
     "@angular-builders/jest": "latest",
     "@angular-devkit/build-angular": "~12.2.12",
+    "@angular-eslint/builder": "12.6.1",
+    "@angular-eslint/eslint-plugin": "12.6.1",
+    "@angular-eslint/eslint-plugin-template": "12.6.1",
+    "@angular-eslint/schematics": "12.6.1",
+    "@angular-eslint/template-parser": "12.6.1",
     "@angular/cli": "~12.2.12",
     "@angular/compiler-cli": "~12.2.0",
     "@briebug/cypress-schematic": "^5.0.1",
     "@compodoc/compodoc": "^1.1.15",
+    "@schuchard/prettier": "^5.1.0",
     "@types/jasmine": "~3.8.0",
     "@types/jest": "latest",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "4.28.2",
+    "@typescript-eslint/parser": "4.28.2",
     "cypress": "latest",
+    "eslint": "^7.26.0",
     "jasmine-core": "~3.8.0",
     "jest": "latest",
     "karma-coverage": "~2.0.3",
+    "lint-staged": "latest",
+    "prettier": "latest",
+    "tslint-config-prettier": "latest",
     "typescript": "~4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,less,md,ts,html,component.html}": [
+      "prettier --write"
+    ]
   }
 }
