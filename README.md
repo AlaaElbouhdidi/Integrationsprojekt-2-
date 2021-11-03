@@ -38,8 +38,6 @@ scripts/compose.sh
 ```bash
 # Deploy with firebase hosting
 npm run deploy
-
-# Deploys frontend at https://integrationsprojekt2.web.app
 ```
 
 View production build at <https://integrationsprojekt2.web.app>
