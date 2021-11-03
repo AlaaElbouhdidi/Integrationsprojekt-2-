@@ -93,7 +93,7 @@ test-backend:
     when: always
     reports:
       junit:
-        - junit.xml
+        - server/junit.xml
 
 e2e-frontend:
   stage: test
