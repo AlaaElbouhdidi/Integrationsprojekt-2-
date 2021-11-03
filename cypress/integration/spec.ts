@@ -1,4 +1,4 @@
-it("loads examples", () => {
-    cy.visit("/");
-    cy.contains("integrationsprojekt2");
+it('loads examples', () => {
+  cy.visit('/');
+  cy.contains("integrationsprojekt2");
 });
