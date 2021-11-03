@@ -118,6 +118,9 @@ e2e-backend:
 docker-frontend:
   stage: docker
   needs: ["e2e-frontend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
   script:
     - echo "Dockerizing Angular"
     - scripts/push_frontend_container.sh
@@ -125,6 +128,9 @@ docker-frontend:
 docker-backend:
   stage: docker
   needs: ["e2e-backend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
   script:
     - echo "Dockerizing Nest"
     - scripts/push_backend_container.sh
@@ -132,6 +138,9 @@ docker-backend:
 deploy-frontend:
   stage: deploy
   needs: ["docker-frontend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
   script:
     - echo "Deploying Angular"
     - firebase deploy --token "$FIREBASE_TOKEN"
@@ -139,6 +148,9 @@ deploy-frontend:
 deploy-backend:
   stage: deploy
   needs: ["docker-backend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
   script:
     - echo "Deploying Nest"
     - cd server || exit
