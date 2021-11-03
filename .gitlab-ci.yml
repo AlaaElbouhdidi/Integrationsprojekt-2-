@@ -19,6 +19,8 @@ stages:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
+    - .npm
+    - cache/Cypress
     - node_modules/
     - server/node_modules/
 
@@ -27,6 +29,8 @@ build-frontend:
   script:
     - echo "Building Angular"
     - npm ci
+    - npx cypress cache path
+    - npx cypress cache list
     - npm run build
 
 build-backend:
@@ -97,10 +101,15 @@ e2e-frontend:
   stage: test
   needs: ["test-frontend"]
   before_script:
-    - npm install cypress
-    - cypress install
+      - npx cypress install
   script:
+    - npm run start &
     - npm run test:cy:run
+  artifacts:
+    when: always
+    paths:
+      - cypress/videos/**/*.mp4
+      - cypress/screenshots/**/*.png
 
 e2e-backend:
   stage: test
