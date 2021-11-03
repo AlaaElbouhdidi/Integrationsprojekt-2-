@@ -92,7 +92,7 @@ deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend"]
   script:
-    - echo "Deploying Angular
+    - echo "Deploying Angular"
 
 deploy-backend:
   stage: deploy
