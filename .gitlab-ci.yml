@@ -118,9 +118,9 @@ docker-frontend:
   script:
     - echo "Dockerizing Angular"
     - scripts/push_frontend_container.sh
-  when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
 
 docker-backend:
   stage: package
@@ -131,6 +131,7 @@ docker-backend:
   when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
 
 deploy-frontend:
   stage: deploy
@@ -141,6 +142,7 @@ deploy-frontend:
   when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
 
 deploy-backend:
   stage: deploy
@@ -149,6 +151,6 @@ deploy-backend:
     - echo "Deploying Nest"
     - cd server || exit
     - firebase deploy --only functions --token "$FIREBASE_TOKEN"
-  when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
