@@ -74,7 +74,7 @@ doc-backend:
 
 test-frontend:
   stage: test
-  needs: ["build-front", "format-frontend", "lint-frontend", "doc-frontend"]
+  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
   script:
     - npm run test:ci
   artifacts:
