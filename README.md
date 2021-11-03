@@ -24,23 +24,13 @@ View production build locally at <http://localhost:4000>
 
 ```bash
 # Build app with docker-compose
-./install.sh
+scripts/compose.sh
 ```
 
 ## Test
 
 ```bash
-# Unit tests with Jest
-npm run test
-
-# e2e tests with Cypress
-npm run e2e
-
-# e2e tests with Cypress
-
-# Run frontend first
-npm run start
-npm run cy:run
+./test.sh
 ```
 
 ## Deployment
