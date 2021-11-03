@@ -18,9 +18,6 @@ stages:
   - docker
   - deploy
 
-before_script:
-  - npm i -g firebase-tools
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
@@ -135,6 +132,8 @@ docker-backend:
 deploy-frontend:
   stage: deploy
   needs: ["docker-frontend"]
+  before_script:
+    - npm i -g firebase-tools
   script:
     - echo "Deploying Angular"
     - npm run deploy
@@ -142,6 +141,8 @@ deploy-frontend:
 deploy-backend:
   stage: deploy
   needs: ["docker-backend"]
+  before_script:
+    - npm i -g firebase-tools
   script:
     - echo "Deploying Nest"
     - cd server || exit
