@@ -25,7 +25,7 @@ build-frontend:
   stage: build
   script:
     - echo "Building Angular"
-    - chown -R 65534:0 "/root/.npm"
+    - npm i -g firebase-tools
     - npm ci
     - npx cypress cache path
     - npx cypress cache list
