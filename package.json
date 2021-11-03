@@ -56,7 +56,6 @@
     "@typescript-eslint/parser": "4.28.2",
     "cypress": "latest",
     "eslint": "^7.26.0",
-    "husky": "latest",
     "jasmine-core": "~3.8.0",
     "jest": "latest",
     "karma-coverage": "~2.0.3",
