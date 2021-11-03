@@ -75,7 +75,7 @@ doc-backend:
 
 test-frontend:
   stage: test
-  needs: ["build-frontend"]
+  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
   script:
     - npm run test:ci
   artifacts:
@@ -86,7 +86,7 @@ test-frontend:
 
 test-backend:
   stage: test
-  needs: ["build-backend"]
+  needs: ["build-frontend", "format-backend", "lint-backend", "doc-backend"]
   script:
     - npm run --prefix server test:ci
   artifacts:
