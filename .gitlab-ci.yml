@@ -25,7 +25,6 @@ build-frontend:
   stage: build
   script:
     - echo "Building Angular"
-    - npm i -g firebase-tools
     - npm ci
     - npx cypress cache path
     - npx cypress cache list
