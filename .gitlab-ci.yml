@@ -29,12 +29,18 @@ build-frontend:
     - npx cypress cache path
     - npx cypress cache list
     - npm run build
+  artifacts:
+    paths:
+      - dist
 
 build-backend:
   stage: build
   script:
     - npm ci --prefix server
     - npm run --prefix server build
+  artifacts:
+    paths:
+      - server/dist
 
 format-frontend:
   stage: format
@@ -64,13 +70,19 @@ doc-frontend:
   stage: doc
   needs: ["build-frontend"]
   script:
-    - npm run doc
+    - npm run doc:coverage
+  artifacts:
+    paths:
+      - documentation
 
 doc-backend:
   stage: doc
   needs: ["build-backend"]
   script:
-    - npm run --prefix server doc
+    - npm run --prefix server doc:coverage
+  artifacts:
+    paths:
+      - server/documentation
 
 test-frontend:
   stage: test
@@ -79,6 +91,8 @@ test-frontend:
     - npm run test:ci
   artifacts:
     when: always
+    paths:
+      - coverage
     reports:
       junit:
         - junit.xml
@@ -90,6 +104,8 @@ test-backend:
     - npm run --prefix server test:ci
   artifacts:
     when: always
+    paths:
+      - server/coverage
     reports:
       junit:
         - server/junit.xml
