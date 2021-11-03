@@ -15,7 +15,11 @@ stages:
   - lint
   - doc
   - test
+  - docker
   - deploy
+
+before_script:
+  - npm i -g firebase-tools
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -78,7 +82,7 @@ doc-frontend:
 
 doc-backend:
   stage: doc
-  needs: ["lint-frontend"]
+  needs: ["lint-backend"]
   script:
     - echo "Documenting Nest"
     - cd server || exit
@@ -115,14 +119,14 @@ e2e-backend:
     - npm run test:e2e
 
 docker-frontend:
-  stage: deploy
+  stage: docker
   needs: ["e2e-frontend"]
   script:
     - echo "Dockerizing Angular"
     - scripts/push_frontend_container.sh
 
 docker-backend:
-  stage: deploy
+  stage: docker
   needs: ["e2e-backend"]
   script:
     - echo "Dockerizing Nest"
@@ -130,14 +134,14 @@ docker-backend:
 
 deploy-frontend:
   stage: deploy
-  needs: ["e2e-frontend"]
+  needs: ["docker-frontend"]
   script:
     - echo "Deploying Angular"
     - npm run deploy
 
 deploy-backend:
   stage: deploy
-  needs: ["e2e-backend"]
+  needs: ["docker-backend"]
   script:
     - echo "Deploying Nest"
     - cd server || exit
