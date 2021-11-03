@@ -70,6 +70,7 @@ doc-frontend:
   stage: doc
   needs: ["build-frontend"]
   script:
+    - npm run doc
     - npm run doc:coverage
   artifacts:
     paths:
@@ -79,6 +80,7 @@ doc-backend:
   stage: doc
   needs: ["build-backend"]
   script:
+    - npm run --prefix server doc
     - npm run --prefix server doc:coverage
   artifacts:
     paths:
@@ -134,7 +136,6 @@ deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend", "test-frontend"]
   before_script:
-    - sudo chown -R 65534:0 "/root/.npm"
     - npm i -g firebase-tools
   script:
     - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
