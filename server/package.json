@@ -12,12 +12,15 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/src/main",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
+    "doc:cov": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
+    "doc:serve": "compodoc -p tsconfig.doc.json --language de-DE -r 8001 -s",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -27,10 +30,7 @@
     "functions:shell": "npm run build && firebase functions:shell",
     "functions:start": "npm run shell",
     "functions:deploy": "firebase deploy --only functions",
-    "functions:logs": "firebase functions:log",
-    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
-    "test:doc": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
-    "serve:doc": "compodoc -p tsconfig.doc.json --language de-DE -r 8001 -s"
+    "functions:logs": "firebase functions:log"
   },
   "dependencies": {
     "@nestjs/axios": "0.0.3",

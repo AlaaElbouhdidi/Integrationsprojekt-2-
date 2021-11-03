@@ -3,20 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "prettier": "prettier --write \"**/*.{js,scss,ts,html}\"",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "lint": "ng lint",
+    "format": "prettier --write \"**/*.{js,scss,ts,html}\"",
+    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
+    "doc:cov": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
+    "doc:serve": "compodoc -p tsconfig.doc.json --language de-DE -s -r 4201",
     "test": "ng test",
+    "e2e": "ng e2e",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e": "ng e2e",
     "deploy": "ng deploy",
-    "deploy:all": "npm run deploy && npm run --prefix server functions:deploy",
-    "doc": "compodoc -p tsconfig.doc.json --language de-DE",
-    "test:doc": "compodoc -p tsconfig.doc.json --language de-DE --coverageTest",
-    "serve:doc": "compodoc -p tsconfig.doc.json --language de-DE -s -r 4201",
-    "lint": "ng lint"
+    "deploy:all": "npm run deploy && npm run --prefix server functions:deploy"
   },
   "private": true,
   "dependencies": {
