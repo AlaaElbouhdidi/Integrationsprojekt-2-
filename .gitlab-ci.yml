@@ -1,8 +1,3 @@
-image: docker:latest
-
-services:
-    - docker:dind
-
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -122,6 +117,9 @@ e2e-backend:
 docker-frontend:
   stage: package
   needs: ["e2e-frontend"]
+  image: docker:latest
+  services:
+    - docker:dind
   before_script:
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
   script:
@@ -129,6 +127,9 @@ docker-frontend:
 
 docker-backend:
   stage: package
+  image: docker:latest
+  services:
+    - docker:dind
   needs: ["e2e-backend"]
   before_script:
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
