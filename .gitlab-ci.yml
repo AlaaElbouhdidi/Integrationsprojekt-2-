@@ -36,7 +36,6 @@ build-backend:
     - npm ci --prefix server
     - npm run --prefix server build
 
-
 format-frontend:
   stage: format
   needs: ["build-frontend"]
@@ -75,7 +74,7 @@ doc-backend:
 
 test-frontend:
   stage: test
-  needs: ["build-frontend"]
+  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
   script:
     - npm run test:ci
   artifacts:
@@ -86,7 +85,7 @@ test-frontend:
 
 test-backend:
   stage: test
-  needs: ["build-backend"]
+  needs: ["build-backend", "format-backend", "lint-backend", "doc-backend"]
   script:
     - npm run --prefix server test:ci
   artifacts:
@@ -119,9 +118,10 @@ deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend", "test-frontend"]
   before_script:
+    - sudo chown -R 65534:0 "/root/.npm"
     - npm i -g firebase-tools
   script:
-    - firebase deploy --token "$FIREBASE_TOKEN"
+    - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
   only:
     refs:
       - main
