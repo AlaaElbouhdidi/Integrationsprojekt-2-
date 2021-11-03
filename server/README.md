@@ -29,7 +29,7 @@ npm run test
 npm run test:e2e
 
 # test coverage
-npm run test:cov
+npm run test:coverage
 ```
 
 ## Deployment
@@ -38,7 +38,7 @@ npm run test:cov
 # Deploy with firebase functions
 # Note: This might take 3-5 minutes!
 
-npm run functions:deploy
-
-# Deploys server as cloud function at https://europe-west1-integrationsprojekt2.cloudfunctions.net/api
+npm run deploy
 ```
+
+View function deployment at <https://europe-west1-integrationsprojekt2.cloudfunctions.net/api>
