@@ -11,6 +11,7 @@ workflow:
 
 stages:
   - build
+  - lint
   - test
   - package
   - deploy
@@ -38,14 +39,14 @@ build-backend:
     - npm run build
 
 format-frontend:
-  stage: test
+  stage: lint
   needs: ["build-frontend"]
   script:
     - echo "Formatting Angular"
     - npm run format
 
 format-backend:
-  stage: test
+  stage: lint
   needs: ["build-backend"]
   script:
     - echo "Formatting Nest"
@@ -53,14 +54,14 @@ format-backend:
     - npm run format
 
 lint-frontend:
-  stage: test
+  stage: lint
   needs: ["format-frontend"]
   script:
     - echo "Linting Angular"
     - npm run lint
 
 lint-backend:
-  stage: test
+  stage: lint
   needs: ["format-backend"]
   script:
     - echo "Linting Nest"
