@@ -23,8 +23,6 @@ stages:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - .npm
-    - cache/Cypress
     - node_modules/
     - server/node_modules/
 
@@ -104,10 +102,10 @@ test-backend:
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
+  image: cypress/base
   before_script:
       - npx cypress install
   script:
-    - npm run start &
     - npm run test:cy:run
   artifacts:
     when: always
