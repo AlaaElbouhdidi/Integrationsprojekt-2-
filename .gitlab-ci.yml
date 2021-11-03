@@ -105,7 +105,7 @@ e2e-frontend:
   needs: ["test-frontend"]
   script:
     - echo "End-to-End-Testing Angular"
-    - npm run test:cyan:run
+    - npm run test:cy:run
 
 e2e-backend:
   stage: test
@@ -132,18 +132,14 @@ docker-backend:
 deploy-frontend:
   stage: deploy
   needs: ["docker-frontend"]
-  before_script:
-    - npm i -g firebase-tools
   script:
     - echo "Deploying Angular"
-    - npm run deploy
+    - firebase deploy --token "$FIREBASE_TOKEN"
 
 deploy-backend:
   stage: deploy
   needs: ["docker-backend"]
-  before_script:
-    - npm i -g firebase-tools
   script:
     - echo "Deploying Nest"
     - cd server || exit
-    - npm run deploy
+    - firebase deploy --only functions --token "$FIREBASE_TOKEN"
