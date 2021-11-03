@@ -21,7 +21,6 @@ cache:
   paths:
     - node_modules/
     - server/node_modules/
-    - /root/.cache/Cypress
 
 build-frontend:
   stage: build
@@ -98,6 +97,8 @@ test-backend:
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
+  before_script:
+    - cypress install
   script:
     - npm run test:cy:run
 
