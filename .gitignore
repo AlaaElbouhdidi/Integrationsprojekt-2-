@@ -59,3 +59,6 @@ node_modules/.bin
 server/coverage
 documentation
 server/documentation
+
+junit.xml
+server/junit.xml

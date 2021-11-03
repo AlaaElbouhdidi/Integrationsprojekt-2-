@@ -21,6 +21,7 @@ cache:
   paths:
     - node_modules/
     - server/node_modules/
+    - /root/.cache/Cypress
 
 build-frontend:
   stage: build
@@ -33,98 +34,89 @@ build-frontend:
 build-backend:
   stage: build
   script:
-    - echo "Building Nest"
-    - cd server || exit
-    - npm ci
-    - npm run build
+    - npm ci --prefix server
+    - npm run --prefix server build
 
 format-frontend:
   stage: lint
   needs: ["build-frontend"]
   script:
-    - echo "Formatting Angular"
     - npm run format
 
 format-backend:
   stage: lint
   needs: ["build-backend"]
   script:
-    - echo "Formatting Nest"
-    - cd server || exit
-    - npm run format
+    - npm run --prefix server format
 
 lint-frontend:
   stage: lint
   needs: ["format-frontend"]
   script:
-    - echo "Linting Angular"
     - npm run lint
 
 lint-backend:
   stage: lint
   needs: ["format-backend"]
   script:
-    - echo "Linting Nest"
-    - cd server || exit
-    - npm run lint
+    - npm run --prefix server lint
 
 doc-frontend:
   stage: test
   needs: ["lint-frontend"]
   script:
-    - echo "Documenting Angular"
     - npm run doc
 
 doc-backend:
   stage: test
   needs: ["lint-backend"]
   script:
-    - echo "Documenting Nest"
-    - cd server || exit
-    - npm run doc
+    - npm run --prefix server doc
 
 test-frontend:
   stage: test
   needs: ["doc-frontend"]
   script:
-    - echo "Testing Angular"
-    - npm run test
+    - npm run test:ci
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
 
 test-backend:
   stage: test
   needs: ["doc-backend"]
   script:
-    - echo "Testing Nest"
-    - cd server || exit
-    - npm run test
+    - npm run --prefix server test:ci
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
 
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
   script:
-    - echo "End-to-End-Testing Angular"
     - npm run test:cy:run
 
 e2e-backend:
   stage: test
   needs: ["test-backend"]
   script:
-    - echo "End-to-End-Testing Nest"
-    - cd server || exit
-    - npm run test:e2e
+    - npm run --prefix server test:e2e
 
 docker-frontend:
   stage: package
   needs: ["e2e-frontend"]
   script:
-    - echo "Dockerizing Angular"
     - scripts/push_frontend_container.sh
 
 docker-backend:
   stage: package
   needs: ["e2e-backend"]
   script:
-    - echo "Dockerizing Nest"
     - scripts/push_backend_container.sh
 
 deploy-frontend:
@@ -134,7 +126,6 @@ deploy-frontend:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
   script:
-    - echo "Deploying Angular"
     - firebase deploy --token "$FIREBASE_TOKEN"
 
 deploy-backend:
@@ -144,6 +135,4 @@ deploy-backend:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
   script:
-    - echo "Deploying Nest"
-    - cd server || exit
     - firebase deploy --only functions --token "$FIREBASE_TOKEN"
