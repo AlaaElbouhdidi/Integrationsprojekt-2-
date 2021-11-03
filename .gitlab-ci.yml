@@ -10,10 +10,11 @@ workflow:
       when: never
 
 stages:
-  - build
+  - format
   - lint
+  - doc
+  - build
   - test
-  - package
   - deploy
 
 cache:
@@ -22,8 +23,39 @@ cache:
     - node_modules/
     - server/node_modules/
 
+format-frontend:
+  stage: format
+  script:
+    - npm run format
+
+format-backend:
+  stage: format
+  script:
+    - npm run --prefix server format
+
+lint-frontend:
+  stage: lint
+  script:
+    - npm run lint
+
+lint-backend:
+  stage: lint
+  script:
+    - npm run --prefix server lint
+
+doc-frontend:
+  stage: doc
+  script:
+    - npm run doc
+
+doc-backend:
+  stage: doc
+  script:
+    - npm run --prefix server doc
+
 build-frontend:
   stage: build
+  needs: ["lint-frontend", "format-frontend", "doc-frontend"]
   script:
     - echo "Building Angular"
     - npm ci
@@ -33,49 +65,14 @@ build-frontend:
 
 build-backend:
   stage: build
+  needs: ["lint-backend", "format-backend", "doc-backend"]
   script:
     - npm ci --prefix server
     - npm run --prefix server build
 
-format-frontend:
-  stage: lint
-  needs: ["build-frontend"]
-  script:
-    - npm run format
-
-format-backend:
-  stage: lint
-  needs: ["build-backend"]
-  script:
-    - npm run --prefix server format
-
-lint-frontend:
-  stage: lint
-  needs: ["format-frontend"]
-  script:
-    - npm run lint
-
-lint-backend:
-  stage: lint
-  needs: ["format-backend"]
-  script:
-    - npm run --prefix server lint
-
-doc-frontend:
-  stage: test
-  needs: ["lint-frontend"]
-  script:
-    - npm run doc
-
-doc-backend:
-  stage: test
-  needs: ["lint-backend"]
-  script:
-    - npm run --prefix server doc
-
 test-frontend:
   stage: test
-  needs: ["doc-frontend"]
+  needs: ["build-frontend"]
   script:
     - npm run test:ci
   artifacts:
@@ -86,7 +83,7 @@ test-frontend:
 
 test-backend:
   stage: test
-  needs: ["doc-backend"]
+  needs: ["build-backend"]
   script:
     - npm run --prefix server test:ci
   artifacts:
@@ -117,7 +114,7 @@ e2e-backend:
 
 deploy-frontend:
   stage: deploy
-  needs: ["e2e-frontend"]
+  needs: ["e2e-frontend", "test-frontend"]
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
@@ -126,7 +123,7 @@ deploy-frontend:
 
 deploy-backend:
   stage: deploy
-  needs: ["e2e-backend"]
+  needs: ["e2e-backend", "test-backend"]
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
