@@ -5,5 +5,5 @@ module.exports = {
     preset: "jest-preset-angular",
     setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
     modulePathIgnorePatterns: ["<rootDir>/cypress/", "<rootDir>/server/"],
-    reporters: ["default", "jest-junit"],
+    reporters: ["default", "jest-junit"]
 };
