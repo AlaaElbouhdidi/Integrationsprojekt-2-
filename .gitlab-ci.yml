@@ -1,3 +1,14 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
+    - if: $CI_COMMIT_BRANCH == "develop"
+      when: always
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+      when: never
+
 stages:
   - build
   - format
@@ -6,8 +17,15 @@ stages:
   - test
   - deploy
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - server/node_modules/
+
 build-frontend:
   stage: build
+  image: node:14-alpine
   script:
     - echo "Building Angular"
 

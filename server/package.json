@@ -12,10 +12,10 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "start": "nest start",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "start": "node dist/src/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/src/main",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "doc": "compodoc -p tsconfig.doc.json --language de-DE",
@@ -26,11 +26,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "functions:serve": "npm run build && firebase emulators:start --only functions",
-    "functions:shell": "npm run build && firebase functions:shell",
-    "functions:start": "npm run shell",
-    "functions:deploy": "firebase deploy --only functions",
-    "functions:logs": "firebase functions:log"
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
   },
   "dependencies": {
     "@nestjs/axios": "0.0.3",
