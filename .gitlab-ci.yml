@@ -98,6 +98,7 @@ test-backend:
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
+  image: cypress/base
   script:
     - npm ci
     - npm run start &
