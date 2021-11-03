@@ -96,7 +96,7 @@ test-backend:
 
 e2e-frontend:
   stage: test
-  needs: ["test-frontend"]
+  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
   image: cypress/base
   script:
     - npm ci
@@ -110,7 +110,7 @@ e2e-frontend:
 
 e2e-backend:
   stage: test
-  needs: ["test-backend"]
+  needs: ["build-backend", "format-backend", "lint-backend", "doc-backend"]
   script:
     - npm run --prefix server test:e2e
 
