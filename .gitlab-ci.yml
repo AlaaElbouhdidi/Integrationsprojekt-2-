@@ -98,7 +98,7 @@ e2e-frontend:
   stage: test
   needs: ["test-frontend"]
   before_script:
-    - cypress install
+    - npm install cypress
   script:
     - npm run test:cy:run
 
