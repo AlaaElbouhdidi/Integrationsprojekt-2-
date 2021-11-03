@@ -28,92 +28,117 @@ build-frontend:
   image: node:14-alpine
   script:
     - echo "Building Angular"
+    - npm ci
+    - npm run build
 
 build-backend:
   stage: build
   script:
     - echo "Building Nest"
+    - cd server || exit
+    - npm ci
+    - npm run build
 
 format-frontend:
   stage: format
   needs: ["build-frontend"]
   script:
     - echo "Formatting Angular"
+    - npm run format
 
 format-backend:
   stage: format
   needs: ["build-backend"]
   script:
     - echo "Formatting Nest"
+    - cd server || exit
+    - npm run format
 
 lint-frontend:
   stage: lint
   needs: ["format-frontend"]
   script:
     - echo "Linting Angular"
+    - npm run lint
 
 lint-backend:
   stage: lint
   needs: ["format-backend"]
   script:
     - echo "Linting Nest"
+    - cd server || exit
+    - npm run lint
 
 doc-frontend:
   stage: doc
   needs: ["lint-frontend"]
   script:
     - echo "Documenting Angular"
+    - npm run doc
 
 doc-backend:
   stage: doc
   needs: ["lint-frontend"]
   script:
     - echo "Documenting Nest"
+    - cd server || exit
+    - npm run doc
 
 test-frontend:
   stage: test
   needs: ["doc-frontend"]
   script:
     - echo "Testing Angular"
+    - npm run test
 
 test-backend:
   stage: test
   needs: ["doc-backend"]
   script:
     - echo "Testing Nest"
+    - cd server || exit
+    - npm run test
 
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
   script:
     - echo "End-to-End-Testing Angular"
+    - npm run test:cyan:run
 
 e2e-backend:
   stage: test
   needs: ["test-backend"]
   script:
     - echo "End-to-End-Testing Nest"
+    - cd server || exit
+    - npm run test:e2e
 
 docker-frontend:
   stage: deploy
   needs: ["e2e-frontend"]
   script:
     - echo "Dockerizing Angular"
+    - scripts/push_frontend_container.sh
 
 docker-backend:
   stage: deploy
   needs: ["e2e-backend"]
   script:
     - echo "Dockerizing Nest"
+    - scripts/push_backend_container.sh
 
 deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend"]
   script:
     - echo "Deploying Angular"
+    - npm run deploy
 
 deploy-backend:
   stage: deploy
   needs: ["e2e-backend"]
   script:
     - echo "Deploying Nest"
+    - cd server || exit
+    - npm run deploy
