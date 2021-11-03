@@ -115,31 +115,9 @@ e2e-backend:
   script:
     - npm run --prefix server test:e2e
 
-docker-frontend:
-  stage: package
-  needs: ["e2e-frontend"]
-  image: docker:latest
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-  script:
-    - scripts/push_frontend_container.sh
-
-docker-backend:
-  stage: package
-  image: docker:latest
-  services:
-    - docker:dind
-  needs: ["e2e-backend"]
-  before_script:
-    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
-  script:
-    - scripts/push_backend_container.sh
-
 deploy-frontend:
   stage: deploy
-  needs: ["docker-frontend"]
+  needs: ["e2e-frontend"]
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
@@ -148,7 +126,7 @@ deploy-frontend:
 
 deploy-backend:
   stage: deploy
-  needs: ["docker-backend"]
+  needs: ["e2e-backend"]
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: on_success
