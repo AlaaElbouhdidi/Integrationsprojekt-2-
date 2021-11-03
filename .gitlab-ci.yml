@@ -130,6 +130,9 @@ docker-backend:
 deploy-frontend:
   stage: deploy
   needs: ["docker-frontend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: on_success
   script:
     - echo "Deploying Angular"
     - firebase deploy --token "$FIREBASE_TOKEN"
