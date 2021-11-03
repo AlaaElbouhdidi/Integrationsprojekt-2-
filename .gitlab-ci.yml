@@ -110,12 +110,16 @@ e2e-backend:
 docker-frontend:
   stage: package
   needs: ["e2e-frontend"]
+  before_script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
   script:
     - scripts/push_frontend_container.sh
 
 docker-backend:
   stage: package
   needs: ["e2e-backend"]
+  before_script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
   script:
     - scripts/push_backend_container.sh
 
