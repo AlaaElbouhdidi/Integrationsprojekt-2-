@@ -15,7 +15,7 @@
     "test:e2e": "ng e2e",
     "test:cy:open": "cypress open",
     "test:cy:run": "cypress run",
-    "test:ci": "jest --ci --reporters=default --reporters=jest-junit",
+    "test:ci": "jest --coverage --ci --reporters=default --reporters=jest-junit",
     "deploy": "ng deploy",
     "deploy:all": "npm run deploy && npm run --prefix server functions:deploy"
   },

@@ -70,6 +70,7 @@ doc-frontend:
   stage: doc
   needs: ["build-frontend"]
   script:
+    - npm run doc
     - npm run doc:coverage
   artifacts:
     paths:
@@ -79,6 +80,7 @@ doc-backend:
   stage: doc
   needs: ["build-backend"]
   script:
+    - npm run --prefix server doc
     - npm run --prefix server doc:coverage
   artifacts:
     paths:
