@@ -115,42 +115,40 @@ e2e-backend:
 docker-frontend:
   stage: package
   needs: ["e2e-frontend"]
-  script:
-    - echo "Dockerizing Angular"
-    - scripts/push_frontend_container.sh
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
+  script:
+    - echo "Dockerizing Angular"
+    - scripts/push_frontend_container.sh
 
 docker-backend:
   stage: package
   needs: ["e2e-backend"]
-  script:
-    - echo "Dockerizing Nest"
-    - scripts/push_backend_container.sh
-  when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
+  script:
+    - echo "Dockerizing Nest"
+    - scripts/push_backend_container.sh
 
 deploy-frontend:
   stage: deploy
   needs: ["docker-frontend"]
-  script:
-    - echo "Deploying Angular"
-    - firebase deploy --token "$FIREBASE_TOKEN"
-  when: manual
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
+  script:
+    - echo "Deploying Angular"
+    - firebase deploy --token "$FIREBASE_TOKEN"
 
 deploy-backend:
   stage: deploy
   needs: ["docker-backend"]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
   script:
     - echo "Deploying Nest"
     - cd server || exit
     - firebase deploy --only functions --token "$FIREBASE_TOKEN"
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      when: manual
