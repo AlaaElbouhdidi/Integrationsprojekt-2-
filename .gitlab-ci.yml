@@ -18,6 +18,7 @@ stages:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
+    - dist
     - node_modules/
     - server/node_modules/
 
