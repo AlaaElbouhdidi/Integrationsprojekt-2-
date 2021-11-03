@@ -1,3 +1,8 @@
+image: docker:latest
+
+services:
+    - docker:dind
+
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -98,7 +103,6 @@ test-backend:
 e2e-frontend:
   stage: test
   needs: ["test-frontend"]
-  image: cypress/base
   script:
     - npm ci
     - npm run start &
