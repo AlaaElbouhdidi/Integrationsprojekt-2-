@@ -10,5 +10,6 @@ export const environment = {
         authDomain: "integrationsprojekt2.firebaseapp.com",
         messagingSenderId: "229229352898"
     },
-    production: true
+    production: true,
+    apiUrl: "https://europe-west1-integrationsprojekt2.cloudfunctions.net/api"
 };
