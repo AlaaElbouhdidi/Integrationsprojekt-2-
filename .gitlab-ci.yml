@@ -18,7 +18,6 @@ stages:
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - dist
     - node_modules/
     - server/node_modules/
 
@@ -136,6 +135,8 @@ e2e-backend:
 deploy-frontend:
   stage: deploy
   needs: ["e2e-frontend", "test-frontend"]
+  dependencies:
+    - build-frontend
   before_script:
     - npm i -g firebase-tools
   script:
