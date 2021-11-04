@@ -10,5 +10,6 @@ export const environment = {
         authDomain: "integrationsprojekt2.firebaseapp.com",
         messagingSenderId: "229229352898"
     },
-    production: false
+    production: false,
+    apiUrl: "http://localhost:8000"
 };
