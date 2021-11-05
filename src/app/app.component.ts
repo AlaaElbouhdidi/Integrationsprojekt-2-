@@ -14,10 +14,18 @@ export class AppComponent implements OnInit {
      * Project title definition
      */
     title = "Mate Team";
+
+    /**
+     * Constructor that initialized the HttpClient
+     * @param {AppService} appService
+     */
     constructor(private appService: AppService) {}
 
+    /**
+     * Calls the Root backend url on app initialization
+     */
     async ngOnInit() {
-        let response = await this.appService.get();
+        let response = await this.appService.get("");
         console.log(response);
     }
 }

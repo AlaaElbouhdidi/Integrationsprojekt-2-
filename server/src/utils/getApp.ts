@@ -8,7 +8,7 @@ import * as express from 'express';
 /**
  * Instance that is required to initialize the app
  */
-export const expressInstance: express.Express= express();
+export const expressInstance: express.Express = express();
 
 /**
  * Function that returns the app
