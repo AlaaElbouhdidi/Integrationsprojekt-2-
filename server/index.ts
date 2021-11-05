@@ -4,14 +4,14 @@ import { getApp } from './src/utils/getApp';
 
 const expressServer: express.Express = express();
 
-const createFunction = async (): Promise<void> => {
-    const app = await getApp();
+const createFunction = async (expressInstance: express.Express): Promise<void> => {
+    const app = await getApp(expressInstance);
     await app.init();
 };
 
 export const api = functions
     .region('europe-west1')
     .https.onRequest(async (request, response) => {
-        await createFunction();
+        await createFunction(expressServer);
         expressServer(request, response);
     });
