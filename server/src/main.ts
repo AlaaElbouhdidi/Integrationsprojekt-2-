@@ -1,12 +1,10 @@
 import { getApp } from './utils/getApp';
-import * as express from 'express';
 
 /**
  * Function that bootstraps the server
  */
 async function bootstrap() {
-    const instance = express();
-    const app = await getApp(instance);
+    const app = await getApp();
     app.listen(8000);
 }
 
