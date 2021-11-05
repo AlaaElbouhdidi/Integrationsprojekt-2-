@@ -7,8 +7,8 @@ import { environment } from "../environments/environment";
 import { provideAuth, getAuth } from "@angular/fire/auth";
 import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { providePerformance, getPerformance } from '@angular/fire/performance';
-import { provideStorage, getStorage } from '@angular/fire/storage';
+import { providePerformance, getPerformance } from "@angular/fire/performance";
+import { provideStorage, getStorage } from "@angular/fire/storage";
 
 @NgModule({
     declarations: [AppComponent],
