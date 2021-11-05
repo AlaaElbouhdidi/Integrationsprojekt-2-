@@ -7,7 +7,7 @@ COPY . .
 RUN npm install -g @angular/cli && \
     npm install && \
     npm run test && \
-    ng build
+    ng build --configuration development
 
 FROM nginx
 

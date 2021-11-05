@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-npm install
+./install.sh
 ```
 
 ## Running the app
