@@ -23,12 +23,12 @@ export class AppService {
     /**
      * Convenience method that just calls the API at the specified path
      * @param {string} path
-     * @returns {Promise<HttpEvent<string> | Observable<never>>}
+     * @returns {Promise<Object | Observable<never>>}
      */
-    async get(path: string): Promise<HttpEvent<string> | Observable<never>> {
+    async get(path: string): Promise<Object | Observable<never>> {
         const url = `${this.apiUrl}/${path}`;
         const headers = this.createHeader("application/json");
-        return this.http.get<string>(url, headers).toPromise().catch(this.handleError);
+        return this.http.get(url, headers).toPromise().catch(this.handleError);
     }
 
     /**
@@ -36,7 +36,7 @@ export class AppService {
      * @param {string} contentType
      * @returns {{ [key: string]: HttpHeaders | string }}
      */
-    private createHeader(contentType: string): any {
+    private createHeader(contentType: string): { [key: string]: HttpHeaders | string } {
         return { headers: new HttpHeaders({ "Content-Type": contentType }), responseType: "text" };
     }
 
