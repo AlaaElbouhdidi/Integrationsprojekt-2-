@@ -6,11 +6,16 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import * as express from 'express';
 
 /**
+ * Instance that is required to initialize the app
+ */
+export const expressInstance: express.Express= express();
+
+/**
  * Function that returns the app
  * @returns {INestApplication}
  */
-export async function getApp(instance: express.Express): Promise<INestApplication> {
-    const server = new ExpressAdapter(instance);
+export async function getApp(): Promise<INestApplication> {
+    const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
@@ -18,5 +23,6 @@ export async function getApp(instance: express.Express): Promise<INestApplicatio
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('swagger', app, document);
+    app.enableCors();
     return app;
 }

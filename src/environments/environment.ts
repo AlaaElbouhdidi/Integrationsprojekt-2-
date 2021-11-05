@@ -11,5 +11,5 @@ export const environment = {
         messagingSenderId: "229229352898"
     },
     production: false,
-    apiUrl: "http://localhost:8000"
+    apiUrl: "http://localhost:5001/integrationsprojekt2/europe-west1/api"
 };

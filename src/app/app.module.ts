@@ -9,12 +9,14 @@ import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { providePerformance, getPerformance } from "@angular/fire/performance";
 import { provideStorage, getStorage } from "@angular/fire/storage";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
