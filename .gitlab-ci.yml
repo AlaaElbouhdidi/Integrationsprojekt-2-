@@ -94,7 +94,11 @@ deploy-frontend:
 
 deploy-backend:
     stage: deploy
-    needs: ['e2e', 'test']
+    needs:
+        - job: e2e
+        - job: test
+        - job: build
+          artifacts: true
     before_script:
         - npm i -g firebase-tools
     script:
