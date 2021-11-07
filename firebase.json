@@ -31,7 +31,6 @@
         ]
     },
     "functions": {
-        "source": "dist/apps/api",
-        "predeploy": ["nx lint api", "nx build api"]
+        "source": "dist/apps/api"
     }
 }
