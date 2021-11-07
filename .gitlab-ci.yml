@@ -1,159 +1,105 @@
 workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: always
-    - if: $CI_COMMIT_BRANCH == "main"
-      when: always
-    - if: '$CI_PIPELINE_SOURCE == "push"'
-      when: never
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: always
+        - if: $CI_COMMIT_BRANCH == "main"
+          when: always
+        - if: '$CI_PIPELINE_SOURCE == "push"'
+          when: never
 
 stages:
-  - build
-  - format
-  - lint
-  - doc
-  - test
-  - deploy
+    - build
+    - prep
+    - test
+    - deploy
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - server/node_modules/
-
-build-frontend:
-  stage: build
-  script:
-    - echo "Building Angular"
-    - npm ci
-    - npx cypress cache path
-    - npx cypress cache list
-    - npm run build
-  artifacts:
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
-      - dist
+        - node_modules/
 
-build-backend:
-  stage: build
-  script:
-    - npm ci --prefix server
-    - npm run --prefix server build
-  artifacts:
-    paths:
-      - server/dist
+before_script:
+    - apk add git
+    - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
 
-format-frontend:
-  stage: format
-  needs: ["build-frontend"]
-  script:
-    - npm run format
+build:
+    stage: build
+    script:
+        - npm ci
+        - npx cypress cache path
+        - npx cypress cache list
+        - npx nx affected --target build --parallel --base=$CI_BASE_SHA
+    artifacts:
+        paths:
+            - dist
 
-format-backend:
-  stage: format
-  needs: ["build-backend"]
-  script:
-    - npm run --prefix server format
+format:
+    stage: prep
+    needs: ['build']
+    script:
+        - npx nx format:check
 
-lint-frontend:
-  stage: lint
-  needs: ["build-frontend"]
-  script:
-    - npm run lint
+lint:
+    stage: prep
+    needs: ['build']
+    script:
+        - npm run lint
+        - npx nx affected --target lint --parallel --base=$CI_BASE_SHA
 
-lint-backend:
-  stage: lint
-  needs: ["build-backend"]
-  script:
-    - npm run --prefix server lint
+doc:
+    stage: prep
+    needs: ['build']
+    script:
+        - npx nx affected --target compodoc --parallel --base=$CI_BASE_SHA
+    artifacts:
+        when: always
+        paths:
+            - dist/apps/mate-team/documentation
+            - dist/apps/api/documentation
 
-doc-frontend:
-  stage: doc
-  needs: ["build-frontend"]
-  script:
-    - npm run doc
-    - npm run doc:coverage
-  artifacts:
-    paths:
-      - documentation
+test:
+    stage: test
+    needs: ['build', 'format', 'lint', 'doc']
+    script:
+        - npx nx affected --target test --parallel --base=$CI_BASE_SHA
 
-doc-backend:
-  stage: doc
-  needs: ["build-backend"]
-  script:
-    - npm run --prefix server doc
-    - npm run --prefix server doc:coverage
-  artifacts:
-    paths:
-      - server/documentation
-
-test-frontend:
-  stage: test
-  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
-  script:
-    - npm run test:ci
-  artifacts:
-    when: always
-    paths:
-      - coverage
-    reports:
-      junit:
-        - junit.xml
-
-test-backend:
-  stage: test
-  needs: ["build-backend", "format-backend", "lint-backend", "doc-backend"]
-  script:
-    - npm run --prefix server test:ci
-  artifacts:
-    when: always
-    paths:
-      - server/coverage
-    reports:
-      junit:
-        - server/junit.xml
-
-e2e-frontend:
-  stage: test
-  needs: ["build-frontend", "format-frontend", "lint-frontend", "doc-frontend"]
-  image: cypress/base
-  script:
-    - npm ci
-    - npm run start &
-    - npm run test:cy:run
-  artifacts:
-    when: always
-    paths:
-      - cypress/videos/**/*.mp4
-      - cypress/screenshots/**/*.png
-
-e2e-backend:
-  stage: test
-  needs: ["build-backend", "format-backend", "lint-backend", "doc-backend"]
-  script:
-    - npm run --prefix server test:e2e
+e2e:
+    stage: test
+    needs: ['build', 'format', 'lint', 'doc']
+    image: cypress/base
+    before_script:
+        - apt install git
+        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
+    script:
+        - npx nx affected --target e2e --parallel --base=$CI_BASE_SHA
+    artifacts:
+        when: always
+        paths:
+            - dist/cypress/apps/mate-team-e2e/videos/**/*.mp4
+            - dist/cypress/apps/mate-team-e2e/screenshots/**/*.png
 
 deploy-frontend:
-  stage: deploy
-  needs:
-    - job: e2e-frontend
-    - job: test-frontend
-    - job: build-frontend
-      artifacts: true
-  before_script:
-    - npm i -g firebase-tools
-  script:
-    - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
-  only:
-    refs:
-      - main
+    stage: deploy
+    needs:
+        - job: e2e
+        - job: test
+        - job: build
+          artifacts: true
+    before_script:
+        - npm i -g firebase-tools
+    script:
+        - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+    only:
+        refs:
+            - main
 
 deploy-backend:
-  stage: deploy
-  needs: ["e2e-backend", "test-backend"]
-  before_script:
-    - npm i -g firebase-tools
-  script:
-    - firebase deploy --only functions --token "$FIREBASE_TOKEN"
-  only:
-    refs:
-      - main
+    stage: deploy
+    needs: ['e2e', 'test']
+    before_script:
+        - npm i -g firebase-tools
+    script:
+        - firebase deploy --only functions --token "$FIREBASE_TOKEN"
+    only:
+        refs:
+            - main
