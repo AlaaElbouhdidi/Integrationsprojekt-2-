@@ -1,7 +1,7 @@
 {
     "hosting": {
         "target": "integrationsprojekt2",
-        "public": "dist",
+        "public": "dist/apps/mate-team",
         "ignore": ["**/.*"],
         "headers": [
             {
@@ -31,7 +31,7 @@
         ]
     },
     "functions": {
-        "source": "server",
-        "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint", "npm --prefix \"$RESOURCE_DIR\" run build"]
+        "source": "dist/apps/api",
+        "predeploy": ["nx lint api", "nx build api"]
     }
 }

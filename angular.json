@@ -1,175 +1,228 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "integrationsprojekt2": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "projects": {
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
+            "projectType": "application",
+            "architect": {
+                "compodoc": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            {
+                                "command": "npx compodoc -p apps/api/tsconfig.doc.json -d dist/apps/api/documentation/"
+                            }
+                        ]
+                    }
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                "build-node": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": [
+                            "apps/api/src/assets",
+                            "apps/api/src/package.json"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/api/src/environments/environment.ts",
+                                    "with": "apps/api/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "build": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "nx run api:build-node"
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "firebase emulators:start --only functions --inspect-functions"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/api/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "firebase deploy --only functions"
+                    }
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+            }
+        },
+        "api-interfaces": {
+            "root": "libs/api-interfaces",
+            "sourceRoot": "libs/api-interfaces/src",
+            "projectType": "library",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+                    }
                 }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
-          },
-          "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "integrationsprojekt2:build:production"
-            },
-            "development": {
-              "browserTarget": "integrationsprojekt2:build:development"
+        "mate-team": {
+            "projectType": "application",
+            "root": "apps/mate-team",
+            "sourceRoot": "apps/mate-team/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "compodoc": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            {
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.doc.json -d dist/apps/mate-team/documentation/"
+                            }
+                        ]
+                    }
+                },
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/mate-team",
+                        "index": "apps/mate-team/src/index.html",
+                        "main": "apps/mate-team/src/main.ts",
+                        "polyfills": "apps/mate-team/src/polyfills.ts",
+                        "tsConfig": "apps/mate-team/tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            "apps/mate-team/src/favicon.ico",
+                            "apps/mate-team/src/assets",
+                            "apps/mate-team/src/manifest.webmanifest"
+                        ],
+                        "styles": ["apps/mate-team/src/styles.scss"],
+                        "scripts": [],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "apps/mate-team/ngsw-config.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kb",
+                                    "maximumError": "1mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/mate-team/src/environments/environment.ts",
+                                    "with": "apps/mate-team/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mate-team:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "mate-team:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "mate-team:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/mate-team/src/**/*.ts",
+                            "apps/mate-team/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/mate-team/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "firebase deploy --only hosting"
+                    }
+                }
             }
-          },
-          "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "integrationsprojekt2:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": [
-              "scss"
-            ],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "prerender": false,
-            "ssr": false,
-            "browserTarget": "integrationsprojekt2:build:production",
-            "firebaseProject": "integrationsprojekt2",
-            "firebaseHostingSite": "integrationsprojekt2"
-          }
-        },
-        "cypress-run": {
-          "builder": "@briebug/cypress-schematic:cypress",
-          "options": {
-            "devServerTarget": "integrationsprojekt2:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "integrationsprojekt2:serve:production"
+        "mate-team-e2e": {
+            "root": "apps/mate-team-e2e",
+            "sourceRoot": "apps/mate-team-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/mate-team-e2e/cypress.json",
+                        "devServerTarget": "mate-team:serve:development",
+                        "tsConfig": "apps/mate-team-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "mate-team:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/mate-team-e2e/**/*.{js,ts}"]
+                    }
+                }
             }
-          }
-        },
-        "cypress-open": {
-          "builder": "@briebug/cypress-schematic:cypress",
-          "options": {
-            "devServerTarget": "integrationsprojekt2:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "integrationsprojekt2:serve:production"
-            }
-          }
-        },
-        "e2e": {
-          "builder": "@briebug/cypress-schematic:cypress",
-          "options": {
-            "devServerTarget": "integrationsprojekt2:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "integrationsprojekt2:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
-          }
         }
-      }
     }
-  },
-  "defaultProject": "integrationsprojekt2",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
 }
