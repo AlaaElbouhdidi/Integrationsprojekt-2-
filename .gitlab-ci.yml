@@ -28,7 +28,7 @@ build:
         - npm ci
         - npx cypress cache path
         - npx cypress cache list
-        - npx nx affected --target build --parallel
+        - npx nx run-many --target=build --parallel --all
     artifacts:
         paths:
             - dist
@@ -44,13 +44,13 @@ lint:
     needs: ['build']
     script:
         - npm run lint
-        - npx nx affected --target lint --parallel
+        - npx nx run-many --target=lint --parallel --all
 
 doc:
     stage: prep
     needs: ['build']
     script:
-        - npx nx affected --target compodoc --parallel
+        - npx nx run-many --target=compodoc --parallel --all
     artifacts:
         when: always
         paths:
@@ -61,7 +61,7 @@ test:
     stage: test
     needs: ['build', 'format', 'lint', 'doc']
     script:
-        - npx nx affected --target test --parallel
+        - npx nx run-many --target=test --parallel --all
 
 e2e:
     stage: test
@@ -71,12 +71,11 @@ e2e:
         - apt install git
         - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npx nx affected --target e2e --parallel
+        - npx nx run-many --target=e2e --parallel --all
     artifacts:
         when: always
         paths:
-            - dist/cypress/apps/mate-team-e2e/videos/**/*.mp4
-            - dist/cypress/apps/mate-team-e2e/screenshots/**/*.png
+            - dist/cypress/apps/**/*.mp4
 
 deploy-frontend:
     stage: deploy
