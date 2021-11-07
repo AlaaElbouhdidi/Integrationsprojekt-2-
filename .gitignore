@@ -4,15 +4,13 @@
 /dist
 /tmp
 /out-tsc
-# Only exists if Bazel was run
-/bazel-out
-
+ui-debug.log
+.firebase
 # dependencies
-**/node_modules
-
-# profiling files
-chrome-profiler-events*.json
-
+/node_modules
+firebase-debug.log
+**/junit.xml/*
+junit.xml
 # IDEs and editors
 /.idea
 .project
@@ -28,9 +26,9 @@ chrome-profiler-events*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -43,22 +41,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Firebase
-.firebase
-*-debug.log
-.runtimeconfig.json
-
-# Cypress
-cypress/screenshots/*
-cypress/videos/*
-node_modules/.bin
-**/node_modules/
-**/dist
-
-server/coverage
 documentation
-server/documentation
-
-junit.xml
-server/junit.xml
