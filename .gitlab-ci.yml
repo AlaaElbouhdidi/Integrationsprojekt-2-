@@ -41,7 +41,7 @@ format:
     stage: prep
     needs: ['build']
     script:
-        - npx nx format:check
+        - npm run format:check
 
 lint:
     stage: prep
