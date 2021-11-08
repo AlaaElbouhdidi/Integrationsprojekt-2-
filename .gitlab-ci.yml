@@ -13,10 +13,14 @@ stages:
     - test
     - deploy
 
+variables:
+    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
+
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
         - node_modules/
+        - cache/Cypress
 
 before_script:
     - apk add git
@@ -37,7 +41,7 @@ format:
     stage: prep
     needs: ['build']
     script:
-        - npx nx format:check
+        - npm run format:check
 
 lint:
     stage: prep
