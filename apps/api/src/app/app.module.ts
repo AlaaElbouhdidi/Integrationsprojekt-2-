@@ -4,12 +4,13 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-    imports: [ConfigModule.forRoot({
-        isGlobal: true,
-        envFilePath: '../../../.env'
-    })],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: '../../../.env',
+        }),
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
 export class AppModule {}
-
