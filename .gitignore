@@ -45,3 +45,4 @@ documentation
 apps/api/src/app/firebaseServiceAccount.json
 **/node_modules
 .env
+firestore-debug.log

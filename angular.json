@@ -25,7 +25,8 @@
                         "tsConfig": "apps/api/tsconfig.app.json",
                         "assets": [
                             "apps/api/src/assets",
-                            "apps/api/src/package.json"
+                            "apps/api/src/package.json",
+                            "apps/api/src/app/services/firebase/firebase.config.json"
                         ]
                     },
                     "configurations": {

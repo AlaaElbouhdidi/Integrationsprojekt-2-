@@ -48,7 +48,6 @@ lint:
     needs: ['build']
     script:
         - npm run lint
-        - npx nx run-many --target=lint --parallel --all
 
 doc:
     stage: prep
