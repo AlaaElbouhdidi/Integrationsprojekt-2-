@@ -5,7 +5,8 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RegisterRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
 })
-export class RegisterModule { }
+export class RegisterModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faEnvelope);
+    }
+}
