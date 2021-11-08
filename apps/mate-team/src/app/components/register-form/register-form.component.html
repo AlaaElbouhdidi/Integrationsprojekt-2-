@@ -1,0 +1,35 @@
+<form class="app-form" (ngSubmit)="register()" [formGroup]="registerForm">
+
+    <h1>REGISTER</h1>
+
+    <div class="form-input">
+        <input type="text" formControlName="email" placeholder="Email" required >
+    </div>
+
+    <div class="form-error" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div class="form-error-message">
+            <p>Email wrongly formatted</p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <input type="password" formControlName="password" placeholder="Password" required>
+    </div>
+
+    <div class="form-error" *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div class="form-error-message">
+            <p>Password required</p>
+        </div>
+        <div class="form-error-message">
+            <p>Password has to be at least 6 characters</p>
+        </div>
+    </div>
+
+    <p>
+        Account already created?
+        <a routerLink="/login">Sign in.</a>
+    </p>
+
+    <button type="submit" [disabled]="!registerForm.valid">Register</button>
+
+</form>
