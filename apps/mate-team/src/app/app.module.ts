@@ -7,12 +7,14 @@ import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
         HttpClientModule,
+        AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             // Register the ServiceWorker as soon as the app is stable
