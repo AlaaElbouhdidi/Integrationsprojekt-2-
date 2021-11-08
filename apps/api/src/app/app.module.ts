@@ -4,10 +4,10 @@ import {
     NestModule,
     RequestMethod,
 } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PreAuthMiddleware } from './auth/pre-auth.middleware';
-import { FirebaseModule } from './firebase/firebase.module';
+import { AppController } from './controllers/app/app.controller';
+import { AppService } from './services/app/app.service';
+import { PreAuthMiddleware } from './middleware/auth/pre-auth.middleware';
+import { FirebaseModule } from './modules/firebase.module';
 
 @Module({
     imports: [FirebaseModule],

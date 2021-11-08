@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { Message } from '@integrationsprojekt2/api-interfaces';
-import { AppService } from './app.service';
-import { FirebaseService } from './firebase/firebase.service';
+import { AppService } from '../../services/app/app.service';
+import { FirebaseService } from '../../services/firebase/firebase.service';
 
 @Controller()
 export class AppController {
