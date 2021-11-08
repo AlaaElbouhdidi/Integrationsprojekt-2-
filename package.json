@@ -10,7 +10,7 @@
         "postbuild": "npm run api:build",
         "api:build": "nx build api",
         "preapi:serve": "npm run api:build",
-        "api:serve": "firebase emulators:start --only functions --inspect-functions",
+        "api:serve": "firebase emulators:start",
         "test": "nx test",
         "lint": "nx workspace-lint && ng lint",
         "e2e": "ng e2e",

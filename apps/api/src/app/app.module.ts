@@ -10,9 +10,10 @@ import { UserModule } from './modules/user.module';
         FirebaseModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            envFilePath: '../../../.env',
+            envFilePath: './.env',
         }),
         UserModule,
+       
     ],
     controllers: [AppController],
     providers: [AppService],
