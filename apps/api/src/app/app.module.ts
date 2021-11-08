@@ -8,9 +8,16 @@ import { AppController } from './controllers/app/app.controller';
 import { AppService } from './services/app/app.service';
 import { PreAuthMiddleware } from './middleware/auth/pre-auth.middleware';
 import { FirebaseModule } from './modules/firebase.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-    imports: [FirebaseModule],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: '../../../.env',
+        }),
+        FirebaseModule,
+    ],
     controllers: [AppController],
     providers: [AppService],
 })
