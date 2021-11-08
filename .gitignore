@@ -42,3 +42,6 @@ testem.log
 .DS_Store
 Thumbs.db
 documentation
+apps/api/src/app/firebaseServiceAccount.json
+**/node_modules
+.env
