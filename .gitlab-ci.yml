@@ -13,6 +13,9 @@ stages:
     - test
     - deploy
 
+variables:
+  CYPRESS_CACHE_FOLDER: "cache/Cypress"
+
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
