@@ -6,7 +6,7 @@ import { RegisterComponent } from './register.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,6 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 })
 export class RegisterModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faEnvelope);
+        library.addIcons(faEnvelope, faLock, faExclamationCircle);
     }
 }

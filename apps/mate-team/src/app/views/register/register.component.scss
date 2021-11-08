@@ -1,0 +1,9 @@
+@import '_variables';
+@import '_mixins';
+
+main {
+    background: $dark;
+    height: 100vh;
+    width: 100%;
+    padding: 0.5rem;
+}
