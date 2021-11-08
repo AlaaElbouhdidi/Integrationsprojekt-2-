@@ -10,6 +10,7 @@
         "serve": "firebase emulators:start",
         "prebuild": "nx build api",
         "preserve": "npm run build",
+        "api:serve": "firebase emulators:start --only functions",
         "test": "nx test",
         "lint": "nx workspace-lint && ng lint",
         "e2e": "ng e2e",
