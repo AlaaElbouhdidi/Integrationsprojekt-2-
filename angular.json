@@ -119,6 +119,11 @@
                             "apps/mate-team/src/manifest.webmanifest"
                         ],
                         "styles": ["apps/mate-team/src/styles.scss"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "apps/mate-team/src/styles/lib"
+                            ]
+                        },
                         "scripts": [],
                         "serviceWorker": true,
                         "ngswConfigPath": "apps/mate-team/ngsw-config.json"
