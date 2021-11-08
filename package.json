@@ -2,6 +2,11 @@
     "name": "integrationsprojekt2",
     "version": "0.0.0",
     "license": "MIT",
+    "homepage": "https://mate-team.de",
+    "repository": {
+        "type": "git",
+        "url": "https://git.thm.de/cbkr81/integrationsprojekt-2"
+    },
     "scripts": {
         "ng": "nx",
         "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
