@@ -59,7 +59,7 @@
       "port": 9199
     },
     "pubsub": {
-      "port": 8085
+      "port": 8086
     }
   },
   "firestore": {
