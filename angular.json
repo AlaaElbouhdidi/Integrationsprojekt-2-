@@ -120,7 +120,15 @@
                             "apps/mate-team/src/assets",
                             "apps/mate-team/src/manifest.webmanifest"
                         ],
-                        "styles": ["apps/mate-team/src/styles.scss"],
+                        "styles": [
+                            "apps/mate-team/src/styles.scss"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "apps/mate-team/src/_bootswatch.scss",
+                                "apps/mate-team/src/_variables.scss"
+                            ]
+                        },
                         "scripts": [],
                         "serviceWorker": true,
                         "ngswConfigPath": "apps/mate-team/ngsw-config.json"
@@ -130,7 +138,7 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
+                                    "maximumWarning": "750kb",
                                     "maximumError": "1mb"
                                 },
                                 {

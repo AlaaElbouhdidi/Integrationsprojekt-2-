@@ -8,11 +8,16 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        FormsModule,
+       
+        NgbModule,
         HttpClientModule,
         AngularFireFunctionsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
