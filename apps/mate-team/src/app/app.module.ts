@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -10,13 +11,17 @@ import { providePerformance, getPerformance } from '@angular/fire/performance';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderModule } from '@integrationsprojekt2/header'
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        HeaderModule,
+        CommonModule,
         BrowserModule,
         FormsModule,
-       
+        AppRoutingModule,
         NgbModule,
         HttpClientModule,
         AngularFireFunctionsModule,

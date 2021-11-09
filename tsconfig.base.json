@@ -18,7 +18,8 @@
         "paths": {
             "@integrationsprojekt2/api-interfaces": [
                 "libs/api-interfaces/src/index.ts"
-            ]
+            ],
+            "@integrationsprojekt2/header": ["libs/header/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
