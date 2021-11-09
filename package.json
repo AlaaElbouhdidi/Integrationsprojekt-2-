@@ -1,6 +1,11 @@
 {
   "name": "integrationsprojekt2",
   "version": "0.0.0",
+  "homepage": "https://mate-team.de",
+  "repository": {
+      "type": "git",
+      "url": "https://git.thm.de/cbkr81/integrationsprojekt-2"
+  },
   "license": "MIT",
   "scripts": {
     "ng": "nx",
