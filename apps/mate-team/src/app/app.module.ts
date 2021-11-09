@@ -9,13 +9,20 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [AppComponent, HeaderComponent],
     imports: [
         BrowserModule,
+        FormsModule,
+
+        NgbModule,
         HttpClientModule,
         AppRoutingModule,
+        AngularFireFunctionsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             // Register the ServiceWorker as soon as the app is stable

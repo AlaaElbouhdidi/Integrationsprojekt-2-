@@ -1,13 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { Message } from '@integrationsprojekt2/api-interfaces';
+import { FirebaseAuthGuard } from '../../guards/firebase-auth.guard';
 import { AppService } from '../../services/app/app.service';
-import { FirebaseService } from '../../services/firebase/firebase.service';
 
 @Controller()
 export class AppController {
     constructor(
         private readonly appService: AppService,
-        private readonly firebaseService: FirebaseService
     ) {}
 
     @Get()
@@ -15,17 +14,13 @@ export class AppController {
         return this.appService.getData();
     }
 
-    @Get('users')
-    async getUsers() {
-        return this.firebaseService.getUsers();
-    }
-
     @Get('ping')
     async ping(): Promise<string> {
         return 'pong';
     }
 
-    @Get('secure/ping')
+    @UseGuards(FirebaseAuthGuard)
+    @Get('pong')
     async securePing(): Promise<string> {
         return 'pong';
     }

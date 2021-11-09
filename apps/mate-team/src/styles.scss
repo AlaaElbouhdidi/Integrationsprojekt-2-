@@ -1,3 +1,6 @@
+@import '_variables';
+@import '_bootswatch';
+
 /* GLOBAL STYLES */
 * {
     margin: 0;
@@ -17,14 +20,6 @@ button {
         outline: none;
     }
 }
-
-/* VARIABLES */
-$dark: #0c2d48;
-$darkAccent: #0b3760;
-$main: #145da0;
-$accent: #2e8bc0;
-$light: #b1d4e0;
-$white: #fff;
 
 /* MIXINS */
 
@@ -65,3 +60,6 @@ $white: #fff;
         @content;
     }
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

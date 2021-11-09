@@ -25,7 +25,9 @@
                         "tsConfig": "apps/api/tsconfig.app.json",
                         "assets": [
                             "apps/api/src/assets",
-                            "apps/api/src/package.json"
+                            "apps/api/src/package.json",
+                            "apps/api/src/app/services/firebase/firebase.config.json",
+                            "apps/api/src/.env"
                         ]
                     },
                     "configurations": {
@@ -118,9 +120,13 @@
                             "apps/mate-team/src/assets",
                             "apps/mate-team/src/manifest.webmanifest"
                         ],
-                        "styles": ["apps/mate-team/src/styles.scss"],
+                        "styles": [
+                            "apps/mate-team/src/styles.scss"
+                        ],
                         "stylePreprocessorOptions": {
                             "includePaths": [
+                                "apps/mate-team/src/_bootswatch.scss",
+                                "apps/mate-team/src/_variables.scss",
                                 "apps/mate-team/src/styles/lib"
                             ]
                         },
@@ -133,7 +139,7 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
+                                    "maximumWarning": "750kb",
                                     "maximumError": "1mb"
                                 },
                                 {

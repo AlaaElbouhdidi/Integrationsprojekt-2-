@@ -1,5 +1,7 @@
 # Integrationsprojekt 2 - Backend
 
+View function deployment at <https://europe-west1-integrationsprojekt2.cloudfunctions.net/api>
+
 ## Installation
 
 ```bash
@@ -41,4 +43,3 @@ npm run test:coverage
 npm run deploy
 ```
 
-View function deployment at <https://europe-west1-integrationsprojekt2.cloudfunctions.net/api>
