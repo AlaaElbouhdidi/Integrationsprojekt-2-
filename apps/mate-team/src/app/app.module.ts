@@ -8,9 +8,10 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, HeaderComponent],
     imports: [
         BrowserModule,
         HttpClientModule,
