@@ -2,13 +2,17 @@
 
 View production build at <https://mate-team.de>
 
+## Contributing guide
+
+View [here](CONTRIBUTING.md)!
+
 ## Installation
 
 ```bash
 npm i -g nx
 npm i -g firebase-tools
 npm install
-nx run-many --target=build --projects=api,mate-team
+nx run-many --target=build --all=true
 ```
 
 This project was generated using [Nx](https://nx.dev).
