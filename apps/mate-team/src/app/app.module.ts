@@ -12,7 +12,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderModule } from '@integrationsprojekt2/header'
+import { HeaderModule } from '@integrationsprojekt2/header';
 
 @NgModule({
     declarations: [AppComponent],

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'integrationsprojekt2-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'integrationsprojekt2-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  ngOnInit(): void {
-      console.log('header works')
-  }
+    ngOnInit(): void {
+        console.log('header works');
+    }
 }
