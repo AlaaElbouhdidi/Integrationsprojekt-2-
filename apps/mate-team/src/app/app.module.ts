@@ -19,10 +19,7 @@ import { RegisterFormModule } from '@integrationsprojekt2/register-form';
 import { AlertModule } from '@integrationsprojekt2/alert';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '@integrationsprojekt2/services';
-import {
-    FontAwesomeModule,
-    FaIconLibrary,
-} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary, } from '@fortawesome/angular-fontawesome';
 import {
     faEnvelope,
     faLock,
