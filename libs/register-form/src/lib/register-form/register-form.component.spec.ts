@@ -3,6 +3,7 @@ import { RegisterFormComponent } from './register-form.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { RegisterFormModule } from '../register-form.module'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const environment = {
     firebase: {
@@ -24,6 +25,7 @@ describe('RegisterFormComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
+                FontAwesomeModule,
                 RegisterFormModule,
                 AngularFireModule.initializeApp(environment.firebase),
             ],
