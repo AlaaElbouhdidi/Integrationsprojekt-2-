@@ -3,8 +3,8 @@
     <h1>REGISTER</h1>
 
     <div class="form-input">
-        <fa-icon icon="envelope"></fa-icon>
         <input type="text" formControlName="email" placeholder="Email" required >
+        <fa-icon icon="envelope"></fa-icon>
     </div>
 
     <div class="form-error" *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -17,8 +17,8 @@
     </div>
 
     <div class="form-input">
-        <fa-icon icon="lock"></fa-icon>
         <input type="password" formControlName="password" placeholder="Password" required>
+        <fa-icon icon="lock"></fa-icon>
     </div>
 
     <div class="form-error" *ngIf="password.invalid && (password.dirty || password.touched)">

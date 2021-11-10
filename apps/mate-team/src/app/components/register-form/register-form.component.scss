@@ -15,6 +15,10 @@
         text-align: center;
         font-weight: normal;
         margin-bottom: 3rem;
+        font-size: 2rem;
+    }
+    @include for-tablet-landscape-up {
+        width: 25rem;
     }
 }
 
@@ -30,12 +34,20 @@
         border: none;
         border-bottom: 1px solid $dark;
         padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+        transition: 0.25s;
+        &:focus {
+            border-bottom: 1px solid $main;
+        }
+        &:focus + fa-icon {
+            color: $main;
+        }
     }
     fa-icon {
         position: absolute;
         top: 0.3rem;
         left: 0.5rem;
         font-size: 1.2rem;
+        transition: 0.25s;
     }
 }
 

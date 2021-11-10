@@ -2,8 +2,31 @@
 @import '_mixins';
 
 main {
+    position: relative;
     background: $dark;
-    height: 100vh;
+    height: calc(100vh - 3rem);
     width: 100%;
     padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+    z-index: 10;
+    img {
+        display: none;
+        max-width: 32.5%;
+        @include for-desktop-up {
+            display: block;
+        }
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        height: calc(100vh - 3rem);
+        width: 100%;
+        background: $darkAccent;
+        clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
+        z-index: -1;
+    }
 }
