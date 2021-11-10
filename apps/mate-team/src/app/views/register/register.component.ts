@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { AlertService } from '../../services/alert.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'integrationsprojekt2-register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  animations: [
+        trigger('alertAnimation', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(-2rem)' }),
+                animate('200ms', style({ opacity: 1, transform: "translateY(0)" })),
+            ]),
+            transition(':leave', [
+                style({ transform: 'translateY(0)' }),
+                animate('200ms', style({ opacity: 0, transform: 'translateY(-2rem)' }))
+            ])
+        ]),
+    ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnDestroy {
 
-  constructor() { }
+  constructor(
+      public alertService: AlertService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+      this.alertService.reset();
   }
 
 }

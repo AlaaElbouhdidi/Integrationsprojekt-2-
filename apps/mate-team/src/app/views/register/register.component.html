@@ -1,4 +1,17 @@
 <main>
-    <img src="../../assets/svgs/register.svg" alt="Man opening a door">
-    <register-form></register-form>
+
+    <div class="alert-wrapper"
+         @alertAnimation
+         *ngFor="let alert of alertService.globalAlerts" >
+        <app-global-alert
+            [message]="alert.message"
+            [type]="alert.type"
+        ></app-global-alert>
+    </div>
+
+    <section>
+        <img src="../../assets/svgs/register.svg" alt="Man opening a door">
+        <register-form></register-form>
+    </section>
+
 </main>

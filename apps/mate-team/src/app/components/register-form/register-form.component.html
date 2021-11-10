@@ -37,9 +37,13 @@
 
     <div class="form-btn">
         <button type="submit"
+                *ngIf="!loading; else loader"
                 [class.disabled-btn]="!registerForm.valid"
                 [disabled]="!registerForm.valid"
         >Register</button>
+        <ng-template #loader>
+            <app-loader></app-loader>
+        </ng-template>
     </div>
 
 </form>

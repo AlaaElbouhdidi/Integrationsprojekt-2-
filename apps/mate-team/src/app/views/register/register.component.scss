@@ -4,13 +4,10 @@
 main {
     position: relative;
     background: $dark;
-    height: calc(100vh - 3rem);
+    min-height: calc(100vh - 3rem);
     width: 100%;
     padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    overflow: hidden;
+    @include flex-center;
     z-index: 10;
     img {
         display: none;
@@ -23,10 +20,24 @@ main {
         content: '';
         position: absolute;
         inset: 0;
-        height: calc(100vh - 3rem);
+        min-height: calc(100vh - 3rem);
         width: 100%;
         background: $darkAccent;
         clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
         z-index: -1;
     }
+    section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 4rem 0;
+    }
+}
+.alert-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 0.5rem;
 }

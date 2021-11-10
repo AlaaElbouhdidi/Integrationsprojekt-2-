@@ -12,13 +12,19 @@ import { HeaderComponent } from './components/header/header.component';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-    declarations: [AppComponent, HeaderComponent],
+    declarations: [
+        AppComponent,
+        HeaderComponent
+    ],
     imports: [
         BrowserModule,
         FormsModule,
-
+        BrowserAnimationsModule,
         NgbModule,
         HttpClientModule,
         AppRoutingModule,
@@ -29,9 +35,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000',
         }),
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        providePerformance(() => getPerformance()),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        // provideFirebaseApp(() => initializeApp(environment.firebase)),
+        // provideAuth(() => getAuth()),
+        // providePerformance(() => getPerformance()),
     ],
     providers: [],
     bootstrap: [AppComponent],
