@@ -19,6 +19,19 @@ import { RegisterFormModule } from '@integrationsprojekt2/register-form';
 import { AlertModule } from '@integrationsprojekt2/alert';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '@integrationsprojekt2/services';
+import {
+    FontAwesomeModule,
+    FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
+import {
+    faEnvelope,
+    faLock,
+    faExclamationCircle,
+    faCheckCircle,
+    faTimesCircle,
+    faExclamationTriangle,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -33,6 +46,7 @@ import { AuthService } from '@integrationsprojekt2/services';
         FormsModule,
         BrowserAnimationsModule,
         NgbModule,
+        FontAwesomeModule,
         HttpClientModule,
         AppRoutingModule,
         AngularFireFunctionsModule,
@@ -47,4 +61,15 @@ import { AuthService } from '@integrationsprojekt2/services';
     providers: [AngularFireAuth, AuthService],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faEnvelope,
+            faLock,
+            faExclamationCircle,
+            faCheckCircle,
+            faTimesCircle,
+            faExclamationTriangle
+        );
+    }
+}
