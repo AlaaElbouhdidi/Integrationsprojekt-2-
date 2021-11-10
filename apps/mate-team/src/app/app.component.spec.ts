@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         TestBed.configureTestingModule({
             declarations: [AppComponent],
-            imports: [HttpClientModule],
+            imports: [HttpClientModule, RouterTestingModule],
         }).compileComponents();
     });
 
