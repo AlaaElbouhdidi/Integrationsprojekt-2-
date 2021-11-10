@@ -6,7 +6,7 @@ import { HeaderModule } from '@integrationsprojekt2/header';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
-        TestBed.configureTestingModule({
+        await TestBed.configureTestingModule({
             declarations: [AppComponent],
             imports: [HttpClientModule, RouterTestingModule, HeaderModule],
         }).compileComponents();

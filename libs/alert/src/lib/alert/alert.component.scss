@@ -1,0 +1,31 @@
+@import '_variables';
+@import '_mixins';
+
+.global-alert {
+    @include flex-center;
+    text-align: center;
+    color: white;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    margin: 1rem 0;
+    fa-icon {
+        margin-right: 0.3rem;
+    }
+}
+.global-success-alert {
+    border: 1px solid #1ba11b;
+    background: #1ba11b80;
+}
+.global-error-alert {
+    border: 1px solid #b82121;
+    background: #b8212180;
+}
+.global-neutral-alert {
+    border: 1px solid #ffffff;
+    background: #ffffff7f;
+}
+.global-warn-alert {
+    border: 1px solid #f6c117;
+    background: rgba(246, 193, 23, 0.5);
+}

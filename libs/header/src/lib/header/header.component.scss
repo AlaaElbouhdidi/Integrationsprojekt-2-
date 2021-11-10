@@ -1,0 +1,48 @@
+@import '_variables';
+@import '_mixins';
+
+header {
+    position: relative;
+    background: $dark;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1rem;
+    box-shadow: 0 2px 0.5vw #000000;
+    z-index: 20;
+    @include for-tablet-landscape-up {
+        padding: 0 5rem;
+    }
+    h2 {
+        font-weight: normal;
+        letter-spacing: 1px;
+        font-size: 1.2rem;
+        span {
+            color: $light;
+        }
+        a {
+            color: $white;
+            cursor: pointer;
+        }
+        @include for-phone-only {
+            font-size: 1.5rem;
+        }
+    }
+    nav {
+        a {
+            color: $white;
+            transition: 0.25s;
+            &:hover {
+                color: $light;
+            }
+        }
+        a:nth-child(2) {
+            margin-left: 1rem;
+            @include for-tablet-portrait-up {
+                margin-left: 3rem;
+            }
+        }
+    }
+}

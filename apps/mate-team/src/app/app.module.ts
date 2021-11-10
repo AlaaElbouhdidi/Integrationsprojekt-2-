@@ -5,38 +5,68 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { providePerformance, getPerformance } from '@angular/fire/performance';
+import { AppRoutingModule } from './app-routing.module';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from '@integrationsprojekt2/header';
+import { LoaderModule } from '@integrationsprojekt2/loader';
+import { RegisterModule } from '@integrationsprojekt2/register';
+import { RegisterFormModule } from '@integrationsprojekt2/register-form';
+import { AlertModule } from '@integrationsprojekt2/alert';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '@integrationsprojekt2/services';
+import { FontAwesomeModule, FaIconLibrary, } from '@fortawesome/angular-fontawesome';
+import {
+    faEnvelope,
+    faLock,
+    faExclamationCircle,
+    faCheckCircle,
+    faTimesCircle,
+    faExclamationTriangle,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         HeaderModule,
+        LoaderModule,
+        RegisterModule,
+        RegisterFormModule,
+        AlertModule,
         CommonModule,
         BrowserModule,
         FormsModule,
-        AppRoutingModule,
+        BrowserAnimationsModule,
         NgbModule,
+        FontAwesomeModule,
         HttpClientModule,
+        AppRoutingModule,
         AngularFireFunctionsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
-            // Register the ServiceWorker as soon as the app is stable
-            // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000',
         }),
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        providePerformance(() => getPerformance()),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
     ],
-    providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [AngularFireAuth, AuthService],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faEnvelope,
+            faLock,
+            faExclamationCircle,
+            faCheckCircle,
+            faTimesCircle,
+            faExclamationTriangle
+        );
+    }
+}

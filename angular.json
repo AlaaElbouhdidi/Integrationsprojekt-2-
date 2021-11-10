@@ -2,6 +2,85 @@
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "projects": {
+        "alert": {
+            "projectType": "library",
+            "root": "libs/alert",
+            "sourceRoot": "libs/alert/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/alert/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/alert/src/**/*.ts",
+                            "libs/alert/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/alert/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/alert",
+                        "config": {
+                            "configFolder": "libs/alert/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "alert-e2e": {
+            "root": "apps/alert-e2e",
+            "sourceRoot": "apps/alert-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/alert-e2e/cypress.json",
+                        "devServerTarget": "alert:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "alert:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/alert-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "api": {
             "root": "apps/api",
             "sourceRoot": "apps/api/src",
@@ -90,6 +169,30 @@
                 }
             }
         },
+        "components": {
+            "projectType": "library",
+            "root": "libs/components",
+            "sourceRoot": "libs/components/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/src/**/*.ts",
+                            "libs/components/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "header": {
             "projectType": "library",
             "root": "libs/header",
@@ -98,7 +201,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/header"],
                     "options": {
                         "jestConfig": "libs/header/jest.config.js",
                         "passWithNoTests": true
@@ -130,7 +232,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/header",
@@ -144,8 +245,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "header-e2e": {
             "root": "apps/header-e2e",
@@ -166,14 +266,90 @@
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
-                    "outputs": ["{options.outputFile}"],
                     "options": {
                         "lintFilePatterns": ["apps/header-e2e/**/*.{js,ts}"]
                     }
                 }
-            },
-            "tags": [],
-            "implicitDependencies": ["header"]
+            }
+        },
+        "loader": {
+            "projectType": "library",
+            "root": "libs/loader",
+            "sourceRoot": "libs/loader/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/loader/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/loader/src/**/*.ts",
+                            "libs/loader/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/loader/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/loader",
+                        "config": {
+                            "configFolder": "libs/loader/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "loader-e2e": {
+            "root": "apps/loader-e2e",
+            "sourceRoot": "apps/loader-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/loader-e2e/cypress.json",
+                        "devServerTarget": "loader:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "loader:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/loader-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
         },
         "mate-team": {
             "projectType": "application",
@@ -207,10 +383,7 @@
                         ],
                         "styles": ["apps/mate-team/src/styles.scss"],
                         "stylePreprocessorOptions": {
-                            "includePaths": [
-                                "apps/mate-team/src/_bootswatch.scss",
-                                "apps/mate-team/src/_variables.scss"
-                            ]
+                            "includePaths": ["libs/styles/src/lib"]
                         },
                         "scripts": [],
                         "serviceWorker": true,
@@ -313,6 +486,214 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["apps/mate-team-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "register": {
+            "projectType": "library",
+            "root": "libs/register",
+            "sourceRoot": "libs/register/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/register/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/register/src/**/*.ts",
+                            "libs/register/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/register/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/register",
+                        "config": {
+                            "configFolder": "libs/register/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "register-e2e": {
+            "root": "apps/register-e2e",
+            "sourceRoot": "apps/register-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/register-e2e/cypress.json",
+                        "devServerTarget": "register:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "register:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/register-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "register-form": {
+            "projectType": "library",
+            "root": "libs/register-form",
+            "sourceRoot": "libs/register-form/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/register-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/register-form/src/**/*.ts",
+                            "libs/register-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/register-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/register-form",
+                        "config": {
+                            "configFolder": "libs/register-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "register-form-e2e": {
+            "root": "apps/register-form-e2e",
+            "sourceRoot": "apps/register-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/register-form-e2e/cypress.json",
+                        "devServerTarget": "register-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "register-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/register-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "services": {
+            "projectType": "library",
+            "root": "libs/services",
+            "sourceRoot": "libs/services/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/services/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/services/src/**/*.ts",
+                            "libs/services/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "styles": {
+            "projectType": "library",
+            "root": "libs/styles",
+            "sourceRoot": "libs/styles/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/styles/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/styles/src/**/*.ts",
+                            "libs/styles/src/**/*.html"
+                        ]
                     }
                 }
             }

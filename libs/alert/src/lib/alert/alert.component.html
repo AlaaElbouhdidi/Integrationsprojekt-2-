@@ -1,0 +1,14 @@
+<div
+    class="global-alert"
+    [class.global-success-alert]="type === 'success'"
+    [class.global-error-alert]="type === 'error'"
+    [class.global-neutral-alert]="type === 'neutral'"
+    [class.global-warn-alert]="type === 'warn'"
+>
+    <div class="icon" [ngSwitch]="type">
+        <fa-icon *ngSwitchCase="'success'" icon="check-circle"></fa-icon>
+        <fa-icon *ngSwitchCase="'error'" icon="times-circle"></fa-icon>
+        <fa-icon *ngSwitchCase="'warn'" icon="exclamation-triangle"></fa-icon>
+    </div>
+    {{ message }}
+</div>
