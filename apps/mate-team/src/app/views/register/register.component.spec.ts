@@ -1,6 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'register-form',
+    template: '<p>Mock Register Form Component</p>'
+})
+class MockRegisterFormComponent{}
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,7 +15,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent, MockRegisterFormComponent ]
     })
     .compileComponents();
   });
