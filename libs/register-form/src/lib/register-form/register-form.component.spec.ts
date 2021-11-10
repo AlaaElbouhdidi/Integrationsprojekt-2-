@@ -23,7 +23,6 @@ describe('RegisterFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [RegisterFormComponent],
             imports: [
                 RegisterFormModule,
                 AngularFireModule.initializeApp(environment.firebase),

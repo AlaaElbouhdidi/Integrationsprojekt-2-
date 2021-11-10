@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert/alert.component';
 import {
@@ -17,8 +17,7 @@ import {
 @NgModule({
     imports: [CommonModule, FontAwesomeModule],
     declarations: [AlertComponent],
-    exports: [AlertComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [AlertComponent]
 })
 export class AlertModule {
     constructor(library: FaIconLibrary) {
