@@ -5,6 +5,11 @@
         "composite": false,
         "types": ["jest", "node"]
     },
+    "angularCompilerOptions": {
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
+    },
     "files": ["src/main.ts", "src/polyfills.ts"],
     "include": ["src/**/*.d.ts"]
 }
