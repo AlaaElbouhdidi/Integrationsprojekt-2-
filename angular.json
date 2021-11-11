@@ -430,6 +430,85 @@
                 }
             }
         },
+        "login-form": {
+            "projectType": "library",
+            "root": "libs/login-form",
+            "sourceRoot": "libs/login-form/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/login-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/login-form/src/**/*.ts",
+                            "libs/login-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/login-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/login-form",
+                        "config": {
+                            "configFolder": "libs/login-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "login-form-e2e": {
+            "root": "apps/login-form-e2e",
+            "sourceRoot": "apps/login-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/login-form-e2e/cypress.json",
+                        "devServerTarget": "login-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "login-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/login-form-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "mate-team": {
             "projectType": "application",
             "root": "apps/mate-team",
