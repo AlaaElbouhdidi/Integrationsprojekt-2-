@@ -351,6 +351,85 @@
                 }
             }
         },
+        "login": {
+            "projectType": "library",
+            "root": "libs/login",
+            "sourceRoot": "libs/login/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/login/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/login/src/**/*.ts",
+                            "libs/login/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/login/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/login",
+                        "config": {
+                            "configFolder": "libs/login/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "login-e2e": {
+            "root": "apps/login-e2e",
+            "sourceRoot": "apps/login-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/login-e2e/cypress.json",
+                        "devServerTarget": "login:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "login:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/login-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "mate-team": {
             "projectType": "application",
             "root": "apps/mate-team",

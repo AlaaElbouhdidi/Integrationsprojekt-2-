@@ -28,6 +28,7 @@ import {
     faTimesCircle,
     faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
+import {LoginModule} from '@integrationsprojekt2/login';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {
         HeaderModule,
         LoaderModule,
         RegisterModule,
+        LoginModule,
         RegisterFormModule,
         AlertModule,
         CommonModule,
