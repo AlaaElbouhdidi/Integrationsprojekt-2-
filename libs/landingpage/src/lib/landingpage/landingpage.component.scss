@@ -1,0 +1,58 @@
+@import '_variables';
+@import '_mixins';
+
+main {
+    position: relative;
+    background: $dark;
+    min-height: calc(100vh - 3rem);
+    width: 100%;
+    padding: 0.5rem;
+    @include flex-center;
+    z-index: 10;
+    img {
+        max-width: 32.5%;
+        @include for-desktop-up {
+            display: block;
+        }
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        min-height: calc(100vh - 3rem);
+        width: 100%;
+        background: $darkAccent;
+        clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
+        z-index: -1;
+    }
+    section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 4rem 0;
+    }
+}
+
+#signUpButton {
+    font-size: 30px ;
+    padding-right: 25%;
+    padding-left: 25%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 5%;
+    border-radius: 20px;
+}
+
+.content {
+    text-align: center;
+}
+
+p {
+    color: #B1D4E0;
+    padding-top: 2%;
+}
+
+.row {
+    margin-top: 50%;
+}

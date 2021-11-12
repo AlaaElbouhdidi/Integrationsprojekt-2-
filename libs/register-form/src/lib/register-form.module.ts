@@ -13,6 +13,7 @@ import {
     faTimesCircle,
     faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
+import { RouterModule } from "@angular/router";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
         LoaderModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        AlertModule
+        AlertModule,
+        RouterModule
     ],
     declarations: [RegisterFormComponent],
     exports: [RegisterFormComponent],

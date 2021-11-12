@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LandingpageComponent } from './landingpage/landingpage.component';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
-    imports: [CommonModule],
     declarations: [
-      LandingpageComponent
+        LandingpageComponent,
     ],
+    imports: [CommonModule, RouterModule],
+    exports: [LandingpageComponent],
 })
 export class LandingpageModule {}

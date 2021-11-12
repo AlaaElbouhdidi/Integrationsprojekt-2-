@@ -28,12 +28,16 @@ import {
     faTimesCircle,
     faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
+import { LandingpageModule } from "@integrationsprojekt2/landingpage";
+import { FooterModule } from "@integrationsprojekt2/footer";
 
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        FooterModule,
         HeaderModule,
+        LandingpageModule,
         LoaderModule,
         RegisterModule,
         RegisterFormModule,
