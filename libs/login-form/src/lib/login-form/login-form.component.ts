@@ -6,6 +6,7 @@ import {
     FormGroup,
     Validators
 } from '@angular/forms';
+import { AlertService, AuthService } from '@integrationsprojekt2/services';
 
 @Component({
   selector: 'integrationsprojekt2-login-form',
@@ -13,12 +14,13 @@ import {
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
-
     loginForm: FormGroup;
     loading = false;
 
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private alertService: AlertService
     ) {
         this.loginForm = this.fb.group({
             email: new FormControl('', [
@@ -40,12 +42,33 @@ export class LoginFormComponent {
         return this.loginForm.controls.password;
     }
 
-    login(): void {
-        console.log('login with email and password');
+    async login(): Promise<void> {
+        try {
+            this.loading = true;
+            await this.authService.login(
+                this.email.value,
+                this.password.value
+            );
+            this.loading = false;
+            this.loginForm.reset();
+            // send user to his group page
+        } catch (e: any) {
+            this.loading = false;
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
     }
 
-    loginWithGoogle(): void {
-        console.log('login with google');
+    async loginWithGoogle(): Promise<void> {
+        try {
+            await this.authService.loginWithGoogle();
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
     }
-
 }

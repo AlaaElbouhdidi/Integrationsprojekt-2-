@@ -1,15 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { AlertService } from '@integrationsprojekt2/services';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'integrationsprojekt2-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'integrationsprojekt2-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    animations: [
+        trigger('alertAnimation', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(-2rem)' }),
+                animate(
+                    '200ms',
+                    style({ opacity: 1, transform: 'translateY(0)' })
+                ),
+            ]),
+            transition(':leave', [
+                style({ transform: 'translateY(0)' }),
+                animate(
+                    '200ms',
+                    style({ opacity: 0, transform: 'translateY(-2rem)' })
+                ),
+            ]),
+        ]),
+    ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnDestroy {
+    constructor(
+      public alertService: AlertService
+    ) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    ngOnDestroy() {
+        this.alertService.reset();
+    }
 }

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private auth: AngularFireAuth) {}
+    user: firebase.User | null = null;
+
+    constructor(
+        private auth: AngularFireAuth
+    ) {
+        this.auth.authState.subscribe(user => user ? this.user = user : this.user = null);
+    }
 
     async register(email: string, password: string): Promise<void> {
         try {
@@ -14,8 +21,31 @@ export class AuthService {
             if (userCredential.user) {
                 await userCredential.user.sendEmailVerification();
             }
+        } catch (e: any) {
+            throw e;
+        }
+    }
+
+    async login(email: string, password: string): Promise<void> {
+        try {
+            await this.auth.signInWithEmailAndPassword(email, password);
         } catch (e) {
-            console.log(e);
+            throw e;
+        }
+    }
+
+    async loginWithGoogle(): Promise<void> {
+        try {
+            await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async logout(): Promise<void> {
+        try {
+            await this.auth.signOut();
+        } catch (e) {
             throw e;
         }
     }
