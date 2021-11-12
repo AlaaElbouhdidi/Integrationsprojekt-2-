@@ -5,8 +5,14 @@
             <a routerLink="/"> <span>M</span>ate <span>T</span>eam </a>
         </h2>
     </div>
-    <nav>
+    <nav *ngIf="!authenticated; else authenticatedNav">
         <a routerLink="/login">Login</a>
         <a routerLink="/register">Register</a>
     </nav>
+    <ng-template #authenticatedNav>
+        <nav>
+            <fa-icon icon="user-circle"></fa-icon>
+            <a (click)="logout()">Logout</a>
+        </nav>
+    </ng-template>
 </header>

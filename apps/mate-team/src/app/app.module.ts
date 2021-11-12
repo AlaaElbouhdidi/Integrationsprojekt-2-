@@ -27,6 +27,7 @@ import {
     faCheckCircle,
     faTimesCircle,
     faExclamationTriangle,
+    faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import {LoginModule} from '@integrationsprojekt2/login';
 
@@ -68,7 +69,8 @@ export class AppModule {
             faExclamationCircle,
             faCheckCircle,
             faTimesCircle,
-            faExclamationTriangle
+            faExclamationTriangle,
+            faUserCircle
         );
     }
 }
