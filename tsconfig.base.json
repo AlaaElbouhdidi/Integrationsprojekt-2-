@@ -24,6 +24,9 @@
                 "libs/components/src/index.ts"
             ],
             "@integrationsprojekt2/header": ["libs/header/src/index.ts"],
+            "@integrationsprojekt2/landingpage": [
+                "libs/landingpage/src/index.ts"
+            ],
             "@integrationsprojekt2/loader": ["libs/loader/src/index.ts"],
             "@integrationsprojekt2/register": ["libs/register/src/index.ts"],
             "@integrationsprojekt2/register-form": [

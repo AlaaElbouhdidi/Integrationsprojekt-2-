@@ -1,5 +1,8 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "cli": {
+      "analytics": false
+    },
     "version": 1,
     "projects": {
         "alert": {
@@ -271,6 +274,32 @@
                     }
                 }
             }
+        },
+        "landingpage": {
+            "projectType": "library",
+            "root": "libs/landingpage",
+            "sourceRoot": "libs/landingpage/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/landingpage"],
+                    "options": {
+                        "jestConfig": "libs/landingpage/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/landingpage/src/**/*.ts",
+                            "libs/landingpage/src/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": []
         },
         "loader": {
             "projectType": "library",
