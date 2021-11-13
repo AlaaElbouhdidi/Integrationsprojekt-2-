@@ -20,9 +20,6 @@
             "@integrationsprojekt2/api-interfaces": [
                 "libs/api-interfaces/src/index.ts"
             ],
-            "@integrationsprojekt2/components": [
-                "libs/components/src/index.ts"
-            ],
             "@integrationsprojekt2/footer": ["libs/footer/src/index.ts"],
             "@integrationsprojekt2/header": ["libs/header/src/index.ts"],
             "@integrationsprojekt2/landingpage": [

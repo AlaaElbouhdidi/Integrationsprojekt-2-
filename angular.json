@@ -6,7 +6,7 @@
             "projectType": "library",
             "root": "libs/alert",
             "sourceRoot": "libs/alert/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "ip2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -57,15 +57,16 @@
             }
         },
         "alert-e2e": {
-            "root": "apps/alert-e2e",
-            "sourceRoot": "apps/alert-e2e/src",
+            "root": "apps/e2e/alert-e2e",
+            "sourceRoot": "apps/e2e/alert-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/alert-e2e/cypress.json",
-                        "devServerTarget": "alert:storybook"
+                        "cypressConfig": "apps/e2e/alert-e2e/cypress.json",
+                        "devServerTarget": "alert:storybook",
+                        "tsConfig": "apps/e2e/alert-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -76,7 +77,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/alert-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/alert-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -169,30 +170,6 @@
                 }
             }
         },
-        "components": {
-            "projectType": "library",
-            "root": "libs/components",
-            "sourceRoot": "libs/components/src",
-            "prefix": "integrationsprojekt2",
-            "architect": {
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/components/jest.config.js",
-                        "passWithNoTests": true
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "libs/components/src/**/*.ts",
-                            "libs/components/src/**/*.html"
-                        ]
-                    }
-                }
-            }
-        },
         "footer": {
             "projectType": "library",
             "root": "libs/footer",
@@ -201,7 +178,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/footer"],
                     "options": {
                         "jestConfig": "libs/footer/jest.config.js",
                         "passWithNoTests": true
@@ -233,7 +209,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/footer",
@@ -247,19 +222,19 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "footer-e2e": {
-            "root": "apps/footer-e2e",
-            "sourceRoot": "apps/footer-e2e/src",
+            "root": "apps/e2e/footer-e2e",
+            "sourceRoot": "apps/e2e/footer-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/footer-e2e/cypress.json",
-                        "devServerTarget": "footer:storybook"
+                        "cypressConfig": "apps/e2e/footer-e2e/cypress.json",
+                        "devServerTarget": "footer:storybook",
+                        "tsConfig": "apps/e2e/footer-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -269,14 +244,11 @@
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
-                    "outputs": ["{options.outputFile}"],
                     "options": {
-                        "lintFilePatterns": ["apps/footer-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/footer-e2e/**/*.{js,ts}"]
                     }
                 }
-            },
-            "tags": [],
-            "implicitDependencies": ["footer"]
+            }
         },
         "header": {
             "projectType": "library",
@@ -333,15 +305,16 @@
             }
         },
         "header-e2e": {
-            "root": "apps/header-e2e",
+            "root": "apps/e2e/header-e2e",
             "sourceRoot": "apps/header-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/header-e2e/cypress.json",
-                        "devServerTarget": "header:storybook"
+                        "cypressConfig": "apps/e2e/header-e2e/cypress.json",
+                        "devServerTarget": "header:storybook",
+                        "tsConfig": "apps/e2e/header-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -352,7 +325,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/header-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/header-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -365,7 +338,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/landingpage"],
                     "options": {
                         "jestConfig": "libs/landingpage/jest.config.js",
                         "passWithNoTests": true
@@ -397,7 +369,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/landingpage",
@@ -411,19 +382,19 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "landingpage-e2e": {
-            "root": "apps/landingpage-e2e",
-            "sourceRoot": "apps/landingpage-e2e/src",
+            "root": "apps/e2e/landingpage-e2e",
+            "sourceRoot": "apps/e2e/landingpage-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/landingpage-e2e/cypress.json",
-                        "devServerTarget": "landingpage:storybook"
+                        "cypressConfig": "apps/e2e/landingpage-e2e/cypress.json",
+                        "devServerTarget": "landingpage:storybook",
+                        "tsConfig": "apps/e2e/landingpage-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -433,16 +404,13 @@
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
-                    "outputs": ["{options.outputFile}"],
                     "options": {
                         "lintFilePatterns": [
-                            "apps/landingpage-e2e/**/*.{js,ts}"
+                            "apps/e2e/landingpage-e2e/**/*.{js,ts}"
                         ]
                     }
                 }
-            },
-            "tags": [],
-            "implicitDependencies": ["landingpage"]
+            }
         },
         "loader": {
             "projectType": "library",
@@ -499,15 +467,16 @@
             }
         },
         "loader-e2e": {
-            "root": "apps/loader-e2e",
-            "sourceRoot": "apps/loader-e2e/src",
+            "root": "apps/e2e/loader-e2e",
+            "sourceRoot": "apps/e2e/loader-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/loader-e2e/cypress.json",
-                        "devServerTarget": "loader:storybook"
+                        "cypressConfig": "apps/e2e/loader-e2e/cypress.json",
+                        "devServerTarget": "loader:storybook",
+                        "tsConfig": "apps/e2e/loader-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -518,7 +487,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/loader-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/loader-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -637,16 +606,16 @@
             }
         },
         "mate-team-e2e": {
-            "root": "apps/mate-team-e2e",
-            "sourceRoot": "apps/mate-team-e2e/src",
+            "root": "apps/e2e/mate-team-e2e",
+            "sourceRoot": "apps/e2e/mate-team-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/mate-team-e2e/cypress.json",
+                        "cypressConfig": "apps/e2e/mate-team-e2e/cypress.json",
                         "devServerTarget": "mate-team:serve:development",
-                        "tsConfig": "apps/mate-team-e2e/tsconfig.json"
+                        "tsConfig": "apps/e2e/mate-team-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "production": {
@@ -657,7 +626,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/mate-team-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/mate-team-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -717,15 +686,16 @@
             }
         },
         "register-e2e": {
-            "root": "apps/register-e2e",
-            "sourceRoot": "apps/register-e2e/src",
+            "root": "apps/e2e/register-e2e",
+            "sourceRoot": "apps/e2e/register-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/register-e2e/cypress.json",
-                        "devServerTarget": "register:storybook"
+                        "cypressConfig": "apps/e2e/register-e2e/cypress.json",
+                        "devServerTarget": "register:storybook",
+                        "tsConfig": "apps/e2e/register-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -736,7 +706,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/register-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/register-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -796,15 +766,16 @@
             }
         },
         "register-form-e2e": {
-            "root": "apps/register-form-e2e",
-            "sourceRoot": "apps/register-form-e2e/src",
+            "root": "apps/e2e/register-form-e2e",
+            "sourceRoot": "apps/e2e/register-form-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/register-form-e2e/cypress.json",
-                        "devServerTarget": "register-form:storybook"
+                        "cypressConfig": "apps/e2e/register-form-e2e/cypress.json",
+                        "devServerTarget": "register-form:storybook",
+                        "tsConfig": "apps/e2e/register-form-e2e/tsconfig.json"
                     },
                     "configurations": {
                         "ci": {
@@ -816,7 +787,7 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "apps/register-form-e2e/**/*.{js,ts}"
+                            "apps/e2e/register-form-e2e/**/*.{js,ts}"
                         ]
                     }
                 }
