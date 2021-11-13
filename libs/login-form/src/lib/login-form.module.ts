@@ -2,9 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from '@integrationsprojekt2/loader';
+import {
+    faEnvelope,
+    faLock,
+    faExclamationCircle,
+    faCheckCircle,
+    faTimesCircle,
+    faExclamationTriangle,
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
     imports: [
@@ -19,4 +27,15 @@ import { LoaderModule } from '@integrationsprojekt2/loader';
     ],
     exports: [LoginFormComponent]
 })
-export class LoginFormModule {}
+export class LoginFormModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faEnvelope,
+            faLock,
+            faExclamationCircle,
+            faCheckCircle,
+            faTimesCircle,
+            faExclamationTriangle
+        );
+    }
+}
