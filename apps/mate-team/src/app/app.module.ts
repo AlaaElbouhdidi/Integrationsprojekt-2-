@@ -37,9 +37,6 @@ import { FooterModule } from '@integrationsprojekt2/footer';
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        FooterModule,
-        HeaderModule,
-        LandingpageModule,
         LoaderModule,
         RegisterModule,
         RegisterFormModule,
@@ -59,6 +56,9 @@ import { FooterModule } from '@integrationsprojekt2/footer';
         }),
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
+        FooterModule,
+        HeaderModule,
+        LandingpageModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [AngularFireAuth, AuthService],
