@@ -47,3 +47,4 @@ apps/api/src/app/firebaseServiceAccount.json
 **/node_modules
 firestore-debug.log
 **-debug.log
+**/dist

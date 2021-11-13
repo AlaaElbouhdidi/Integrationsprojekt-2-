@@ -22,7 +22,6 @@
         "format": "nx format:write",
         "format:check": "nx format:check --files apps/**/*.ts, libs/**/*.ts",
         "update": "ng update @nrwl/workspace",
-        "workspace-schematic": "nx workspace-schematic",
         "dep-graph": "nx dep-graph",
         "help": "nx help"
     },

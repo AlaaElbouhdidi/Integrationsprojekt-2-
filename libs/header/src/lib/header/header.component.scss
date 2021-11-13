@@ -1,5 +1,5 @@
-@import '_variables';
-@import '_mixins';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
 
 header {
     position: relative;
@@ -11,7 +11,7 @@ header {
     height: 3rem;
     padding: 0 1rem;
     box-shadow: 0 2px 0.5vw #000000;
-    z-index: 20;
+    z-index: 101;
     @include for-tablet-landscape-up {
         padding: 0 5rem;
     }
@@ -34,6 +34,8 @@ header {
         a {
             color: $white;
             transition: 0.25s;
+            cursor: pointer;
+            text-decoration: underline;
             &:hover {
                 color: $light;
             }
@@ -42,6 +44,13 @@ header {
             margin-left: 1rem;
             @include for-tablet-portrait-up {
                 margin-left: 3rem;
+            }
+        }
+        fa-icon {
+            cursor: pointer;
+            transition: 0.25s;
+            &:hover {
+                color: $light;
             }
         }
     }

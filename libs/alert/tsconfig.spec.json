@@ -9,6 +9,6 @@
     "include": [
         "**/*.spec.ts",
         "**/*.d.ts",
-        "../services/src/lib/alert.service.spec.ts"
+        "../services/src/lib/alert/alert.service.spec.ts"
     ]
 }
