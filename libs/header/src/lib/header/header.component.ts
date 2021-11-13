@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AuthService } from '@integrationsprojekt2/services';
+import { AlertService, AuthService } from '@integrationsprojekt2/services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -14,6 +14,7 @@ export class HeaderComponent implements OnDestroy {
 
     constructor(
         private authService: AuthService,
+        private alertService: AlertService,
         private router: Router
     ) {
         this.authSubscription = this.authService.authState$
@@ -23,7 +24,18 @@ export class HeaderComponent implements OnDestroy {
     }
 
     async logout(): Promise<void> {
-        await this.authService.logout();
+        try {
+            await this.authService.logout();
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Successfully logged out'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
         await this.router.navigate(['/']);
     }
 
