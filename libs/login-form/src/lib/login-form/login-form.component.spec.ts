@@ -31,8 +31,7 @@ describe('LoginFormComponent', () => {
             RouterTestingModule.withRoutes([]),
             AngularFireModule.initializeApp(environment.firebase),
         ],
-        providers: [],
-        declarations: [ LoginFormComponent ]
+        providers: []
     })
     .compileComponents();
   });

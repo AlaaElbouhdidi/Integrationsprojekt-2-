@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -26,7 +27,8 @@ describe('HeaderComponent', () => {
             imports: [
                 RouterTestingModule.withRoutes([]),
                 AngularFireModule.initializeApp(environment.firebase),
-            ]
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });
 

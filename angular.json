@@ -547,14 +547,14 @@
             }
         },
         "login-e2e": {
-            "root": "apps/login-e2e",
-            "sourceRoot": "apps/login-e2e/src",
+            "root": "apps/e2e/login-e2e",
+            "sourceRoot": "apps/e2e/login-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/login-e2e/cypress.json",
+                        "cypressConfig": "apps/e2e/login-e2e/cypress.json",
                         "devServerTarget": "login:storybook"
                     },
                     "configurations": {
@@ -566,7 +566,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/login-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/login-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -626,14 +626,14 @@
             }
         },
         "login-form-e2e": {
-            "root": "apps/login-form-e2e",
-            "sourceRoot": "apps/login-form-e2e/src",
+            "root": "apps/e2e/login-form-e2e",
+            "sourceRoot": "apps/e2e/login-form-e2e/src",
             "projectType": "application",
             "architect": {
                 "e2e": {
                     "builder": "@nrwl/cypress:cypress",
                     "options": {
-                        "cypressConfig": "apps/login-form-e2e/cypress.json",
+                        "cypressConfig": "apps/e2e/login-form-e2e/cypress.json",
                         "devServerTarget": "login-form:storybook"
                     },
                     "configurations": {
@@ -645,7 +645,7 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/login-form-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": ["apps/e2e/login-form-e2e/**/*.{js,ts}"]
                     }
                 }
             }
