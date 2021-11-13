@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { RegisterFormModule } from '../register-form.module'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterTestingModule } from '@angular/router/testing';
 
 export const environment = {
     firebase: {
@@ -27,6 +28,7 @@ describe('RegisterFormComponent', () => {
             imports: [
                 FontAwesomeModule,
                 RegisterFormModule,
+                RouterTestingModule.withRoutes([]),
                 AngularFireModule.initializeApp(environment.firebase),
             ],
             providers: [AngularFireAuth],
