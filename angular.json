@@ -170,6 +170,30 @@
                 }
             }
         },
+        "env": {
+            "projectType": "library",
+            "root": "libs/env",
+            "sourceRoot": "libs/env/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/env/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/env/src/**/*.ts",
+                            "libs/env/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "footer": {
             "projectType": "library",
             "root": "libs/footer",
@@ -645,7 +669,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/login-form-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/login-form-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -704,8 +730,8 @@
                             ],
                             "fileReplacements": [
                                 {
-                                    "replace": "apps/mate-team/src/environments/environment.ts",
-                                    "with": "apps/mate-team/src/environments/environment.prod.ts"
+                                    "replace": "libs/env/src/lib/environment.ts",
+                                    "with": "libs/env/src/lib/environment.prod.ts"
                                 }
                             ],
                             "outputHashing": "all"
@@ -784,7 +810,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/mate-team-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/mate-team-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -864,7 +892,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/register-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/register-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }

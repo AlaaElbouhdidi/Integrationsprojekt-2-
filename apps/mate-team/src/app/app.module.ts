@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { environment } from '@integrationsprojekt2/env';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
@@ -55,10 +55,10 @@ import { FooterModule } from '@integrationsprojekt2/footer';
         AppRoutingModule,
         AngularFireFunctionsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production,
+            enabled: environment.environment.production,
             registrationStrategy: 'registerWhenStable:30000',
         }),
-        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireModule.initializeApp(environment.environment.firebase),
         AngularFireAuthModule,
         FooterModule,
         HeaderModule,
