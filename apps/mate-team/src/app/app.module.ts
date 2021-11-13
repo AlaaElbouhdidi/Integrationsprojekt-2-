@@ -29,7 +29,7 @@ import {
     faExclamationTriangle,
     faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
-import {LoginModule} from '@integrationsprojekt2/login';
+import { LoginModule } from '@integrationsprojekt2/login';
 
 
 @NgModule({
