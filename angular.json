@@ -193,6 +193,91 @@
                 }
             }
         },
+        "footer": {
+            "projectType": "library",
+            "root": "libs/footer",
+            "sourceRoot": "libs/footer/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/footer"],
+                    "options": {
+                        "jestConfig": "libs/footer/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/footer/src/**/*.ts",
+                            "libs/footer/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/footer/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "outputs": ["{options.outputPath}"],
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/footer",
+                        "config": {
+                            "configFolder": "libs/footer/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            },
+            "tags": []
+        },
+        "footer-e2e": {
+            "root": "apps/footer-e2e",
+            "sourceRoot": "apps/footer-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/footer-e2e/cypress.json",
+                        "devServerTarget": "footer:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "footer:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": ["apps/footer-e2e/**/*.{js,ts}"]
+                    }
+                }
+            },
+            "tags": [],
+            "implicitDependencies": ["footer"]
+        },
         "header": {
             "projectType": "library",
             "root": "libs/header",
@@ -271,6 +356,93 @@
                     }
                 }
             }
+        },
+        "landingpage": {
+            "projectType": "library",
+            "root": "libs/landingpage",
+            "sourceRoot": "libs/landingpage/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/landingpage"],
+                    "options": {
+                        "jestConfig": "libs/landingpage/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/landingpage/src/**/*.ts",
+                            "libs/landingpage/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/landingpage/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "outputs": ["{options.outputPath}"],
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/landingpage",
+                        "config": {
+                            "configFolder": "libs/landingpage/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            },
+            "tags": []
+        },
+        "landingpage-e2e": {
+            "root": "apps/landingpage-e2e",
+            "sourceRoot": "apps/landingpage-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/landingpage-e2e/cypress.json",
+                        "devServerTarget": "landingpage:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "landingpage:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "outputs": ["{options.outputFile}"],
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/landingpage-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            },
+            "tags": [],
+            "implicitDependencies": ["landingpage"]
         },
         "loader": {
             "projectType": "library",

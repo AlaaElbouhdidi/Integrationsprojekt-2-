@@ -23,7 +23,11 @@
             "@integrationsprojekt2/components": [
                 "libs/components/src/index.ts"
             ],
+            "@integrationsprojekt2/footer": ["libs/footer/src/index.ts"],
             "@integrationsprojekt2/header": ["libs/header/src/index.ts"],
+            "@integrationsprojekt2/landingpage": [
+                "libs/landingpage/src/index.ts"
+            ],
             "@integrationsprojekt2/loader": ["libs/loader/src/index.ts"],
             "@integrationsprojekt2/login": ["libs/login/src/index.ts"],
             "@integrationsprojekt2/login-form": [

@@ -1,0 +1,41 @@
+@import '_variables';
+@import '_mixins';
+
+footer {
+    position: relative;
+    background: $dark;
+    color: $white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1rem;
+    box-shadow: 0 2px 0.5vw #000000;
+    z-index: 20;
+    @include for-tablet-landscape-up {
+        padding: 0 5rem;
+    }
+    a {
+        color: $white;
+        cursor: pointer;
+    }
+    nav {
+        a {
+            color: $white;
+            transition: 0.25s;
+            &:hover {
+                color: $light;
+            }
+        }
+        a:nth-child(2) {
+            margin-left: 1rem;
+            @include for-tablet-portrait-up {
+                margin-left: 3rem;
+            }
+        }
+    }
+}
+
+.content {
+    text-align: center;
+}
