@@ -14,8 +14,4 @@ export class AlertService {
     addAlert(alert: Alert): void {
         this.globalAlerts.push(alert);
     }
-
-    reset(): void {
-        this.globalAlerts = [];
-    }
 }

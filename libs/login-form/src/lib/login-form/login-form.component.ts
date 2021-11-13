@@ -7,6 +7,7 @@ import {
     Validators
 } from '@angular/forms';
 import { AlertService, AuthService } from '@integrationsprojekt2/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'integrationsprojekt2-login-form',
@@ -20,7 +21,8 @@ export class LoginFormComponent {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private router: Router
     ) {
         this.loginForm = this.fb.group({
             email: new FormControl('', [
@@ -51,9 +53,14 @@ export class LoginFormComponent {
             );
             this.loading = false;
             this.loginForm.reset();
-            // send user to his group page
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Successfully logged in'
+            });
+            await this.router.navigate(['/']);
         } catch (e: any) {
             this.loading = false;
+            this.loginForm.reset();
             this.alertService.addAlert({
                 type: 'error',
                 message: e.message
