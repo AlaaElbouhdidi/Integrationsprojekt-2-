@@ -1,3 +1,13 @@
 <integrationsprojekt2-header></integrationsprojekt2-header>
+<div
+    class="alert-wrapper"
+    @alertAnimation
+    *ngFor="let alert of alertService.globalAlerts"
+>
+    <integrationsprojekt2-alert
+        [message]="alert.message"
+        [type]="alert.type"
+    ></integrationsprojekt2-alert>
+</div>
 <router-outlet></router-outlet>
 <integrationsprojekt2-footer></integrationsprojekt2-footer>

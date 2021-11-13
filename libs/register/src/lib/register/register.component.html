@@ -1,15 +1,4 @@
 <main>
-    <div
-        class="alert-wrapper"
-        @alertAnimation
-        *ngFor="let alert of alertService.globalAlerts"
-    >
-        <integrationsprojekt2-alert
-            [message]="alert.message"
-            [type]="alert.type"
-        ></integrationsprojekt2-alert>
-    </div>
-
     <section>
         <img src="../../assets/svgs/register.svg" alt="Man opening a door" />
         <integrationsprojekt2-register-form></integrationsprojekt2-register-form>

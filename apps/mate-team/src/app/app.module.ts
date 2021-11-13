@@ -30,7 +30,10 @@ import {
     faCheckCircle,
     faTimesCircle,
     faExclamationTriangle,
+    faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
+import { LoginModule } from '@integrationsprojekt2/login';
+
 import { LandingpageModule } from '@integrationsprojekt2/landingpage';
 import { FooterModule } from '@integrationsprojekt2/footer';
 
@@ -39,6 +42,7 @@ import { FooterModule } from '@integrationsprojekt2/footer';
     imports: [
         LoaderModule,
         RegisterModule,
+        LoginModule,
         RegisterFormModule,
         AlertModule,
         CommonModule,
@@ -72,7 +76,8 @@ export class AppModule {
             faExclamationCircle,
             faCheckCircle,
             faTimesCircle,
-            faExclamationTriangle
+            faExclamationTriangle,
+            faUserCircle
         );
     }
 }
