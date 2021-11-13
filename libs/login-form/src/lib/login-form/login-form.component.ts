@@ -58,7 +58,7 @@ export class LoginFormComponent {
                 message: 'Successfully logged in'
             });
             await this.router.navigate(['/']);
-        } catch (e: any) {
+        } catch (e) {
             this.loading = false;
             this.loginForm.reset();
             this.alertService.addAlert({
@@ -71,7 +71,7 @@ export class LoginFormComponent {
     async loginWithGoogle(): Promise<void> {
         try {
             await this.authService.loginWithGoogle();
-        } catch (e: any) {
+        } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({
                     type: 'error',

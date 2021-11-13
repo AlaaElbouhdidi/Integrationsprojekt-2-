@@ -26,38 +26,22 @@ export class AuthService {
     }
 
     async register(email: string, password: string): Promise<void> {
-        try {
-            const userCredential =
-                await this.auth.createUserWithEmailAndPassword(email, password);
-            if (userCredential.user) {
-                await userCredential.user.sendEmailVerification();
-            }
-        } catch (e: any) {
-            throw e;
+        const userCredential =
+            await this.auth.createUserWithEmailAndPassword(email, password);
+        if (userCredential.user) {
+            await userCredential.user.sendEmailVerification();
         }
     }
 
     async login(email: string, password: string): Promise<void> {
-        try {
-            await this.auth.signInWithEmailAndPassword(email, password);
-        } catch (e) {
-            throw e;
-        }
+        await this.auth.signInWithEmailAndPassword(email, password);
     }
 
     async loginWithGoogle(): Promise<void> {
-        try {
-            await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-        } catch (e) {
-            throw e;
-        }
+        await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
 
     async logout(): Promise<void> {
-        try {
-            await this.auth.signOut();
-        } catch (e) {
-            throw e;
-        }
+        await this.auth.signOut();
     }
 }
