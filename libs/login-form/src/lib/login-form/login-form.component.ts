@@ -71,11 +71,13 @@ export class LoginFormComponent {
     async loginWithGoogle(): Promise<void> {
         try {
             await this.authService.loginWithGoogle();
-        } catch (e) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
+        } catch (e: any) {
+            if (e.code !== 'auth/popup-closed-by-user') {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
 }

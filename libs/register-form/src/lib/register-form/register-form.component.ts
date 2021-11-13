@@ -24,7 +24,10 @@ export class RegisterFormComponent {
         private router: Router
     ) {
         this.registerForm = this.fb.group({
-            email: new FormControl('', [Validators.email, Validators.required]),
+            email: new FormControl('', [
+                Validators.email,
+                Validators.required
+            ]),
             password: new FormControl('', [
                 Validators.minLength(6),
                 Validators.required,
@@ -58,7 +61,11 @@ export class RegisterFormComponent {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             this.loading = false;
-            this.alertService.addAlert({ type: 'error', message: err.message });
+            this.registerForm.reset();
+            this.alertService.addAlert({
+                type: 'error',
+                message: err.message
+            });
         }
     }
 }
