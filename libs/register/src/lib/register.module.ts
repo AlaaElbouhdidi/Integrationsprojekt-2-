@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterRoutingModule } from './register/register-routing.module';
 import { RegisterComponent } from './register/register.component';
@@ -14,6 +14,5 @@ import { AlertModule } from '@integrationsprojekt2/alert';
         RegisterFormModule,
     ],
     exports: [RegisterComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RegisterModule {}
