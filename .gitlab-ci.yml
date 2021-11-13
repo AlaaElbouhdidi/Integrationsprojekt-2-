@@ -74,7 +74,7 @@ e2e:
         - apt install git
         - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npx nx run-many --target=e2e --parallel --all
+        - npx nx run-many --target=e2e --all
     artifacts:
         when: always
         paths:
