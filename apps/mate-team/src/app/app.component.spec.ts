@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HeaderModule } from '@header';
+import { CoreModule } from '@core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
 
@@ -14,7 +14,7 @@ describe('AppComponent', () => {
             imports: [
                 HttpClientModule,
                 RouterTestingModule,
-                HeaderModule,
+                CoreModule,
                 AngularFireModule.initializeApp(environment.environment.firebase),
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
