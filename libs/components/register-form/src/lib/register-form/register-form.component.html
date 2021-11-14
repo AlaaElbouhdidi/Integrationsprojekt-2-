@@ -1,0 +1,66 @@
+<form class="app-form" (ngSubmit)="register()" [formGroup]="registerForm">
+    <h1>REGISTER</h1>
+
+    <div class="form-input">
+        <input
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            required
+        />
+        <fa-icon icon="envelope"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Email wrongly formatted
+            </p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            required
+        />
+        <fa-icon icon="lock"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Password has to be at least 6 characters
+            </p>
+        </div>
+    </div>
+
+    <div class="form-link">
+        Account already created?
+        <a routerLink="/login">Sign in.</a>
+    </div>
+
+    <div class="form-btn">
+        <button
+            type="submit"
+            *ngIf="!loading; else loader"
+            [class.disabled-btn]="!registerForm.valid"
+            [disabled]="!registerForm.valid"
+        >
+            Register
+        </button>
+        <ng-template #loader>
+            <mate-team-loader></mate-team-loader>
+        </ng-template>
+    </div>
+</form>
