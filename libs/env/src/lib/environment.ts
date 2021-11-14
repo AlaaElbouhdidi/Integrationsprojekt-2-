@@ -1,5 +1,5 @@
 /**
- * Production environment variables
+ * Development environment variables
  */
 import { Environment } from '@integrationsprojekt2/api-interfaces';
 

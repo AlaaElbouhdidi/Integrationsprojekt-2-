@@ -4,14 +4,14 @@
     "projects": {
         "alert": {
             "projectType": "library",
-            "root": "libs/alert",
+            "root": "libs/components/alert",
             "sourceRoot": "libs/alert/src",
             "prefix": "ip2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/alert/jest.config.js",
+                        "jestConfig": "libs/components/alert/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -19,8 +19,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/alert/src/**/*.ts",
-                            "libs/alert/src/**/*.html"
+                            "libs/components/alert/src/**/*.ts",
+                            "libs/components/alert/src/**/*.html"
                         ]
                     }
                 },
@@ -30,7 +30,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/alert/.storybook"
+                            "configFolder": "libs/components/alert/.storybook"
                         }
                     },
                     "configurations": {
@@ -45,7 +45,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/alert",
                         "config": {
-                            "configFolder": "libs/alert/.storybook"
+                            "configFolder": "libs/components/alert/.storybook"
                         }
                     },
                     "configurations": {
@@ -196,14 +196,14 @@
         },
         "footer": {
             "projectType": "library",
-            "root": "libs/footer",
-            "sourceRoot": "libs/footer/src",
+            "root": "libs/components/footer",
+            "sourceRoot": "libs/components/footer/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/footer/jest.config.js",
+                        "jestConfig": "libs/components/footer/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -211,8 +211,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/footer/src/**/*.ts",
-                            "libs/footer/src/**/*.html"
+                            "libs/components/footer/src/**/*.ts",
+                            "libs/components/footer/src/**/*.html"
                         ]
                     }
                 },
@@ -222,7 +222,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/footer/.storybook"
+                            "configFolder": "libs/components/footer/.storybook"
                         }
                     },
                     "configurations": {
@@ -237,7 +237,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/footer",
                         "config": {
-                            "configFolder": "libs/footer/.storybook"
+                            "configFolder": "libs/components/footer/.storybook"
                         }
                     },
                     "configurations": {
@@ -276,14 +276,14 @@
         },
         "header": {
             "projectType": "library",
-            "root": "libs/header",
-            "sourceRoot": "libs/header/src",
+            "root": "libs/components/header",
+            "sourceRoot": "libs/components/header/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/header/jest.config.js",
+                        "jestConfig": "libs/components/header/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -291,8 +291,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/header/src/**/*.ts",
-                            "libs/header/src/**/*.html"
+                            "libs/components/header/src/**/*.ts",
+                            "libs/components/header/src/**/*.html"
                         ]
                     }
                 },
@@ -302,7 +302,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/header/.storybook"
+                            "configFolder": "libs/components/header/.storybook"
                         }
                     },
                     "configurations": {
@@ -317,7 +317,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/header",
                         "config": {
-                            "configFolder": "libs/header/.storybook"
+                            "configFolder": "libs/components/header/.storybook"
                         }
                     },
                     "configurations": {
@@ -356,14 +356,14 @@
         },
         "landingpage": {
             "projectType": "library",
-            "root": "libs/landingpage",
-            "sourceRoot": "libs/landingpage/src",
+            "root": "libs/components/landingpage",
+            "sourceRoot": "libs/components/landingpage/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/landingpage/jest.config.js",
+                        "jestConfig": "libs/components/landingpage/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -371,8 +371,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/landingpage/src/**/*.ts",
-                            "libs/landingpage/src/**/*.html"
+                            "libs/components/landingpage/src/**/*.ts",
+                            "libs/components/landingpage/src/**/*.html"
                         ]
                     }
                 },
@@ -382,7 +382,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/landingpage/.storybook"
+                            "configFolder": "libs/components/landingpage/.storybook"
                         }
                     },
                     "configurations": {
@@ -397,7 +397,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/landingpage",
                         "config": {
-                            "configFolder": "libs/landingpage/.storybook"
+                            "configFolder": "libs/components/landingpage/.storybook"
                         }
                     },
                     "configurations": {
@@ -438,14 +438,14 @@
         },
         "loader": {
             "projectType": "library",
-            "root": "libs/loader",
-            "sourceRoot": "libs/loader/src",
+            "root": "libs/components/loader",
+            "sourceRoot": "libs/components/loader/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/loader/jest.config.js",
+                        "jestConfig": "libs/components/loader/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -453,8 +453,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/loader/src/**/*.ts",
-                            "libs/loader/src/**/*.html"
+                            "libs/components/loader/src/**/*.ts",
+                            "libs/components/loader/src/**/*.html"
                         ]
                     }
                 },
@@ -464,7 +464,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/loader/.storybook"
+                            "configFolder": "libs/components/loader/.storybook"
                         }
                     },
                     "configurations": {
@@ -479,7 +479,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/loader",
                         "config": {
-                            "configFolder": "libs/loader/.storybook"
+                            "configFolder": "libs/components/loader/.storybook"
                         }
                     },
                     "configurations": {
@@ -518,14 +518,14 @@
         },
         "login": {
             "projectType": "library",
-            "root": "libs/login",
-            "sourceRoot": "libs/login/src",
+            "root": "libs/components/login",
+            "sourceRoot": "libs/components/login/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/login/jest.config.js",
+                        "jestConfig": "libs/components/login/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -533,8 +533,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/login/src/**/*.ts",
-                            "libs/login/src/**/*.html"
+                            "libs/components/login/src/**/*.ts",
+                            "libs/components/login/src/**/*.html"
                         ]
                     }
                 },
@@ -544,7 +544,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/login/.storybook"
+                            "configFolder": "libs/components/login/.storybook"
                         }
                     },
                     "configurations": {
@@ -559,7 +559,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/login",
                         "config": {
-                            "configFolder": "libs/login/.storybook"
+                            "configFolder": "libs/components/login/.storybook"
                         }
                     },
                     "configurations": {
@@ -597,14 +597,14 @@
         },
         "login-form": {
             "projectType": "library",
-            "root": "libs/login-form",
-            "sourceRoot": "libs/login-form/src",
+            "root": "libs/components/login-form",
+            "sourceRoot": "libs/components/login-form/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/login-form/jest.config.js",
+                        "jestConfig": "libs/components/login-form/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -612,8 +612,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/login-form/src/**/*.ts",
-                            "libs/login-form/src/**/*.html"
+                            "libs/components/login-form/src/**/*.ts",
+                            "libs/components/login-form/src/**/*.html"
                         ]
                     }
                 },
@@ -623,7 +623,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/login-form/.storybook"
+                            "configFolder": "libs/components/login-form/.storybook"
                         }
                     },
                     "configurations": {
@@ -638,7 +638,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/login-form",
                         "config": {
-                            "configFolder": "libs/login-form/.storybook"
+                            "configFolder": "libs/components/login-form/.storybook"
                         }
                     },
                     "configurations": {
@@ -819,14 +819,14 @@
         },
         "register": {
             "projectType": "library",
-            "root": "libs/register",
-            "sourceRoot": "libs/register/src",
+            "root": "libs/components/register",
+            "sourceRoot": "libs/components/register/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/register/jest.config.js",
+                        "jestConfig": "libs/components/register/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -834,8 +834,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/register/src/**/*.ts",
-                            "libs/register/src/**/*.html"
+                            "libs/components/register/src/**/*.ts",
+                            "libs/components/register/src/**/*.html"
                         ]
                     }
                 },
@@ -845,7 +845,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/register/.storybook"
+                            "configFolder": "libs/components/register/.storybook"
                         }
                     },
                     "configurations": {
@@ -860,7 +860,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/register",
                         "config": {
-                            "configFolder": "libs/register/.storybook"
+                            "configFolder": "libs/components/register/.storybook"
                         }
                     },
                     "configurations": {
@@ -901,14 +901,14 @@
         },
         "register-form": {
             "projectType": "library",
-            "root": "libs/register-form",
-            "sourceRoot": "libs/register-form/src",
+            "root": "libs/components/register-form",
+            "sourceRoot": "libs/components/register-form/src",
             "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/register-form/jest.config.js",
+                        "jestConfig": "libs/components/register-form/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -916,8 +916,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/register-form/src/**/*.ts",
-                            "libs/register-form/src/**/*.html"
+                            "libs/components/register-form/src/**/*.ts",
+                            "libs/components/register-form/src/**/*.html"
                         ]
                     }
                 },
@@ -927,7 +927,7 @@
                         "uiFramework": "@storybook/angular",
                         "port": 4400,
                         "config": {
-                            "configFolder": "libs/register-form/.storybook"
+                            "configFolder": "libs/components/register-form/.storybook"
                         }
                     },
                     "configurations": {
@@ -942,7 +942,7 @@
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/register-form",
                         "config": {
-                            "configFolder": "libs/register-form/.storybook"
+                            "configFolder": "libs/components/register-form/.storybook"
                         }
                     },
                     "configurations": {
