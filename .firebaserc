@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "integrationsprojekt2": {
-      "hosting": {
-        "integrationsprojekt2": [
-          "integrationsprojekt2"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "integrationsprojekt2"
+    "default": "mate-team"
   }
 }
