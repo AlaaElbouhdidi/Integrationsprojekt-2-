@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HeaderModule } from '@integrationsprojekt2/header';
+import { HeaderModule } from '@header';
 import { AngularFireModule } from '@angular/fire/compat';
 
 export const environment = {

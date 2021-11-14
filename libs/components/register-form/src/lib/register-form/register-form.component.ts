@@ -6,7 +6,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { AlertService, AuthService } from '@integrationsprojekt2/services';
+import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 @Component({
     selector: 'integrationsprojekt2-register-form',
@@ -24,10 +24,7 @@ export class RegisterFormComponent {
         private router: Router
     ) {
         this.registerForm = this.fb.group({
-            email: new FormControl('', [
-                Validators.email,
-                Validators.required
-            ]),
+            email: new FormControl('', [Validators.email, Validators.required]),
             password: new FormControl('', [
                 Validators.minLength(6),
                 Validators.required,
@@ -64,7 +61,7 @@ export class RegisterFormComponent {
             this.registerForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message
+                message: err.message,
             });
         }
     }

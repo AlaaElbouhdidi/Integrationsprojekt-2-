@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { LoaderModule } from '@integrationsprojekt2/loader';
-import { AlertModule } from '@integrationsprojekt2/alert';
+import { LoaderModule } from '@loader';
+import { AlertModule } from '@alert';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     FontAwesomeModule,
@@ -17,7 +17,6 @@ import {
     faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
-
 
 @NgModule({
     imports: [

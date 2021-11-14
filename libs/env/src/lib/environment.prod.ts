@@ -1,7 +1,7 @@
 /**
  * Production environment variables
  */
-import { Environment } from '@integrationsprojekt2/api-interfaces';
+import { Environment } from '@api-interfaces';
 
 export const environment: Environment = {
     firebase: {

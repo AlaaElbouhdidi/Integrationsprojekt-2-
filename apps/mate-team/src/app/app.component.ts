@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertService } from '@integrationsprojekt2/services';
+import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({

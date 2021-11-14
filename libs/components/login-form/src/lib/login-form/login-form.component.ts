@@ -4,15 +4,15 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators
+    Validators,
 } from '@angular/forms';
-import { AlertService, AuthService } from '@integrationsprojekt2/services';
+import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'integrationsprojekt2-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+    selector: 'integrationsprojekt2-login-form',
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
     loginForm: FormGroup;
@@ -25,14 +25,11 @@ export class LoginFormComponent {
         private router: Router
     ) {
         this.loginForm = this.fb.group({
-            email: new FormControl('', [
-                Validators.email,
-                Validators.required
-            ]),
+            email: new FormControl('', [Validators.email, Validators.required]),
             password: new FormControl('', [
                 Validators.minLength(6),
-                Validators.required
-            ])
+                Validators.required,
+            ]),
         });
     }
 
@@ -47,15 +44,12 @@ export class LoginFormComponent {
     async login(): Promise<void> {
         try {
             this.loading = true;
-            await this.authService.login(
-                this.email.value,
-                this.password.value
-            );
+            await this.authService.login(this.email.value, this.password.value);
             this.loading = false;
             this.loginForm.reset();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully logged in'
+                message: 'Successfully logged in',
             });
             await this.router.navigate(['/']);
         } catch (e) {
@@ -63,7 +57,7 @@ export class LoginFormComponent {
             this.loginForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message
+                message: e.message,
             });
         }
     }
@@ -75,7 +69,7 @@ export class LoginFormComponent {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({
                     type: 'error',
-                    message: e.message
+                    message: e.message,
                 });
             }
         }

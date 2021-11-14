@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlertModule } from '../alert.module'
+import { AlertModule } from '../alert.module';
 import { AlertComponent } from './alert.component';
 
 describe('AlertComponent', () => {

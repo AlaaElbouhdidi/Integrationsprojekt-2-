@@ -5,11 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        FontAwesomeModule
-    ],
+    imports: [CommonModule, RouterModule, FontAwesomeModule],
     declarations: [HeaderComponent],
     exports: [HeaderComponent],
 })

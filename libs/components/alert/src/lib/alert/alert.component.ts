@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { AlertService } from '@integrationsprojekt2/services';
+import { AlertService } from '@services';
 
 @Component({
     selector: 'integrationsprojekt2-alert',

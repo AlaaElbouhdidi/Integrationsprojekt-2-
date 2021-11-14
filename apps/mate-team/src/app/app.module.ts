@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '@integrationsprojekt2/env';
+import { environment } from '@env';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { FormsModule } from '@angular/forms';
@@ -12,13 +12,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderModule } from '@integrationsprojekt2/header';
-import { LoaderModule } from '@integrationsprojekt2/loader';
-import { RegisterModule } from '@integrationsprojekt2/register';
-import { RegisterFormModule } from '@integrationsprojekt2/register-form';
-import { AlertModule } from '@integrationsprojekt2/alert';
+import { HeaderModule } from '@header';
+import { LoaderModule } from '@loader';
+import { RegisterModule } from '@register';
+import { RegisterFormModule } from '@register-form';
+import { AlertModule } from '@alert';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AuthService } from '@integrationsprojekt2/services';
+import { AuthService } from '@services';
 import {
     FontAwesomeModule,
     FaIconLibrary,
@@ -30,12 +30,12 @@ import {
     faCheckCircle,
     faTimesCircle,
     faExclamationTriangle,
-    faUserCircle
+    faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { LoginModule } from '@integrationsprojekt2/login';
+import { LoginModule } from '@login';
 
-import { LandingpageModule } from '@integrationsprojekt2/landingpage';
-import { FooterModule } from '@integrationsprojekt2/footer';
+import { LandingpageModule } from '@landingpage';
+import { FooterModule } from '@footer';
 
 @NgModule({
     declarations: [AppComponent],
