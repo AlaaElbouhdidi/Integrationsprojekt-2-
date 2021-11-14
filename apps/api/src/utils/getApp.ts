@@ -18,7 +18,7 @@ export const expressInstance: express.Express = express();
 export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
-    if (firebase.apps.length === 0) {
+    if (!firebase.apps.length) {
         this.firebaseApp = firebase.initializeApp();
     }
     const config = new DocumentBuilder()
