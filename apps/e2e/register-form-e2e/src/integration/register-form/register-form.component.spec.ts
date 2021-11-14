@@ -3,6 +3,6 @@ describe('register-form', () => {
         cy.visit('/iframe.html?id=registerformcomponent--primary')
     );
     it('should render the component', () => {
-        cy.get('integrationsprojekt2-register-form').should('exist');
+        cy.get('mate-team-register-form').should('exist');
     });
 });

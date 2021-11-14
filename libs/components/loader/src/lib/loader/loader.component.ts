@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'integrationsprojekt2-loader',
+    selector: 'mate-team-loader',
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.scss'],
 })

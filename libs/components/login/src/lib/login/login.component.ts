@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertService } from '@services';
 
 @Component({
-    selector: 'integrationsprojekt2-login',
+    selector: 'mate-team-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })

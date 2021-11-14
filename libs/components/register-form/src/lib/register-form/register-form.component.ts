@@ -9,7 +9,7 @@ import {
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 @Component({
-    selector: 'integrationsprojekt2-register-form',
+    selector: 'mate-team-register-form',
     templateUrl: './register-form.component.html',
     styleUrls: ['./register-form.component.scss'],
 })

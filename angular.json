@@ -6,7 +6,7 @@
             "projectType": "library",
             "root": "libs/components/alert",
             "sourceRoot": "libs/alert/src",
-            "prefix": "ip2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -174,7 +174,6 @@
             "projectType": "library",
             "root": "libs/env",
             "sourceRoot": "libs/env/src",
-            "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -198,7 +197,7 @@
             "projectType": "library",
             "root": "libs/components/footer",
             "sourceRoot": "libs/components/footer/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -278,7 +277,7 @@
             "projectType": "library",
             "root": "libs/components/header",
             "sourceRoot": "libs/components/header/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -358,7 +357,7 @@
             "projectType": "library",
             "root": "libs/components/landingpage",
             "sourceRoot": "libs/components/landingpage/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -440,7 +439,7 @@
             "projectType": "library",
             "root": "libs/components/loader",
             "sourceRoot": "libs/components/loader/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -520,7 +519,7 @@
             "projectType": "library",
             "root": "libs/components/login",
             "sourceRoot": "libs/components/login/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -599,7 +598,7 @@
             "projectType": "library",
             "root": "libs/components/login-form",
             "sourceRoot": "libs/components/login-form/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -680,7 +679,7 @@
             "projectType": "application",
             "root": "apps/mate-team",
             "sourceRoot": "apps/mate-team/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "compodoc": {
                     "builder": "@nrwl/workspace:run-commands",
@@ -821,7 +820,7 @@
             "projectType": "library",
             "root": "libs/components/register",
             "sourceRoot": "libs/components/register/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -903,7 +902,7 @@
             "projectType": "library",
             "root": "libs/components/register-form",
             "sourceRoot": "libs/components/register-form/src",
-            "prefix": "integrationsprojekt2",
+            "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -985,7 +984,6 @@
             "projectType": "library",
             "root": "libs/services",
             "sourceRoot": "libs/services/src",
-            "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
@@ -1009,7 +1007,6 @@
             "projectType": "library",
             "root": "libs/styles",
             "sourceRoot": "libs/styles/src",
-            "prefix": "integrationsprojekt2",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { AlertService } from '@services';
 
 @Component({
-    selector: 'integrationsprojekt2-alert',
+    selector: 'mate-team-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
 })

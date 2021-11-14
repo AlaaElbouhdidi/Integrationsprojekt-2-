@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertService } from '@services';
 
 @Component({
-    selector: 'integrationsprojekt2-register',
+    selector: 'mate-team-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })

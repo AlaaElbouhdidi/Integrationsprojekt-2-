@@ -3,7 +3,7 @@ import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-    selector: 'integrationsprojekt2-root',
+    selector: 'mate-team-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     animations: [

@@ -10,7 +10,7 @@ import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'integrationsprojekt2-login-form',
+    selector: 'mate-team-login-form',
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
 })

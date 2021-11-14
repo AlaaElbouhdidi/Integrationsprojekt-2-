@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'integrationsprojekt2-header',
+    selector: 'mate-team-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
