@@ -5,25 +5,16 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-            import('@integrationsprojekt2/landingpage').then(
-                (m) => m.LandingpageModule
-            ),
+            import('@landingpage').then((m) => m.LandingpageModule),
     },
     {
         path: 'register',
-        loadChildren: () =>
-            import('@integrationsprojekt2/register').then(
-                (m) => m.RegisterModule
-            ),
+        loadChildren: () => import('@register').then((m) => m.RegisterModule),
     },
     {
         path: 'login',
-        loadChildren: () =>
-            import('@integrationsprojekt2/login').then(
-                (m) => m.LoginModule
-            ),
+        loadChildren: () => import('@login').then((m) => m.LoginModule),
     },
-
 ];
 
 @NgModule({

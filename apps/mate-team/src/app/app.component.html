@@ -1,13 +1,13 @@
-<integrationsprojekt2-header></integrationsprojekt2-header>
+<mate-team-header></mate-team-header>
 <div
     class="alert-wrapper"
     @alertAnimation
     *ngFor="let alert of alertService.globalAlerts"
 >
-    <integrationsprojekt2-alert
+    <mate-team-alert
         [message]="alert.message"
         [type]="alert.type"
-    ></integrationsprojekt2-alert>
+    ></mate-team-alert>
 </div>
 <router-outlet></router-outlet>
-<integrationsprojekt2-footer></integrationsprojekt2-footer>
+<mate-team-footer></mate-team-footer>
