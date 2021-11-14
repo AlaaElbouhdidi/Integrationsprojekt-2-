@@ -8,10 +8,14 @@ import { AlertModule } from '@alert';
 import { LoginModule } from '@login';
 import { LandingpageModule } from '@landingpage';
 import { FooterModule } from '@footer';
+import { ServicesModule } from '@services';
+import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
+import { StylesModule } from '@styles';
 
 @NgModule({
     exports: [
         CommonModule,
+        ServicesModule,
         HeaderModule,
         LoaderModule,
         RegisterModule,
@@ -20,6 +24,8 @@ import { FooterModule } from '@footer';
         LoginModule,
         LandingpageModule,
         FooterModule,
+        AngularFireFunctionsModule,
+        StylesModule
     ],
 })
 export class CoreModule {}
