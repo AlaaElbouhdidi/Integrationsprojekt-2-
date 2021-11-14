@@ -10,17 +10,6 @@ import { LandingpageModule } from '@landingpage';
 import { FooterModule } from '@footer';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        HeaderModule,
-        LoaderModule,
-        RegisterModule,
-        RegisterFormModule,
-        AlertModule,
-        LoginModule,
-        LandingpageModule,
-        FooterModule,
-    ],
     exports: [
         CommonModule,
         HeaderModule,
