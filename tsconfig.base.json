@@ -27,6 +27,7 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
+            "@password-reset-form": ["libs/components/password-reset-form/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],
