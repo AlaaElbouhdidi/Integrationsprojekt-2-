@@ -1,0 +1,28 @@
+<div class="d-flex" style="position: relative; margin-top: 55px; margin-bottom: 30px">
+    <h1>My groups <i-bs name="people-fill"></i-bs></h1>
+    <div>
+        <a class="createGroup" href="#">Create new group</a>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;display: flex;">
+    <div class="searchContainer">
+        <i-bs name="search"></i-bs>
+        <input type="text" placeholder="Search..." [(ngModel)]="textSearch" class="searchField" (ngModelChange)="doFiltering()"/>
+    </div>
+    <div>
+        Filter by
+        <a (click)="this.enabledMemberFilter = true; doFiltering()" [className]="enabledMemberFilter ? 'filter active' : 'filter'">Members</a>
+        <a (click)="this.enabledMemberFilter = false; doFiltering()" [className]="enabledMemberFilter ? 'filter' : 'filter active'">Creation Date</a>
+    </div>
+</div>
+
+<div style="position:relative;">
+    <div style="position: absolute; top: 0; visibility: hidden">
+        <integrationsprojekt2-group-item-screen *ngFor="let x of groups" [group]="x"></integrationsprojekt2-group-item-screen>
+    </div>
+    <integrationsprojekt2-group-item-screen *ngFor="let x of shownGroups" (clicked)="clicked(x)"  [group]="x"></integrationsprojekt2-group-item-screen>
+    <p *ngIf="shownGroups && shownGroups.length === 0">
+        No group found.
+    </p>
+</div>

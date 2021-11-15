@@ -1,0 +1,15 @@
+
+<div class="d-flex box" style="align-items: center; padding: 5px;" *ngIf="group !== undefined">
+    <div style="flex:0; margin-right: 10px;">
+        <img class="rounded-circle" [src]="group.imgSrc"/>
+    </div>
+    <div style="flex:0; width: 300px;">
+        <h4 style="width: 300px;">{{ group.title }}</h4>
+    </div>
+    <p style="flex: 1">
+        <span>|</span>
+        {{ group.members.length }}
+        Members
+    </p>
+    <a class="whiteBtn" (click)="clicked.emit()" style="cursor: pointer; padding:0; margin:0; width: 200px !important">Open</a>
+</div>

@@ -1,0 +1,62 @@
+@import "../../_variables.scss";
+h1{
+    border-left-style: solid;
+    border-left-width: 3px;
+    border-left-color: white;
+    padding-left: 3px;
+    margin-top: 10px;
+    color: white;
+}
+
+.createGroup{
+    position: absolute;
+    bottom: 15px;
+    margin-left: 10px;
+    background-color: rgb(52, 146, 51);
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2px 5px;
+}
+.searchField{
+    margin-left: 20px;
+    width: 250px;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+}
+::-webkit-input-placeholder { /* Edge */
+    color: white;
+}
+:-ms-input-placeholder { /* Internet Explorer */
+    color: white;
+}
+::placeholder {
+    color: white;
+}
+.searchContainer{
+    border-bottom: 2px white solid;
+    padding-bottom: 2px;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-right: 50px;
+}
+.filter{
+    color: white;
+    text-decoration: none;
+    border: $main 5px solid;
+    display: inline-block;
+    width: 120px;
+    border-radius: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+    padding-right: 5px;
+}
+.filter:not(:first-child){
+    margin-left: 50px;
+}
+.filter.active{
+    background-color: #155ca3;
+}
