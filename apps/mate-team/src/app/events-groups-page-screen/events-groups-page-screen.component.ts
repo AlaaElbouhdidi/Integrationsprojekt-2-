@@ -3,7 +3,7 @@ import {EventModel} from "../shared/models/EventModel";
 import {GroupModel} from "../shared/models/GroupModel";
 
 @Component({
-  selector: 'integrationsprojekt2-events-groups-page-screen',
+  selector: 'mate-team-integrationsprojekt2-events-groups-page-screen',
   templateUrl: './events-groups-page-screen.component.html',
   styleUrls: ['./events-groups-page-screen.component.scss']
 })

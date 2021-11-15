@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GroupModel} from "../shared/models/GroupModel";
 
 @Component({
-  selector: 'integrationsprojekt2-group-item-screen',
+  selector: 'mate-team-integrationsprojekt2-group-item-screen',
   templateUrl: './group-item-screen.component.html',
   styleUrls: ['./group-item-screen.component.scss']
 })
