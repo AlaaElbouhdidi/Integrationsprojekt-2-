@@ -168,6 +168,87 @@
                 }
             }
         },
+        "auth-handler": {
+            "projectType": "library",
+            "root": "libs/components/auth-handler",
+            "sourceRoot": "libs/components/auth-handler/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/auth-handler/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/auth-handler/src/**/*.ts",
+                            "libs/components/auth-handler/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/auth-handler",
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "auth-handler-e2e": {
+            "root": "apps/e2e/auth-handler-e2e",
+            "sourceRoot": "apps/e2e/auth-handler-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/auth-handler-e2e/cypress.json",
+                        "devServerTarget": "auth-handler:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "auth-handler:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/auth-handler-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",
