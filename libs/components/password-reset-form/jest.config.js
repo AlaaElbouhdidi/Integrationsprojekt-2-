@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'components-password-reset-form',
+    displayName: 'password-reset-form',
     preset: '../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
