@@ -273,6 +273,85 @@
                 }
             }
         },
+        "email-form": {
+            "projectType": "library",
+            "root": "libs/components/email-form",
+            "sourceRoot": "libs/components/email-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/email-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/email-form/src/**/*.ts",
+                            "libs/components/email-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/email-form",
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "email-form-e2e": {
+            "root": "apps/e2e/email-form-e2e",
+            "sourceRoot": "apps/e2e/email-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/email-form-e2e/cypress.json",
+                        "devServerTarget": "email-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "email-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/email-form-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "env": {
             "projectType": "library",
             "root": "libs/env",
