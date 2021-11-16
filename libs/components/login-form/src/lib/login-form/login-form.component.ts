@@ -66,6 +66,11 @@ export class LoginFormComponent {
     async loginWithGoogle(): Promise<void> {
         try {
             await this.authService.loginWithGoogle();
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Successfully logged in with google',
+            });
+            await this.router.navigate(['/']);
         } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({
