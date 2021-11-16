@@ -2,14 +2,14 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GroupModel } from '../shared/models/GroupModel';
 import {GroupModalDialogComponent} from "../group-modal-dialog/group-modal-dialog.component";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 @Component({
-  selector: 'integrationsprojekt2-groups-section-screen',
+  selector: 'mate-team-groups-section-screen',
   templateUrl: './groups-section-screen.component.html',
   styleUrls: ['./groups-section-screen.component.scss']
 })
-export class GroupsSectionScreenComponent implements OnInit, OnChanges {
+export class GroupsSectionScreenComponent implements OnChanges {
     @Input()
     groups: GroupModel[] | undefined;
     shownGroups: GroupModel[] | undefined;
@@ -17,9 +17,6 @@ export class GroupsSectionScreenComponent implements OnInit, OnChanges {
     textSearch = '';
 
   constructor(public modalService: NgbModal) { }
-
-  ngOnInit(): void {
-  }
 
 
   doFiltering(): void{

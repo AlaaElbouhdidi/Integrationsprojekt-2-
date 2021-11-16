@@ -5,11 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './events-group-item-screen.component.html',
   styleUrls: ['./events-group-item-screen.component.scss']
 })
-export class EventsGroupItemScreenComponent implements OnInit {
+export class EventsGroupItemScreenComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

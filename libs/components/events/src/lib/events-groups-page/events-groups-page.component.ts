@@ -6,7 +6,7 @@ import {EventModel} from "../shared/models/EventModel";
 import {GroupModel} from "../shared/models/GroupModel";
 
 @Component({
-  selector: 'integrationsprojekt2-events-groups-page',
+  selector: 'mate-team-integrationsprojekt2-events-groups-page',
   templateUrl: './events-groups-page.component.html',
   styleUrls: ['./events-groups-page.component.scss']
 })

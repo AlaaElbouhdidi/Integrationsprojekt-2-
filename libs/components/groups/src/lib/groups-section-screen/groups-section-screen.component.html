@@ -19,9 +19,9 @@
 
 <div style="position:relative;">
     <div style="position: absolute; top: 0; visibility: hidden">
-        <integrationsprojekt2-group-item-screen *ngFor="let x of groups" [group]="x"></integrationsprojekt2-group-item-screen>
+        <mate-team-group-item-screen *ngFor="let x of groups" [group]="x"></mate-team-group-item-screen>
     </div>
-    <integrationsprojekt2-group-item-screen *ngFor="let x of shownGroups" (clicked)="clicked(x)"  [group]="x"></integrationsprojekt2-group-item-screen>
+    <mate-team-group-item-screen *ngFor="let x of shownGroups" (clicked)="clicked(x)" [group]="x"></mate-team-group-item-screen>
     <p *ngIf="shownGroups && shownGroups.length === 0">
         No group found.
     </p>

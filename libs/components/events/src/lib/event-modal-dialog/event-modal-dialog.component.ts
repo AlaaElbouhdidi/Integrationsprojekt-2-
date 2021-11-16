@@ -4,7 +4,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {EventModel} from "../shared/models/EventModel";
 
 @Component({
-  selector: 'integrationsprojekt2-event-modal-dialog',
+  selector: 'mate-team-integrationsprojekt2-event-modal-dialog',
   templateUrl: './event-modal-dialog.component.html',
   styleUrls: ['./event-modal-dialog.component.scss']
 })

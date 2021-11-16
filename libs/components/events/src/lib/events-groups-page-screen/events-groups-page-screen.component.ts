@@ -7,15 +7,10 @@ import {GroupModel} from '../shared/models/GroupModel';
   templateUrl: './events-groups-page-screen.component.html',
   styleUrls: ['./events-groups-page-screen.component.scss']
 })
-export class EventsGroupsPageScreenComponent implements OnInit {
+export class EventsGroupsPageScreenComponent {
     @Input()
     events: EventModel[] | undefined;
     @Input()
     groups: GroupModel[] | undefined;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
