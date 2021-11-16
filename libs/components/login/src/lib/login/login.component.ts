@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
     showLogin = true;
-
-    constructor() {}
 }

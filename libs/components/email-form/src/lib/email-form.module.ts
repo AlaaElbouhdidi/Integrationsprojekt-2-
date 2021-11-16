@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailFormComponent } from './email-form/email-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { LoaderModule } from '@loader';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
     imports: [
@@ -17,4 +18,10 @@ import { LoaderModule } from '@loader';
     ],
     exports: [EmailFormComponent]
 })
-export class EmailFormModule {}
+export class EmailFormModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faEnvelope
+        )
+    }
+}

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AlertService, AuthService } from '@services';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'mate-team-auth-handler',
@@ -9,7 +10,7 @@ import { AlertService, AuthService } from '@services';
   styleUrls: ['./auth-handler.component.scss']
 })
 export class AuthHandlerComponent implements OnInit, OnDestroy {
-    private routeSubscription: Subscription | undefined;
+    private unsubscribe$ = new Subject();
     private mode = '';
     private code = '';
     codeChecked = false;
@@ -22,15 +23,17 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        this.routeSubscription = this.activatedRoute.queryParams.subscribe(async params => {
-            if (!params['mode'] || !params['oobCode'] || params['mode'] !== 'resetPassword') {
-                await this.router.navigate(['/']);
-            }
-            this.mode = params['mode'];
-            this.code = params['oobCode'];
-            if (params['mode'] === 'resetPassword') {
-                await this.verifyCode();
-            }
+        this.activatedRoute.queryParams
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe(async params => {
+                if (!params['mode'] || !params['oobCode'] || params['mode'] !== 'resetPassword') {
+                    await this.router.navigate(['/']);
+                }
+                this.mode = params['mode'];
+                this.code = params['oobCode'];
+                if (params['mode'] === 'resetPassword') {
+                    await this.verifyCode();
+                }
         });
     }
 
@@ -64,6 +67,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.routeSubscription!.unsubscribe();
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
     }
 }
