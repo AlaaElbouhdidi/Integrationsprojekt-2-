@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AlertService } from '@services';
 
 @Component({
     selector: 'mate-team-login',
@@ -7,5 +6,7 @@ import { AlertService } from '@services';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-    constructor(public alertService: AlertService) {}
+    showLogin = true;
+
+    constructor() {}
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
     AbstractControl,
     FormBuilder,
@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class LoginFormComponent {
     loginForm: FormGroup;
     loading = false;
+    @Output() showEmailFormEvent = new EventEmitter();
 
     constructor(
         private fb: FormBuilder,
@@ -73,5 +74,9 @@ export class LoginFormComponent {
                 });
             }
         }
+    }
+
+    resetPassword(): void {
+        this.showEmailFormEvent.emit();
     }
 }

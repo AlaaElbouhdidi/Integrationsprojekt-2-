@@ -46,8 +46,14 @@
     </div>
 
     <div class="form-link">
-        Don't have an account?
-        <a routerLink="/register">Register here.</a>
+        <p>
+            Don't have an account?
+            <a routerLink="/register">Register here.</a>
+        </p>
+        <p>
+            Forgot password?
+            <a (click)="resetPassword()">Reset.</a>
+        </p>
     </div>
 
     <div class="form-btn">

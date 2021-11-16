@@ -1,1 +1,47 @@
-<p>email-form works!</p>
+<form class="app-form" (ngSubmit)="resetPassword()" [formGroup]="emailForm">
+    <h1>ENTER EMAIL</h1>
+
+    <div class="form-input">
+        <input
+            type="text"
+            formControlName="email"
+            placeholder="Email"
+            required
+        />
+        <fa-icon icon="envelope"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Email wrongly formatted
+            </p>
+        </div>
+    </div>
+
+    <div class="form-btn">
+        <div *ngIf="!loading; else loader" style="width: 100%">
+            <button
+                type="submit"
+                [class.disabled-btn]="!emailForm.valid"
+                [disabled]="!emailForm.valid"
+            >
+                Send Link
+            </button>
+            <button
+                class="cancel-btn"
+                (click)="cancelReset()"
+            >
+                Cancel
+            </button>
+        </div>
+        <ng-template #loader>
+            <mate-team-loader></mate-team-loader>
+        </ng-template>
+    </div>
+</form>
+
