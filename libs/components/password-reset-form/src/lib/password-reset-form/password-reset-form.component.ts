@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ export class PasswordResetFormComponent {
     passwordResetForm: FormGroup;
     showNewPassword = false;
     showConfirmPassword = false;
+    @Output() formSubmitEvent = new EventEmitter();
 
     constructor(
         private fb: FormBuilder
@@ -35,7 +36,8 @@ export class PasswordResetFormComponent {
     }
 
     resetPassword(): void {
-        console.log('reset password');
+        this.formSubmitEvent.emit(this.newPassword.value);
+        this.passwordResetForm.reset();
     }
 
     comparePasswords(): void {

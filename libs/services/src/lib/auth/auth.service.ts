@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import firebase from 'firebase/compat/app'
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -25,6 +25,10 @@ export class AuthService {
         });
     }
 
+    getAuth(): AngularFireAuth {
+        return this.auth;
+    }
+
     async register(email: string, password: string): Promise<void> {
         const userCredential =
             await this.auth.createUserWithEmailAndPassword(email, password);
@@ -39,6 +43,10 @@ export class AuthService {
 
     async loginWithGoogle(): Promise<void> {
         await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    }
+
+    async resetPassword(email: string): Promise<void> {
+        await this.auth.sendPasswordResetEmail(email);
     }
 
     async logout(): Promise<void> {
