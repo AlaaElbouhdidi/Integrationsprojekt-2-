@@ -26,13 +26,16 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         this.activatedRoute.queryParams
             .pipe(takeUntil(this.unsubscribe$))
             .subscribe(async params => {
-                if (!params['mode'] || !params['oobCode'] || params['mode'] !== 'resetPassword') {
+                if (!params['mode'] || !params['oobCode']) {
                     await this.router.navigate(['/']);
                 }
                 this.mode = params['mode'];
                 this.code = params['oobCode'];
                 if (params['mode'] === 'resetPassword') {
                     await this.verifyCode();
+                }
+                if (params['mode'] === 'verifyEmail') {
+                    await this.handleVerifyEmail();
                 }
         });
     }
@@ -50,6 +53,23 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         }
     }
 
+    async handleVerifyEmail(): Promise<void> {
+        try {
+            await this.authService.getAuth().applyActionCode(this.code);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Email has been successfully verified.'
+            });
+            await this.router.navigate(['/']);
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+            await this.router.navigate(['/']);
+        }
+    }
+
     async handlePasswordReset(newPassword: string): Promise<void> {
         try {
             await this.authService.getAuth().confirmPasswordReset(this.code, newPassword);
@@ -57,7 +77,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 type: 'success',
                 message: 'Password successfully reset and new password updated.'
             });
-            await this.router.navigate(['/']);
+            await this.router.navigate(['/login']);
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
