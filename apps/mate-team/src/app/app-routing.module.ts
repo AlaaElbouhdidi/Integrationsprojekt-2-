@@ -15,6 +15,10 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('@login').then((m) => m.LoginModule),
     },
+    {
+        path: 'newgroup',
+        loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule),
+    },
 ];
 
 @NgModule({
