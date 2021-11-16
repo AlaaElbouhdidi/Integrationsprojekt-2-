@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventModel} from "../shared/models/EventModel";
-import {GroupModel} from "../shared/models/GroupModel";
+import {GroupModel} from '../shared/models/GroupModel';
 
 @Component({
   selector: 'mate-team-integrationsprojekt2-events-groups-page-screen',
