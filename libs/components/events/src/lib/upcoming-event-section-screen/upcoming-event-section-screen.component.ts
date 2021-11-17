@@ -1,29 +1,31 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { EventModel } from '../shared/models/EventModel';
-import {ChunkerUtils} from "../shared/utils/ChunkerUtils";
-import {GroupModalDialogComponent} from "../group-modal-dialog/group-modal-dialog.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {EventModalDialogComponent} from "../event-modal-dialog/event-modal-dialog.component";
+import { Component, Input, OnChanges } from '@angular/core';
+import { Event } from '@api-interfaces';
+import { ChunkerService } from '@services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EventModalDialogComponent } from '../event-modal-dialog/event-modal-dialog.component';
 
 @Component({
-  selector: 'mate-team-integrationsprojekt2-upcoming-event-section-screen',
-  templateUrl: './upcoming-event-section-screen.component.html',
-  styleUrls: ['./upcoming-event-section-screen.component.scss']
+    selector: 'mate-team-integrationsprojekt2-upcoming-event-section-screen',
+    templateUrl: './upcoming-event-section-screen.component.html',
+    styleUrls: ['./upcoming-event-section-screen.component.scss'],
 })
 export class UpcomingEventSectionScreenComponent implements OnChanges {
     @Input()
-    events: EventModel[] | undefined;
-    buckets: EventModel[][] | undefined;
+    events: Event[] | undefined;
+    buckets: Event[][] | undefined;
 
-    constructor(private modalService: NgbModal) { }
-    ngOnChanges(changes: SimpleChanges): void {
-        if(this.events === undefined){
+    constructor(
+        private modalService: NgbModal,
+        private chunkerService: ChunkerService
+    ) {}
+    ngOnChanges(): void {
+        if (this.events === undefined) {
             return;
         }
-        this.buckets = ChunkerUtils.Chunk(this.events, 4);
+        this.buckets = this.chunkerService.chunk(this.events, 4);
     }
 
-    clicked(e: EventModel): void {
+    clicked(e: Event): void {
         const ref = this.modalService.open(EventModalDialogComponent);
         ref.componentInstance.event = e;
     }

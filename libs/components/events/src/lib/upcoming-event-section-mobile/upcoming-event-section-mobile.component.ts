@@ -1,21 +1,21 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EventModel} from '../shared/models/EventModel';
-import {EventClientService} from "../shared/clients/event-client.service";
-import {ChunkerUtils} from "../shared/utils/ChunkerUtils";
+import { Component, Input, OnChanges } from '@angular/core';
+import { Event } from '@api-interfaces';
+import { ChunkerService } from '@services';
 
 @Component({
-    selector: 'app-upcoming-event-section-mobile',
+    selector: 'mate-team-upcoming-event-section-mobile',
     templateUrl: './upcoming-event-section-mobile.component.html',
-    styleUrls: ['./upcoming-event-section-mobile.component.scss']
+    styleUrls: ['./upcoming-event-section-mobile.component.scss'],
 })
 export class UpcomingEventSectionMobileComponent implements OnChanges {
+    constructor(private chunkerService: ChunkerService) {}
     @Input()
-    events: EventModel[] | undefined;
-    buckets: EventModel[][] | undefined;
-    ngOnChanges(changes: SimpleChanges): void {
-        if(this.events === undefined){
+    events: Event[] | undefined;
+    buckets: Event[][] | undefined;
+    ngOnChanges(): void {
+        if (this.events === undefined) {
             return;
         }
-        this.buckets = ChunkerUtils.Chunk(this.events, 2);
+        this.buckets = this.chunkerService.chunk(this.events, 2);
     }
 }

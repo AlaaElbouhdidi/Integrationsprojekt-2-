@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {EventClientService} from "../shared/clients/event-client.service";
-import {GroupClientService} from "../shared/clients/group-client.service";
-import {zip} from "rxjs";
-import {EventModel} from "../shared/models/EventModel";
-import {GroupModel} from "../shared/models/GroupModel";
+import { EventService, GroupService } from '@services';
+import { Event, Group } from '@api-interfaces';
+import { zip } from 'rxjs';
 
 @Component({
-  selector: 'mate-team-integrationsprojekt2-events-groups-page',
-  templateUrl: './events-groups-page.component.html',
-  styleUrls: ['./events-groups-page.component.scss']
+    selector: 'mate-team-events-groups-page',
+    templateUrl: './events-groups-page.component.html',
+    styleUrls: ['./events-groups-page.component.scss'],
 })
 export class EventsGroupsPageComponent implements OnInit {
-    events: EventModel[] | undefined;
-    groups: GroupModel[] | undefined;
+    events: Event[] | undefined;
+    groups: Group[] | undefined;
 
-    constructor(private eventClientService: EventClientService,
-                private groupClientService: GroupClientService) { }
+    constructor(
+        private eventService: EventService,
+        private groupService: GroupService
+    ) {}
 
     ngOnInit(): void {
-        zip(this.eventClientService.getEvents(), this.groupClientService.getGroups()).subscribe(([events, groups]) => {
+        zip(
+            this.eventService.getEvents(),
+            this.groupService.getGroups()
+        ).subscribe(([events, groups]) => {
             this.events = events;
             this.groups = groups;
         });

@@ -1,16 +1,22 @@
 <ng-container *ngIf="group !== undefined">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{ group.title }}</h4>
+        <h4 class="modal-title" id="modal-basic-title">{{ group?.title }}</h4>
     </div>
     <div class="modal-body">
         <p>
-            <strong>Creation date:</strong> <br>
-            {{ group.creationDate | date: 'dd.MM.yyyy'}}
+            <strong>Creation date:</strong> <br />
+            {{ group?.creationDate }}
         </p>
         <h4>Members</h4>
         <ul>
             <li *ngFor="let x of group.members">{{ x }}</li>
         </ul>
-        <button type="submit" (click)="activeModal.dismiss('Cross click')" class="btn btn-primary w-100">Close</button>
+        <button
+            type="submit"
+            (click)="activeModal.dismiss('Cross click')"
+            class="btn btn-primary w-100"
+        >
+            Close
+        </button>
     </div>
 </ng-container>

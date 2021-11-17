@@ -1,0 +1,212 @@
+import { Event } from '@api-interfaces';
+export const events: Event[] = [
+    {
+        description: 'Beschreibung 1',
+        title: 'Title 1',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-01T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title 2',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-02T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 3',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-03T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 4',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-08-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 5',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 1',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-03-04T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 1',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 1',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 1',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 1',
+        title: 'Title',
+        address: {
+            zipCode: '2323',
+            region: 'Buseck',
+            streetName: 'Flößerweg',
+            streetNumber: 11,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+    {
+        description: 'Beschreibung 2',
+        title: 'Title',
+        address: {
+            zipCode: '61169',
+            region: 'Friedberg',
+            streetName: 'Musterstraße',
+            streetNumber: 12,
+        },
+        date: new Date('2021-11-11T11:35:07.356Z'),
+    },
+];

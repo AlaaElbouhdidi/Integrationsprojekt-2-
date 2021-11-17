@@ -1,7 +1,8 @@
 <div class="eventBox">
-    <h4> {{ event.title }} </h4>
-    <p> <i-bs name="clock"></i-bs> {{ event.date | date: 'dd.MM.yyyy'}} </p>
+    <h4>{{ event.title }}</h4>
+    <!-- TODO: -->
+    <!-- <p> <i-bs name="clock"></i-bs> {{ event.date }} </p> -->
+    <p>{{ event.date }}</p>
 
     <a class="whiteBtn" (click)="clicked.emit()">More Infos</a>
 </div>
-

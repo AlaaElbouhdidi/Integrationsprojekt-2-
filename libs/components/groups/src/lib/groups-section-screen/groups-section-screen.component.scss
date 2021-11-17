@@ -1,5 +1,5 @@
-@import "../../_variables.scss";
-h1{
+@import '../../_variables.scss';
+h1 {
     border-left-style: solid;
     border-left-width: 3px;
     border-left-color: white;
@@ -8,7 +8,7 @@ h1{
     color: white;
 }
 
-.createGroup{
+.createGroup {
     position: absolute;
     bottom: 15px;
     margin-left: 10px;
@@ -18,7 +18,7 @@ h1{
     text-decoration: none;
     padding: 2px 5px;
 }
-.searchField{
+.searchField {
     margin-left: 20px;
     width: 250px;
     background-color: transparent;
@@ -27,23 +27,25 @@ h1{
     outline: 0;
     font-size: 12px;
 }
-::-webkit-input-placeholder { /* Edge */
+::-webkit-input-placeholder {
+    /* Edge */
     color: white;
 }
-:-ms-input-placeholder { /* Internet Explorer */
+:-ms-input-placeholder {
+    /* Internet Explorer */
     color: white;
 }
 ::placeholder {
     color: white;
 }
-.searchContainer{
+.searchContainer {
     border-bottom: 2px white solid;
     padding-bottom: 2px;
     margin-bottom: 10px;
     display: inline-block;
     margin-right: 50px;
 }
-.filter{
+.filter {
     color: white;
     text-decoration: none;
     border: $main 5px solid;
@@ -54,9 +56,9 @@ h1{
     cursor: pointer;
     padding-right: 5px;
 }
-.filter:not(:first-child){
+.filter:not(:first-child) {
     margin-left: 50px;
 }
-.filter.active{
+.filter.active {
     background-color: #155ca3;
 }

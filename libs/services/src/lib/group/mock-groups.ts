@@ -1,0 +1,257 @@
+import { Group } from '@api-interfaces';
+
+export const groups: Group[] = [
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Colin Pristen',
+            message: 'passt 19:00 ?',
+        },
+        numberOfNotSeenMessages: 1,
+        members: ['Max', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 2',
+        imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg',
+        latestMessage: {
+            author: 'Tino Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-10T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 3',
+        imgSrc: 'https://mocki.io/joshua.jpg',
+        latestMessage: {
+            author: 'Max Mustermann',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-11T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/oskar.jpg',
+        latestMessage: {
+            author: 'Christan Madeleine',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-12T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg',
+        latestMessage: {
+            author: 'Magdalena Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-15T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg',
+        latestMessage: {
+            author: 'Niclas Muhr',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-18T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-12T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+    {
+        title: 'titel 1',
+        imgSrc: 'https://mocki.io/jan.jpg',
+        latestMessage: {
+            author: 'Tim Pez',
+            message: '20 Uhr passt',
+        },
+        numberOfNotSeenMessages: 0,
+        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        creationDate: new Date('2021-01-09T11:35:07.356Z'),
+    },
+];

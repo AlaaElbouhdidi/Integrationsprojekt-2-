@@ -1,18 +1,18 @@
-@import "../../variables";
-.mobile{
+@import '../../variables';
+.mobile {
     display: none;
 }
-.screen{
+.screen {
     display: none;
 }
 
-@media(max-width: $breakPoint){
-    .mobile{
+@media (max-width: $breakPoint) {
+    .mobile {
         display: block;
     }
 }
-@media(min-width: $breakPoint){
-    .screen{
-        display:block;
+@media (min-width: $breakPoint) {
+    .screen {
+        display: block;
     }
 }

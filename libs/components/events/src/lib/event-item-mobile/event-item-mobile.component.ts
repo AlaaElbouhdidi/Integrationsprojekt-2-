@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {EventModel} from '../shared/models/EventModel';
+import { Component, Input } from '@angular/core';
+import { Event } from '@api-interfaces';
 
 @Component({
     selector: 'mate-team-integrationsprojekt2-event-item-mobile',
     templateUrl: './event-item-mobile.component.html',
-    styleUrls: ['./event-item-mobile.component.scss']
+    styleUrls: ['./event-item-mobile.component.scss'],
 })
 export class EventItemMobileComponent {
     @Input()
-    event: EventModel = EventModel.empty();
+    event: Event = Event.empty();
 }

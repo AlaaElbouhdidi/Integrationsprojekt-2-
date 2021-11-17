@@ -1,16 +1,19 @@
 <div class="d-flex" style="position: relative; margin-bottom: 30px">
-    <h1>Upcoming events <i-bs name="calendar-event"></i-bs></h1>
+    <!-- TODO:  -->
+    <!-- <h1>Upcoming events <i-bs name="calendar-event"></i-bs></h1> -->
+    <h1>Upcoming events</h1>
     <div>
         <a class="createEvent" href="#">Create new event</a>
     </div>
 </div>
 
-
 <div class="row" *ngFor="let x of buckets">
-
-    <integrationsprojekt2-event-item-screen *ngFor="let e of x" (clicked)="clicked(e)" [event]="e" class="col-md-3"></integrationsprojekt2-event-item-screen>
+    <!-- TODO: e of x? Needs to define x first, and please give it the name of what it actually represents  -->
+    <!-- <mate-team-event-item-screen *ngFor="let e of x" (clicked)="clicked(e)" [event]="e" class="col-md-3"></mate-team-event-item-screen> -->
     <div *ngIf="x">
-        <div class="col-md-3" *ngFor="let tmp of [].constructor(4 - x.length)">
-        </div>
+        <div
+            class="col-md-3"
+            *ngFor="let tmp of [].constructor(4 - x.length)"
+        ></div>
     </div>
 </div>

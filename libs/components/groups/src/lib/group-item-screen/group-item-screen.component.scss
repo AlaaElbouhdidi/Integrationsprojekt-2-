@@ -1,35 +1,35 @@
-@import "../../variables";
+@import '../../variables';
 $blue: rgb(45, 139, 191);
 
-h4{
+h4 {
     margin-bottom: 3px;
     text-align: left;
 }
-p{
+p {
     margin-bottom: 1px;
     text-align: left;
 }
-.circle{
+.circle {
     width: 30px;
-    height:30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: $blue;
     border-radius: 30px;
 }
-.person{
+.person {
     font-weight: bold;
 }
 
-@import "../../variables";
-.box{
+@import '../../variables';
+.box {
     box-shadow: 4px 4px 5px black;
     margin-bottom: 15px;
     background-color: $blue1;
 }
 
-img{
-    height:50px;
-    margin-left:5px;
+img {
+    height: 50px;
+    margin-left: 5px;
 }

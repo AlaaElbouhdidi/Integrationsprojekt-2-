@@ -1,14 +1,14 @@
- import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EventModel} from "../shared/models/EventModel";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Event } from '@api-interfaces';
 
 @Component({
-  selector: 'mate-team-integrationsprojekt2-event-item-screen',
-  templateUrl: './event-item-screen.component.html',
-  styleUrls: ['./event-item-screen.component.scss']
+    selector: 'mate-team-event-item-screen',
+    templateUrl: './event-item-screen.component.html',
+    styleUrls: ['./event-item-screen.component.scss'],
 })
 export class EventItemScreenComponent {
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
     @Input()
-    event: EventModel = EventModel.empty();
+    event: Event = Event.empty();
 }

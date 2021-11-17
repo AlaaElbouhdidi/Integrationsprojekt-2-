@@ -1,9 +1,11 @@
-import {EventModel} from "../models/EventModel";
+import { Injectable } from '@angular/core';
 
-export class ChunkerUtils {
-
-    public static Chunk<T>(arr: T[], amount: number): T[][]{
-        const buckets : T[][] = [];
+@Injectable({
+    providedIn: 'root',
+})
+export class ChunkerService {
+    public chunk<T>(arr: T[], amount: number): T[][] {
+        const buckets: T[][] = [];
         for (let i = 0; i < arr.length; i += amount) {
             buckets[i] = [];
             for (let j = i; j < i + amount && j < arr.length; j++) {
@@ -12,5 +14,4 @@ export class ChunkerUtils {
         }
         return buckets;
     }
-
 }

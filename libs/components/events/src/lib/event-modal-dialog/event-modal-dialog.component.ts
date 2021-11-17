@@ -1,15 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {GroupModel} from "../shared/models/GroupModel";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {EventModel} from "../shared/models/EventModel";
+import { Component, Input } from '@angular/core';
+import { Event } from '@api-interfaces';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'mate-team-integrationsprojekt2-event-modal-dialog',
-  templateUrl: './event-modal-dialog.component.html',
-  styleUrls: ['./event-modal-dialog.component.scss']
+    selector: 'mate-team-integrationsprojekt2-event-modal-dialog',
+    templateUrl: './event-modal-dialog.component.html',
+    styleUrls: ['./event-modal-dialog.component.scss'],
 })
 export class EventModalDialogComponent {
-    @Input() event: EventModel | undefined = undefined;
+    @Input() event: Event | undefined = undefined;
 
-    constructor(public activeModal: NgbActiveModal) { }
+    constructor(public activeModal: NgbActiveModal) {}
 }
