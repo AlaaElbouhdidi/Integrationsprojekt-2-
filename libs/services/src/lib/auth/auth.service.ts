@@ -25,10 +25,6 @@ export class AuthService {
         });
     }
 
-    getAuth(): AngularFireAuth {
-        return this.auth;
-    }
-
     async register(email: string, password: string): Promise<void> {
         const userCredential =
             await this.auth.createUserWithEmailAndPassword(email, password);
@@ -47,6 +43,18 @@ export class AuthService {
 
     async resetPassword(email: string): Promise<void> {
         await this.auth.sendPasswordResetEmail(email);
+    }
+
+    verifyPasswordResetCode(code: string): Promise<string> {
+        return this.auth.verifyPasswordResetCode(code);
+    }
+
+    applyActionCode(code: string): Promise<void> {
+        return this.auth.applyActionCode(code);
+    }
+
+    confirmPasswordReset(code: string, newPassword: string): Promise<void> {
+        return this.auth.confirmPasswordReset(code, newPassword);
     }
 
     async logout(): Promise<void> {

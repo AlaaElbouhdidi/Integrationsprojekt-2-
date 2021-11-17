@@ -32,7 +32,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 this.mode = params['mode'];
                 this.code = params['oobCode'];
                 if (params['mode'] === 'resetPassword') {
-                    await this.verifyCode();
+                    await this.handleVerifyCode();
                 }
                 if (params['mode'] === 'verifyEmail') {
                     await this.handleVerifyEmail();
@@ -40,9 +40,9 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         });
     }
 
-    async verifyCode(): Promise<void> {
+    async handleVerifyCode(): Promise<void> {
         try {
-            await this.authService.getAuth().verifyPasswordResetCode(this.code);
+            await this.authService.verifyPasswordResetCode(this.code);
             this.codeChecked = true;
         } catch (e) {
             this.alertService.addAlert({
@@ -55,7 +55,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
 
     async handleVerifyEmail(): Promise<void> {
         try {
-            await this.authService.getAuth().applyActionCode(this.code);
+            await this.authService.applyActionCode(this.code);
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Email has been successfully verified.'
@@ -72,7 +72,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
 
     async handlePasswordReset(newPassword: string): Promise<void> {
         try {
-            await this.authService.getAuth().confirmPasswordReset(this.code, newPassword);
+            await this.authService.confirmPasswordReset(this.code, newPassword);
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Password successfully reset and new password updated.'
