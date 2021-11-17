@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+import { GroupService } from '@services';
 import {
   FormBuilder,
   FormControl,
@@ -6,15 +7,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Group } from '@api-interfaces';
 
 @Component({
-  selector: 'integrationsprojekt2-newgroup',
+  selector: 'mate-team-newgroup',
   templateUrl: './newgroup.component.html',
   styleUrls: ['./newgroup.component.scss']
 })
 export class NewgroupComponent {
   newGroupForm: FormGroup;
-  constructor( private fb: FormBuilder,
+  constructor( private fb: FormBuilder, private groupService: GroupService,
     private router: Router) {
       this.newGroupForm = this.fb.group({
         email: new FormControl('', [ Validators.required]),
@@ -24,8 +26,8 @@ export class NewgroupComponent {
     });
      }
 
-  newGroup(){
-    console.log("create group")
-  }
+     addNewGroupEntity(groupEntity: Group){
+      this.groupService.addNewGroup(groupEntity);
+     }
 
 }

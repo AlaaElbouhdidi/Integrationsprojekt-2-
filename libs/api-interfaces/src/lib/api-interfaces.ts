@@ -18,3 +18,14 @@ export interface Environment {
     production: boolean;
     apiUrl: string;
 }
+export interface Group {
+    id?: number;
+    name: string;
+    activity: Activity;
+    description?: string;
+}
+export interface Activity {
+    id?: number;
+    name: string;
+    logo: string;
+}

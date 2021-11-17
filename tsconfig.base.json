@@ -22,6 +22,7 @@
             "@env": ["libs/env/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
+            "@newgroup-form": [ "libs/components/newgroup-form/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
