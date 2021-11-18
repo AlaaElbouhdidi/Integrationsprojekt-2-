@@ -8,9 +8,18 @@ describe('AuthServiceService', () => {
     const email = 'email';
     const password = 'password';
     const code = 'code';
+    const mockUser = {
+        user: {
+            email: 'email',
+            displayName: '',
+            sendEmailVerification: jest.fn()
+        }
+    }
 
     const angularFireAuthMock = {
-        authState: of({}),
+        authState: of(mockUser),
+        createUserWithEmailAndPassword: jest.fn(),
+        sendEmailVerification: jest.fn(),
         signInWithEmailAndPassword: jest.fn(),
         signInWithPopup: jest.fn(),
         sendPasswordResetEmail: jest.fn(),
@@ -34,42 +43,70 @@ describe('AuthServiceService', () => {
         expect(service).toBeTruthy();
     });
 
+    it('should set user in constructor', () => {
+        angularFireAuthMock.authState.subscribe(user => {
+            expect(user).toBe(mockUser);
+            expect(service.user).toBe(user)
+        });
+    });
+
+    it('should set current user in authState$ observable', () => {
+       service.authState$.subscribe(user => {
+           expect(user).toBe(mockUser);
+       });
+    });
+
+    it('should call firebase auth createUserWithEmailAndPassword in register method', () => {
+       const spy = jest.spyOn(angularFireAuthMock, 'createUserWithEmailAndPassword');
+       angularFireAuthMock.createUserWithEmailAndPassword.mockReturnValue(mockUser);
+       service.register(email, password);
+       expect(spy).toHaveBeenCalledWith(email, password);
+       expect(spy).toHaveBeenCalledTimes(1);
+    });
+
     it('should call firebase auth signInWithEmailAndPassword in login method', () => {
-        const spy = jest.spyOn(service, 'login');
+        const spy = jest.spyOn(angularFireAuthMock, 'signInWithEmailAndPassword');
         service.login(email, password);
         expect(spy).toHaveBeenCalledWith(email, password);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signInWithPopup in loginWithGoogle method', () => {
-       const spy = jest.spyOn(service, 'loginWithGoogle');
+       const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup');
        service.loginWithGoogle();
        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth sendPasswordResetEmail in resetPassword method', () => {
-        const spy = jest.spyOn(service, 'resetPassword');
+        const spy = jest.spyOn(angularFireAuthMock, 'sendPasswordResetEmail');
         service.resetPassword(email);
         expect(spy).toHaveBeenCalledWith(email);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('should call firebase auth applyActionCode in verifyPasswordResetCode method', () => {
-       const spy = jest.spyOn(service, 'verifyPasswordResetCode');
+    it('should call firebase auth verifyPasswordResetCode in verifyPasswordResetCode method', () => {
+       const spy = jest.spyOn(angularFireAuthMock, 'verifyPasswordResetCode');
        service.verifyPasswordResetCode(code);
        expect(spy).toHaveBeenCalledWith(code);
        expect(spy).toHaveBeenCalledTimes(1);
     });
 
+    it('should call firebase auth applyActionCode in applyActionCode method', () => {
+       const spy = jest.spyOn(angularFireAuthMock, 'applyActionCode');
+       service.applyActionCode(code);
+       expect(spy).toHaveBeenCalledWith(code);
+       expect(spy).toHaveBeenCalledTimes(1);
+    });
+
     it('should call firebase auth confirmPasswordReset in confirmPasswordReset method', () => {
-        const spy = jest.spyOn(service, 'confirmPasswordReset');
+        const spy = jest.spyOn(angularFireAuthMock, 'confirmPasswordReset');
         service.confirmPasswordReset(code, password);
         expect(spy).toHaveBeenCalledWith(code, password);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signOut in logout method', () => {
-        const spy = jest.spyOn(service, 'logout');
+        const spy = jest.spyOn(angularFireAuthMock, 'signOut');
         service.logout();
         expect(spy).toHaveBeenCalledTimes(1);
     });
