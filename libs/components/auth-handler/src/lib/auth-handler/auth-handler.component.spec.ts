@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthHandlerComponent } from './auth-handler.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@services';
-import { LoginComponent } from '../../../../login/src/lib/login/login.component';
+import { LoginModule } from '@login';
 import { Location } from '@angular/common';
 
 describe('AuthHandlerComponent', () => {
@@ -23,7 +23,7 @@ describe('AuthHandlerComponent', () => {
             { provide: AuthService, useValue: authServiceMock }
         ],
         imports: [
-            RouterTestingModule.withRoutes([{ path: 'login', component: LoginComponent }])
+            RouterTestingModule.withRoutes([{ path: 'login', component: LoginModule }])
         ],
         declarations: [ AuthHandlerComponent ]
         })
