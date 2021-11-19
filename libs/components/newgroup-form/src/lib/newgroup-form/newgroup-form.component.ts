@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -7,16 +7,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Group } from '@api-interfaces';
+import { Activity, Group } from '@api-interfaces';
+import { ActivityService } from '@services';
 @Component({
   selector: 'mate-team-newgroup-form',
   templateUrl: './newgroup-form.component.html',
   styleUrls: ['./newgroup-form.component.sass']
 })
-export class NewgroupFormComponent {
+export class NewgroupFormComponent implements OnInit {
   @Output() addGroup: EventEmitter<Group> = new EventEmitter();
-    newGroupForm: FormGroup;
-  constructor( private fb: FormBuilder, private router: Router) {
+  newGroupForm: FormGroup;
+  activities: Activity[] = [];
+  constructor( private fb: FormBuilder, private router: Router, private activitySevice: ActivityService) {
       this.newGroupForm = this.fb.group({
         name: new FormControl('', [ Validators.required ]),
         activity: new FormControl('', [ Validators.required ])
@@ -42,5 +44,12 @@ export class NewgroupFormComponent {
     this.addGroup.emit(newGroupEntry);
 
   }
+  ngOnInit(): void {
+    this.activitySevice.getAllActivities().subscribe(items => {
+      this.activities = items;
+      console.log(this.activities);
+          }
+     )
+ }
 
 }

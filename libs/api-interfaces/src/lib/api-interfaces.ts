@@ -25,7 +25,7 @@ export interface Group {
     description?: string;
 }
 export interface Activity {
-    id?: number;
-    name: string;
-    logo: string;
+    id?: string;
+    name?: string;
+    logo?: string;
 }

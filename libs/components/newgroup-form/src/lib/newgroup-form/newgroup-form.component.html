@@ -5,10 +5,8 @@
         <input id="name" type="text" name="name" formControlName="name" placeholder="Name" required>
     </div>
     <div class="form-input">
-        <select name="acitvity" >
-            <option selected="selected" value="one">Option 1</option>
-            <option value="two">Option 2</option>
-            <option value="three">Option 3</option>
+        <select *ngFor="let activity of activities" name="activity" formControlName="activity" >
+            <option value="{{activity.id}}">{{activity.logo}} {{activity.name}}</option>
             </select>
     </div>
     <div class="form-input">
@@ -17,7 +15,7 @@
     </div>
     <div class="form-btn">
         <button type="submit">
-            Next
+            Create group
         </button>
     </div>
 </form>
