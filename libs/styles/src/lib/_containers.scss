@@ -1,0 +1,36 @@
+@import './variables';
+@import './mixins';
+
+.auth-container {
+    position: relative;
+    background: $dark;
+    min-height: calc(100vh - 3rem);
+    width: 100%;
+    padding: 0.5rem;
+    @include flex-center;
+    z-index: 10;
+    img {
+        display: none;
+        max-width: 32.5%;
+        @include for-desktop-up {
+            display: block;
+        }
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        min-height: calc(100vh - 3rem);
+        width: 100%;
+        background: $darkAccent;
+        clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
+        z-index: -1;
+    }
+    section {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 4rem 0;
+    }
+}
