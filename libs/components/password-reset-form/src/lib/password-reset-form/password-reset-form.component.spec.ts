@@ -2,41 +2,40 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PasswordResetFormComponent } from './password-reset-form.component';
 import { PasswordResetFormModule } from '../password-reset-form.module';
-import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 describe('PasswordResetFormComponent', () => {
-  let component: PasswordResetFormComponent;
-  let fixture: ComponentFixture<PasswordResetFormComponent>;
+    let component: PasswordResetFormComponent;
+    let fixture: ComponentFixture<PasswordResetFormComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-        imports: [ PasswordResetFormModule, ReactiveFormsModule ],
-        declarations: [ PasswordResetFormComponent ]
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+        imports: [ PasswordResetFormModule ]
     })
     .compileComponents();
-  });
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PasswordResetFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(PasswordResetFormComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should emit event on submit', () => {
-      jest.spyOn(component.formSubmitEvent, 'emit');
-      component.resetPassword();
-      expect(component.formSubmitEvent.emit).toHaveBeenCalled();
-  });
+    it('should emit event on submit', () => {
+        jest.spyOn(component.formSubmitEvent, 'emit');
+        component.resetPassword();
+        expect(component.formSubmitEvent.emit).toHaveBeenCalled();
+    });
 
-  it('should return password and email abstract controls of form', () => {
-      expect(component.newPassword).toBeInstanceOf(AbstractControl);
-      expect(component.confirmPassword).toBeInstanceOf(AbstractControl);
-  });
+    it('should return password and email abstract controls of form', () => {
+        expect(component.newPassword).toBeInstanceOf(AbstractControl);
+        expect(component.confirmPassword).toBeInstanceOf(AbstractControl);
+    });
 
     it('should render two input elements', () => {
         const form = fixture.debugElement.nativeElement.querySelector('.app-form');

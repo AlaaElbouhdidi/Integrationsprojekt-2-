@@ -4,7 +4,7 @@ import { EmailFormComponent } from './email-form.component';
 import { EmailFormModule } from '../email-form.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { AuthService } from '@services';
 
@@ -22,14 +22,11 @@ describe('EmailFormComponent', () => {
             AuthService,
             { provide: AuthService, useValue: authServiceMock }
         ],
-
         imports: [
             EmailFormModule,
             FontAwesomeModule,
-            ReactiveFormsModule,
             RouterTestingModule.withRoutes([]),
-        ],
-        declarations: [ EmailFormComponent ]
+        ]
     })
     .compileComponents();
   });

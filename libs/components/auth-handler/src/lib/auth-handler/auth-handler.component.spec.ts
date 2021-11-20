@@ -5,6 +5,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@services';
 import { LoginModule } from '@login';
 import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'mate-team-password-reset-form',
+    template: '<p>Mock Password Reset Form Component</p>',
+})
+class MockPasswordResetFormComponent {}
+
 
 describe('AuthHandlerComponent', () => {
     let component: AuthHandlerComponent;
@@ -25,7 +33,7 @@ describe('AuthHandlerComponent', () => {
         imports: [
             RouterTestingModule.withRoutes([{ path: 'login', component: LoginModule }])
         ],
-        declarations: [ AuthHandlerComponent ]
+        declarations: [ AuthHandlerComponent, MockPasswordResetFormComponent ]
         })
         .compileComponents();
     });

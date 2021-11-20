@@ -10,13 +10,23 @@ import { By } from '@angular/platform-browser';
 })
 class MockLoginFormComponent {}
 
+@Component({
+    selector: 'mate-team-email-form',
+    template: '<p>Mock Email Form Component</p>',
+})
+class MockEmailFormComponent {}
+
 describe('LoginComponent', () => {
     let component: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [LoginComponent, MockLoginFormComponent],
+            declarations: [
+                LoginComponent,
+                MockLoginFormComponent,
+                MockEmailFormComponent
+            ],
         }).compileComponents();
     });
 
