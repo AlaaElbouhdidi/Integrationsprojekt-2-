@@ -18,11 +18,24 @@ export interface Environment {
     production: boolean;
     apiUrl: string;
 }
+export interface User {
+    id?: string;
+    email?: string;
+    emailVerified?: boolean;
+    photoURL?: string;
+    displayName?: string;
+}
+export interface Member {
+    uid?: string;
+    isAdmin?: boolean;
+    groupid?: string;
+}
 export interface Group {
-    id?: number;
-    name: string;
-    activity: Activity;
+    id?: string;
+    name?: string;
+    activity?: Activity;
     description?: string;
+    members?: Member[];
 }
 export interface Activity {
     id?: string;

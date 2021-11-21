@@ -1,20 +1,19 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Route } from '@angular/router';
 import { NewgroupComponent } from './newgroup/newgroup.component';
 import { NewgroupRoutingModule } from './newgroup/newgroup-routing.module';
 import { NewgroupFormModule } from '@newgroup-form';
+import { NewgroupSuccessModule } from '@newgroup-success';
+import { AlertModule } from '@alert';
 
-export const newgroupRoutes: Route[] = [];
 
 @NgModule({
-    imports: [CommonModule, RouterModule, NewgroupRoutingModule, NewgroupFormModule],
+    imports: [CommonModule, NewgroupRoutingModule, NewgroupFormModule, NewgroupSuccessModule, AlertModule],
     declarations: [
       NewgroupComponent
     ],
     exports: [
       NewgroupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    ]
 })
 export class NewgroupModule {}

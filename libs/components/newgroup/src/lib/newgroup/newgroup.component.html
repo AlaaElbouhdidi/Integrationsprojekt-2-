@@ -1,1 +1,2 @@
-<mate-team-newgroup-form (addGroup)="addNewGroupEntity($event)"></mate-team-newgroup-form> 
+<mate-team-newgroup-form *ngIf=!success ></mate-team-newgroup-form> 
+<mate-team-newgroup-success *ngIf=success ></mate-team-newgroup-success>

@@ -12,7 +12,7 @@ export class ActivityService {
   activities: Observable<Activity[]>;
 
   constructor(public afs: AngularFirestore) { 
-    this.activityCollection = this.afs.collection('activity');
+    this.activityCollection = this.afs.collection('activity', ref =>  ref.orderBy('name', 'asc'));
     this.activities = this.activityCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Activity;

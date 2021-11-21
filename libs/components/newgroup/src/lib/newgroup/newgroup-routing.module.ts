@@ -4,7 +4,7 @@ import { NewgroupComponent } from './newgroup.component';
 
 const routes: Routes = [
   {
-    path: 'newgroup',
+    path: '',
     component: NewgroupComponent,
 },
 ];

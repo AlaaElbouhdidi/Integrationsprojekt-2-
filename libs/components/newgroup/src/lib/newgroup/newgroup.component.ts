@@ -1,41 +1,24 @@
-import { Component, OnInit} from '@angular/core';
-import { ActivityService, GroupService } from '@services';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { Activity, Group } from '@api-interfaces';
+import { Component, OnDestroy} from '@angular/core';
+import { AlertService, GroupService } from '@services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mate-team-newgroup',
   templateUrl: './newgroup.component.html',
   styleUrls: ['./newgroup.component.scss']
 })
-export class NewgroupComponent implements OnInit {
-  newGroupForm: FormGroup;
-  activities: Activity[] = [];
-  constructor( private fb: FormBuilder, private groupService: GroupService, private activitySevice: ActivityService,
-    private router: Router) {
-      this.newGroupForm = this.fb.group({
-        email: new FormControl('', [ Validators.required]),
-        password: new FormControl('', [
-            Validators.required,
-        ]),
-    });
-     }
-
-     addNewGroupEntity(groupEntity: Group){
-      this.groupService.addNewGroup(groupEntity);
-     }
-     ngOnInit(): void {
-      this.activitySevice.getAllActivities().subscribe(items => {
-        this.activities = items;
-        console.log(this.activities);
-            }
-       )
-   }
-
+export class NewgroupComponent implements OnDestroy{
+  success = false;
+  subscription: Subscription;
+    
+  constructor(public alertService: AlertService, private groupService: GroupService) {
+      this.subscription = this.groupService
+        .onToggle()
+        .subscribe((value) => (this.success = value));
+  }
+  
+  ngOnDestroy() {
+    // Unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
 }

@@ -1,21 +1,38 @@
-<form class="app-form" (ngSubmit)="newGroup()" >
+<form class="app-form" (ngSubmit)="newGroup()" [formGroup]="newGroupForm" >
     <h1>Create new group</h1>
     <div class="form-input">
-        <label for="name">Name your Group</label>
-        <input id="name" type="text" name="name" formControlName="name" placeholder="Name" required>
+        <input  type="text"  formControlName="name" placeholder="Name" required/>
+    </div>
+    <div
+        class="form-error"
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Enter a name of the group
+            </p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <select *ngFor="let activity of activities"  formControlName="activity" placeholder="Choose activity"> 
+            <option value="{{activity.id}}"> <img src="../../assets/activities/football.png" /> {{activity.name}}</option>
+        </select>
     </div>
     <div class="form-input">
-        <select *ngFor="let activity of activities" name="activity" formControlName="activity" >
-            <option value="{{activity.id}}">{{activity.logo}} {{activity.name}}</option>
-            </select>
-    </div>
-    <div class="form-input">
-        <label for="description">what is it about (optional)</label>
-        <input id="description" type="text" name="description" formControlName="description" placeholder="Description" >
+        <input type="text" formControlName="description" placeholder="Description" />
     </div>
     <div class="form-btn">
-        <button type="submit">
+        <button type="submit"
+            *ngIf="!loading; else loader"
+            [class.disabled-btn]="newGroupForm.invalid"
+            [disabled]="newGroupForm.invalid"    
+        >
             Create group
         </button>
+        <ng-template #loader>
+            <mate-team-loader></mate-team-loader>
+        </ng-template>
     </div>
 </form>

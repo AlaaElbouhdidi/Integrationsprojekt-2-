@@ -952,6 +952,63 @@
             },
             "tags": []
         },
+        "newgroup-success": {
+            "projectType": "library",
+            "root": "libs/components/newgroup-success",
+            "sourceRoot": "libs/components/newgroup-success/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/components/newgroup-success"],
+                    "options": {
+                        "jestConfig": "libs/components/newgroup-success/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup-success/src/**/*.ts",
+                            "libs/components/newgroup-success/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "outputs": ["{options.outputPath}"],
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup-success",
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            },
+            "tags": []
+        },
         "register": {
             "projectType": "library",
             "root": "libs/components/register",
