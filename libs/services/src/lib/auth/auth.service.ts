@@ -45,14 +45,30 @@ export class AuthService {
         await this.auth.sendPasswordResetEmail(email);
     }
 
+    /**
+     * Verify the password reset code
+     *
+     * @param code {string} The code to verify
+     */
     verifyPasswordResetCode(code: string): Promise<string> {
         return this.auth.verifyPasswordResetCode(code);
     }
 
+    /**
+     * Apply the code to the authenticated user
+     *
+     * @param code {string} The code to apply
+     */
     applyActionCode(code: string): Promise<void> {
         return this.auth.applyActionCode(code);
     }
 
+    /**
+     * Confirms the password reset
+     *
+     * @param code {string} The code for the action
+     * @param newPassword {string} The new password to set
+     */
     confirmPasswordReset(code: string, newPassword: string): Promise<void> {
         return this.auth.confirmPasswordReset(code, newPassword);
     }
