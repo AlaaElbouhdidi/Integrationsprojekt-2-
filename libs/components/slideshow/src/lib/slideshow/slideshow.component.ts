@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -26,8 +26,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
         ]),
     ]
 })
-export class SlideshowComponent implements OnInit, OnDestroy {
-    slideInterval: any;
+export class SlideshowComponent implements OnDestroy {
+    slideInterval: ReturnType<typeof setInterval>;
     activeSlideIndex = 0;
     slideIntervalDelay = 4000;
     slides = [
@@ -48,13 +48,17 @@ export class SlideshowComponent implements OnInit, OnDestroy {
         }
     ];
 
-    initSlideInterval(startIndex: number): void {
-        this.activeSlideIndex = startIndex;
-        this.setSlideInterval();
+    constructor() {
+        this.slideInterval = this.setSlideInterval();
     }
 
-    setSlideInterval(): void {
-        this.slideInterval = setInterval(() => {
+    initSlideInterval(startIndex: number): void {
+        this.activeSlideIndex = startIndex;
+        this.slideInterval = this.setSlideInterval();
+    }
+
+    setSlideInterval(): ReturnType<typeof setInterval> {
+        return setInterval(() => {
             this.activeSlideIndex === this.slides.length - 1 ? this.activeSlideIndex = 0 : this.activeSlideIndex += 1;
             this.setSelectedSlide(this.activeSlideIndex);
         }, this.slideIntervalDelay);
@@ -63,10 +67,6 @@ export class SlideshowComponent implements OnInit, OnDestroy {
     setSelectedSlide(index: number): void {
         clearInterval(this.slideInterval);
         this.initSlideInterval(index);
-    }
-
-    ngOnInit(): void {
-        this.initSlideInterval(0);
     }
 
     ngOnDestroy(): void {
