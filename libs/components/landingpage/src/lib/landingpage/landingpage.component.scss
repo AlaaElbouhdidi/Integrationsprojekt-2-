@@ -1,58 +1,98 @@
-@import '_variables';
-@import '_mixins';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
 
 main {
     position: relative;
     background: $dark;
-    min-height: calc(100vh - 3rem);
+    min-height: calc(100vh - 6rem);
     width: 100%;
     padding: 0.5rem;
     @include flex-center;
     z-index: 10;
-    img {
-        max-width: 32.5%;
-        @include for-desktop-up {
-            display: block;
-        }
-    }
+    overflow: hidden;
     &:after {
         content: '';
         position: absolute;
         inset: 0;
-        min-height: calc(100vh - 3rem);
+        min-height: calc(100vh - 6rem);
         width: 100%;
         background: $darkAccent;
         clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
         z-index: -1;
     }
-    section {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin: 4rem 0;
+}
+
+/* MOBILE VIEW */
+.mobile-container {
+    display: flex;
+    @include for-tablet-landscape-up {
+        display: none;
+    }
+    p {
+        color: #b1d4e0;
+        padding-top: 2%;
+    }
+    button {
+        font-size: 30px;
+        padding: 5% 25%;
+        margin-bottom: 5%;
+        border-radius: 20px;
     }
 }
-
-#signUpButton {
-    font-size: 30px;
-    padding-right: 25%;
-    padding-left: 25%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    margin-bottom: 5%;
-    border-radius: 20px;
-}
-
 .content {
     text-align: center;
 }
-
-p {
-    color: #b1d4e0;
-    padding-top: 2%;
-}
-
 .row {
     margin-top: 50%;
+}
+
+/* DESKTOP VIEW */
+.desktop-container {
+    display: none;
+    color: $white;
+    @include for-tablet-landscape-up {
+        display: flex;
+    }
+}
+.slideshow-container {
+    width: 50%;
+}
+.text-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 3.5rem;
+        span {
+            color: $accent;
+        }
+        @include for-desktop-up {
+            font-size: 4rem;
+        }
+    }
+    h2 {
+        font-size: 2.5rem;
+        @include for-desktop-up {
+            font-size: 2.9rem;
+        }
+    }
+    p {
+        font-size: 1.25rem;
+        @include for-desktop-up {
+            font-size: 1.4rem;
+        }
+    }
+    button {
+        border: none;
+        cursor: pointer;
+        background: $main;
+        color: $white;
+        padding: 0.75rem 7rem;
+        border-radius: 0.25rem;
+        transition: 0.25s;
+        &:hover {
+            background: $accent;
+        }
+    }
 }
