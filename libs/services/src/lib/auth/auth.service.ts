@@ -52,14 +52,28 @@ export class AuthService {
         }
     }
 
+    /**
+     * Login the user with email and password
+     *
+     * @param email {string} The email of the user
+     * @param password {string} The password of the user
+     */
     async login(email: string, password: string): Promise<void> {
         await this.auth.signInWithEmailAndPassword(email, password);
     }
 
+    /**
+     * Login user with google credentials
+     */
     async loginWithGoogle(): Promise<void> {
         await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     }
 
+    /**
+     * Send password reset email link to user
+     *
+     * @param email {string} The email to send the reset link to
+     */
     async resetPassword(email: string): Promise<void> {
         await this.auth.sendPasswordResetEmail(email);
     }
@@ -92,6 +106,9 @@ export class AuthService {
         return this.auth.confirmPasswordReset(code, newPassword);
     }
 
+    /**
+     * Logout a user
+     */
     async logout(): Promise<void> {
         await this.auth.signOut();
     }
