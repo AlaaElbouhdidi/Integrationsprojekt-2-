@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventModalDialogComponent } from '../event-modal-dialog/event-modal-dialog.component';
 
 @Component({
-    selector: 'mate-team-integrationsprojekt2-upcoming-event-section-screen',
+    selector: 'mate-team-upcoming-event-section-screen',
     templateUrl: './upcoming-event-section-screen.component.html',
     styleUrls: ['./upcoming-event-section-screen.component.scss'],
 })

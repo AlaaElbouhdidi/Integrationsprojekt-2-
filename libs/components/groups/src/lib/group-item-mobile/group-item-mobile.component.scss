@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../style';
 
 h4 {
     margin-bottom: 3px;
@@ -26,4 +26,7 @@ p {
 }
 img {
     width: 30px;
+}
+*{
+    color: white;
 }

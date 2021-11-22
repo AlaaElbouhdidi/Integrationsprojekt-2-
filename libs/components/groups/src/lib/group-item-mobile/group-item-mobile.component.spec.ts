@@ -22,3 +22,4 @@ describe('GroupItemMobileComponent', () => {
         expect(component).toBeTruthy();
     });
 });
+

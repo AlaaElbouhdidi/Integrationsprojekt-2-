@@ -1,8 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GroupModel } from '../shared/models/GroupModel';
+import { GroupModel } from '@services';
 import { GroupModalDialogComponent } from '../group-modal-dialog/group-modal-dialog.component';
 import * as moment from 'moment';
+import { Group } from '@api-interfaces';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
     selector: 'mate-team-groups-section-screen',
@@ -11,8 +14,8 @@ import * as moment from 'moment';
 })
 export class GroupsSectionScreenComponent implements OnChanges {
     @Input()
-    groups: GroupModel[] | undefined;
-    shownGroups: GroupModel[] | undefined;
+    groups: Group[] | undefined;
+    shownGroups: Group[] | undefined;
     enabledMemberFilter = true;
     textSearch = '';
 
@@ -44,7 +47,7 @@ export class GroupsSectionScreenComponent implements OnChanges {
         this.doFiltering();
     }
 
-    clicked(g: GroupModel): void {
+    clicked(g: Group): void {
         const ref = this.modalService.open(GroupModalDialogComponent);
         ref.componentInstance.group = g;
     }

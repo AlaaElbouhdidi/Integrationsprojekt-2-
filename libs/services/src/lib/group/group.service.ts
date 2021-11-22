@@ -8,10 +8,6 @@ import { groups } from './mock-groups';
     providedIn: 'root',
 })
 export class GroupService {
-    url = 'https://localhost:3001/groups';
-
-    constructor(private httpClient: HttpClient) {}
-
     getGroups(): Observable<Group[]> {
         //return this.httpClient.get<GroupModel[]>(this.url);
         return of(groups);

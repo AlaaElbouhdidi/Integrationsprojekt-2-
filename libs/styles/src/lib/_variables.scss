@@ -3,6 +3,14 @@
 
 $theme: 'cosmo' !default;
 
+// Our Color system
+$main: #145da0; // background color
+$blue1: #0c3761; // background color for large screen items
+$light: #b1d4e0; // background color form upcoming event items for small screens
+$accent: #2e8bc0; // background color for buttons for small screens
+$dark: #0c2d48;
+$breakPoint: 801px;
+
 //
 // Color system
 //
@@ -58,8 +66,8 @@ $body-color: $gray-800 !default;
 
 // stylelint-disable-next-line value-keyword-case
 $font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 $headings-font-weight: 400 !default;
 
 // Navbar

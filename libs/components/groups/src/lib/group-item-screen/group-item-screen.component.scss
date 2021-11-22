@@ -1,9 +1,13 @@
-@import '../../variables';
+@import '../../style';
 $blue: rgb(45, 139, 191);
 
 h4 {
     margin-bottom: 3px;
     text-align: left;
+    color: white;
+}
+*{
+    color: white;
 }
 p {
     margin-bottom: 1px;
@@ -22,7 +26,7 @@ p {
     font-weight: bold;
 }
 
-@import '../../variables';
+@import '_variables';
 .box {
     box-shadow: 4px 4px 5px black;
     margin-bottom: 15px;

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GroupModel } from '../shared/models/GroupModel';
+import { Group } from '@api-interfaces';
+import { GroupModel } from '@services';
+//import { GroupModel } from '../shared/models/GroupModel';
 
 @Component({
     selector: 'mate-team-group-item-screen',
@@ -8,7 +10,7 @@ import { GroupModel } from '../shared/models/GroupModel';
 })
 export class GroupItemScreenComponent {
     @Input()
-    group: GroupModel | undefined;
+    group: Group | undefined;
     @Output()
     clicked: EventEmitter<void> = new EventEmitter();
 }

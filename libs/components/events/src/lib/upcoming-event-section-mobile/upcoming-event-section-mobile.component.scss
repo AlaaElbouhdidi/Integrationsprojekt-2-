@@ -1,0 +1,43 @@
+@import "../../style";
+.eventBox{
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(178, 212, 224);
+    box-shadow: 4px 4px 5px white;
+    margin-bottom: 10px;
+}
+h4,h5,p{
+    color: black;
+    font-size: 15px;
+}
+h4{
+    padding-left: 20px;
+}
+h5{
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+@media (min-width: 576px) {
+    .eventBox:not(:first-child) {
+        margin-left: 15px;
+    }
+    .eventBox:first-child {
+        margin-right: 15px;
+    }
+}
+@media (max-width: 575px) {
+    .eventBox:not(:first-child) {
+        margin-top: 10px;
+    }
+}
+.btn{
+    margin-top: 15px;
+}
+.box{
+    margin-bottom: 20px;
+}
+
+*{
+    color: white;
+}

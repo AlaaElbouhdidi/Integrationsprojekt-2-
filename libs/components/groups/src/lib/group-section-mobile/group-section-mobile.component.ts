@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { GroupModel } from '../shared/models/GroupModel';
+import { Group } from '@api-interfaces';
+import { GroupModel } from '@services';
+//import { GroupModel } from '../shared/models/GroupModel';
 
 @Component({
     selector: 'mate-team-group-section-mobile',
@@ -8,5 +10,5 @@ import { GroupModel } from '../shared/models/GroupModel';
 })
 export class GroupSectionMobileComponent {
     @Input()
-    groups: GroupModel[] | undefined;
+    public groups: Group[] | undefined;
 }

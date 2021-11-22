@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GroupModel } from '../shared/models/GroupModel';
+import { Group } from '@api-interfaces';
 
 @Component({
     selector: 'mate-team-group-item-mobile',
@@ -8,5 +8,5 @@ import { GroupModel } from '../shared/models/GroupModel';
 })
 export class GroupItemMobileComponent {
     @Input()
-    group: GroupModel | undefined;
+    group: Group | undefined;
 }

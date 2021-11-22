@@ -1,4 +1,6 @@
-@import '../../_variables.scss';
+@import '../../style';
+
+
 h1 {
     border-left-style: solid;
     border-left-width: 3px;
@@ -61,4 +63,7 @@ h1 {
 }
 .filter.active {
     background-color: #155ca3;
+}
+*{
+    color: white;
 }

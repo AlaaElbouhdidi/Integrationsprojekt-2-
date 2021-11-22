@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { Group } from '@api-interfaces';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { GroupModel } from '../shared/models/GroupModel';
+import { GroupModel } from '@services';
+//import { GroupModel } from '../shared/models/GroupModel';
 
 @Component({
     selector: 'mate-team-group-modal-dialog',
@@ -8,7 +10,7 @@ import { GroupModel } from '../shared/models/GroupModel';
     styleUrls: ['./group-modal-dialog.component.scss'],
 })
 export class GroupModalDialogComponent {
-    @Input() group: GroupModel | undefined = undefined;
+    @Input() group: Group | undefined = undefined;
 
     constructor(public activeModal: NgbActiveModal) {}
 }

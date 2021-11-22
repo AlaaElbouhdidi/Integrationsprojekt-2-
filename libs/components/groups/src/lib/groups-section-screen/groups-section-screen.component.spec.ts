@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { GroupsSectionScreenComponent } from './groups-section-screen.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('GroupsSectionScreenComponent', () => {
     let component: GroupsSectionScreenComponent;
@@ -9,6 +11,8 @@ describe('GroupsSectionScreenComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GroupsSectionScreenComponent],
+            imports: [FormsModule],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

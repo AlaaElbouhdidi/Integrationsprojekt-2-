@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { UpcomingEventSectionScreenComponent } from './upcoming-event-section-screen.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('UpcomingEventSectionScreenComponent', () => {
     let component: UpcomingEventSectionScreenComponent;
@@ -9,6 +11,8 @@ describe('UpcomingEventSectionScreenComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [UpcomingEventSectionScreenComponent],
+            imports: [FormsModule],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

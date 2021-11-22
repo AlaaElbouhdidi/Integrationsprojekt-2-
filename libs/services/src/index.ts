@@ -4,3 +4,7 @@ export * from './lib/auth/auth.service';
 export * from './lib/group/group.service';
 export * from './lib/event/event.service';
 export * from './lib/chunker/chunker.service';
+export * from './lib/models/EventModels';
+export * from './lib/models/GroupModel';
+export * from './lib/models/MessageModels';
+export * from './lib/models/AddressModel';
