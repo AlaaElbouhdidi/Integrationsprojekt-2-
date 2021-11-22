@@ -4,7 +4,7 @@
 .auth-container {
     position: relative;
     background: $dark;
-    min-height: calc(100vh - 3rem);
+    min-height: calc(100vh - 6rem);
     width: 100%;
     padding: 0.5rem;
     @include flex-center;
