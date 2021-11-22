@@ -1,4 +1,4 @@
-<main>
+<main class="mobile-container">
     <div class="content">
         <button
             id="signUpButton"
@@ -25,5 +25,19 @@
                 <p>Connect with your Mates</p>
             </div>
         </div>
+    </div>
+</main>
+
+<main class="desktop-container">
+    <section class="text-container">
+        <div class="block">
+            <h1><span>M</span>ate <span>T</span>eam</h1>
+            <h2>A team management site</h2>
+            <p>Create your own groups or join existing!</p>
+            <button routerLink="/register">Sign up</button>
+        </div>
+    </section>
+    <div class="slideshow-container">
+        <mate-team-slideshow></mate-team-slideshow>
     </div>
 </main>

@@ -1314,6 +1314,85 @@
                 }
             }
         },
+        "slideshow": {
+            "projectType": "library",
+            "root": "libs/components/slideshow",
+            "sourceRoot": "libs/components/slideshow/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/slideshow/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/slideshow/src/**/*.ts",
+                            "libs/components/slideshow/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/slideshow",
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "slideshow-e2e": {
+            "root": "apps/e2e/slideshow-e2e",
+            "sourceRoot": "apps/e2e/slideshow-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/slideshow-e2e/cypress.json",
+                        "devServerTarget": "slideshow:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "slideshow:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/slideshow-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "styles": {
             "projectType": "library",
             "root": "libs/styles",
