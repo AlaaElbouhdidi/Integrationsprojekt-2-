@@ -168,6 +168,87 @@
                 }
             }
         },
+        "auth-handler": {
+            "projectType": "library",
+            "root": "libs/components/auth-handler",
+            "sourceRoot": "libs/components/auth-handler/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/auth-handler/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/auth-handler/src/**/*.ts",
+                            "libs/components/auth-handler/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/auth-handler",
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "auth-handler-e2e": {
+            "root": "apps/e2e/auth-handler-e2e",
+            "sourceRoot": "apps/e2e/auth-handler-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/auth-handler-e2e/cypress.json",
+                        "devServerTarget": "auth-handler:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "auth-handler:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/auth-handler-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",
@@ -188,6 +269,85 @@
                             "libs/core/src/**/*.ts",
                             "libs/core/src/**/*.html"
                         ]
+                    }
+                }
+            }
+        },
+        "email-form": {
+            "projectType": "library",
+            "root": "libs/components/email-form",
+            "sourceRoot": "libs/components/email-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/email-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/email-form/src/**/*.ts",
+                            "libs/components/email-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/email-form",
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "email-form-e2e": {
+            "root": "apps/e2e/email-form-e2e",
+            "sourceRoot": "apps/e2e/email-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/email-form-e2e/cypress.json",
+                        "devServerTarget": "email-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "email-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/email-form-e2e/**/*.{js,ts}"]
                     }
                 }
             }
@@ -741,7 +901,7 @@
                                 {
                                     "type": "initial",
                                     "maximumWarning": "750kb",
-                                    "maximumError": "1.5mb"
+                                    "maximumError": "1mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -1009,6 +1169,87 @@
             },
             "tags": []
         },
+        "password-reset-form": {
+            "projectType": "library",
+            "root": "libs/components/password-reset-form",
+            "sourceRoot": "libs/components/password-reset-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/password-reset-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/password-reset-form/src/**/*.ts",
+                            "libs/components/password-reset-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/password-reset-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/password-reset-form",
+                        "config": {
+                            "configFolder": "libs/components/password-reset-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "password-reset-form-e2e": {
+            "root": "apps/e2e/password-reset-form-e2e",
+            "sourceRoot": "apps/e2e/password-reset-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/password-reset-form-e2e/cypress.json",
+                        "devServerTarget": "password-reset-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "password-reset-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/password-reset-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "register": {
             "projectType": "library",
             "root": "libs/components/register",
@@ -1192,6 +1433,85 @@
                             "libs/services/src/**/*.ts",
                             "libs/services/src/**/*.html"
                         ]
+                    }
+                }
+            }
+        },
+        "slideshow": {
+            "projectType": "library",
+            "root": "libs/components/slideshow",
+            "sourceRoot": "libs/components/slideshow/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/slideshow/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/slideshow/src/**/*.ts",
+                            "libs/components/slideshow/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/slideshow",
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "slideshow-e2e": {
+            "root": "apps/e2e/slideshow-e2e",
+            "sourceRoot": "apps/e2e/slideshow-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/slideshow-e2e/cypress.json",
+                        "devServerTarget": "slideshow:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "slideshow:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/slideshow-e2e/**/*.{js,ts}"]
                     }
                 }
             }

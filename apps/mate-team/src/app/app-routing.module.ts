@@ -19,6 +19,10 @@ const routes: Routes = [
         path: 'newgroup',
         loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule),
     },
+    {
+        path: 'auth/handler',
+        loadChildren: () => import('@auth-handler').then((m) => m.AuthHandlerModule)
+    },
 ];
 
 @NgModule({

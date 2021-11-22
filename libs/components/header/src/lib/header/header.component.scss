@@ -55,3 +55,14 @@ header {
         }
     }
 }
+.logo {
+    @include flex-center;
+    overflow: hidden;
+    height: 2.9rem;
+    img {
+        width: 50px;
+    }
+    h2 {
+        margin-top: 5px;
+    }
+}

@@ -1,0 +1,9 @@
+@import 'libs/styles/src/lib/forms';
+
+.cancel-btn {
+    background: #962323 !important;
+    margin-top: 1rem;
+    &:hover {
+        background: #b02828 !important;
+    }
+}

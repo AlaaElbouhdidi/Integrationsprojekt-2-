@@ -11,6 +11,8 @@ import { FooterModule } from '@footer';
 import { ServicesModule } from '@services';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
+import { AuthHandlerModule } from '@auth-handler';
+import { SlideshowModule } from '@slideshow';
 
 @NgModule({
     exports: [
@@ -19,11 +21,13 @@ import { StylesModule } from '@styles';
         HeaderModule,
         LoaderModule,
         RegisterModule,
+        SlideshowModule,
         RegisterFormModule,
         AlertModule,
         LoginModule,
         LandingpageModule,
         FooterModule,
+        AuthHandlerModule,
         AngularFireFunctionsModule,
         StylesModule
     ],
