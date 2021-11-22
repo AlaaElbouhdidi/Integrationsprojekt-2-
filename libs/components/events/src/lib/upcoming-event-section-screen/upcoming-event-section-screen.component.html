@@ -5,11 +5,17 @@
     </div>
 </div>
 
-
 <div class="row" *ngFor="let x of buckets">
-    <mate-team-event-item-screen *ngFor="let e of x" (clicked)="clicked(e)" [event]="e" class="col-md-3"></mate-team-event-item-screen>
+    <mate-team-event-item-screen
+        *ngFor="let e of x"
+        (clicked)="clicked(e)"
+        [event]="e"
+        class="col-md-3"
+    ></mate-team-event-item-screen>
     <div *ngIf="x">
-        <div class="col-md-3" *ngFor="let tmp of [].constructor(4 - x.length)">
-        </div>
+        <div
+            class="col-md-3"
+            *ngFor="let tmp of [].constructor(4 - x.length)"
+        ></div>
     </div>
 </div>

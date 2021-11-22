@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventItemScreenComponent } from './event-item-screen.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('EventItemScreenComponent', () => {
     let component: EventItemScreenComponent;
@@ -10,7 +10,7 @@ describe('EventItemScreenComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [EventItemScreenComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });
 
@@ -24,4 +24,3 @@ describe('EventItemScreenComponent', () => {
         expect(component).toBeTruthy();
     });
 });
-

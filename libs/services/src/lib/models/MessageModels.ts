@@ -1,4 +1,4 @@
-export class MessageModel{
+export class MessageModel {
     author = '';
     message = '';
 }

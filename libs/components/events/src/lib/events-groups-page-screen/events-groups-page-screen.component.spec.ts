@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpcomingEventSectionScreenComponent } from '../upcoming-event-section-screen/upcoming-event-section-screen.component';
 
 import { EventsGroupsPageScreenComponent } from './events-groups-page-screen.component';
-import {GroupsModule} from "@groups";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { GroupsModule } from '@groups';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('EventsGroupsPageScreenComponent', () => {
     let component: EventsGroupsPageScreenComponent;
@@ -11,9 +11,12 @@ describe('EventsGroupsPageScreenComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [EventsGroupsPageScreenComponent, UpcomingEventSectionScreenComponent],
+            declarations: [
+                EventsGroupsPageScreenComponent,
+                UpcomingEventSectionScreenComponent,
+            ],
             imports: [GroupsModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });
 
@@ -27,4 +30,3 @@ describe('EventsGroupsPageScreenComponent', () => {
         expect(component).toBeTruthy();
     });
 });
-

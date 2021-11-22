@@ -10,7 +10,7 @@ describe('EventModalDialogComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [EventModalDialogComponent],
-            providers: [NgbActiveModal]
+            providers: [NgbActiveModal],
         }).compileComponents();
     });
 
@@ -24,4 +24,3 @@ describe('EventModalDialogComponent', () => {
         expect(component).toBeTruthy();
     });
 });
-

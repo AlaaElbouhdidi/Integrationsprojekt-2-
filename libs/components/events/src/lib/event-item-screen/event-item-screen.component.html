@@ -1,6 +1,6 @@
 <div class="eventBox">
-    <h4> {{ event.title }} </h4>
-    <p> <i class="bi bi-clock"></i> {{ event.date | date: 'dd.MM.yyyy'}} </p>
+    <h4>{{ event.title }}</h4>
+    <p><i class="bi bi-clock"></i> {{ event.date | date: 'dd.MM.yyyy' }}</p>
 
     <a class="whiteBtn" (click)="clicked.emit()">More Infos</a>
 </div>

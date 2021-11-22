@@ -224,7 +224,7 @@
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/events/jest.config.js",
+                        "jestConfig": "libs/components/events/jest.config.js",
                         "passWithNoTests": true
                     }
                 },

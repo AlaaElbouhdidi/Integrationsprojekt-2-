@@ -4,8 +4,7 @@ import {
     redirectLoggedInTo,
     canActivate,
 } from '@angular/fire/compat/auth-guard';
-import {EventsGroupsPageMobileComponent} from "./events-groups-page-mobile/events-groups-page-mobile.component";
-import {EventsGroupsPageComponent} from "./events-groups-page/events-groups-page.component";
+import { EventsGroupsPageComponent } from './events-groups-page/events-groups-page.component';
 
 const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/']);
 

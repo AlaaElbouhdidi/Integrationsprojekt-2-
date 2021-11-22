@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-
 import { UpcomingEventSectionMobileComponent } from './upcoming-event-section-mobile.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('UpcomingEventSectionMobileComponent', () => {
     let component: UpcomingEventSectionMobileComponent;
@@ -10,11 +9,10 @@ describe('UpcomingEventSectionMobileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ UpcomingEventSectionMobileComponent ],
+            declarations: [UpcomingEventSectionMobileComponent],
             imports: [FormsModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
-        })
-            .compileComponents();
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        }).compileComponents();
     });
 
     beforeEach(() => {

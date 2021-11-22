@@ -1,11 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { GroupModel } from '@services';
 import { GroupModalDialogComponent } from '../group-modal-dialog/group-modal-dialog.component';
 import * as moment from 'moment';
 import { Group } from '@api-interfaces';
-import { FormsModule } from '@angular/forms';
-
 
 @Component({
     selector: 'mate-team-groups-section-screen',

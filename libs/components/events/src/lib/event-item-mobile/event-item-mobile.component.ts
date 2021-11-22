@@ -10,4 +10,3 @@ export class EventItemMobileComponent {
     @Input()
     event: Event = Event.empty();
 }
-

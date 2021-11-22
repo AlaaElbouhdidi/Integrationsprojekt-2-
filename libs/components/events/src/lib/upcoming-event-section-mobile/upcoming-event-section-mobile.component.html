@@ -1,5 +1,9 @@
 <h1>Upcoming events</h1>
 <div class="row" *ngFor="let x of buckets">
-    <mate-team-event-item-mobile *ngFor="let e of x" [event]="e" class="col-xs-12 col-sm-6 box"></mate-team-event-item-mobile>
+    <mate-team-event-item-mobile
+        *ngFor="let e of x"
+        [event]="e"
+        class="col-xs-12 col-sm-6 box"
+    ></mate-team-event-item-mobile>
 </div>
 <a class="btn" href="#">Create Event</a>

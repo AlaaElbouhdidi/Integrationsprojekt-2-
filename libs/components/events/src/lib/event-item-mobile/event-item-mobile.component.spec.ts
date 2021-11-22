@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventItemMobileComponent } from './event-item-mobile.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('EventItemMobileComponent', () => {
     let component: EventItemMobileComponent;
@@ -9,10 +9,9 @@ describe('EventItemMobileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ EventItemMobileComponent ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
-        })
-            .compileComponents();
+            declarations: [EventItemMobileComponent],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        }).compileComponents();
     });
 
     beforeEach(() => {

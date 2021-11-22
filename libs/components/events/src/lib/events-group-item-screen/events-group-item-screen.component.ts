@@ -6,4 +6,3 @@ import { Component } from '@angular/core';
     styleUrls: ['./events-group-item-screen.component.scss'],
 })
 export class EventsGroupItemScreenComponent {}
-
