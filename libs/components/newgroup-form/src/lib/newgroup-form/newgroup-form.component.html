@@ -1,5 +1,5 @@
 <form class="app-form" (ngSubmit)="newGroup()" [formGroup]="newGroupForm" >
-    <h1>Create new group</h1>
+    <h1>Create a new group</h1>
     <div class="form-input">
         <input  type="text"  formControlName="name" placeholder="Name" required/>
     </div>
@@ -16,12 +16,13 @@
     </div>
 
     <div class="form-input">
-        <select *ngFor="let activity of activities"  formControlName="activity" placeholder="Choose activity"> 
-            <option value="{{activity.id}}"> <img src="../../assets/activities/football.png" /> {{activity.name}}</option>
+        <label>Select the group activity:</label>
+        <select formControlName="activity" > 
+            <option *ngFor="let activity of activities" value="{{activity.id}}"  > <img src="../../assets/activities/football.png" /> {{activity.name}}</option>
         </select>
     </div>
     <div class="form-input">
-        <input type="text" formControlName="description" placeholder="Description" />
+        <input type="text" formControlName="description" placeholder="Description (optional)" />
     </div>
     <div class="form-btn">
         <button type="submit"

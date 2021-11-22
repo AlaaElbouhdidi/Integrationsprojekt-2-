@@ -1,2 +1,8 @@
-<mate-team-newgroup-form *ngIf=!success ></mate-team-newgroup-form> 
-<mate-team-newgroup-success *ngIf=success ></mate-team-newgroup-success>
+<main>
+    <section>
+        <img *ngIf=success  src="../../assets/svgs/group.svg" alt="Group" />
+        <img *ngIf=!success  src="../../assets/svgs/group.svg" alt="Group" />
+        <mate-team-newgroup-form *ngIf=success ></mate-team-newgroup-form> 
+        <mate-team-newgroup-success *ngIf=!success ></mate-team-newgroup-success>
+    </section>
+</main>

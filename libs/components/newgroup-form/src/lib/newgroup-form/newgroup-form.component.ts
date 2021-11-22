@@ -18,7 +18,7 @@ export class NewgroupFormComponent implements OnInit {
   activities: Activity[] = [];
   loading = false;
 
-  constructor( private fb: FormBuilder, 
+  constructor( private fb: FormBuilder,
      private activitySevice: ActivityService, private groupService: GroupService,
      private alertService: AlertService, private authService: AuthService) {
       this.newGroupForm = this.fb.group({
@@ -26,6 +26,7 @@ export class NewgroupFormComponent implements OnInit {
         activity: new FormControl('', [ Validators.required ]),
         description: new FormControl('', )
       });
+
   }
   get name(): AbstractControl {
       return this.newGroupForm.controls.name;
@@ -71,11 +72,21 @@ export class NewgroupFormComponent implements OnInit {
       });
   }
   }
-  ngOnInit(): void {
-    this.activitySevice.getAllActivities().subscribe(items => {
+  async ngOnInit():  Promise<void>  {
+    try{
+   await this.activitySevice.getAllActivities().subscribe(items => {
       this.activities = items;
           }
-     )
+     );
+        }
+    catch (err: any) {
+      this.loading = false;
+      this.newGroupForm.reset();
+      this.alertService.addAlert({
+          type: 'error',
+          message: err.message,
+      });
+  }
  }
 
 }

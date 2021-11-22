@@ -1,4 +1,5 @@
 @import 'libs/styles/src/lib/_forms';
+
 .form-input {
     position: relative;
     margin-top: 2rem;
@@ -18,6 +19,12 @@
             color: $main;
         }
     }
+    label{
+        font-size: 1rem;
+        color: gray;
+        width: 100%;
+        padding-left:2.5rem;
+    }
     fa-icon {
         position: absolute;
         top: 0.3rem;
@@ -25,4 +32,8 @@
         font-size: 1.2rem;
         transition: 0.25s;
     }
+}
+.disabled-btn {
+    opacity: 20%;
+    pointer-events: none;
 }
