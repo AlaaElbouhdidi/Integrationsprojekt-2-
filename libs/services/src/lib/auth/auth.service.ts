@@ -7,10 +7,24 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root',
 })
 export class AuthService {
+    /**
+     * Firebase user object
+     */
     user: firebase.User | null = null;
+    /**
+     * Auth state Subject
+     * @private
+     */
     private readonly authState = new BehaviorSubject<firebase.User | null>(null);
+    /**
+     * Auth state observable
+     */
     readonly authState$ = this.authState.asObservable();
 
+    /**
+     * Constructor of auth service
+     * @param auth {AngularFireAuth}
+     */
     constructor(
         private auth: AngularFireAuth
     ) {
@@ -25,6 +39,11 @@ export class AuthService {
         });
     }
 
+    /**
+     * Creates new user with email and password and sends email verification link
+     * @param email {string} The email of the user
+     * @param password {string} The password of the user
+     */
     async register(email: string, password: string): Promise<void> {
         const userCredential =
             await this.auth.createUserWithEmailAndPassword(email, password);
