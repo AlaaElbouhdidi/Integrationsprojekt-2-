@@ -1006,7 +1006,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/newgroup"],
                     "options": {
                         "jestConfig": "libs/components/newgroup/jest.config.js",
                         "passWithNoTests": true
@@ -1038,7 +1037,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/newgroup",
@@ -1052,8 +1050,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "newgroup-form": {
             "projectType": "library",
@@ -1063,7 +1060,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/newgroup-form"],
                     "options": {
                         "jestConfig": "libs/components/newgroup-form/jest.config.js",
                         "passWithNoTests": true
@@ -1095,7 +1091,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/newgroup-form",
@@ -1109,8 +1104,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "newgroup-success": {
             "projectType": "library",
@@ -1120,7 +1114,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/newgroup-success"],
                     "options": {
                         "jestConfig": "libs/components/newgroup-success/jest.config.js",
                         "passWithNoTests": true
@@ -1152,7 +1145,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/newgroup-success",
@@ -1166,8 +1158,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "password-reset-form": {
             "projectType": "library",
