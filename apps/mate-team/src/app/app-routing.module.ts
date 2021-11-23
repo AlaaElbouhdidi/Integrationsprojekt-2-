@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('@login').then((m) => m.LoginModule),
     },
     {
+        path: 'newgroup',
+        loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule),
+    },
+    {
         path: 'auth/handler',
         loadChildren: () => import('@auth-handler').then((m) => m.AuthHandlerModule)
     },
