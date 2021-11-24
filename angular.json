@@ -347,7 +347,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/email-form-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/email-form-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -1241,6 +1243,85 @@
                 }
             }
         },
+        "profile": {
+            "projectType": "library",
+            "root": "libs/components/profile",
+            "sourceRoot": "libs/components/profile/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/profile/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/profile/src/**/*.ts",
+                            "libs/components/profile/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/profile",
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "profile-e2e": {
+            "root": "apps/e2e/profile-e2e",
+            "sourceRoot": "apps/e2e/profile-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/profile-e2e/cypress.json",
+                        "devServerTarget": "profile:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "profile:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/profile-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
         "register": {
             "projectType": "library",
             "root": "libs/components/register",
@@ -1502,7 +1583,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/slideshow-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/slideshow-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }

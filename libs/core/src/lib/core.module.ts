@@ -13,6 +13,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
+import { ProfileModule } from '@profile';
 
 @NgModule({
     exports: [
@@ -24,6 +25,7 @@ import { SlideshowModule } from '@slideshow';
         SlideshowModule,
         RegisterFormModule,
         AlertModule,
+        ProfileModule,
         LoginModule,
         LandingpageModule,
         FooterModule,
