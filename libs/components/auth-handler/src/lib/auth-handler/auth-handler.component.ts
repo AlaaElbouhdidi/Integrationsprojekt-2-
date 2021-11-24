@@ -10,11 +10,33 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./auth-handler.component.scss']
 })
 export class AuthHandlerComponent implements OnInit, OnDestroy {
+    /**
+     * Subject for unsubscribing from observables with takeUntil
+     * @private
+     */
     private unsubscribe$ = new Subject();
+    /**
+     * The mode of the user action
+     * @private
+     */
     private mode = '';
+    /**
+     * The code to verify
+     * @private
+     */
     private code = '';
+    /**
+     * Determines if code is valid or invalid
+     */
     codeChecked = false;
 
+    /**
+     * Constructor of the auth handler component
+     * @param router {Router}
+     * @param activatedRoute {ActivatedRoute}
+     * @param authService {AuthService}
+     * @param alertService {AlertService}
+     */
     constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
@@ -22,6 +44,9 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
       private alertService: AlertService
     ) { }
 
+    /**
+     * Subscribes to activated route and checks mode and code query parameters
+     */
     ngOnInit(): void {
         this.activatedRoute.queryParams
             .pipe(takeUntil(this.unsubscribe$))
@@ -40,6 +65,9 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         });
     }
 
+    /**
+     * Calls auth service to verify the password reset code and handles success and error cases
+     */
     async handleVerifyCode(): Promise<void> {
         try {
             await this.authService.verifyPasswordResetCode(this.code);
@@ -53,6 +81,9 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Calls auth service to verify email and handles success and error cases
+     */
     async handleVerifyEmail(): Promise<void> {
         try {
             await this.authService.applyActionCode(this.code);
@@ -70,6 +101,11 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Calls auth service to confirm password reset and handles success and error cases
+     *
+     * @param newPassword {string} The new password to set
+     */
     async handlePasswordReset(newPassword: string): Promise<void> {
         try {
             await this.authService.confirmPasswordReset(this.code, newPassword);
@@ -86,6 +122,9 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Unsubscribes from subscribed observables
+     */
     ngOnDestroy(): void {
         this.unsubscribe$.next();
         this.unsubscribe$.complete();

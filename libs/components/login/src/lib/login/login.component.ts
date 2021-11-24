@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+    /**
+     * Determines if login form or email form component is shown
+     */
     showLogin = true;
 }
