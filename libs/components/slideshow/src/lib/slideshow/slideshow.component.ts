@@ -27,9 +27,21 @@ import { animate, style, transition, trigger } from '@angular/animations';
     ]
 })
 export class SlideshowComponent implements OnDestroy {
+    /**
+     * Interval of the slideshow
+     */
     slideInterval: ReturnType<typeof setInterval>;
+    /**
+     * Index of the currently active slide
+     */
     activeSlideIndex = 0;
+    /**
+     * Delay of the slideshow
+     */
     slideIntervalDelay = 4000;
+    /**
+     * Array containing the slides
+     */
     slides = [
         {
             src: "assets/svgs/online_calender.svg",
@@ -48,15 +60,26 @@ export class SlideshowComponent implements OnDestroy {
         }
     ];
 
+    /**
+     * Constructor which initializes the slide interval
+     */
     constructor() {
         this.slideInterval = this.setSlideInterval();
     }
 
+    /**
+     * Sets the slide interval and the starting point of the slideshow
+     *
+     * @param startIndex {number} Index of the slide to start the slideshow from
+     */
     initSlideInterval(startIndex: number): void {
         this.activeSlideIndex = startIndex;
         this.slideInterval = this.setSlideInterval();
     }
 
+    /**
+     * @returns {NodeJS.Timeout} Interval of the slideshow
+     */
     setSlideInterval(): ReturnType<typeof setInterval> {
         return setInterval(() => {
             this.activeSlideIndex === this.slides.length - 1 ? this.activeSlideIndex = 0 : this.activeSlideIndex += 1;
@@ -64,11 +87,19 @@ export class SlideshowComponent implements OnDestroy {
         }, this.slideIntervalDelay);
     }
 
+    /**
+     * Sets the active slide
+     *
+     * @param index {number} Index of the slide to set as active
+     */
     setSelectedSlide(index: number): void {
         clearInterval(this.slideInterval);
         this.initSlideInterval(index);
     }
 
+    /**
+     * Clears the interval
+     */
     ngOnDestroy(): void {
         clearInterval(this.slideInterval);
     }

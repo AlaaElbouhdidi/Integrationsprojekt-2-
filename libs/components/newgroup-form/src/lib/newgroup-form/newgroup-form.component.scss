@@ -1,0 +1,39 @@
+@import 'libs/styles/src/lib/_forms';
+
+.form-input {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+    select {
+        font-size: 1rem;
+        color: $dark;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid $dark;
+        padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+        transition: 0.25s;
+        &:focus {
+            border-bottom: 1px solid $main;
+        }
+        &:focus + fa-icon {
+            color: $main;
+        }
+    }
+    label{
+        font-size: 1rem;
+        color: gray;
+        width: 100%;
+        padding-left:2.5rem;
+    }
+    fa-icon {
+        position: absolute;
+        top: 0.3rem;
+        left: 0.5rem;
+        font-size: 1.2rem;
+        transition: 0.25s;
+    }
+}
+.disabled-btn {
+    opacity: 20%;
+    pointer-events: none;
+}

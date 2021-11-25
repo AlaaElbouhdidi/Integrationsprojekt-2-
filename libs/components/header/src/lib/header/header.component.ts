@@ -9,9 +9,21 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
+    /**
+     * Authenticated State
+     */
     authenticated = false;
+    /**
+     * Subscription of the auth state
+     */
     authSubscription: Subscription;
 
+    /**
+     * Constructor which subscribes the auth state
+     * @param authService {AuthService}
+     * @param alertService {AlertService}
+     * @param router {Router}
+     */
     constructor(
         private authService: AuthService,
         private alertService: AlertService,
@@ -26,6 +38,9 @@ export class HeaderComponent implements OnDestroy {
         );
     }
 
+    /**
+     * Logout the user and handle success and error case
+     */
     async logout(): Promise<void> {
         try {
             await this.authService.logout();
@@ -42,6 +57,9 @@ export class HeaderComponent implements OnDestroy {
         await this.router.navigate(['/']);
     }
 
+    /**
+     * Unsubscribe from the auth state subscription
+     */
     ngOnDestroy(): void {
         this.authSubscription.unsubscribe();
     }
