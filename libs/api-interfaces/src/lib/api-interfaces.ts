@@ -1,5 +1,3 @@
-import { UserRecord } from 'firebase-admin/auth'
-
 export interface Message {
     message: string;
 }
@@ -22,35 +20,26 @@ export interface Environment {
     apiUrl: string;
 }
 
-export interface User {
-    id?: string;
-    email?: string;
-    emailVerified?: boolean;
-    photoURL?: string;
-    displayName?: string;
+export interface Member {
+    uid: string;
+    isAdmin: boolean;
 }
 
-export interface Member {
-    uid?: string;
-    isAdmin?: boolean;
-    groupid?: string;
+export interface Event {
+    name: string;
+    description: string;
+    date: Date;
+    participants?: string[] // Array of uid's
 }
+
 export interface Group {
     id?: string;
     name?: string;
     activity?: Activity;
     description?: string;
-    members?: Member[];
-}
-export interface Activity {
-    id?: string;
-    name?: string;
-    logo?: string;
+    member?: Member[]; // Array of uid's
 }
 
-export interface Event {
-    date: Date;
-    description: string;
-    name: string;
-    participants: UserRecord[]
+export enum Activity {
+    soccer = 'SOCCER_ACTIVITY',
 }

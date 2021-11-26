@@ -5,6 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
+import * as packagejson from '../package.json';
 
 /**
  * Instance that is required to initialize the app
@@ -21,7 +22,9 @@ export async function getApp(): Promise<INestApplication> {
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
-        .setDescription('Dokumentation der API von Mate Team')
+        .setDescription(packagejson.description)
+        .setVersion(packagejson.version)
+        .addBearerAuth()
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('swagger', app, document);

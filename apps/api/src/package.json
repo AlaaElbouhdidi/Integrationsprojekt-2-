@@ -1,10 +1,14 @@
 {
-    "name": "api",
+    "name": "mate-team-api",
     "version": "0.0.1",
-    "description": "",
-    "author": "",
+    "description": "Firebase powered API for Mate Team",
     "private": true,
-    "license": "UNLICENSED",
+    "license": "MIT",
+    "homepage": "https://mate-team.de",
+    "repository": {
+        "type": "git",
+        "url": "https://git.thm.de/cbkr81/integrationsprojekt-2"
+    },
     "engines": {
         "node": "14"
     },

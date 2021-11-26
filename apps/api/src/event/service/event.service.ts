@@ -1,45 +1,177 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+    Injectable,
+    InternalServerErrorException,
+    Logger,
+} from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
 import { Event } from '@api-interfaces';
-import { CollectionReference, DocumentData } from 'firebase-admin/firestore';
+import { DecodedIdToken } from 'firebase-admin/auth';
+import { User } from '../../decorators/user.decorator';
 
+/**
+ * The EventService
+ * */
 @Injectable()
 export class EventService {
-    private readonly logger: Logger = new Logger('EventsService');
-    private readonly events: Event[] = [];
-    private readonly eventsRef: CollectionReference<DocumentData> =
-        this.firebaseService.firestore().collection('events');
-
+    /**
+     * The constructor of the EventService
+     * @param {FirebaseService} firebaseService The injected FirebaseService to use in the EventsService
+     * */
     constructor(private readonly firebaseService: FirebaseService) {}
-
-    create(createEventDto: CreateEventDto) {
-        return 'This action adds a new event';
-    }
-
-    async findAll(): Promise<Event[]> {
-        const snapshot = await this.eventsRef.get();
-        snapshot.forEach((event) => {
-            this.events.push({
+    /**
+     * The VehicleService Logger
+     * */
+    private readonly logger: Logger = new Logger('EventsService');
+    /**
+     * The reference to the events collection in firestore
+     * */
+    private readonly eventsRef = this.firebaseService
+        .firestore()
+        .collection('events');
+    /**
+     * The method to create an event
+     * @param {IAuthUser} user The logged in user
+     * @param {CreateEventDto} createEventDto The DTO to create an event
+     * @returns {Event} The inserted event document from firestore
+     * */
+    async create(
+        @User() user: DecodedIdToken,
+        createEventDto: CreateEventDto
+    ): Promise<Event> {
+        try {
+            const { uid } = user;
+            const { name, description, date, participants } = createEventDto;
+            const data = {
+                name,
+                description,
+                date,
+                participants: [uid, ...participants],
+            };
+            const res = await this.eventsRef.add(data);
+            this.logger.log(`Successfully created event with id ${res.id}`);
+            const event = await res.get();
+            const eventData: Event = {
                 name: event.get('name'),
                 description: event.get('description'),
                 participants: event.get('participants'),
                 date: event.get('date'),
+            };
+            this.logger.log(`Event: ${eventData}`);
+            return eventData;
+        } catch (e) {
+            this.logger.error(`Failed creating event`);
+            throw new InternalServerErrorException(
+                `Failed to create event, check the DTO that was sent over the network.`
+            );
+        }
+    }
+    /**
+     * The method that finds all events
+     * @returns {Event[]} The events of firestore
+     * */
+    async findAll(): Promise<Event[]> {
+        try {
+            const events: Event[] = [];
+            const snapshot = await this.eventsRef.get();
+            snapshot.forEach((event) => {
+                const eventData: Event = {
+                    name: event.get('name'),
+                    description: event.get('description'),
+                    participants: event.get('participants'),
+                    date: event.get('date'),
+                };
+                this.logger.log(`Successfully fetched event ${eventData}`);
+                events.push(eventData);
             });
-        });
-        return this.events;
+            return events;
+        } catch (e) {
+            this.logger.error(`Failed to fetch all events`);
+            throw new InternalServerErrorException(
+                `Failed to fetch all events`
+            );
+        }
     }
-
-    findOne(id: number) {
-        return `This action returns a #${id} event`;
+    /**
+     * Method that finds an event by id
+     * @param {string} id The id of the event
+     * @returns {Event} Returns the event
+     * */
+    async findOne(id: string): Promise<Event> {
+        try {
+            const event = await this.eventsRef.doc(id).get();
+            const eventData: Event = {
+                name: event.get('name'),
+                description: event.get('description'),
+                participants: event.get('participants'),
+                date: event.get('date'),
+            };
+            this.logger.log(`Event with id ${id}: ${eventData}`);
+            return eventData;
+        } catch (e) {
+            this.logger.error(
+                `Unexpected server error. Failed to fetch event #${id}`
+            );
+            throw new InternalServerErrorException(
+                `Unexpected server error. Failed to fetch event #${id}`
+            );
+        }
     }
-
-    update(id: number, updateEventDto: UpdateEventDto) {
-        return `This action updates a #${id} event`;
+    /**
+     * The method to update an event
+     * @param {CreateEventDto} createEventDto The DTO to update an event
+     * @returns {Event} The updated event document from firestore
+     * */
+    async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
+        try {
+            await this.eventsRef.doc(id).update(updateEventDto);
+            const event = await this.eventsRef.doc(id).get();
+            const eventData: Event = {
+                name: event.get('name'),
+                description: event.get('description'),
+                participants: event.get('participants'),
+                date: event.get('date'),
+            };
+            this.logger.log(
+                `Successfully updated event with id ${id}: ${event}`
+            );
+            return eventData;
+        } catch (e) {
+            this.logger.error(
+                `Unexpected server error. Failed to update event #${id}`
+            );
+            throw new InternalServerErrorException(
+                `Unexpected server error. Failed to update event #${id}`
+            );
+        }
     }
-
-    remove(id: number) {
-        return `This action removes a #${id} event`;
+    /**
+     * The method to delete an event
+     * @param {CreateEventDto} createEventDto The DTO to delete an event
+     * @returns {Event} The deleted event document from firestore
+     * */
+    async remove(id: string): Promise<Event> {
+        try {
+            const event = await this.eventsRef.doc(id).get();
+            const eventData: Event = {
+                name: event.get('name'),
+                description: event.get('description'),
+                participants: event.get('participants'),
+                date: event.get('date'),
+            };
+            await this.eventsRef.doc(id).delete();
+            this.logger.log(
+                `Successfully deleted event with id ${id}: ${eventData}`
+            );
+            return eventData;
+        } catch (e) {
+            this.logger.error(
+                `Unexpected server error. Failed to delete event #${id}`
+            );
+            throw new InternalServerErrorException(
+                `Unexpected server error. Failed to delete event #${id}`
+            );
+        }
     }
 }

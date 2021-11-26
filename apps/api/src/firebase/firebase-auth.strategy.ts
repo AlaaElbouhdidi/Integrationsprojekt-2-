@@ -17,14 +17,14 @@ export class FirebaseAuthStrategy extends PassportStrategy(
         });
     }
     async validate(token: string): Promise<DecodedIdToken> {
-        const firebaseUser: DecodedIdToken = await this.firebaseService
+        const user: DecodedIdToken = await this.firebaseService
             .getAuth()
             .verifyIdToken(token)
             .catch((err) => {
                 console.log(err);
                 throw new UnauthorizedException(err.message);
             });
-        Logger.log(firebaseUser);
-        return firebaseUser;
+        Logger.log(user);
+        return user;
     }
 }
