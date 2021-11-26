@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { getApp, expressInstance } from './utils/getApp';
-import { UserRecord } from 'firebase-admin/auth';
 
 if (!admin.apps.length) admin.initializeApp();
 
@@ -15,7 +14,7 @@ export const api = functions
 export const createUser = functions
     .region('europe-west1')
     .auth.user()
-    .onCreate((user: UserRecord) => {
+    .onCreate((user) => {
         const { uid, displayName, email } = user;
         return admin
             .firestore()
