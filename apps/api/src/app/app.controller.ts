@@ -1,12 +1,13 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { Message } from '@api-interfaces';
-import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AppService } from './app.service';
+import { Public } from '../decorators/public.decorator';
 
 @Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
+    @Public()
     @Get()
     getData(): Message {
         return this.appService.getData();
@@ -17,7 +18,6 @@ export class AppController {
         return 'pong';
     }
 
-    @UseGuards(FirebaseAuthGuard)
     @Get('pong')
     async securePing(): Promise<string> {
         return 'pong';

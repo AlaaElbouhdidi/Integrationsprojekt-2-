@@ -8,6 +8,8 @@ import { EventModule } from '../event/event.module';
 import { GroupModule } from '../group/group.module';
 import { GameModule } from '../game/game.module';
 import { TeamModule } from '../team/team.module';
+import { APP_GUARD } from '@nestjs/core';
+import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 
 @Module({
     imports: [
@@ -23,6 +25,12 @@ import { TeamModule } from '../team/team.module';
         }),
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+        {
+            provide: APP_GUARD,
+            useClass: FirebaseAuthGuard,
+        },
+    ],
 })
 export class AppModule {}
