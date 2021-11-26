@@ -104,8 +104,7 @@
                         "main": "apps/api/src/main.ts",
                         "tsConfig": "apps/api/tsconfig.app.json",
                         "assets": [
-                            "apps/api/src/package.json",
-                            "apps/api/src/.env"
+                            "apps/api/src/package.json"
                         ]
                     },
                     "configurations": {
