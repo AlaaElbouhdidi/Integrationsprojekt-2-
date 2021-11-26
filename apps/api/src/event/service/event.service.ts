@@ -128,7 +128,7 @@ export class EventService {
     async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
         try {
             const { name, description, date, participants } = updateEventDto;
-            const updated = await this.eventsRef.doc(id).update({
+            await this.eventsRef.doc(id).update({
                 name: name,
                 description: description,
                 date: date,
