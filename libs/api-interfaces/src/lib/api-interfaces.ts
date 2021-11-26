@@ -1,3 +1,5 @@
+import { UserRecord } from 'firebase-admin/auth'
+
 export interface Message {
     message: string;
 }
@@ -44,4 +46,11 @@ export interface Activity {
     id?: string;
     name?: string;
     logo?: string;
+}
+
+export interface Event {
+    date: Date;
+    description: string;
+    name: string;
+    participants: UserRecord[]
 }

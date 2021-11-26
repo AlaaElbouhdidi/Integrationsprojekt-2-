@@ -10,6 +10,7 @@ import {
 import { EventService } from '../service/event.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
+import { Public } from '../../decorators/public.decorator';
 
 @Controller('event')
 export class EventController {
@@ -20,9 +21,10 @@ export class EventController {
         return this.eventService.create(createEventDto);
     }
 
+    @Public()
     @Get()
-    findAll() {
-        return this.eventService.findAll();
+    async findAll() {
+        return await this.eventService.findAll();
     }
 
     @Get(':id')

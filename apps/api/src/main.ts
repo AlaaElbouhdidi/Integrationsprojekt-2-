@@ -5,6 +5,7 @@ import { UserRecord } from 'firebase-admin/auth';
 
 if (!admin.apps.length) admin.initializeApp();
 
+
 export const api = functions
     .region('europe-west1')
     .https.onRequest(async (request, response) => {
