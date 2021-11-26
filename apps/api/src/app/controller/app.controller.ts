@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { Message } from '@api-interfaces';
-import { AppService } from './app.service';
-import { Public } from '../decorators/public.decorator';
+import { AppService } from '../service/app.service';
+import { Public } from '../../decorators/public.decorator';
 
 @Controller()
 export class AppController {

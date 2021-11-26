@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserService } from '../user/user.service';
-import { FirebaseModule } from '../firebase/firebase.module';
+import { UserService } from '../service/user.service';
+import { FirebaseModule } from '../../firebase/firebase.module';
 
 describe('UserController', () => {
     let controller: UserController;
