@@ -14,10 +14,13 @@ import {
     Param,
     Delete,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 /**
  * The Vehicle Controller
  **/
+@ApiBearerAuth()
+@ApiTags('Event')
 @Controller('event')
 export class EventController {
     /**

@@ -132,7 +132,7 @@ export class EventService {
                 name: name,
                 description: description,
                 date: date,
-                participants: participants
+                participants: participants,
             });
             const event = await this.eventsRef.doc(id).get();
             const eventData: Event = {

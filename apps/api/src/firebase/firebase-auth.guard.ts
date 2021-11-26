@@ -1,4 +1,9 @@
-import { ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import {
+    ExecutionContext,
+    Injectable,
+    Logger,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
@@ -20,7 +25,7 @@ export class FirebaseAuthGuard extends AuthGuard('firebase-auth') {
             }
             return super.canActivate(context);
         } catch (e) {
-            this.logger.error("JWT is invalid");
+            this.logger.error('JWT is invalid');
             throw new UnauthorizedException(e);
         }
     }

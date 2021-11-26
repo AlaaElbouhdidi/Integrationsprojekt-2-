@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
+import { environment } from '@env';
 import * as express from 'express';
 import * as packagejson from '../package.json';
 
@@ -20,8 +21,10 @@ export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
+        .addServer(environment.environment.apiUrl)
         .setDescription(packagejson.description)
         .setVersion(packagejson.version)
         .addBearerAuth()

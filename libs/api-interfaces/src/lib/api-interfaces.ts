@@ -30,7 +30,7 @@ export interface Event {
     name: string;
     description: string;
     date: Date;
-    participants?: string[] // Array of uid's
+    participants?: string[]; // Array of uid's
 }
 
 export interface Group {

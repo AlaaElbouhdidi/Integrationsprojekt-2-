@@ -10,7 +10,10 @@ import {
 import { GameService } from '../service/game.service';
 import { CreateGameDto } from '../dto/create-game.dto';
 import { UpdateGameDto } from '../dto/update-game.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Game')
 @Controller('game')
 export class GameController {
     constructor(private readonly gameService: GameService) {}
