@@ -58,7 +58,7 @@ export class EventService {
                 participants: event.get('participants'),
                 date: event.get('date'),
             };
-            this.logger.log(`Event: ${eventData}`);
+            this.logger.log(eventData);
             return eventData;
         } catch (e) {
             this.logger.error(`Failed creating event`);
@@ -82,7 +82,8 @@ export class EventService {
                     participants: event.get('participants'),
                     date: event.get('date'),
                 };
-                this.logger.log(`Successfully fetched event ${eventData}`);
+                this.logger.log(`Successfully fetched event`);
+                this.logger.log(eventData);
                 events.push(eventData);
             });
             return events;
@@ -107,7 +108,8 @@ export class EventService {
                 participants: event.get('participants'),
                 date: event.get('date'),
             };
-            this.logger.log(`Event with id ${id}: ${eventData}`);
+            this.logger.log(`Successfully fetched event with id ${id}`);
+            this.logger.log(eventData);
             return eventData;
         } catch (e) {
             this.logger.error(
@@ -125,7 +127,13 @@ export class EventService {
      * */
     async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
         try {
-            await this.eventsRef.doc(id).update(updateEventDto);
+            const { name, description, date, participants } = updateEventDto;
+            const updated = await this.eventsRef.doc(id).update({
+                name: name,
+                description: description,
+                date: date,
+                participants: participants
+            });
             const event = await this.eventsRef.doc(id).get();
             const eventData: Event = {
                 name: event.get('name'),
@@ -133,9 +141,9 @@ export class EventService {
                 participants: event.get('participants'),
                 date: event.get('date'),
             };
-            this.logger.log(
-                `Successfully updated event with id ${id}: ${event}`
-            );
+            this.logger.debug(eventData);
+            this.logger.log(`Successfully updated event with id ${id}`);
+            this.logger.log(eventData);
             return eventData;
         } catch (e) {
             this.logger.error(
@@ -161,9 +169,8 @@ export class EventService {
                 date: event.get('date'),
             };
             await this.eventsRef.doc(id).delete();
-            this.logger.log(
-                `Successfully deleted event with id ${id}: ${eventData}`
-            );
+            this.logger.log(`Successfully deleted event with id ${id}`);
+            this.logger.log(eventData);
             return eventData;
         } catch (e) {
             this.logger.error(

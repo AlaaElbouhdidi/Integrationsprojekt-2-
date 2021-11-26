@@ -21,8 +21,9 @@ export interface Environment {
 }
 
 export interface Member {
-    uid: string;
-    isAdmin: boolean;
+    uid?: string;
+    isAdmin?: boolean;
+    groupid?: string;
 }
 
 export interface Event {
@@ -40,6 +41,20 @@ export interface Group {
     member?: Member[]; // Array of uid's
 }
 
-export enum Activity {
+export interface Activity {
+    id?: string;
+    name?: string;
+    logo?: string;
+}
+
+export interface User {
+    id?: string;
+    email?: string;
+    emailVerified?: boolean;
+    photoURL?: string;
+    displayName?: string;
+}
+
+export enum ActivityEnum {
     soccer = 'SOCCER_ACTIVITY',
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsArray, IsDateString } from 'class-validator';
 import { Event } from '@api-interfaces';
 
 /**
@@ -25,8 +25,8 @@ export class CreateEventDto implements Event {
      * The date property of an event
      * */
     @IsNotEmpty()
-    @IsString()
-    @ApiProperty({ example: '28. November 2021 um 12:00:00 UTC+1' })
+    @IsDateString()
+    @ApiProperty({ example: '2021-11-29T12:00:00.666Z' })
     date: Date;
     /**
      * The participants property of an event

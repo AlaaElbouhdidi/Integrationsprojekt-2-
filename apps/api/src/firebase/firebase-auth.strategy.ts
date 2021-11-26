@@ -9,6 +9,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     Strategy,
     'firebase-auth'
 ) {
+    logger: Logger = new Logger('FirebaseAuthStrategy');
     constructor(private firebaseService: FirebaseService) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -24,7 +25,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
                 console.log(err);
                 throw new UnauthorizedException(err.message);
             });
-        Logger.log(user);
+        this.logger.log(user);
         return user;
     }
 }
