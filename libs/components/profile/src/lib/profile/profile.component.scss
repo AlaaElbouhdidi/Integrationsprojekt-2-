@@ -1,0 +1,155 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+@import 'libs/styles/src/lib/containers';
+
+.profile {
+    @include flex-center;
+}
+.profile-container {
+    position: relative;
+}
+.profile-user {
+    position: relative;
+    width: 20rem;
+    background: $dark;
+    color: $white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    animation: slide-in-left 0.5s forwards;
+    z-index: 99;
+    @include for-desktop-up {
+        position: absolute;
+        top: -5rem;
+        left: -5rem;
+    }
+    fa-icon[icon="edit"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        transition: 0.25s;
+        z-index: 99;
+        padding: 0.5rem;
+        &:hover {
+            color: $light;
+        }
+    }
+}
+.profile-user-banner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    background: $darkAccent;
+    clip-path: circle(62.5% at 50% 3%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.profile-user-photo {
+    @include flex-center;
+    position: relative;
+    width: 9rem;
+    height: 9rem;
+    background: $white;
+    border-radius: 50%;
+    transition: 0.25s;
+    &:hover {
+        transform: scale(1.1) rotate(360deg);
+    }
+    fa-icon[icon="user"] {
+        color: $dark;
+        transform: scale(4);
+        opacity: 50%;
+    }
+}
+.profile-user-name {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+}
+.profile-user-info {
+    margin-top: 17.5rem;
+}
+.profile-card {
+    background: $darkAccent;
+    width: 100%;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    p {
+        margin: 0;
+    }
+    fa-icon[icon="check-circle"] {
+        color: #17c917;
+    }
+}
+
+.profile-wrapper {
+    display: none;
+    animation: fade-in 0.5s forwards;
+    position: relative;
+    color: $white;
+    background: $dark;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    padding: 2rem 2rem 4rem 17rem;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 0.25rem;
+    nav {
+        ul {
+            list-style: none;
+            display: flex;
+            li {
+                cursor: pointer;
+                margin: 0 2.25rem;
+                position: relative;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: $white;
+                    transition: 0.25s;
+                }
+                &:hover:after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    @include for-desktop-up {
+        @include flex-center-column;
+    }
+}
+
+
+@keyframes slide-in-left {
+    from { transform: translateX(-5rem); }
+    to { transform: translateX(0); }
+}
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* gets replaced */
+.example-form {
+    display: none;
+    width: 100%;
+    height: 20rem;
+    border-radius: 0.25rem;
+    background: $darkAccent;
+    @include for-desktop-up {
+        display: block;
+    }
+}
+
