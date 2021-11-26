@@ -14,23 +14,20 @@ describe('HeaderComponent', () => {
         user: {
             email: 'email',
             displayName: '',
-        }
-    }
+        },
+    };
     const authServiceMock = {
         authState$: of(mockUser),
-        logout: jest.fn()
-    }
+        logout: jest.fn(),
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock }
+                { provide: AuthService, useValue: authServiceMock },
             ],
-            imports: [
-                RouterTestingModule.withRoutes([]),
-                HeaderModule
-            ],
+            imports: [RouterTestingModule.withRoutes([]), HeaderModule],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });
@@ -46,28 +43,29 @@ describe('HeaderComponent', () => {
     });
 
     it('should get user state in constructor', () => {
-        authServiceMock.authState$.subscribe(user => {
+        authServiceMock.authState$.subscribe((user) => {
             expect(user).toBe(mockUser);
         });
     });
 
     it('should call auth service logout in component logout method', () => {
-       const spy = jest.spyOn(authServiceMock, 'logout');
-       component.logout();
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(authServiceMock, 'logout');
+        component.logout();
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should redirect to landing page after successful logout', () => {
-       const location = TestBed.inject(Location);
-       component.logout()
-           .then(() => {
-               expect(location.path()).toBe('/');
-           });
+        const location = TestBed.inject(Location);
+        component.logout().then(() => {
+            expect(location.path()).toBe('/');
+        });
     });
 
     it('should unsubscribe from observable on destroy', () => {
-       jest.spyOn(component['authSubscription'], 'unsubscribe');
-       component.ngOnDestroy();
-       expect(component['authSubscription'].unsubscribe).toHaveBeenCalledTimes(1);
+        jest.spyOn(component['authSubscription'], 'unsubscribe');
+        component.ngOnDestroy();
+        expect(component['authSubscription'].unsubscribe).toHaveBeenCalledTimes(
+            1
+        );
     });
 });

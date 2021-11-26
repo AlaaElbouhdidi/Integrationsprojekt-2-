@@ -8,13 +8,13 @@ export interface Alert {
 
 export interface Environment {
     firebase: {
-        projectId: string,
-        appId: string,
-        storageBucket: string,
-        apiKey: string,
-        authDomain: string,
-        messagingSenderId: string,
-    }
+        projectId: string;
+        appId: string;
+        storageBucket: string;
+        apiKey: string;
+        authDomain: string;
+        messagingSenderId: string;
+    };
     production: boolean;
     apiUrl: string;
 }

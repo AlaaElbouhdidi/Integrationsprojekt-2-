@@ -9,10 +9,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
         trigger('slideTextAnimation', [
             transition(':enter', [
                 style({ opacity: 0 }),
-                animate(
-                    '200ms',
-                    style({ opacity: 1 })
-                ),
+                animate('200ms', style({ opacity: 1 })),
             ]),
         ]),
         trigger('slideAnimation', [
@@ -24,7 +21,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
                 ),
             ]),
         ]),
-    ]
+    ],
 })
 export class SlideshowComponent implements OnDestroy {
     /**
@@ -44,20 +41,20 @@ export class SlideshowComponent implements OnDestroy {
      */
     slides = [
         {
-            src: "assets/svgs/online_calender.svg",
-            alt: "Woman standing next to a calender",
-            text: "Manage events and create polls to easier decide dates"
+            src: 'assets/svgs/online_calender.svg',
+            alt: 'Woman standing next to a calender',
+            text: 'Manage events and create polls to easier decide dates',
         },
         {
-            src: "/assets/svgs/connection_teams.svg",
-            alt: "Different icons with users",
-            text: "Build up your team and connect with your mates"
+            src: '/assets/svgs/connection_teams.svg',
+            alt: 'Different icons with users',
+            text: 'Build up your team and connect with your mates',
         },
         {
-            src: "/assets/svgs/winners.svg",
-            alt: "Two people celebrating next to a trophy",
-            text: "Track your results and see who leads the leaderboard"
-        }
+            src: '/assets/svgs/winners.svg',
+            alt: 'Two people celebrating next to a trophy',
+            text: 'Track your results and see who leads the leaderboard',
+        },
     ];
 
     /**
@@ -82,7 +79,9 @@ export class SlideshowComponent implements OnDestroy {
      */
     setSlideInterval(): ReturnType<typeof setInterval> {
         return setInterval(() => {
-            this.activeSlideIndex === this.slides.length - 1 ? this.activeSlideIndex = 0 : this.activeSlideIndex += 1;
+            this.activeSlideIndex === this.slides.length - 1
+                ? (this.activeSlideIndex = 0)
+                : (this.activeSlideIndex += 1);
             this.setSelectedSlide(this.activeSlideIndex);
         }, this.slideIntervalDelay);
     }

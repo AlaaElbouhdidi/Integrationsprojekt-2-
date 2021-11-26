@@ -3,6 +3,7 @@ import { AppModule } from '../app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
 import * as firebase from 'firebase-admin';
 
@@ -18,6 +19,7 @@ export const expressInstance: express.Express = express();
 export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
     if (!firebase.apps.length) {
         this.firebaseApp = firebase.initializeApp();
     }

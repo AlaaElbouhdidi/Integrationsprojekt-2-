@@ -347,7 +347,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/email-form-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/email-form-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -1502,7 +1504,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/slideshow-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/slideshow-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }

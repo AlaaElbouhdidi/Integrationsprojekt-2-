@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
 import { BehaviorSubject } from 'rxjs';
-import { getAuth } from "firebase/auth";
-import { User } from "@api-interfaces";
+import { getAuth } from 'firebase/auth';
+import { User } from '@api-interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +17,9 @@ export class AuthService {
      * Auth state Subject
      * @private
      */
-    private readonly authState = new BehaviorSubject<firebase.User | null>(null);
+    private readonly authState = new BehaviorSubject<firebase.User | null>(
+        null
+    );
     /**
      * Auth state observable
      */
@@ -27,17 +29,15 @@ export class AuthService {
      * Constructor of auth service
      * @param auth {AngularFireAuth}
      */
-    constructor(
-        private auth: AngularFireAuth
-    ) {
-        this.auth.authState.subscribe(user => {
-           if (user) {
-               this.user = user;
-               this.authState.next(user);
-           } else {
-               this.user = null;
-               this.authState.next(null);
-           }
+    constructor(private auth: AngularFireAuth) {
+        this.auth.authState.subscribe((user) => {
+            if (user) {
+                this.user = user;
+                this.authState.next(user);
+            } else {
+                this.user = null;
+                this.authState.next(null);
+            }
         });
     }
 
@@ -47,8 +47,10 @@ export class AuthService {
      * @param password {string} The password of the user
      */
     async register(email: string, password: string): Promise<void> {
-        const userCredential =
-            await this.auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await this.auth.createUserWithEmailAndPassword(
+            email,
+            password
+        );
         if (userCredential.user) {
             await userCredential.user.sendEmailVerification();
         }
@@ -134,8 +136,8 @@ export class AuthService {
                 email: email,
                 photoURL: photoURL,
                 emailVerified: emailVerified,
-                displayName: displayName
-            }
+                displayName: displayName,
+            };
         }
         throw new Error();
     }

@@ -5,9 +5,9 @@ import { AlertService, AuthService } from '@services';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'mate-team-auth-handler',
-  templateUrl: './auth-handler.component.html',
-  styleUrls: ['./auth-handler.component.scss']
+    selector: 'mate-team-auth-handler',
+    templateUrl: './auth-handler.component.html',
+    styleUrls: ['./auth-handler.component.scss'],
 })
 export class AuthHandlerComponent implements OnInit, OnDestroy {
     /**
@@ -38,11 +38,11 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
      * @param alertService {AlertService}
      */
     constructor(
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      private authService: AuthService,
-      private alertService: AlertService
-    ) { }
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
+        private alertService: AlertService
+    ) {}
 
     /**
      * Subscribes to activated route and checks mode and code query parameters
@@ -50,7 +50,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.activatedRoute.queryParams
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(async params => {
+            .subscribe(async (params) => {
                 if (!params['mode'] || !params['oobCode']) {
                     await this.router.navigate(['/']);
                 }
@@ -62,7 +62,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 if (params['mode'] === 'verifyEmail') {
                     await this.handleVerifyEmail();
                 }
-        });
+            });
     }
 
     /**
@@ -75,7 +75,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message
+                message: e.message,
             });
             await this.router.navigate(['/']);
         }
@@ -89,13 +89,13 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
             await this.authService.applyActionCode(this.code);
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Email has been successfully verified.'
+                message: 'Email has been successfully verified.',
             });
             await this.router.navigate(['/']);
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message
+                message: e.message,
             });
             await this.router.navigate(['/']);
         }
@@ -111,13 +111,14 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
             await this.authService.confirmPasswordReset(this.code, newPassword);
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Password successfully reset and new password updated.'
+                message:
+                    'Password successfully reset and new password updated.',
             });
             await this.router.navigate(['/login']);
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message
+                message: e.message,
             });
         }
     }

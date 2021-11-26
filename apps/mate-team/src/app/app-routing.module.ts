@@ -21,7 +21,8 @@ const routes: Routes = [
     },
     {
         path: 'auth/handler',
-        loadChildren: () => import('@auth-handler').then((m) => m.AuthHandlerModule)
+        loadChildren: () =>
+            import('@auth-handler').then((m) => m.AuthHandlerModule),
     },
 ];
 
