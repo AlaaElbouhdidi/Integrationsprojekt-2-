@@ -7,8 +7,7 @@ import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
 import { Event } from '@api-interfaces';
-import { DecodedIdToken } from 'firebase-admin/auth';
-import { User } from '../../decorators/user.decorator';
+import * as admin from 'firebase-admin';
 
 /**
  * The EventService
@@ -21,9 +20,9 @@ export class EventService {
      * */
     constructor(private readonly firebaseService: FirebaseService) {}
     /**
-     * The VehicleService Logger
+     * The EventService Logger
      * */
-    private readonly logger: Logger = new Logger('EventsService');
+    private readonly logger: Logger = new Logger('EventService');
     /**
      * The reference to the events collection in firestore
      * */
@@ -32,12 +31,12 @@ export class EventService {
         .collection('events');
     /**
      * The method to create an event
-     * @param {IAuthUser} user The logged in user
+     * @param {admin.auth.DecodedIdToken} user The logged in user
      * @param {CreateEventDto} createEventDto The DTO to create an event
      * @returns {Event} The inserted event document from firestore
      * */
     async create(
-        @User() user: DecodedIdToken,
+        user: admin.auth.DecodedIdToken,
         createEventDto: CreateEventDto
     ): Promise<Event> {
         try {

@@ -14,7 +14,7 @@ export const api = functions
 export const createUser = functions
     .region('europe-west1')
     .auth.user()
-    .onCreate((user) => {
+    .onCreate((user: admin.auth.UserRecord) => {
         const { uid, displayName, email } = user;
         return admin
             .firestore()

@@ -1,10 +1,11 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { DecodedIdToken } from 'firebase-admin/auth';
+import * as admin from 'firebase-admin';
+
 /**
  * The custom @User() decorator that grabs the user attribute from the request
  * */
 export const User = createParamDecorator(
-    (data, ctx: ExecutionContext): DecodedIdToken => {
+    (data, ctx: ExecutionContext): admin.auth.DecodedIdToken => {
         return ctx.switchToHttp().getRequest().user;
     }
 );

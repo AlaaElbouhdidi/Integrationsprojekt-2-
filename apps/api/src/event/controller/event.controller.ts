@@ -3,7 +3,6 @@ import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
 import { Public } from '../../decorators/public.decorator';
 import { User } from '../../decorators/user.decorator';
-import { DecodedIdToken } from 'firebase-admin/auth';
 import { Event } from '@api-interfaces';
 import {
     Controller,
@@ -15,9 +14,10 @@ import {
     Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import * as admin from 'firebase-admin';
 
 /**
- * The Vehicle Controller
+ * The EventController
  **/
 @ApiBearerAuth()
 @ApiTags('Event')
@@ -30,13 +30,13 @@ export class EventController {
     constructor(private readonly eventService: EventService) {}
     /**
      * The route handler to create an event
-     * @param {DecodedIdToken} user The currently logged in user
+     * @param {admin.auth.DecodedIdToken} user The currently logged in user
      * @param {CreateEventDto} createEventDto The DTO that the route handler forwards to the EventService
      * @returns {Event} Returns the created event
      * */
     @Post()
     async create(
-        @User() user: DecodedIdToken,
+        @User() user: admin.auth.DecodedIdToken,
         @Body() createEventDto: CreateEventDto
     ): Promise<Event> {
         return await this.eventService.create(user, createEventDto);
