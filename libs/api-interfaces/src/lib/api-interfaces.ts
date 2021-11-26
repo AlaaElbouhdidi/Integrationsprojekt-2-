@@ -1,6 +1,7 @@
 export interface Message {
     message: string;
 }
+
 export interface Alert {
     type: 'error' | 'success' | 'neutral' | 'warn';
     message: string;
@@ -18,6 +19,7 @@ export interface Environment {
     production: boolean;
     apiUrl: string;
 }
+
 export interface User {
     id?: string;
     email?: string;
@@ -25,6 +27,7 @@ export interface User {
     photoURL?: string;
     displayName?: string;
 }
+
 export interface Member {
     uid?: string;
     isAdmin?: boolean;

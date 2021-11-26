@@ -5,7 +5,6 @@ import { INestApplication } from '@nestjs/common';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
-import * as firebase from 'firebase-admin';
 
 /**
  * Instance that is required to initialize the app
@@ -20,9 +19,6 @@ export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
-    if (!firebase.apps.length) {
-        this.firebaseApp = firebase.initializeApp();
-    }
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
         .setDescription('Dokumentation der API von Mate Team')
