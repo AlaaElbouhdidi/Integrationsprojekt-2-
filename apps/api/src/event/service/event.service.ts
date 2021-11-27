@@ -2,6 +2,7 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
+    NotFoundException,
 } from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateEventDto } from '../dto/create-event.dto';
@@ -73,6 +74,11 @@ export class EventService {
         try {
             const events: Event[] = [];
             const snapshot = await this.eventsRef.get();
+            if (!snapshot.docs.length) {
+                const message = 'No events found';
+                this.logger.error(message);
+                new NotFoundException(message);
+            }
             snapshot.forEach((event) => {
                 const eventData: Event = {
                     name: event.get('name'),
@@ -99,16 +105,29 @@ export class EventService {
      * */
     async findOne(id: string): Promise<Event> {
         try {
-            const event = await this.eventsRef.doc(id).get();
-            const eventData: Event = {
-                name: event.get('name'),
-                description: event.get('description'),
-                participants: event.get('participants'),
-                date: event.get('date'),
-            };
-            this.logger.log(`Successfully fetched event with id ${id}`);
-            this.logger.log(eventData);
-            return eventData;
+            return Promise.resolve()
+                .then(async () => {
+                    const event = this.eventsRef.doc(id);
+                    if (event) {
+                        return event.get();
+                    }
+                })
+                .then((event) => {
+                    if (!event.exists) {
+                        const message = `No event with id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const eventData: Event = {
+                        name: event.get('name'),
+                        description: event.get('description'),
+                        participants: event.get('participants'),
+                        date: event.get('date'),
+                    };
+                    this.logger.log(`Successfully fetched event with id ${id}`);
+                    this.logger.log(eventData);
+                    return eventData;
+                });
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to fetch event #${id}`
@@ -127,6 +146,12 @@ export class EventService {
     async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
         try {
             const { name, description, date, participants } = updateEventDto;
+            const oldEvent = await this.eventsRef.doc(id).get();
+            if (oldEvent.exists) {
+                const message = `No event with id ${id} found`;
+                this.logger.error(message);
+                throw new NotFoundException(message);
+            }
             await this.eventsRef.doc(id).update({
                 name: name,
                 description: description,
@@ -161,6 +186,11 @@ export class EventService {
     async remove(id: string): Promise<Event> {
         try {
             const event = await this.eventsRef.doc(id).get();
+            if (!event) {
+                const message = `No event with id ${id} found`;
+                this.logger.error(message);
+                throw new NotFoundException(message);
+            }
             const eventData: Event = {
                 name: event.get('name'),
                 description: event.get('description'),
