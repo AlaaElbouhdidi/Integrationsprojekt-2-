@@ -163,30 +163,39 @@ export class EventService {
      * */
     async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
         try {
-            const { name, description, date, participants } = updateEventDto;
-            const oldEvent = await this.eventsRef.doc(id).get();
-            if (oldEvent.exists) {
-                const message = `No event with id ${id} found`;
-                this.logger.error(message);
-                throw new NotFoundException(message);
-            }
-            await this.eventsRef.doc(id).update({
-                name: name,
-                description: description,
-                date: date,
-                participants: participants,
-            });
-            const event = await this.eventsRef.doc(id).get();
-            const eventData: Event = {
-                name: event.get('name'),
-                description: event.get('description'),
-                participants: event.get('participants'),
-                date: event.get('date'),
-            };
-            this.logger.debug(eventData);
-            this.logger.log(`Successfully updated event with id ${id}`);
-            this.logger.log(eventData);
-            return eventData;
+            return Promise.resolve()
+                .then(async () => {
+                    const event = await this.eventsRef.doc(id).get();
+                    if (event) {
+                        return event;
+                    }
+                })
+                .then(async (oldEvent) => {
+                    if (!oldEvent.exists) {
+                        const message = `No event with id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const { name, description, date, participants } =
+                        updateEventDto;
+                    await this.eventsRef.doc(id).update({
+                        name: name,
+                        description: description,
+                        date: date,
+                        participants: participants,
+                    });
+                    const event = await this.eventsRef.doc(id).get();
+                    const eventData: Event = {
+                        name: event.get('name'),
+                        description: event.get('description'),
+                        participants: event.get('participants'),
+                        date: event.get('date'),
+                    };
+                    this.logger.debug(eventData);
+                    this.logger.log(`Successfully updated event with id ${id}`);
+                    this.logger.log(eventData);
+                    return eventData;
+                });
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to update event #${id}`
