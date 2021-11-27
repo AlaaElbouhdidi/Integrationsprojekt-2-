@@ -15,9 +15,10 @@ export const GroupConstants = {
                     'name should not be empty',
                     'description must be a string',
                     'description should not be empty',
-                    'date must be a valid ISO 8601 date string',
-                    'date should not be empty',
-                    'participants must be an array',
+                    'activity must be a valid enum value',
+                    'activity should not be empty',
+                    'member must be an array',
+                    'member should not be empty',
                 ],
             },
             error: {
@@ -34,7 +35,7 @@ export const GroupConstants = {
             },
             message: {
                 type: 'string',
-                example: 'Could not find event',
+                example: 'Could not find group',
             },
             error: {
                 type: 'string',
