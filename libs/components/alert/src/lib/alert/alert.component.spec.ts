@@ -37,10 +37,13 @@ describe('AlertComponent', () => {
     });
 
     it('removes alert after given remaining Time', () => {
-       jest.useFakeTimers();
-       jest.spyOn(global, 'setInterval');
-       component.removeAlertAfterTime();
-       expect(setInterval).toHaveBeenCalledTimes(1);
-       expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), component.remainingTime);
+        jest.useFakeTimers();
+        jest.spyOn(global, 'setInterval');
+        component.removeAlertAfterTime();
+        expect(setInterval).toHaveBeenCalledTimes(1);
+        expect(setInterval).toHaveBeenLastCalledWith(
+            expect.any(Function),
+            component.remainingTime
+        );
     });
 });

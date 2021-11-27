@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Message } from '@api-interfaces';
 /**
  * The AppService
@@ -10,6 +10,10 @@ export class AppService {
      * @returns {Message} Returns a welcome message
      * */
     getData(): Message {
-        return { message: 'Welcome to api!' };
+        try {
+            return { message: 'Welcome to api!' };
+        } catch (e) {
+            throw new InternalServerErrorException('Unexpected error occurred');
+        }
     }
 }

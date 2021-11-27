@@ -62,7 +62,11 @@ export class EventController {
     @Public()
     @Get()
     @ApiOperation({ summary: 'Get all events' })
-    @ApiOkResponse({ description: 'Fetched all events', type: [Event] })
+    @ApiOkResponse({
+        description: 'Fetched all events',
+        type: [Event],
+        isArray: true,
+    })
     async findAll(): Promise<Event[]> {
         return await this.eventService.findAll();
     }

@@ -12,9 +12,9 @@ describe('AuthServiceService', () => {
         user: {
             email: 'email',
             displayName: '',
-            sendEmailVerification: jest.fn()
-        }
-    }
+            sendEmailVerification: jest.fn(),
+        },
+    };
 
     const angularFireAuthMock = {
         authState: of(mockUser),
@@ -26,14 +26,14 @@ describe('AuthServiceService', () => {
         verifyPasswordResetCode: jest.fn(),
         applyActionCode: jest.fn(),
         confirmPasswordReset: jest.fn(),
-        signOut: jest.fn()
-    }
+        signOut: jest.fn(),
+    };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 AngularFireAuth,
-                { provide: AngularFireAuth, useValue: angularFireAuthMock }
+                { provide: AngularFireAuth, useValue: angularFireAuthMock },
             ],
         });
         service = TestBed.inject(AuthService);
@@ -44,37 +44,45 @@ describe('AuthServiceService', () => {
     });
 
     it('should set user in constructor', () => {
-        angularFireAuthMock.authState.subscribe(user => {
+        angularFireAuthMock.authState.subscribe((user) => {
             expect(user).toBe(mockUser);
-            expect(service.user).toBe(user)
+            expect(service.user).toBe(user);
         });
     });
 
     it('should set current user in authState$ observable', () => {
-       service.authState$.subscribe(user => {
-           expect(user).toBe(mockUser);
-       });
+        service.authState$.subscribe((user) => {
+            expect(user).toBe(mockUser);
+        });
     });
 
     it('should call firebase auth createUserWithEmailAndPassword in register method', () => {
-       const spy = jest.spyOn(angularFireAuthMock, 'createUserWithEmailAndPassword');
-       angularFireAuthMock.createUserWithEmailAndPassword.mockReturnValue(mockUser);
-       service.register(email, password);
-       expect(spy).toHaveBeenCalledWith(email, password);
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(
+            angularFireAuthMock,
+            'createUserWithEmailAndPassword'
+        );
+        angularFireAuthMock.createUserWithEmailAndPassword.mockReturnValue(
+            mockUser
+        );
+        service.register(email, password);
+        expect(spy).toHaveBeenCalledWith(email, password);
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signInWithEmailAndPassword in login method', () => {
-        const spy = jest.spyOn(angularFireAuthMock, 'signInWithEmailAndPassword');
+        const spy = jest.spyOn(
+            angularFireAuthMock,
+            'signInWithEmailAndPassword'
+        );
         service.login(email, password);
         expect(spy).toHaveBeenCalledWith(email, password);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signInWithPopup in loginWithGoogle method', () => {
-       const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup');
-       service.loginWithGoogle();
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup');
+        service.loginWithGoogle();
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth sendPasswordResetEmail in resetPassword method', () => {
@@ -85,17 +93,17 @@ describe('AuthServiceService', () => {
     });
 
     it('should call firebase auth verifyPasswordResetCode in verifyPasswordResetCode method', () => {
-       const spy = jest.spyOn(angularFireAuthMock, 'verifyPasswordResetCode');
-       service.verifyPasswordResetCode(code);
-       expect(spy).toHaveBeenCalledWith(code);
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(angularFireAuthMock, 'verifyPasswordResetCode');
+        service.verifyPasswordResetCode(code);
+        expect(spy).toHaveBeenCalledWith(code);
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth applyActionCode in applyActionCode method', () => {
-       const spy = jest.spyOn(angularFireAuthMock, 'applyActionCode');
-       service.applyActionCode(code);
-       expect(spy).toHaveBeenCalledWith(code);
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(angularFireAuthMock, 'applyActionCode');
+        service.applyActionCode(code);
+        expect(spy).toHaveBeenCalledWith(code);
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth confirmPasswordReset in confirmPasswordReset method', () => {

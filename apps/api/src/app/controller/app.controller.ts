@@ -2,7 +2,13 @@ import { Controller, Get } from '@nestjs/common';
 import { Message } from '@api-interfaces';
 import { AppService } from '../service/app.service';
 import { Public } from '../../decorators/public.decorator';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBadRequestResponse,
+    ApiOkResponse,
+    ApiOperation,
+    ApiTags,
+} from '@nestjs/swagger';
+import { AppConstants } from '../constants/app.constants';
 /**
  * The AppController
  **/
@@ -21,6 +27,14 @@ export class AppController {
     @Public()
     @Get()
     @ApiOperation({ summary: 'API entry point' })
+    @ApiOkResponse({
+        description: 'Welcomed to the API',
+        schema: AppConstants.OK,
+    })
+    @ApiBadRequestResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.BAD_REQUEST,
+    })
     getData(): Message {
         return this.appService.getData();
     }
