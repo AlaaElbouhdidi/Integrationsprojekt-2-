@@ -16,7 +16,7 @@ import * as admin from 'firebase-admin';
 export class EventService {
     /**
      * The constructor of the EventService
-     * @param {FirebaseService} firebaseService The injected FirebaseService to use in the EventsService
+     * @param {FirebaseService} firebaseService The injected FirebaseService to use in the EventService
      * */
     constructor(private readonly firebaseService: FirebaseService) {}
     /**
@@ -40,25 +40,35 @@ export class EventService {
         createEventDto: CreateEventDto
     ): Promise<Event> {
         try {
-            const { uid } = user;
-            const { name, description, date, participants } = createEventDto;
-            const data = {
-                name,
-                description,
-                date,
-                participants: [uid, ...participants],
-            };
-            const res = await this.eventsRef.add(data);
-            this.logger.log(`Successfully created event with id ${res.id}`);
-            const event = await res.get();
-            const eventData: Event = {
-                name: event.get('name'),
-                description: event.get('description'),
-                participants: event.get('participants'),
-                date: event.get('date'),
-            };
-            this.logger.log(eventData);
-            return eventData;
+            return Promise.resolve()
+                .then(async () => {
+                    const { uid } = user;
+                    const { name, description, date, participants } =
+                        createEventDto;
+                    const data = {
+                        name,
+                        description,
+                        date,
+                        participants: [uid, ...participants],
+                    };
+                    const res = await this.eventsRef.add(data);
+                    if (res) {
+                        this.logger.log(
+                            `Successfully created event with id ${res.id}`
+                        );
+                        return await res.get();
+                    }
+                })
+                .then((event) => {
+                    const eventData: Event = {
+                        name: event.get('name'),
+                        description: event.get('description'),
+                        participants: event.get('participants'),
+                        date: event.get('date'),
+                    };
+                    this.logger.log(eventData);
+                    return eventData;
+                });
         } catch (e) {
             this.logger.error(`Failed creating event`);
             throw new InternalServerErrorException(
@@ -115,9 +125,9 @@ export class EventService {
         try {
             return Promise.resolve()
                 .then(async () => {
-                    const event = this.eventsRef.doc(id);
+                    const event = await this.eventsRef.doc(id).get();
                     if (event) {
-                        return event.get();
+                        return event;
                     }
                 })
                 .then((event) => {
