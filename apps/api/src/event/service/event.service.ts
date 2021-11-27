@@ -212,22 +212,30 @@ export class EventService {
      * */
     async remove(id: string): Promise<Event> {
         try {
-            const event = await this.eventsRef.doc(id).get();
-            if (!event) {
-                const message = `No event with id ${id} found`;
-                this.logger.error(message);
-                throw new NotFoundException(message);
-            }
-            const eventData: Event = {
-                name: event.get('name'),
-                description: event.get('description'),
-                participants: event.get('participants'),
-                date: event.get('date'),
-            };
-            await this.eventsRef.doc(id).delete();
-            this.logger.log(`Successfully deleted event with id ${id}`);
-            this.logger.log(eventData);
-            return eventData;
+            return Promise.resolve()
+                .then(async () => {
+                    const event = await this.eventsRef.doc(id).get();
+                    if (event) {
+                        return event;
+                    }
+                })
+                .then(async (event) => {
+                    if (!event.exists) {
+                        const message = `No event with id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const eventData: Event = {
+                        name: event.get('name'),
+                        description: event.get('description'),
+                        participants: event.get('participants'),
+                        date: event.get('date'),
+                    };
+                    await this.eventsRef.doc(id).delete();
+                    this.logger.log(`Successfully deleted event with id ${id}`);
+                    this.logger.log(eventData);
+                    return eventData;
+                });
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to delete event #${id}`
