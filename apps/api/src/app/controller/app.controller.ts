@@ -3,7 +3,6 @@ import { Message } from '@api-interfaces';
 import { AppService } from '../service/app.service';
 import { Public } from '../../decorators/public.decorator';
 import {
-    ApiBadRequestResponse,
     ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiOperation,

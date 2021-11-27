@@ -18,12 +18,9 @@
     <div class="form-input">
         <label>Select the group activity:</label>
         <select formControlName="activity">
-            <option
-                *ngFor="let activity of activities"
-                value="{{ activity.id }}"
-            >
+            <option *ngFor="let key of keys" [value]="key">
                 <img src="../../assets/activities/football.png" />
-                {{ activity.name }}
+                {{ key }}
             </option>
         </select>
     </div>

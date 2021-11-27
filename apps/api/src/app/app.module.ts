@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './controller/app.controller';
 import { AppService } from './service/app.service';
 import { FirebaseModule } from '../firebase/firebase.module';
-import { UserModule } from '../user/user.module';
 import { EventModule } from '../event/event.module';
 import { GroupModule } from '../group/group.module';
 import { GameModule } from '../game/game.module';
@@ -16,7 +15,6 @@ import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 @Module({
     imports: [
         FirebaseModule,
-        UserModule,
         EventModule,
         GroupModule,
         GameModule,

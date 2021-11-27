@@ -10,26 +10,38 @@ export class CreateEventDto implements Event {
      **/
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ example: 'Weihnachtsmarkt' })
+    @ApiProperty({
+        example: 'Weihnachtsmarkt',
+        description: 'The name of the event',
+    })
     name: string;
     /**
      * The description property of an event
      **/
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ example: 'Weihnachtsmarkt in Gießen am Marktplatz' })
+    @ApiProperty({
+        example: 'Weihnachtsmarkt in Gießen am Marktplatz',
+        description: 'The description of the event',
+    })
     description: string;
     /**
      * The date property of an event
      **/
     @IsNotEmpty()
     @IsDateString()
-    @ApiProperty({ example: '2021-11-29T12:00:00.666Z' })
+    @ApiProperty({
+        example: '2021-11-29T12:00:00.666Z',
+        description: 'The date of the event',
+    })
     date: Date;
     /**
      * The participants property of an event
      **/
     @IsArray()
-    @ApiProperty({ example: ['TX5RYf6QIcW0WC8urdf8XUyNKMi2'] })
+    @ApiProperty({
+        example: ['TX5RYf6QIcW0WC8urdf8XUyNKMi2'],
+        description: 'The participants of an event',
+    })
     participants?: string[];
 }

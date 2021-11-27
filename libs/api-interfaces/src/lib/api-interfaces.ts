@@ -23,7 +23,6 @@ export interface Environment {
 export interface Member {
     uid: string;
     isAdmin: boolean;
-    groupid?: string;
 }
 
 export interface Event {
@@ -36,12 +35,12 @@ export interface Event {
 export interface Group {
     name: string;
     description: string;
-    activity?: Activity;
-    member?: Member[]; // Array of uid's
+    activity: Activity;
+    member: Member[]; // Array of uid's
 }
 
 export interface Game {
-    activity: ActivityEnum;
+    activity: Activity;
     firstTeam: Team;
     secondTeam: Team;
     date: Date;
@@ -54,12 +53,6 @@ export interface Team {
     groupId: string;
 }
 
-export interface Activity {
-    id?: string;
-    name: string;
-    logo?: string;
-}
-
 export interface User {
     id: string;
     email?: string;
@@ -68,6 +61,6 @@ export interface User {
     displayName?: string;
 }
 
-export enum ActivityEnum {
+export enum Activity {
     soccer = 'SOCCER_ACTIVITY',
 }

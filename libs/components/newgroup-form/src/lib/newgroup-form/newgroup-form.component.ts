@@ -7,12 +7,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { Activity, Member } from '@api-interfaces';
-import {
-    ActivityService,
-    AlertService,
-    AuthService,
-    GroupService,
-} from '@services';
+import { AlertService, AuthService, GroupService } from '@services';
 @Component({
     selector: 'mate-team-newgroup-form',
     templateUrl: './newgroup-form.component.html',
@@ -20,12 +15,12 @@ import {
 })
 export class NewgroupFormComponent implements OnInit {
     newGroupForm: FormGroup;
-    activities: Activity[] = [];
+    activities = Activity;
     loading = false;
+    keys: string[];
 
     constructor(
         private fb: FormBuilder,
-        private activitySevice: ActivityService,
         private groupService: GroupService,
         private alertService: AlertService,
         private authService: AuthService
@@ -35,6 +30,7 @@ export class NewgroupFormComponent implements OnInit {
             activity: new FormControl('', [Validators.required]),
             description: new FormControl(''),
         });
+        this.keys = Object.keys(this.activities);
     }
     get name(): AbstractControl {
         return this.newGroupForm.controls.name;
@@ -62,6 +58,7 @@ export class NewgroupFormComponent implements OnInit {
                     name: this.name.value,
                     activity: this.activity.value,
                     description: this.description.value,
+                    member: [this.member],
                 },
                 this.member
             );
@@ -83,9 +80,7 @@ export class NewgroupFormComponent implements OnInit {
     }
     async ngOnInit(): Promise<void> {
         try {
-            await this.activitySevice.getAllActivities().subscribe((items) => {
-                this.activities = items;
-            });
+            console.log(`Component initialized`);
         } catch (err: any) {
             this.loading = false;
             this.newGroupForm.reset();
