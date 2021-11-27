@@ -13,9 +13,17 @@ import {
     Param,
     Delete,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBadRequestResponse,
+    ApiBearerAuth,
+    ApiCreatedResponse,
+    ApiNotFoundResponse,
+    ApiOkResponse,
+    ApiOperation,
+    ApiTags,
+} from '@nestjs/swagger';
 import * as admin from 'firebase-admin';
-
+import { EventConstants } from '../constants/event.constants';
 /**
  * The EventController
  **/
@@ -35,6 +43,12 @@ export class EventController {
      * @returns {Event} Returns the created event
      * */
     @Post()
+    @ApiOperation({ summary: 'Create a new event' })
+    @ApiCreatedResponse({ description: 'Event created', type: Event })
+    @ApiBadRequestResponse({
+        description: 'Invalid data sent',
+        schema: EventConstants.BAD_REQUEST,
+    })
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createEventDto: CreateEventDto
@@ -47,6 +61,8 @@ export class EventController {
      * */
     @Public()
     @Get()
+    @ApiOperation({ summary: 'Get all events' })
+    @ApiOkResponse({ description: 'Fetched all events', type: [Event] })
     async findAll(): Promise<Event[]> {
         return await this.eventService.findAll();
     }
@@ -56,6 +72,12 @@ export class EventController {
      * @returns {Event} Returns the requested event
      * */
     @Get(':id')
+    @ApiOperation({ summary: 'Get an event by id' })
+    @ApiOkResponse({ description: 'Event fetched', type: Event })
+    @ApiNotFoundResponse({
+        description: 'Event not found',
+        schema: EventConstants.NOT_FOUND,
+    })
     async findOne(@Param('id') id: string): Promise<Event> {
         return await this.eventService.findOne(id);
     }
@@ -65,6 +87,16 @@ export class EventController {
      * @returns {Event} Returns the updated event
      * */
     @Patch(':id')
+    @ApiOperation({ summary: 'Update a user by id' })
+    @ApiOkResponse({ description: 'User edited', type: Event })
+    @ApiBadRequestResponse({
+        description: 'Invalid data sent',
+        schema: EventConstants.BAD_REQUEST,
+    })
+    @ApiNotFoundResponse({
+        description: 'Event not found',
+        schema: EventConstants.NOT_FOUND,
+    })
     async update(
         @Param('id') id: string,
         @Body() updateEventDto: UpdateEventDto
@@ -77,6 +109,12 @@ export class EventController {
      * @returns {Event} Returns the deleted event
      * */
     @Delete(':id')
+    @ApiOperation({ summary: 'Delete a user by id' })
+    @ApiOkResponse({ description: 'User deleted', type: Event })
+    @ApiNotFoundResponse({
+        description: 'User not found',
+        schema: EventConstants.NOT_FOUND,
+    })
     async remove(@Param('id') id: string): Promise<Event> {
         return await this.eventService.remove(id);
     }

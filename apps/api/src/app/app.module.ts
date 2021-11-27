@@ -10,7 +10,9 @@ import { GameModule } from '../game/game.module';
 import { TeamModule } from '../team/team.module';
 import { APP_GUARD } from '@nestjs/core';
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
-
+/**
+ * The AppModule
+ * */
 @Module({
     imports: [
         FirebaseModule,
