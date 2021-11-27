@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { FirebaseModule } from '../firebase/firebase.module';
+import { AppService } from '../service/app.service';
+import { FirebaseModule } from '../../firebase/firebase.module';
 
 describe('AppController', () => {
     let app: TestingModule;
