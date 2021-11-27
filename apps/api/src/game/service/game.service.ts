@@ -71,7 +71,9 @@ export class GameService {
             return `This action returns a game with id ${id}`;
         } catch (e) {
             this.logger.error(`Failed to fetch game with id ${id}`);
-            throw new InternalServerErrorException(`Failed to fetch game with id ${id}`);
+            throw new InternalServerErrorException(
+                `Failed to fetch game with id ${id}`
+            );
         }
     }
     /**
@@ -85,7 +87,9 @@ export class GameService {
             return `This action updates a game with id ${id}`;
         } catch (e) {
             this.logger.error(`Failed to update game with id ${id}`);
-            throw new InternalServerErrorException(`Failed to update game with id ${id}`);
+            throw new InternalServerErrorException(
+                `Failed to update game with id ${id}`
+            );
         }
     }
     /**
@@ -98,7 +102,9 @@ export class GameService {
             return `This action removes a #${id} game`;
         } catch (e) {
             this.logger.error(`Failed to delete game with id ${id}`);
-            throw new InternalServerErrorException(`Failed to delete game with id ${id}`);
+            throw new InternalServerErrorException(
+                `Failed to delete game with id ${id}`
+            );
         }
     }
 }

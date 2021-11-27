@@ -32,7 +32,10 @@ export class GameController {
      * @returns Returns the created game
      * */
     @Post()
-    async create(@User() user: admin.auth.DecodedIdToken, @Body() createGameDto: CreateGameDto) {
+    async create(
+        @User() user: admin.auth.DecodedIdToken,
+        @Body() createGameDto: CreateGameDto
+    ) {
         return await this.gameService.create(user, createGameDto);
     }
     /**
@@ -58,7 +61,10 @@ export class GameController {
      * @returns Returns the updated game
      * */
     @Patch(':id')
-    async update(@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
+    async update(
+        @Param('id') id: string,
+        @Body() updateGameDto: UpdateGameDto
+    ) {
         return await this.gameService.update(id, updateGameDto);
     }
     /**

@@ -1,8 +1,8 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { Strategy, ExtractJwt } from 'passport-firebase-jwt';
-import { DecodedIdToken } from 'firebase-admin/auth';
 import { FirebaseService } from './service/firebase.service';
+import * as admin from 'firebase-admin';
 /**
  * The FirebaseAuthStrategy
  **/
@@ -29,9 +29,11 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     /**
      * The method that validates the Firebase Auth JWT token
      * throws an error if the token is invalid
+     * @param {string} token The JWT token from the Authorization Header of the request
+     * @return {Promise<admin.auth.DecodedIdToken>} The decoded id token from the request which is attached to the request as the user property
      **/
-    async validate(token: string): Promise<DecodedIdToken> {
-        const user: DecodedIdToken = await this.firebaseService
+    async validate(token: string): Promise<admin.auth.DecodedIdToken> {
+        const user: admin.auth.DecodedIdToken = await this.firebaseService
             .getAuth()
             .verifyIdToken(token)
             .catch((err) => {
