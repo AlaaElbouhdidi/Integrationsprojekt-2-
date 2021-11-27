@@ -92,7 +92,7 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/api/tsconfig.doc.json -d dist/apps/api/documentation/"
+                                "command": "npx compodoc -p apps/api/tsconfig.compodoc.json -d dist/apps/api/docs/api/"
                             }
                         ]
                     }
@@ -867,7 +867,7 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/mate-team/documentation/"
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/"
                             }
                         ]
                     }

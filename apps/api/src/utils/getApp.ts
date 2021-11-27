@@ -7,6 +7,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { environment } from '@env';
 import * as express from 'express';
 import * as packagejson from '../package.json';
+import { join } from 'path';
 /**
  * Instance that is required to initialize the app
  */
@@ -19,6 +20,11 @@ export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create(AppModule, server);
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
+    app.use(
+        '/docs/mate-team',
+        express.static(join(__dirname, 'docs', 'mate-team'))
+    );
+    app.use('/docs/api', express.static(join(__dirname, 'docs', 'api')));
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
         .addServer(environment.environment.apiUrl)
@@ -27,7 +33,7 @@ export async function getApp(): Promise<INestApplication> {
         .addBearerAuth()
         .build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('swagger', app, document);
+    SwaggerModule.setup('docs/swagger', app, document);
     app.enableCors();
     return app;
 }
