@@ -867,7 +867,7 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/mate-team/tsconfig.doc.json -d dist/apps/mate-team/documentation/"
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/mate-team/documentation/"
                             }
                         ]
                     }
