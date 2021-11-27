@@ -37,7 +37,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
             .getAuth()
             .verifyIdToken(token, true)
             .catch((err) => {
-                console.log(err);
+                this.logger.error(err);
                 throw new UnauthorizedException(err.message);
             });
         this.logger.log(user);

@@ -48,11 +48,11 @@ export class EventController {
     @ApiOperation({ summary: 'Create a new event' })
     @ApiCreatedResponse({
         description: 'Event created',
-        // schema: EventConstants.CREATED,
+        type: CreateEventDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: EventConstants.BAD_REQUEST_CREATE,
+        schema: EventConstants.BAD_REQUEST,
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
@@ -76,7 +76,7 @@ export class EventController {
     @ApiOperation({ summary: 'Get all events' })
     @ApiOkResponse({
         description: 'Fetched all events',
-        // schema: EventConstants.OK_FIND_ALL,
+        type: [CreateEventDto],
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
@@ -98,7 +98,7 @@ export class EventController {
     @ApiOperation({ summary: 'Get an event by id' })
     @ApiOkResponse({
         description: 'Event fetched',
-        // schema: EventConstants.OK_FIND_ONE,
+        type: UpdateEventDto
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -124,11 +124,11 @@ export class EventController {
     @ApiOperation({ summary: 'Update an event by id' })
     @ApiOkResponse({
         description: 'Event edited',
-        // schema: EventConstants.OK_UPDATE,
+        type: UpdateEventDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: EventConstants.BAD_REQUEST_UPDATE,
+        schema: EventConstants.BAD_REQUEST,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -157,7 +157,7 @@ export class EventController {
     @ApiOperation({ summary: 'Delete an event by id' })
     @ApiOkResponse({
         description: 'Event deleted',
-        // schema: EventConstants.OK_DELETE,
+        type: UpdateEventDto
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
