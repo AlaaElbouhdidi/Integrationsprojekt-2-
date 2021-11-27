@@ -1,4 +1,3 @@
-import { Group } from '@api-interfaces';
 import {
     Injectable,
     InternalServerErrorException,
@@ -8,6 +7,7 @@ import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import * as admin from 'firebase-admin';
+// import { Group } from '@api-interfaces';
 /**
  * The GroupService
  * */
@@ -37,8 +37,10 @@ export class GroupService {
     async create(
         user: admin.auth.DecodedIdToken,
         createGroupDto: CreateGroupDto
-    ): Promise<Group> {
+    ) /*: Promise<Group>*/ {
         try {
+            this.logger.log(user, createGroupDto);
+            await this.groupsRef.add(createGroupDto);
             return await 'This action adds a new group';
         } catch (e) {
             this.logger.error(
@@ -53,7 +55,7 @@ export class GroupService {
      * The method that finds all groups
      * @returns {Promise<Group[]>} The groups of firestore
      * */
-    async findAll(): Promise<Group[]> {
+    async findAll() /*: Promise<Group[]>*/ {
         try {
             return await `This action returns all group`;
         } catch (e) {
@@ -70,7 +72,7 @@ export class GroupService {
      * @param {string} id The id of the group
      * @returns {Promise<Group>} Returns the group
      * */
-    async findOne(id: string): Promise<Group> {
+    async findOne(id: string) /*: Promise<Group>*/ {
         try {
             return await `This action returns a #${id} group`;
         } catch (e) {
@@ -88,8 +90,12 @@ export class GroupService {
      * @param {UpdateGroupDto} UpdateGroupDto The DTO to update a group
      * @returns {Promise<Group>} The updated group document from firestore
      * */
-    async update(id: string, updateGroupDto: UpdateGroupDto): Promise<Group> {
+    async update(
+        id: string,
+        updateGroupDto: UpdateGroupDto
+    ) /*: Promise<Group>*/ {
         try {
+            this.logger.log(updateGroupDto);
             return await `This action updates a #${id} group`;
         } catch (e) {
             this.logger.error(
@@ -105,7 +111,7 @@ export class GroupService {
      * @param {string} id The id of the group to delete
      * @returns {Promise<Group>} The deleted group document from firestore
      * */
-    async remove(id: string): Promise<Group> {
+    async remove(id: string) /*: Promise<Group>*/ {
         try {
             return await `This action removes the group with id ${id}`;
         } catch (e) {

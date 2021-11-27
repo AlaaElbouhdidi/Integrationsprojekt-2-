@@ -21,7 +21,7 @@ import {
 import { GroupService } from '../service/group.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
-import { Group } from '@api-interfaces';
+// import { Group } from '@api-interfaces';
 import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
@@ -48,11 +48,11 @@ export class GroupController {
     @ApiOperation({ summary: 'Create a new group' })
     @ApiCreatedResponse({
         description: 'Group created',
-        schema: GroupConstants.CREATED,
+        // schema: GroupConstants.CREATED,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST_CREATE,
+        // schema: GroupConstants.BAD_REQUEST_CREATE,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -61,7 +61,7 @@ export class GroupController {
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createGroupDto: CreateGroupDto
-    ): Promise<Group> {
+    ) /*: Promise<Group>*/ {
         return await this.groupService.create(user, createGroupDto);
     }
     /**
@@ -72,13 +72,13 @@ export class GroupController {
     @ApiOperation({ summary: 'Get all groups' })
     @ApiOkResponse({
         description: 'Fetched all groups',
-        schema: GroupConstants.OK_FIND_ALL,
+        // schema: GroupConstants.OK_FIND_ALL,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findAll(): Promise<Group[]> {
+    async findAll() /*: Promise<Group[]>*/ {
         return await this.groupService.findAll();
     }
     /**
@@ -88,10 +88,13 @@ export class GroupController {
      * */
     @Get(':id')
     @ApiOperation({ summary: 'Get a group by id' })
-    @ApiOkResponse({ description: 'Group fetched', schema: GroupConstants.OK_FIND_ONE})
+    @ApiOkResponse({
+        description: 'Group fetched',
+        // schema: GroupConstants.OK_FIND_ONE,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST_GET,
+        // schema: GroupConstants.BAD_REQUEST_GET,
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
@@ -101,7 +104,7 @@ export class GroupController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findOne(@Param('id') id: string): Promise<Group> {
+    async findOne(@Param('id') id: string) /*: Promise<Group>*/ {
         return await this.groupService.findOne(id);
     }
     /**
@@ -111,10 +114,13 @@ export class GroupController {
      * */
     @Patch(':id')
     @ApiOperation({ summary: 'Update a group by id' })
-    @ApiOkResponse({ description: 'Group edited', schema: GroupConstants.OK_UPDATE })
+    @ApiOkResponse({
+        description: 'Group edited',
+        // schema: GroupConstants.OK_UPDATE,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST_UPDATE,
+        // schema: GroupConstants.BAD_REQUEST_UPDATE,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -127,7 +133,7 @@ export class GroupController {
     async update(
         @Param('id') id: string,
         @Body() updateGroupDto: UpdateGroupDto
-    ): Promise<Group> {
+    ) /*: Promise<Group>*/ {
         return await this.groupService.update(id, updateGroupDto);
     }
     /**
@@ -137,20 +143,23 @@ export class GroupController {
      * */
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a group by id' })
-    @ApiOkResponse({ description: 'Group deleted', schema: GroupConstants.OK_DELETE })
+    @ApiOkResponse({
+        description: 'Group deleted',
+        // schema: GroupConstants.OK_DELETE,
+    })
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: GroupConstants.NOT_FOUND,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST_DELETE,
+        // schema: GroupConstants.BAD_REQUEST_DELETE,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async remove(@Param('id') id: string): Promise<Group> {
+    async remove(@Param('id') id: string) /*: Promise<Group>*/ {
         return await this.groupService.remove(id);
     }
 }

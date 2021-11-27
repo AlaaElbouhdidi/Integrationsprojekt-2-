@@ -47,11 +47,11 @@ export class EventController {
     @ApiOperation({ summary: 'Create a new event' })
     @ApiCreatedResponse({
         description: 'Event created',
-        schema: EventConstants.CREATED,
+        // schema: EventConstants.CREATED,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST_CREATE,
+        // schema: EventConstants.BAD_REQUEST_CREATE,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -71,7 +71,7 @@ export class EventController {
     @ApiOperation({ summary: 'Get all events' })
     @ApiOkResponse({
         description: 'Fetched all events',
-        schema: EventConstants.OK_FIND_ALL,
+        // schema: EventConstants.OK_FIND_ALL,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -87,7 +87,10 @@ export class EventController {
      * */
     @Get(':id')
     @ApiOperation({ summary: 'Get an event by id' })
-    @ApiOkResponse({ description: 'Event fetched', schema: EventConstants.OK_FIND_ONE})
+    @ApiOkResponse({
+        description: 'Event fetched',
+        // schema: EventConstants.OK_FIND_ONE,
+    })
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
@@ -106,10 +109,13 @@ export class EventController {
      * */
     @Patch(':id')
     @ApiOperation({ summary: 'Update an event by id' })
-    @ApiOkResponse({ description: 'Event edited', schema: EventConstants.OK_UPDATE })
+    @ApiOkResponse({
+        description: 'Event edited',
+        // schema: EventConstants.OK_UPDATE,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST_UPDATE,
+        // schema: EventConstants.BAD_REQUEST_UPDATE,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -132,7 +138,10 @@ export class EventController {
      * */
     @Delete(':id')
     @ApiOperation({ summary: 'Delete an event by id' })
-    @ApiOkResponse({ description: 'Event deleted', schema: EventConstants.OK_DELETE })
+    @ApiOkResponse({
+        description: 'Event deleted',
+        // schema: EventConstants.OK_DELETE,
+    })
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,

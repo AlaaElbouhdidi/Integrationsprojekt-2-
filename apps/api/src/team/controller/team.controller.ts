@@ -21,11 +21,11 @@ import {
 import { TeamService } from '../service/team.service';
 import { CreateTeamDto } from '../dto/create-team.dto';
 import { UpdateTeamDto } from '../dto/update-team.dto';
-import { Team } from '@api-interfaces';
 import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
 import { TeamConstants } from '../constants/team.constants';
+// import { Team } from '@api-interfaces';
 /**
  * The TeamController
  **/
@@ -48,11 +48,11 @@ export class TeamController {
     @ApiOperation({ summary: 'Create a new team' })
     @ApiCreatedResponse({
         description: 'Team created',
-        schema: TeamConstants.CREATED,
+        // schema: TeamConstants.CREATED,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST_CREATE,
+        // schema: TeamConstants.BAD_REQUEST_CREATE,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -61,7 +61,7 @@ export class TeamController {
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createTeamDto: CreateTeamDto
-    ): Promise<Team> {
+    ) /*: Promise<Team>*/ {
         return await this.teamService.create(user, createTeamDto);
     }
     /**
@@ -72,13 +72,13 @@ export class TeamController {
     @ApiOperation({ summary: 'Get all teams' })
     @ApiOkResponse({
         description: 'Fetched all teams',
-        schema: TeamConstants.OK_FIND_ALL,
+        // schema: TeamConstants.OK_FIND_ALL,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findAll(): Promise<Team[]> {
+    async findAll() /*: Promise<Team[]>*/ {
         return await this.teamService.findAll();
     }
     /**
@@ -88,10 +88,13 @@ export class TeamController {
      * */
     @Get(':id')
     @ApiOperation({ summary: 'Get a team by id' })
-    @ApiOkResponse({ description: 'Team fetched', schema: TeamConstants.OK_FIND_ONE})
+    @ApiOkResponse({
+        description: 'Team fetched',
+        // schema: TeamConstants.OK_FIND_ONE,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST_GET,
+        // schema: TeamConstants.BAD_REQUEST_GET,
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -101,7 +104,7 @@ export class TeamController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findOne(@Param('id') id: string): Promise<Team> {
+    async findOne(@Param('id') id: string) /*: Promise<Team>*/ {
         return await this.teamService.findOne(id);
     }
     /**
@@ -111,10 +114,13 @@ export class TeamController {
      * */
     @Patch(':id')
     @ApiOperation({ summary: 'Update a team by id' })
-    @ApiOkResponse({ description: 'Team edited', schema: TeamConstants.OK_UPDATE })
+    @ApiOkResponse({
+        description: 'Team edited',
+        // schema: TeamConstants.OK_UPDATE,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST_UPDATE,
+        // schema: TeamConstants.BAD_REQUEST_UPDATE,
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -127,7 +133,7 @@ export class TeamController {
     async update(
         @Param('id') id: string,
         @Body() updateTeamDto: UpdateTeamDto
-    ): Promise<Team> {
+    ) /*: Promise<Team>*/ {
         return await this.teamService.update(id, updateTeamDto);
     }
     /**
@@ -137,20 +143,23 @@ export class TeamController {
      * */
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a team by id' })
-    @ApiOkResponse({ description: 'Team deleted', schema: TeamConstants.OK_DELETE })
+    @ApiOkResponse({
+        description: 'Team deleted',
+        // schema: TeamConstants.OK_DELETE,
+    })
     @ApiNotFoundResponse({
         description: 'Team not found',
         schema: TeamConstants.NOT_FOUND,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST_DELETE,
+        // schema: TeamConstants.BAD_REQUEST_DELETE,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async remove(@Param('id') id: string): Promise<Team> {
+    async remove(@Param('id') id: string) /*: Promise<Team>*/ {
         return await this.teamService.remove(id);
     }
 }

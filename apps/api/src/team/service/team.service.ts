@@ -1,4 +1,3 @@
-import { Group, Team } from '@api-interfaces';
 import {
     Injectable,
     InternalServerErrorException,
@@ -8,6 +7,7 @@ import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateTeamDto } from '../dto/create-team.dto';
 import { UpdateTeamDto } from '../dto/update-team.dto';
 import * as admin from 'firebase-admin';
+// import { Team } from '@api-interfaces';
 /**
  * The TeamService
  * */
@@ -25,7 +25,7 @@ export class TeamService {
     /**
      * The reference to the teams collection in firestore
      * */
-    private readonly groupsRef = this.firebaseService
+    private readonly teamsRef = this.firebaseService
         .getFirestore()
         .collection('teams');
     /**
@@ -37,13 +37,13 @@ export class TeamService {
     async create(
         user: admin.auth.DecodedIdToken,
         createTeamDto: CreateTeamDto
-    ): Promise<Team> {
+    ) /*: Promise<Team>*/ {
         try {
+            this.logger.log(user, createTeamDto);
+            await this.teamsRef.add(createTeamDto);
             return await 'This action adds a new team';
         } catch (e) {
-            this.logger.error(
-                `Unexpected server error. Failed to create team`
-            );
+            this.logger.error(`Unexpected server error. Failed to create team`);
             throw new InternalServerErrorException(
                 `Unexpected server error. Failed to create team`
             );
@@ -53,7 +53,7 @@ export class TeamService {
      * The method that finds all teams
      * @returns {Promise<Team[]>} The teams of firestore
      * */
-    async findAll(): Promise<Team[]> {
+    async findAll() /*: Promise<Team[]>*/ {
         try {
             return await `This action returns all teams`;
         } catch (e) {
@@ -70,7 +70,7 @@ export class TeamService {
      * @param {string} id The id of the team
      * @returns {Promise<Team>} Returns the team
      * */
-    async findOne(id: string): Promise<Team> {
+    async findOne(id: string) /*: Promise<Team>*/ {
         try {
             return await `This action returns a #${id} group`;
         } catch (e) {
@@ -88,8 +88,9 @@ export class TeamService {
      * @param {UpdateTeamDto} updateTeamDto The DTO to update a team
      * @returns {Promise<Team>} The updated team document from firestore
      * */
-    async update(id: string, updateTeamDto: UpdateTeamDto): Promise<Team> {
+    async update(id: string, updateTeamDto: UpdateTeamDto) /*: Promise<Team>*/ {
         try {
+            this.logger.log(updateTeamDto);
             return await `This action updates a #${id} group`;
         } catch (e) {
             this.logger.error(
@@ -105,7 +106,7 @@ export class TeamService {
      * @param {string} id The id of the team to delete
      * @returns {Promise<Team>} The deleted team document from firestore
      * */
-    async remove(id: string): Promise<Team> {
+    async remove(id: string) /*: Promise<Team>*/ {
         try {
             return await `This action removes the group with id ${id}`;
         } catch (e) {
