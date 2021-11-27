@@ -21,6 +21,7 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
+    ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import * as admin from 'firebase-admin';
 import { EventConstants } from '../constants/event.constants';
@@ -53,6 +54,10 @@ export class EventController {
         description: 'Invalid data sent',
         // schema: EventConstants.BAD_REQUEST_CREATE,
     })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
@@ -72,6 +77,10 @@ export class EventController {
     @ApiOkResponse({
         description: 'Fetched all events',
         // schema: EventConstants.OK_FIND_ALL,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -94,6 +103,10 @@ export class EventController {
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -121,6 +134,10 @@ export class EventController {
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
     })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
@@ -145,6 +162,10 @@ export class EventController {
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
