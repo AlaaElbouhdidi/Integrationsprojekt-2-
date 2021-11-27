@@ -10,19 +10,19 @@ export const AppConstants = {
             },
         },
     },
-    BAD_REQUEST: {
+    INTERNAL_SERVER_ERROR: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 400,
+                example: 500,
             },
             message: {
-                type: 'array',
+                type: 'string',
                 example: 'Unexpected error occurred',
             },
             error: {
                 type: 'string',
-                example: 'Bad Request',
+                example: 'Internal Server Error',
             },
         },
     },

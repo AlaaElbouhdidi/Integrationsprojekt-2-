@@ -4,6 +4,7 @@ import { AppService } from '../service/app.service';
 import { Public } from '../../decorators/public.decorator';
 import {
     ApiBadRequestResponse,
+    ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiOperation,
     ApiTags,
@@ -31,9 +32,9 @@ export class AppController {
         description: 'Welcomed to the API',
         schema: AppConstants.OK,
     })
-    @ApiBadRequestResponse({
+    @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.BAD_REQUEST,
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     getData(): Message {
         return this.appService.getData();
