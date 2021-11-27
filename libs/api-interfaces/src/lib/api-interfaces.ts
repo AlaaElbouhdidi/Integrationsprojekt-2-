@@ -21,8 +21,8 @@ export interface Environment {
 }
 
 export interface Member {
-    uid?: string;
-    isAdmin?: boolean;
+    uid: string;
+    isAdmin: boolean;
     groupid?: string;
 }
 
@@ -34,21 +34,34 @@ export interface Event {
 }
 
 export interface Group {
-    id?: string;
-    name?: string;
+    name: string;
+    description: string;
     activity?: Activity;
-    description?: string;
     member?: Member[]; // Array of uid's
+}
+
+export interface Game {
+    activity: ActivityEnum;
+    firstTeam: Team;
+    secondTeam: Team;
+    date: Date;
+    firstTeamScore?: number;
+    secondTeamScore?: number;
+}
+
+export interface Team {
+    member: Member[];
+    groupId: string;
 }
 
 export interface Activity {
     id?: string;
-    name?: string;
+    name: string;
     logo?: string;
 }
 
 export interface User {
-    id?: string;
+    id: string;
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;
