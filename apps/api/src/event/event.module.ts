@@ -1,4 +1,4 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { EventService } from './service/event.service';
 import { EventController } from './controller/event.controller';
 import { FirebaseService } from '../firebase/service/firebase.service';
@@ -7,6 +7,6 @@ import { FirebaseService } from '../firebase/service/firebase.service';
  * */
 @Module({
     controllers: [EventController],
-    providers: [EventService, FirebaseService, Logger],
+    providers: [EventService, FirebaseService],
 })
 export class EventModule {}
