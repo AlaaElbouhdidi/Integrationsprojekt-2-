@@ -8,7 +8,6 @@ import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
 import { Event } from '@api-interfaces';
 import * as admin from 'firebase-admin';
-
 /**
  * The EventService
  * */
@@ -27,7 +26,7 @@ export class EventService {
      * The reference to the events collection in firestore
      * */
     private readonly eventsRef = this.firebaseService
-        .firestore()
+        .getFirestore()
         .collection('events');
     /**
      * The method to create an event

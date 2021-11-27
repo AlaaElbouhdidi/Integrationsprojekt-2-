@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsArray, IsDateString } from 'class-validator';
 import { Event } from '@api-interfaces';
-
 /**
  * The Data Transfer Object to create an event
  * *

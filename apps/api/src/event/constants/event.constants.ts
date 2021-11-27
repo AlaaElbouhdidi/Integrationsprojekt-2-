@@ -1,3 +1,6 @@
+/**
+ * The event constants to feed the swagger documentation
+ * */
 export const EventConstants = {
     BAD_REQUEST: {
         properties: {

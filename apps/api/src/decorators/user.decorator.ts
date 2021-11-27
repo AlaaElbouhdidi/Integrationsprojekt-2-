@@ -1,6 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import * as admin from 'firebase-admin';
-
 /**
  * The custom @User() decorator that grabs the user attribute from the request
  * */

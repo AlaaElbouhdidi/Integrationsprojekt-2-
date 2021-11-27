@@ -25,7 +25,7 @@ export class GameService {
      * The reference to the games collection in firestore
      * */
     private readonly gamesRef = this.firebaseService
-        .firestore()
+        .getFirestore()
         .collection('games');
 
     /**

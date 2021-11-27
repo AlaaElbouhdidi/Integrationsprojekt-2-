@@ -87,8 +87,8 @@ export class EventController {
      * @returns {Event} Returns the updated event
      * */
     @Patch(':id')
-    @ApiOperation({ summary: 'Update a user by id' })
-    @ApiOkResponse({ description: 'User edited', type: Event })
+    @ApiOperation({ summary: 'Update an event by id' })
+    @ApiOkResponse({ description: 'Event edited', type: Event })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
         schema: EventConstants.BAD_REQUEST,
@@ -109,8 +109,8 @@ export class EventController {
      * @returns {Event} Returns the deleted event
      * */
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete a user by id' })
-    @ApiOkResponse({ description: 'User deleted', type: Event })
+    @ApiOperation({ summary: 'Delete an event by id' })
+    @ApiOkResponse({ description: 'Event deleted', type: Event })
     @ApiNotFoundResponse({
         description: 'User not found',
         schema: EventConstants.NOT_FOUND,
