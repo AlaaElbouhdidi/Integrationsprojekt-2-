@@ -5,6 +5,37 @@
             <a routerLink="/"> <span>M</span>ate <span>T</span>eam </a>
         </h2>
     </div>
+    <div class="btn-group" ngbDropdown>
+        <button ngbDropdownToggle id="docs" class="btn btn-light">
+            Documentation
+        </button>
+        <div ngbDropdownMenu="docs">
+            <a
+                ngbDropdownItem
+                [href]="
+                    'https://europe-west1-mate-team.cloudfunctions.net/api/docs/mate-team/'
+                "
+                mate-team-external-url
+                >Mate Team Documentation</a
+            >
+            <a
+                ngbDropdownItem
+                [href]="
+                    'https://europe-west1-mate-team.cloudfunctions.net/api/docs/api/'
+                "
+                mate-team-external-url
+                >Mate Team API Documentation</a
+            >
+            <a
+                ngbDropdownItem
+                [href]="
+                    'https://europe-west1-mate-team.cloudfunctions.net/api/docs/swagger/'
+                "
+                mate-team-external-url
+                >Mate Team Swagger API</a
+            >
+        </div>
+    </div>
     <nav *ngIf="!authenticated; else authenticatedNav">
         <a routerLink="/login">Login</a>
         <a routerLink="/register">Register</a>
