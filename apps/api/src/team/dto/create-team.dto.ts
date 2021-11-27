@@ -11,10 +11,6 @@ import {
 /**
  * The Data Transfer Object to create a team
  **/
-
-/**
- * The Data Transfer Object to create the member property of a team
- **/
 export class CreateMemberDto implements Member {
     /**
      * The uid property for member
@@ -33,11 +29,10 @@ export class CreateMemberDto implements Member {
         description: 'Whether the team member is an admin',
     })
     isAdmin: boolean;
-    /**
-     * The groupId property for member
-     **/
 }
-
+/**
+ * The Data Transfer Object to create the member property of a team
+ **/
 export class CreateTeamDto implements Team {
     /**
      * The member property of a team

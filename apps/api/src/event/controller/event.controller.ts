@@ -1,7 +1,6 @@
 import { EventService } from '../service/event.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
-import { Public } from '../../decorators/public.decorator';
 import { User } from '../../decorators/user.decorator';
 import { Event } from '@api-interfaces';
 import {
@@ -17,6 +16,7 @@ import {
     ApiBadRequestResponse,
     ApiBearerAuth,
     ApiCreatedResponse,
+    ApiInternalServerErrorResponse,
     ApiNotFoundResponse,
     ApiOkResponse,
     ApiOperation,
@@ -24,6 +24,7 @@ import {
 } from '@nestjs/swagger';
 import * as admin from 'firebase-admin';
 import { EventConstants } from '../constants/event.constants';
+import { AppConstants } from '../../app/constants/app.constants';
 /**
  * The EventController
  **/
@@ -40,14 +41,21 @@ export class EventController {
      * The route handler to create an event
      * @param {admin.auth.DecodedIdToken} user The currently logged in user
      * @param {CreateEventDto} createEventDto The DTO that the route handler forwards to the EventService
-     * @returns {Event} Returns the created event
+     * @returns {Promise<Event>} Returns the created event
      * */
     @Post()
     @ApiOperation({ summary: 'Create a new event' })
-    @ApiCreatedResponse({ description: 'Event created', type: Event })
+    @ApiCreatedResponse({
+        description: 'Event created',
+        schema: EventConstants.CREATED,
+    })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST,
+        schema: EventConstants.BAD_REQUEST_CREATE,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async create(
         @User() user: admin.auth.DecodedIdToken,
@@ -57,15 +65,17 @@ export class EventController {
     }
     /**
      * The route handler that fetches all events
-     * @returns {Event[]} Returns all events
+     * @returns {Promise<Event[]>} Returns all events
      * */
-    @Public()
     @Get()
     @ApiOperation({ summary: 'Get all events' })
     @ApiOkResponse({
         description: 'Fetched all events',
-        type: [Event],
-        isArray: true,
+        schema: EventConstants.OK_FIND_ALL,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async findAll(): Promise<Event[]> {
         return await this.eventService.findAll();
@@ -73,14 +83,18 @@ export class EventController {
     /**
      * The route handler that gets an event by id
      * @param {string} id The id of the event to find
-     * @returns {Event} Returns the requested event
+     * @returns {Promise<Event>} Returns the requested event
      * */
     @Get(':id')
     @ApiOperation({ summary: 'Get an event by id' })
-    @ApiOkResponse({ description: 'Event fetched', type: Event })
+    @ApiOkResponse({ description: 'Event fetched', schema: EventConstants.OK_FIND_ONE})
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async findOne(@Param('id') id: string): Promise<Event> {
         return await this.eventService.findOne(id);
@@ -88,18 +102,22 @@ export class EventController {
     /**
      * The route handler that updates an event by id
      * @param {string} id The id of the event to update
-     * @returns {Event} Returns the updated event
+     * @returns {Promise<Event>} Returns the updated event
      * */
     @Patch(':id')
     @ApiOperation({ summary: 'Update an event by id' })
-    @ApiOkResponse({ description: 'Event edited', type: Event })
+    @ApiOkResponse({ description: 'Event edited', schema: EventConstants.OK_UPDATE })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST,
+        schema: EventConstants.BAD_REQUEST_UPDATE,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async update(
         @Param('id') id: string,
@@ -110,14 +128,18 @@ export class EventController {
     /**
      * The route handler that deletes an event by id
      * @param {string} id The id of the event to delete
-     * @returns {Event} Returns the deleted event
+     * @returns {Promise<Event>} Returns the deleted event
      * */
     @Delete(':id')
     @ApiOperation({ summary: 'Delete an event by id' })
-    @ApiOkResponse({ description: 'Event deleted', type: Event })
+    @ApiOkResponse({ description: 'Event deleted', schema: EventConstants.OK_DELETE })
     @ApiNotFoundResponse({
-        description: 'User not found',
+        description: 'Event not found',
         schema: EventConstants.NOT_FOUND,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async remove(@Param('id') id: string): Promise<Event> {
         return await this.eventService.remove(id);

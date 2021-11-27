@@ -78,7 +78,8 @@ export class GameService {
     }
     /**
      * The method to update a game
-     * @param {CreateGameDto} createGameDto The DTO to update a game
+     * @param {string} id The id of the game to update
+     * @param {UpdateGameDto} UpdateGameDto The DTO to update a game
      * @returns The updated game document from firestore
      * */
     async update(id: string, updateGameDto: UpdateGameDto) {
@@ -94,7 +95,7 @@ export class GameService {
     }
     /**
      * The method to delete a game
-     * @param {CreateGameDto} createGameDto The DTO to delete a game
+     * @param {string} id The id of the game to delete
      * @returns The deleted game document from firestore
      * */
     async remove(id: string) {

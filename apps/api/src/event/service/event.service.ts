@@ -32,7 +32,7 @@ export class EventService {
      * The method to create an event
      * @param {admin.auth.DecodedIdToken} user The logged in user
      * @param {CreateEventDto} createEventDto The DTO to create an event
-     * @returns {Event} The inserted event document from firestore
+     * @returns {Promise<Event>} The inserted event document from firestore
      * */
     async create(
         user: admin.auth.DecodedIdToken,
@@ -67,7 +67,7 @@ export class EventService {
     }
     /**
      * The method that finds all events
-     * @returns {Event[]} The events of firestore
+     * @returns {Promise<Event[]>} The events of firestore
      * */
     async findAll(): Promise<Event[]> {
         try {
@@ -95,7 +95,7 @@ export class EventService {
     /**
      * Method that finds an event by id
      * @param {string} id The id of the event
-     * @returns {Event} Returns the event
+     * @returns {Promise<Event>} Returns the event
      * */
     async findOne(id: string): Promise<Event> {
         try {
@@ -120,8 +120,9 @@ export class EventService {
     }
     /**
      * The method to update an event
-     * @param {CreateEventDto} createEventDto The DTO to update an event
-     * @returns {Event} The updated event document from firestore
+     * @param {string} id The id of the event to update
+     * @param {UpdateEventDto} UpdateEventDto The DTO to update an event
+     * @returns {Promise<Event>} The updated event document from firestore
      * */
     async update(id: string, updateEventDto: UpdateEventDto): Promise<Event> {
         try {
@@ -154,8 +155,8 @@ export class EventService {
     }
     /**
      * The method to delete an event
-     * @param {CreateEventDto} createEventDto The DTO to delete an event
-     * @returns {Event} The deleted event document from firestore
+     * @param {string} id The id of the event to delete
+     * @returns {Promise<Event>} The deleted event document from firestore
      * */
     async remove(id: string): Promise<Event> {
         try {
