@@ -41,8 +41,8 @@ export interface Group {
 
 export interface Game {
     activity: Activity;
-    firstTeam: Team;
-    secondTeam: Team;
+    firstTeamId: string;
+    secondTeamId: string;
     date: Date;
     firstTeamScore?: number;
     secondTeamScore?: number;

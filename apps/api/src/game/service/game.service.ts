@@ -40,17 +40,17 @@ export class GameService {
                 .then(async () => {
                     const {
                         activity,
-                        firstTeam,
+                        firstTeamId,
                         firstTeamScore,
-                        secondTeam,
+                        secondTeamId,
                         secondTeamScore,
                         date
                     } = createGameDto;
                     const data = {
                         activity,
-                        firstTeam,
+                        firstTeamId,
                         firstTeamScore,
-                        secondTeam,
+                        secondTeamId,
                         secondTeamScore,
                         date
                     }
@@ -144,9 +144,9 @@ export class GameService {
                     this.checkGameExists(id, oldGame);
                     await this.gamesRef.doc(id).update({
                         activity: updateGameDto.activity,
-                        firstTeam: updateGameDto.firstTeam,
+                        firstTeamId: updateGameDto.firstTeamId,
                         firstTeamScore: updateGameDto.firstTeamScore,
-                        secondTeam: updateGameDto.secondTeam,
+                        secondTeam: updateGameDto.secondTeamId,
                         secondTeamScore: updateGameDto.secondTeamScore,
                         date: updateGameDto.date,
                     });
@@ -197,9 +197,9 @@ export class GameService {
     ): Game {
         return {
             activity: game.get('activity'),
-            firstTeam: game.get('firstTeam'),
+            firstTeamId: game.get('firstTeamId'),
             firstTeamScore: game.get('firstTeamScore'),
-            secondTeam: game.get('secondTeam'),
+            secondTeamId: game.get('secondTeamId'),
             secondTeamScore: game.get('secondTeamScore'),
             date: game.get('date'),
         };

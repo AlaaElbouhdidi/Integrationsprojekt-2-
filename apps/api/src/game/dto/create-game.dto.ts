@@ -1,15 +1,13 @@
 import { Activity, Game } from '@api-interfaces';
-import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
     IsNotEmpty,
     IsDateString,
-    IsNotEmptyObject,
-    ValidateNested,
     IsNumber,
     IsEnum,
+    IsFirebasePushId,
+    IsOptional,
 } from 'class-validator';
-import { CreateTeamDto } from '../../team/dto/create-team.dto';
 /**
  * The Data Transfer Object to create a game
  **/
@@ -28,25 +26,21 @@ export class CreateGameDto implements Game {
     /**
      * The firstTeam property of a game
      **/
-    @IsNotEmptyObject()
-    @ValidateNested()
-    @Type(() => CreateTeamDto)
+    @IsFirebasePushId()
     @ApiProperty({
         description: 'The first team of the game',
-        type: CreateTeamDto,
+        example: '',
     })
-    firstTeam: CreateTeamDto;
+    firstTeamId: string;
     /**
      * The secondTeam property of a game
      **/
-    @IsNotEmptyObject()
-    @ValidateNested()
-    @Type(() => CreateTeamDto)
+    @IsFirebasePushId()
     @ApiProperty({
-        description: 'The second team of the game',
-        type: CreateTeamDto,
+        description: 'The first team of the game',
+        example: '',
     })
-    secondTeam: CreateTeamDto;
+    secondTeamId: string;
     /**
      * The date property of a game
      **/
@@ -61,6 +55,7 @@ export class CreateGameDto implements Game {
      * The firstTeamScore property of a game
      **/
     @IsNumber()
+    @IsOptional()
     @ApiPropertyOptional({
         example: 3,
         description: 'The first teams score after the game is played',
@@ -70,6 +65,7 @@ export class CreateGameDto implements Game {
      * The secondTeamScore property of a game
      **/
     @IsNumber()
+    @IsOptional()
     @ApiPropertyOptional({
         example: 2,
         description: 'The second teams score after the game is played',
