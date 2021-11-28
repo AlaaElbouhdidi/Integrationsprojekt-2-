@@ -219,6 +219,7 @@ export class EventService {
                         return event;
                     }
                 })
+
                 .then(async (event) => {
                     if (!event.exists) {
                         const message = `No event with id ${id} found`;

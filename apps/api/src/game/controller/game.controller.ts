@@ -22,10 +22,9 @@ import {
     ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-import { User } from '../../decorators/user.decorator';
-import * as admin from 'firebase-admin';
 import { GameConstants } from '../constants/game.constants';
 import { AppConstants } from '../../app/constants/app.constants';
+import { Game } from '@api-interfaces';
 /**
  * The GameController
  * */
@@ -40,9 +39,8 @@ export class GameController {
     constructor(private readonly gameService: GameService) {}
     /**
      * The route handler to create a game
-     * @param {admin.auth.DecodedIdToken} user The currently logged in user
      * @param {CreateGameDto} createGameDto The DTO that the route handler forwards to the GameService
-     * @returns Returns the created game
+     * @returns {Promise<Game>} Returns the created game
      * */
     @Post()
     @ApiOperation({ summary: 'Create a new game' })
@@ -63,14 +61,13 @@ export class GameController {
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async create(
-        @User() user: admin.auth.DecodedIdToken,
         @Body() createGameDto: CreateGameDto
-    ) {
-        return await this.gameService.create(user, createGameDto);
+    ): Promise<Game> {
+        return await this.gameService.create(createGameDto);
     }
     /**
      * The route handler that fetches all games
-     * @returns  Returns all games
+     * @returns {Promise<Game[]>} Returns all games
      * */
     @Get()
     @ApiOperation({ summary: 'Get all games' })
@@ -90,13 +87,13 @@ export class GameController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findAll() {
+    async findAll(): Promise<Game[]> {
         return await this.gameService.findAll();
     }
     /**
      * The route handler that gets a game by id
      * @param {string} id The id of the game to find
-     * @returns Returns the requested game
+     * @returns {Promise<Game>} Returns the requested game
      * */
     @Get(':id')
     @ApiOperation({ summary: 'Get a game by id' })
@@ -116,13 +113,13 @@ export class GameController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findOne(@Param('id') id: string) {
+    async findOne(@Param('id') id: string): Promise<Game> {
         return await this.gameService.findOne(id);
     }
     /**
      * The route handler that updates a game by id
      * @param {string} id The id of the game to update
-     * @returns Returns the updated game
+     * @returns {Promise<Game>} Returns the updated game
      * */
     @Patch(':id')
     @ApiOperation({ summary: 'Update a game by id' })
@@ -149,13 +146,13 @@ export class GameController {
     async update(
         @Param('id') id: string,
         @Body() updateGameDto: UpdateGameDto
-    ) {
+    ): Promise<Game> {
         return await this.gameService.update(id, updateGameDto);
     }
     /**
      * The route handler that deletes a game by id
      * @param {string} id The id of the game to delete
-     * @returns Returns the deleted game
+     * @returns {Promise<Game>} Returns the deleted game
      * */
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a game by id' })
@@ -175,7 +172,7 @@ export class GameController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async remove(@Param('id') id: string) {
+    async remove(@Param('id') id: string): Promise<Game> {
         return await this.gameService.remove(id);
     }
 }
