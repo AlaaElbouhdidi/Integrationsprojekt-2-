@@ -49,7 +49,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Create a new team' })
     @ApiCreatedResponse({
         description: 'Team created',
-        type: CreateTeamDto
+        type: CreateTeamDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -57,7 +57,7 @@ export class TeamController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -77,7 +77,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Get all teams' })
     @ApiOkResponse({
         description: 'Fetched all teams',
-        type: [CreateTeamDto]
+        type: [CreateTeamDto],
     })
     @ApiNotFoundResponse({
         description: 'No teams found',
@@ -85,7 +85,7 @@ export class TeamController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -103,7 +103,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Get a team by id' })
     @ApiOkResponse({
         description: 'Team fetched',
-        type: CreateTeamDto
+        type: CreateTeamDto,
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -111,7 +111,7 @@ export class TeamController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -129,7 +129,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Update a team by id' })
     @ApiOkResponse({
         description: 'Team edited',
-        type: CreateTeamDto
+        type: CreateTeamDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -141,7 +141,7 @@ export class TeamController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -162,7 +162,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Delete a team by id' })
     @ApiOkResponse({
         description: 'Team deleted',
-        type: CreateTeamDto
+        type: CreateTeamDto,
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -170,7 +170,7 @@ export class TeamController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',

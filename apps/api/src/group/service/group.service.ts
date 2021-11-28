@@ -7,7 +7,7 @@ import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import * as admin from 'firebase-admin';
-import { Group } from '@api-interfaces';
+// import { Group } from '@api-interfaces';
 /**
  * The GroupService
  * */

@@ -69,7 +69,7 @@ export class NewgroupFormComponent implements OnInit {
                 message: 'Successfully added a group.',
             });
             this.groupService.toggleSuccess(true);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             this.loading = false;
             this.newGroupForm.reset();
@@ -82,7 +82,7 @@ export class NewgroupFormComponent implements OnInit {
     async ngOnInit(): Promise<void> {
         try {
             console.log(`Component initialized`);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             this.loading = false;
             this.newGroupForm.reset();

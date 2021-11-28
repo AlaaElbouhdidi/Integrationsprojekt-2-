@@ -11,7 +11,7 @@ const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/']);
 const route = {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectAuthenticatedToHome)
+    ...canActivate(redirectAuthenticatedToHome),
 };
 
 const routes: Routes = [route];

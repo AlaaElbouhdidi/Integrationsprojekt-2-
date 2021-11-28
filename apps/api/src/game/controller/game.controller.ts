@@ -84,7 +84,7 @@ export class GameController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -102,7 +102,7 @@ export class GameController {
     @ApiOperation({ summary: 'Get a game by id' })
     @ApiOkResponse({
         description: 'Game fetched',
-        type: UpdateGameDto
+        type: UpdateGameDto,
     })
     @ApiNotFoundResponse({
         description: 'Game not found',
@@ -110,7 +110,7 @@ export class GameController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -128,7 +128,7 @@ export class GameController {
     @ApiOperation({ summary: 'Update a game by id' })
     @ApiOkResponse({
         description: 'Game edited',
-        type: UpdateGameDto
+        type: UpdateGameDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -140,7 +140,7 @@ export class GameController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -161,7 +161,7 @@ export class GameController {
     @ApiOperation({ summary: 'Delete a game by id' })
     @ApiOkResponse({
         description: 'Game deleted',
-        type: UpdateGameDto
+        type: UpdateGameDto,
     })
     @ApiNotFoundResponse({
         description: 'Game not found',
@@ -169,7 +169,7 @@ export class GameController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',

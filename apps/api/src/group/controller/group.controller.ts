@@ -49,7 +49,7 @@ export class GroupController {
     @ApiOperation({ summary: 'Create a new group' })
     @ApiCreatedResponse({
         description: 'Group created',
-        type: CreateGroupDto
+        type: CreateGroupDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -57,7 +57,7 @@ export class GroupController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -85,7 +85,7 @@ export class GroupController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -103,7 +103,7 @@ export class GroupController {
     @ApiOperation({ summary: 'Get a group by id' })
     @ApiOkResponse({
         description: 'Group fetched',
-        type: CreateGroupDto
+        type: CreateGroupDto,
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
@@ -111,7 +111,7 @@ export class GroupController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -129,7 +129,7 @@ export class GroupController {
     @ApiOperation({ summary: 'Update a group by id' })
     @ApiOkResponse({
         description: 'Group edited',
-        type: CreateGroupDto
+        type: CreateGroupDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -141,7 +141,7 @@ export class GroupController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -170,7 +170,7 @@ export class GroupController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',

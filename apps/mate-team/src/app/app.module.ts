@@ -21,6 +21,6 @@ import { environment } from '@env';
         FirestoreModule,
     ],
     bootstrap: [AppComponent],
-    exports: [ExternalUrlDirective]
+    exports: [ExternalUrlDirective],
 })
 export class AppModule {}

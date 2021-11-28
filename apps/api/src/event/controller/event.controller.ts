@@ -48,7 +48,7 @@ export class EventController {
     @ApiOperation({ summary: 'Create a new event' })
     @ApiCreatedResponse({
         description: 'Event created',
-        type: CreateEventDto
+        type: CreateEventDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -56,7 +56,7 @@ export class EventController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -84,7 +84,7 @@ export class EventController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -102,7 +102,7 @@ export class EventController {
     @ApiOperation({ summary: 'Get an event by id' })
     @ApiOkResponse({
         description: 'Event fetched',
-        type: UpdateEventDto
+        type: UpdateEventDto,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -110,7 +110,7 @@ export class EventController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -128,7 +128,7 @@ export class EventController {
     @ApiOperation({ summary: 'Update an event by id' })
     @ApiOkResponse({
         description: 'Event edited',
-        type: UpdateEventDto
+        type: UpdateEventDto,
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
@@ -140,7 +140,7 @@ export class EventController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -161,7 +161,7 @@ export class EventController {
     @ApiOperation({ summary: 'Delete an event by id' })
     @ApiOkResponse({
         description: 'Event deleted',
-        type: UpdateEventDto
+        type: UpdateEventDto,
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
@@ -169,7 +169,7 @@ export class EventController {
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED
+        schema: AppConstants.UNAUTHORIZED,
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
