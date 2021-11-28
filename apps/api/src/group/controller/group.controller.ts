@@ -16,6 +16,7 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
+    ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
 import { GroupService } from '../service/group.service';
@@ -48,11 +49,15 @@ export class GroupController {
     @ApiOperation({ summary: 'Create a new group' })
     @ApiCreatedResponse({
         description: 'Group created',
-        // schema: GroupConstants.CREATED,
+        type: CreateGroupDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: GroupConstants.BAD_REQUEST_CREATE,
+        schema: GroupConstants.BAD_REQUEST,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -72,7 +77,15 @@ export class GroupController {
     @ApiOperation({ summary: 'Get all groups' })
     @ApiOkResponse({
         description: 'Fetched all groups',
-        // schema: GroupConstants.OK_FIND_ALL,
+        type: [CreateGroupDto],
+    })
+    @ApiNotFoundResponse({
+        description: 'No groups found',
+        schema: GroupConstants.NONE_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -90,15 +103,15 @@ export class GroupController {
     @ApiOperation({ summary: 'Get a group by id' })
     @ApiOkResponse({
         description: 'Group fetched',
-        // schema: GroupConstants.OK_FIND_ONE,
-    })
-    @ApiBadRequestResponse({
-        description: 'Invalid data sent',
-        // schema: GroupConstants.BAD_REQUEST_GET,
+        type: CreateGroupDto
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
         schema: GroupConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -116,15 +129,19 @@ export class GroupController {
     @ApiOperation({ summary: 'Update a group by id' })
     @ApiOkResponse({
         description: 'Group edited',
-        // schema: GroupConstants.OK_UPDATE,
+        type: CreateGroupDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: GroupConstants.BAD_REQUEST_UPDATE,
+        schema: GroupConstants.BAD_REQUEST,
     })
     @ApiNotFoundResponse({
-        description: 'Event not found',
+        description: 'Group not found',
         schema: GroupConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -145,15 +162,15 @@ export class GroupController {
     @ApiOperation({ summary: 'Delete a group by id' })
     @ApiOkResponse({
         description: 'Group deleted',
-        // schema: GroupConstants.OK_DELETE,
+        type: UpdateGroupDto,
     })
     @ApiNotFoundResponse({
-        description: 'Event not found',
+        description: 'Group not found',
         schema: GroupConstants.NOT_FOUND,
     })
-    @ApiBadRequestResponse({
-        description: 'Invalid data sent',
-        // schema: GroupConstants.BAD_REQUEST_DELETE,
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',

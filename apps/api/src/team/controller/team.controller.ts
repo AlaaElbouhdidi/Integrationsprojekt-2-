@@ -16,6 +16,7 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
+    ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
 import { TeamService } from '../service/team.service';
@@ -54,6 +55,10 @@ export class TeamController {
         description: 'Invalid data sent',
         // schema: TeamConstants.BAD_REQUEST_CREATE,
     })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
@@ -73,6 +78,14 @@ export class TeamController {
     @ApiOkResponse({
         description: 'Fetched all teams',
         // schema: TeamConstants.OK_FIND_ALL,
+    })
+    @ApiNotFoundResponse({
+        description: 'No teams found',
+        schema: TeamConstants.NONE_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -100,6 +113,10 @@ export class TeamController {
         description: 'Team not found',
         schema: TeamConstants.NOT_FOUND,
     })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
@@ -125,6 +142,10 @@ export class TeamController {
     @ApiNotFoundResponse({
         description: 'Team not found',
         schema: TeamConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
@@ -154,6 +175,10 @@ export class TeamController {
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
         // schema: TeamConstants.BAD_REQUEST_DELETE,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
