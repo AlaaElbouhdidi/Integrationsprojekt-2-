@@ -17,7 +17,10 @@ export class CreateMemberDto implements Member {
      **/
     @IsNotEmpty()
     @IsString()
-    @ApiProperty({ example: '', description: 'The uid of the team member' })
+    @ApiProperty({
+        example: 'TX5RYf6QIcW0WC8urdf8XUyNKMi2',
+        description: 'The uid of the team member',
+    })
     uid: string;
     /**
      * The isAdmin property for member
@@ -52,7 +55,7 @@ export class CreateTeamDto implements Team {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({
-        example: '',
+        example: 'Z47AQg1mEtZ0MEMxbV90',
         description: 'The id of the group in which the team is created',
     })
     groupId: string;

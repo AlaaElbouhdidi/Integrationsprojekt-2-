@@ -49,11 +49,11 @@ export class TeamController {
     @ApiOperation({ summary: 'Create a new team' })
     @ApiCreatedResponse({
         description: 'Team created',
-        // schema: TeamConstants.CREATED,
+        type: CreateTeamDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: TeamConstants.BAD_REQUEST_CREATE,
+        schema: TeamConstants.BAD_REQUEST,
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
@@ -77,7 +77,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Get all teams' })
     @ApiOkResponse({
         description: 'Fetched all teams',
-        // schema: TeamConstants.OK_FIND_ALL,
+        type: [CreateTeamDto]
     })
     @ApiNotFoundResponse({
         description: 'No teams found',
@@ -103,11 +103,7 @@ export class TeamController {
     @ApiOperation({ summary: 'Get a team by id' })
     @ApiOkResponse({
         description: 'Team fetched',
-        // schema: TeamConstants.OK_FIND_ONE,
-    })
-    @ApiBadRequestResponse({
-        description: 'Invalid data sent',
-        // schema: TeamConstants.BAD_REQUEST_GET,
+        type: CreateTeamDto
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -133,11 +129,11 @@ export class TeamController {
     @ApiOperation({ summary: 'Update a team by id' })
     @ApiOkResponse({
         description: 'Team edited',
-        // schema: TeamConstants.OK_UPDATE,
+        type: CreateTeamDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        // schema: TeamConstants.BAD_REQUEST_UPDATE,
+        schema: TeamConstants.BAD_REQUEST,
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
@@ -166,15 +162,11 @@ export class TeamController {
     @ApiOperation({ summary: 'Delete a team by id' })
     @ApiOkResponse({
         description: 'Team deleted',
-        // schema: TeamConstants.OK_DELETE,
+        type: CreateTeamDto
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
         schema: TeamConstants.NOT_FOUND,
-    })
-    @ApiBadRequestResponse({
-        description: 'Invalid data sent',
-        // schema: TeamConstants.BAD_REQUEST_DELETE,
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
