@@ -43,4 +43,20 @@ export const GroupConstants = {
             },
         },
     },
+    NONE_FOUND: {
+        properties: {
+            statusCode: {
+                type: 'number',
+                example: 404,
+            },
+            message: {
+                type: 'string',
+                example: 'No groups found',
+            },
+            error: {
+                type: 'string',
+                example: 'Not Found',
+            },
+        },
+    },
 };

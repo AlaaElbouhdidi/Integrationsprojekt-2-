@@ -39,4 +39,20 @@ export const TeamConstants = {
             },
         },
     },
+    NONE_FOUND: {
+        properties: {
+            statusCode: {
+                type: 'number',
+                example: 404,
+            },
+            message: {
+                type: 'string',
+                example: 'No teams found',
+            },
+            error: {
+                type: 'string',
+                example: 'Not Found',
+            },
+        },
+    },
 };

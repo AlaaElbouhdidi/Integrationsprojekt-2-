@@ -78,6 +78,10 @@ export class EventController {
         description: 'Fetched all events',
         type: [CreateEventDto],
     })
+    @ApiNotFoundResponse({
+        description: 'No events found',
+        schema: EventConstants.NONE_FOUND,
+    })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
         schema: AppConstants.UNAUTHORIZED

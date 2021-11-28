@@ -42,4 +42,20 @@ export const EventConstants = {
             },
         },
     },
+    NONE_FOUND: {
+        properties: {
+            statusCode: {
+                type: 'number',
+                example: 404,
+            },
+            message: {
+                type: 'string',
+                example: 'No events found',
+            },
+            error: {
+                type: 'string',
+                example: 'Not Found',
+            },
+        },
+    },
 };

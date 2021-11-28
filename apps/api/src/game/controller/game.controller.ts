@@ -10,9 +10,22 @@ import {
 import { GameService } from '../service/game.service';
 import { CreateGameDto } from '../dto/create-game.dto';
 import { UpdateGameDto } from '../dto/update-game.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBadRequestResponse,
+    ApiBearerAuth,
+    ApiCreatedResponse,
+    ApiInternalServerErrorResponse,
+    ApiNotFoundResponse,
+    ApiOkResponse,
+    ApiOperation,
+    ApiTags,
+    ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
+
 import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
+import { GameConstants } from '../constants/game.constants';
+import { AppConstants } from '../../app/constants/app.constants';
 /**
  * The GameController
  * */
@@ -32,6 +45,23 @@ export class GameController {
      * @returns Returns the created game
      * */
     @Post()
+    @ApiOperation({ summary: 'Create a new game' })
+    @ApiCreatedResponse({
+        description: 'Game created',
+        type: CreateGameDto,
+    })
+    @ApiBadRequestResponse({
+        description: 'Invalid data sent',
+        schema: GameConstants.BAD_REQUEST,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED,
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
+    })
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createGameDto: CreateGameDto
@@ -43,6 +73,23 @@ export class GameController {
      * @returns  Returns all games
      * */
     @Get()
+    @ApiOperation({ summary: 'Get all games' })
+    @ApiOkResponse({
+        description: 'Fetched all games',
+        type: [CreateGameDto],
+    })
+    @ApiNotFoundResponse({
+        description: 'No games found',
+        schema: GameConstants.NONE_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
+    })
     async findAll() {
         return await this.gameService.findAll();
     }
@@ -52,6 +99,23 @@ export class GameController {
      * @returns Returns the requested game
      * */
     @Get(':id')
+    @ApiOperation({ summary: 'Get a game by id' })
+    @ApiOkResponse({
+        description: 'Game fetched',
+        type: UpdateGameDto
+    })
+    @ApiNotFoundResponse({
+        description: 'Game not found',
+        schema: GameConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
+    })
     async findOne(@Param('id') id: string) {
         return await this.gameService.findOne(id);
     }
@@ -61,6 +125,27 @@ export class GameController {
      * @returns Returns the updated game
      * */
     @Patch(':id')
+    @ApiOperation({ summary: 'Update a game by id' })
+    @ApiOkResponse({
+        description: 'Game edited',
+        type: UpdateGameDto
+    })
+    @ApiBadRequestResponse({
+        description: 'Invalid data sent',
+        schema: GameConstants.BAD_REQUEST,
+    })
+    @ApiNotFoundResponse({
+        description: 'Game not found',
+        schema: GameConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
+    })
     async update(
         @Param('id') id: string,
         @Body() updateGameDto: UpdateGameDto
@@ -73,6 +158,23 @@ export class GameController {
      * @returns Returns the deleted game
      * */
     @Delete(':id')
+    @ApiOperation({ summary: 'Delete a game by id' })
+    @ApiOkResponse({
+        description: 'Game deleted',
+        type: UpdateGameDto
+    })
+    @ApiNotFoundResponse({
+        description: 'Game not found',
+        schema: GameConstants.NOT_FOUND,
+    })
+    @ApiUnauthorizedResponse({
+        description: 'Unauthorized',
+        schema: AppConstants.UNAUTHORIZED
+    })
+    @ApiInternalServerErrorResponse({
+        description: 'Unexpected error',
+        schema: AppConstants.INTERNAL_SERVER_ERROR,
+    })
     async remove(@Param('id') id: string) {
         return await this.gameService.remove(id);
     }
