@@ -10,31 +10,35 @@
 
                 <div class="profile-user-banner">
                     <div class="profile-user-photo">
-                        <fa-icon icon="user"></fa-icon>
+                        <img *ngIf="user?.photoURL; else placeholderPhoto" [src]="user?.photoURL" alt="User profile picture">
+                        <ng-template #placeholderPhoto>
+                            <fa-icon icon="user"></fa-icon>
+                        </ng-template>
                     </div>
 
                     <div class="profile-user-name">
                         <p>
-                            Beispielname
+                            {{ user?.displayName === null ? 'No name yet' : user?.displayName }}
                         </p>
                     </div>
                 </div>
 
                 <div class="profile-user-info">
-                    <div class="profile-card">
+                    <div class="profile-card verified-card">
                         <p>
                             <fa-icon icon="certificate"></fa-icon>
                             Verified:
                         </p>
-                        <fa-icon icon="check-circle"></fa-icon>
+                        <fa-icon *ngIf="user?.emailVerified" icon="check-circle"></fa-icon>
+                        <fa-icon *ngIf="!user?.emailVerified" icon="times-circle"></fa-icon>
                     </div>
 
-                    <div class="profile-card">
+                    <div class="profile-card email-card">
                         <p>
                             <fa-icon icon="envelope"></fa-icon>
                             Email:
                         </p>
-                        <p>Example@email.com</p>
+                        <p>{{ user?.email }}</p>
                     </div>
                 </div>
 

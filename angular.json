@@ -1317,7 +1317,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/profile-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/profile-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }

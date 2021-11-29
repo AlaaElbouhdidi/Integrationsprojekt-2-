@@ -20,7 +20,7 @@
     z-index: 99;
     @include for-desktop-up {
         position: absolute;
-        top: -5rem;
+        top: -2.25rem;
         left: -5rem;
     }
     fa-icon[icon="edit"] {
@@ -87,8 +87,15 @@
         margin: 0;
     }
     fa-icon[icon="check-circle"] {
-        color: #17c917;
+        color: #1ba11b;
     }
+    fa-icon[icon="times-circle"] {
+        color: #b82121;
+    }
+}
+.email-card {
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .profile-wrapper {
@@ -98,7 +105,7 @@
     color: $white;
     background: $dark;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    padding: 2rem 2rem 4rem 17rem;
+    padding: 2rem 2rem 2.5rem 17rem;
     align-items: flex-end;
     justify-content: flex-start;
     border-radius: 0.25rem;
