@@ -44,7 +44,7 @@ export class GameService {
                         firstTeamScore,
                         secondTeamId,
                         secondTeamScore,
-                        date
+                        date,
                     } = createGameDto;
                     const data = {
                         activity,
@@ -52,8 +52,8 @@ export class GameService {
                         firstTeamScore,
                         secondTeamId,
                         secondTeamScore,
-                        date
-                    }
+                        date,
+                    };
                     const res = await this.gamesRef.add(data);
                     if (res) {
                         this.logger.log(

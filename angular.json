@@ -108,7 +108,7 @@
                     "configurations": {
                         "production": {
                             "optimization": true,
-                            "extractLicenses": true,
+                            "extractLicenses": false,
                             "inspect": false,
                             "fileReplacements": [
                                 {
@@ -116,8 +116,13 @@
                                     "with": "libs/env/src/lib/environment.prod.ts"
                                 }
                             ]
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "build": {
                     "builder": "@nrwl/workspace:run-commands",

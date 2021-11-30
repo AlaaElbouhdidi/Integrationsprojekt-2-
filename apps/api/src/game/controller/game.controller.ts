@@ -60,9 +60,7 @@ export class GameController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async create(
-        @Body() createGameDto: CreateGameDto
-    ): Promise<Game> {
+    async create(@Body() createGameDto: CreateGameDto): Promise<Game> {
         return await this.gameService.create(createGameDto);
     }
     /**

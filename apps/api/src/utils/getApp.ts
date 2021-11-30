@@ -2,7 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
-import { ExpressAdapter } from '@nestjs/platform-express';
+import {
+    ExpressAdapter,
+    NestExpressApplication,
+} from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { environment } from '@env';
 import * as express from 'express';
@@ -18,16 +21,20 @@ export const expressInstance: express.Express = express();
  */
 export async function getApp(): Promise<INestApplication> {
     const server = new ExpressAdapter(expressInstance);
-    const app = await NestFactory.create(AppModule, server);
-    app.useGlobalPipes(new ValidationPipe({ transform: true }));
-    app.use(
-        '/docs/mate-team',
-        express.static(join(__dirname, 'docs', 'mate-team'))
+    const app = await NestFactory.create<NestExpressApplication>(
+        AppModule,
+        server
     );
-    app.use('/docs/api', express.static(join(__dirname, 'docs', 'api')));
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
+    app.useStaticAssets(join(__dirname, 'docs', 'mate-team'), {
+        prefix: '/docs/mate-team',
+    });
+    app.useStaticAssets(join(__dirname, 'docs', 'api'), {
+        prefix: '/docs/api/',
+    });
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
-        .addServer(environment.environment.apiUrl)
+        .addServer(environment.apiUrl)
         .setDescription(packagejson.description)
         .setVersion(packagejson.version)
         .addBearerAuth()

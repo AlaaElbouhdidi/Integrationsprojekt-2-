@@ -127,7 +127,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
      * Unsubscribes from subscribed observables
      */
     ngOnDestroy(): void {
-        this.unsubscribe$.next();
         this.unsubscribe$.complete();
     }
 }

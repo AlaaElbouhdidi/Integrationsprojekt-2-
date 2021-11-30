@@ -14,4 +14,5 @@ export const environment: Environment = {
     },
     production: true,
     apiUrl: 'https://europe-west1-mate-team.cloudfunctions.net/api',
+    clientUrl: 'https://mate-team.de'
 };
