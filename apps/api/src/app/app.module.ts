@@ -1,7 +1,7 @@
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
-// import { AppController } from './controller/app.controller';
+import { AppController } from './controller/app.controller';
 import { AppService } from './service/app.service';
 import { FirebaseModule } from '../firebase/firebase.module';
 import { EventModule } from '../event/event.module';
@@ -10,6 +10,7 @@ import { GameModule } from '../game/game.module';
 import { TeamModule } from '../team/team.module';
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AppGateway } from './gateway/app.gateway';
+
 /**
  * The AppModule
  * */
@@ -25,7 +26,7 @@ import { AppGateway } from './gateway/app.gateway';
             cache: true,
         }),
     ],
-    controllers: [],
+    controllers: [AppController],
     providers: [
         AppService,
         AppGateway,

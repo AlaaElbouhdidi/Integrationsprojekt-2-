@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, UnauthorizedException } from '@nestjs/common';
 import {
     ConnectedSocket,
     MessageBody,
@@ -11,9 +11,11 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { environment } from '@env';
+import * as admin from 'firebase-admin';
+import { FirebaseService } from '../../firebase/service/firebase.service';
 
 @WebSocketGateway({
-    cors: { origin: [environment.clientUrl, 'https://hoppscotch.io'] },
+    cors: { origin: [environment.clientUrl] },
 })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
@@ -21,6 +23,7 @@ export class AppGateway
     @WebSocketServer()
     server: Server;
     private logger: Logger = new Logger('AppGateway');
+    constructor(private firebaseService: FirebaseService) {}
 
     afterInit() {
         this.logger.log('Initialized');
@@ -30,9 +33,28 @@ export class AppGateway
         this.logger.log(`Client disconnected: ${client.id}`);
     }
 
-    handleConnection(client: Socket) {
-        this.logger.log(`Client connected: ${client.id}`);
-        this.server.emit('msgToServer', 'Mate-Team');
+    private disconnect(socket: Socket) {
+        socket.emit('Error', new UnauthorizedException());
+        socket.disconnect();
+        this.logger.error(`Disconnected client: ${socket.id}`);
+    }
+
+    async handleConnection(socket: Socket) {
+        try {
+            this.logger.log(`Client connected: ${socket.id}`);
+            const token: string = socket.handshake.headers.authorization;
+            if (token == 'undefined') {
+                this.logger.error(`Not signed in`);
+                throw new UnauthorizedException();
+            }
+            const user: admin.auth.DecodedIdToken = await this.firebaseService
+                .getAuth()
+                .verifyIdToken(token, true);
+            this.logger.log(user);
+        } catch (err) {
+            this.logger.error(err.message);
+            this.disconnect(socket);
+        }
     }
 
     @SubscribeMessage('msgToServer')
@@ -41,7 +63,7 @@ export class AppGateway
         @MessageBody() payload: unknown
     ) {
         this.logger.log(`Client : ${client.id}`);
-        this.logger.log(payload)
+        this.logger.log(payload);
         this.server.emit('msgToClient', payload);
     }
 }

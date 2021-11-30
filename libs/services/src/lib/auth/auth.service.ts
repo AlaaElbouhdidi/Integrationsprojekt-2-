@@ -30,12 +30,15 @@ export class AuthService {
      * @param auth {AngularFireAuth}
      */
     constructor(private auth: AngularFireAuth) {
-        this.auth.authState.subscribe((user) => {
+        this.auth.authState.subscribe(async (user) => {
             if (user) {
                 this.user = user;
+                const token = await user.getIdToken(true);
+                localStorage.setItem('idToken', token);
                 this.authState.next(user);
             } else {
                 this.user = null;
+                localStorage.clear();
                 this.authState.next(null);
             }
         });
@@ -53,6 +56,8 @@ export class AuthService {
         );
         if (userCredential.user) {
             await userCredential.user.sendEmailVerification();
+            const token = await userCredential.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
         }
     }
 
@@ -63,14 +68,27 @@ export class AuthService {
      * @param password {string} The password of the user
      */
     async login(email: string, password: string): Promise<void> {
-        await this.auth.signInWithEmailAndPassword(email, password);
+        const user = await this.auth.signInWithEmailAndPassword(
+            email,
+            password
+        );
+        if (user.user) {
+            const token = await user.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
+        }
     }
 
     /**
      * Login user with google credentials
      */
     async loginWithGoogle(): Promise<void> {
-        await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        const user = await this.auth.signInWithPopup(
+            new firebase.auth.GoogleAuthProvider()
+        );
+        if (user.user) {
+            const token = await user.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
+        }
     }
 
     /**
@@ -114,7 +132,9 @@ export class AuthService {
      * Logout a user
      */
     async logout(): Promise<void> {
+        localStorage.clear();
         await this.auth.signOut();
+        window.location.reload();
     }
 
     getCurrentUser(): User {

@@ -7,9 +7,23 @@ import { FirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
+export const socketConfig: SocketIoConfig = {
+    url: environment.apiUrl,
+    options: {
+        transportOptions: {
+            polling: {
+                extraHeaders: {
+                    Authorization: localStorage
+                        .getItem('idToken')
+                        ?.replace('"', ''),
+                },
+            },
+        },
+    },
+};
 
 @NgModule({
     declarations: [AppComponent, ExternalUrlDirective],
@@ -22,7 +36,7 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
         }),
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
-        SocketIoModule.forRoot(config),
+        SocketIoModule.forRoot(socketConfig),
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective],
