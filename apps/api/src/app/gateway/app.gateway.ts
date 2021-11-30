@@ -9,6 +9,7 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { environment } from '@env';
+import { Message } from '@api-interfaces';
 
 @WebSocketGateway({ cors: { origin: environment.clientUrl } })
 export class AppGateway
@@ -31,7 +32,7 @@ export class AppGateway
     }
 
     @SubscribeMessage('msgToServer')
-    handleMessage(client: Socket, payload: string) {
+    handleMessage(client: Socket, payload: Message) {
         this.logger.log(`Client : ${client.id}`);
         this.server.emit('msgToClient', payload);
     }

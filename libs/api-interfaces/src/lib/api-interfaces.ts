@@ -18,6 +18,8 @@ export interface Environment {
     };
     production: boolean;
     apiUrl: string;
+    apiPath: string;
+    wsHost: string;
     clientUrl: string;
 }
 
