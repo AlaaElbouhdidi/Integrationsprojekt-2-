@@ -1324,6 +1324,87 @@
                 }
             }
         },
+        "reauth-form": {
+            "projectType": "library",
+            "root": "libs/components/reauth-form",
+            "sourceRoot": "libs/components/reauth-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/reauth-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/reauth-form/src/**/*.ts",
+                            "libs/components/reauth-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/reauth-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/reauth-form",
+                        "config": {
+                            "configFolder": "libs/components/reauth-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "reauth-form-e2e": {
+            "root": "apps/e2e/reauth-form-e2e",
+            "sourceRoot": "apps/e2e/reauth-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/reauth-form-e2e/cypress.json",
+                        "devServerTarget": "reauth-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "reauth-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/reauth-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "register": {
             "projectType": "library",
             "root": "libs/components/register",

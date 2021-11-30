@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileRoutingModule } from './profile/profile-routing.module';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { ReauthFormModule } from '@reauth-form';
 import {
     faUser,
     faEnvelope,
@@ -18,6 +19,7 @@ import {
     imports: [
         CommonModule,
         ProfileRoutingModule,
+        ReauthFormModule,
         FontAwesomeModule
     ],
     declarations: [
