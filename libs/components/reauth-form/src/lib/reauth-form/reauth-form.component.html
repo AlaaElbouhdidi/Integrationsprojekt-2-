@@ -1,1 +1,33 @@
-<p>reauth-form works!</p>
+<form (ngSubmit)="reAuthUser()" [formGroup]="reAuthForm">
+    <div class="form-input">
+        <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            required
+        />
+        <fa-icon icon="lock"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Password has to be at least 6 characters
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <button
+            type="submit"
+            [class.disabled-btn]="!reAuthForm.valid"
+            [disabled]="!reAuthForm.valid"
+        >
+            Confirm
+        </button>
+    </div>
+</form>

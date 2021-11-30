@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReauthFormComponent } from './reauth-form/reauth-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoaderModule } from '@loader';
 import {
     FaIconLibrary,
     FontAwesomeModule
@@ -20,8 +19,7 @@ import {
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        FontAwesomeModule,
-        LoaderModule
+        FontAwesomeModule
     ],
     declarations: [
       ReauthFormComponent

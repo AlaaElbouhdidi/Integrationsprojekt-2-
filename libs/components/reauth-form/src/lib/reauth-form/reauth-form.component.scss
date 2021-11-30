@@ -1,0 +1,19 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+
+form {
+    color: $dark;
+}
+button {
+    border: none;
+    cursor: pointer;
+    background: #1ba11b;
+    color: $white;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+    width: 100%;
+}
+.form-error-message {
+    color: #b82121;
+}

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app'
 import { BehaviorSubject } from 'rxjs';
-import { getAuth } from "firebase/auth";
-import { User } from "@api-interfaces";
+import { getAuth, UserCredential, reauthenticateWithCredential, reauthenticateWithPopup } from "firebase/auth";
+import { User } from '@api-interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -106,6 +106,20 @@ export class AuthService {
      */
     confirmPasswordReset(code: string, newPassword: string): Promise<void> {
         return this.auth.confirmPasswordReset(code, newPassword);
+    }
+
+    reauthenticateUser(password: string): Promise<UserCredential> {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        const credential  = firebase.auth.EmailAuthProvider.credential(this.user!.email!, password);
+        return reauthenticateWithCredential(user!, credential);
+    }
+
+    reauthenticateWithPopup(): Promise<UserCredential> {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        const provider = new firebase.auth.GoogleAuthProvider();
+        return reauthenticateWithPopup(user!, provider);
     }
 
     /**
