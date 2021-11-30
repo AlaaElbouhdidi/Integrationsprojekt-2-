@@ -15,6 +15,6 @@ export const environment: Environment = {
     production: false,
     apiUrl: 'http://localhost:5001/mate-team/europe-west1/api',
     apiPath: '/mate-team/europe-west1/api',
-    wsHost: 'ws://localhost:5001',
+    wsHost: 'http://localhost:5001',
     clientUrl: 'http://localhost:5000',
 };

@@ -9,10 +9,16 @@ import { Observable } from 'rxjs';
 export class SocketService {
     socket: Socket;
     constructor() {
-        this.socket = io(environment.wsHost, { path: environment.apiPath});
+        this.socket = io(environment.wsHost, { path: environment.apiPath });
+        this.socket.connect();
+        console.log(this.socket);
     }
     listen = (event: string) =>
         new Observable((subscriber) => {
             this.socket.on(event, (data) => subscriber.next(data));
         });
+
+    emit = (event: string, data: unknown) => {
+        this.socket.emit(event, data);
+    };
 }

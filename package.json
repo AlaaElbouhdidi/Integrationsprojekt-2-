@@ -15,7 +15,7 @@
         "start": "nx serve",
         "build": "nx build mate-team --configuration=development --skip-nx-cache",
         "serve": "nx run-many --target=compodoc --parallel=true --all=true",
-        "postserve": "firebase emulators:start --import=.firestore-test-data --export-on-exit",
+        "postserve": "firebase emulators:start --import=.firebase --export-on-exit",
         "prebuild": "nx run api:build-node --configuration=development --skip-nx-cache",
         "preserve": "npm run build",
         "api:serve": "firebase emulators:start --only functions",

@@ -11,7 +11,7 @@ import { Server, Socket } from 'socket.io';
 import { environment } from '@env';
 import { Message } from '@api-interfaces';
 
-@WebSocketGateway({ cors: { origin: environment.clientUrl } })
+@WebSocketGateway({ cors: { origin: [environment.clientUrl, "https://hoppscotch.io"] } })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

@@ -28,11 +28,11 @@ import { AppGateway } from './gateway/app.gateway';
     controllers: [AppController],
     providers: [
         AppService,
+        AppGateway,
         {
             provide: APP_GUARD,
             useClass: FirebaseAuthGuard,
         },
-        AppGateway,
     ],
 })
 export class AppModule {}

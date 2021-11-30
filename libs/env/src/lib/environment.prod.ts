@@ -15,6 +15,6 @@ export const environment: Environment = {
     production: true,
     apiUrl: 'https://europe-west1-mate-team.cloudfunctions.net/api',
     apiPath: '/api',
-    wsHost: 'wss://europe-west1-mate-team.cloudfunctions.net',
+    wsHost: 'https://europe-west1-mate-team.cloudfunctions.net',
     clientUrl: 'https://mate-team.de',
 };
