@@ -17,9 +17,8 @@ export interface Environment {
         messagingSenderId: string;
     };
     production: boolean;
+    port: number;
     apiUrl: string;
-    apiPath: string;
-    wsHost: string;
     clientUrl: string;
 }
 

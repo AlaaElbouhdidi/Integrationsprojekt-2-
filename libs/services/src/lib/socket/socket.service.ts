@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class SocketService {
     socket: Socket;
     constructor() {
-        this.socket = io(environment.wsHost, { path: environment.apiPath });
+        this.socket = io(environment.apiUrl);
         this.socket.connect();
         console.log(this.socket);
     }

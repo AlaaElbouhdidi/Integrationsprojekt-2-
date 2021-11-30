@@ -97,13 +97,27 @@
                         ]
                     }
                 },
-                "build-node": {
+                "build-functions": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/functions",
+                        "main": "apps/api/src/functions/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": [
+                            "apps/api/src/package.json"
+                        ]
+                    }
+                },
+                "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
                         "outputPath": "dist/apps/api",
                         "main": "apps/api/src/main.ts",
                         "tsConfig": "apps/api/tsconfig.app.json",
-                        "assets": ["apps/api/src/package.json"]
+                        "assets": [
+                            "apps/api/src/package.json",
+                            "apps/api/src/serviceAccount.json"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -124,16 +138,16 @@
                     },
                     "defaultConfiguration": "production"
                 },
-                "build": {
+                "serve-functions": {
                     "builder": "@nrwl/workspace:run-commands",
                     "options": {
-                        "command": "nx run api:build-node"
+                        "command": "firebase emulators:start --only functions"
                     }
                 },
                 "serve": {
-                    "builder": "@nrwl/workspace:run-commands",
+                    "builder": "@nrwl/node:execute",
                     "options": {
-                        "command": "firebase emulators:start --only functions --inspect-functions"
+                        "buildTarget": "api:build"
                     }
                 },
                 "lint": {

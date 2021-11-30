@@ -14,7 +14,6 @@ export const environment: Environment = {
     },
     production: true,
     apiUrl: 'https://europe-west1-mate-team.cloudfunctions.net/api',
-    apiPath: '/api',
-    wsHost: 'https://europe-west1-mate-team.cloudfunctions.net',
+    port: 8000,
     clientUrl: 'https://mate-team.de',
 };

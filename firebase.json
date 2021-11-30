@@ -4,7 +4,7 @@
         "indexes": "firestore.indexes.json"
     },
     "functions": {
-        "source": "dist/apps/api"
+        "source": "dist/apps/api/functions"
     },
     "hosting": {
         "public": "dist/apps/mate-team",
