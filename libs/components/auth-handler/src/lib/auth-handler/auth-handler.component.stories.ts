@@ -15,9 +15,7 @@ export default {
             imports: [
                 RouterTestingModule,
                 AuthHandlerModule,
-                AngularFireModule.initializeApp(
-                    environment.environment.firebase
-                ),
+                AngularFireModule.initializeApp(environment.firebase),
             ],
             providers: [AuthService, AngularFireAuth],
         }),

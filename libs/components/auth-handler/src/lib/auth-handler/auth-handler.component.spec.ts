@@ -52,10 +52,8 @@ describe('AuthHandlerComponent', () => {
     });
 
     it('should trigger unsubscribe on destroy', () => {
-        jest.spyOn(component['unsubscribe$'], 'next');
         jest.spyOn(component['unsubscribe$'], 'complete');
         component.ngOnDestroy();
-        expect(component['unsubscribe$'].next).toHaveBeenCalledTimes(1);
         expect(component['unsubscribe$'].complete).toHaveBeenCalledTimes(1);
     });
 

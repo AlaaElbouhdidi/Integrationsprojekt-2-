@@ -11,9 +11,7 @@ export default {
         moduleMetadata({
             imports: [
                 EmailFormModule,
-                AngularFireModule.initializeApp(
-                    environment.environment.firebase
-                ),
+                AngularFireModule.initializeApp(environment.firebase),
             ],
         }),
     ],

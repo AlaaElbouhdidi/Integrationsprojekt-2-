@@ -15,9 +15,7 @@ describe('AppComponent', () => {
                 HttpClientModule,
                 RouterTestingModule,
                 CoreModule,
-                AngularFireModule.initializeApp(
-                    environment.environment.firebase
-                ),
+                AngularFireModule.initializeApp(environment.firebase),
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
