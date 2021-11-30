@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, SocketService } from '@services';
+import { Socket } from 'ngx-socket-io';
+import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -26,13 +27,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
     ],
 })
 export class AppComponent implements OnInit {
-    constructor(
-        public alertService: AlertService,
-        private socket: SocketService
-    ) {}
-    ngOnInit = () => {
-        this.socket.listen('msgToClient').subscribe((msg) => {
-            console.log(msg);
+    constructor(public alertService: AlertService, private socket: Socket) {}
+    ngOnInit() {
+        this.socket.fromEvent<string>('msgToServer').subscribe((title) => {
+            console.log(title);
         });
-    };
+    }
 }

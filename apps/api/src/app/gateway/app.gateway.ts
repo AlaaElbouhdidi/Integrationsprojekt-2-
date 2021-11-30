@@ -1,5 +1,7 @@
 import { Logger } from '@nestjs/common';
 import {
+    ConnectedSocket,
+    MessageBody,
     OnGatewayConnection,
     OnGatewayDisconnect,
     OnGatewayInit,
@@ -9,7 +11,6 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { environment } from '@env';
-import { Message } from '@api-interfaces';
 
 @WebSocketGateway({
     cors: { origin: [environment.clientUrl, 'https://hoppscotch.io'] },
@@ -31,11 +32,16 @@ export class AppGateway
 
     handleConnection(client: Socket) {
         this.logger.log(`Client connected: ${client.id}`);
+        this.server.emit('msgToServer', 'Mate-Team');
     }
 
     @SubscribeMessage('msgToServer')
-    handleMessage(client: Socket, payload: Message) {
+    handleMessage(
+        @ConnectedSocket() client: Socket,
+        @MessageBody() payload: unknown
+    ) {
         this.logger.log(`Client : ${client.id}`);
+        this.logger.log(payload)
         this.server.emit('msgToClient', payload);
     }
 }

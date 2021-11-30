@@ -1,16 +1,20 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from '../app/app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { INestApplication } from '@nestjs/common';
 import {
     ExpressAdapter,
     NestExpressApplication,
 } from '@nestjs/platform-express';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from '../app/app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { INestApplication } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { environment } from '@env';
-import * as express from 'express';
-import * as packagejson from '../package.json';
 import { join } from 'path';
+import { ServiceAccount } from 'firebase-admin';
+import * as express from 'express';
+import * as firebaseServiceAccount from '../serviceAccount.json';
+import * as admin from 'firebase-admin';
+import * as packagejson from '../package.json';
+
 /**
  * Instance that is required to initialize the app
  */
@@ -19,7 +23,18 @@ export const expressInstance: express.Express = express();
  * Function that returns the app
  * @returns {INestApplication}
  */
+
 export async function getApp(): Promise<INestApplication> {
+    const { project_id, client_email, private_key } = firebaseServiceAccount;
+    const serviceAccount: ServiceAccount = {
+        projectId: project_id,
+        clientEmail: client_email,
+        privateKey: private_key,
+    };
+    if (!admin.apps.length)
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+        });
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create<NestExpressApplication>(
         AppModule,
