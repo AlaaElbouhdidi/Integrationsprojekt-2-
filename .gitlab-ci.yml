@@ -34,6 +34,7 @@ build:
         - npx cypress cache path
         - npx cypress cache list
         - npx nx run-many --target=build --parallel --all
+        - npx nx build-functions api
     artifacts:
         paths:
             - dist
