@@ -1,5 +1,8 @@
 FROM node:14 as build
 
+ENV PORT 8000
+ENV HOST 0.0.0.0
+
 WORKDIR /app
 
 COPY . ./
