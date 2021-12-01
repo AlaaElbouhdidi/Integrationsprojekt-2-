@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
 import { BehaviorSubject } from 'rxjs';
 import { getAuth } from 'firebase/auth';
 import { User } from '@api-interfaces';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
     providedIn: 'root',
@@ -134,7 +134,6 @@ export class AuthService {
     async logout(): Promise<void> {
         localStorage.clear();
         await this.auth.signOut();
-        window.location.reload();
     }
 
     getCurrentUser(): User {

@@ -1,11 +1,8 @@
 import { Logger, UnauthorizedException } from '@nestjs/common';
 import {
-    ConnectedSocket,
-    MessageBody,
     OnGatewayConnection,
     OnGatewayDisconnect,
     OnGatewayInit,
-    SubscribeMessage,
     WebSocketGateway,
     WebSocketServer,
 } from '@nestjs/websockets';
@@ -55,15 +52,5 @@ export class AppGateway
             this.logger.error(err.message);
             this.disconnect(socket);
         }
-    }
-
-    @SubscribeMessage('msgToServer')
-    handleMessage(
-        @ConnectedSocket() client: Socket,
-        @MessageBody() payload: unknown
-    ) {
-        this.logger.log(`Client : ${client.id}`);
-        this.logger.log(payload);
-        this.server.emit('msgToClient', payload);
     }
 }

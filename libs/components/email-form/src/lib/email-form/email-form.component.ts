@@ -74,7 +74,6 @@ export class EmailFormComponent {
             this.loading = false;
             this.emailForm.reset();
             await this.router.navigate(['/']);
-            window.location.reload();
         } catch (e) {
             this.loading = false;
             this.emailForm.reset();

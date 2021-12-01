@@ -10,7 +10,7 @@ import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 export const socketConfig: SocketIoConfig = {
-    url: environment.apiUrl,
+    url: environment.clientUrl,
     options: {
         transportOptions: {
             polling: {
@@ -23,8 +23,6 @@ export const socketConfig: SocketIoConfig = {
         },
     },
 };
-
-console.log(socketConfig);
 
 @NgModule({
     declarations: [AppComponent, ExternalUrlDirective],

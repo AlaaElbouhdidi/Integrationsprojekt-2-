@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Component } from '@angular/core';
 import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 
@@ -26,11 +25,6 @@ import { animate, style, transition, trigger } from '@angular/animations';
         ]),
     ],
 })
-export class AppComponent implements OnInit {
-    constructor(public alertService: AlertService, private socket: Socket) {}
-    ngOnInit() {
-        this.socket.fromEvent<string>('msgToServer').subscribe((title) => {
-            console.log(title);
-        });
-    }
+export class AppComponent {
+    constructor(public alertService: AlertService) {}
 }
