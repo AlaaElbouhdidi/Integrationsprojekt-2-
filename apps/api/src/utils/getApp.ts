@@ -40,12 +40,16 @@ export async function getApp(): Promise<INestApplication> {
         AppModule,
         server
     );
+    app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     app.useStaticAssets(join(__dirname, 'docs', 'mate-team'), {
         prefix: '/docs/mate-team',
     });
     app.useStaticAssets(join(__dirname, 'docs', 'api'), {
         prefix: '/docs/api/',
+    });
+    app.useStaticAssets(join(__dirname, '..', 'mate-team'), {
+        prefix: '/',
     });
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')

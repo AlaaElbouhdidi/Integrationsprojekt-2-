@@ -144,9 +144,15 @@
                 },
                 "serve": {
                     "builder": "@nrwl/node:execute",
-                    "options": {
-                        "buildTarget": "api:build:production"
-                    }
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "api:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "api:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",

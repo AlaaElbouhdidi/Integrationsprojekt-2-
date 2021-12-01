@@ -53,7 +53,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
             .subscribe(async (params) => {
                 if (!params['mode'] || !params['oobCode']) {
                     await this.router.navigate(['/']);
-                    location.reload();
                 }
                 this.mode = params['mode'];
                 this.code = params['oobCode'];
@@ -79,7 +78,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 message: e.message,
             });
             await this.router.navigate(['/']);
-            location.reload();
         }
     }
 
@@ -94,14 +92,12 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 message: 'Email has been successfully verified.',
             });
             await this.router.navigate(['/']);
-            window.location.reload();
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
                 message: e.message,
             });
             await this.router.navigate(['/']);
-            window.location.reload();
         }
     }
 
@@ -119,7 +115,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                     'Password successfully reset and new password updated.',
             });
             await this.router.navigate(['/login']);
-            window.location.reload();
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',

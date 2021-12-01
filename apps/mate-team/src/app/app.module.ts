@@ -7,8 +7,7 @@ import { FirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
-import { SocketIoModule } from 'ngx-socket-io';
-import { SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 export const socketConfig: SocketIoConfig = {
     url: environment.apiUrl,

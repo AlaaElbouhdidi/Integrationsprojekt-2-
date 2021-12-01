@@ -1,5 +1,8 @@
 FROM node:14
 
+ENV PORT 8000
+ENV HOST 0.0.0.0
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -9,7 +12,5 @@ RUN npm i -g nx \
     nx build api
 
 COPY . .
-
-EXPOSE 8000
 
 CMD ["node", "dist/apps/api/main.js"]

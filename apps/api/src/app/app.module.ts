@@ -10,6 +10,7 @@ import { GameModule } from '../game/game.module';
 import { TeamModule } from '../team/team.module';
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AppGateway } from './gateway/app.gateway';
+
 /**
  * The AppModule
  * */
