@@ -1,0 +1,6 @@
+tools
+libs
+*-debug.log
+junit.xml
+.angular
+.firebase

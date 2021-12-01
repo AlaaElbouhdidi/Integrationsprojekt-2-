@@ -103,9 +103,7 @@
                         "outputPath": "dist/apps/api/functions",
                         "main": "apps/api/src/functions/main.ts",
                         "tsConfig": "apps/api/tsconfig.app.json",
-                        "assets": [
-                            "apps/api/src/package.json"
-                        ]
+                        "assets": ["apps/api/src/package.json"]
                     }
                 },
                 "build": {
@@ -147,7 +145,7 @@
                 "serve": {
                     "builder": "@nrwl/node:execute",
                     "options": {
-                        "buildTarget": "api:build:development"
+                        "buildTarget": "api:build:production"
                     }
                 },
                 "lint": {
