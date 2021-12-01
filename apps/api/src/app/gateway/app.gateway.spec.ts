@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { FirebaseModule } from '../../firebase/firebase.module';
 import { AppGateway } from './app.gateway';
 
 describe('AppGateway', () => {
@@ -6,6 +7,7 @@ describe('AppGateway', () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
+            imports: [FirebaseModule],
             providers: [AppGateway],
         }).compile();
 
