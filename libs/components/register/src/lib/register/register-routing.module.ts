@@ -8,13 +8,13 @@ import {
 
 const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/']);
 
-const routes: Routes = [
-    {
-        path: 'register',
-        component: RegisterComponent,
-        ...canActivate(redirectAuthenticatedToHome),
-    },
-];
+const route = {
+    path: 'register',
+    component: RegisterComponent,
+    ...canActivate(redirectAuthenticatedToHome),
+};
+
+const routes: Routes = [route];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

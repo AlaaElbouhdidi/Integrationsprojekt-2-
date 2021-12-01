@@ -5,11 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    exports: [
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        NgbModule,
-    ],
+    exports: [CommonModule, BrowserModule, BrowserAnimationsModule, NgbModule],
 })
 export class StylesModule {}

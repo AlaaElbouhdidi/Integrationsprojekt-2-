@@ -11,7 +11,7 @@
                     {
                         "type": "attribute",
                         "prefix": "mate-team",
-                        "style": "camelCase"
+                        "style": "kebab-case"
                     }
                 ],
                 "@angular-eslint/component-selector": [

@@ -1,4 +1,6 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { FooterModule } from '../footer.module';
 import { FooterComponent } from './footer.component';
 
 export default {
@@ -6,7 +8,7 @@ export default {
     component: FooterComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
+            imports: [FooterModule, RouterTestingModule],
         }),
     ],
 } as Meta<FooterComponent>;
