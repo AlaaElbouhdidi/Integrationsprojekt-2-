@@ -29,7 +29,7 @@ import { SlideshowModule } from '@slideshow';
         FooterModule,
         AuthHandlerModule,
         AngularFireFunctionsModule,
-        StylesModule
+        StylesModule,
     ],
 })
 export class CoreModule {}

@@ -1,0 +1,5 @@
+tools
+*-debug.log
+junit.xml
+.angular
+.firebase

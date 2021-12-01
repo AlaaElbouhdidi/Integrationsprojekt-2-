@@ -12,20 +12,20 @@ describe('RegisterFormComponent', () => {
     let fixture: ComponentFixture<RegisterFormComponent>;
 
     const authServiceMock = {
-        register: jest.fn()
-    }
+        register: jest.fn(),
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock }
+                { provide: AuthService, useValue: authServiceMock },
             ],
             imports: [
                 FontAwesomeModule,
                 RegisterFormModule,
                 RouterTestingModule.withRoutes([]),
-            ]
+            ],
         }).compileComponents();
     });
 
@@ -45,7 +45,8 @@ describe('RegisterFormComponent', () => {
     });
 
     it('should render two input elements', () => {
-        const form = fixture.debugElement.nativeElement.querySelector('.app-form');
+        const form =
+            fixture.debugElement.nativeElement.querySelector('.app-form');
         const input = form.querySelectorAll('input');
         expect(input.length).toEqual(2);
     });
@@ -61,16 +62,15 @@ describe('RegisterFormComponent', () => {
     });
 
     it('should call auth service register method', () => {
-       const spy = jest.spyOn(authServiceMock, 'register');
-       component.register();
-       expect(spy).toHaveBeenCalledTimes(1);
+        const spy = jest.spyOn(authServiceMock, 'register');
+        component.register();
+        expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should redirect to landing page after successful register', () => {
         const location = TestBed.inject(Location);
-        component.register()
-            .then(() => {
-                expect(location.path()).toBe('/');
-            });
+        component.register().then(() => {
+            expect(location.path()).toBe('/');
+        });
     });
 });

@@ -1,0 +1,23 @@
+@import '_variables';
+@import '_mixins';
+.container {
+    background: $white;
+    color: $dark;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    max-width: 25rem;
+    border-radius: 2px;
+    h1 {
+        text-align: center;
+        font-weight: normal;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+    }
+    h6 {
+        font-size: 1rem;
+    }
+    @include for-tablet-portrait-up {
+        width: 25rem;
+    }
+}
