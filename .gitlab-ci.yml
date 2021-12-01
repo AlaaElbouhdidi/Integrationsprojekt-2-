@@ -33,7 +33,6 @@ build:
         - npm ci
         - npx cypress cache path
         - npx cypress cache list
-        - npx nx run-many --target=compodoc --parallel --all
         - npx nx run-many --target=build --parallel --all
     artifacts:
         paths:
@@ -59,8 +58,7 @@ doc:
     artifacts:
         when: always
         paths:
-            - dist/apps/mate-team/documentation
-            - dist/apps/api/documentation
+            - dist/apps/api/docs
 
 test:
     stage: test
