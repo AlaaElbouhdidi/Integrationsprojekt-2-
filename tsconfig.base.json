@@ -24,18 +24,22 @@
             "@env": ["libs/env/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
-            "@slideshow": ["libs/components/slideshow/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
-            "@newgroup-success": ["libs/components/newgroup-success/src/index.ts"],
-            "@password-reset-form": ["libs/components/password-reset-form/src/index.ts"],
+            "@newgroup-success": [
+                "libs/components/newgroup-success/src/index.ts"
+            ],
+            "@password-reset-form": [
+                "libs/components/password-reset-form/src/index.ts"
+            ],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],
+            "@slideshow": ["libs/components/slideshow/src/index.ts"],
             "@styles": ["libs/styles/src/index.ts"]
         }
     },
