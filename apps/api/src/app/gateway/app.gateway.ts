@@ -15,7 +15,7 @@ import * as admin from 'firebase-admin';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 
 @WebSocketGateway({
-    cors: { origin: [environment.apiUrl] },
+    cors: { origin: [environment.clientUrl] },
 })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect

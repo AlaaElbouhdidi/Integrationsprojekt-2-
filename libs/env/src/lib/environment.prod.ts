@@ -15,4 +15,5 @@ export const environment: Environment = {
     production: true,
     port: 8000,
     apiUrl: 'https://mate-team.de',
+    clientUrl: 'wss://mate-team.de',
 };

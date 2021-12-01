@@ -28,7 +28,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
         }),
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '..', 'mate-team'),
-            exclude: ['/docs*', '/api*'],
+            exclude: ['/api*','/docs*'],
+            serveStaticOptions: {
+                redirect: false
+            }
         }),
     ],
     controllers: [AppController],

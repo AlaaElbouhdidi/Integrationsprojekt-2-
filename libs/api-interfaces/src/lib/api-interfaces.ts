@@ -19,6 +19,7 @@ export interface Environment {
     production: boolean;
     port: number;
     apiUrl: string;
+    clientUrl: string;
 }
 
 export interface Member {
