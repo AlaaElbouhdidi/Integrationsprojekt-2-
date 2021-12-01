@@ -21,6 +21,7 @@ cache:
     paths:
         - node_modules/
         - cache/Cypress
+        - dist
 
 before_script:
     - apk add git
