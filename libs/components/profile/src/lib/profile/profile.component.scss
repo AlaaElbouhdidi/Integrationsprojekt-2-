@@ -10,7 +10,7 @@
 }
 .profile-user {
     position: relative;
-    width: 20rem;
+    width: 100%;
     background: $dark;
     color: $white;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
@@ -18,22 +18,11 @@
     padding: 1rem;
     animation: slide-in-left 0.5s forwards;
     z-index: 99;
-    @include for-desktop-up {
+    @include for-tablet-landscape-up {
         position: absolute;
         top: -2.25rem;
         left: -5rem;
-    }
-    fa-icon[icon="edit"] {
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: pointer;
-        transition: 0.25s;
-        z-index: 99;
-        padding: 0.5rem;
-        &:hover {
-            color: $light;
-        }
+        width: 20rem;
     }
 }
 .profile-user-banner {
@@ -41,13 +30,19 @@
     inset: 0;
     width: 100%;
     background: $darkAccent;
-    clip-path: circle(62.5% at 50% 3%);
     display: flex;
     align-items: center;
     flex-direction: column;
+    clip-path: circle(62.5% at 50% 3%);
     padding: 2rem;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+    @include for-tablet-portrait-up {
+        clip-path: circle(55% at 50% 3%);
+    }
+    @include for-tablet-landscape-up {
+        clip-path: circle(62.5% at 50% 3%);
+    }
 }
 .profile-user-photo {
     @include flex-center;
@@ -99,36 +94,82 @@
 }
 
 .profile-wrapper {
-    display: none;
     animation: fade-in 0.5s forwards;
     position: relative;
     color: $white;
     background: $dark;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    padding: 2rem 2rem 2rem 17rem;
-    min-height: 27rem;
+    padding: 1rem;
     align-items: flex-end;
     justify-content: flex-start;
     border-radius: 0.25rem;
+    select {
+        display: block;
+        background: $darkAccent;
+        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+        color: $white;
+        text-align: center;
+        padding: 0.75rem;
+        cursor: pointer;
+        text-align-last: center;
+        border-radius: 0.25rem;
+        width: 100%;
+        border: none;
+        option {
+            cursor: pointer;
+            &:hover {
+                background: $main;
+            }
+        }
+        @include for-tablet-portrait-up {
+            display: none;
+        }
+    }
     nav {
+        display: none;
+        @include for-tablet-portrait-up {
+            display: block;
+        }
         ul {
             list-style: none;
-            display: flex;
             padding: 0;
+            text-align: center;
+            @include for-tablet-portrait-up {
+                display: flex;
+            }
             li {
                 cursor: pointer;
-                margin: 0 2.25rem;
+                margin: 0.35rem 0;
                 position: relative;
-                &:hover {
-                    border-bottom: 2px solid white;
+                fa-icon {
+                    position: absolute;
+                    top: 0;
+                    left: -1.25rem;
+                    transition: 0.25s;
+                }
+                &:hover fa-icon {
+                    transform: translateY(-1.5rem);
+                    opacity: 0;
+                }
+                @include for-tablet-portrait-up {
+                    margin: 0 1.2rem;
+                }
+                @include for-desktop-up {
+                    margin: 0 2.25rem;
                 }
             }
         }
     }
-    @include for-desktop-up {
+    @include for-tablet-portrait-up {
+        margin: 1rem 0;
+    }
+    @include for-tablet-landscape-up {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        padding: 2rem 2rem 2rem 17rem;
+        min-height: 27rem;
+        margin: 0;
     }
 }
 .profile-edit {
@@ -138,7 +179,10 @@
     display: flex;
     justify-content: center;
     .change-password, .change-email {
-        width: 90%;
+        width: 100%;
+        @include for-desktop-up {
+            width: 90%;
+        }
     }
 }
 .change-warning {
@@ -146,10 +190,13 @@
     border: 1px solid #f6c117;
     background: rgba(246, 193, 23, 0.5);
     border-radius: 0.25rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
 }
 .selected-nav {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid $light;
+    fa-icon {
+        color: $light;
+    }
 }
 .google-reauth-btn {
     background: #962323 !important;
@@ -164,7 +211,6 @@
         background: #b02828 !important;
     }
 }
-
 @keyframes slide-in-left {
     from { transform: translateX(-5rem); }
     to { transform: translateX(0); }

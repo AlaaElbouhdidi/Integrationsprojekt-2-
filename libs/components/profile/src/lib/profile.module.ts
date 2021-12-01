@@ -12,7 +12,7 @@ import {
     faTimesCircle,
     faLock,
     faLink,
-    faEdit
+    faUserTag
 } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
@@ -37,7 +37,7 @@ export class ProfileModule {
             faTimesCircle,
             faLock,
             faLink,
-            faEdit
+            faUserTag
         );
     }
 }

@@ -6,8 +6,6 @@
 
             <div class="profile-user">
 
-                <fa-icon icon="edit"></fa-icon>
-
                 <div class="profile-user-banner">
                     <div class="profile-user-photo">
                         <img *ngIf="user?.photoURL; else placeholderPhoto" [src]="user?.photoURL" alt="User profile picture">
@@ -18,7 +16,8 @@
 
                     <div class="profile-user-name">
                         <p>
-                            {{ user?.displayName === null ? 'No name yet' : user?.displayName }}
+                            <fa-icon icon="user-tag"></fa-icon>
+                            {{ user?.displayName === null ? 'No name set' : user?.displayName }}
                         </p>
                     </div>
                 </div>
@@ -45,6 +44,27 @@
             </div>
 
             <div class="profile-wrapper">
+
+                <select name="nav-selection-mobile" id="nav-selection">
+                    <option
+                        (click)="setActiveLink('profile')"
+                        [selected]="activeNavLink === 'profile'"
+                    >
+                        Change profile
+                    </option>
+                    <option
+                        (click)="setActiveLink('password')"
+                        [selected]="activeNavLink === 'password'"
+                    >
+                        Change password
+                    </option>
+                    <option
+                        (click)="setActiveLink('email')"
+                        [selected]="activeNavLink === 'email'"
+                    >
+                        Change email
+                    </option>
+                </select>
 
                 <nav>
                     <ul>
