@@ -1,15 +1,14 @@
-FROM node:14
+FROM node:14 as build
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY nx.json ./
+COPY . ./
 
 RUN npm i -g nx && \
-    npm ci && \
-    nx run-many --target=compodoc --all --skip-nx-cache && \
-    nx run-many --target=build --all --skip-nx-cache
+    npm ci
 
-COPY . ./
+RUN nx run-many --target=compodoc --all --skip-nx-cache && \
+    nx build && \
+    nx build api
 
 CMD ["node", "dist/apps/api/main.js"]
