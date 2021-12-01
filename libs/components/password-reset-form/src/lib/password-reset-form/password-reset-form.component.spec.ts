@@ -11,9 +11,8 @@ describe('PasswordResetFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-        imports: [ PasswordResetFormModule ]
-    })
-    .compileComponents();
+            imports: [PasswordResetFormModule],
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -38,14 +37,17 @@ describe('PasswordResetFormComponent', () => {
     });
 
     it('should render two input elements', () => {
-        const form = fixture.debugElement.nativeElement.querySelector('.app-form');
+        const form =
+            fixture.debugElement.nativeElement.querySelector('.app-form');
         const input = form.querySelectorAll('input');
         expect(input.length).toEqual(2);
     });
 
     it('should toggle state of password input on click', () => {
         expect(component.showNewPassword).toBeFalsy();
-        fixture.debugElement.query(By.css('.toggleVisibilityIcon')).triggerEventHandler('click', null);
+        fixture.debugElement
+            .query(By.css('.toggleVisibilityIcon'))
+            .triggerEventHandler('click', null);
         expect(component.showNewPassword).toBeTruthy();
     });
 
@@ -60,7 +62,7 @@ describe('PasswordResetFormComponent', () => {
         component.newPassword.setValue('testing123');
         component.confirmPassword.setValue('testing');
         component.comparePasswords();
-        expect(component.confirmPassword.errors).toEqual({ "mustMatch": true });
+        expect(component.confirmPassword.errors).toEqual({ mustMatch: true });
     });
 
     it('should set error when password has 5 or less characters', () => {
@@ -71,7 +73,7 @@ describe('PasswordResetFormComponent', () => {
 
     it('should compare passwords on input event', () => {
         const spy = jest.spyOn(component, 'comparePasswords');
-        const input = fixture.debugElement.query(By.css('input'))
+        const input = fixture.debugElement.query(By.css('input'));
         input.triggerEventHandler('input', { target: input.nativeElement });
         expect(spy).toHaveBeenCalled();
     });

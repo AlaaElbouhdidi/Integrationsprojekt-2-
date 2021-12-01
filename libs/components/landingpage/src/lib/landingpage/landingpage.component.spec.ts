@@ -15,10 +15,7 @@ describe('LandingpageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                LandingpageComponent,
-                MockSlideshowComponent
-            ],
+            declarations: [LandingpageComponent, MockSlideshowComponent],
         }).compileComponents();
     });
 
@@ -33,6 +30,8 @@ describe('LandingpageComponent', () => {
     });
 
     it('should render slideshow', () => {
-        expect(fixture.debugElement.query(By.css('mate-team-slideshow'))).not.toBeNull();
+        expect(
+            fixture.debugElement.query(By.css('mate-team-slideshow'))
+        ).not.toBeNull();
     });
 });

@@ -25,7 +25,7 @@ describe('LoginComponent', () => {
             declarations: [
                 LoginComponent,
                 MockLoginFormComponent,
-                MockEmailFormComponent
+                MockEmailFormComponent,
             ],
         }).compileComponents();
     });
@@ -42,6 +42,8 @@ describe('LoginComponent', () => {
 
     it('should render login form', () => {
         expect(component.showLogin).toBeTruthy();
-        expect(fixture.debugElement.query(By.css('mate-team-login-form'))).not.toBeNull();
+        expect(
+            fixture.debugElement.query(By.css('mate-team-login-form'))
+        ).not.toBeNull();
     });
 });

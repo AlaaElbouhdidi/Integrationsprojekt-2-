@@ -4,11 +4,7 @@ import { NewgroupSuccessComponent } from './newgroup-success.component';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [
-      NewgroupSuccessComponent
-    ],
-    exports: [
-      NewgroupSuccessComponent
-    ],
+    declarations: [NewgroupSuccessComponent],
+    exports: [NewgroupSuccessComponent],
 })
 export class NewgroupSuccessModule {}

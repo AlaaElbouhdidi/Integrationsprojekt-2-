@@ -7,38 +7,36 @@ import { AlertModule } from '@alert';
 import { RouterModule } from '@angular/router';
 
 import {
-  FontAwesomeModule,
-  FaIconLibrary,
+    FontAwesomeModule,
+    FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
 import {
-  faExclamationCircle,
-  faCheckCircle,
-  faTimesCircle,
-  faExclamationTriangle,
+    faExclamationCircle,
+    faCheckCircle,
+    faTimesCircle,
+    faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
-    imports: [CommonModule,
-      FormsModule,
-      LoaderModule,
-      ReactiveFormsModule,
-      FontAwesomeModule,
-      AlertModule,
-      RouterModule,],
-    declarations: [
-      NewgroupFormComponent
+    imports: [
+        CommonModule,
+        FormsModule,
+        LoaderModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+        AlertModule,
+        RouterModule,
     ],
-    exports: [
-      NewgroupFormComponent
-    ],
+    declarations: [NewgroupFormComponent],
+    exports: [NewgroupFormComponent],
 })
 export class NewgroupFormModule {
-  constructor(library: FaIconLibrary) {
-    library.addIcons(
-        faExclamationCircle,
-        faCheckCircle,
-        faTimesCircle,
-        faExclamationTriangle
-    );
-}
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faExclamationCircle,
+            faCheckCircle,
+            faTimesCircle,
+            faExclamationTriangle
+        );
+    }
 }

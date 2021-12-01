@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from '@env';
 
 @Component({
     selector: 'mate-team-header',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
+    apiUrl: string = environment.apiUrl;
     /**
      * Authenticated State
      */

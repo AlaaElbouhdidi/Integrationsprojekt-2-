@@ -6,11 +6,7 @@ import { SlideshowModule } from '@slideshow';
 
 @NgModule({
     declarations: [LandingpageComponent],
-    imports: [
-        CommonModule,
-        LandingpageRoutingModule,
-        SlideshowModule
-    ],
+    imports: [CommonModule, LandingpageRoutingModule, SlideshowModule],
     exports: [LandingpageComponent],
 })
 export class LandingpageModule {}

@@ -1,12 +1,18 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'mate-team-email-form',
-  templateUrl: './email-form.component.html',
-  styleUrls: ['./email-form.component.scss']
+    selector: 'mate-team-email-form',
+    templateUrl: './email-form.component.html',
+    styleUrls: ['./email-form.component.scss'],
 })
 export class EmailFormComponent {
     /**
@@ -36,10 +42,7 @@ export class EmailFormComponent {
         private router: Router
     ) {
         this.emailForm = this.fb.group({
-            email: new FormControl('', [
-                Validators.email,
-                Validators.required
-            ])
+            email: new FormControl('', [Validators.email, Validators.required]),
         });
     }
 
@@ -71,6 +74,7 @@ export class EmailFormComponent {
             this.loading = false;
             this.emailForm.reset();
             await this.router.navigate(['/']);
+            window.location.reload();
         } catch (e) {
             this.loading = false;
             this.emailForm.reset();
