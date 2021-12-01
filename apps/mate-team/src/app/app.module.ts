@@ -24,6 +24,8 @@ export const socketConfig: SocketIoConfig = {
     },
 };
 
+console.log(socketConfig);
+
 @NgModule({
     declarations: [AppComponent, ExternalUrlDirective],
     imports: [

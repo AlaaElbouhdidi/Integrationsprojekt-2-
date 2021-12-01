@@ -15,5 +15,4 @@ export const environment: Environment = {
     production: false,
     apiUrl: 'http://localhost:8000',
     port: 8000,
-    clientUrl: 'http://localhost:8000',
 };

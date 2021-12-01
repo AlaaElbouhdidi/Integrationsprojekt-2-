@@ -10,7 +10,8 @@ import { GameModule } from '../game/game.module';
 import { TeamModule } from '../team/team.module';
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AppGateway } from './gateway/app.gateway';
-
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 /**
  * The AppModule
  * */
@@ -24,6 +25,10 @@ import { AppGateway } from './gateway/app.gateway';
         ConfigModule.forRoot({
             isGlobal: true,
             cache: true,
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..', 'mate-team'),
+            exclude: ['/docs*', '/api*'],
         }),
     ],
     controllers: [AppController],

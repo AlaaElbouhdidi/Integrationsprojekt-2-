@@ -922,8 +922,8 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "750kb",
-                                    "maximumError": "1.5mb"
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "3mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -966,7 +966,7 @@
                             "browserTarget": "mate-team:build:development"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "production"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",

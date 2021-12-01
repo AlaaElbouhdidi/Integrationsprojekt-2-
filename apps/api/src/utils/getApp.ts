@@ -48,9 +48,6 @@ export async function getApp(): Promise<INestApplication> {
     app.useStaticAssets(join(__dirname, 'docs', 'api'), {
         prefix: '/docs/api/',
     });
-    app.useStaticAssets(join(__dirname, '..', 'mate-team'), {
-        prefix: '/',
-    });
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')
         .addServer(environment.apiUrl)

@@ -13,7 +13,6 @@ export const environment: Environment = {
         appId: '1:848103878945:web:2d78aef8264f87f52b0e60',
     },
     production: true,
-    apiUrl: 'https://europe-west1-mate-team.cloudfunctions.net/api',
     port: 8000,
-    clientUrl: 'https://mate-team.de',
+    apiUrl: 'https://mate-team.de',
 };
