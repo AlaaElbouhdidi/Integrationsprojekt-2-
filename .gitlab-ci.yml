@@ -21,6 +21,7 @@ cache:
     paths:
         - node_modules/
         - cache/Cypress
+        - dist
 
 before_script:
     - apk add git
@@ -32,6 +33,7 @@ build:
         - npm ci
         - npx cypress cache path
         - npx cypress cache list
+        - npx nx run-many --target=compodoc --parallel --all
         - npx nx run-many --target=build --parallel --all
     artifacts:
         paths:
