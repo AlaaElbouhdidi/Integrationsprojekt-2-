@@ -1,6 +1,6 @@
 # Integrationsprojekt 2 - Backend
 
-View function deployment at <https://europe-west1-integrationsprojekt2.cloudfunctions.net/api>
+View function deployment at <https://europe-west1-mate-team.cloudfunctions.net/api>
 
 ## Installation
 

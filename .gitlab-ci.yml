@@ -21,6 +21,7 @@ cache:
     paths:
         - node_modules/
         - cache/Cypress
+        - dist
 
 before_script:
     - apk add git
@@ -33,6 +34,7 @@ build:
         - npx cypress cache path
         - npx cypress cache list
         - npx nx run-many --target=build --parallel --all
+        - npx nx build-functions api
     artifacts:
         paths:
             - dist
@@ -57,8 +59,7 @@ doc:
     artifacts:
         when: always
         paths:
-            - dist/apps/mate-team/documentation
-            - dist/apps/api/documentation
+            - dist/apps/api/docs
 
 test:
     stage: test

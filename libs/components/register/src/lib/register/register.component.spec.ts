@@ -29,6 +29,8 @@ describe('RegisterComponent', () => {
     });
 
     it('should render register form', () => {
-        expect(fixture.debugElement.query(By.css('mate-team-register-form'))).not.toBeNull();
+        expect(
+            fixture.debugElement.query(By.css('mate-team-register-form'))
+        ).not.toBeNull();
     });
 });

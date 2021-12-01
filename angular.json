@@ -92,12 +92,21 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/api/tsconfig.doc.json -d dist/apps/api/documentation/"
+                                "command": "npx compodoc -p apps/api/tsconfig.compodoc.json -d dist/apps/api/docs/api/"
                             }
                         ]
                     }
                 },
-                "build-node": {
+                "build-functions": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/functions",
+                        "main": "apps/api/src/functions/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/package.json"]
+                    }
+                },
+                "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
                         "outputPath": "dist/apps/api",
@@ -105,13 +114,13 @@
                         "tsConfig": "apps/api/tsconfig.app.json",
                         "assets": [
                             "apps/api/src/package.json",
-                            "apps/api/src/.env"
+                            "apps/api/src/serviceAccount.json"
                         ]
                     },
                     "configurations": {
                         "production": {
                             "optimization": true,
-                            "extractLicenses": true,
+                            "extractLicenses": false,
                             "inspect": false,
                             "fileReplacements": [
                                 {
@@ -119,20 +128,31 @@
                                     "with": "libs/env/src/lib/environment.prod.ts"
                                 }
                             ]
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false
                         }
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
-                "build": {
+                "serve-functions": {
                     "builder": "@nrwl/workspace:run-commands",
                     "options": {
-                        "command": "nx run api:build-node"
+                        "command": "firebase emulators:start --only functions"
                     }
                 },
                 "serve": {
-                    "builder": "@nrwl/workspace:run-commands",
-                    "options": {
-                        "command": "firebase emulators:start --only functions --inspect-functions"
-                    }
+                    "builder": "@nrwl/node:execute",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "api:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "api:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
@@ -347,7 +367,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/email-form-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/email-form-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -868,7 +890,7 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/mate-team/tsconfig.doc.json -d dist/apps/mate-team/documentation/"
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/"
                             }
                         ]
                     }
@@ -900,8 +922,8 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "750kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "3mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -928,6 +950,12 @@
                     },
                     "defaultConfiguration": "production"
                 },
+                "firebase": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "npm run serve"
+                    }
+                },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
@@ -938,7 +966,7 @@
                             "browserTarget": "mate-team:build:development"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "production"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -994,6 +1022,168 @@
                         "lintFilePatterns": [
                             "apps/e2e/mate-team-e2e/**/*.{js,ts}"
                         ]
+                    }
+                }
+            }
+        },
+        "newgroup": {
+            "projectType": "library",
+            "root": "libs/components/newgroup",
+            "sourceRoot": "libs/components/newgroup/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup/src/**/*.ts",
+                            "libs/components/newgroup/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup",
+                        "config": {
+                            "configFolder": "libs/components/newgroup/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "newgroup-form": {
+            "projectType": "library",
+            "root": "libs/components/newgroup-form",
+            "sourceRoot": "libs/components/newgroup-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup-form/src/**/*.ts",
+                            "libs/components/newgroup-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup-form",
+                        "config": {
+                            "configFolder": "libs/components/newgroup-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "newgroup-success": {
+            "projectType": "library",
+            "root": "libs/components/newgroup-success",
+            "sourceRoot": "libs/components/newgroup-success/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup-success/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup-success/src/**/*.ts",
+                            "libs/components/newgroup-success/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup-success",
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
                     }
                 }
             }
@@ -1340,7 +1530,9 @@
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["apps/e2e/slideshow-e2e/**/*.{js,ts}"]
+                        "lintFilePatterns": [
+                            "apps/e2e/slideshow-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }

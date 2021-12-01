@@ -1,22 +1,45 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ExternalUrlDirective } from './app.external-url.directive';
 import { CoreModule } from '@core';
-import { AngularFireModule } from '@angular/fire/compat';
+import { FirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+
+export const socketConfig: SocketIoConfig = {
+    url: environment.apiUrl,
+    options: {
+        transportOptions: {
+            polling: {
+                extraHeaders: {
+                    Authorization: localStorage
+                        .getItem('idToken')
+                        ?.replace('"', ''),
+                },
+            },
+        },
+    },
+};
+
+console.log(socketConfig);
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ExternalUrlDirective],
     imports: [
         CoreModule,
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.environment.production,
+            enabled: environment.production,
             registrationStrategy: 'registerWhenStable:30000',
         }),
-        AngularFireModule.initializeApp(environment.environment.firebase),
+        AngularFireModule.initializeApp(environment.firebase),
+        FirestoreModule,
+        SocketIoModule.forRoot(socketConfig),
     ],
     bootstrap: [AppComponent],
+    exports: [ExternalUrlDirective],
 })
 export class AppModule {}

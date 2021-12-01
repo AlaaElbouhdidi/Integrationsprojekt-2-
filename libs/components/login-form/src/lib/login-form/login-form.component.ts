@@ -15,10 +15,26 @@ import { Router } from '@angular/router';
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
+    /**
+     * Login Form Group
+     */
     loginForm: FormGroup;
+    /**
+     * Loading state
+     */
     loading = false;
+    /**
+     * Show email form event
+     */
     @Output() showEmailFormEvent = new EventEmitter();
 
+    /**
+     * Constructor which initializes the reactive login form
+     * @param fb {FormBuilder}
+     * @param authService {AuthService}
+     * @param alertService {AlertService}
+     * @param router {Router}
+     */
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
@@ -34,14 +50,23 @@ export class LoginFormComponent {
         });
     }
 
+    /**
+     * @returns {AbstractControl} The email input control of the form
+     */
     get email(): AbstractControl {
         return this.loginForm.controls.email;
     }
 
+    /**
+     * @returns {AbstractControl} The password input control of the form
+     */
     get password(): AbstractControl {
         return this.loginForm.controls.password;
     }
 
+    /**
+     * Calls auth service to login the user with email and password and handles success and error cases
+     */
     async login(): Promise<void> {
         try {
             this.loading = true;
@@ -53,6 +78,7 @@ export class LoginFormComponent {
                 message: 'Successfully logged in',
             });
             await this.router.navigate(['/']);
+            window.location.reload();
         } catch (e) {
             this.loading = false;
             this.loginForm.reset();
@@ -63,6 +89,9 @@ export class LoginFormComponent {
         }
     }
 
+    /**
+     * Calls auth service to open login with google popup and handles success and error cases
+     */
     async loginWithGoogle(): Promise<void> {
         try {
             await this.authService.loginWithGoogle();
@@ -71,6 +100,7 @@ export class LoginFormComponent {
                 message: 'Successfully logged in with google',
             });
             await this.router.navigate(['/']);
+            window.location.reload();
         } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({
@@ -81,6 +111,9 @@ export class LoginFormComponent {
         }
     }
 
+    /**
+     * Emits the event to show the email form
+     */
     resetPassword(): void {
         this.showEmailFormEvent.emit();
     }

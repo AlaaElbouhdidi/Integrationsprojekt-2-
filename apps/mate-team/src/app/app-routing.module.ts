@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { InjectionToken, NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+
+const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 
 const routes: Routes = [
     {
@@ -16,13 +19,33 @@ const routes: Routes = [
         loadChildren: () => import('@login').then((m) => m.LoginModule),
     },
     {
+        path: 'newgroup',
+        loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule),
+    },
+    {
         path: 'auth/handler',
-        loadChildren: () => import('@auth-handler').then((m) => m.AuthHandlerModule)
+        loadChildren: () =>
+            import('@auth-handler').then((m) => m.AuthHandlerModule),
+    },
+    {
+        path: 'externalRedirect',
+        canActivate: [externalUrlProvider],
+        // We need a component here because we cannot define the route otherwise
+        component: AppComponent,
     },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
+    providers: [
+        {
+            provide: externalUrlProvider,
+            useValue: (route: ActivatedRouteSnapshot) => {
+                const externalUrl = route.paramMap.get('externalUrl');
+                if (externalUrl) window.open(externalUrl, '_self');
+            },
+        },
+    ],
     exports: [RouterModule],
 })
 export class AppRoutingModule {}
