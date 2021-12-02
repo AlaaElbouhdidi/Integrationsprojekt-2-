@@ -4,7 +4,7 @@
 .global-alert {
     @include flex-center;
     text-align: center;
-    color: white;
+    color: $white;
     width: 100%;
     padding: 0.75rem;
     border-radius: 0.25rem;
@@ -14,18 +14,18 @@
     }
 }
 .global-success-alert {
-    border: 1px solid #1ba11b;
+    border: 1px solid $success;
     background: #1ba11b80;
 }
 .global-error-alert {
-    border: 1px solid #b82121;
+    border: 1px solid $error;
     background: #b8212180;
 }
 .global-neutral-alert {
-    border: 1px solid #ffffff;
+    border: 1px solid $white;
     background: #ffffff7f;
 }
 .global-warn-alert {
-    border: 1px solid #f6c117;
+    border: 1px solid $warn;
     background: rgba(246, 193, 23, 0.5);
 }
