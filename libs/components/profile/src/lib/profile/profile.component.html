@@ -107,6 +107,7 @@
                     <div class="change-password" *ngIf="activeNavLink === 'password'">
                         <div *ngIf="provider === 'password'; else googleInfo">
                             <mate-team-change-password-form
+                                [loading]="loading"
                                 (changePasswordEvent)="changePassword($event)"
                             >
                             </mate-team-change-password-form>

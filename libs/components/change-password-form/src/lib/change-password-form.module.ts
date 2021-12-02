@@ -9,12 +9,14 @@ import {
     faEyeSlash,
     faUnlock
 } from '@fortawesome/free-solid-svg-icons';
+import { LoaderModule } from '@loader';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        LoaderModule
     ],
     declarations: [
       ChangePasswordFormComponent

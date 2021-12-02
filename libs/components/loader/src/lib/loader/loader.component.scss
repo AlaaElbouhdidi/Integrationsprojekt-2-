@@ -3,9 +3,14 @@
 .loading-circle {
     height: 3rem;
     width: 3rem;
-    background: $dark;
     border-radius: 50%;
     animation: loading-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loading-circle-dark {
+    background: $dark;
+}
+.loading-circle-light {
+    background: $white;
 }
 @keyframes loading-circle {
     0%,

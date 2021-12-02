@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     user: firebase.User | null = null;
     activeNavLink: 'password' | 'email' | 'profile' = 'password';
     provider = '';
+    loading = false;
 
     /**
      * Constructor of the profile component
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ) { }
 
     async changePassword(data: ChangePasswordData): Promise<void> {
+        this.loading = true;
         try {
             await this.authService.reauthenticateUser(data.oldPassword);
             await this.authService.updatePassword(data.newPassword);
@@ -47,6 +49,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
+        this.loading = false;
     }
 
     setActiveLink(nav: 'password' | 'email' | 'profile'): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChangePasswordData } from '@api-interfaces';
 
@@ -9,6 +9,7 @@ import { ChangePasswordData } from '@api-interfaces';
 })
 export class ChangePasswordFormComponent {
     changePasswordForm: FormGroup;
+    @Input() loading = false;
     @Output() changePasswordEvent = new EventEmitter();
 
     constructor(
