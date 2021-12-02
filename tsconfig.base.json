@@ -40,7 +40,6 @@
                 "libs/components/password-reset-form/src/index.ts"
             ],
             "@profile": ["libs/components/profile/src/index.ts"],
-            "@reauth-form": ["libs/components/reauth-form/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],
