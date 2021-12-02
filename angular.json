@@ -249,6 +249,87 @@
                 }
             }
         },
+        "change-password-form": {
+            "projectType": "library",
+            "root": "libs/components/change-password-form",
+            "sourceRoot": "libs/components/change-password-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-password-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-password-form/src/**/*.ts",
+                            "libs/components/change-password-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/change-password-form",
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "change-password-form-e2e": {
+            "root": "apps/e2e/change-password-form-e2e",
+            "sourceRoot": "apps/e2e/change-password-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/change-password-form-e2e/cypress.json",
+                        "devServerTarget": "change-password-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "change-password-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/change-password-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",

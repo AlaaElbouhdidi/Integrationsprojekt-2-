@@ -24,8 +24,8 @@
             "@env": ["libs/env/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
-            "@reauth-form": [
-                "libs/components/reauth-form/src/index.ts"
+            "@change-password-form": [
+                "libs/change-password-form/src/index.ts"
             ],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
@@ -40,6 +40,7 @@
                 "libs/components/password-reset-form/src/index.ts"
             ],
             "@profile": ["libs/components/profile/src/index.ts"],
+            "@reauth-form": ["libs/components/reauth-form/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],

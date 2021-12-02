@@ -14,12 +14,14 @@ import {
     faLink,
     faUserTag
 } from '@fortawesome/free-solid-svg-icons';
+import { ChangePasswordFormModule } from '../../../change-password-form/src';
 
 @NgModule({
     imports: [
         CommonModule,
         ProfileRoutingModule,
         ReauthFormModule,
+        ChangePasswordFormModule,
         FontAwesomeModule
     ],
     declarations: [
