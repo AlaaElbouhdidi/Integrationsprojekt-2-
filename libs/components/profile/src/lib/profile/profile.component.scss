@@ -191,24 +191,12 @@
     background: rgba(246, 193, 23, 0.5);
     border-radius: 0.25rem;
     padding: 0.5rem;
+    width: 100%;
 }
 .selected-nav {
     border-bottom: 2px solid $light;
     fa-icon {
         color: $light;
-    }
-}
-.google-reauth-btn {
-    background: #962323 !important;
-    margin-top: 1rem;
-    color: $white;
-    border: none;
-    border-radius: 0.25rem;
-    transition: 0.25s;
-    width: 100%;
-    padding: 0.75rem 0;
-    &:hover {
-        background: #b02828 !important;
     }
 }
 @keyframes slide-in-left {

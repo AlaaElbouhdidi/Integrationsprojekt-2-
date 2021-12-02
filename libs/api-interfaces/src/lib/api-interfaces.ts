@@ -5,7 +5,10 @@ export interface Alert {
     type: 'error' | 'success' | 'neutral' | 'warn';
     message: string;
 }
-
+export interface ChangePasswordData {
+    oldPassword: string,
+    newPassword: string
+}
 export interface Environment {
     firebase: {
         projectId: string,

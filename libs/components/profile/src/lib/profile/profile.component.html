@@ -105,43 +105,29 @@
                     </div>
 
                     <div class="change-password" *ngIf="activeNavLink === 'password'">
-                        <div *ngIf="provider === 'password'; else google">
-                            <p class="change-warning">
-                                Please enter password to change sensitive data.
-                            </p>
-                            <mate-team-reauth-form
-                                (formSubmitEvent)="reAuthWithPassword($event)"
+                        <div *ngIf="provider === 'password'; else googleInfo">
+                            <mate-team-change-password-form
+                                (changePasswordEvent)="changePassword($event)"
                             >
-                            </mate-team-reauth-form>
+                            </mate-team-change-password-form>
                         </div>
 
-                        <ng-template #google>
+                        <ng-template #googleInfo>
                             <p class="change-warning">
-                                Please enter password to change sensitive data.
+                                You are signed in with google. Please visit their site to change your data.
                             </p>
-                            <button class="google-reauth-btn">Open Google Popup</button>
                         </ng-template>
                     </div>
 
                     <div class="change-email" *ngIf="activeNavLink === 'email'">
-                        <div *ngIf="provider === 'password'; else googleReAuth">
-                            <p class="change-warning">
-                                Please enter password to change sensitive data.
-                            </p>
-                            <mate-team-reauth-form
-                                (formSubmitEvent)="reAuthWithPassword($event)"
-                            >
-                            </mate-team-reauth-form>
+                        <div *ngIf="provider === 'password'; else googleInfo">
+                            <p>Change email</p>
                         </div>
 
-                        <ng-template #googleReAuth>
+                        <ng-template #googleInfo>
                             <p class="change-warning">
-                                Please enter password to change sensitive data.
+                                You are signed in with google. Please visit their site to change your data.
                             </p>
-                            <button
-                                class="google-reauth-btn"
-                                (click)="reAuthWithGoogle()"
-                            >Open Google Popup</button>
                         </ng-template>
                     </div>
 

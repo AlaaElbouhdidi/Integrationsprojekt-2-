@@ -3,6 +3,7 @@ import { AlertService, AuthService } from '@services';
 import firebase from 'firebase/compat';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ChangePasswordData } from '@api-interfaces';
 
 @Component({
   selector: 'mate-team-profile',
@@ -32,20 +33,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private alertService: AlertService
     ) { }
 
-    async reAuthWithGoogle(): Promise<void> {
+    async changePassword(data: ChangePasswordData): Promise<void> {
         try {
-            await this.authService.reauthenticateWithPopup();
-        } catch (e) {
+            await this.authService.reauthenticateUser(data.oldPassword);
+            await this.authService.updatePassword(data.newPassword);
             this.alertService.addAlert({
-                type: 'error',
-                message: e.message
+                type: 'success',
+                message: 'Successfully updated password'
             });
-        }
-    }
-
-    async reAuthWithPassword(password: string): Promise<void> {
-        try {
-            await this.authService.reauthenticateUser(password);
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',

@@ -1,15 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangePasswordData } from '@api-interfaces';
 
 @Component({
   selector: 'mate-team-change-password-form',
   templateUrl: './change-password-form.component.html',
   styleUrls: ['./change-password-form.component.scss']
 })
-export class ChangePasswordFormComponent implements OnInit {
+export class ChangePasswordFormComponent {
+    changePasswordForm: FormGroup;
+    @Output() changePasswordEvent = new EventEmitter();
 
-  constructor() { }
+    constructor(
+        private fb: FormBuilder
+    ) {
+        this.changePasswordForm = this.fb.group({
+            password: new FormControl('', [
+                Validators.required
+            ]),
+            newPassword: new FormControl('', [
+                Validators.minLength(6),
+                Validators.required
+            ]),
+            confirmNewPassword: new FormControl('', [
+                Validators.required
+            ])
+        });
+    }
 
-  ngOnInit(): void {
-  }
+    get password(): AbstractControl {
+        return this.changePasswordForm.controls.password;
+    }
 
+    get newPassword(): AbstractControl {
+        return this.changePasswordForm.controls.newPassword;
+    }
+
+    get confirmNewPassword(): AbstractControl {
+        return this.changePasswordForm.controls.confirmNewPassword;
+    }
+
+    comparePasswords(): void {
+        if (this.newPassword.value !== this.confirmNewPassword.value){
+            this.confirmNewPassword.setErrors({ mustMatch: true });
+        } else {
+            this.confirmNewPassword.setErrors(null);
+        }
+    }
+
+    changePassword(): void {
+        const data: ChangePasswordData = {
+            oldPassword: this.password.value,
+            newPassword: this.newPassword.value
+        }
+        this.changePasswordEvent.emit(data);
+        this.changePasswordForm.reset();
+    }
 }
