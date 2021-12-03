@@ -58,7 +58,6 @@ lint:
     script:
         - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL
 
-
 compodoc:
     extends: .distributed
     parallel: 8
