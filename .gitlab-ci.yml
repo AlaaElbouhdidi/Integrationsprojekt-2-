@@ -19,39 +19,16 @@ variables:
     NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
 
 stages:
-    - setup
     - test
     - deploy
 
-install-dependencies:
-    stage: setup
-    interruptible: true
-    script:
-        - npm ci
-    artifacts:
-        paths:
-            - node_modules
-
-.distributed:
-    interruptible: true
-    only:
-        - main
-        - merge_requests
-    needs:
-        - install-dependencies
-    artifacts:
-        paths:
-            - node_modules/.cache/nx
-
 test:
     stage: test
-    extends: .distributed
-    needs:
-      - build
     image: cypress/base
     before_script:
         - apt install git
     script:
+        - npm ci
         - npm run format:check
         - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
         - npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3
