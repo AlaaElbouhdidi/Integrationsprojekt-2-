@@ -27,15 +27,6 @@ stages:
 install-dependencies:
     stage: setup
     interruptible: true
-    only:
-        - main
-        - merge_requests
-    cache:
-        key:
-            files:
-                - package-lock.json
-        paths:
-            - node_modules
     script:
         - npm ci
     artifacts:
@@ -56,6 +47,9 @@ install-dependencies:
 build:
     stage: build
     extends: .distributed
+    before_script:
+        - apk add git
+        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
         - npm run format:check
         - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
@@ -68,6 +62,7 @@ build:
 
 test:
     stage: test
+    extends: .distributed
     needs:
       - build
     image: cypress/base
