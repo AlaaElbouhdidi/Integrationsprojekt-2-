@@ -14,12 +14,14 @@ import {
     faUserTag
 } from '@fortawesome/free-solid-svg-icons';
 import { ChangePasswordFormModule } from '../../../change-password-form/src';
+import { ChangeEmailFormModule } from '@change-email-form';
 
 @NgModule({
     imports: [
         CommonModule,
         ProfileRoutingModule,
         ChangePasswordFormModule,
+        ChangeEmailFormModule,
         FontAwesomeModule
     ],
     declarations: [
