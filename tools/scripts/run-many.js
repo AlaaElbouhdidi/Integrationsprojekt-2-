@@ -26,7 +26,7 @@ if (projects.length > 0) execSync(cmd, { stdio: [0, 1, 2] });
 
 function restArgs() {
     return process.argv
-        .slice(6)
+        .slice(5)
         .map((arg) => `"${arg}"`)
         .join(' ');
 }
