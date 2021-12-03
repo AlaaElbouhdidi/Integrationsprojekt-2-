@@ -21,13 +21,13 @@ stages:
     - deploy
 
 install-dependencies:
+    stage: setup
     cache:
         key: ${CI_COMMIT_REF_SLUG}
         paths:
             - node_modules/
             - cache/Cypress
             - dist
-    stage: setup
     interruptible: true
     script:
         - npm ci
@@ -60,7 +60,7 @@ compodoc:
     extends: .distributed
     parallel: 8
     script:
-        - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL
+        - node ./tools/scripts/run-many.js compodoc $CI_NODE_INDEX $CI_NODE_TOTAL
 
 test:
     extends: .distributed
