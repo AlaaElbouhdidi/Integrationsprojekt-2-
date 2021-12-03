@@ -9,6 +9,10 @@ export interface ChangePasswordData {
     oldPassword: string,
     newPassword: string
 }
+export interface ChangeEmailData {
+    password: string;
+    newEmail: string;
+}
 export interface Environment {
     firebase: {
         projectId: string,

@@ -60,7 +60,10 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                     await this.handleVerifyCode();
                 }
                 if (params['mode'] === 'verifyEmail') {
-                    await this.handleVerifyEmail();
+                    await this.handleEmailAction('verify');
+                }
+                if (params['mode'] === 'recoverEmail') {
+                    await this.handleEmailAction('recover');
                 }
         });
     }
@@ -84,12 +87,12 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
     /**
      * Calls auth service to verify email and handles success and error cases
      */
-    async handleVerifyEmail(): Promise<void> {
+    async handleEmailAction(type: 'verify' | 'recover'): Promise<void> {
         try {
             await this.authService.applyActionCode(this.code);
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Email has been successfully verified.'
+                message: type === 'verify' ?  'Email has been successfully verified.' : 'Email has been successfully recovered.'
             });
             await this.router.navigate(['/']);
         } catch (e) {

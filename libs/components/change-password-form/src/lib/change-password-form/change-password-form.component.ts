@@ -10,7 +10,7 @@ import { ChangePasswordData } from '@api-interfaces';
 export class ChangePasswordFormComponent {
     changePasswordForm: FormGroup;
     @Input() loading = false;
-    @Output() changePasswordEvent = new EventEmitter();
+    @Output() changePasswordEvent = new EventEmitter<ChangePasswordData>();
 
     constructor(
         private fb: FormBuilder

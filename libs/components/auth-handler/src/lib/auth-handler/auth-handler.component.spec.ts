@@ -59,7 +59,7 @@ describe('AuthHandlerComponent', () => {
     it('should apply action code in handleVerifyEmail method and redirect to landing page', () => {
         const location = TestBed.inject(Location);
         const verifySpy = jest.spyOn(authServiceMock, 'applyActionCode');
-        component.handleVerifyEmail()
+        component.handleEmailAction('verify')
         .then(() => {
             expect(location.path()).toBe('/');
             expect(verifySpy).toHaveBeenCalledTimes(1);

@@ -1,4 +1,8 @@
 {
+    "workspaceLayout": {
+        "appsDir": "apps/e2e",
+        "libsDir": "libs/components"
+    },
     "npmScope": "integrationsprojekt2",
     "affected": {
         "defaultBase": "main"

@@ -6,7 +6,9 @@ import {
     getAuth,
     UserCredential,
     reauthenticateWithCredential,
-    updatePassword
+    updatePassword,
+    updateEmail,
+    sendEmailVerification
 } from 'firebase/auth';
 import { User } from '@api-interfaces';
 
@@ -113,6 +115,13 @@ export class AuthService {
         return this.auth.confirmPasswordReset(code, newPassword);
     }
 
+    sendEmailVerification(): Promise<void> {
+        return sendEmailVerification(getAuth().currentUser!);
+    }
+
+    updateEmail(newEmail: string): Promise<void> {
+        return updateEmail(getAuth().currentUser!, newEmail);
+    }
 
     updatePassword(newPassword: string): Promise<void> {
         return updatePassword(getAuth().currentUser!, newPassword);

@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="change-password" *ngIf="activeNavLink === 'password'">
-                        <div *ngIf="provider === 'password'; else googleInfo">
+                        <div *ngIf="provider === 'password'; else socialLoginInfo">
                             <mate-team-change-password-form
                                 [loading]="loading"
                                 (changePasswordEvent)="changePassword($event)"
@@ -113,21 +113,25 @@
                             </mate-team-change-password-form>
                         </div>
 
-                        <ng-template #googleInfo>
+                        <ng-template #socialLoginInfo>
                             <p class="change-warning">
-                                You are signed in with google. Please visit their site to change your data.
+                                You are signed in with a social login. You can not change your data on this site.
                             </p>
                         </ng-template>
                     </div>
 
                     <div class="change-email" *ngIf="activeNavLink === 'email'">
-                        <div *ngIf="provider === 'password'; else googleInfo">
-                            <p>Change email</p>
+                        <div *ngIf="provider === 'password'; else socialLoginInfo">
+                            <mate-team-change-email-form
+                                [loading]="loading"
+                                (changeEmailEvent)="changeEmail($event)"
+                            >
+                            </mate-team-change-email-form>
                         </div>
 
-                        <ng-template #googleInfo>
+                        <ng-template #socialLoginInfo>
                             <p class="change-warning">
-                                You are signed in with google. Please visit their site to change your data.
+                                You are signed in with a social login. You can not change your data on this site.
                             </p>
                         </ng-template>
                     </div>
