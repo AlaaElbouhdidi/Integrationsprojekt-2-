@@ -46,9 +46,6 @@ install-dependencies:
             - node_modules/.cache/nx
 format:
     extends: .distributed
-    before_script:
-        - apk add git
-        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
         - npm run format:check
 
