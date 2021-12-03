@@ -7,14 +7,6 @@ workflow:
         - if: '$CI_PIPELINE_SOURCE == "push"'
           when: never
 
-before_script:
-    - apk add git
-    - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
-
-variables:
-    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
-    NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
-
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -22,9 +14,13 @@ cache:
         - cache/Cypress
         - dist
 
+variables:
+    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
+    NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
+
 stages:
     - setup
-    - distributed-tasks
+    - test
     - deploy
 
 install-dependencies:
@@ -34,80 +30,44 @@ install-dependencies:
         - npm ci
     artifacts:
         paths:
-            - cache/Cypress
+            - node_modules
 
 .distributed:
-    stage: distributed-tasks
     interruptible: true
+    only:
+        - main
+        - merge_requests
     needs:
         - install-dependencies
     artifacts:
         paths:
             - node_modules/.cache/nx
 
-format:
-    extends: .distributed
-    script:
-        - npm run format:check
-
-lint:
-    extends: .distributed
-    parallel: 8
-    script:
-        - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL
-
-compodoc:
-    extends: .distributed
-    parallel: 8
-    script:
-        - node ./tools/scripts/run-many.js compodoc $CI_NODE_INDEX $CI_NODE_TOTAL
-
 test:
+    stage: test
     extends: .distributed
-    parallel: 8
-    script:
-        - node ./tools/scripts/run-many.js test $CI_NODE_INDEX $CI_NODE_TOTAL
-    artifacts:
-        when: always
-        paths:
-            - node_modules/.cache/nx
-            - dist/cypress/apps/**/*.mp4
-            - dist/cypress/apps/**/*.png
-
-e2e:
-    extends: .distributed
-    parallel: 2
+    needs:
+      - build
     image: cypress/base
     before_script:
         - apt install git
-        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - node ./tools/scripts/run-many.js e2e $CI_NODE_INDEX $CI_NODE_TOTAL
+        - npm run format:check
+        - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
+        - npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=lint --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=compodoc --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=test --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=e2e --parallel --max-parallel=3
     artifacts:
         when: always
         paths:
-            - dist/cypress/apps/**/*.mp4
-
-build:
-    extends: .distributed
-    parallel: 2
-    script:
-        - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
-        - node ./tools/scripts/run-many.js build $CI_NODE_INDEX $CI_NODE_TOTAL
-    artifacts:
-        paths:
-            - node_modules/.cache/nx
             - dist
 
 deploy:
     stage: deploy
     needs:
-        - job: format
-        - job: compodoc
-        - job: lint
-        - job: e2e
         - job: test
-        - job: build
           artifacts: true
     before_script:
         - npm i -g firebase-tools
