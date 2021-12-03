@@ -36,7 +36,6 @@ install-dependencies:
                 - package-lock.json
         paths:
             - node_modules
-            - .npm
     script:
         - npm ci
     artifacts:
@@ -59,7 +58,7 @@ build:
     extends: .distributed
     script:
         - npm run format:check
-        - npx nx build-functions api
+        - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
         - npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3
         - npx nx affected --base=HEAD~1 --target=lint --parallel --max-parallel=3
         - npx nx affected --base=HEAD~1 --target=compodoc --parallel --max-parallel=3
@@ -76,8 +75,8 @@ test:
         - apt install git
         - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npx nx run-many --target=test --parallel --all
-        - npx nx run-many --target=e2e --all
+        - npx nx affected --base=HEAD~1 --target=test --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=e2e --parallel --max-parallel=3
     artifacts:
         when: always
         paths:
