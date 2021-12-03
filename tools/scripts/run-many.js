@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+const execSync = require('child_process').execSync
 
 const target = process.argv[2];
 const jobIndex = Number(process.argv[3]);
