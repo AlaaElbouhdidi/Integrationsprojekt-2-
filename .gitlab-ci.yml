@@ -55,7 +55,6 @@ install-dependencies:
             - node_modules/.cache/nx
 
 build:
-    needs: [setup]
     stage: build
     extends: .distributed
     script:
@@ -70,7 +69,8 @@ build:
 
 test:
     stage: test
-    needs: [build]
+    needs:
+      - build
     image: cypress/base
     before_script:
         - apt install git
