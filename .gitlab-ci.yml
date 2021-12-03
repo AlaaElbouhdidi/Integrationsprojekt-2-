@@ -17,7 +17,7 @@ variables:
 
 stages:
     - setup
-    - distrubted-tasks
+    - distributed-tasks
     - deploy
 
 install-dependencies:
