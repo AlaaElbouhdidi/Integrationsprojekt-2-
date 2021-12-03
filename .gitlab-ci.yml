@@ -24,9 +24,9 @@ install-dependencies:
     cache:
         key: ${CI_COMMIT_REF_SLUG}
         paths:
-        - node_modules/
-        - cache/Cypress
-        - dist
+            - node_modules/
+            - cache/Cypress
+            - dist
     stage: setup
     interruptible: true
     script:
@@ -44,6 +44,7 @@ install-dependencies:
     artifacts:
         paths:
             - node_modules/.cache/nx
+
 format:
     extends: .distributed
     script:
