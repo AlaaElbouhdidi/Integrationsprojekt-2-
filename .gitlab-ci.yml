@@ -7,15 +7,6 @@ workflow:
         - if: '$CI_PIPELINE_SOURCE == "push"'
           when: never
 
-stages:
-    - build
-    - prep
-    - test
-    - deploy
-
-variables:
-    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
-
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -23,90 +14,79 @@ cache:
         - cache/Cypress
         - dist
 
-before_script:
-    - apk add git
-    - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
+variables:
+    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
+    NX_CLOUD_DISTRIBUTED_EXECUTION: 'true'
+
+stages:
+    - setup
+    - build
+    - test
+    - deploy
+
+install-dependencies:
+    stage: setup
+    interruptible: true
+    script:
+        - npm ci
+    artifacts:
+        paths:
+            - node_modules
+
+.distributed:
+    interruptible: true
+    only:
+        - main
+        - merge_requests
+    needs:
+        - install-dependencies
+    artifacts:
+        paths:
+            - node_modules/.cache/nx
 
 build:
     stage: build
+    extends: .distributed
+    before_script:
+        - apk add git
+        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npm ci
-        - npx cypress cache path
-        - npx cypress cache list
-        - npx nx run-many --target=build --parallel --all
-        - npx nx build-functions api
+        - npm run format:check
+        - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
+        - npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=lint --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=compodoc --parallel --max-parallel=3
     artifacts:
         paths:
             - dist
 
-format:
-    stage: prep
-    needs: ['build']
-    script:
-        - npm run format:check
-
-lint:
-    stage: prep
-    needs: ['build']
-    script:
-        - npm run lint
-
-doc:
-    stage: prep
-    needs: ['build']
-    script:
-        - npx nx run-many --target=compodoc --parallel --all
-    artifacts:
-        when: always
-        paths:
-            - dist/apps/api/docs
-
 test:
     stage: test
-    needs: ['build', 'format', 'lint', 'doc']
-    script:
-        - npx nx run-many --target=test --parallel --all
-
-e2e:
-    stage: test
-    needs: ['build', 'format', 'lint', 'doc']
+    extends: .distributed
+    needs:
+      - build
     image: cypress/base
     before_script:
         - apt install git
         - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npx nx run-many --target=e2e --all
+        - npx nx affected --base=HEAD~1 --target=test --parallel --max-parallel=3
+        - npx nx affected --base=HEAD~1 --target=e2e --parallel --max-parallel=3
     artifacts:
         when: always
         paths:
             - dist/cypress/apps/**/*.mp4
 
-deploy-frontend:
+deploy:
     stage: deploy
     needs:
-        - job: e2e
-        - job: test
         - job: build
+        - job: test
           artifacts: true
     before_script:
         - npm i -g firebase-tools
     script:
-        - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
-    only:
-        refs:
-            - main
-
-deploy-backend:
-    stage: deploy
-    needs:
-        - job: e2e
-        - job: test
-        - job: build
-          artifacts: true
-    before_script:
-        - npm i -g firebase-tools
-    script:
-        - firebase deploy --only functions --token "$FIREBASE_TOKEN"
+        - firebase deploy --token "$FIREBASE_TOKEN"
     only:
         refs:
             - main
