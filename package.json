@@ -26,7 +26,7 @@
         "lint": "nx workspace-lint && ng lint",
         "e2e": "ng e2e",
         "format": "nx format:write",
-        "format:check": "nx format:check --files apps/**/*.ts, libs/**/*.ts",
+        "format:check": "npx nx format:check --files apps/**/*.ts, libs/**/*.ts",
         "update": "ng update @nrwl/workspace",
         "dep-graph": "nx dep-graph",
         "help": "nx help"
