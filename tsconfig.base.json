@@ -24,7 +24,7 @@
             "@env": ["libs/env/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
-            "@integrationsprojekt2/create-event": [
+            "@create-event": [
                 "libs/components/create-event/src/index.ts"
             ],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],

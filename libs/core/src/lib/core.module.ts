@@ -13,6 +13,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
+import { CreateEventModule } from '@create-event';
 
 @NgModule({
     exports: [
@@ -30,6 +31,7 @@ import { SlideshowModule } from '@slideshow';
         AuthHandlerModule,
         AngularFireFunctionsModule,
         StylesModule,
+        CreateEventModule,
     ],
 })
 export class CoreModule {}

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CreateEventModule } from '../create-event.module';
 import { CreateEventComponent } from './create-event.component';
 
 describe('CreateEventComponent', () => {
@@ -8,7 +8,7 @@ describe('CreateEventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateEventComponent ]
+        imports: [CreateEventModule],
     })
     .compileComponents();
   });
