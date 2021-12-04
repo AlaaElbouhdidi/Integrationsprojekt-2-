@@ -8,6 +8,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
 
 export const socketConfig: SocketIoConfig = {
     url: environment.clientUrl,
@@ -15,9 +17,7 @@ export const socketConfig: SocketIoConfig = {
         transportOptions: {
             polling: {
                 extraHeaders: {
-                    Authorization: localStorage
-                        .getItem('idToken')
-                        ?.replace('"', ''),
+                    Authorization: getIdToken(),
                 },
             },
         },
@@ -36,8 +36,20 @@ export const socketConfig: SocketIoConfig = {
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
+        HttpClientModule,
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true,
+        },
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective],
 })
 export class AppModule {}
+
+export function getIdToken(): string {
+    return localStorage.getItem('idToken')?.replace('"', '') || 'undefined';
+}

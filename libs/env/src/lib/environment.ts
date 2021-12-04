@@ -13,7 +13,7 @@ export const environment: Environment = {
         appId: '1:848103878945:web:2d78aef8264f87f52b0e60',
     },
     production: false,
-    apiUrl: 'http://localhost:8000',
+    apiUrl: 'http://localhost:8000/api',
     clientUrl: 'http://localhost:8000',
     port: 8000,
 };
