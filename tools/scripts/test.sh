@@ -1,10 +1,10 @@
 #!/bin/sh
 
+tsc -p tools/tsconfig.tools.json &&
 npm run format:check &&
-npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3 &&
-npx nx affected --base=HEAD~1 --target=lint --parallel --max-parallel=3 &&
-npx nx affected --base=HEAD~1 --target=compodoc --parallel --max-parallel=3 &&
-npx nx affected --base=HEAD~1 --target=test --parallel --max-parallel=3 &&
-npx nx affected --base=HEAD~1 --target=e2e &&
-
+node ./tools/scripts/run-many.js build "$CI_NODE_INDEX" "$CI_NODE_TOTAL" "$CI_COMMIT_REF_SLUG" &&
+node ./tools/scripts/run-many.js lint "$CI_NODE_INDEX" "$CI_NODE_TOTAL" "$CI_COMMIT_REF_SLUG" &&
+node ./tools/scripts/run-many.js compodoc "$CI_NODE_INDEX" "$CI_NODE_TOTAL" "$CI_COMMIT_REF_SLUG" &&
+node ./tools/scripts/run-many.js test "$CI_NODE_INDEX" "$CI_NODE_TOTAL" "$CI_COMMIT_REF_SLUG" &&
+node ./tools/scripts/run-many.js e2e "$CI_NODE_INDEX" "$CI_NODE_TOTAL" "$CI_COMMIT_REF_SLUG" &&
 echo "Looking good, pipeline is likely going to succeed!"
