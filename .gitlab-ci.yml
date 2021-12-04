@@ -31,11 +31,11 @@ test:
         - npm ci
         - npm run format:check
         - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
-        - npx nx affected --base=main --head=HEAD --target=build --parallel=true --verbose
-        - npx nx affected --base=main --head=HEAD --target=lint --parallel=true --verbose
-        - npx nx affected --base=main --head=HEAD --target=compodoc --parallel=true --verbose
-        - npx nx affected --base=main --head=HEAD --target=test --parallel=true --verbose
-        - npx nx affected --base=main --head=HEAD --target=e2e --parallel=true --verbose
+        - npx nx run-many --target=build --parallel=true --verbose
+        - npx nx run-many --target=lint --parallel=true --verbose
+        - npx nx run-many --target=compodoc --parallel=true --verbose
+        - npx nx run-many --target=test --parallel=true --verbose
+        - npx nx run-many --target=e2e --parallel=true --verbose
     artifacts:
         when: always
         paths:
