@@ -3,7 +3,7 @@ import { EventModule } from '../../event/event.module';
 import { FirebaseModule } from '../../firebase/firebase.module';
 import { AppGateway } from './app.gateway';
 import * as admin from 'firebase-admin';
-if (!admin.apps.length) admin.initializeApp()
+if (!admin.apps.length) admin.initializeApp();
 
 describe('AppGateway', () => {
     let gateway: AppGateway;
