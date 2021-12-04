@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@env';
 
 @Component({
     selector: 'mate-team-root',
@@ -25,6 +27,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
         ]),
     ],
 })
-export class AppComponent {
-    constructor(public alertService: AlertService) {}
+export class AppComponent implements OnInit {
+    apiUrl = environment.apiUrl;
+    constructor(private http: HttpClient, public alertService: AlertService) {}
+    ngOnInit() {
+        console.log(this.http.get<Event[]>(this.apiUrl + '/event').subscribe());
+    }
 }
