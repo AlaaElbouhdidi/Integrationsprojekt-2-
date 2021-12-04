@@ -1,9 +1,11 @@
 #!/bin/sh
 
 npm run format:check &&
-nx run-many --target=build --all=true --parallel --skip-nx-cache &&
-nx run-many --target=lint --all=true --parallel --skip-nx-cache &&
-nx run-many --target=test --all=true --parallel --skip-nx-cache &&
-nx run-many --target=compodoc --all=true --parallel --skip-nx-cache &&
-nx run-many --target=e2e --all=true --skip-nx-cache &&
+NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api &&
+npx nx affected --base=HEAD~1 --target=build --parallel --max-parallel=3 &&
+npx nx affected --base=HEAD~1 --target=lint --parallel --max-parallel=3 &&
+npx nx affected --base=HEAD~1 --target=compodoc --parallel --max-parallel=3 &&
+npx nx affected --base=HEAD~1 --target=test --parallel --max-parallel=3 &&
+npx nx affected --base=HEAD~1 --target=e2e --parallel --max-parallel=3 &&
+
 echo "Looking good, pipeline is likely going to succeed!"

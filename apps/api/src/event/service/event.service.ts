@@ -96,7 +96,6 @@ export class EventService {
                         participants: event.get('participants'),
                         date: event.get('date'),
                     };
-                    this.logger.log(`Successfully fetched event`);
                     this.logger.log(eventData);
                     events.push(eventData);
                 });
