@@ -46,7 +46,7 @@ export const socketConfig: SocketIoConfig = {
         },
     ],
     bootstrap: [AppComponent],
-    exports: [ExternalUrlDirective],
+    exports: [ExternalUrlDirective]
 })
 export class AppModule {}
 
