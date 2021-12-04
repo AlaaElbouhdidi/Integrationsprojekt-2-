@@ -27,15 +27,16 @@ test:
     image: cypress/base
     before_script:
         - apt install git
+        - npm i -g nx
     script:
         - npm ci
         - npm run format:check
         - NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx build-functions api
-        - npx nx run-many --target=build --parallel=true --all=true --verbose
-        - npx nx run-many --target=lint --parallel=true --all=true --verbose
-        - npx nx run-many --target=compodoc --parallel=true --all=true --verbose
-        - npx nx run-many --target=test --parallel=true --all=true --verbose
-        - npx nx affected --base=main head=$CI_COMMIT_REF_SLUG --target=e2e --parallel=true --verbose
+        - nx run-many --target=build --parallel=true --all=true --verbose
+        - nx run-many --target=lint --parallel=true --all=true --verbose
+        - nx run-many --target=compodoc --parallel=true --all=true --verbose
+        - nx run-many --target=test --parallel=true --all=true --verbose
+        - nx affected --base=main head=$CI_COMMIT_REF_SLUG --target=e2e --parallel=true --verbose
     artifacts:
         when: always
         paths:
