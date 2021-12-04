@@ -3,6 +3,7 @@ import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env';
+import { map, Observable } from 'rxjs';
 
 @Component({
     selector: 'mate-team-root',
@@ -29,8 +30,24 @@ import { environment } from '@env';
 })
 export class AppComponent implements OnInit {
     apiUrl = environment.apiUrl;
+
+    events$: Observable<Event[]> = this.getEvents();
+
     constructor(private http: HttpClient, public alertService: AlertService) {}
+
     ngOnInit() {
-        console.log(this.http.get<Event[]>(this.apiUrl + '/event').subscribe());
+        this.events$
+            .pipe(
+                map((events: Event[]) =>
+                    events.forEach((event: Event) => {
+                        console.log(event);
+                    })
+                )
+            )
+            .subscribe();
+    }
+
+    getEvents() {
+        return (this.events$ = this.http.get<Event[]>(`${this.apiUrl}/event`));
     }
 }
