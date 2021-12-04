@@ -90,16 +90,16 @@ export class EventService {
                 throw new NotFoundException(message);
             }
             snapshot.forEach((event) => {
-                    const eventData: Event = {
-                        name: event.get('name'),
-                        description: event.get('description'),
-                        participants: event.get('participants'),
-                        date: event.get('date'),
-                    };
-                    this.logger.log(eventData);
-                    events.push(eventData);
-                });
-            return events
+                const eventData: Event = {
+                    name: event.get('name'),
+                    description: event.get('description'),
+                    participants: event.get('participants'),
+                    date: event.get('date'),
+                };
+                this.logger.log(eventData);
+                events.push(eventData);
+            });
+            return events;
         } catch (e) {
             this.logger.error(`Failed to fetch all events`);
             throw new InternalServerErrorException(

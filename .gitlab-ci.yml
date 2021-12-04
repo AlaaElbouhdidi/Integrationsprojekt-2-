@@ -29,7 +29,6 @@ test:
     script:
         - npm ci
         - npm run format:check
-        - npx nx build-functions api
         - node ./tools/scripts/run-many.js build $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
         - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
         - node ./tools/scripts/run-many.js compodoc $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG

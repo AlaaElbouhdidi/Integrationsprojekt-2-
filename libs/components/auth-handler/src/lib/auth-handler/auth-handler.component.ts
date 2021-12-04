@@ -78,7 +78,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 message: e.message,
             });
             await this.router.navigate(['/']);
-            
         }
     }
 
