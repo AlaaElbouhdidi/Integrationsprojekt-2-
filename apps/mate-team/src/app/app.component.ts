@@ -4,6 +4,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env';
 import { map, Observable } from 'rxjs';
+import { Event } from '@api-interfaces';
 
 @Component({
     selector: 'mate-team-root',
@@ -30,11 +31,8 @@ import { map, Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
     apiUrl = environment.apiUrl;
-
     events$: Observable<Event[]> = this.getEvents();
-
     constructor(private http: HttpClient, public alertService: AlertService) {}
-
     ngOnInit() {
         this.events$
             .pipe(
@@ -46,7 +44,6 @@ export class AppComponent implements OnInit {
             )
             .subscribe();
     }
-
     getEvents() {
         return (this.events$ = this.http.get<Event[]>(`${this.apiUrl}/event`));
     }
