@@ -8,6 +8,7 @@ import {
     reauthenticateWithCredential,
     updatePassword,
     updateEmail,
+    updateProfile,
     sendEmailVerification
 } from 'firebase/auth';
 import { User } from '@api-interfaces';
@@ -117,6 +118,13 @@ export class AuthService {
 
     sendEmailVerification(): Promise<void> {
         return sendEmailVerification(getAuth().currentUser!);
+    }
+
+    updateProfile(displayName?: string, photoURL?: string): Promise<void> {
+        return updateProfile(getAuth().currentUser!, {
+            displayName: displayName,
+            photoURL: photoURL
+        });
     }
 
     updateEmail(newEmail: string): Promise<void> {

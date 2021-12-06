@@ -3,7 +3,11 @@ import { AlertService, AuthService } from '@services';
 import firebase from 'firebase/compat';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ChangeEmailData, ChangePasswordData } from '@api-interfaces';
+import {
+    ChangeEmailData,
+    ChangePasswordData,
+    ChangeProfileData
+} from '@api-interfaces';
 
 @Component({
   selector: 'mate-team-profile',
@@ -20,7 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * The currently logged in user or null
      */
     user: firebase.User | null = null;
-    activeNavLink: 'password' | 'email' | 'profile' = 'password';
+    activeNavLink: 'password' | 'email' | 'profile' = 'profile';
     provider = '';
     loading = false;
 
@@ -61,6 +65,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Successfully updated email. Please verify your new email.'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+        this.loading = false;
+    }
+
+    async changeProfile(data: ChangeProfileData): Promise<void> {
+        this.loading = true;
+        try {
+            await this.authService.updateProfile(data.displayName, data.photoURL);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Successfully updated user profile.'
             });
         } catch (e) {
             this.alertService.addAlert({

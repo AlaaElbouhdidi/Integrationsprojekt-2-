@@ -8,10 +8,10 @@
 
                 <div class="profile-user-banner">
                     <div class="profile-user-photo">
-                        <img *ngIf="user?.photoURL; else placeholderPhoto" [src]="user?.photoURL" alt="User profile picture">
-                        <ng-template #placeholderPhoto>
-                            <fa-icon icon="user"></fa-icon>
-                        </ng-template>
+                        <mate-team-user-icon
+                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                        >
+                        </mate-team-user-icon>
                     </div>
 
                     <div class="profile-user-name">
@@ -101,7 +101,13 @@
                 <div class="profile-edit">
 
                     <div class="change-profile" *ngIf="activeNavLink === 'profile'">
-                        <p>Change profile</p>
+                        <mate-team-change-profile-form
+                            [userDisplayName]="user!.displayName ? user!.displayName : ''"
+                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                            (changeProfileEvent)="changeProfile($event)"
+                            [loading]="loading"
+                        >
+                        </mate-team-change-profile-form>
                     </div>
 
                     <div class="change-password" *ngIf="activeNavLink === 'password'">

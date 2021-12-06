@@ -1,0 +1,102 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+form {
+    color: $dark;
+    animation: 0.25s slide-in-up forwards;
+    h6 {
+        text-align: center;
+        border-bottom: 1px dotted $white;
+        padding-bottom: 0.25rem;
+        color: $white;
+    }
+}
+.form-input {
+    margin-top: 1rem !important;
+}
+.form-submit {
+    @include flex-center;
+    text-align: center;
+}
+.loader {
+    margin-top: 1rem;
+}
+@include slide-in-up(5rem, 0);
+
+.change-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 1rem 0;
+    @include for-tablet-portrait-up {
+        flex-direction: row;
+    }
+    .user-icon {
+        width: 7rem;
+        height: 7rem;
+    }
+    .user-icon-color-inputs {
+        color: $white;
+        text-align: center;
+        width: 100%;
+        @include for-tablet-portrait-up {
+            width: auto;
+        }
+        div {
+            width: 100%;
+            @include flex-center;
+            @include for-tablet-portrait-up {
+                width: auto;
+            }
+            label {
+                @include flex-center;
+                background: $white;
+                color: $dark;
+                width: 100%;
+                height: 2rem;
+                fa-icon {
+                    margin-right: 0.25rem;
+                }
+                @include for-tablet-portrait-up {
+                    width: 8rem;
+                }
+            }
+        }
+        input {
+            margin: 0.5rem 0;
+            border: none;
+            width: 4rem;
+            height: 2rem;
+        }
+    }
+    .user-icon-selection {
+        background: white;
+        height: 5rem;
+        color: $dark;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+        @include for-tablet-portrait-up {
+            width: 8rem;
+            margin: 0;
+        }
+        div {
+            transform: scale(1.35);
+        }
+        fa-icon[icon="chevron-left"], fa-icon[icon="chevron-right"] {
+            @include flex-center;
+            height: 100%;
+            cursor: pointer;
+            padding: 0 0.25rem;
+            z-index: 99;
+            transition: 0.25s;
+            &:hover {
+                background: $light;
+            }
+        }
+    }
+}
