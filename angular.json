@@ -411,6 +411,30 @@
                 }
             }
         },
+        "change-profile-form": {
+            "projectType": "library",
+            "root": "libs/components/change-profile-form",
+            "sourceRoot": "libs/components/change-profile-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-profile-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-profile-form/src/**/*.ts",
+                            "libs/components/change-profile-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",

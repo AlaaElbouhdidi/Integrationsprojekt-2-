@@ -13,8 +13,9 @@ import {
     faLink,
     faUserTag
 } from '@fortawesome/free-solid-svg-icons';
-import { ChangePasswordFormModule } from '../../../change-password-form/src';
+import { ChangePasswordFormModule } from '@change-password-form';
 import { ChangeEmailFormModule } from '@change-email-form';
+import { ChangeProfileFormModule } from '@change-profile-form';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ChangeEmailFormModule } from '@change-email-form';
         ProfileRoutingModule,
         ChangePasswordFormModule,
         ChangeEmailFormModule,
+        ChangeProfileFormModule,
         FontAwesomeModule
     ],
     declarations: [
