@@ -16,6 +16,7 @@ import {
 import { ChangePasswordFormModule } from '@change-password-form';
 import { ChangeEmailFormModule } from '@change-email-form';
 import { ChangeProfileFormModule } from '@change-profile-form';
+import { UserIconModule } from '@user-icon';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { ChangeProfileFormModule } from '@change-profile-form';
         ChangePasswordFormModule,
         ChangeEmailFormModule,
         ChangeProfileFormModule,
+        UserIconModule,
         FontAwesomeModule
     ],
     declarations: [

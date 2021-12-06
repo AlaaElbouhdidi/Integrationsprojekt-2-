@@ -1800,6 +1800,30 @@
                     }
                 }
             }
+        },
+        "user-icon": {
+            "projectType": "library",
+            "root": "libs/components/user-icon",
+            "sourceRoot": "libs/components/user-icon/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/user-icon/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/user-icon/src/**/*.ts",
+                            "libs/components/user-icon/src/**/*.html"
+                        ]
+                    }
+                }
+            }
         }
     }
 }
