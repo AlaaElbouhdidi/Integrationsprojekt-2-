@@ -6,14 +6,14 @@ export default {
     component: CreateEventComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<CreateEventComponent>;
 
 const Template: Story<CreateEventComponent> = (args: CreateEventComponent) => ({
     component: CreateEventComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

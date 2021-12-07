@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class IconService {
     icons: IconProp[] = [
@@ -18,8 +18,6 @@ export class IconService {
         'hippo'
     ];
 
-    constructor() { }
-
     getIcons(): IconProp[] {
         return this.icons;
     }
@@ -28,7 +26,11 @@ export class IconService {
         return iconCode.split('/');
     }
 
-    encodeIconString(icon: string, iconColor: string, iconBackground: string): string {
+    encodeIconString(
+        icon: string,
+        iconColor: string,
+        iconBackground: string
+    ): string {
         return `${icon}/${iconColor}/${iconBackground}`;
     }
 }

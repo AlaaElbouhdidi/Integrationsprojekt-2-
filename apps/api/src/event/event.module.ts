@@ -9,6 +9,6 @@ import { EventGateway } from './gateway/event.gateway';
 @Module({
     controllers: [EventController],
     providers: [EventService, FirebaseService, EventGateway],
-    exports: [EventService, FirebaseService, EventGateway],
+    exports: [EventService, FirebaseService, EventGateway]
 })
 export class EventModule {}

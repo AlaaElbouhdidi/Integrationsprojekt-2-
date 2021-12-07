@@ -3,7 +3,7 @@ import {
     OnGatewayDisconnect,
     OnGatewayInit,
     WebSocketGateway,
-    WebSocketServer,
+    WebSocketServer
 } from '@nestjs/websockets';
 import { Logger, UnauthorizedException } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
@@ -13,7 +13,7 @@ import { EventService } from '../../event/service/event.service';
 import * as admin from 'firebase-admin';
 
 @WebSocketGateway({
-    cors: { origin: [environment.clientUrl] },
+    cors: { origin: [environment.clientUrl] }
 })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect

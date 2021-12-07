@@ -10,10 +10,10 @@ export const environment: Environment = {
         projectId: 'mate-team',
         storageBucket: 'mate-team.appspot.com',
         messagingSenderId: '848103878945',
-        appId: '1:848103878945:web:2d78aef8264f87f52b0e60',
+        appId: '1:848103878945:web:2d78aef8264f87f52b0e60'
     },
     production: true,
     port: 8000,
     apiUrl: 'https://europe-west1-mate-team.cloudfunctions.net/api',
-    clientUrl: 'wss://mate-team.de',
+    clientUrl: 'wss://mate-team.de'
 };

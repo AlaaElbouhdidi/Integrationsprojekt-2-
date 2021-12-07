@@ -1,6 +1,6 @@
 import {
     ExpressAdapter,
-    NestExpressApplication,
+    NestExpressApplication
 } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app/app.module';
@@ -29,10 +29,10 @@ export async function getApp(): Promise<INestApplication> {
     );
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     app.useStaticAssets(join(__dirname, 'docs', 'mate-team'), {
-        prefix: '/docs/mate-team',
+        prefix: '/docs/mate-team'
     });
     app.useStaticAssets(join(__dirname, 'docs', 'api'), {
-        prefix: '/docs/api/',
+        prefix: '/docs/api/'
     });
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')

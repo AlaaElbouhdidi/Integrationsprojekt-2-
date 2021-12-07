@@ -2,7 +2,7 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
-    NotFoundException,
+    NotFoundException
 } from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateEventDto } from '../dto/create-event.dto';
@@ -49,7 +49,7 @@ export class EventService {
                         name,
                         description,
                         date,
-                        participants: [uid, ...participants],
+                        participants: [uid, ...participants]
                     };
                     const res = await this.eventsRef.add(data);
                     if (res) {
@@ -64,7 +64,7 @@ export class EventService {
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date'),
+                        date: event.get('date')
                     };
                     this.logger.log(eventData);
                     return eventData;
@@ -94,7 +94,7 @@ export class EventService {
                     name: event.get('name'),
                     description: event.get('description'),
                     participants: event.get('participants'),
-                    date: event.get('date'),
+                    date: event.get('date')
                 };
                 this.logger.log(eventData);
                 events.push(eventData);
@@ -131,7 +131,7 @@ export class EventService {
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date'),
+                        date: event.get('date')
                     };
                     this.logger.log(`Successfully fetched event with id ${id}`);
                     this.logger.log(eventData);
@@ -173,14 +173,14 @@ export class EventService {
                         name: name,
                         description: description,
                         date: date,
-                        participants: participants,
+                        participants: participants
                     });
                     const event = await this.eventsRef.doc(id).get();
                     const eventData: Event = {
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date'),
+                        date: event.get('date')
                     };
                     this.logger.debug(eventData);
                     this.logger.log(`Successfully updated event with id ${id}`);
@@ -221,7 +221,7 @@ export class EventService {
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date'),
+                        date: event.get('date')
                     };
                     await this.eventsRef.doc(id).delete();
                     this.logger.log(`Successfully deleted event with id ${id}`);

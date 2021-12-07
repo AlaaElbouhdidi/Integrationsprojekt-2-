@@ -4,14 +4,14 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 import { Activity, Member } from '@api-interfaces';
 import { AlertService, AuthService, GroupService } from '@services';
 @Component({
     selector: 'mate-team-newgroup-form',
     templateUrl: './newgroup-form.component.html',
-    styleUrls: ['./newgroup-form.component.scss'],
+    styleUrls: ['./newgroup-form.component.scss']
 })
 export class NewgroupFormComponent implements OnInit {
     newGroupForm: FormGroup;
@@ -28,7 +28,7 @@ export class NewgroupFormComponent implements OnInit {
         this.newGroupForm = this.fb.group({
             name: new FormControl('', [Validators.required]),
             activity: new FormControl('', [Validators.required]),
-            description: new FormControl(''),
+            description: new FormControl('')
         });
         this.keys = Object.keys(this.activities);
     }
@@ -45,7 +45,7 @@ export class NewgroupFormComponent implements OnInit {
     get member(): Member {
         return {
             uid: this.authService.getCurrentUser().uid,
-            isAdmin: true,
+            isAdmin: true
         };
     }
 
@@ -58,7 +58,7 @@ export class NewgroupFormComponent implements OnInit {
                     name: this.name.value,
                     activity: this.activity.value,
                     description: this.description.value,
-                    member: [this.member],
+                    member: [this.member]
                 },
                 this.member
             );
@@ -66,7 +66,7 @@ export class NewgroupFormComponent implements OnInit {
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully added a group.',
+                message: 'Successfully added a group.'
             });
             this.groupService.toggleSuccess(true);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,7 +75,7 @@ export class NewgroupFormComponent implements OnInit {
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message,
+                message: err.message
             });
         }
     }
@@ -88,7 +88,7 @@ export class NewgroupFormComponent implements OnInit {
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message,
+                message: err.message
             });
         }
     }

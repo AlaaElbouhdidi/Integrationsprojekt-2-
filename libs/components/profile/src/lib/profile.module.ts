@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileRoutingModule } from './profile/profile-routing.module';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faUser,
     faEnvelope,
@@ -28,9 +31,7 @@ import { UserIconModule } from '@user-icon';
         UserIconModule,
         FontAwesomeModule
     ],
-    declarations: [
-      ProfileComponent
-    ],
+    declarations: [ProfileComponent],
     exports: [ProfileComponent]
 })
 export class ProfileModule {

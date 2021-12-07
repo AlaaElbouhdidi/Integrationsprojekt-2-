@@ -8,30 +8,30 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () =>
-            import('@landingpage').then((m) => m.LandingpageModule),
+            import('@landingpage').then((m) => m.LandingpageModule)
     },
     {
         path: 'register',
-        loadChildren: () => import('@register').then((m) => m.RegisterModule),
+        loadChildren: () => import('@register').then((m) => m.RegisterModule)
     },
     {
         path: 'login',
-        loadChildren: () => import('@login').then((m) => m.LoginModule),
+        loadChildren: () => import('@login').then((m) => m.LoginModule)
     },
     {
         path: 'newgroup',
-        loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule),
+        loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule)
     },
     {
         path: 'auth/handler',
         loadChildren: () =>
-            import('@auth-handler').then((m) => m.AuthHandlerModule),
+            import('@auth-handler').then((m) => m.AuthHandlerModule)
     },
     {
         path: 'externalRedirect',
         canActivate: [externalUrlProvider],
         // We need a component here because we cannot define the route otherwise
-        component: AppComponent,
+        component: AppComponent
     },
     {
         path: 'profile',
@@ -47,9 +47,9 @@ const routes: Routes = [
             useValue: (route: ActivatedRouteSnapshot) => {
                 const externalUrl = route.paramMap.get('externalUrl');
                 if (externalUrl) window.open(externalUrl, '_self');
-            },
-        },
+            }
+        }
     ],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}

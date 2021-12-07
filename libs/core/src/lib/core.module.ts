@@ -15,7 +15,10 @@ import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
 import { CreateEventModule } from '@create-event';
 import { ProfileModule } from '@profile';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faUser,
     faDragon,
@@ -47,8 +50,8 @@ import {
         AngularFireFunctionsModule,
         StylesModule,
         CreateEventModule,
-        FontAwesomeModule,
-    ],
+        FontAwesomeModule
+    ]
 })
 export class CoreModule {
     constructor(library: FaIconLibrary) {

@@ -6,6 +6,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
     imports: [CommonModule, FormsModule],
     declarations: [CreateEventComponent],
-    exports: [CreateEventComponent],
+    exports: [CreateEventComponent]
 })
 export class CreateEventModule {}

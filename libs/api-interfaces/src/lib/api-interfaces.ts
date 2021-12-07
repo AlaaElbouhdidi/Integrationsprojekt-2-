@@ -7,8 +7,8 @@ export interface Alert {
     message: string;
 }
 export interface ChangePasswordData {
-    oldPassword: string,
-    newPassword: string
+    oldPassword: string;
+    newPassword: string;
 }
 export interface ChangeEmailData {
     password: string;
@@ -67,7 +67,7 @@ export interface Team {
 }
 
 export interface User {
-    uid: string,
+    uid: string;
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;
@@ -75,5 +75,5 @@ export interface User {
 }
 
 export enum Activity {
-    soccer = 'SOCCER_ACTIVITY',
+    soccer = 'SOCCER_ACTIVITY'
 }

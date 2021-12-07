@@ -9,12 +9,12 @@ import {
     updatePassword,
     updateEmail,
     updateProfile,
-    sendEmailVerification,
+    sendEmailVerification
 } from 'firebase/auth';
 import { User } from '@api-interfaces';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class AuthService {
     /**
@@ -139,7 +139,7 @@ export class AuthService {
     sendEmailVerification(): Promise<void> {
         const user = getAuth().currentUser;
         if (!user) {
-            throw new Error('No user found')
+            throw new Error('No user found');
         }
         return sendEmailVerification(user);
     }
@@ -147,18 +147,18 @@ export class AuthService {
     updateProfile(displayName?: string, photoURL?: string): Promise<void> {
         const user = getAuth().currentUser;
         if (!user) {
-            throw new Error('No user found')
+            throw new Error('No user found');
         }
         return updateProfile(user, {
             displayName: displayName,
-            photoURL: photoURL,
+            photoURL: photoURL
         });
     }
 
     updateEmail(newEmail: string): Promise<void> {
         const user = getAuth().currentUser;
         if (!user) {
-            throw new Error('No user found')
+            throw new Error('No user found');
         }
         return updateEmail(user, newEmail);
     }
@@ -166,7 +166,7 @@ export class AuthService {
     updatePassword(newPassword: string): Promise<void> {
         const user = getAuth().currentUser;
         if (!user) {
-            throw new Error('No user found')
+            throw new Error('No user found');
         }
         return updatePassword(user, newPassword);
     }
@@ -174,7 +174,7 @@ export class AuthService {
     reauthenticateUser(password: string): Promise<UserCredential> {
         const user = getAuth().currentUser;
         if (!user || !user.email) {
-            throw new Error('No user email found')
+            throw new Error('No user email found');
         }
         const credential = firebase.auth.EmailAuthProvider.credential(
             user.email,
@@ -209,7 +209,7 @@ export class AuthService {
                 email: email,
                 photoURL: photoURL,
                 emailVerified: emailVerified,
-                displayName: displayName,
+                displayName: displayName
             };
         }
         throw new Error();

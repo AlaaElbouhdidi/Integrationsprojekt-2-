@@ -1,15 +1,13 @@
 <main class="auth-container">
-
     <div class="profile">
-
         <div class="profile-container">
-
             <div class="profile-user">
-
                 <div class="profile-user-banner">
                     <div class="profile-user-photo">
                         <mate-team-user-icon
-                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                            [userIconString]="
+                                user!.photoURL ? user!.photoURL : ''
+                            "
                         >
                         </mate-team-user-icon>
                     </div>
@@ -17,7 +15,11 @@
                     <div class="profile-user-name">
                         <p>
                             <fa-icon icon="user-tag"></fa-icon>
-                            {{ user?.displayName === null ? 'No name set' : user?.displayName }}
+                            {{
+                                user?.displayName === null
+                                    ? 'No name set'
+                                    : user?.displayName
+                            }}
                         </p>
                     </div>
                 </div>
@@ -28,8 +30,14 @@
                             <fa-icon icon="certificate"></fa-icon>
                             Verified:
                         </p>
-                        <fa-icon *ngIf="user?.emailVerified" icon="check-circle"></fa-icon>
-                        <fa-icon *ngIf="!user?.emailVerified" icon="times-circle"></fa-icon>
+                        <fa-icon
+                            *ngIf="user?.emailVerified"
+                            icon="check-circle"
+                        ></fa-icon>
+                        <fa-icon
+                            *ngIf="!user?.emailVerified"
+                            icon="times-circle"
+                        ></fa-icon>
                     </div>
 
                     <div class="profile-card email-card">
@@ -40,11 +48,9 @@
                         <p>{{ user?.email }}</p>
                     </div>
                 </div>
-
             </div>
 
             <div class="profile-wrapper">
-
                 <select name="nav-selection-mobile" id="nav-selection">
                     <option
                         (click)="setActiveLink('profile')"
@@ -99,19 +105,33 @@
                 </nav>
 
                 <div class="profile-edit">
-
-                    <div class="change-profile" *ngIf="activeNavLink === 'profile'">
+                    <div
+                        class="change-profile"
+                        *ngIf="activeNavLink === 'profile'"
+                    >
                         <mate-team-change-profile-form
-                            [userDisplayName]="user!.displayName ? user!.displayName : ''"
-                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                            [userDisplayName]="
+                                user!.displayName ? user!.displayName : ''
+                            "
+                            [userIconString]="
+                                user!.photoURL ? user!.photoURL : ''
+                            "
                             (changeProfileEvent)="changeProfile($event)"
                             [loading]="loading"
                         >
                         </mate-team-change-profile-form>
                     </div>
 
-                    <div class="change-password" *ngIf="activeNavLink === 'password'">
-                        <div *ngIf="provider === 'password'; else socialLoginInfo">
+                    <div
+                        class="change-password"
+                        *ngIf="activeNavLink === 'password'"
+                    >
+                        <div
+                            *ngIf="
+                                provider === 'password';
+                                else socialLoginInfo
+                            "
+                        >
                             <mate-team-change-password-form
                                 [loading]="loading"
                                 (changePasswordEvent)="changePassword($event)"
@@ -121,13 +141,19 @@
 
                         <ng-template #socialLoginInfo>
                             <p class="change-warning">
-                                You are signed in with a social login. You can not change your data on this site.
+                                You are signed in with a social login. You can
+                                not change your data on this site.
                             </p>
                         </ng-template>
                     </div>
 
                     <div class="change-email" *ngIf="activeNavLink === 'email'">
-                        <div *ngIf="provider === 'password'; else socialLoginInfo">
+                        <div
+                            *ngIf="
+                                provider === 'password';
+                                else socialLoginInfo
+                            "
+                        >
                             <mate-team-change-email-form
                                 [loading]="loading"
                                 (changeEmailEvent)="changeEmail($event)"
@@ -137,17 +163,13 @@
 
                         <ng-template #socialLoginInfo>
                             <p class="change-warning">
-                                You are signed in with a social login. You can not change your data on this site.
+                                You are signed in with a social login. You can
+                                not change your data on this site.
                             </p>
                         </ng-template>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </main>

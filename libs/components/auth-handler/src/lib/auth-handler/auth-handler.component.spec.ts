@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'mate-team-password-reset-form',
-    template: '<p>Mock Password Reset Form Component</p>',
+    template: '<p>Mock Password Reset Form Component</p>'
 })
 class MockPasswordResetFormComponent {}
 
@@ -20,24 +20,21 @@ describe('AuthHandlerComponent', () => {
     const authServiceMock = {
         applyActionCode: jest.fn(),
         confirmPasswordReset: jest.fn(),
-        verifyPasswordResetCode: jest.fn(),
+        verifyPasswordResetCode: jest.fn()
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 RouterTestingModule.withRoutes([
-                    { path: 'login', component: LoginModule },
-                ]),
+                    { path: 'login', component: LoginModule }
+                ])
             ],
-            declarations: [
-                AuthHandlerComponent,
-                MockPasswordResetFormComponent,
-            ],
+            declarations: [AuthHandlerComponent, MockPasswordResetFormComponent]
         }).compileComponents();
     });
 
@@ -60,11 +57,11 @@ describe('AuthHandlerComponent', () => {
     it('should apply action code in handleVerifyEmail method and redirect to landing page', () => {
         const location = TestBed.inject(Location);
         const verifySpy = jest.spyOn(authServiceMock, 'applyActionCode');
-        component.handleVerifyEmail().then(() => {
-        component.handleEmailAction('verify')
-        .then(() => {
-            expect(location.path()).toBe('/');
-            expect(verifySpy).toHaveBeenCalledTimes(1);
+        component.handleVerifyCode().then(() => {
+            component.handleEmailAction('verify').then(() => {
+                expect(location.path()).toBe('/');
+                expect(verifySpy).toHaveBeenCalledTimes(1);
+            });
         });
     });
 
