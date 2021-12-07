@@ -8,7 +8,7 @@ import { IconService } from '@services';
     styleUrls: ['./user-icon.component.scss']
 })
 export class UserIconComponent implements OnInit, OnChanges {
-    @Input() userIconString = '';
+    @Input() userIconString: string | null = '';
     icon: IconProp = 'user';
     iconColor = '#0c2d48';
     iconBackground = '#ffffff';
@@ -16,22 +16,24 @@ export class UserIconComponent implements OnInit, OnChanges {
     constructor(private iconService: IconService) {}
 
     setIconValues(): void {
+        if (this.userIconString) {
         const [icon, iconColor, iconBackground] =
             this.iconService.decodeIconString(this.userIconString);
         this.iconColor = iconColor;
         this.iconBackground = iconBackground;
         this.icon = icon as IconProp;
+        }
     }
 
     ngOnChanges(): void {
-        if (this.userIconString.length === 0) {
+        if (this.userIconString?.length === 0) {
             return;
         }
         this.setIconValues();
     }
 
     ngOnInit(): void {
-        if (this.userIconString.length === 0) {
+        if (this.userIconString?.length === 0) {
             return;
         }
         this.setIconValues();

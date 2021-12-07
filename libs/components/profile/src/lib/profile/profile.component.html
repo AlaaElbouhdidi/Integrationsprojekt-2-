@@ -6,7 +6,7 @@
                     <div class="profile-user-photo">
                         <mate-team-user-icon
                             [userIconString]="
-                                user!.photoURL ? user!.photoURL : ''
+                                user?.photoURL ? user!.photoURL : ''
                             "
                         >
                         </mate-team-user-icon>
@@ -111,10 +111,10 @@
                     >
                         <mate-team-change-profile-form
                             [userDisplayName]="
-                                user!.displayName ? user!.displayName : ''
+                                user?.displayName ? user!.displayName : ''
                             "
                             [userIconString]="
-                                user!.photoURL ? user!.photoURL : ''
+                                user?.photoURL ? user!.photoURL : ''
                             "
                             (changeProfileEvent)="changeProfile($event)"
                             [loading]="loading"

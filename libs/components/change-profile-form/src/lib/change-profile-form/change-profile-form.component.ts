@@ -4,7 +4,7 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators
+    Validators,
 } from '@angular/forms';
 import { IconService } from '@services';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -13,12 +13,12 @@ import { ChangeProfileData } from '@api-interfaces';
 @Component({
     selector: 'mate-team-change-profile-form',
     templateUrl: './change-profile-form.component.html',
-    styleUrls: ['./change-profile-form.component.scss']
+    styleUrls: ['./change-profile-form.component.scss'],
 })
 export class ChangeProfileFormComponent implements OnInit {
     @Output() changeProfileEvent = new EventEmitter();
-    @Input() userIconString = '';
-    @Input() userDisplayName = '';
+    @Input() userIconString: string | null = '';
+    @Input() userDisplayName: string | null = '';
     @Input() loading = false;
     changeProfileForm: FormGroup;
     previewIcon = '';
@@ -32,8 +32,8 @@ export class ChangeProfileFormComponent implements OnInit {
             iconBackground: new FormControl(''),
             displayName: new FormControl('', [
                 Validators.maxLength(15),
-                Validators.required
-            ])
+                Validators.required,
+            ]),
         });
         this.icons = this.iconService.getIcons();
     }
@@ -85,13 +85,13 @@ export class ChangeProfileFormComponent implements OnInit {
                 this.selectedIcon,
                 this.iconColor.value,
                 this.iconBackground.value
-            )
+            ),
         };
         this.changeProfileEvent.emit(data);
     }
 
     ngOnInit(): void {
-        if (this.userIconString.length === 0) {
+        if (this.userIconString?.length === 0) {
             this.previewIcon = this.iconService.encodeIconString(
                 'user',
                 '#0c2d48',
@@ -100,18 +100,20 @@ export class ChangeProfileFormComponent implements OnInit {
             this.changeProfileForm.reset({
                 displayName: this.userDisplayName,
                 iconColor: '#0c2d48',
-                iconBackground: '#ffffff'
+                iconBackground: '#ffffff',
             });
         } else {
-            const [icon, iconColor, iconBackground] =
-                this.iconService.decodeIconString(this.userIconString);
-            this.changeProfileForm.reset({
-                displayName: this.userDisplayName,
-                iconColor: iconColor,
-                iconBackground: iconBackground
-            });
-            this.selectedIcon = icon;
-            this.updatePreviewIcon();
+            if (this.userIconString) {
+                const [icon, iconColor, iconBackground] =
+                    this.iconService.decodeIconString(this.userIconString);
+                this.changeProfileForm.reset({
+                    displayName: this.userDisplayName,
+                    iconColor: iconColor,
+                    iconBackground: iconBackground,
+                });
+                this.selectedIcon = icon;
+                this.updatePreviewIcon();
+            }
         }
     }
 }
