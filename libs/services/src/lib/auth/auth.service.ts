@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
-import { getAuth } from 'firebase/auth';
-import { User } from '@api-interfaces';
 import firebase from 'firebase/compat/app';
+import {
+    getAuth,
+    UserCredential,
+    reauthenticateWithCredential,
+    updatePassword,
+    updateEmail,
+    updateProfile,
+    sendEmailVerification,
+} from 'firebase/auth';
+import { User } from '@api-interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -128,6 +136,53 @@ export class AuthService {
         return this.auth.confirmPasswordReset(code, newPassword);
     }
 
+    sendEmailVerification(): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found')
+        }
+        return sendEmailVerification(user);
+    }
+
+    updateProfile(displayName?: string, photoURL?: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found')
+        }
+        return updateProfile(user, {
+            displayName: displayName,
+            photoURL: photoURL,
+        });
+    }
+
+    updateEmail(newEmail: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found')
+        }
+        return updateEmail(user, newEmail);
+    }
+
+    updatePassword(newPassword: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found')
+        }
+        return updatePassword(user, newPassword);
+    }
+
+    reauthenticateUser(password: string): Promise<UserCredential> {
+        const user = getAuth().currentUser;
+        if (!user || !user.email) {
+            throw new Error('No user email found')
+        }
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            password
+        );
+        return reauthenticateWithCredential(user, credential);
+    }
+
     /**
      * Logout a user
      */
@@ -149,9 +204,8 @@ export class AuthService {
             // The user's ID, unique to the Firebase project. Do NOT use
             // this value to authenticate with your backend server, if
             // you have one. Use User.getToken() instead.
-            const uid = user.uid;
             return {
-                id: uid,
+                uid: user.uid,
                 email: email,
                 photoURL: photoURL,
                 emailVerified: emailVerified,

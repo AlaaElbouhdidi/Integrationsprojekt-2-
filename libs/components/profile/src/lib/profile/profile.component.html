@@ -1,0 +1,153 @@
+<main class="auth-container">
+
+    <div class="profile">
+
+        <div class="profile-container">
+
+            <div class="profile-user">
+
+                <div class="profile-user-banner">
+                    <div class="profile-user-photo">
+                        <mate-team-user-icon
+                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                        >
+                        </mate-team-user-icon>
+                    </div>
+
+                    <div class="profile-user-name">
+                        <p>
+                            <fa-icon icon="user-tag"></fa-icon>
+                            {{ user?.displayName === null ? 'No name set' : user?.displayName }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="profile-user-info">
+                    <div class="profile-card verified-card">
+                        <p>
+                            <fa-icon icon="certificate"></fa-icon>
+                            Verified:
+                        </p>
+                        <fa-icon *ngIf="user?.emailVerified" icon="check-circle"></fa-icon>
+                        <fa-icon *ngIf="!user?.emailVerified" icon="times-circle"></fa-icon>
+                    </div>
+
+                    <div class="profile-card email-card">
+                        <p>
+                            <fa-icon icon="envelope"></fa-icon>
+                            Email:
+                        </p>
+                        <p>{{ user?.email }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="profile-wrapper">
+
+                <select name="nav-selection-mobile" id="nav-selection">
+                    <option
+                        (click)="setActiveLink('profile')"
+                        [selected]="activeNavLink === 'profile'"
+                    >
+                        Change profile
+                    </option>
+                    <option
+                        (click)="setActiveLink('password')"
+                        [selected]="activeNavLink === 'password'"
+                    >
+                        Change password
+                    </option>
+                    <option
+                        (click)="setActiveLink('email')"
+                        [selected]="activeNavLink === 'email'"
+                    >
+                        Change email
+                    </option>
+                </select>
+
+                <nav>
+                    <ul>
+                        <li
+                            (click)="setActiveLink('profile')"
+                            [class.selected-nav]="activeNavLink === 'profile'"
+                        >
+                            <a>
+                                <fa-icon icon="user"></fa-icon>
+                                Change profile
+                            </a>
+                        </li>
+                        <li
+                            (click)="setActiveLink('password')"
+                            [class.selected-nav]="activeNavLink === 'password'"
+                        >
+                            <a>
+                                <fa-icon icon="lock"></fa-icon>
+                                Change password
+                            </a>
+                        </li>
+                        <li
+                            (click)="setActiveLink('email')"
+                            [class.selected-nav]="activeNavLink === 'email'"
+                        >
+                            <a>
+                                <fa-icon icon="envelope"></fa-icon>
+                                Change email
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="profile-edit">
+
+                    <div class="change-profile" *ngIf="activeNavLink === 'profile'">
+                        <mate-team-change-profile-form
+                            [userDisplayName]="user!.displayName ? user!.displayName : ''"
+                            [userIconString]="user!.photoURL ? user!.photoURL : ''"
+                            (changeProfileEvent)="changeProfile($event)"
+                            [loading]="loading"
+                        >
+                        </mate-team-change-profile-form>
+                    </div>
+
+                    <div class="change-password" *ngIf="activeNavLink === 'password'">
+                        <div *ngIf="provider === 'password'; else socialLoginInfo">
+                            <mate-team-change-password-form
+                                [loading]="loading"
+                                (changePasswordEvent)="changePassword($event)"
+                            >
+                            </mate-team-change-password-form>
+                        </div>
+
+                        <ng-template #socialLoginInfo>
+                            <p class="change-warning">
+                                You are signed in with a social login. You can not change your data on this site.
+                            </p>
+                        </ng-template>
+                    </div>
+
+                    <div class="change-email" *ngIf="activeNavLink === 'email'">
+                        <div *ngIf="provider === 'password'; else socialLoginInfo">
+                            <mate-team-change-email-form
+                                [loading]="loading"
+                                (changeEmailEvent)="changeEmail($event)"
+                            >
+                            </mate-team-change-email-form>
+                        </div>
+
+                        <ng-template #socialLoginInfo>
+                            <p class="change-warning">
+                                You are signed in with a social login. You can not change your data on this site.
+                            </p>
+                        </ng-template>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

@@ -33,6 +33,10 @@ const routes: Routes = [
         // We need a component here because we cannot define the route otherwise
         component: AppComponent,
     },
+    {
+        path: 'profile',
+        loadChildren: () => import('@profile').then((m) => m.ProfileModule)
+    }
 ];
 
 @NgModule({

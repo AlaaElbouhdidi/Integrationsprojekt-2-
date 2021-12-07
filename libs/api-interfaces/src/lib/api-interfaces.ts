@@ -6,7 +6,18 @@ export interface Alert {
     type: 'error' | 'success' | 'neutral' | 'warn';
     message: string;
 }
-
+export interface ChangePasswordData {
+    oldPassword: string,
+    newPassword: string
+}
+export interface ChangeEmailData {
+    password: string;
+    newEmail: string;
+}
+export interface ChangeProfileData {
+    displayName?: string;
+    photoURL?: string;
+}
 export interface Environment {
     firebase: {
         projectId: string;
@@ -56,7 +67,7 @@ export interface Team {
 }
 
 export interface User {
-    id: string;
+    uid: string,
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;

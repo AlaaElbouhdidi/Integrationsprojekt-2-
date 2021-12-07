@@ -1,5 +1,9 @@
 {
     "npmScope": "mate-team",
+    "workspaceLayout": {
+        "appsDir": "apps/e2e",
+        "libsDir": "libs/components"
+    },
     "affected": {
         "defaultBase": "main"
     },

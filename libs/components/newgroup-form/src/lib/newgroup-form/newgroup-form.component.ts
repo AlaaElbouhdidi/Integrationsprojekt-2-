@@ -44,7 +44,7 @@ export class NewgroupFormComponent implements OnInit {
     }
     get member(): Member {
         return {
-            uid: this.authService.getCurrentUser().id,
+            uid: this.authService.getCurrentUser().uid,
             isAdmin: true,
         };
     }

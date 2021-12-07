@@ -1,0 +1,111 @@
+<form (ngSubmit)="changeProfile()" [formGroup]="changeProfileForm">
+
+    <h6>Icon</h6>
+
+    <section class="change-icon-wrapper">
+
+        <div class="user-icon">
+            <mate-team-user-icon
+                [userIconString]="previewIcon"
+            ></mate-team-user-icon>
+        </div>
+
+        <div class="user-icon-color-inputs">
+
+            <div>
+                <label for="icon-color">
+                    <fa-icon icon="tint"></fa-icon>
+                    Color:
+                </label>
+                <input
+                    type="color"
+                    id="icon-color"
+                    formControlName="iconColor"
+                    (change)="updatePreviewIcon()"
+                >
+            </div>
+
+            <div>
+                <label for="icon-background">
+                    <fa-icon icon="fill"></fa-icon>
+                    Background:
+                </label>
+                <input
+                    type="color"
+                    id="icon-background"
+                    formControlName="iconBackground"
+                    (change)="updatePreviewIcon()"
+                >
+            </div>
+        </div>
+
+        <div class="user-icon-selection">
+
+            <fa-icon
+                icon="chevron-left"
+                (click)="previousIcon()"
+            ></fa-icon>
+
+            <div>
+                <div *ngFor="let icon of icons">
+                    <fa-icon
+                        *ngIf="selectedIcon == icon"
+                        [icon]="icon"
+                    ></fa-icon>
+                </div>
+            </div>
+
+            <fa-icon
+                icon="chevron-right"
+                (click)="nextIcon()"
+            ></fa-icon>
+
+        </div>
+
+    </section>
+
+    <h6>Display Name</h6>
+
+    <div class="form-input">
+        <input
+            type="text"
+            formControlName="displayName"
+            placeholder="Display name"
+            required >
+        <fa-icon icon="user-tag"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="displayName.invalid && (displayName.dirty || displayName.touched)"
+    >
+        <div class="form-error-message" *ngIf="displayName.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Display name required
+            </p>
+        </div>
+        <div class="form-error-message" *ngIf="displayName.errors?.maxlength">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Maximum Length of 15 characters exceeded
+            </p>
+        </div>
+    </div>
+
+    <div class="form-submit">
+        <button
+            type="submit"
+            class="green-btn"
+            *ngIf="!loading"
+            [class.disabled-btn]="!changeProfileForm.valid"
+            [disabled]="!changeProfileForm.valid"
+        >
+            Save profile
+        </button>
+        <div class="loader" *ngIf="loading">
+            <mate-team-loader [theme]="'light'"></mate-team-loader>
+        </div>
+    </div>
+
+</form>

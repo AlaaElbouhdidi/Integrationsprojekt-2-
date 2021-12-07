@@ -61,6 +61,8 @@ describe('AuthHandlerComponent', () => {
         const location = TestBed.inject(Location);
         const verifySpy = jest.spyOn(authServiceMock, 'applyActionCode');
         component.handleVerifyEmail().then(() => {
+        component.handleEmailAction('verify')
+        .then(() => {
             expect(location.path()).toBe('/');
             expect(verifySpy).toHaveBeenCalledTimes(1);
         });
