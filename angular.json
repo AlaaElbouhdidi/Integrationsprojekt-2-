@@ -92,26 +92,32 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/api/tsconfig.doc.json -d dist/apps/api/documentation/"
+                                "command": "npx compodoc -p apps/api/tsconfig.compodoc.json -d dist/apps/api/docs/api/"
                             }
                         ]
                     }
                 },
-                "build-node": {
+                "build-functions": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/functions",
+                        "main": "apps/api/src/functions/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/package.json"]
+                    }
+                },
+                "build": {
                     "builder": "@nrwl/node:build",
                     "options": {
                         "outputPath": "dist/apps/api",
                         "main": "apps/api/src/main.ts",
                         "tsConfig": "apps/api/tsconfig.app.json",
-                        "assets": [
-                            "apps/api/src/package.json",
-                            "apps/api/src/.env"
-                        ]
+                        "assets": ["apps/api/src/package.json"]
                     },
                     "configurations": {
                         "production": {
                             "optimization": true,
-                            "extractLicenses": true,
+                            "extractLicenses": false,
                             "inspect": false,
                             "fileReplacements": [
                                 {
@@ -119,20 +125,25 @@
                                     "with": "libs/env/src/lib/environment.prod.ts"
                                 }
                             ]
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false
                         }
-                    }
-                },
-                "build": {
-                    "builder": "@nrwl/workspace:run-commands",
-                    "options": {
-                        "command": "nx run api:build-node"
-                    }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "serve": {
-                    "builder": "@nrwl/workspace:run-commands",
-                    "options": {
-                        "command": "firebase emulators:start --only functions --inspect-functions"
-                    }
+                    "builder": "@nrwl/node:execute",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "api:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "api:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "production"
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
@@ -454,6 +465,87 @@
                         "lintFilePatterns": [
                             "libs/core/src/**/*.ts",
                             "libs/core/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "create-event": {
+            "projectType": "library",
+            "root": "libs/components/create-event",
+            "sourceRoot": "libs/components/create-event/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/create-event/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/create-event/src/**/*.ts",
+                            "libs/components/create-event/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/create-event/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/create-event",
+                        "config": {
+                            "configFolder": "libs/components/create-event/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "create-event-e2e": {
+            "root": "apps/e2e/create-event-e2e",
+            "sourceRoot": "apps/e2e/create-event-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/create-event-e2e/cypress.json",
+                        "devServerTarget": "create-event:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "create-event:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/create-event-e2e/**/*.{js,ts}"
                         ]
                     }
                 }
@@ -1056,7 +1148,7 @@
                     "options": {
                         "commands": [
                             {
-                                "command": "npx compodoc -p apps/mate-team/tsconfig.doc.json -d dist/apps/mate-team/documentation/"
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/"
                             }
                         ]
                     }
@@ -1088,13 +1180,13 @@
                             "budgets": [
                                 {
                                     "type": "initial",
-                                    "maximumWarning": "750kb",
-                                    "maximumError": "1.5mb"
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "3mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "8kb",
+                                    "maximumError": "16kb"
                                 }
                             ],
                             "fileReplacements": [
@@ -1116,6 +1208,12 @@
                     },
                     "defaultConfiguration": "production"
                 },
+                "firebase": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "npm run serve"
+                    }
+                },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
@@ -1126,7 +1224,7 @@
                             "browserTarget": "mate-team:build:development"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "production"
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",

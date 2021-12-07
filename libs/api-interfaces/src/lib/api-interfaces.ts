@@ -1,13 +1,14 @@
 export interface Message {
     message: string;
 }
+
 export interface Alert {
     type: 'error' | 'success' | 'neutral' | 'warn';
     message: string;
 }
 export interface ChangePasswordData {
-    oldPassword: string,
-    newPassword: string
+    oldPassword: string;
+    newPassword: string;
 }
 export interface ChangeEmailData {
     password: string;
@@ -19,37 +20,60 @@ export interface ChangeProfileData {
 }
 export interface Environment {
     firebase: {
-        projectId: string,
-        appId: string,
-        storageBucket: string,
-        apiKey: string,
-        authDomain: string,
-        messagingSenderId: string,
-    }
+        projectId: string;
+        appId: string;
+        storageBucket: string;
+        apiKey: string;
+        authDomain: string;
+        messagingSenderId: string;
+    };
     production: boolean;
+    port: number;
     apiUrl: string;
+    clientUrl: string;
 }
+
+export interface Member {
+    uid: string;
+    isAdmin: boolean;
+}
+
+export interface Event {
+    name: string;
+    description: string;
+    date: Date;
+    participants?: string[]; // Array of uid's
+}
+
+export interface Group {
+    name: string;
+    description: string;
+    activity: Activity;
+    member: Member[]; // Array of uid's
+}
+
+export interface Game {
+    activity: Activity;
+    firstTeamId: string;
+    secondTeamId: string;
+    date: Date;
+    firstTeamScore?: number;
+    secondTeamScore?: number;
+}
+
+export interface Team {
+    member: Member[];
+    groupId: string;
+}
+
 export interface User {
-    id?: string;
+    uid: string;
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;
     displayName?: string;
 }
-export interface Member {
-    uid?: string;
-    isAdmin?: boolean;
-    groupid?: string;
-}
-export interface Group {
-    id?: string;
-    name?: string;
-    activity?: Activity;
-    description?: string;
-    members?: Member[];
-}
-export interface Activity {
-    id?: string;
-    name?: string;
-    logo?: string;
+
+export enum Activity {
+    soccer = 'SOCCER_ACTIVITY'
 }

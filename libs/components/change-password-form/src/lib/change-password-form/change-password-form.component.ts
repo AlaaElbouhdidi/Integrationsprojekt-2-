@@ -1,31 +1,31 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { ChangePasswordData } from '@api-interfaces';
 
 @Component({
-  selector: 'mate-team-change-password-form',
-  templateUrl: './change-password-form.component.html',
-  styleUrls: ['./change-password-form.component.scss']
+    selector: 'mate-team-change-password-form',
+    templateUrl: './change-password-form.component.html',
+    styleUrls: ['./change-password-form.component.scss']
 })
 export class ChangePasswordFormComponent {
     changePasswordForm: FormGroup;
     @Input() loading = false;
     @Output() changePasswordEvent = new EventEmitter<ChangePasswordData>();
 
-    constructor(
-        private fb: FormBuilder
-    ) {
+    constructor(private fb: FormBuilder) {
         this.changePasswordForm = this.fb.group({
-            password: new FormControl('', [
-                Validators.required
-            ]),
+            password: new FormControl('', [Validators.required]),
             newPassword: new FormControl('', [
                 Validators.minLength(6),
                 Validators.required
             ]),
-            confirmNewPassword: new FormControl('', [
-                Validators.required
-            ])
+            confirmNewPassword: new FormControl('', [Validators.required])
         });
     }
 
@@ -42,7 +42,7 @@ export class ChangePasswordFormComponent {
     }
 
     comparePasswords(): void {
-        if (this.newPassword.value !== this.confirmNewPassword.value){
+        if (this.newPassword.value !== this.confirmNewPassword.value) {
             this.confirmNewPassword.setErrors({ mustMatch: true });
         } else {
             this.confirmNewPassword.setErrors(null);
@@ -53,7 +53,7 @@ export class ChangePasswordFormComponent {
         const data: ChangePasswordData = {
             oldPassword: this.password.value,
             newPassword: this.newPassword.value
-        }
+        };
         this.changePasswordEvent.emit(data);
         this.changePasswordForm.reset();
     }

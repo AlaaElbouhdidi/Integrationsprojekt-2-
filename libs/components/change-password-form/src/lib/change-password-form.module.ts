@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faLock,
     faEye,
@@ -18,18 +21,11 @@ import { LoaderModule } from '@loader';
         FontAwesomeModule,
         LoaderModule
     ],
-    declarations: [
-      ChangePasswordFormComponent
-    ],
+    declarations: [ChangePasswordFormComponent],
     exports: [ChangePasswordFormComponent]
 })
 export class ChangePasswordFormModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(
-            faLock,
-            faEye,
-            faEyeSlash,
-            faUnlock
-        );
+        library.addIcons(faLock, faEye, faEyeSlash, faUnlock);
     }
 }

@@ -3,7 +3,7 @@
 ## Create it as a lib using nx
 
 ```bash
-# This will create the components module in the libs folder 
+# This will create the components module in the libs folder
 
 nx g lib <component>
 ```
@@ -11,8 +11,8 @@ nx g lib <component>
 ## Create the component in the lib
 
 ```bash
-# This will create the component and its files in 
-# the libs/<component>/src/lib/<component> folder 
+# This will create the component and its files in
+# the libs/<component>/src/lib/<component> folder
 
 nx g c <component> --project=<component>
 ```

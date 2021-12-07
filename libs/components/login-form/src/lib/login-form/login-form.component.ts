@@ -78,6 +78,7 @@ export class LoginFormComponent {
                 message: 'Successfully logged in',
             });
             await this.router.navigate(['/']);
+            window.location.reload();
         } catch (e) {
             this.loading = false;
             this.loginForm.reset();
@@ -99,6 +100,7 @@ export class LoginFormComponent {
                 message: 'Successfully logged in with google',
             });
             await this.router.navigate(['/']);
+            window.location.reload();
         } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({

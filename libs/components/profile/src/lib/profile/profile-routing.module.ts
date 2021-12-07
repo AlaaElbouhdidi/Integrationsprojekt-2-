@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import {
     redirectUnauthorizedTo,
@@ -8,16 +8,16 @@ import {
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
-const routes: Routes = [
-    {
+const route = {
         path: 'profile',
         component: ProfileComponent,
         ...canActivate(redirectUnauthenticatedToHome)
-    },
-];
+    }
+
+const routes = [route]
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class ProfileRoutingModule {}

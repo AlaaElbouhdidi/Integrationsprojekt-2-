@@ -5,7 +5,7 @@
             *ngIf="showLogin; else emailForm"
             (showEmailFormEvent)="showLogin = false"
         ></mate-team-login-form>
-        <ng-template #emailForm >
+        <ng-template #emailForm>
             <mate-team-email-form
                 (cancelResetEvent)="showLogin = true"
             ></mate-team-email-form>

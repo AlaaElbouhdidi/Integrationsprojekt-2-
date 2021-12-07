@@ -6,14 +6,15 @@ import { NewgroupFormModule } from '@newgroup-form';
 import { NewgroupSuccessModule } from '@newgroup-success';
 import { AlertModule } from '@alert';
 
-
 @NgModule({
-    imports: [CommonModule, NewgroupRoutingModule, NewgroupFormModule, NewgroupSuccessModule, AlertModule],
-    declarations: [
-      NewgroupComponent
+    imports: [
+        CommonModule,
+        NewgroupRoutingModule,
+        NewgroupFormModule,
+        NewgroupSuccessModule,
+        AlertModule,
     ],
-    exports: [
-      NewgroupComponent
-    ]
+    declarations: [NewgroupComponent],
+    exports: [NewgroupComponent],
 })
 export class NewgroupModule {}

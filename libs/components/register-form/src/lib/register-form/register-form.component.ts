@@ -77,6 +77,7 @@ export class RegisterFormComponent {
                     'Successfully logged in with new account. Please verify your email.',
             });
             await this.router.navigate(['/']);
+            window.location.reload();
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             this.loading = false;

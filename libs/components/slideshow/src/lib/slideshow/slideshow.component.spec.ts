@@ -10,12 +10,8 @@ describe('SlideshowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                SlideshowModule,
-                BrowserAnimationsModule
-            ],
-        })
-        .compileComponents();
+            imports: [SlideshowModule, BrowserAnimationsModule],
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -53,6 +49,9 @@ describe('SlideshowComponent', () => {
         jest.spyOn(global, 'setInterval');
         component.setSlideInterval();
         expect(setInterval).toHaveBeenCalledTimes(1);
-        expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), component.slideIntervalDelay);
+        expect(setInterval).toHaveBeenLastCalledWith(
+            expect.any(Function),
+            component.slideIntervalDelay
+        );
     });
 });

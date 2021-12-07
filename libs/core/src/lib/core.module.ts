@@ -13,8 +13,12 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
+import { CreateEventModule } from '@create-event';
 import { ProfileModule } from '@profile';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faUser,
     faDragon,
@@ -44,9 +48,10 @@ import {
         FooterModule,
         AuthHandlerModule,
         AngularFireFunctionsModule,
-        FontAwesomeModule,
-        StylesModule
-    ],
+        StylesModule,
+        CreateEventModule,
+        FontAwesomeModule
+    ]
 })
 export class CoreModule {
     constructor(library: FaIconLibrary) {

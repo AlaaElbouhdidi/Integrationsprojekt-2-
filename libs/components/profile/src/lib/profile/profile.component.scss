@@ -85,10 +85,10 @@
     p {
         margin: 0;
     }
-    fa-icon[icon="check-circle"] {
+    fa-icon[icon='check-circle'] {
         color: $success;
     }
-    fa-icon[icon="times-circle"] {
+    fa-icon[icon='times-circle'] {
         color: $error;
     }
 }
@@ -189,7 +189,9 @@
     @include for-tablet-portrait-up {
         margin-top: 0.5rem;
     }
-    .change-password, .change-email, .change-profile {
+    .change-password,
+    .change-email,
+    .change-profile {
         width: 100%;
         @include for-desktop-up {
             width: 90%;

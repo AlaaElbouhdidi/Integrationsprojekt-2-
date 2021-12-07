@@ -1,14 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { IconService } from '@services';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { ChangeProfileData } from '@api-interfaces';
 
-
 @Component({
-  selector: 'mate-team-change-profile-form',
-  templateUrl: './change-profile-form.component.html',
-  styleUrls: ['./change-profile-form.component.scss']
+    selector: 'mate-team-change-profile-form',
+    templateUrl: './change-profile-form.component.html',
+    styleUrls: ['./change-profile-form.component.scss']
 })
 export class ChangeProfileFormComponent implements OnInit {
     @Output() changeProfileEvent = new EventEmitter();
@@ -21,10 +26,7 @@ export class ChangeProfileFormComponent implements OnInit {
     selectedIconIndex = 0;
     icons: IconProp[] = [];
 
-    constructor(
-        private fb: FormBuilder,
-        private iconService: IconService
-    ) {
+    constructor(private fb: FormBuilder, private iconService: IconService) {
         this.changeProfileForm = this.fb.group({
             iconColor: new FormControl(''),
             iconBackground: new FormControl(''),
@@ -49,7 +51,11 @@ export class ChangeProfileFormComponent implements OnInit {
     }
 
     updatePreviewIcon(): void {
-        this.previewIcon = this.iconService.encodeIconString(String(this.selectedIcon), this.iconColor.value, this.iconBackground.value);
+        this.previewIcon = this.iconService.encodeIconString(
+            String(this.selectedIcon),
+            this.iconColor.value,
+            this.iconBackground.value
+        );
     }
 
     nextIcon(): void {
@@ -75,21 +81,30 @@ export class ChangeProfileFormComponent implements OnInit {
     changeProfile(): void {
         const data: ChangeProfileData = {
             displayName: this.displayName.value,
-            photoURL: this.iconService.encodeIconString(this.selectedIcon, this.iconColor.value, this.iconBackground.value)
-        }
+            photoURL: this.iconService.encodeIconString(
+                this.selectedIcon,
+                this.iconColor.value,
+                this.iconBackground.value
+            )
+        };
         this.changeProfileEvent.emit(data);
     }
 
     ngOnInit(): void {
         if (this.userIconString.length === 0) {
-            this.previewIcon = this.iconService.encodeIconString('user', '#0c2d48', '#ffffff');
+            this.previewIcon = this.iconService.encodeIconString(
+                'user',
+                '#0c2d48',
+                '#ffffff'
+            );
             this.changeProfileForm.reset({
                 displayName: this.userDisplayName,
                 iconColor: '#0c2d48',
                 iconBackground: '#ffffff'
             });
         } else {
-            const [icon, iconColor, iconBackground] = this.iconService.decodeIconString(this.userIconString);
+            const [icon, iconColor, iconBackground] =
+                this.iconService.decodeIconString(this.userIconString);
             this.changeProfileForm.reset({
                 displayName: this.userDisplayName,
                 iconColor: iconColor,

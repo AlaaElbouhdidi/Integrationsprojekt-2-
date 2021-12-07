@@ -13,10 +13,10 @@ describe('ProfileComponent', () => {
         displayName: 'Max',
         emailVerified: false,
         photoURL: undefined
-    }
+    };
     const authServiceMock = {
         authState$: of(mockUser)
-    }
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -24,11 +24,8 @@ describe('ProfileComponent', () => {
                 AuthService,
                 { provide: AuthService, useValue: authServiceMock }
             ],
-            imports: [
-                ProfileModule
-            ],
-        })
-        .compileComponents();
+            imports: [ProfileModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -53,25 +50,28 @@ describe('ProfileComponent', () => {
     });
 
     it('should render the display name of the user', () => {
-        const el: HTMLParagraphElement = fixture.debugElement.nativeElement.querySelector('.profile-user-name p');
+        const el: HTMLParagraphElement =
+            fixture.debugElement.nativeElement.querySelector(
+                '.profile-user-name p'
+            );
         expect(el.textContent).toContain(component.user?.displayName);
     });
 
     it('should not render image when no url provided', () => {
-        expect(component.user?.photoURL).toBeUndefined()
+        expect(component.user?.photoURL).toBeUndefined();
         expect(fixture.debugElement.query(By.css('img'))).toBeNull();
     });
 
     it('should render times circle icon if email not verified', () => {
-        const icon = fixture.debugElement.nativeElement.querySelector('fa-icon[icon="times-circle"]');
+        const icon = fixture.debugElement.nativeElement.querySelector(
+            'fa-icon[icon="times-circle"]'
+        );
         expect(icon).not.toBeNull();
     });
 
     it('should unsubscribe from observable on component destroy', () => {
-        jest.spyOn(component['destroy$'], 'next');
         jest.spyOn(component['destroy$'], 'complete');
-        component.ngOnDestroy()
-        expect(component['destroy$'].next).toHaveBeenCalledTimes(1);
+        component.ngOnDestroy();
         expect(component['destroy$'].complete).toHaveBeenCalledTimes(1);
     });
 });
