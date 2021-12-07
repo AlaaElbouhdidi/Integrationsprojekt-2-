@@ -1,4 +1,5 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { AlertModule } from '../alert.module';
 import { AlertComponent } from './alert.component';
 
 export default {
@@ -6,7 +7,7 @@ export default {
     component: AlertComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
+            imports: [AlertModule],
         }),
     ],
 } as Meta<AlertComponent>;

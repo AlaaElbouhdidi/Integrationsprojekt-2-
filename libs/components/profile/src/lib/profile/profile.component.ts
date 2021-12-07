@@ -10,9 +10,9 @@ import {
 } from '@api-interfaces';
 
 @Component({
-  selector: 'mate-team-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'mate-team-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     /**
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     constructor(
         private authService: AuthService,
         private alertService: AlertService
-    ) { }
+    ) {}
 
     async changePassword(data: ChangePasswordData): Promise<void> {
         this.loading = true;
@@ -64,7 +64,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
             await this.authService.sendEmailVerification();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully updated email. Please verify your new email.'
+                message:
+                    'Successfully updated email. Please verify your new email.'
             });
         } catch (e) {
             this.alertService.addAlert({
@@ -78,7 +79,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     async changeProfile(data: ChangeProfileData): Promise<void> {
         this.loading = true;
         try {
-            await this.authService.updateProfile(data.displayName, data.photoURL);
+            await this.authService.updateProfile(
+                data.displayName,
+                data.photoURL
+            );
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Successfully updated user profile.'
@@ -98,10 +102,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     checkProvider(): void {
-        this.authService.user?.providerData.forEach(provider => {
-           if (provider) {
-               this.provider = provider.providerId;
-           }
+        this.authService.user?.providerData.forEach((provider) => {
+            if (provider) {
+                this.provider = provider.providerId;
+            }
         });
     }
 
@@ -111,7 +115,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.authService.authState$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(user => this.user = user);
+            .subscribe((user) => (this.user = user));
         this.checkProvider();
     }
 
@@ -119,7 +123,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Unsubscribe from observables
      */
     ngOnDestroy(): void {
-        this.destroy$.next();
         this.destroy$.complete();
     }
 }

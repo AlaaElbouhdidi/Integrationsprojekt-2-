@@ -5,9 +5,9 @@ import { AlertService, AuthService } from '@services';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'mate-team-auth-handler',
-  templateUrl: './auth-handler.component.html',
-  styleUrls: ['./auth-handler.component.scss']
+    selector: 'mate-team-auth-handler',
+    templateUrl: './auth-handler.component.html',
+    styleUrls: ['./auth-handler.component.scss']
 })
 export class AuthHandlerComponent implements OnInit, OnDestroy {
     /**
@@ -38,11 +38,11 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
      * @param alertService {AlertService}
      */
     constructor(
-      private router: Router,
-      private activatedRoute: ActivatedRoute,
-      private authService: AuthService,
-      private alertService: AlertService
-    ) { }
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
+        private alertService: AlertService
+    ) {}
 
     /**
      * Subscribes to activated route and checks mode and code query parameters
@@ -50,7 +50,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.activatedRoute.queryParams
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe(async params => {
+            .subscribe(async (params) => {
                 if (!params['mode'] || !params['oobCode']) {
                     await this.router.navigate(['/']);
                 }
@@ -65,7 +65,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 if (params['mode'] === 'recoverEmail') {
                     await this.handleEmailAction('recover');
                 }
-        });
+            });
     }
 
     /**
@@ -92,7 +92,10 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
             await this.authService.applyActionCode(this.code);
             this.alertService.addAlert({
                 type: 'success',
-                message: type === 'verify' ?  'Email has been successfully verified.' : 'Email has been successfully recovered.'
+                message:
+                    type === 'verify'
+                        ? 'Email has been successfully verified.'
+                        : 'Email has been successfully recovered.'
             });
             await this.router.navigate(['/']);
         } catch (e) {
@@ -129,7 +132,6 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
      * Unsubscribes from subscribed observables
      */
     ngOnDestroy(): void {
-        this.unsubscribe$.next();
         this.unsubscribe$.complete();
     }
 }

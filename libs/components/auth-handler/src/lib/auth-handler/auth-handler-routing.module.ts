@@ -5,7 +5,7 @@ import { AuthHandlerComponent } from './auth-handler.component';
 const routes: Routes = [
     {
         path: 'auth/handler',
-        component: AuthHandlerComponent
+        component: AuthHandlerComponent,
     },
 ];
 

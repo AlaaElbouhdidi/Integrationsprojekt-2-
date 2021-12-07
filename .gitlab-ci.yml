@@ -7,105 +7,47 @@ workflow:
         - if: '$CI_PIPELINE_SOURCE == "push"'
           when: never
 
-stages:
-    - build
-    - prep
-    - test
-    - deploy
-
-variables:
-    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
-
 cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
         - node_modules/
         - cache/Cypress
+        - dist
 
-before_script:
-    - apk add git
-    - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
+variables:
+    CYPRESS_CACHE_FOLDER: 'cache/Cypress'
 
-build:
-    stage: build
-    script:
-        - npm ci
-        - npx cypress cache path
-        - npx cypress cache list
-        - npx nx run-many --target=build --parallel --all
-    artifacts:
-        paths:
-            - dist
-
-format:
-    stage: prep
-    needs: ['build']
-    script:
-        - npm run format:check
-
-lint:
-    stage: prep
-    needs: ['build']
-    script:
-        - npm run lint
-
-doc:
-    stage: prep
-    needs: ['build']
-    script:
-        - npx nx run-many --target=compodoc --parallel --all
-    artifacts:
-        when: always
-        paths:
-            - dist/apps/mate-team/documentation
-            - dist/apps/api/documentation
+stages:
+    - test
+    - deploy
 
 test:
     stage: test
-    needs: ['build', 'format', 'lint', 'doc']
-    script:
-        - npx nx run-many --target=test --parallel --all
-
-e2e:
-    stage: test
-    needs: ['build', 'format', 'lint', 'doc']
     image: cypress/base
     before_script:
         - apt install git
-        - git fetch --no-tags --progress $CI_REPOSITORY_URL +refs/heads/main:refs/main
     script:
-        - npx nx run-many --target=e2e --all
+        - npm ci
+        - npm run format:check
+        - node ./tools/scripts/run-many.js build $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
+        - node ./tools/scripts/run-many.js lint $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
+        - node ./tools/scripts/run-many.js compodoc $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
+        - node ./tools/scripts/run-many.js test $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
+        - node ./tools/scripts/run-many.js e2e $CI_NODE_INDEX $CI_NODE_TOTAL $CI_COMMIT_REF_SLUG
     artifacts:
         when: always
         paths:
-            - dist/cypress/apps/**/*.mp4
+            - dist
 
-deploy-frontend:
+deploy:
     stage: deploy
     needs:
-        - job: e2e
         - job: test
-        - job: build
           artifacts: true
     before_script:
         - npm i -g firebase-tools
     script:
-        - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
-    only:
-        refs:
-            - main
-
-deploy-backend:
-    stage: deploy
-    needs:
-        - job: e2e
-        - job: test
-        - job: build
-          artifacts: true
-    before_script:
-        - npm i -g firebase-tools
-    script:
-        - firebase deploy --only functions --token "$FIREBASE_TOKEN"
+        - firebase deploy --token "$FIREBASE_TOKEN"
     only:
         refs:
             - main

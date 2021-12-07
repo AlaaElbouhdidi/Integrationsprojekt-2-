@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app'
 import { BehaviorSubject } from 'rxjs';
+import firebase from 'firebase/compat/app';
 import {
     getAuth,
     UserCredential,
@@ -14,7 +14,7 @@ import {
 import { User } from '@api-interfaces';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class AuthService {
     /**
@@ -25,7 +25,9 @@ export class AuthService {
      * Auth state Subject
      * @private
      */
-    private readonly authState = new BehaviorSubject<firebase.User | null>(null);
+    private readonly authState = new BehaviorSubject<firebase.User | null>(
+        null
+    );
     /**
      * Auth state observable
      */
@@ -35,17 +37,18 @@ export class AuthService {
      * Constructor of auth service
      * @param auth {AngularFireAuth}
      */
-    constructor(
-        private auth: AngularFireAuth
-    ) {
-        this.auth.authState.subscribe(user => {
-           if (user) {
-               this.user = user;
-               this.authState.next(user);
-           } else {
-               this.user = null;
-               this.authState.next(null);
-           }
+    constructor(private auth: AngularFireAuth) {
+        this.auth.authState.subscribe(async (user) => {
+            if (user) {
+                this.user = user;
+                const token = await user.getIdToken(true);
+                localStorage.setItem('idToken', token);
+                this.authState.next(user);
+            } else {
+                this.user = null;
+                localStorage.clear();
+                this.authState.next(null);
+            }
         });
     }
 
@@ -55,10 +58,14 @@ export class AuthService {
      * @param password {string} The password of the user
      */
     async register(email: string, password: string): Promise<void> {
-        const userCredential =
-            await this.auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await this.auth.createUserWithEmailAndPassword(
+            email,
+            password
+        );
         if (userCredential.user) {
             await userCredential.user.sendEmailVerification();
+            const token = await userCredential.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
         }
     }
 
@@ -69,14 +76,27 @@ export class AuthService {
      * @param password {string} The password of the user
      */
     async login(email: string, password: string): Promise<void> {
-        await this.auth.signInWithEmailAndPassword(email, password);
+        const user = await this.auth.signInWithEmailAndPassword(
+            email,
+            password
+        );
+        if (user.user) {
+            const token = await user.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
+        }
     }
 
     /**
      * Login user with google credentials
      */
     async loginWithGoogle(): Promise<void> {
-        await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        const user = await this.auth.signInWithPopup(
+            new firebase.auth.GoogleAuthProvider()
+        );
+        if (user.user) {
+            const token = await user.user.getIdToken(true);
+            localStorage.setItem('idToken', token);
+        }
     }
 
     /**
@@ -117,33 +137,57 @@ export class AuthService {
     }
 
     sendEmailVerification(): Promise<void> {
-        return sendEmailVerification(getAuth().currentUser!);
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return sendEmailVerification(user);
     }
 
     updateProfile(displayName?: string, photoURL?: string): Promise<void> {
-        return updateProfile(getAuth().currentUser!, {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updateProfile(user, {
             displayName: displayName,
             photoURL: photoURL
         });
     }
 
     updateEmail(newEmail: string): Promise<void> {
-        return updateEmail(getAuth().currentUser!, newEmail);
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updateEmail(user, newEmail);
     }
 
     updatePassword(newPassword: string): Promise<void> {
-        return updatePassword(getAuth().currentUser!, newPassword);
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updatePassword(user, newPassword);
     }
 
     reauthenticateUser(password: string): Promise<UserCredential> {
-        const credential  = firebase.auth.EmailAuthProvider.credential(this.user!.email!, password);
-        return reauthenticateWithCredential(getAuth().currentUser!, credential);
+        const user = getAuth().currentUser;
+        if (!user || !user.email) {
+            throw new Error('No user email found');
+        }
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            password
+        );
+        return reauthenticateWithCredential(user, credential);
     }
 
     /**
      * Logout a user
      */
     async logout(): Promise<void> {
+        localStorage.clear();
         await this.auth.signOut();
     }
 
@@ -160,14 +204,13 @@ export class AuthService {
             // The user's ID, unique to the Firebase project. Do NOT use
             // this value to authenticate with your backend server, if
             // you have one. Use User.getToken() instead.
-            const uid = user.uid;
             return {
-                id: uid,
+                uid: user.uid,
                 email: email,
                 photoURL: photoURL,
                 emailVerified: emailVerified,
                 displayName: displayName
-            }
+            };
         }
         throw new Error();
     }

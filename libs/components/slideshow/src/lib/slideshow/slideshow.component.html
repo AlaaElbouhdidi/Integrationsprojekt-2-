@@ -1,16 +1,22 @@
 <section class="slideshow">
-
     <div class="slideshow-slides" *ngFor="let slide of slides; let i = index">
-        <img @slideAnimation  [src]="slide.src" *ngIf="activeSlideIndex === i" [alt]="slide.alt">
-        <p @slideTextAnimation *ngIf="activeSlideIndex === i">{{slide.text}}</p>
+        <img
+            @slideAnimation
+            [src]="slide.src"
+            *ngIf="activeSlideIndex === i"
+            [alt]="slide.alt"
+        />
+        <p @slideTextAnimation *ngIf="activeSlideIndex === i">
+            {{ slide.text }}
+        </p>
     </div>
 
     <div class="slideshow-pointers">
-        <div class="pointer"
-             *ngFor="let slide of slides; let i = index"
-             (click)="setSelectedSlide(i)"
-             [class.selected]="activeSlideIndex === i">
-        </div>
+        <div
+            class="pointer"
+            *ngFor="let slide of slides; let i = index"
+            (click)="setSelectedSlide(i)"
+            [class.selected]="activeSlideIndex === i"
+        ></div>
     </div>
-
 </section>

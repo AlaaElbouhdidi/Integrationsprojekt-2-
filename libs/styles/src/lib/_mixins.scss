@@ -12,20 +12,32 @@
 // Animations
 @mixin slide-in-left($from, $to) {
     @keyframes slide-in-left {
-        from { transform: translateX($from) }
-        to { transform: translateX($to) }
+        from {
+            transform: translateX($from);
+        }
+        to {
+            transform: translateX($to);
+        }
     }
 }
 @mixin slide-in-up($from, $to) {
     @keyframes slide-in-up {
-        from { transform: translateY($from) }
-        to { transform: translateY($to) }
+        from {
+            transform: translateY($from);
+        }
+        to {
+            transform: translateY($to);
+        }
     }
 }
 @mixin fade-in($from, $to) {
     @keyframes fade-in {
-        from { opacity: translateX($from) }
-        to { opacity: translateX($to) }
+        from {
+            opacity: translateX($from);
+        }
+        to {
+            opacity: translateX($to);
+        }
     }
 }
 

@@ -12,7 +12,7 @@ View [here](CONTRIBUTING.md)!
 npm i -g nx
 npm i -g firebase-tools
 npm install
-nx run-many --target=build --all=true
+npm run dev // Live Reload for everything on port 4200
 ```
 
 This project was generated using [Nx](https://nx.dev).

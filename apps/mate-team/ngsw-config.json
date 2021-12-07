@@ -26,5 +26,10 @@
                 ]
             }
         }
-    ]
+    ],
+    "navigationUrls": [
+        "!/docs*",
+        "!/api*"
+    ],
+    "navigationRequestStrategy": "freshness"
 }
