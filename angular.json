@@ -1246,6 +1246,58 @@
                         "passWithNoTests": true
                     }
                 },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/apps/mate-team/server",
+                        "main": "apps/mate-team/server.ts",
+                        "tsConfig": "apps/mate-team/tsconfig.server.json",
+                        "externalDependencies": [
+                            "@nestjs/microservices",
+                            "@nestjs/microservices/microservices-module",
+                            "@nestjs/websockets",
+                            "@nestjs/websockets/socket-module",
+                            "cache-manager"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputHashing": "media",
+                            "fileReplacements": [
+                                {
+                                    "replace": "libs/env/src/lib/environment.ts",
+                                    "with": "libs/env/src/lib/environment.prod.ts"
+                                }
+                            ],
+                            "sourceMap": false,
+                            "optimization": false
+                        }
+                    }
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "mate-team:build",
+                        "serverTarget": "mate-team:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mate-team:build:production",
+                            "serverTarget": "mate-team:server:production"
+                        }
+                    }
+                },
+                "prerender": {
+                    "builder": "@nguniversal/builders:prerender",
+                    "options": {
+                        "browserTarget": "mate-team:build:production",
+                        "serverTarget": "mate-team:server:production",
+                        "routes": ["/"]
+                    },
+                    "configurations": {
+                        "production": {}
+                    }
+                },
                 "deploy": {
                     "builder": "@nrwl/workspace:run-commands",
                     "options": {

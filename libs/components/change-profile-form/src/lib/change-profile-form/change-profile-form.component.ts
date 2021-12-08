@@ -4,7 +4,7 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 import { IconService } from '@services';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -13,7 +13,7 @@ import { ChangeProfileData } from '@api-interfaces';
 @Component({
     selector: 'mate-team-change-profile-form',
     templateUrl: './change-profile-form.component.html',
-    styleUrls: ['./change-profile-form.component.scss'],
+    styleUrls: ['./change-profile-form.component.scss']
 })
 export class ChangeProfileFormComponent implements OnInit {
     @Output() changeProfileEvent = new EventEmitter();
@@ -32,8 +32,8 @@ export class ChangeProfileFormComponent implements OnInit {
             iconBackground: new FormControl(''),
             displayName: new FormControl('', [
                 Validators.maxLength(15),
-                Validators.required,
-            ]),
+                Validators.required
+            ])
         });
         this.icons = this.iconService.getIcons();
     }
@@ -85,7 +85,7 @@ export class ChangeProfileFormComponent implements OnInit {
                 this.selectedIcon,
                 this.iconColor.value,
                 this.iconBackground.value
-            ),
+            )
         };
         this.changeProfileEvent.emit(data);
     }
@@ -100,7 +100,7 @@ export class ChangeProfileFormComponent implements OnInit {
             this.changeProfileForm.reset({
                 displayName: this.userDisplayName,
                 iconColor: '#0c2d48',
-                iconBackground: '#ffffff',
+                iconBackground: '#ffffff'
             });
         } else {
             if (this.userIconString) {
@@ -109,7 +109,7 @@ export class ChangeProfileFormComponent implements OnInit {
                 this.changeProfileForm.reset({
                     displayName: this.userDisplayName,
                     iconColor: iconColor,
-                    iconBackground: iconBackground,
+                    iconBackground: iconBackground
                 });
                 this.selectedIcon = icon;
                 this.updatePreviewIcon();

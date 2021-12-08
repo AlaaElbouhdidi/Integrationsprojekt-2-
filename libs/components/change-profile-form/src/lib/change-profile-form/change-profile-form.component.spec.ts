@@ -9,7 +9,7 @@ describe('ChangeProfileFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ ChangeProfileFormModule ],
+            imports: [ChangeProfileFormModule],
             declarations: [ChangeProfileFormComponent]
         }).compileComponents();
     });

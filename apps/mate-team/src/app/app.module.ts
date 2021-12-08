@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ExternalUrlDirective } from './app.external-url.directive';
@@ -31,6 +32,7 @@ export const socketConfig: SocketIoConfig = {
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         HttpClientModule
     ],
     providers: [

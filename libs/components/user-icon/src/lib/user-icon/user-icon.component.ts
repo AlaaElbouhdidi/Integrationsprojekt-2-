@@ -17,11 +17,11 @@ export class UserIconComponent implements OnInit, OnChanges {
 
     setIconValues(): void {
         if (this.userIconString) {
-        const [icon, iconColor, iconBackground] =
-            this.iconService.decodeIconString(this.userIconString);
-        this.iconColor = iconColor;
-        this.iconBackground = iconBackground;
-        this.icon = icon as IconProp;
+            const [icon, iconColor, iconBackground] =
+                this.iconService.decodeIconString(this.userIconString);
+            this.iconColor = iconColor;
+            this.iconBackground = iconBackground;
+            this.icon = icon as IconProp;
         }
     }
 

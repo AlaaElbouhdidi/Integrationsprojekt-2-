@@ -9,7 +9,7 @@ describe('ChangeEmailFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ ChangeEmailFormModule ],
+            imports: [ChangeEmailFormModule]
         }).compileComponents();
     });
 
