@@ -1171,9 +1171,7 @@
                         "stylePreprocessorOptions": {
                             "includePaths": ["libs/styles/src/lib"]
                         },
-                        "scripts": [],
-                        "serviceWorker": true,
-                        "ngswConfigPath": "apps/mate-team/ngsw-config.json"
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {

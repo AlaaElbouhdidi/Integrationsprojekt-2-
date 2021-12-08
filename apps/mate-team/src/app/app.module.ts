@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ExternalUrlDirective } from './app.external-url.directive';
 import { CoreModule } from '@core';
 import { FirestoreModule } from '@angular/fire/firestore';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
@@ -29,10 +28,6 @@ export const socketConfig: SocketIoConfig = {
     imports: [
         CoreModule,
         AppRoutingModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production,
-            registrationStrategy: 'registerWhenStable:30000'
-        }),
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),

@@ -2,14 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
-        "composite": false,
-        "types": ["jest", "node"]
-    },
-    "angularCompilerOptions": {
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true
+        "types": []
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
-    "include": ["src/**/*.d.ts"]
 }

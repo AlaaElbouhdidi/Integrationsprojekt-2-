@@ -2,9 +2,9 @@
     "extends": "../../tsconfig.base.json",
     "files": [],
     "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*.spec.ts", "src/test-setup.ts"],
     "compilerOptions": {
         "forceConsistentCasingInFileNames": true,
-        "strict": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true
     },
