@@ -8,7 +8,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 describe('UserIconComponent', () => {
     let component: UserIconComponent;
     let fixture: ComponentFixture<UserIconComponent>;
-    let user = faUser;
+    const user = faUser;
 
     const iconServiceMock = {
         decodeIconString: jest.fn(),
