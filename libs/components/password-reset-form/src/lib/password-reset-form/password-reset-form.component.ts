@@ -26,7 +26,7 @@ export class PasswordResetFormComponent {
      */
     showConfirmPassword = false;
     /**
-     * Event to emit to parent component on form submit
+     * Form submit event
      */
     @Output() formSubmitEvent = new EventEmitter();
 
@@ -59,7 +59,7 @@ export class PasswordResetFormComponent {
     }
 
     /**
-     * Emits the form submit event to parent component with new password value and resets form
+     * Emits event to parent component with new password value and resets form
      */
     resetPassword(): void {
         this.formSubmitEvent.emit(this.newPassword.value);
@@ -67,7 +67,7 @@ export class PasswordResetFormComponent {
     }
 
     /**
-     * Compares the new password and confirm password and sets corresponding error
+     * Compares new password and confirm password values and sets corresponding errors
      */
     comparePasswords(): void {
         if (this.newPassword.value !== this.confirmPassword.value) {

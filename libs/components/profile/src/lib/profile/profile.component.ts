@@ -21,11 +21,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
      */
     private destroy$ = new Subject();
     /**
-     * The currently logged in user or null
+     * The current authenticated user
      */
     user: firebase.User | null = null;
+    /**
+     * The current selected nav
+     */
     activeNavLink: 'password' | 'email' | 'profile' = 'profile';
+    /**
+     * User provider
+     */
     provider = '';
+    /**
+     * Loading state
+     */
     loading = false;
 
     /**
@@ -38,6 +47,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private alertService: AlertService
     ) {}
 
+    /**
+     * Change password of user
+     *
+     * @param data {ChangePasswordData} Data required to change password
+     */
     async changePassword(data: ChangePasswordData): Promise<void> {
         this.loading = true;
         try {
@@ -56,6 +70,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.loading = false;
     }
 
+    /**
+     * Change email of user
+     *
+     * @param data {ChangeEmailData} Data required to change email
+     */
     async changeEmail(data: ChangeEmailData): Promise<void> {
         this.loading = true;
         try {
@@ -76,6 +95,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.loading = false;
     }
 
+    /**
+     * Change profile display name and icon
+     *
+     * @param data {ChangeProfileData} Data to change profile
+     */
     async changeProfile(data: ChangeProfileData): Promise<void> {
         this.loading = true;
         try {
@@ -96,11 +120,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.loading = false;
     }
 
+    /**
+     * Set the active navigation
+     *
+     * @param nav {'password' | 'email' | 'profile} Active navigation
+     */
     setActiveLink(nav: 'password' | 'email' | 'profile'): void {
         this.activeNavLink = nav;
         this.checkProvider();
     }
 
+    /**
+     * Check provider of authenticated user and set provider id
+     */
     checkProvider(): void {
         this.authService.user?.providerData.forEach((provider) => {
             if (provider) {
@@ -110,7 +142,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Subscribe to auth service for currently logged in user
+     * Subscribe to auth service for current authenticated user
      */
     ngOnInit(): void {
         this.authService.authState$

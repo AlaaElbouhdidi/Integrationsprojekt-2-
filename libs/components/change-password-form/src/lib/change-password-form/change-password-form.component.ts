@@ -14,10 +14,23 @@ import { ChangePasswordData } from '@api-interfaces';
     styleUrls: ['./change-password-form.component.scss']
 })
 export class ChangePasswordFormComponent {
+    /**
+     * Change password form group
+     */
     changePasswordForm: FormGroup;
+    /**
+     * Loading state
+     */
     @Input() loading = false;
+    /**
+     * Change password event
+     */
     @Output() changePasswordEvent = new EventEmitter<ChangePasswordData>();
 
+    /**
+     * Constructor which initializes the change password reactive form
+     * @param fb {FormBuilder}
+     */
     constructor(private fb: FormBuilder) {
         this.changePasswordForm = this.fb.group({
             password: new FormControl('', [Validators.required]),
@@ -29,18 +42,30 @@ export class ChangePasswordFormComponent {
         });
     }
 
+    /**
+     * @returns {AbstractControl} The password input control of the form
+     */
     get password(): AbstractControl {
         return this.changePasswordForm.controls.password;
     }
 
+    /**
+     * @returns {AbstractControl} The new password input control of the form
+     */
     get newPassword(): AbstractControl {
         return this.changePasswordForm.controls.newPassword;
     }
 
+    /**
+     * @returns {AbstractControl} The confirm new password input control of the form
+     */
     get confirmNewPassword(): AbstractControl {
         return this.changePasswordForm.controls.confirmNewPassword;
     }
 
+    /**
+     * Compares new password and confirm password values and sets corresponding errors
+     */
     comparePasswords(): void {
         if (this.newPassword.value !== this.confirmNewPassword.value) {
             this.confirmNewPassword.setErrors({ mustMatch: true });
@@ -49,6 +74,9 @@ export class ChangePasswordFormComponent {
         }
     }
 
+    /**
+     * Emits event to parent component with change password data and resets form
+     */
     changePassword(): void {
         const data: ChangePasswordData = {
             oldPassword: this.password.value,
