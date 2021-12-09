@@ -52,7 +52,6 @@ export class NewgroupFormComponent implements OnInit {
     async newGroup(): Promise<void> {
         try {
             this.loading = true;
-
             await this.groupService.addNewGroup(
                 {
                     name: this.name.value,

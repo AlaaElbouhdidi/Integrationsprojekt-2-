@@ -1,4 +1,4 @@
-import { EventOwner } from '../decorator/event.owner.decorator'
+import { EventOwner } from '../decorator/event.owner.decorator';
 import { EventService } from '../service/event.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
@@ -11,7 +11,7 @@ import {
     Body,
     Patch,
     Param,
-    Delete,
+    Delete
 } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
@@ -22,7 +22,7 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
-    ApiUnauthorizedResponse,
+    ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import * as admin from 'firebase-admin';
 import { EventConstants } from '../constants/event.constants';
@@ -49,19 +49,19 @@ export class EventController {
     @ApiOperation({ summary: 'Create a new event' })
     @ApiCreatedResponse({
         description: 'Event created',
-        type: CreateEventDto,
+        type: CreateEventDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST,
+        schema: EventConstants.BAD_REQUEST
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async create(
         @User() user: admin.auth.DecodedIdToken,
@@ -77,19 +77,19 @@ export class EventController {
     @ApiOperation({ summary: 'Get all events' })
     @ApiOkResponse({
         description: 'Fetched all events',
-        type: [CreateEventDto],
+        type: [CreateEventDto]
     })
     @ApiNotFoundResponse({
         description: 'No events found',
-        schema: EventConstants.NONE_FOUND,
+        schema: EventConstants.NONE_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findAll(): Promise<Event[]> {
         return await this.eventService.findAll();
@@ -103,19 +103,19 @@ export class EventController {
     @ApiOperation({ summary: 'Get an event by id' })
     @ApiOkResponse({
         description: 'Event fetched',
-        type: UpdateEventDto,
+        type: UpdateEventDto
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
-        schema: EventConstants.NOT_FOUND,
+        schema: EventConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findOne(@Param('id') id: string): Promise<Event> {
         return await this.eventService.findOne(id);
@@ -130,23 +130,23 @@ export class EventController {
     @ApiOperation({ summary: 'Update an event by id' })
     @ApiOkResponse({
         description: 'Event edited',
-        type: UpdateEventDto,
+        type: UpdateEventDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: EventConstants.BAD_REQUEST,
+        schema: EventConstants.BAD_REQUEST
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
-        schema: EventConstants.NOT_FOUND,
+        schema: EventConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async update(
         @Param('id') id: string,
@@ -164,19 +164,19 @@ export class EventController {
     @ApiOperation({ summary: 'Delete an event by id' })
     @ApiOkResponse({
         description: 'Event deleted',
-        type: UpdateEventDto,
+        type: UpdateEventDto
     })
     @ApiNotFoundResponse({
         description: 'Event not found',
-        schema: EventConstants.NOT_FOUND,
+        schema: EventConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async remove(@Param('id') id: string): Promise<Event> {
         return await this.eventService.remove(id);

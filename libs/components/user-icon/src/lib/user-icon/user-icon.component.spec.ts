@@ -11,8 +11,8 @@ describe('UserIconComponent', () => {
     const user = faUser;
 
     const iconServiceMock = {
-        decodeIconString: jest.fn(),
-    }
+        decodeIconString: jest.fn()
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -20,9 +20,7 @@ describe('UserIconComponent', () => {
                 IconService,
                 { provide: IconService, useValue: iconServiceMock }
             ],
-            imports: [
-                FontAwesomeModule
-            ],
+            imports: [FontAwesomeModule],
             declarations: [UserIconComponent]
         }).compileComponents();
     });

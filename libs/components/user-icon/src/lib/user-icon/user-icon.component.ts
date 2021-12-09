@@ -29,9 +29,7 @@ export class UserIconComponent implements OnInit, OnChanges {
      * Constructor of icon service
      * @param iconService {IconService}
      */
-    constructor(
-        private iconService: IconService
-    ) {}
+    constructor(private iconService: IconService) {}
 
     /**
      * Decode user icon string and set corresponding values in component
