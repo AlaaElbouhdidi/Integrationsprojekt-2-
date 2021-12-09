@@ -73,26 +73,34 @@ export class EventService {
      * */
     async findAll(): Promise<Event[]> {
         try {
-            const events: Event[] = [];
-            const snapshot = await this.eventsRef.get();
-            if (!snapshot.docs.length) {
-                const message = 'No events found';
-                this.logger.error(message);
-                throw new NotFoundException(message);
-            }
-            snapshot.forEach((event) => {
-                const eventData: Event = {
-                    id: event.id,
-                    name: event.get('name'),
-                    description: event.get('description'),
-                    participants: event.get('participants'),
-                    date: event.get('date'),
-                    owner: event.get('owner')
-                };
-                this.logger.log(eventData);
-                events.push(eventData);
-            });
-            return events;
+            return Promise.resolve()
+                .then(async () => {
+                    const events = await this.eventsRef.get();
+                    if (events) {
+                        return events;
+                    }
+                })
+                .then((snapshot) => {
+                    const events: Event[] = [];
+                    if (!snapshot.docs.length) {
+                        const message = 'No events found';
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    snapshot.forEach((event) => {
+                        const eventData: Event = {
+                            id: event.id,
+                            name: event.get('name'),
+                            description: event.get('description'),
+                            participants: event.get('participants'),
+                            date: event.get('date')
+                        };
+                        this.logger.log(`Successfully fetched event`);
+                        this.logger.log(eventData);
+                        events.push(eventData);
+                    });
+                    return events;
+                });
         } catch (e) {
             this.logger.error(`Failed to fetch all events`);
             throw new InternalServerErrorException(
@@ -168,7 +176,7 @@ export class EventService {
                         name: name,
                         description: description,
                         date: date,
-                        participants: participants,
+                        participants: participants
                     });
                     const event = await this.eventsRef.doc(id).get();
                     const eventData: Event = {

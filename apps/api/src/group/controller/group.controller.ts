@@ -22,7 +22,7 @@ import {
 import { GroupService } from '../service/group.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
-// import { Group } from '@api-interfaces';
+import { Group } from '@api-interfaces';
 import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
@@ -66,7 +66,7 @@ export class GroupController {
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createGroupDto: CreateGroupDto
-    ) /*: Promise<Group>*/ {
+    ): Promise<Group> {
         return await this.groupService.create(user, createGroupDto);
     }
     /**
@@ -91,7 +91,7 @@ export class GroupController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findAll() /*: Promise<Group[]>*/ {
+    async findAll(): Promise<Group[]> {
         return await this.groupService.findAll();
     }
     /**
@@ -117,7 +117,7 @@ export class GroupController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findOne(@Param('id') id: string) /*: Promise<Group>*/ {
+    async findOne(@Param('id') id: string): Promise<Group> {
         return await this.groupService.findOne(id);
     }
     /**
@@ -150,7 +150,7 @@ export class GroupController {
     async update(
         @Param('id') id: string,
         @Body() updateGroupDto: UpdateGroupDto
-    ) /*: Promise<Group>*/ {
+    ): Promise<Group> {
         return await this.groupService.update(id, updateGroupDto);
     }
     /**
@@ -176,7 +176,7 @@ export class GroupController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async remove(@Param('id') id: string) /*: Promise<Group>*/ {
+    async remove(@Param('id') id: string): Promise<Group> {
         return await this.groupService.remove(id);
     }
 }
