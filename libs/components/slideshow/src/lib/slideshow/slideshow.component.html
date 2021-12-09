@@ -5,7 +5,7 @@
             [src]="slide.src"
             *ngIf="activeSlideIndex === i"
             [alt]="slide.alt"
-        />
+        >
         <p @slideTextAnimation *ngIf="activeSlideIndex === i">
             {{ slide.text }}
         </p>
