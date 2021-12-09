@@ -39,13 +39,16 @@ export interface Member {
 }
 
 export interface Event {
+    id?: string;
     name: string;
     description: string;
     date: Date;
     participants?: string[]; // Array of uid's
+    owner?: string;
 }
 
 export interface Group {
+    id?: string;
     name: string;
     description: string;
     activity: Activity;
@@ -53,6 +56,8 @@ export interface Group {
 }
 
 export interface Game {
+    id?: string;
+    groupId: string;
     activity: Activity;
     firstTeamId: string;
     secondTeamId: string;
@@ -62,6 +67,7 @@ export interface Game {
 }
 
 export interface Team {
+    id?: string;
     member: Member[];
     groupId: string;
 }

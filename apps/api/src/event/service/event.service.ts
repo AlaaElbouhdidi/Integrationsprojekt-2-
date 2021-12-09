@@ -40,35 +40,26 @@ export class EventService {
         createEventDto: CreateEventDto
     ): Promise<Event> {
         try {
-            return Promise.resolve()
-                .then(async () => {
-                    const { uid } = user;
-                    const { name, description, date, participants } =
-                        createEventDto;
-                    const data = {
-                        name,
-                        description,
-                        date,
-                        participants: [uid, ...participants]
-                    };
-                    const res = await this.eventsRef.add(data);
-                    if (res) {
-                        this.logger.log(
-                            `Successfully created event with id ${res.id}`
-                        );
-                        return await res.get();
-                    }
-                })
-                .then((event) => {
-                    const eventData: Event = {
-                        name: event.get('name'),
-                        description: event.get('description'),
-                        participants: event.get('participants'),
-                        date: event.get('date')
-                    };
-                    this.logger.log(eventData);
-                    return eventData;
-                });
+            const { uid } = user;
+            const { name, description, date, participants } = createEventDto;
+            const data = {
+                name,
+                description,
+                date,
+                participants: [uid, ...participants],
+                owner: uid
+            };
+            const event = await (await this.eventsRef.add(data)).get();
+            this.logger.log(`Successfully created event with id ${event.id}`);
+            const eventData: Event = {
+                id: event.id,
+                name: event.get('name'),
+                description: event.get('description'),
+                participants: event.get('participants'),
+                date: event.get('date'),
+                owner: event.get('owner')
+            };
+            return eventData;
         } catch (e) {
             this.logger.error(`Failed creating event`);
             throw new InternalServerErrorException(
@@ -91,10 +82,12 @@ export class EventService {
             }
             snapshot.forEach((event) => {
                 const eventData: Event = {
+                    id: event.id,
                     name: event.get('name'),
                     description: event.get('description'),
                     participants: event.get('participants'),
-                    date: event.get('date')
+                    date: event.get('date'),
+                    owner: event.get('owner')
                 };
                 this.logger.log(eventData);
                 events.push(eventData);
@@ -128,10 +121,12 @@ export class EventService {
                         throw new NotFoundException(message);
                     }
                     const eventData: Event = {
+                        id: event.id,
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date')
+                        date: event.get('date'),
+                        owner: event.get('owner')
                     };
                     this.logger.log(`Successfully fetched event with id ${id}`);
                     this.logger.log(eventData);
@@ -173,14 +168,15 @@ export class EventService {
                         name: name,
                         description: description,
                         date: date,
-                        participants: participants
+                        participants: participants,
                     });
                     const event = await this.eventsRef.doc(id).get();
                     const eventData: Event = {
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date')
+                        date: event.get('date'),
+                        owner: event.get('owner')
                     };
                     this.logger.debug(eventData);
                     this.logger.log(`Successfully updated event with id ${id}`);
@@ -210,7 +206,6 @@ export class EventService {
                         return event;
                     }
                 })
-
                 .then(async (event) => {
                     if (!event.exists) {
                         const message = `No event with id ${id} found`;
@@ -218,10 +213,12 @@ export class EventService {
                         throw new NotFoundException(message);
                     }
                     const eventData: Event = {
+                        id: event.id,
                         name: event.get('name'),
                         description: event.get('description'),
                         participants: event.get('participants'),
-                        date: event.get('date')
+                        date: event.get('date'),
+                        owner: event.get('owner')
                     };
                     await this.eventsRef.doc(id).delete();
                     this.logger.log(`Successfully deleted event with id ${id}`);
