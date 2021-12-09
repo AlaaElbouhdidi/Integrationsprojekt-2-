@@ -52,7 +52,7 @@ export interface Group {
     name: string;
     description: string;
     activity: Activity;
-    member: Member[]; // Array of uid's
+    member?: Member[]; // Array of uid's
 }
 
 export interface Game {

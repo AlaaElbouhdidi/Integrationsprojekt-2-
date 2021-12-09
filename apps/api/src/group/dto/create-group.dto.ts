@@ -47,7 +47,6 @@ export class CreateGroupDto implements Group {
     /**
      * The member property of a group
      **/
-    @IsNotEmpty()
     @IsArray()
     @ValidateNested()
     @Type(() => CreateMemberDto)
@@ -55,5 +54,5 @@ export class CreateGroupDto implements Group {
         description: 'The member of a group',
         type: [CreateMemberDto],
     })
-    member: CreateMemberDto[];
+    member?: CreateMemberDto[];
 }

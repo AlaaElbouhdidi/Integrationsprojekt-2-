@@ -8,7 +8,7 @@ import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
 import * as admin from 'firebase-admin';
-import { Group } from '@api-interfaces';
+import { Group, Member } from '@api-interfaces';
 /**
  * The GroupService
  * */
@@ -42,12 +42,17 @@ export class GroupService {
         try {
             const { uid } = user;
             const { name, description, activity, member } = createGroupDto;
+            const creator: Member = {
+                uid,
+                isAdmin: true
+            }
             const data = {
                 name,
                 description,
                 activity,
-                member: [uid, ...member]
+                member: [creator, ...member]
             };
+            this.logger.log(data)
             const group = await (await this.groupsRef.add(data)).get();
             this.logger.log(`Successfully created group with id ${group.id}`);
             const groupData: Group = {
