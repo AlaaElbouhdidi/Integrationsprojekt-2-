@@ -160,6 +160,7 @@ export class GroupController {
      * @param {string} id The id of the group to delete
      * @returns {Promise<Group>} Returns the deleted group
      * */
+    @GroupOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a group by id' })
     @ApiOkResponse({

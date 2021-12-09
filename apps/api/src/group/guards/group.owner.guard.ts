@@ -29,8 +29,9 @@ export class GroupOwnerGuard {
     /**
      * The method that determines whether a request is allowed to be executed
      * if the method has a @Public() decorator, all requests are allowed to be executed
-     * if not, then only the users who own the event
+     * if not, then only the users who own the group
      * are allowed to execute the request
+     * or anyone, if the group has no members
      * @param {ExecutionContext} context The execution context of the request
      * @return {Promise<boolean | Observable<boolean>>} Whether the request is allowed
      **/
