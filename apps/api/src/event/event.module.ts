@@ -4,9 +4,6 @@ import { EventController } from './controller/event.controller';
 import { FirebaseService } from '../firebase/service/firebase.service';
 import { EventGateway } from './gateway/event.gateway';
 import { EventOwnerGuard } from './guards/event.owner.guard';
-
-
-
 /**
  * The EventModule
  * */

@@ -50,6 +50,7 @@ export class EventService {
                 owner: uid
             };
             const event = await (await this.eventsRef.add(data)).get();
+            this.logger.log(`Successfully created event with id ${event.id}`);
             const eventData: Event = {
                 id: event.id,
                 name: event.get('name'),

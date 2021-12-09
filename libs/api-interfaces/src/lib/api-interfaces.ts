@@ -56,6 +56,8 @@ export interface Group {
 }
 
 export interface Game {
+    id?: string;
+    groupId: string;
     activity: Activity;
     firstTeamId: string;
     secondTeamId: string;

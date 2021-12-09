@@ -125,6 +125,7 @@ export class EventController {
      * @param {string} id The id of the event to update
      * @returns {Promise<Event>} Returns the updated event
      * */
+    @EventOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update an event by id' })
     @ApiOkResponse({
