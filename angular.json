@@ -735,6 +735,30 @@
                 }
             }
         },
+        "group": {
+            "projectType": "library",
+            "root": "libs/components/group",
+            "sourceRoot": "libs/components/group/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group/src/**/*.ts",
+                            "libs/components/group/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "header": {
             "projectType": "library",
             "root": "libs/components/header",

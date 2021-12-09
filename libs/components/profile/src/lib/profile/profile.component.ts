@@ -155,6 +155,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Unsubscribe from observables
      */
     ngOnDestroy(): void {
+        this.destroy$.next(true);
         this.destroy$.complete();
     }
 }

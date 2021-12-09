@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('@profile').then((m) => m.ProfileModule)
     },
     {
+        path: 'group/:id',
+        loadChildren: () => import('@group').then((m) => m.GroupModule)
+    },
+    {
         path: '**',
         redirectTo: ''
     }
