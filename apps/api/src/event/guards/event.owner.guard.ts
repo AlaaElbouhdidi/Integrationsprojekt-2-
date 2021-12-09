@@ -10,7 +10,7 @@ import { IS_PUBLIC_KEY } from '../../decorators/public.decorator';
 import { Observable } from 'rxjs';
 import { EventService } from '../service/event.service';
 /**
- * The FirebaseAuthGuard
+ * The EventOwnerGuard
  **/
 @Injectable()
 export class EventOwnerGuard {
@@ -23,16 +23,16 @@ export class EventOwnerGuard {
         private reflector: Reflector
     ) {}
     /**
-     * The FirebaseAuthGuard Logger
+     * The EventOwnerGuardLogger
      **/
     private logger: Logger = new Logger('EventOwnerGuardLogger');
     /**
      * The method that determines whether a request is allowed to be executed
      * if the method has a @Public() decorator, all requests are allowed to be executed
-     * if not, then only verified Firebase Auth JWT tokens
-     * in the Authorization Header allow for execution
+     * if not, then only the users who own the event
+     * are allowed to execute the request
      * @param {ExecutionContext} context The execution context of the request
-     * @return {boolean | Promise<boolean> | Observable<boolean>} Whether the request is allowed
+     * @return {Promise<boolean | Observable<boolean>>} Whether the request is allowed
      **/
     async canActivate(
         context: ExecutionContext
