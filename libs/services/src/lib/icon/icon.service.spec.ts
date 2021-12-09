@@ -42,10 +42,8 @@ describe('IconService', () => {
     });
 
     it('should encode icon string', () => {
-       expect(service.encodeIconString(
-           'spider',
-           '#c02121',
-           '#250a0a'
-       )).toStrictEqual('spider/#c02121/#250a0a');
+        expect(
+            service.encodeIconString('spider', '#c02121', '#250a0a')
+        ).toStrictEqual('spider/#c02121/#250a0a');
     });
 });

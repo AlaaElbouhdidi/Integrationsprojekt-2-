@@ -6,7 +6,7 @@ import {
     IsNotEmpty,
     IsArray,
     ValidateNested,
-    IsEnum,
+    IsEnum
 } from 'class-validator';
 import { CreateMemberDto } from '../../team/dto/create-team.dto';
 /**
@@ -20,7 +20,7 @@ export class CreateGroupDto implements Group {
     @IsString()
     @ApiProperty({
         example: 'Fußballkönige',
-        description: 'The name of the group',
+        description: 'The name of the group'
     })
     name: string;
     /**
@@ -30,7 +30,7 @@ export class CreateGroupDto implements Group {
     @IsString()
     @ApiProperty({
         example: 'Immerhin besser als Bielefeld',
-        description: 'The description of the group',
+        description: 'The description of the group'
     })
     description: string;
     /**
@@ -41,19 +41,18 @@ export class CreateGroupDto implements Group {
     @ApiProperty({
         enum: Activity,
         description: 'The given activity of the group',
-        example: 'SOCCER_ACTIVITY',
+        example: 'SOCCER_ACTIVITY'
     })
     activity: Activity;
     /**
      * The member property of a group
      **/
-    @IsNotEmpty()
     @IsArray()
     @ValidateNested()
     @Type(() => CreateMemberDto)
     @ApiProperty({
         description: 'The member of a group',
-        type: [CreateMemberDto],
+        type: [CreateMemberDto]
     })
-    member: CreateMemberDto[];
+    member?: CreateMemberDto[];
 }

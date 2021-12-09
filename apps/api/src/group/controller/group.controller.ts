@@ -5,7 +5,7 @@ import {
     Body,
     Patch,
     Param,
-    Delete,
+    Delete
 } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
@@ -16,17 +16,18 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
-    ApiUnauthorizedResponse,
+    ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 
 import { GroupService } from '../service/group.service';
 import { CreateGroupDto } from '../dto/create-group.dto';
 import { UpdateGroupDto } from '../dto/update-group.dto';
-// import { Group } from '@api-interfaces';
+import { Group } from '@api-interfaces';
 import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
 import { GroupConstants } from '../constants/group.constants';
+import { GroupOwner } from '../decorator/group.owner.decorator';
 /**
  * The GroupController
  **/
@@ -49,24 +50,24 @@ export class GroupController {
     @ApiOperation({ summary: 'Create a new group' })
     @ApiCreatedResponse({
         description: 'Group created',
-        type: CreateGroupDto,
+        type: CreateGroupDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST,
+        schema: GroupConstants.BAD_REQUEST
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createGroupDto: CreateGroupDto
-    ) /*: Promise<Group>*/ {
+    ): Promise<Group> {
         return await this.groupService.create(user, createGroupDto);
     }
     /**
@@ -77,21 +78,21 @@ export class GroupController {
     @ApiOperation({ summary: 'Get all groups' })
     @ApiOkResponse({
         description: 'Fetched all groups',
-        type: [CreateGroupDto],
+        type: [CreateGroupDto]
     })
     @ApiNotFoundResponse({
         description: 'No groups found',
-        schema: GroupConstants.NONE_FOUND,
+        schema: GroupConstants.NONE_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
-    async findAll() /*: Promise<Group[]>*/ {
+    async findAll(): Promise<Group[]> {
         return await this.groupService.findAll();
     }
     /**
@@ -103,21 +104,21 @@ export class GroupController {
     @ApiOperation({ summary: 'Get a group by id' })
     @ApiOkResponse({
         description: 'Group fetched',
-        type: CreateGroupDto,
+        type: CreateGroupDto
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
-        schema: GroupConstants.NOT_FOUND,
+        schema: GroupConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
-    async findOne(@Param('id') id: string) /*: Promise<Group>*/ {
+    async findOne(@Param('id') id: string): Promise<Group> {
         return await this.groupService.findOne(id);
     }
     /**
@@ -125,32 +126,33 @@ export class GroupController {
      * @param {string} id The id of the group to update
      * @returns {Promise<Group>} Returns the updated group
      * */
+    @GroupOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update a group by id' })
     @ApiOkResponse({
         description: 'Group edited',
-        type: CreateGroupDto,
+        type: CreateGroupDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GroupConstants.BAD_REQUEST,
+        schema: GroupConstants.BAD_REQUEST
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
-        schema: GroupConstants.NOT_FOUND,
+        schema: GroupConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async update(
         @Param('id') id: string,
         @Body() updateGroupDto: UpdateGroupDto
-    ) /*: Promise<Group>*/ {
+    ): Promise<Group> {
         return await this.groupService.update(id, updateGroupDto);
     }
     /**
@@ -158,25 +160,26 @@ export class GroupController {
      * @param {string} id The id of the group to delete
      * @returns {Promise<Group>} Returns the deleted group
      * */
+    @GroupOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a group by id' })
     @ApiOkResponse({
         description: 'Group deleted',
-        type: UpdateGroupDto,
+        type: UpdateGroupDto
     })
     @ApiNotFoundResponse({
         description: 'Group not found',
-        schema: GroupConstants.NOT_FOUND,
+        schema: GroupConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
-    async remove(@Param('id') id: string) /*: Promise<Group>*/ {
+    async remove(@Param('id') id: string): Promise<Group> {
         return await this.groupService.remove(id);
     }
 }

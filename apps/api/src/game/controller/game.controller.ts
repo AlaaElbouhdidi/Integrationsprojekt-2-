@@ -5,7 +5,7 @@ import {
     Body,
     Patch,
     Param,
-    Delete,
+    Delete
 } from '@nestjs/common';
 import { GameService } from '../service/game.service';
 import { CreateGameDto } from '../dto/create-game.dto';
@@ -19,12 +19,13 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
-    ApiUnauthorizedResponse,
+    ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 
 import { GameConstants } from '../constants/game.constants';
 import { AppConstants } from '../../app/constants/app.constants';
 import { Game } from '@api-interfaces';
+import { GameOwner } from '../decorator/game.owner.decorator';
 /**
  * The GameController
  * */
@@ -42,23 +43,24 @@ export class GameController {
      * @param {CreateGameDto} createGameDto The DTO that the route handler forwards to the GameService
      * @returns {Promise<Game>} Returns the created game
      * */
-    @Post()
+    @GameOwner()
+    @Post(':groupId')
     @ApiOperation({ summary: 'Create a new game' })
     @ApiCreatedResponse({
         description: 'Game created',
-        type: CreateGameDto,
+        type: CreateGameDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GameConstants.BAD_REQUEST,
+        schema: GameConstants.BAD_REQUEST
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async create(@Body() createGameDto: CreateGameDto): Promise<Game> {
         return await this.gameService.create(createGameDto);
@@ -71,19 +73,19 @@ export class GameController {
     @ApiOperation({ summary: 'Get all games' })
     @ApiOkResponse({
         description: 'Fetched all games',
-        type: [CreateGameDto],
+        type: [CreateGameDto]
     })
     @ApiNotFoundResponse({
         description: 'No games found',
-        schema: GameConstants.NONE_FOUND,
+        schema: GameConstants.NONE_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findAll(): Promise<Game[]> {
         return await this.gameService.findAll();
@@ -97,19 +99,19 @@ export class GameController {
     @ApiOperation({ summary: 'Get a game by id' })
     @ApiOkResponse({
         description: 'Game fetched',
-        type: UpdateGameDto,
+        type: UpdateGameDto
     })
     @ApiNotFoundResponse({
         description: 'Game not found',
-        schema: GameConstants.NOT_FOUND,
+        schema: GameConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findOne(@Param('id') id: string): Promise<Game> {
         return await this.gameService.findOne(id);
@@ -119,27 +121,28 @@ export class GameController {
      * @param {string} id The id of the game to update
      * @returns {Promise<Game>} Returns the updated game
      * */
+    @GameOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update a game by id' })
     @ApiOkResponse({
         description: 'Game edited',
-        type: UpdateGameDto,
+        type: UpdateGameDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: GameConstants.BAD_REQUEST,
+        schema: GameConstants.BAD_REQUEST
     })
     @ApiNotFoundResponse({
         description: 'Game not found',
-        schema: GameConstants.NOT_FOUND,
+        schema: GameConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async update(
         @Param('id') id: string,
@@ -152,23 +155,24 @@ export class GameController {
      * @param {string} id The id of the game to delete
      * @returns {Promise<Game>} Returns the deleted game
      * */
+    @GameOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a game by id' })
     @ApiOkResponse({
         description: 'Game deleted',
-        type: UpdateGameDto,
+        type: UpdateGameDto
     })
     @ApiNotFoundResponse({
         description: 'Game not found',
-        schema: GameConstants.NOT_FOUND,
+        schema: GameConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async remove(@Param('id') id: string): Promise<Game> {
         return await this.gameService.remove(id);
