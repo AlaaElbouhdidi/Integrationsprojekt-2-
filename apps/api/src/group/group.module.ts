@@ -10,6 +10,6 @@ import { GroupOwnerGuard } from './guards/group.owner.guard';
 @Module({
     controllers: [GroupController],
     providers: [GroupService, FirebaseService, GroupGateway, GroupOwnerGuard],
-    exports: [GroupService, FirebaseService, GroupGateway, GroupOwnerGuard],
+    exports: [GroupService, FirebaseService, GroupGateway, GroupOwnerGuard]
 })
 export class GroupModule {}

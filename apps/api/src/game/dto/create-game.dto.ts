@@ -6,7 +6,7 @@ import {
     IsNumber,
     IsEnum,
     IsFirebasePushId,
-    IsOptional,
+    IsOptional
 } from 'class-validator';
 /**
  * The Data Transfer Object to create a game

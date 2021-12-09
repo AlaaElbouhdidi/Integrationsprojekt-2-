@@ -32,8 +32,7 @@ describe('ChangePasswordFormComponent', () => {
     });
 
     it('should render three input elements', () => {
-        const form =
-            fixture.debugElement.nativeElement.querySelector('form');
+        const form = fixture.debugElement.nativeElement.querySelector('form');
         const input = form.querySelectorAll('input');
         expect(input.length).toEqual(3);
     });
@@ -42,7 +41,9 @@ describe('ChangePasswordFormComponent', () => {
         component.newPassword.setValue('testing123');
         component.confirmNewPassword.setValue('testing');
         component.comparePasswords();
-        expect(component.confirmNewPassword.errors).toEqual({ mustMatch: true });
+        expect(component.confirmNewPassword.errors).toEqual({
+            mustMatch: true
+        });
     });
 
     it('should set error to null when passwords match', () => {

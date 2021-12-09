@@ -10,7 +10,13 @@ import { GroupService } from '../group/service/group.service';
  * */
 @Module({
     controllers: [GameController],
-    providers: [GameService, FirebaseService, GameGateway, GameOwnerGuard, GroupService],
-    exports: [GameService, FirebaseService, GameGateway, GameOwnerGuard],
+    providers: [
+        GameService,
+        FirebaseService,
+        GameGateway,
+        GameOwnerGuard,
+        GroupService
+    ],
+    exports: [GameService, FirebaseService, GameGateway, GameOwnerGuard]
 })
 export class GameModule {}

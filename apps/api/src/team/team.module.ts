@@ -10,7 +10,13 @@ import { GroupService } from '../group/service/group.service';
  * */
 @Module({
     controllers: [TeamController],
-    providers: [TeamService, FirebaseService, TeamGateway, TeamOwnerGuard, GroupService],
-    exports: [TeamService, FirebaseService, TeamGateway, TeamOwnerGuard],
+    providers: [
+        TeamService,
+        FirebaseService,
+        TeamGateway,
+        TeamOwnerGuard,
+        GroupService
+    ],
+    exports: [TeamService, FirebaseService, TeamGateway, TeamOwnerGuard]
 })
 export class TeamModule {}

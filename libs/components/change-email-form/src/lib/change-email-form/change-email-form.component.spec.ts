@@ -11,7 +11,7 @@ describe('ChangeEmailFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ ChangeEmailFormModule ],
+            imports: [ChangeEmailFormModule]
         }).compileComponents();
     });
 
@@ -26,14 +26,14 @@ describe('ChangeEmailFormComponent', () => {
     });
 
     it('should return abstract control of password and new email', () => {
-       expect(component.password).toBeInstanceOf(AbstractControl);
-       expect(component.newEmail).toBeInstanceOf(AbstractControl);
+        expect(component.password).toBeInstanceOf(AbstractControl);
+        expect(component.newEmail).toBeInstanceOf(AbstractControl);
     });
 
     it('should render two input elements', () => {
-       const form = fixture.debugElement.nativeElement.querySelector('form');
-       const input = form.querySelectorAll('input');
-       expect(input.length).toEqual(2);
+        const form = fixture.debugElement.nativeElement.querySelector('form');
+        const input = form.querySelectorAll('input');
+        expect(input.length).toEqual(2);
     });
 
     it('should set error when password is empty', () => {
@@ -53,9 +53,9 @@ describe('ChangeEmailFormComponent', () => {
     });
 
     it('should reset form on form submit', () => {
-       jest.spyOn(component.changeEmailForm, 'reset');
-       component.changeEmail();
-       expect(component.changeEmailForm.reset).toHaveBeenCalled();
+        jest.spyOn(component.changeEmailForm, 'reset');
+        component.changeEmail();
+        expect(component.changeEmailForm.reset).toHaveBeenCalled();
     });
 
     it('should render loading spinner while loading and hide submit form button', () => {

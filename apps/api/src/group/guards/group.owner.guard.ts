@@ -49,12 +49,12 @@ export class GroupOwnerGuard {
             const { user, params } = context.switchToHttp().getRequest();
             const group = await this.groupService.findOne(params.id);
             if (group.member.length === 0) {
-                return true
+                return true;
             }
             const admins = group.member?.filter(
-                (member) => ((member.uid === user.uid) && member.isAdmin)
+                (member) => member.uid === user.uid && member.isAdmin
             );
-            return admins.length > 0
+            return admins.length > 0;
         } catch (e) {
             if (e.status === 404) {
                 throw new NotFoundException(e.message);

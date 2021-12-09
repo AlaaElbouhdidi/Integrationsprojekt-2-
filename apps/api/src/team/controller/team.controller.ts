@@ -5,7 +5,7 @@ import {
     Body,
     Patch,
     Param,
-    Delete,
+    Delete
 } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
@@ -16,7 +16,7 @@ import {
     ApiOkResponse,
     ApiOperation,
     ApiTags,
-    ApiUnauthorizedResponse,
+    ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 
 import { TeamService } from '../service/team.service';
@@ -49,23 +49,21 @@ export class TeamController {
     @ApiOperation({ summary: 'Create a new team' })
     @ApiCreatedResponse({
         description: 'Team created',
-        type: CreateTeamDto,
+        type: CreateTeamDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST,
+        schema: TeamConstants.BAD_REQUEST
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
-    async create(
-        @Body() createTeamDto: CreateTeamDto
-    ): Promise<Team> {
+    async create(@Body() createTeamDto: CreateTeamDto): Promise<Team> {
         return await this.teamService.create(createTeamDto);
     }
     /**
@@ -76,19 +74,19 @@ export class TeamController {
     @ApiOperation({ summary: 'Get all teams' })
     @ApiOkResponse({
         description: 'Fetched all teams',
-        type: [CreateTeamDto],
+        type: [CreateTeamDto]
     })
     @ApiNotFoundResponse({
         description: 'No teams found',
-        schema: TeamConstants.NONE_FOUND,
+        schema: TeamConstants.NONE_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findAll(): Promise<Team[]> {
         return await this.teamService.findAll();
@@ -102,19 +100,19 @@ export class TeamController {
     @ApiOperation({ summary: 'Get a team by id' })
     @ApiOkResponse({
         description: 'Team fetched',
-        type: CreateTeamDto,
+        type: CreateTeamDto
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
-        schema: TeamConstants.NOT_FOUND,
+        schema: TeamConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async findOne(@Param('id') id: string): Promise<Team> {
         return await this.teamService.findOne(id);
@@ -129,23 +127,23 @@ export class TeamController {
     @ApiOperation({ summary: 'Update a team by id' })
     @ApiOkResponse({
         description: 'Team edited',
-        type: CreateTeamDto,
+        type: CreateTeamDto
     })
     @ApiBadRequestResponse({
         description: 'Invalid data sent',
-        schema: TeamConstants.BAD_REQUEST,
+        schema: TeamConstants.BAD_REQUEST
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
-        schema: TeamConstants.NOT_FOUND,
+        schema: TeamConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async update(
         @Param('id') id: string,
@@ -163,19 +161,19 @@ export class TeamController {
     @ApiOperation({ summary: 'Delete a team by id' })
     @ApiOkResponse({
         description: 'Team deleted',
-        type: CreateTeamDto,
+        type: CreateTeamDto
     })
     @ApiNotFoundResponse({
         description: 'Team not found',
-        schema: TeamConstants.NOT_FOUND,
+        schema: TeamConstants.NOT_FOUND
     })
     @ApiUnauthorizedResponse({
         description: 'Unauthorized',
-        schema: AppConstants.UNAUTHORIZED,
+        schema: AppConstants.UNAUTHORIZED
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     async remove(@Param('id') id: string): Promise<Team> {
         return await this.teamService.remove(id);

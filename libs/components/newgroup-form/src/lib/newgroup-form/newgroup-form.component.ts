@@ -57,7 +57,7 @@ export class NewgroupFormComponent implements OnInit {
                     name: this.name.value,
                     activity: this.activity.value,
                     description: this.description.value,
-                    member: [this.member],
+                    member: [this.member]
                 },
                 this.member
             );

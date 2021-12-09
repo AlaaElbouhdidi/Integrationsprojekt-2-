@@ -60,7 +60,7 @@ export class GameOwnerGuard {
                 );
                 return admins.length > 0;
             }
-            const { groupId }= await this.gameService.findOne(params.id);
+            const { groupId } = await this.gameService.findOne(params.id);
             const group = await this.groupService.findOne(groupId);
             if (!group.member.length) {
                 return true;

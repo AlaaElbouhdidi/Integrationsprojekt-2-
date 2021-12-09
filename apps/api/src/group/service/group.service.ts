@@ -45,14 +45,14 @@ export class GroupService {
             const creator: Member = {
                 uid,
                 isAdmin: true
-            }
+            };
             const data = {
                 name,
                 description,
                 activity,
                 member: [creator, ...member]
             };
-            this.logger.log(data)
+            this.logger.log(data);
             const group = await (await this.groupsRef.add(data)).get();
             this.logger.log(`Successfully created group with id ${group.id}`);
             const groupData: Group = {

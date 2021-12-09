@@ -9,12 +9,12 @@ import {
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
 const route = {
-        path: 'profile',
-        component: ProfileComponent,
-        ...canActivate(redirectUnauthenticatedToHome)
-    }
+    path: 'profile',
+    component: ProfileComponent,
+    ...canActivate(redirectUnauthenticatedToHome)
+};
 
-const routes = [route]
+const routes = [route];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
