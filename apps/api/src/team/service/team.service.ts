@@ -2,7 +2,7 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
-    NotFoundException,
+    NotFoundException
 } from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateTeamDto } from '../dto/create-team.dto';
@@ -33,22 +33,33 @@ export class TeamService {
      * @param {CreateTeamDto} createTeamDto The DTO to create a team
      * @returns {Promise<Team>} The inserted team document from firestore
      * */
-    async create(
-        createTeamDto: CreateTeamDto
-    ): Promise<Team> {
+    async create(createTeamDto: CreateTeamDto): Promise<Team> {
         try {
-            const team = await (await this.teamsRef.add(createTeamDto)).get();
+            const { groupId, member } = createTeamDto;
+            const [{ uid, isAdmin }] = member;
+            this.logger.debug({ createTeamDto });
+            const team = await (
+                await this.teamsRef.add({
+                    groupId: groupId,
+                    member: {
+                        uid: uid,
+                        isAdmin: isAdmin
+                    }
+                })
+            ).get();
             this.logger.log(`Successfully created team with id ${team.id}`);
             const teamData: Team = {
                 id: team.id,
-                groupId: team.get('groupId'),
-                member: team.get('member')
+                member: team.get('member'),
+                groupId: team.get('groupId')
             };
             return teamData;
         } catch (e) {
-            this.logger.error(`Unexpected server error. Failed to create team`);
+            this.logger.error(
+                `Unexpected server error. Failed to create team. Error: ${e.message}`
+            );
             throw new InternalServerErrorException(
-                `Unexpected server error. Failed to create team`
+                `Unexpected server error. Failed to create team. Error: ${e.message}`
             );
         }
     }
@@ -58,7 +69,7 @@ export class TeamService {
      * */
     async findAll(): Promise<Team[]> {
         try {
-           return Promise.resolve()
+            return Promise.resolve()
                 .then(async () => {
                     const teams = await this.teamsRef.get();
                     if (teams) {
@@ -76,20 +87,19 @@ export class TeamService {
                         const teamData: Team = {
                             id: team.id,
                             groupId: team.get('groupId'),
-                            member: team.get('member'),
+                            member: team.get('member')
                         };
                         this.logger.log(teamData);
                         teams.push(teamData);
                     });
                     return teams;
                 });
-
         } catch (e) {
             this.logger.error(
-                `Unexpected server error. Failed to find all teams`
+                `Unexpected server error. Failed to find all teams. Error: ${e.message}`
             );
             throw new InternalServerErrorException(
-                `Unexpected server error. Failed to find all teams`
+                `Unexpected server error. Failed to find all teams. Error: ${e.message}`
             );
         }
     }
@@ -116,19 +126,18 @@ export class TeamService {
                     const teamData: Team = {
                         id: team.id,
                         member: team.get('member'),
-                        groupId: team.get('groupId'),
+                        groupId: team.get('groupId')
                     };
                     this.logger.log(`Successfully fetched team with id ${id}`);
                     this.logger.log(teamData);
                     return teamData;
                 });
-
         } catch (e) {
             this.logger.error(
-                `Unexpected server error. Failed to find team with id ${id}`
+                `Unexpected server error. Failed to find team with id ${id}. Error: ${e.message}`
             );
             throw new InternalServerErrorException(
-                `Unexpected server error. Failed to find team with id ${id}`
+                `Unexpected server error. Failed to find team with id ${id}. Error: ${e.message}`
             );
         }
     }
@@ -153,10 +162,14 @@ export class TeamService {
                         this.logger.error(message);
                         throw new NotFoundException(message);
                     }
-                    const { groupId, member } = updateTeamDto
+                    const { groupId, member } = updateTeamDto;
+                    const [{ uid, isAdmin }] = member;
                     await this.teamsRef.doc(id).update({
                         groupId: groupId,
-                        member: member
+                        member: {
+                            uid: uid,
+                            isAdmin: isAdmin
+                        }
                     });
                     const team = await this.teamsRef.doc(id).get();
                     const teamData: Team = {
@@ -168,13 +181,12 @@ export class TeamService {
                     this.logger.log(teamData);
                     return teamData;
                 });
-
         } catch (e) {
             this.logger.error(
-                `Unexpected server error. Failed to update team with id ${id}`
+                `Unexpected server error. Failed to update team with id ${id}. Error: ${e.message}`
             );
             throw new InternalServerErrorException(
-                `Unexpected server error. Failed to update team with id ${id}`
+                `Unexpected server error. Failed to update team with id ${id}. Error: ${e.message}`
             );
         }
     }
@@ -201,20 +213,19 @@ export class TeamService {
                     const teamData: Team = {
                         id: team.id,
                         groupId: team.get('groupId'),
-                        member: team.get('member'),
+                        member: team.get('member')
                     };
                     await this.teamsRef.doc(id).delete();
                     this.logger.log(`Successfully deleted team with id ${id}`);
                     this.logger.log(teamData);
                     return teamData;
                 });
-
         } catch (e) {
             this.logger.error(
-                `Unexpected server error. Failed to delete team with id ${id}`
+                `Unexpected server error. Failed to delete team with id ${id}. Error: ${e.message}`
             );
             throw new InternalServerErrorException(
-                `Unexpected server error. Failed to delete team with id ${id}`
+                `Unexpected server error. Failed to delete team with id ${id}. Error: ${e.message}`
             );
         }
     }

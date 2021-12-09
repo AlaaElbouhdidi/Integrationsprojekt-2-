@@ -22,11 +22,10 @@ import {
 import { TeamService } from '../service/team.service';
 import { CreateTeamDto } from '../dto/create-team.dto';
 import { UpdateTeamDto } from '../dto/update-team.dto';
-import { User } from '../../decorators/user.decorator';
-import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
 import { TeamConstants } from '../constants/team.constants';
 import { Team } from '@api-interfaces';
+import { TeamOwner } from '../decorator/team.owner.decorator';
 /**
  * The TeamController
  **/
@@ -45,7 +44,8 @@ export class TeamController {
      * @param {CreateTeamDto} createTeamDto The DTO that the route handler forwards to the TeamService
      * @returns {Promise<Team>} Returns the created team
      * */
-    @Post()
+    @TeamOwner()
+    @Post(':groupId')
     @ApiOperation({ summary: 'Create a new team' })
     @ApiCreatedResponse({
         description: 'Team created',
@@ -64,10 +64,9 @@ export class TeamController {
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
     async create(
-        @User() user: admin.auth.DecodedIdToken,
         @Body() createTeamDto: CreateTeamDto
     ): Promise<Team> {
-        return await this.teamService.create(user, createTeamDto);
+        return await this.teamService.create(createTeamDto);
     }
     /**
      * The route handler that fetches all teams
@@ -125,6 +124,7 @@ export class TeamController {
      * @param {string} id The id of the team to update
      * @returns {Promise<Team>} Returns the updated team
      * */
+    @TeamOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update a team by id' })
     @ApiOkResponse({
@@ -158,6 +158,7 @@ export class TeamController {
      * @param {string} id The id of the team to delete
      * @returns {Promise<Team>} Returns the deleted team
      * */
+    @TeamOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a team by id' })
     @ApiOkResponse({
