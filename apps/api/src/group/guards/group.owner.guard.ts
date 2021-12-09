@@ -3,7 +3,7 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
-    NotFoundException,
+    NotFoundException
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLIC_KEY } from '../../decorators/public.decorator';
@@ -46,9 +46,14 @@ export class GroupOwnerGuard {
                 return true;
             }
             const { user, params } = context.switchToHttp().getRequest();
-            // const { owner } = await this.groupService.findOne(params.id);
-            // return owner === user.uid;
-            return true
+            const group = await this.groupService.findOne(params.id);
+            if (group.member.length === 0) {
+                return true
+            }
+            const admins = group.member?.filter(
+                (member) => ((member.uid === user.uid) && member.isAdmin)
+            );
+            return admins.length > 0
         } catch (e) {
             if (e.status === 404) {
                 throw new NotFoundException(e.message);

@@ -27,6 +27,7 @@ import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
 import { GroupConstants } from '../constants/group.constants';
+import { GroupOwner } from '../decorator/group.owner.decorator';
 /**
  * The GroupController
  **/
@@ -125,6 +126,7 @@ export class GroupController {
      * @param {string} id The id of the group to update
      * @returns {Promise<Group>} Returns the updated group
      * */
+    @GroupOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update a group by id' })
     @ApiOkResponse({
