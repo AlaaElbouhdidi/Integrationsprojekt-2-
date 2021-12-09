@@ -26,7 +26,7 @@ import { User } from '../../decorators/user.decorator';
 import * as admin from 'firebase-admin';
 import { AppConstants } from '../../app/constants/app.constants';
 import { TeamConstants } from '../constants/team.constants';
-// import { Team } from '@api-interfaces';
+import { Team } from '@api-interfaces';
 /**
  * The TeamController
  **/
@@ -66,7 +66,7 @@ export class TeamController {
     async create(
         @User() user: admin.auth.DecodedIdToken,
         @Body() createTeamDto: CreateTeamDto
-    ) /*: Promise<Team>*/ {
+    ): Promise<Team> {
         return await this.teamService.create(user, createTeamDto);
     }
     /**
@@ -91,7 +91,7 @@ export class TeamController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findAll() /*: Promise<Team[]>*/ {
+    async findAll(): Promise<Team[]> {
         return await this.teamService.findAll();
     }
     /**
@@ -117,7 +117,7 @@ export class TeamController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async findOne(@Param('id') id: string) /*: Promise<Team>*/ {
+    async findOne(@Param('id') id: string): Promise<Team> {
         return await this.teamService.findOne(id);
     }
     /**
@@ -150,7 +150,7 @@ export class TeamController {
     async update(
         @Param('id') id: string,
         @Body() updateTeamDto: UpdateTeamDto
-    ) /*: Promise<Team>*/ {
+    ): Promise<Team> {
         return await this.teamService.update(id, updateTeamDto);
     }
     /**
@@ -176,7 +176,7 @@ export class TeamController {
         description: 'Unexpected error',
         schema: AppConstants.INTERNAL_SERVER_ERROR,
     })
-    async remove(@Param('id') id: string) /*: Promise<Team>*/ {
+    async remove(@Param('id') id: string): Promise<Team> {
         return await this.teamService.remove(id);
     }
 }

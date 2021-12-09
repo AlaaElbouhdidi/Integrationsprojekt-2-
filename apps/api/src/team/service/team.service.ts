@@ -2,12 +2,12 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
+    NotFoundException,
 } from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateTeamDto } from '../dto/create-team.dto';
 import { UpdateTeamDto } from '../dto/update-team.dto';
-import * as admin from 'firebase-admin';
-// import { Team } from '@api-interfaces';
+import { Team } from '@api-interfaces';
 /**
  * The TeamService
  * */
@@ -30,18 +30,21 @@ export class TeamService {
         .collection('teams');
     /**
      * The method to create a group
-     * @param {admin.auth.DecodedIdToken} user The logged in user
      * @param {CreateTeamDto} createTeamDto The DTO to create a team
      * @returns {Promise<Team>} The inserted team document from firestore
      * */
     async create(
-        user: admin.auth.DecodedIdToken,
         createTeamDto: CreateTeamDto
-    ) /*: Promise<Team>*/ {
+    ): Promise<Team> {
         try {
-            this.logger.log(user, createTeamDto);
-            await this.teamsRef.add(createTeamDto);
-            return await 'This action adds a new team';
+            const team = await (await this.teamsRef.add(createTeamDto)).get();
+            this.logger.log(`Successfully created team with id ${team.id}`);
+            const teamData: Team = {
+                id: team.id,
+                groupId: team.get('groupId'),
+                member: team.get('member')
+            };
+            return teamData;
         } catch (e) {
             this.logger.error(`Unexpected server error. Failed to create team`);
             throw new InternalServerErrorException(
@@ -53,9 +56,34 @@ export class TeamService {
      * The method that finds all teams
      * @returns {Promise<Team[]>} The teams of firestore
      * */
-    async findAll() /*: Promise<Team[]>*/ {
+    async findAll(): Promise<Team[]> {
         try {
-            return await `This action returns all teams`;
+           return Promise.resolve()
+                .then(async () => {
+                    const teams = await this.teamsRef.get();
+                    if (teams) {
+                        return teams;
+                    }
+                })
+                .then((snapshot) => {
+                    const teams: Team[] = [];
+                    if (!snapshot.docs.length) {
+                        const message = 'No teams found';
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    snapshot.forEach((team) => {
+                        const teamData: Team = {
+                            id: team.id,
+                            groupId: team.get('groupId'),
+                            member: team.get('member'),
+                        };
+                        this.logger.log(teamData);
+                        teams.push(teamData);
+                    });
+                    return teams;
+                });
+
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to find all teams`
@@ -70,9 +98,31 @@ export class TeamService {
      * @param {string} id The id of the team
      * @returns {Promise<Team>} Returns the team
      * */
-    async findOne(id: string) /*: Promise<Team>*/ {
+    async findOne(id: string): Promise<Team> {
         try {
-            return await `This action returns a #${id} group`;
+            return Promise.resolve()
+                .then(async () => {
+                    const team = await this.teamsRef.doc(id).get();
+                    if (team) {
+                        return team;
+                    }
+                })
+                .then((team) => {
+                    if (!team.exists) {
+                        const message = `No team with id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const teamData: Team = {
+                        id: team.id,
+                        member: team.get('member'),
+                        groupId: team.get('groupId'),
+                    };
+                    this.logger.log(`Successfully fetched team with id ${id}`);
+                    this.logger.log(teamData);
+                    return teamData;
+                });
+
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to find team with id ${id}`
@@ -88,10 +138,37 @@ export class TeamService {
      * @param {UpdateTeamDto} updateTeamDto The DTO to update a team
      * @returns {Promise<Team>} The updated team document from firestore
      * */
-    async update(id: string, updateTeamDto: UpdateTeamDto) /*: Promise<Team>*/ {
+    async update(id: string, updateTeamDto: UpdateTeamDto): Promise<Team> {
         try {
-            this.logger.log(updateTeamDto);
-            return await `This action updates a #${id} group`;
+            return Promise.resolve()
+                .then(async () => {
+                    const team = await this.teamsRef.doc(id).get();
+                    if (team) {
+                        return team;
+                    }
+                })
+                .then(async (oldTeam) => {
+                    if (!oldTeam.exists) {
+                        const message = `No group team id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const { groupId, member } = updateTeamDto
+                    await this.teamsRef.doc(id).update({
+                        groupId: groupId,
+                        member: member
+                    });
+                    const team = await this.teamsRef.doc(id).get();
+                    const teamData: Team = {
+                        id: oldTeam.id,
+                        groupId: team.get('groupId'),
+                        member: team.get('member')
+                    };
+                    this.logger.log(`Successfully updated team with id ${id}`);
+                    this.logger.log(teamData);
+                    return teamData;
+                });
+
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to update team with id ${id}`
@@ -106,9 +183,32 @@ export class TeamService {
      * @param {string} id The id of the team to delete
      * @returns {Promise<Team>} The deleted team document from firestore
      * */
-    async remove(id: string) /*: Promise<Team>*/ {
+    async remove(id: string): Promise<Team> {
         try {
-            return await `This action removes the group with id ${id}`;
+            return Promise.resolve()
+                .then(async () => {
+                    const team = await this.teamsRef.doc(id).get();
+                    if (team) {
+                        return team;
+                    }
+                })
+                .then(async (team) => {
+                    if (!team.exists) {
+                        const message = `No team with id ${id} found`;
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    const teamData: Team = {
+                        id: team.id,
+                        groupId: team.get('groupId'),
+                        member: team.get('member'),
+                    };
+                    await this.teamsRef.doc(id).delete();
+                    this.logger.log(`Successfully deleted team with id ${id}`);
+                    this.logger.log(teamData);
+                    return teamData;
+                });
+
         } catch (e) {
             this.logger.error(
                 `Unexpected server error. Failed to delete team with id ${id}`
