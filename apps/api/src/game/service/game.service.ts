@@ -72,20 +72,28 @@ export class GameService {
      * */
     async findAll(): Promise<Game[]> {
         try {
-            const games: Game[] = []
-            const snapshot = await this.gamesRef.get();
-            if (!snapshot.docs.length) {
-                const message = 'No games found';
-                this.logger.error(message);
-                throw new NotFoundException(message);
-            }
-            snapshot.forEach((game) => {
-                const gameData: Game = this.getGame(game);
-                this.logger.log(`Successfully fetched event`);
-                this.logger.log(gameData);
-                games.push(gameData);
-            });
-            return games;
+            return Promise.resolve()
+                .then(async () => {
+                    const groups = await this.gamesRef.get();
+                    if (groups) {
+                        return groups;
+                    }
+                })
+                .then((snapshot) => {
+                    const games: Game[] = [];
+                    if (!snapshot.docs.length) {
+                        const message = 'No games found';
+                        this.logger.error(message);
+                        throw new NotFoundException(message);
+                    }
+                    snapshot.forEach((game) => {
+                        const gameData: Game = this.getGame(game);
+                        this.logger.log(`Successfully fetched event`);
+                        this.logger.log(gameData);
+                        games.push(gameData);
+                    });
+                    return games;
+                });
         } catch (e) {
             this.logger.error(`Failed to fetch all games`);
             throw new InternalServerErrorException(`Failed to fetch all games`);

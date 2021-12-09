@@ -25,6 +25,7 @@ import {
 import { GameConstants } from '../constants/game.constants';
 import { AppConstants } from '../../app/constants/app.constants';
 import { Game } from '@api-interfaces';
+import { GameOwner } from '../decorator/game.owner.decorator'
 /**
  * The GameController
  * */
@@ -42,7 +43,8 @@ export class GameController {
      * @param {CreateGameDto} createGameDto The DTO that the route handler forwards to the GameService
      * @returns {Promise<Game>} Returns the created game
      * */
-    @Post()
+    @GameOwner()
+    @Post(':groupId')
     @ApiOperation({ summary: 'Create a new game' })
     @ApiCreatedResponse({
         description: 'Game created',
@@ -119,6 +121,7 @@ export class GameController {
      * @param {string} id The id of the game to update
      * @returns {Promise<Game>} Returns the updated game
      * */
+    @GameOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update a game by id' })
     @ApiOkResponse({
@@ -152,6 +155,7 @@ export class GameController {
      * @param {string} id The id of the game to delete
      * @returns {Promise<Game>} Returns the deleted game
      * */
+    @GameOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete a game by id' })
     @ApiOkResponse({
