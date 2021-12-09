@@ -80,6 +80,20 @@
         }
     }
 }
+.green-btn {
+    border: none;
+    cursor: pointer;
+    background: $success;
+    color: $white;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    transition: 0.25s;
+    &:hover {
+        background: #1fb61f;
+    }
+}
 .disabled-btn {
     opacity: 70%;
     pointer-events: none;
@@ -91,6 +105,9 @@
     text-align: right;
 }
 .form-error-message {
-    color: #910b0b;
+    color: $error;
     font-size: 0.9rem;
+    p {
+        margin: 0;
+    }
 }

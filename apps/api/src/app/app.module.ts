@@ -25,15 +25,15 @@ import { EventService } from '../event/service/event.service';
         TeamModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            cache: true,
+            cache: true
         }),
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '..', 'mate-team'),
             exclude: ['/api*', '/docs*'],
             serveStaticOptions: {
-                redirect: false,
-            },
-        }),
+                redirect: false
+            }
+        })
     ],
     controllers: [AppController],
     providers: [
@@ -42,8 +42,8 @@ import { EventService } from '../event/service/event.service';
         AppGateway,
         {
             provide: APP_GUARD,
-            useClass: FirebaseAuthGuard,
-        },
-    ],
+            useClass: FirebaseAuthGuard
+        }
+    ]
 })
 export class AppModule {}

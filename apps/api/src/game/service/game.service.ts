@@ -2,7 +2,7 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
-    NotFoundException,
+    NotFoundException
 } from '@nestjs/common';
 import { FirebaseService } from '../../firebase/service/firebase.service';
 import { CreateGameDto } from '../dto/create-game.dto';
@@ -36,37 +36,29 @@ export class GameService {
      * */
     async create(createGameDto: CreateGameDto): Promise<Game> {
         try {
-            return Promise.resolve()
-                .then(async () => {
-                    const {
-                        activity,
-                        firstTeamId,
-                        firstTeamScore,
-                        secondTeamId,
-                        secondTeamScore,
-                        date,
-                    } = createGameDto;
-                    const data = {
-                        activity,
-                        firstTeamId,
-                        firstTeamScore,
-                        secondTeamId,
-                        secondTeamScore,
-                        date,
-                    };
-                    const res = await this.gamesRef.add(data);
-                    if (res) {
-                        this.logger.log(
-                            `Successfully created game with id ${res.id}`
-                        );
-                        return await res.get();
-                    }
-                })
-                .then((game) => {
-                    const gameData: Game = this.getGame(game);
-                    this.logger.log(gameData);
-                    return gameData;
-                });
+            const {
+                groupId,
+                activity,
+                firstTeamId,
+                firstTeamScore,
+                secondTeamId,
+                secondTeamScore,
+                date
+            } = createGameDto;
+            const data = {
+                groupId,
+                activity,
+                firstTeamId,
+                firstTeamScore,
+                secondTeamId,
+                secondTeamScore,
+                date
+            };
+            const game = await (await this.gamesRef.add(data)).get();
+            this.logger.log(`Successfully created game with id ${game.id}`);
+            const gameData: Game = this.getGame(game);
+            this.logger.log(gameData);
+            return gameData;
         } catch (e) {
             this.logger.error(`Failed creating game`);
             throw new InternalServerErrorException(
@@ -80,28 +72,20 @@ export class GameService {
      * */
     async findAll(): Promise<Game[]> {
         try {
-            return Promise.resolve()
-                .then(async () => {
-                    const games = await this.gamesRef.get();
-                    if (games) {
-                        return games;
-                    }
-                })
-                .then((snapshot) => {
-                    const games: Game[] = [];
-                    if (!snapshot.docs.length) {
-                        const message = 'No games found';
-                        this.logger.error(message);
-                        throw new NotFoundException(message);
-                    }
-                    snapshot.forEach((game) => {
-                        const gameData: Game = this.getGame(game);
-                        this.logger.log(`Successfully fetched event`);
-                        this.logger.log(gameData);
-                        games.push(gameData);
-                    });
-                    return games;
-                });
+            const games: Game[] = []
+            const snapshot = await this.gamesRef.get();
+            if (!snapshot.docs.length) {
+                const message = 'No games found';
+                this.logger.error(message);
+                throw new NotFoundException(message);
+            }
+            snapshot.forEach((game) => {
+                const gameData: Game = this.getGame(game);
+                this.logger.log(`Successfully fetched event`);
+                this.logger.log(gameData);
+                games.push(gameData);
+            });
+            return games;
         } catch (e) {
             this.logger.error(`Failed to fetch all games`);
             throw new InternalServerErrorException(`Failed to fetch all games`);
@@ -143,12 +127,13 @@ export class GameService {
                 .then(async (oldGame) => {
                     this.checkGameExists(id, oldGame);
                     await this.gamesRef.doc(id).update({
+                        groupId: updateGameDto.groupId,
                         activity: updateGameDto.activity,
                         firstTeamId: updateGameDto.firstTeamId,
                         firstTeamScore: updateGameDto.firstTeamScore,
                         secondTeam: updateGameDto.secondTeamId,
                         secondTeamScore: updateGameDto.secondTeamScore,
-                        date: updateGameDto.date,
+                        date: updateGameDto.date
                     });
                     const game = await this.gamesRef.doc(id).get();
                     const gameData: Game = this.getGame(game);
@@ -196,12 +181,14 @@ export class GameService {
         game: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>
     ): Game {
         return {
+            id: game.id,
+            groupId: game.get('groupId'),
             activity: game.get('activity'),
             firstTeamId: game.get('firstTeamId'),
             firstTeamScore: game.get('firstTeamScore'),
             secondTeamId: game.get('secondTeamId'),
             secondTeamScore: game.get('secondTeamScore'),
-            date: game.get('date'),
+            date: game.get('date')
         };
     }
     /**

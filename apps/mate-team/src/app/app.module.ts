@@ -17,11 +17,11 @@ export const socketConfig: SocketIoConfig = {
         transportOptions: {
             polling: {
                 extraHeaders: {
-                    Authorization: getIdToken(),
-                },
-            },
-        },
-    },
+                    Authorization: getIdToken()
+                }
+            }
+        }
+    }
 };
 
 @NgModule({
@@ -31,19 +31,19 @@ export const socketConfig: SocketIoConfig = {
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
-            registrationStrategy: 'registerWhenStable:30000',
+            registrationStrategy: 'registerWhenStable:30000'
         }),
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
-        HttpClientModule,
+        HttpClientModule
     ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
-            multi: true,
-        },
+            multi: true
+        }
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective]

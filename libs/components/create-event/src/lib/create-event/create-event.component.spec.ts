@@ -8,7 +8,7 @@ describe('CreateEventComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CreateEventModule],
+            imports: [CreateEventModule]
         }).compileComponents();
     });
 

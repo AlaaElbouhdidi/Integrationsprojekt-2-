@@ -17,17 +17,17 @@ import { Event } from '@api-interfaces';
                 animate(
                     '200ms',
                     style({ opacity: 1, transform: 'translateY(0)' })
-                ),
+                )
             ]),
             transition(':leave', [
                 style({ transform: 'translateY(0)' }),
                 animate(
                     '200ms',
                     style({ opacity: 0, transform: 'translateY(-2rem)' })
-                ),
-            ]),
-        ]),
-    ],
+                )
+            ])
+        ])
+    ]
 })
 export class AppComponent implements OnInit {
     apiUrl = environment.apiUrl;

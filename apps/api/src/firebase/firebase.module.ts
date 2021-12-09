@@ -5,7 +5,7 @@ import { FirebaseAuthStrategy } from './firebase-auth.strategy';
  * The FirebaseModule
  * */
 @Module({
-    providers: [FirebaseService, FirebaseAuthStrategy],
+    providers: [FirebaseService, FirebaseAuthStrategy ],
     exports: [FirebaseService, FirebaseAuthStrategy],
 })
 export class FirebaseModule {}

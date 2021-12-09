@@ -1,3 +1,4 @@
+import { EventOwner } from '../decorator/event.owner.decorator'
 import { EventService } from '../service/event.service';
 import { CreateEventDto } from '../dto/create-event.dto';
 import { UpdateEventDto } from '../dto/update-event.dto';
@@ -124,6 +125,7 @@ export class EventController {
      * @param {string} id The id of the event to update
      * @returns {Promise<Event>} Returns the updated event
      * */
+    @EventOwner()
     @Patch(':id')
     @ApiOperation({ summary: 'Update an event by id' })
     @ApiOkResponse({
@@ -157,6 +159,7 @@ export class EventController {
      * @param {string} id The id of the event to delete
      * @returns {Promise<Event>} Returns the deleted event
      * */
+    @EventOwner()
     @Delete(':id')
     @ApiOperation({ summary: 'Delete an event by id' })
     @ApiOkResponse({

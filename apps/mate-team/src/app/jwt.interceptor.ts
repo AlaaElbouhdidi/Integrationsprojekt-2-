@@ -3,7 +3,7 @@ import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
-    HttpInterceptor,
+    HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { getIdToken } from './app.module';
@@ -20,7 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 headers: request.headers.append(
                     'Authorization',
                     'Bearer ' + token
-                ),
+                )
             });
             return next.handle(cloned);
         } else {

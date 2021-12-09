@@ -13,6 +13,16 @@ import {
  **/
 export class CreateGameDto implements Game {
     /**
+     * The groupId property of a game
+     **/
+    @IsNotEmpty()
+    @IsFirebasePushId()
+    @ApiProperty({
+        description: 'The group in which the game is played',
+        example: 'SOCCER_ACTIVITY',
+    })
+    groupId: string;
+    /**
      * The activity property of a game
      **/
     @IsNotEmpty()

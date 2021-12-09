@@ -31,7 +31,7 @@ affected = execSync(affected).toString('utf-8');
 
 const tasksArray: Task[] = JSON.parse(affected).tasks.sort();
 
-let projectsArray = tasksArray.map(task => task.target.project);
+let projectsArray = tasksArray.map((task) => task.target.project);
 
 const sliceSize = Math.floor(projectsArray.length / jobCount);
 

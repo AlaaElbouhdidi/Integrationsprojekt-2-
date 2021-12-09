@@ -11,7 +11,7 @@ describe('AppGateway', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule, EventModule],
-            providers: [AppGateway],
+            providers: [AppGateway]
         }).compile();
 
         gateway = module.get<AppGateway>(AppGateway);

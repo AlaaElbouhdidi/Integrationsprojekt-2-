@@ -1,0 +1,60 @@
+<form (ngSubmit)="changeEmail()" [formGroup]="changeEmailForm">
+    <div class="form-input">
+        <input
+            type="password"
+            formControlName="password"
+            placeholder="Current password"
+            required
+        />
+        <fa-icon icon="unlock"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Current password required
+            </p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <input
+            type="email"
+            formControlName="newEmail"
+            placeholder="New Email"
+            required
+        />
+        <fa-icon icon="envelope"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="newEmail.invalid && (newEmail.dirty || newEmail.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Email is wrongly formatted
+            </p>
+        </div>
+    </div>
+
+    <div class="form-submit">
+        <button
+            type="submit"
+            class="green-btn"
+            *ngIf="!loading"
+            [class.disabled-btn]="!changeEmailForm.valid"
+            [disabled]="!changeEmailForm.valid"
+        >
+            Confirm
+        </button>
+        <div class="loader" *ngIf="loading">
+            <mate-team-loader [theme]="'light'"></mate-team-loader>
+        </div>
+    </div>
+</form>

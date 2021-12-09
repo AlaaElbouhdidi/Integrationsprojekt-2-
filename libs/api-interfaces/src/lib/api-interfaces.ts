@@ -6,7 +6,18 @@ export interface Alert {
     type: 'error' | 'success' | 'neutral' | 'warn';
     message: string;
 }
-
+export interface ChangePasswordData {
+    oldPassword: string;
+    newPassword: string;
+}
+export interface ChangeEmailData {
+    password: string;
+    newEmail: string;
+}
+export interface ChangeProfileData {
+    displayName?: string;
+    photoURL?: string;
+}
 export interface Environment {
     firebase: {
         projectId: string;
@@ -28,13 +39,16 @@ export interface Member {
 }
 
 export interface Event {
+    id?: string;
     name: string;
     description: string;
     date: Date;
     participants?: string[]; // Array of uid's
+    owner?: string;
 }
 
 export interface Group {
+    id?: string;
     name: string;
     description: string;
     activity: Activity;
@@ -42,6 +56,8 @@ export interface Group {
 }
 
 export interface Game {
+    id?: string;
+    groupId: string;
     activity: Activity;
     firstTeamId: string;
     secondTeamId: string;
@@ -51,12 +67,13 @@ export interface Game {
 }
 
 export interface Team {
+    id?: string;
     member: Member[];
     groupId: string;
 }
 
 export interface User {
-    id: string;
+    uid: string;
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;
@@ -64,5 +81,5 @@ export interface User {
 }
 
 export enum Activity {
-    soccer = 'SOCCER_ACTIVITY',
+    soccer = 'SOCCER_ACTIVITY'
 }

@@ -260,6 +260,192 @@
                 }
             }
         },
+        "change-email-form": {
+            "projectType": "library",
+            "root": "libs/components/change-email-form",
+            "sourceRoot": "libs/components/change-email-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-email-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-email-form/src/**/*.ts",
+                            "libs/components/change-email-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/change-email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/change-email-form",
+                        "config": {
+                            "configFolder": "libs/components/change-email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "change-email-form-e2e": {
+            "root": "apps/e2e/change-email-form-e2e",
+            "sourceRoot": "apps/e2e/change-email-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/change-email-form-e2e/cypress.json",
+                        "devServerTarget": "change-email-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "change-email-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/change-email-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "change-password-form": {
+            "projectType": "library",
+            "root": "libs/components/change-password-form",
+            "sourceRoot": "libs/components/change-password-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-password-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-password-form/src/**/*.ts",
+                            "libs/components/change-password-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/change-password-form",
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "change-password-form-e2e": {
+            "root": "apps/e2e/change-password-form-e2e",
+            "sourceRoot": "apps/e2e/change-password-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/change-password-form-e2e/cypress.json",
+                        "devServerTarget": "change-password-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "change-password-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/change-password-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "change-profile-form": {
+            "projectType": "library",
+            "root": "libs/components/change-profile-form",
+            "sourceRoot": "libs/components/change-profile-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-profile-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-profile-form/src/**/*.ts",
+                            "libs/components/change-profile-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",
@@ -999,8 +1185,8 @@
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "8kb",
+                                    "maximumError": "16kb"
                                 }
                             ],
                             "fileReplacements": [
@@ -1341,6 +1527,87 @@
                 }
             }
         },
+        "profile": {
+            "projectType": "library",
+            "root": "libs/components/profile",
+            "sourceRoot": "libs/components/profile/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/profile/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/profile/src/**/*.ts",
+                            "libs/components/profile/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/profile",
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "profile-e2e": {
+            "root": "apps/e2e/profile-e2e",
+            "sourceRoot": "apps/e2e/profile-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/profile-e2e/cypress.json",
+                        "devServerTarget": "profile:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "profile:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/profile-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "register": {
             "projectType": "library",
             "root": "libs/components/register",
@@ -1627,6 +1894,30 @@
                         "lintFilePatterns": [
                             "libs/styles/src/**/*.ts",
                             "libs/styles/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "user-icon": {
+            "projectType": "library",
+            "root": "libs/components/user-icon",
+            "sourceRoot": "libs/components/user-icon/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/user-icon/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/user-icon/src/**/*.ts",
+                            "libs/components/user-icon/src/**/*.html"
                         ]
                     }
                 }

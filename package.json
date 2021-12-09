@@ -15,6 +15,7 @@
     "main": "dist/apps/api/main.js",
     "scripts": {
         "ng": "nx",
+        "test": "tools/scripts/test.sh",
         "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
         "preprod": "npm run all:build:prod",
         "serve:dev": "concurrently \"npm run client:start:dev\" \"npm run api:start:dev\"",
