@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
+
 @Component({
     selector: 'mate-team-register-form',
     templateUrl: './register-form.component.html',
@@ -78,13 +79,12 @@ export class RegisterFormComponent {
             });
             await this.router.navigate(['/']);
             window.location.reload();
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
+        } catch (e) {
             this.loading = false;
             this.registerForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message,
+                message: e.message,
             });
         }
     }

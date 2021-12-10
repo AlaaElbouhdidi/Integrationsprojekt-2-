@@ -1,4 +1,35 @@
 <footer>
     <a routerLink="/imprint" class="content">Imprint</a>
+    <div ngbDropdown>
+        <a ngbDropdownToggle id="docs">
+            Documentation
+        </a>
+        <div ngbDropdownMenu="docs" class="dropdown">
+            <a
+                ngbDropdownItem
+                class="dropdown-link"
+                target="_blank"
+                [href]="apiUrl + '/docs/mate-team/'"
+                mate-team-external-url
+            >Mate Team Documentation</a
+            >
+            <a
+                ngbDropdownItem
+                class="dropdown-link"
+                target="_blank"
+                [href]="apiUrl + '/docs/api/'"
+                mate-team-external-url
+            >Mate Team API Documentation</a
+            >
+            <a
+                ngbDropdownItem
+                class="dropdown-link"
+                target="_blank"
+                [href]="apiUrl + '/docs/swagger/'"
+                mate-team-external-url
+            >Mate Team Swagger API</a
+            >
+        </div>
+    </div>
     <a routerLink="/privacy" class="content">Privacy</a>
 </footer>
