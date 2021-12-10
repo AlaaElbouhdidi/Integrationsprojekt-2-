@@ -1,8 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TeamController } from './team.controller';
-import { TeamService } from '../service/team.service';
-import { FirebaseModule } from '../../firebase/firebase.module';
 import * as admin from 'firebase-admin';
+import { TeamModule } from '../team.module';
 
 describe('TeamController', () => {
     let controller: TeamController;
@@ -10,11 +9,8 @@ describe('TeamController', () => {
     beforeEach(async () => {
         if (!admin.apps.length) admin.initializeApp();
         const module: TestingModule = await Test.createTestingModule({
-            imports: [FirebaseModule],
-            controllers: [TeamController],
-            providers: [TeamService],
+            imports: [TeamModule]
         }).compile();
-
         controller = module.get<TeamController>(TeamController);
     });
 

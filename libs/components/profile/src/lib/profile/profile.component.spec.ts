@@ -16,9 +16,7 @@ describe('ProfileComponent', () => {
     };
     const authServiceMock = {
         user: {
-            providerData: [
-                { providerId: 'password' }
-            ]
+            providerData: [{ providerId: 'password' }]
         },
         authState$: of(mockUser),
         reauthenticateUser: jest.fn(),
@@ -96,19 +94,28 @@ describe('ProfileComponent', () => {
 
     it('should call auth service to reauthenticate user before updating the password', () => {
         const reAuthSpy = jest.spyOn(authServiceMock, 'reauthenticateUser');
-        component.changePassword({ oldPassword: 'password', newPassword: 'newPassword' });
+        component.changePassword({
+            oldPassword: 'password',
+            newPassword: 'newPassword'
+        });
         expect(reAuthSpy).toHaveBeenCalled();
     });
 
     it('should call auth service to reauthenticate user before updating the email', () => {
-       const reAuthSpy = jest.spyOn(authServiceMock, 'reauthenticateUser');
-       component.changeEmail({ password: 'password', newEmail: 'test@example.com' });
-       expect(reAuthSpy).toHaveBeenCalled();
+        const reAuthSpy = jest.spyOn(authServiceMock, 'reauthenticateUser');
+        component.changeEmail({
+            password: 'password',
+            newEmail: 'test@example.com'
+        });
+        expect(reAuthSpy).toHaveBeenCalled();
     });
 
     it('should call auth service to update profile', () => {
-       const spy = jest.spyOn(authServiceMock, 'updateProfile');
-       component.changeProfile({ displayName: 'myName', photoURL: 'user/#ffffff/#ffffff' });
-       expect(spy).toHaveBeenCalled();
+        const spy = jest.spyOn(authServiceMock, 'updateProfile');
+        component.changeProfile({
+            displayName: 'myName',
+            photoURL: 'user/#ffffff/#ffffff'
+        });
+        expect(spy).toHaveBeenCalled();
     });
 });

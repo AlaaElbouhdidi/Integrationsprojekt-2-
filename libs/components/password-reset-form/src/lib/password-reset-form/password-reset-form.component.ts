@@ -4,13 +4,13 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 
 @Component({
     selector: 'mate-team-password-reset-form',
     templateUrl: './password-reset-form.component.html',
-    styleUrls: ['./password-reset-form.component.scss'],
+    styleUrls: ['./password-reset-form.component.scss']
 })
 export class PasswordResetFormComponent {
     /**
@@ -38,9 +38,9 @@ export class PasswordResetFormComponent {
         this.passwordResetForm = this.fb.group({
             newPassword: new FormControl('', [
                 Validators.minLength(6),
-                Validators.required,
+                Validators.required
             ]),
-            confirmPassword: new FormControl('', [Validators.required]),
+            confirmPassword: new FormControl('', [Validators.required])
         });
     }
 

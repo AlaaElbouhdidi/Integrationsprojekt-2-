@@ -12,16 +12,16 @@ describe('ChangeProfileFormComponent', () => {
 
     const iconServiceMock = {
         getIcons: jest.fn().mockReturnValue(['user']),
-        decodeIconString: jest.fn().mockReturnValue(['user', '#ffffff', '#ffffff']),
+        decodeIconString: jest
+            .fn()
+            .mockReturnValue(['user', '#ffffff', '#ffffff']),
         encodeIconString: jest.fn().mockReturnValue('user/#ffffff/#ffffff')
-    }
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            providers: [
-                { provide: IconService, useValue: iconServiceMock }
-            ],
-            imports: [ ChangeProfileFormModule ],
+            providers: [{ provide: IconService, useValue: iconServiceMock }],
+            imports: [ChangeProfileFormModule],
             declarations: [ChangeProfileFormComponent]
         }).compileComponents();
     });
@@ -38,9 +38,9 @@ describe('ChangeProfileFormComponent', () => {
     });
 
     it('should return abstract control of icon color, icon background and display name', () => {
-       expect(component.iconColor).toBeInstanceOf(AbstractControl);
-       expect(component.iconBackground).toBeInstanceOf(AbstractControl);
-       expect(component.displayName).toBeInstanceOf(AbstractControl);
+        expect(component.iconColor).toBeInstanceOf(AbstractControl);
+        expect(component.iconBackground).toBeInstanceOf(AbstractControl);
+        expect(component.displayName).toBeInstanceOf(AbstractControl);
     });
 
     it('should render three input elements', () => {
@@ -65,7 +65,7 @@ describe('ChangeProfileFormComponent', () => {
         component.nextIcon();
         component.previousIcon();
         expect(spy).toHaveBeenCalledTimes(2);
-    })
+    });
 
     it('should call icon service on update preview icon', () => {
         const spy = jest.spyOn(iconServiceMock, 'encodeIconString');
@@ -83,14 +83,14 @@ describe('ChangeProfileFormComponent', () => {
     });
 
     it('should call icon service to decode string when user icon string is not empty and reset form', () => {
-       const spy = jest.spyOn(iconServiceMock, 'decodeIconString');
-       const compSpy = jest.spyOn(component.changeProfileForm, 'reset');
-       component.userIconString = 'user/#ffffff/#ffffff';
-       fixture.detectChanges();
-       expect(component.userIconString.length).not.toBe(0);
-       component.ngOnInit();
-       expect(spy).toHaveBeenCalled();
-       expect(compSpy).toHaveBeenCalled();
+        const spy = jest.spyOn(iconServiceMock, 'decodeIconString');
+        const compSpy = jest.spyOn(component.changeProfileForm, 'reset');
+        component.userIconString = 'user/#ffffff/#ffffff';
+        fixture.detectChanges();
+        expect(component.userIconString.length).not.toBe(0);
+        component.ngOnInit();
+        expect(spy).toHaveBeenCalled();
+        expect(compSpy).toHaveBeenCalled();
     });
 
     it('should render loading spinner while loading and hide submit form button', () => {

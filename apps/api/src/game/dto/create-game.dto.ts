@@ -6,12 +6,22 @@ import {
     IsNumber,
     IsEnum,
     IsFirebasePushId,
-    IsOptional,
+    IsOptional
 } from 'class-validator';
 /**
  * The Data Transfer Object to create a game
  **/
 export class CreateGameDto implements Game {
+    /**
+     * The groupId property of a game
+     **/
+    @IsNotEmpty()
+    @IsFirebasePushId()
+    @ApiProperty({
+        description: 'The group in which the game is played',
+        example: 'clTABI5gAy3HlTuCyjsf'
+    })
+    groupId: string;
     /**
      * The activity property of a game
      **/
@@ -20,7 +30,7 @@ export class CreateGameDto implements Game {
     @ApiProperty({
         enum: Activity,
         description: 'The given activity',
-        example: 'SOCCER_ACTIVITY',
+        example: 'SOCCER_ACTIVITY'
     })
     activity: Activity;
     /**
@@ -29,7 +39,7 @@ export class CreateGameDto implements Game {
     @IsFirebasePushId()
     @ApiProperty({
         description: 'The first team of the game',
-        example: '',
+        example: ''
     })
     firstTeamId: string;
     /**
@@ -38,7 +48,7 @@ export class CreateGameDto implements Game {
     @IsFirebasePushId()
     @ApiProperty({
         description: 'The first team of the game',
-        example: '',
+        example: ''
     })
     secondTeamId: string;
     /**
@@ -48,7 +58,7 @@ export class CreateGameDto implements Game {
     @IsDateString()
     @ApiProperty({
         example: '2021-11-29T12:00:00.666Z',
-        description: 'The date when the game will be played',
+        description: 'The date when the game will be played'
     })
     date: Date;
     /**
@@ -58,7 +68,7 @@ export class CreateGameDto implements Game {
     @IsOptional()
     @ApiPropertyOptional({
         example: 3,
-        description: 'The first teams score after the game is played',
+        description: 'The first teams score after the game is played'
     })
     firstTeamScore?: number;
     /**
@@ -68,7 +78,7 @@ export class CreateGameDto implements Game {
     @IsOptional()
     @ApiPropertyOptional({
         example: 2,
-        description: 'The second teams score after the game is played',
+        description: 'The second teams score after the game is played'
     })
     secondTeamScore?: number;
 }
