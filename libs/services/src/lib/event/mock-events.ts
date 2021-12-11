@@ -1,4 +1,4 @@
-import { Event } from '@api-interfaces';
+// import { Event } from '@api-interfaces';
 /*
 export const events: Event[] = [
     {

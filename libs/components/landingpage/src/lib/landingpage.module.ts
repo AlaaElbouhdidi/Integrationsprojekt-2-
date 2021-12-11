@@ -4,6 +4,7 @@ import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LandingpageRoutingModule } from './landingpage/landingpage-routing.module';
 import { SlideshowModule } from '@slideshow';
 import { EventsModule } from '@events';
+import { AuthService } from '@services';
 
 @NgModule({
     declarations: [LandingpageComponent],
@@ -13,6 +14,7 @@ import { EventsModule } from '@events';
         EventsModule,
         SlideshowModule
     ],
+    providers: [AuthService],
     exports: [LandingpageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

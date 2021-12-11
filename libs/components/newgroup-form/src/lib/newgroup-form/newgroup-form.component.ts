@@ -49,35 +49,6 @@ export class NewgroupFormComponent implements OnInit {
         };
     }
 
-    async newGroup(): Promise<void> {
-        try {
-            this.loading = true;
-            await this.groupService.addNewGroup(
-                {
-                    name: this.name.value,
-                    activity: this.activity.value,
-                    description: this.description.value,
-                    member: [this.member]
-                },
-                this.member
-            );
-            this.loading = false;
-            this.newGroupForm.reset();
-            this.alertService.addAlert({
-                type: 'success',
-                message: 'Successfully added a group.'
-            });
-            this.groupService.toggleSuccess(true);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            this.loading = false;
-            this.newGroupForm.reset();
-            this.alertService.addAlert({
-                type: 'error',
-                message: err.message
-            });
-        }
-    }
     async ngOnInit(): Promise<void> {
         try {
             console.log(`Component initialized`);

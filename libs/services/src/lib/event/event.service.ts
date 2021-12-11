@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+// import { of } from 'rxjs';
 import { Observable } from 'rxjs';
-import { Event, Group } from '@api-interfaces';
+import { Event } from '@api-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ interface EventDto {
     name: string;
     description: string;
     participants: string[];
-    date: any;
+    date: Date;
 }
 
 @Injectable({
@@ -31,10 +31,7 @@ export class EventService {
                         id: z.id,
                         name: z.name,
                         description: z.description,
-                        date:
-                            typeof z.date === 'string'
-                                ? new Date(z.date)
-                                : new Date(z.date._seconds * 1000)
+                        date: z.date
                     };
                 });
             })
