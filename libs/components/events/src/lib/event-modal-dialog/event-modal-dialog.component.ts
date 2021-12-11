@@ -8,6 +8,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./event-modal-dialog.component.scss'],
 })
 export class EventModalDialogComponent {
+    /**
+     * Event, that is displayed
+     */
     @Input() event: Event | undefined = undefined;
 
     constructor(public activeModal: NgbActiveModal) {}

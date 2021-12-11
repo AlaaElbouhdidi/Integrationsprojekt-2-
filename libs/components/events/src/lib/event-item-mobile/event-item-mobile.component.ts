@@ -7,6 +7,9 @@ import { Event } from '@api-interfaces';
     styleUrls: ['./event-item-mobile.component.scss'],
 })
 export class EventItemMobileComponent {
+    /**
+     * Event that is displayed
+     */
     @Input()
-    event: Event = Event.empty();
+    event: Event | undefined;
 }

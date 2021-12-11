@@ -1,4 +1,4 @@
-<main style="padding-bottom: 20px">
+<main style="padding-bottom: 20px" *ngIf="!loading; else loader">
     <div class="content container-lg">
         <mate-team-events-groups-page-mobile
             class="mobile"
@@ -12,3 +12,6 @@
         ></mate-team-events-groups-page-screen>
     </div>
 </main>
+<ng-template #loader>
+    <mate-team-loader style="display: flex; justify-content: center;"></mate-team-loader>
+</ng-template>

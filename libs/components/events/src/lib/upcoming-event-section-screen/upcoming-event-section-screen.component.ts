@@ -10,14 +10,29 @@ import { EventModalDialogComponent } from '../event-modal-dialog/event-modal-dia
     styleUrls: ['./upcoming-event-section-screen.component.scss'],
 })
 export class UpcomingEventSectionScreenComponent implements OnChanges {
-    @Input()
-    events: Event[] | undefined;
+    /**
+     * Events that are displayed
+     */
+    @Input() events: Event[] | undefined;
+    /**
+     * Contains buckets of size 2
+     * In every bucket events are stored
+     */
     buckets: Event[][] | undefined;
 
+    /**
+     * Constructor gets the NgbModal and ChunkerService.
+     * @param modalService
+     * @param chunkerService
+     */
     constructor(
         private modalService: NgbModal,
         private chunkerService: ChunkerService
     ) {}
+
+    /**
+     * It defines the buckets based on the defined events.
+     */
     ngOnChanges(): void {
         if (this.events === undefined) {
             return;
@@ -25,6 +40,11 @@ export class UpcomingEventSectionScreenComponent implements OnChanges {
         this.buckets = this.chunkerService.chunk(this.events, 4);
     }
 
+    /**
+     * Is called iff the user clicks on open.
+     * It opens the EventModalDialogComponent in a modal dialog.
+     * @param e
+     */
     clicked(e: Event): void {
         const ref = this.modalService.open(EventModalDialogComponent);
         ref.componentInstance.event = e;

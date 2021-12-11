@@ -7,17 +7,27 @@ import { GroupItemScreenComponent } from './group-item-screen/group-item-screen.
 import { GroupItemMobileComponent } from './group-item-mobile/group-item-mobile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { GroupDetailViewComponent } from './group-detail-view/group-detail-view.component';
+import { GroupMemberItemComponent } from './group-member-item/group-member-item.component';
+import {GroupRoutingModule} from "./group-routing.module";
+import { SearchInputFieldComponent } from './search-input-field/search-input-field.component';
+import { GroupMemberEditModalDialogComponent } from './group-member-edit-modal-dialog/group-member-edit-modal-dialog.component';
+import {LoaderModule} from "@loader";
 
 @NgModule({
-    imports: [CommonModule, HttpClientModule, FormsModule],
+    imports: [CommonModule, HttpClientModule, FormsModule, LoaderModule],
     declarations: [
         GroupModalDialogComponent,
         GroupSectionMobileComponent,
         GroupsSectionScreenComponent,
         GroupItemScreenComponent,
         GroupItemMobileComponent,
+        GroupDetailViewComponent,
+        GroupMemberItemComponent,
+        SearchInputFieldComponent,
+        GroupMemberEditModalDialogComponent,
     ],
-    exports: [GroupSectionMobileComponent, GroupsSectionScreenComponent],
+    exports: [GroupSectionMobileComponent, GroupsSectionScreenComponent, GroupDetailViewComponent, GroupRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GroupsModule {}

@@ -6,7 +6,7 @@ import { Environment } from '@api-interfaces';
 export const environment: Environment = {
     firebase: {
         apiKey: 'AIzaSyCF0w37bc980S6avy5lVCYZqHTw4RYkGjc',
-        authDomain: 'mate-team.de',
+        authDomain: 'mate-team.firebaseapp.com',
         projectId: 'mate-team',
         storageBucket: 'mate-team.appspot.com',
         messagingSenderId: '848103878945',

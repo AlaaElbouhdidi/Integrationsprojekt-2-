@@ -4,14 +4,16 @@
     *ngIf="group !== undefined"
 >
     <div style="flex: 0; margin-right: 10px">
+        <!--
         <img class="rounded-circle" [src]="group?.imgSrc" />
+        -->
     </div>
     <div style="flex: 0; width: 300px">
-        <h4 style="width: 300px">{{ group?.title }}</h4>
+        <h4 style="width: 300px">{{ group?.name }}</h4>
     </div>
     <p style="flex: 1">
         <span>|</span>
-        {{ group?.members?.length }}
+        {{ group?.member?.length }}
         Members
     </p>
     <a

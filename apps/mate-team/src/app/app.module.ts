@@ -5,6 +5,9 @@ import { CoreModule } from '@core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@env';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
+import {EventsModule} from "@events";
 
 @NgModule({
     declarations: [AppComponent],
@@ -16,7 +19,19 @@ import { environment } from '@env';
             registrationStrategy: 'registerWhenStable:30000',
         }),
         AngularFireModule.initializeApp(environment.environment.firebase),
+        HttpClientModule
     ],
     bootstrap: [AppComponent],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        }
+    ],
 })
 export class AppModule {}
+
+export function getIdToken(): string {
+    return localStorage.getItem('idToken')?.replace('"', '') || 'undefined';
+}

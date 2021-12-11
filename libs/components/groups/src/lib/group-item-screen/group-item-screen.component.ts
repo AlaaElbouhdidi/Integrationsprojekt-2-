@@ -7,8 +7,14 @@ import { Group } from '@api-interfaces';
     styleUrls: ['./group-item-screen.component.scss'],
 })
 export class GroupItemScreenComponent {
+    /**
+     * Group that is displayed.
+     */
     @Input()
     group: Group | undefined;
+    /**
+     * This is emitted iff the user clicks on the open button.
+     */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter();
 }
