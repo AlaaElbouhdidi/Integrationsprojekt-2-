@@ -18,24 +18,43 @@
         "paths": {
             "@alert": ["libs/components/alert/src/index.ts"],
             "@api-interfaces": ["libs/api-interfaces/src/index.ts"],
-            "@core": ["libs/core/src/index.ts"],
             "@auth-handler": ["libs/components/auth-handler/src/index.ts"],
+            "@change-email-form": [
+                "libs/components/change-email-form/src/index.ts"
+            ],
+            "@change-password-form": [
+                "libs/components/change-password-form/src/index.ts"
+            ],
+            "@change-profile-form": [
+                "libs/components/change-profile-form/src/index.ts"
+            ],
+            "@core": ["libs/core/src/index.ts"],
+            "@create-event": ["libs/components/create-event/src/index.ts"],
             "@email-form": ["libs/components/email-form/src/index.ts"],
             "@env": ["libs/env/src/index.ts"],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
-            "@slideshow": ["libs/components/slideshow/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@password-reset-form": ["libs/components/password-reset-form/src/index.ts"],
+            "@newgroup": ["libs/components/newgroup/src/index.ts"],
+            "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
+            "@newgroup-success": [
+                "libs/components/newgroup-success/src/index.ts"
+            ],
+            "@password-reset-form": [
+                "libs/components/password-reset-form/src/index.ts"
+            ],
+            "@profile": ["libs/components/profile/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],
-            "@styles": ["libs/styles/src/index.ts"]
+            "@slideshow": ["libs/components/slideshow/src/index.ts"],
+            "@styles": ["libs/styles/src/index.ts"],
+            "@user-icon": ["libs/components/user-icon/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

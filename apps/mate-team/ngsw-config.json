@@ -26,5 +26,7 @@
                 ]
             }
         }
-    ]
+    ],
+    "navigationUrls": ["!/docs*", "!/api*"],
+    "navigationRequestStrategy": "performance"
 }

@@ -1,15 +1,38 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Group } from '@api-interfaces';
-import { groups } from './mock-groups';
+import { Group, Member } from '@api-interfaces';
+import {
+    AngularFirestore,
+    AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GroupService {
-    getGroups(): Observable<Group[]> {
-        //return this.httpClient.get<GroupModel[]>(this.url);
-        return of(groups);
+    groupCollection: AngularFirestoreCollection<Group>;
+
+    private success = false;
+    private subject = new Subject<boolean>();
+
+    constructor(public afs: AngularFirestore) {
+        this.groupCollection = this.afs.collection('group');
+    }
+
+    toggleSuccess(success: boolean): void {
+        this.success = success;
+        this.subject.next(this.success);
+    }
+    onToggle(): Observable<boolean> {
+        return this.subject.asObservable();
+    }
+
+    async addNewGroup(g: Group, m: Member) {
+        const ref = await this.groupCollection.add(g);
+        this.groupCollection
+            .doc(ref.id)
+            .collection('members')
+            .doc(ref.id)
+            .set(m);
     }
 }

@@ -7,5 +7,9 @@ import { AlertService } from '@services';
     styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+    /**
+     * Constructor of register component
+     * @param alertService {AlertService}
+     */
     constructor(public alertService: AlertService) {}
 }

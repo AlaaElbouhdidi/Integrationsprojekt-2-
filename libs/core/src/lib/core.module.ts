@@ -13,6 +13,24 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
+import { CreateEventModule } from '@create-event';
+import { ProfileModule } from '@profile';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
+import {
+    faUser,
+    faDragon,
+    faFrog,
+    faFish,
+    faSpider,
+    faChessKing,
+    faDog,
+    faCat,
+    faHippo,
+    faOtter
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
     exports: [
@@ -24,12 +42,30 @@ import { SlideshowModule } from '@slideshow';
         SlideshowModule,
         RegisterFormModule,
         AlertModule,
+        ProfileModule,
         LoginModule,
         LandingpageModule,
         FooterModule,
         AuthHandlerModule,
         AngularFireFunctionsModule,
-        StylesModule
-    ],
+        StylesModule,
+        CreateEventModule,
+        FontAwesomeModule
+    ]
 })
-export class CoreModule {}
+export class CoreModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faUser,
+            faDragon,
+            faFrog,
+            faFish,
+            faSpider,
+            faChessKing,
+            faDog,
+            faCat,
+            faOtter,
+            faHippo
+        );
+    }
+}
