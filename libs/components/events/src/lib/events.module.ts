@@ -13,6 +13,10 @@ import { GroupsModule } from '@groups';
 import { UpcomingEventSectionScreenComponent } from './upcoming-event-section-screen/upcoming-event-section-screen.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+// import {AngularFireModule} from "@angular/fire/compat";
+// import {environment} from "@env";
+import {LoaderModule} from "@loader";
+import { EventService, GroupService } from '@services';
 
 @NgModule({
     imports: [
@@ -21,6 +25,7 @@ import { FormsModule } from '@angular/forms';
         GroupsModule,
         HttpClientModule,
         FormsModule,
+        LoaderModule
     ],
     declarations: [
         EventItemMobileComponent,
@@ -31,8 +36,9 @@ import { FormsModule } from '@angular/forms';
         EventsGroupsPageMobileComponent,
         EventsGroupsPageScreenComponent,
         UpcomingEventSectionMobileComponent,
-        UpcomingEventSectionScreenComponent,
+        UpcomingEventSectionScreenComponent
     ],
+    providers: [EventService, GroupService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [EventGroupRoutingModule],
 })

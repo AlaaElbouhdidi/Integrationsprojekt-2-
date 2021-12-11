@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Event } from '@api-interfaces';
-import { ChunkerService } from '@services';
+// import { ChunkerService } from '@services';
 
 @Component({
     selector: 'mate-team-upcoming-event-section-mobile',
@@ -8,14 +8,21 @@ import { ChunkerService } from '@services';
     styleUrls: ['./upcoming-event-section-mobile.component.scss'],
 })
 export class UpcomingEventSectionMobileComponent implements OnChanges {
-    constructor(private chunkerService: ChunkerService) {}
-    @Input()
-    events: Event[] | undefined;
+    /**
+     * Events that are displayed
+     */
+    @Input() events: Event[] | undefined;
+    /**
+     * Contains buckets of size 2
+     * In every bucket the events are stored
+     */
     buckets: Event[][] | undefined;
+    /**
+     * Updates the buckets based on the defined events
+     */
     ngOnChanges(): void {
         if (this.events === undefined) {
             return;
         }
-        this.buckets = this.chunkerService.chunk(this.events, 2);
     }
 }

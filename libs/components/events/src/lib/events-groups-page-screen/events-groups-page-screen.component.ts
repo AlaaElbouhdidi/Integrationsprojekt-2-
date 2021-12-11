@@ -7,8 +7,14 @@ import { Event, Group } from '@api-interfaces';
     styleUrls: ['./events-groups-page-screen.component.scss'],
 })
 export class EventsGroupsPageScreenComponent {
+    /**
+     * Events that are displayed
+     */
     @Input()
     events: Event[] | undefined;
+    /**
+     * Groups that are displayed
+     */
     @Input()
     groups: Group[] | undefined;
 }

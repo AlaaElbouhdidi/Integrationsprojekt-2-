@@ -7,6 +7,8 @@ import { Group } from '@api-interfaces';
     styleUrls: ['./group-section-mobile.component.scss'],
 })
 export class GroupSectionMobileComponent {
-    @Input()
-    public groups: Group[] | undefined;
+    /**
+     * Groups that are displayed
+     */
+    @Input() public groups: Group[] | undefined;
 }

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpcomingEventSectionScreenComponent } from '../upcoming-event-section-screen/upcoming-event-section-screen.component';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { EventsGroupsPageScreenComponent } from './events-groups-page-screen.component';
 import { GroupsModule } from '@groups';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -15,7 +15,7 @@ describe('EventsGroupsPageScreenComponent', () => {
                 EventsGroupsPageScreenComponent,
                 UpcomingEventSectionScreenComponent,
             ],
-            imports: [GroupsModule],
+            imports: [GroupsModule, RouterTestingModule],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     });

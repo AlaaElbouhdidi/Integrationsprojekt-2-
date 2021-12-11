@@ -7,8 +7,14 @@ import { Event } from '@api-interfaces';
     styleUrls: ['./event-item-screen.component.scss'],
 })
 export class EventItemScreenComponent {
+    /**
+     * This is called, iff the user clicks on more information.
+     */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
+    /**
+     * Event, that is displayed.
+     */
     @Input()
-    event: Event = Event.empty();
+    event: Event | undefined;
 }

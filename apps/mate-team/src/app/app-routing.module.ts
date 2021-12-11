@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('@events').then((m) => m.EventsModule),
     },
     {
+        path: 'group/:id',
+        loadChildren: () => import('@groups').then((m) => m.GroupsModule),
+    },
+    {
         path: 'auth/handler',
         loadChildren: () =>
             import('@auth-handler').then((m) => m.AuthHandlerModule)

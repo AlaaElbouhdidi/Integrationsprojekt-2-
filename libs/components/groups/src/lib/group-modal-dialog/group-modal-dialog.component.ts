@@ -8,7 +8,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./group-modal-dialog.component.scss'],
 })
 export class GroupModalDialogComponent {
+    /**
+     * Group that is displayed
+     */
     @Input() group: Group | undefined = undefined;
 
+    /**
+     * Constructor
+     * @param activeModal
+     */
     constructor(public activeModal: NgbActiveModal) {}
 }

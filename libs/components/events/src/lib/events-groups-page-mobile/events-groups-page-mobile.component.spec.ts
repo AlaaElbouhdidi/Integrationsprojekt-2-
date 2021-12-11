@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventsGroupsPageMobileComponent } from './events-groups-page-mobile.component';
+import {EventsGroupsPageMobileComponent} from './events-groups-page-mobile.component';
+import {UpcomingEventSectionMobileComponent} from "../upcoming-event-section-mobile/upcoming-event-section-mobile.component";
+import {GroupsModule} from "@groups";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('EventsGroupsPageComponent', () => {
     let component: EventsGroupsPageMobileComponent;
@@ -8,7 +11,12 @@ describe('EventsGroupsPageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [EventsGroupsPageMobileComponent],
+            declarations: [
+                EventsGroupsPageMobileComponent,
+                UpcomingEventSectionMobileComponent,
+            ],
+            imports: [GroupsModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
 

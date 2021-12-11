@@ -1,36 +1,28 @@
 <div
     class="d-flex"
-    style="position: relative; margin-top: 55px; margin-bottom: 30px"
->
+    style="position: relative; margin-top: 55px; margin-bottom: 30px">
     <h1>My groups <i class="bi bi-people-fill"></i></h1>
     <div>
-        <a class="createGroup" href="#">Create new group</a>
+        <a class="createGroup" routerLink="/newgroup">Create new group</a>
     </div>
 </div>
 
 <div style="margin-bottom: 20px; display: flex">
-    <div class="searchContainer">
-        <i class="bi bi-search"></i>
-        <input
-            type="text"
-            placeholder="Search..."
-            [(ngModel)]="textSearch"
-            class="searchField"
-            (ngModelChange)="doFiltering()"
-        />
-    </div>
+    <mate-team-search-input-field name="searchInputField" ngDefaultControl></mate-team-search-input-field>
     <div>
         Filter by
         <a
             (click)="this.enabledMemberFilter = true; doFiltering()"
             [className]="enabledMemberFilter ? 'filter active' : 'filter'"
-            >Members</a
+        >Members</a
         >
+        <!--
         <a
             (click)="this.enabledMemberFilter = false; doFiltering()"
             [className]="enabledMemberFilter ? 'filter' : 'filter active'"
             >Creation Date</a
         >
+        -->
     </div>
 </div>
 

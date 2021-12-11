@@ -1,7 +1,8 @@
 import { Group } from '@api-interfaces';
-
+/*
 export const groups: Group[] = [
     {
+        id: "1",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -9,10 +10,11 @@ export const groups: Group[] = [
             message: 'passt 19:00 ?',
         },
         numberOfNotSeenMessages: 1,
-        members: ['Max', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "2",
         title: 'titel 2',
         imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg',
         latestMessage: {
@@ -20,10 +22,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-10T11:35:07.356Z'),
     },
     {
+        id: "3",
         title: 'titel 3',
         imgSrc: 'https://mocki.io/joshua.jpg',
         latestMessage: {
@@ -31,10 +34,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-11T11:35:07.356Z'),
     },
     {
+        id: "4",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/oskar.jpg',
         latestMessage: {
@@ -42,10 +46,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-12T11:35:07.356Z'),
     },
     {
+        id: "5",
         title: 'titel 1',
         imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg',
         latestMessage: {
@@ -53,10 +58,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-15T11:35:07.356Z'),
     },
     {
+        id: "6",
         title: 'titel 1',
         imgSrc: 'https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg',
         latestMessage: {
@@ -64,10 +70,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-18T11:35:07.356Z'),
     },
     {
+        id: "7",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -75,10 +82,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-12T11:35:07.356Z'),
     },
     {
+        id: "8",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -86,10 +94,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "9",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -97,10 +106,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "10",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -108,10 +118,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "11",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -119,10 +130,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "12",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -130,10 +142,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "13",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -141,10 +154,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "14",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -152,10 +166,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "15",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -163,10 +178,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "16",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -174,10 +190,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "17",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -185,10 +202,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "18",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -196,10 +214,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "19",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -207,10 +226,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "20",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -218,10 +238,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "21",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -229,10 +250,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "22",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -240,10 +262,11 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
     {
+        id: "23",
         title: 'titel 1',
         imgSrc: 'https://mocki.io/jan.jpg',
         latestMessage: {
@@ -251,7 +274,8 @@ export const groups: Group[] = [
             message: '20 Uhr passt',
         },
         numberOfNotSeenMessages: 0,
-        members: ['Max', 'Muster', 'Muster', 'Muster'],
+        members: [{displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}, {displayName:'Max', id:'1'}],
         creationDate: new Date('2021-01-09T11:35:07.356Z'),
     },
 ];
+*/

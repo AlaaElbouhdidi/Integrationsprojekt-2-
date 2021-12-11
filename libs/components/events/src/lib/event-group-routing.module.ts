@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
     redirectLoggedInTo,
-    canActivate,
+    canActivate, redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
 import { EventsGroupsPageComponent } from './events-groups-page/events-groups-page.component';
 
-const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/']);
+const redirectAuthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
 const routes: Routes = [
     {

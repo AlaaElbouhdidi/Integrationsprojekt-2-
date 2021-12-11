@@ -7,6 +7,9 @@ import { Group } from '@api-interfaces';
     styleUrls: ['./group-item-mobile.component.scss'],
 })
 export class GroupItemMobileComponent {
+    /**
+     * Group that is displayed
+     */
     @Input()
     group: Group | undefined;
 }

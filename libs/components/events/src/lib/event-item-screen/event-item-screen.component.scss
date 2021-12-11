@@ -1,12 +1,13 @@
 @import '../../style';
 a {
     background-color: white;
-    width: 250px;
     color: black !important;
     text-align: center;
     border-radius: 5px;
     display: inline-block;
     margin-bottom: 10px;
+    width: 80%;
+    max-width: 200px;
 }
 .eventBox {
     background-color: $blue1;

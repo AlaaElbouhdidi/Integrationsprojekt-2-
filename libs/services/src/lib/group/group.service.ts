@@ -26,6 +26,9 @@ export class GroupService {
     onToggle(): Observable<boolean> {
         return this.subject.asObservable();
     }
+    getGroups() {
+        return this.groupCollection.valueChanges()
+    }
 
     async addNewGroup(g: Group, m: Member) {
         const ref = await this.groupCollection.add(g);
