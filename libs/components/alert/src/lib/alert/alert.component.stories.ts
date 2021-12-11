@@ -7,14 +7,14 @@ export default {
     component: AlertComponent,
     decorators: [
         moduleMetadata({
-            imports: [AlertModule],
-        }),
-    ],
+            imports: [AlertModule]
+        })
+    ]
 } as Meta<AlertComponent>;
 
 const Template: Story<AlertComponent> = (args: AlertComponent) => ({
     component: AlertComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

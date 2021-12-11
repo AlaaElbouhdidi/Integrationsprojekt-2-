@@ -12,7 +12,7 @@ describe('UpcomingEventSectionScreenComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [UpcomingEventSectionScreenComponent],
             imports: [FormsModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

@@ -24,11 +24,11 @@ const routes: Routes = [
     },
     {
         path: 'events',
-        loadChildren: () => import('@events').then((m) => m.EventsModule),
+        loadChildren: () => import('@events').then((m) => m.EventsModule)
     },
     {
         path: 'group/:id',
-        loadChildren: () => import('@groups').then((m) => m.GroupsModule),
+        loadChildren: () => import('@groups').then((m) => m.GroupsModule)
     },
     {
         path: 'auth/handler',

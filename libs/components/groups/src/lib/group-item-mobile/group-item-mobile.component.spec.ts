@@ -8,7 +8,7 @@ describe('GroupItemMobileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GroupItemMobileComponent],
+            declarations: [GroupItemMobileComponent]
         }).compileComponents();
     });
 

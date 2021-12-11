@@ -10,7 +10,7 @@ describe('GroupSectionComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GroupSectionMobileComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

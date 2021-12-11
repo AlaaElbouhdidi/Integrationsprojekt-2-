@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 // import {AngularFireModule} from "@angular/fire/compat";
 // import {environment} from "@env";
-import {LoaderModule} from "@loader";
+import { LoaderModule } from '@loader';
 import { EventService, GroupService } from '@services';
 
 @NgModule({
@@ -40,6 +40,6 @@ import { EventService, GroupService } from '@services';
     ],
     providers: [EventService, GroupService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [EventGroupRoutingModule],
+    exports: [EventGroupRoutingModule]
 })
 export class EventsModule {}

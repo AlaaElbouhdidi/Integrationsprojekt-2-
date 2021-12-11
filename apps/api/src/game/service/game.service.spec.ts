@@ -10,7 +10,7 @@ describe('GameService', () => {
         if (!admin.apps.length) admin.initializeApp();
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule],
-            providers: [GameService],
+            providers: [GameService]
         }).compile();
 
         service = module.get<GameService>(GameService);

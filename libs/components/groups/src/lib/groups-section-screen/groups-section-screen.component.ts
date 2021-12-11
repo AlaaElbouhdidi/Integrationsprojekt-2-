@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'mate-team-groups-section-screen',
     templateUrl: './groups-section-screen.component.html',
-    styleUrls: ['./groups-section-screen.component.scss'],
+    styleUrls: ['./groups-section-screen.component.scss']
 })
 export class GroupsSectionScreenComponent implements OnChanges {
     /**

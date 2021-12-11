@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'mate-team-slideshow',
-    template: '<p>Mock Slideshow Component</p>',
+    template: '<p>Mock Slideshow Component</p>'
 })
 class MockSlideshowComponent {}
 
@@ -15,7 +15,7 @@ describe('LandingpageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [LandingpageComponent, MockSlideshowComponent],
+            declarations: [LandingpageComponent, MockSlideshowComponent]
         }).compileComponents();
     });
 

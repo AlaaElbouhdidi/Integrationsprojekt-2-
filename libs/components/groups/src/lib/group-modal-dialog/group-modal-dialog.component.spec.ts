@@ -10,7 +10,7 @@ describe('GroupModalDialogComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [GroupModalDialogComponent],
-            providers: [NgbActiveModal],
+            providers: [NgbActiveModal]
         }).compileComponents();
     });
 

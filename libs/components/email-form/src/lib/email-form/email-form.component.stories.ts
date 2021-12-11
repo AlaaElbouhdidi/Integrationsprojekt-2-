@@ -11,15 +11,15 @@ export default {
         moduleMetadata({
             imports: [
                 EmailFormModule,
-                AngularFireModule.initializeApp(environment.firebase),
-            ],
-        }),
-    ],
+                AngularFireModule.initializeApp(environment.firebase)
+            ]
+        })
+    ]
 } as Meta<EmailFormComponent>;
 
 const Template: Story<EmailFormComponent> = (args: EmailFormComponent) => ({
     component: EmailFormComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

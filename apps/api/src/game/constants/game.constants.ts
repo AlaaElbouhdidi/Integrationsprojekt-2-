@@ -6,7 +6,7 @@ export const GameConstants = {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 400,
+                example: 400
             },
             message: {
                 type: 'array',
@@ -18,45 +18,45 @@ export const GameConstants = {
                     'date must be a valid ISO 8601 date string',
                     'date should not be empty',
                     'firstTeamScore must be a number conforming to the specified constraints',
-                    'secondTeamScore must be a number conforming to the specified constraints',
-                ],
+                    'secondTeamScore must be a number conforming to the specified constraints'
+                ]
             },
             error: {
                 type: 'string',
-                example: 'Bad Request',
-            },
-        },
+                example: 'Bad Request'
+            }
+        }
     },
     NOT_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'Could not find game',
+                example: 'Could not find game'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
+                example: 'Not Found'
+            }
+        }
     },
     NONE_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'No games found',
+                example: 'No games found'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
-    },
+                example: 'Not Found'
+            }
+        }
+    }
 };

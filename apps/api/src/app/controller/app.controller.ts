@@ -6,7 +6,7 @@ import {
     ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiOperation,
-    ApiTags,
+    ApiTags
 } from '@nestjs/swagger';
 import { AppConstants } from '../constants/app.constants';
 /**
@@ -29,11 +29,11 @@ export class AppController {
     @ApiOperation({ summary: 'API entry point' })
     @ApiOkResponse({
         description: 'Welcomed to the API',
-        schema: AppConstants.OK,
+        schema: AppConstants.OK
     })
     @ApiInternalServerErrorResponse({
         description: 'Unexpected error',
-        schema: AppConstants.INTERNAL_SERVER_ERROR,
+        schema: AppConstants.INTERNAL_SERVER_ERROR
     })
     getData(): Message {
         return this.appService.getData();

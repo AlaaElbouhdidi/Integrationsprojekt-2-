@@ -13,7 +13,7 @@ describe('GroupsSectionScreenComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [GroupsSectionScreenComponent],
             imports: [FormsModule, RouterTestingModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

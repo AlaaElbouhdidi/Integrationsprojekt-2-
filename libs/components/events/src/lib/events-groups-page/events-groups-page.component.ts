@@ -7,7 +7,7 @@ import { zip } from 'rxjs';
 @Component({
     selector: 'mate-team-events-groups-page',
     templateUrl: './events-groups-page.component.html',
-    styleUrls: ['./events-groups-page.component.scss'],
+    styleUrls: ['./events-groups-page.component.scss']
 })
 export class EventsGroupsPageComponent implements OnInit {
     loading = true;
@@ -40,7 +40,7 @@ export class EventsGroupsPageComponent implements OnInit {
         ).subscribe(([events, groups]) => {
             this.events = events;
             this.groups = groups;
-           this.loading = false;
+            this.loading = false;
         });
     }
 }

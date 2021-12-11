@@ -8,13 +8,13 @@ import { RouterModule } from '@angular/router';
 
 import {
     FontAwesomeModule,
-    FaIconLibrary,
+    FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
 import {
     faExclamationCircle,
     faCheckCircle,
     faTimesCircle,
-    faExclamationTriangle,
+    faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
@@ -25,10 +25,10 @@ import {
         ReactiveFormsModule,
         FontAwesomeModule,
         AlertModule,
-        RouterModule,
+        RouterModule
     ],
     declarations: [NewgroupFormComponent],
-    exports: [NewgroupFormComponent],
+    exports: [NewgroupFormComponent]
 })
 export class NewgroupFormModule {
     constructor(library: FaIconLibrary) {

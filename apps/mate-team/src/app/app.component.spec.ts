@@ -18,9 +18,9 @@ describe('AppComponent', () => {
                 RouterTestingModule,
                 CoreModule,
                 AngularFireModule.initializeApp(environment.firebase),
-                SocketIoModule.forRoot(socketConfig),
+                SocketIoModule.forRoot(socketConfig)
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

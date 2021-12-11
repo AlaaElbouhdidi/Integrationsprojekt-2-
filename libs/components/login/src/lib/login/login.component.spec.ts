@@ -6,13 +6,13 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'mate-team-login-form',
-    template: '<p>Mock Login Form Component</p>',
+    template: '<p>Mock Login Form Component</p>'
 })
 class MockLoginFormComponent {}
 
 @Component({
     selector: 'mate-team-email-form',
-    template: '<p>Mock Email Form Component</p>',
+    template: '<p>Mock Email Form Component</p>'
 })
 class MockEmailFormComponent {}
 
@@ -25,8 +25,8 @@ describe('LoginComponent', () => {
             declarations: [
                 LoginComponent,
                 MockLoginFormComponent,
-                MockEmailFormComponent,
-            ],
+                MockEmailFormComponent
+            ]
         }).compileComponents();
     });
 

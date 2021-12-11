@@ -8,7 +8,7 @@ describe('NewgroupSuccessComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NewgroupSuccessComponent],
+            declarations: [NewgroupSuccessComponent]
         }).compileComponents();
     });
 

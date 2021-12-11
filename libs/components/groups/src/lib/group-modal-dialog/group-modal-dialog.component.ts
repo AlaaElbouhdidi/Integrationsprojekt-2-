@@ -5,7 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'mate-team-group-modal-dialog',
     templateUrl: './group-modal-dialog.component.html',
-    styleUrls: ['./group-modal-dialog.component.scss'],
+    styleUrls: ['./group-modal-dialog.component.scss']
 })
 export class GroupModalDialogComponent {
     /**

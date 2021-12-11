@@ -10,7 +10,7 @@ describe('EventService', () => {
         if (!admin.apps.length) admin.initializeApp();
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule],
-            providers: [EventService],
+            providers: [EventService]
         }).compile();
 
         service = module.get<EventService>(EventService);

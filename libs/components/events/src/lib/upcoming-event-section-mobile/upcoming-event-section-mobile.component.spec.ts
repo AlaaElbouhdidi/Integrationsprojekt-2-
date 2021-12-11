@@ -11,7 +11,7 @@ describe('UpcomingEventSectionMobileComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [UpcomingEventSectionMobileComponent],
             imports: [FormsModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

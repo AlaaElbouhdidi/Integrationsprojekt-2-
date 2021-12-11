@@ -6,7 +6,7 @@ import { EventModalDialogComponent } from '../event-modal-dialog/event-modal-dia
 @Component({
     selector: 'mate-team-upcoming-event-section-screen',
     templateUrl: './upcoming-event-section-screen.component.html',
-    styleUrls: ['./upcoming-event-section-screen.component.scss'],
+    styleUrls: ['./upcoming-event-section-screen.component.scss']
 })
 export class UpcomingEventSectionScreenComponent implements OnChanges {
     /**
@@ -24,9 +24,7 @@ export class UpcomingEventSectionScreenComponent implements OnChanges {
      * @param modalService
      * @param chunkerService
      */
-    constructor(
-        private modalService: NgbModal,
-    ) {}
+    constructor(private modalService: NgbModal) {}
 
     /**
      * It defines the buckets based on the defined events.

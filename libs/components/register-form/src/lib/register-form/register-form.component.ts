@@ -4,14 +4,14 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 @Component({
     selector: 'mate-team-register-form',
     templateUrl: './register-form.component.html',
-    styleUrls: ['./register-form.component.scss'],
+    styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent {
     /**
@@ -40,8 +40,8 @@ export class RegisterFormComponent {
             email: new FormControl('', [Validators.email, Validators.required]),
             password: new FormControl('', [
                 Validators.minLength(6),
-                Validators.required,
-            ]),
+                Validators.required
+            ])
         });
     }
 
@@ -74,7 +74,7 @@ export class RegisterFormComponent {
             this.alertService.addAlert({
                 type: 'success',
                 message:
-                    'Successfully logged in with new account. Please verify your email.',
+                    'Successfully logged in with new account. Please verify your email.'
             });
             await this.router.navigate(['/']);
             window.location.reload();
@@ -84,7 +84,7 @@ export class RegisterFormComponent {
             this.registerForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message,
+                message: err.message
             });
         }
     }

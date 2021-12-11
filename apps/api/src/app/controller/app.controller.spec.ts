@@ -10,7 +10,7 @@ describe('AppController', () => {
         app = await Test.createTestingModule({
             imports: [FirebaseModule],
             controllers: [AppController],
-            providers: [AppService],
+            providers: [AppService]
         }).compile();
     });
 
@@ -18,7 +18,7 @@ describe('AppController', () => {
         it('should return "Welcome to api!"', () => {
             const appController = app.get<AppController>(AppController);
             expect(appController.getData()).toEqual({
-                message: 'Welcome to api!',
+                message: 'Welcome to api!'
             });
         });
     });

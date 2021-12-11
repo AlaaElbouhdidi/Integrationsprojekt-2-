@@ -4,7 +4,7 @@ import { Event } from '@api-interfaces';
 @Component({
     selector: 'mate-team-event-item-screen',
     templateUrl: './event-item-screen.component.html',
-    styleUrls: ['./event-item-screen.component.scss'],
+    styleUrls: ['./event-item-screen.component.scss']
 })
 export class EventItemScreenComponent {
     /**

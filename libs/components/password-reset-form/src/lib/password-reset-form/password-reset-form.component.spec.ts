@@ -11,7 +11,7 @@ describe('PasswordResetFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PasswordResetFormModule],
+            imports: [PasswordResetFormModule]
         }).compileComponents();
     });
 

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Group, Member } from '@api-interfaces';
 import {
     AngularFirestore,
-    AngularFirestoreCollection,
+    AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class GroupService {
     groupCollection: AngularFirestoreCollection<Group>;
@@ -27,7 +27,7 @@ export class GroupService {
         return this.subject.asObservable();
     }
     getGroups() {
-        return this.groupCollection.valueChanges()
+        return this.groupCollection.valueChanges();
     }
 
     async addNewGroup(g: Group, m: Member) {

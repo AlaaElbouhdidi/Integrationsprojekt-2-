@@ -13,10 +13,10 @@ describe('EventsGroupsPageScreenComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [
                 EventsGroupsPageScreenComponent,
-                UpcomingEventSectionScreenComponent,
+                UpcomingEventSectionScreenComponent
             ],
             imports: [GroupsModule, RouterTestingModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

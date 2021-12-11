@@ -7,8 +7,8 @@ import { GroupItemScreenComponent } from './group-item-screen/group-item-screen.
 import { GroupItemMobileComponent } from './group-item-mobile/group-item-mobile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {GroupRoutingModule} from "./group-routing.module";
-import {LoaderModule} from "@loader";
+import { GroupRoutingModule } from './group-routing.module';
+import { LoaderModule } from '@loader';
 
 @NgModule({
     imports: [CommonModule, HttpClientModule, FormsModule, LoaderModule],
@@ -17,9 +17,13 @@ import {LoaderModule} from "@loader";
         GroupSectionMobileComponent,
         GroupsSectionScreenComponent,
         GroupItemScreenComponent,
-        GroupItemMobileComponent,
+        GroupItemMobileComponent
     ],
-    exports: [GroupSectionMobileComponent, GroupsSectionScreenComponent, GroupRoutingModule],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [
+        GroupSectionMobileComponent,
+        GroupsSectionScreenComponent,
+        GroupRoutingModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GroupsModule {}

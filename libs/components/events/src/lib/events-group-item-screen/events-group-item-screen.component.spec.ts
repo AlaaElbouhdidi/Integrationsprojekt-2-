@@ -7,7 +7,7 @@ describe('EventsGroupItemScreenComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [EventsGroupItemScreenComponent],
+            declarations: [EventsGroupItemScreenComponent]
         }).compileComponents();
     });
 

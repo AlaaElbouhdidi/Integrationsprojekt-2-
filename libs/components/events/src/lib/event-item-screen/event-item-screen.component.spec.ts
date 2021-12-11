@@ -10,7 +10,7 @@ describe('EventItemScreenComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [EventItemScreenComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 
