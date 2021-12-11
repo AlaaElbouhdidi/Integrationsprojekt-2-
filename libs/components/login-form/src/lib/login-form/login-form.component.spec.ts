@@ -20,20 +20,14 @@ describe('LoginFormComponent', () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock }
+                { provide: AuthService, useValue: authServiceMock },
             ],
             imports: [
                 FontAwesomeModule,
                 LoginFormModule,
-                RouterTestingModule.withRoutes([])
-            ]
+                RouterTestingModule.withRoutes([]),
+            ],
         }).compileComponents();
-    });
-
-    beforeEach(() => {
-        fixture = TestBed.createComponent(LoginFormComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should create', () => {

@@ -75,12 +75,14 @@ export class EmailFormComponent {
             this.emailForm.reset();
             await this.router.navigate(['/']);
         } catch (e) {
-            this.loading = false;
-            this.emailForm.reset();
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
+            if (e instanceof Error) {
+                this.loading = false;
+                this.emailForm.reset();
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
 }
