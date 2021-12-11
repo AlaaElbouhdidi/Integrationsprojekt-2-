@@ -9,12 +9,9 @@ describe('GroupComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule.withRoutes([]),
-            ],
-            declarations: [ GroupComponent ]
-    })
-    .compileComponents();
+            imports: [RouterTestingModule.withRoutes([])],
+            declarations: [GroupComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

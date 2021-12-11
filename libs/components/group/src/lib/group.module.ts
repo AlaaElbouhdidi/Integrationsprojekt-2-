@@ -4,13 +4,8 @@ import { GroupComponent } from './group/group.component';
 import { GroupRoutingModule } from './group/group-routing.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        GroupRoutingModule
-    ],
-    declarations: [
-      GroupComponent
-    ],
+    imports: [CommonModule, GroupRoutingModule],
+    declarations: [GroupComponent],
     exports: [GroupComponent]
 })
 export class GroupModule {}

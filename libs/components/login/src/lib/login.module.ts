@@ -12,10 +12,10 @@ import { EmailFormModule } from '@email-form';
         LoginRoutingModule,
         LoginFormModule,
         AlertModule,
-        EmailFormModule,
+        EmailFormModule
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginModule {}

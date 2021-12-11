@@ -33,11 +33,11 @@ const route = {
         {
             path: 'member',
             component: GroupComponent
-        },
+        }
     ]
-}
+};
 
-const routes = [route]
+const routes = [route];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

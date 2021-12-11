@@ -8,6 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [CommonModule, RouterModule, NgbModule],
     declarations: [FooterComponent],
     exports: [FooterComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FooterModule {}

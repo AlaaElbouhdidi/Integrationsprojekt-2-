@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'mate-team-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnDestroy {
     /**
@@ -46,12 +46,12 @@ export class HeaderComponent implements OnDestroy {
             await this.authService.logout();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully logged out',
+                message: 'Successfully logged out'
             });
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message,
+                message: e.message
             });
         }
         await this.router.navigate(['/']);

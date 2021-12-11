@@ -12,7 +12,7 @@ describe('EventController', () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule],
             controllers: [EventController],
-            providers: [EventService],
+            providers: [EventService]
         }).compile();
 
         controller = module.get<EventController>(EventController);

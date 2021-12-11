@@ -12,8 +12,8 @@ describe('AuthServiceService', () => {
         user: {
             email: 'email',
             displayName: '',
-            sendEmailVerification: jest.fn(),
-        },
+            sendEmailVerification: jest.fn()
+        }
     };
 
     const angularFireAuthMock = {
@@ -26,15 +26,15 @@ describe('AuthServiceService', () => {
         verifyPasswordResetCode: jest.fn(),
         applyActionCode: jest.fn(),
         confirmPasswordReset: jest.fn(),
-        signOut: jest.fn(),
+        signOut: jest.fn()
     };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 AngularFireAuth,
-                { provide: AngularFireAuth, useValue: angularFireAuthMock },
-            ],
+                { provide: AngularFireAuth, useValue: angularFireAuthMock }
+            ]
         });
         service = TestBed.inject(AuthService);
     });

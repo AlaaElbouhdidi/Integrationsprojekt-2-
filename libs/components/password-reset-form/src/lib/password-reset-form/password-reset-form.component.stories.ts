@@ -6,16 +6,16 @@ export default {
     component: PasswordResetFormComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<PasswordResetFormComponent>;
 
 const Template: Story<PasswordResetFormComponent> = (
     args: PasswordResetFormComponent
 ) => ({
     component: PasswordResetFormComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

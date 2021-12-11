@@ -655,6 +655,30 @@
                 }
             }
         },
+        "events": {
+            "projectType": "library",
+            "root": "libs/components/events",
+            "sourceRoot": "libs/components/events/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/events/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/events/src/**/*.ts",
+                            "libs/components/events/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "footer": {
             "projectType": "library",
             "root": "libs/components/footer",
@@ -735,16 +759,16 @@
                 }
             }
         },
-        "group": {
+        "groups": {
             "projectType": "library",
-            "root": "libs/components/group",
-            "sourceRoot": "libs/components/group/src",
+            "root": "libs/components/groups",
+            "sourceRoot": "libs/components/groups/src",
             "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/components/group/jest.config.js",
+                        "jestConfig": "libs/components/groups/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -752,8 +776,8 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/components/group/src/**/*.ts",
-                            "libs/components/group/src/**/*.html"
+                            "libs/components/groups/src/**/*.ts",
+                            "libs/components/groups/src/**/*.html"
                         ]
                     }
                 }

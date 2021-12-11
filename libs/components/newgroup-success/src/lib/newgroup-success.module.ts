@@ -5,6 +5,6 @@ import { NewgroupSuccessComponent } from './newgroup-success.component';
 @NgModule({
     imports: [CommonModule],
     declarations: [NewgroupSuccessComponent],
-    exports: [NewgroupSuccessComponent],
+    exports: [NewgroupSuccessComponent]
 })
 export class NewgroupSuccessModule {}

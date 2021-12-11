@@ -10,7 +10,7 @@ describe('SlideshowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SlideshowModule, BrowserAnimationsModule],
+            imports: [SlideshowModule, BrowserAnimationsModule]
         }).compileComponents();
     });
 
