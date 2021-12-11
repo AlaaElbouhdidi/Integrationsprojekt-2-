@@ -16,10 +16,7 @@ describe('LoginComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                LoginComponent,
-                MockEmailFormComponent
-            ]
+            declarations: [LoginComponent, MockEmailFormComponent]
         }).compileComponents();
     });
 

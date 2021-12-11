@@ -34,6 +34,7 @@
             "@env": ["libs/env/src/index.ts"],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
+            "@group": ["libs/components/group/src/index.ts"],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],

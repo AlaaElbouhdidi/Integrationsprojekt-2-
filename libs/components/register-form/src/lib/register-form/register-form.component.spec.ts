@@ -19,7 +19,7 @@ describe('RegisterFormComponent', () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 FontAwesomeModule,

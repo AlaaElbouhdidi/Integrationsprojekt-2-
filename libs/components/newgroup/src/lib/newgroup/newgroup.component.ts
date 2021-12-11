@@ -9,7 +9,5 @@ import { AlertService } from '@services';
 export class NewgroupComponent {
     success = false;
 
-    constructor(
-        public alertService: AlertService,
-    ) {}
+    constructor(public alertService: AlertService) {}
 }

@@ -11,7 +11,7 @@ import { faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
     declarations: [PasswordResetFormComponent],
-    exports: [PasswordResetFormComponent],
+    exports: [PasswordResetFormComponent]
 })
 export class PasswordResetFormModule {
     constructor(library: FaIconLibrary) {

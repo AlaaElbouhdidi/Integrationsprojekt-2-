@@ -31,6 +31,7 @@ import {
     faHippo,
     faOtter
 } from '@fortawesome/free-solid-svg-icons';
+import { GroupModule } from '@group';
 
 @NgModule({
     exports: [
@@ -43,6 +44,7 @@ import {
         RegisterFormModule,
         AlertModule,
         ProfileModule,
+        GroupModule,
         LoginModule,
         LandingpageModule,
         FooterModule,

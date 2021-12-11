@@ -14,7 +14,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
         CommonModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        LoaderModule,
+        LoaderModule
     ],
     declarations: [EmailFormComponent],
     exports: [EmailFormComponent]

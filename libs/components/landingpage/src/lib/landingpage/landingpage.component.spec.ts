@@ -3,7 +3,7 @@ import { LandingpageComponent } from './landingpage.component';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { LandingpageModule } from '../landingpage.module';
-import { RouterTestingModule } from '@angular/router/testing'
+import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,7 +40,11 @@ describe('LandingpageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [LandingpageModule, RouterTestingModule, BrowserAnimationsModule],
+            imports: [
+                LandingpageModule,
+                RouterTestingModule,
+                BrowserAnimationsModule
+            ],
             declarations: [MockSlideshowComponent],
             providers: [
                 AngularFireAuth,

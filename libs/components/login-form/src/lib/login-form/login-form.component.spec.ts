@@ -20,13 +20,13 @@ describe('LoginFormComponent', () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 FontAwesomeModule,
                 LoginFormModule,
-                RouterTestingModule.withRoutes([]),
-            ],
+                RouterTestingModule.withRoutes([])
+            ]
         }).compileComponents();
     });
 

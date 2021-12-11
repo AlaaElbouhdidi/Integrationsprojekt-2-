@@ -7,7 +7,7 @@ import { AppModule } from './app.module';
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AppModule, RouterTestingModule ],
+            imports: [AppModule, RouterTestingModule],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });

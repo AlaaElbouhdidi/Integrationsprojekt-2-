@@ -34,9 +34,7 @@ export class EventsGroupsPageComponent implements OnInit {
      * Sets the events and groups.
      */
     ngOnInit(): void {
-        zip(
-            this.eventService.getEvents(),
-        ).subscribe(([events]) => {
+        zip(this.eventService.getEvents()).subscribe(([events]) => {
             this.events = events;
             this.loading = false;
         });
