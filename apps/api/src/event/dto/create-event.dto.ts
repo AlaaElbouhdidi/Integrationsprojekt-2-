@@ -34,7 +34,7 @@ export class CreateEventDto implements Event {
         example: '2021-11-29T12:00:00.666Z',
         description: 'The date of the event',
     })
-    date: Date;
+    date: string;
     /**
      * The participants property of an event
      **/
