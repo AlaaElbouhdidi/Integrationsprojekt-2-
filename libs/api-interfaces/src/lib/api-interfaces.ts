@@ -42,7 +42,7 @@ export interface Event {
     id?: string;
     name: string;
     description: string;
-    date: Date;
+    date: string;
     participants?: string[]; // Array of uid's
     owner?: string;
 }

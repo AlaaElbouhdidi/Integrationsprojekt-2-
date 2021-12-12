@@ -17,8 +17,7 @@
                         type="text"
                         class="form-control"
                         id="eventTitleInput"
-                        [(ngModel)]="this.event.title"
-                    />
+                        [(ngModel)]="this.event.name"/>
                 </div>
                 <div id="eventDescritption">
                     <label for="eventDescriptionInput"
@@ -31,32 +30,12 @@
                     ></textarea>
                 </div>
                 <div id="eventLocation">
-                    <label for="eventLocationInput">Event Location:</label>
-                    <textarea
-                        class="form-control"
-                        id="eventLocationInput"
-                        [(ngModel)]="this.event.location"
-                    ></textarea>
-                </div>
-                <div id="eventStart">
-                    <label for="eventStartInput">Event Start:</label>
+                    <label for="eventDateInput">Event Date:</label>
                     <input
-                        type="text"
+                        type="date"
                         class="form-control"
-                        id="eventStartInput"
-                        [(ngModel)]="this.event.start"
-                    />
-                </div>
-                <div id="eventStartTime">
-                    <label for="eventStartTimeInput"
-                        >Time:
-                        <span style="font-size: 11px">(optional)</span></label
-                    >
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="eventStartTimeInput"
-                        [(ngModel)]="this.event.time"
+                        id="eventDateInput"
+                        [(ngModel)]="this.event.date"
                     />
                 </div>
                 <div id="createEventBTN">

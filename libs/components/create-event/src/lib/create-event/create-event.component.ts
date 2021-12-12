@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
+import {Event} from "@api-interfaces";
 
 @Component({
     selector: 'mate-team-create-event',
@@ -7,14 +9,18 @@ import { Component } from '@angular/core';
 })
 export class CreateEventComponent {
     public event = {
-        title: '',
+        name: '',
         description: '',
-        location: '',
-        start: '',
-        time: ''
+        date: ''
     };
+    eventCollection: AngularFirestoreCollection<Event>;
 
-    createEvent() {
-        console.log('Creating Event: ' + this.event.description);
+    constructor(public afs: AngularFirestore) {
+        this.eventCollection = this.afs.collection('events');
+    }
+
+    //Function to add a new Event to Firestore
+    async createEvent() {
+        await this.eventCollection.add(this.event);
     }
 }
