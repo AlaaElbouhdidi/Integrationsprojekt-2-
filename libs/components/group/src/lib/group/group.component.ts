@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -10,8 +10,14 @@ import { Subject, takeUntil } from 'rxjs';
 export class GroupComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject();
     groupId: string | null = null;
+    activeRoute = '';
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router
+    ) {
+        this.activeRoute = this.router.url;
+    }
 
     ngOnInit(): void {
         this.route.paramMap
@@ -19,6 +25,17 @@ export class GroupComponent implements OnInit, OnDestroy {
             .subscribe((param) => {
                 this.groupId = param.get('id');
             });
+        this.router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.activeRoute = this.router.url;
+                }
+            });
+    }
+
+    navigateTo(routeParam: 'events' | 'statistics' | 'chat' | 'members') {
+        this.router.navigate([routeParam], { relativeTo: this.route });
     }
 
     ngOnDestroy(): void {
