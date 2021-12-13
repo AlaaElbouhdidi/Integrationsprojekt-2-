@@ -5,12 +5,12 @@ import { NewgroupComponent } from './newgroup.component';
 const routes: Routes = [
     {
         path: '',
-        component: NewgroupComponent,
-    },
+        component: NewgroupComponent
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
 export class NewgroupRoutingModule {}

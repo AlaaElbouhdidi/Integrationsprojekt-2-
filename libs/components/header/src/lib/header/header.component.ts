@@ -2,15 +2,13 @@ import { Component, OnDestroy } from '@angular/core';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { environment } from '@env';
 
 @Component({
     selector: 'mate-team-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnDestroy {
-    apiUrl: string = environment.apiUrl;
     /**
      * Authenticated State
      */
@@ -48,12 +46,12 @@ export class HeaderComponent implements OnDestroy {
             await this.authService.logout();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully logged out',
+                message: 'Successfully logged out'
             });
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message,
+                message: e.message
             });
         }
         await this.router.navigate(['/']);

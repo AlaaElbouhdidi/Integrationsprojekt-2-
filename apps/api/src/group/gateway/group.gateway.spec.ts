@@ -6,7 +6,7 @@ describe('GroupGateway', () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [GroupGateway],
+            providers: [GroupGateway]
         }).compile();
 
         gateway = module.get<GroupGateway>(GroupGateway);

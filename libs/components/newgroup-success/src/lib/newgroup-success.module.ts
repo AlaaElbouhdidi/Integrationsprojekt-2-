@@ -9,6 +9,6 @@ import {MatIconModule} from '@angular/material/icon'
 @NgModule({
     imports: [CommonModule, MatChipsModule, MatFormFieldModule, MatIconModule],
     declarations: [NewgroupSuccessComponent],
-    exports: [NewgroupSuccessComponent],
+    exports: [NewgroupSuccessComponent]
 })
 export class NewgroupSuccessModule {}

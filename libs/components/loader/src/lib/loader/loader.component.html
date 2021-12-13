@@ -1,1 +1,5 @@
-<div class="loading-circle"></div>
+<div
+    class="loading-circle"
+    [class.loading-circle-dark]="theme === 'dark'"
+    [class.loading-circle-light]="theme === 'light'"
+></div>

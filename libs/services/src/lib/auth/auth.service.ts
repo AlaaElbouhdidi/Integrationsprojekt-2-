@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
-import { EmailAuthProvider, getAuth } from 'firebase/auth';
 import { User } from '@api-interfaces';
 import firebase from 'firebase/compat/app';
+import {
+    getAuth,
+    UserCredential,
+    EmailAuthProvider,
+    reauthenticateWithCredential,
+    updatePassword,
+    updateEmail,
+    updateProfile,
+    sendEmailVerification
+} from 'firebase/auth';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class AuthService {
     /**
@@ -46,6 +55,7 @@ export class AuthService {
 
     /**
      * Creates new user with email and password and sends email verification link
+     *
      * @param email {string} The email of the user
      * @param password {string} The password of the user
      */
@@ -92,7 +102,7 @@ export class AuthService {
     }
 
     /**
-     * Send password reset email link to user
+     * Send password reset email link to current authenticated user
      *
      * @param email {string} The email to send the reset link to
      */
@@ -110,7 +120,7 @@ export class AuthService {
     }
 
     /**
-     * Apply the code to the authenticated user
+     * Apply code to current authenticated user
      *
      * @param code {string} The code to apply
      */
@@ -129,38 +139,109 @@ export class AuthService {
     }
 
     /**
-     * Logout a user
+     * Send email verification link to current authenticated user
+     */
+    sendEmailVerification(): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return sendEmailVerification(user);
+    }
+
+    /**
+     * Update profile of current authenticated user
+     *
+     * @param displayName {string} The new display name
+     * @param photoURL {string} The new icon code
+     */
+    updateProfile(displayName?: string, photoURL?: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updateProfile(user, {
+            displayName: displayName,
+            photoURL: photoURL
+        });
+    }
+
+    /**
+     * Update email of current authenticated user
+     *
+     * @param newEmail {string} The new email of the user
+     */
+    updateEmail(newEmail: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updateEmail(user, newEmail);
+    }
+
+    /**
+     * Update password of current authenticated user
+     *
+     * @param newPassword {string} The new password of the user
+     */
+    updatePassword(newPassword: string): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            throw new Error('No user found');
+        }
+        return updatePassword(user, newPassword);
+    }
+
+    /**
+     * Reauthenticate a user with a given password
+     *
+     * @param password {string} The password of the user to reauthenticate
+     * @returns {UserCredential} The credentials of the user
+     */
+    reauthenticateUser(password: string): Promise<UserCredential> {
+        const user = getAuth().currentUser;
+        if (!user || !user.email) {
+            throw new Error('No user email found');
+        }
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            password
+        );
+        return reauthenticateWithCredential(user, credential);
+    }
+
+    /**
+     * Logout user and clear local storage
      */
     async logout(): Promise<void> {
         localStorage.clear();
         await this.auth.signOut();
     }
 
+    /**
+     * Get current user
+     *
+     * @returns {User} The current user profile data
+     */
     getCurrentUser(): User {
         const auth = getAuth();
         const user = auth.currentUser;
         if (user !== null) {
-            // The user object has basic properties such as display name, email, etc.
             const displayName = user.displayName || '';
             const email = user.email || '';
             const photoURL = user.photoURL || '';
             const emailVerified = user.emailVerified;
-
-            // The user's ID, unique to the Firebase project. Do NOT use
-            // this value to authenticate with your backend server, if
-            // you have one. Use User.getToken() instead.
-            const uid = user.uid;
             return {
-                id: uid,
+                uid: user.uid,
                 email: email,
                 photoURL: photoURL,
                 emailVerified: emailVerified,
-                displayName: displayName,
+                displayName: displayName
             };
         }
         throw new Error();
     }
-    async emailIsAlreadyRegistred(email: string): Promise<number>{ 
+    async emailIsAlreadyRegistred(email: string): Promise<number>{
         const res = await firebase.auth().fetchSignInMethodsForEmail(email)
         .then((signInMethods) => {
             // This returns the same array as fetchProvidersForEmail but for email
@@ -183,7 +264,7 @@ export class AuthService {
                 return -1
               }
             }
-            
+
           })
           .catch((error) => {
             // Some error occurred, you can inspect the code: error.code

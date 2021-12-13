@@ -13,8 +13,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
         AuthHandlerComponent,
         CommonModule,
         AuthHandlerRoutingModule,
-        PasswordResetFormModule,
+        PasswordResetFormModule
     ],
-    providers: [AuthService, AngularFireAuth],
+    providers: [AuthService, AngularFireAuth]
 })
 export class AuthHandlerModule {}

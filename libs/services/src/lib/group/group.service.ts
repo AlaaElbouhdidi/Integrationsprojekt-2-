@@ -8,7 +8,7 @@ import {
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class GroupService {
     groupCollection: AngularFirestoreCollection<Group>;
@@ -37,7 +37,7 @@ export class GroupService {
             .set(m);
         return ref.id;
         });
-        
+
         return ref;
     }
     async addMemberToGroup(gid: string, m: Member): Promise<void> {

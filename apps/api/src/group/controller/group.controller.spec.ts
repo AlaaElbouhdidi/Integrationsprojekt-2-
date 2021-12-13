@@ -12,7 +12,7 @@ describe('GroupController', () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule],
             controllers: [GroupController],
-            providers: [GroupService],
+            providers: [GroupService]
         }).compile();
 
         controller = module.get<GroupController>(GroupController);

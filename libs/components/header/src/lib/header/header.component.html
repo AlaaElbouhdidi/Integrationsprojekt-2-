@@ -5,41 +5,13 @@
             <a routerLink="/"> <span>M</span>ate <span>T</span>eam </a>
         </h2>
     </div>
-    <div class="btn-group" ngbDropdown>
-        <button ngbDropdownToggle id="docs" class="btn btn-light">
-            Documentation
-        </button>
-        <div ngbDropdownMenu="docs">
-            <a
-                ngbDropdownItem
-                [href]="apiUrl + '/docs/mate-team/'"
-                target="_blank"
-                mate-team-external-url
-                >Mate Team Documentation</a
-            >
-            <a
-                ngbDropdownItem
-                [href]="apiUrl + '/docs/api/'"
-                target="_blank"
-                mate-team-external-url
-                >Mate Team API Documentation</a
-            >
-            <a
-                ngbDropdownItem
-                [href]="apiUrl + '/docs/swagger/'"
-                target="_blank"
-                mate-team-external-url
-                >Mate Team Swagger API</a
-            >
-        </div>
-    </div>
     <nav *ngIf="!authenticated; else authenticatedNav">
         <a routerLink="/login">Login</a>
         <a routerLink="/register">Register</a>
     </nav>
     <ng-template #authenticatedNav>
         <nav>
-            <fa-icon icon="user-circle"></fa-icon>
+            <fa-icon icon="user-circle" routerLink="/profile"></fa-icon>
             <a (click)="logout()">Logout</a>
         </nav>
     </ng-template>

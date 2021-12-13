@@ -1,6 +1,6 @@
 import {
     ExpressAdapter,
-    NestExpressApplication,
+    NestExpressApplication
 } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app/app.module';
@@ -9,10 +9,7 @@ import { INestApplication } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { environment } from '@env';
 import { join } from 'path';
-import { ServiceAccount } from 'firebase-admin';
 import * as express from 'express';
-import * as firebaseServiceAccount from '../serviceAccount.json';
-import * as admin from 'firebase-admin';
 import * as packagejson from '../package.json';
 
 /**
@@ -25,28 +22,17 @@ export const expressInstance: express.Express = express();
  */
 
 export async function getApp(): Promise<INestApplication> {
-    const { project_id, client_email, private_key } = firebaseServiceAccount;
-    const serviceAccount: ServiceAccount = {
-        projectId: project_id,
-        clientEmail: client_email,
-        privateKey: private_key,
-    };
-    if (!admin.apps.length)
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
     const server = new ExpressAdapter(expressInstance);
     const app = await NestFactory.create<NestExpressApplication>(
         AppModule,
         server
     );
-    app.setGlobalPrefix('api');
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     app.useStaticAssets(join(__dirname, 'docs', 'mate-team'), {
-        prefix: '/docs/mate-team',
+        prefix: '/docs/mate-team'
     });
     app.useStaticAssets(join(__dirname, 'docs', 'api'), {
-        prefix: '/docs/api/',
+        prefix: '/docs/api/'
     });
     const config = new DocumentBuilder()
         .setTitle('Mate Team API')

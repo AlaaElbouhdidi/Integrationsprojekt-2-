@@ -3,6 +3,14 @@
 
 $theme: 'cosmo' !default;
 
+// Our Color system
+$main: #145da0; // background color
+$blue1: #0c3761; // background color for large screen items
+$light: #b1d4e0; // background color form upcoming event items for small screens
+$accent: #2e8bc0; // background color for buttons for small screens
+$dark: #0c2d48;
+$breakPoint: 801px;
+
 //
 // Color system
 //
@@ -13,6 +21,9 @@ $main: #145da0;
 $accent: #2e8bc0;
 $light: #b1d4e0;
 $white: #fff;
+$error: #b82121;
+$success: #1ba11b;
+$warn: #f6c117;
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;

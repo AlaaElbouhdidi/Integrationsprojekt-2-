@@ -4,13 +4,13 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 
 @Component({
     selector: 'mate-team-password-reset-form',
     templateUrl: './password-reset-form.component.html',
-    styleUrls: ['./password-reset-form.component.scss'],
+    styleUrls: ['./password-reset-form.component.scss']
 })
 export class PasswordResetFormComponent {
     /**
@@ -26,7 +26,7 @@ export class PasswordResetFormComponent {
      */
     showConfirmPassword = false;
     /**
-     * Event to emit to parent component on form submit
+     * Form submit event
      */
     @Output() formSubmitEvent = new EventEmitter();
 
@@ -38,9 +38,9 @@ export class PasswordResetFormComponent {
         this.passwordResetForm = this.fb.group({
             newPassword: new FormControl('', [
                 Validators.minLength(6),
-                Validators.required,
+                Validators.required
             ]),
-            confirmPassword: new FormControl('', [Validators.required]),
+            confirmPassword: new FormControl('', [Validators.required])
         });
     }
 
@@ -59,7 +59,7 @@ export class PasswordResetFormComponent {
     }
 
     /**
-     * Emits the form submit event to parent component with new password value and resets form
+     * Emits event to parent component with new password value and resets form
      */
     resetPassword(): void {
         this.formSubmitEvent.emit(this.newPassword.value);
@@ -67,7 +67,7 @@ export class PasswordResetFormComponent {
     }
 
     /**
-     * Compares the new password and confirm password and sets corresponding error
+     * Compares new password and confirm password values and sets corresponding errors
      */
     comparePasswords(): void {
         if (this.newPassword.value !== this.confirmPassword.value) {

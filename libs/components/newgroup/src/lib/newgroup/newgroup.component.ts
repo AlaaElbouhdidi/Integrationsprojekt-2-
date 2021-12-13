@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'mate-team-newgroup',
     templateUrl: './newgroup.component.html',
-    styleUrls: ['./newgroup.component.scss'],
+    styleUrls: ['./newgroup.component.scss']
 })
 export class NewgroupComponent implements OnDestroy {
     success = false;

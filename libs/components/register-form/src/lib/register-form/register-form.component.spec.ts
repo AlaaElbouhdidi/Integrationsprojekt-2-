@@ -12,20 +12,20 @@ describe('RegisterFormComponent', () => {
     let fixture: ComponentFixture<RegisterFormComponent>;
 
     const authServiceMock = {
-        register: jest.fn(),
+        register: jest.fn()
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 FontAwesomeModule,
                 RegisterFormModule,
-                RouterTestingModule.withRoutes([]),
-            ],
+                RouterTestingModule.withRoutes([])
+            ]
         }).compileComponents();
     });
 

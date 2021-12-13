@@ -27,7 +27,7 @@ junit.xml
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
+tools/scripts/run-many.js.map
 # misc
 /.angular/cache
 /.sass-cache
@@ -48,3 +48,4 @@ apps/api/src/app/firebaseServiceAccount.json
 firestore-debug.log
 **-debug.log
 **/dist
+firebase-export**

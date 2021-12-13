@@ -8,6 +8,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const socketConfig: SocketIoConfig = {
@@ -16,13 +18,11 @@ export const socketConfig: SocketIoConfig = {
         transportOptions: {
             polling: {
                 extraHeaders: {
-                    Authorization: localStorage
-                        .getItem('idToken')
-                        ?.replace('"', ''),
-                },
-            },
-        },
-    },
+                    Authorization: getIdToken()
+                }
+            }
+        }
+    }
 };
 
 @NgModule({
@@ -32,14 +32,26 @@ export const socketConfig: SocketIoConfig = {
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
-            registrationStrategy: 'registerWhenStable:30000',
+            registrationStrategy: 'registerWhenStable:30000'
         }),
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
+        HttpClientModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
         BrowserAnimationsModule,
     ],
     bootstrap: [AppComponent],
-    exports: [ExternalUrlDirective],
+    exports: [ExternalUrlDirective]
 })
 export class AppModule {}
+
+export function getIdToken(): string {
+    return localStorage.getItem('idToken')?.replace('"', '') || 'undefined';
+}

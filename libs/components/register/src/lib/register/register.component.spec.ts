@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 @Component({
     selector: 'mate-team-register-form',
-    template: '<p>Mock Register Form Component</p>',
+    template: '<p>Mock Register Form Component</p>'
 })
 class MockRegisterFormComponent {}
 
@@ -14,7 +14,7 @@ describe('RegisterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [RegisterComponent, MockRegisterFormComponent],
+            declarations: [RegisterComponent, MockRegisterFormComponent]
         }).compileComponents();
     });
 

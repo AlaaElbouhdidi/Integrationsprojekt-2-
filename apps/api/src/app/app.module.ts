@@ -12,6 +12,7 @@ import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
 import { AppGateway } from './gateway/app.gateway';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { EventService } from '../event/service/event.service';
 /**
  * The AppModule
  * */
@@ -24,24 +25,25 @@ import { ServeStaticModule } from '@nestjs/serve-static';
         TeamModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            cache: true,
+            cache: true
         }),
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '..', 'mate-team'),
-            exclude: ['/api*','/docs*'],
+            exclude: ['/api*', '/docs*'],
             serveStaticOptions: {
                 redirect: false
             }
-        }),
+        })
     ],
     controllers: [AppController],
     providers: [
         AppService,
+        EventService,
         AppGateway,
         {
             provide: APP_GUARD,
-            useClass: FirebaseAuthGuard,
-        },
-    ],
+            useClass: FirebaseAuthGuard
+        }
+    ]
 })
 export class AppModule {}

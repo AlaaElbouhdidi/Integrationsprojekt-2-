@@ -6,7 +6,7 @@ describe('TeamGateway', () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [TeamGateway],
+            providers: [TeamGateway]
         }).compile();
 
         gateway = module.get<TeamGateway>(TeamGateway);

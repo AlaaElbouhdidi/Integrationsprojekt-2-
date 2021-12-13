@@ -1,1585 +1,1975 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "projects": {
-    "alert": {
-      "projectType": "library",
-      "root": "libs/components/alert",
-      "sourceRoot": "libs/alert/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/alert/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/alert/src/**/*.ts",
-              "libs/components/alert/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/alert/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/alert",
-            "config": {
-              "configFolder": "libs/components/alert/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "alert-e2e": {
-      "root": "apps/e2e/alert-e2e",
-      "sourceRoot": "apps/e2e/alert-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/alert-e2e/cypress.json",
-            "devServerTarget": "alert:storybook",
-            "tsConfig": "apps/e2e/alert-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "alert:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/alert-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "architect": {
-        "compodoc": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx compodoc -p apps/api/tsconfig.compodoc.json -d dist/apps/api/docs/api/"
-              }
-            ]
-          }
-        },
-        "build-functions": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/api/functions",
-            "main": "apps/api/src/functions/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/package.json"
-            ]
-          }
-        },
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/src/package.json",
-              "apps/api/src/serviceAccount.json"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": false,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "libs/env/src/lib/environment.ts",
-                  "with": "libs/env/src/lib/environment.prod.ts"
-                }
-              ]
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-functions": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "firebase emulators:start --only functions"
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "configurations": {
-            "production": {
-              "buildTarget": "api:build:production"
-            },
-            "development": {
-              "buildTarget": "api:build:development"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/api/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "deploy": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "firebase deploy --only functions"
-          }
-        }
-      }
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/api-interfaces/**/*.ts"
-            ]
-          }
-        }
-      }
-    },
-    "auth-handler": {
-      "projectType": "library",
-      "root": "libs/components/auth-handler",
-      "sourceRoot": "libs/components/auth-handler/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/auth-handler/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/auth-handler/src/**/*.ts",
-              "libs/components/auth-handler/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/auth-handler/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/auth-handler",
-            "config": {
-              "configFolder": "libs/components/auth-handler/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "auth-handler-e2e": {
-      "root": "apps/e2e/auth-handler-e2e",
-      "sourceRoot": "apps/e2e/auth-handler-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/auth-handler-e2e/cypress.json",
-            "devServerTarget": "auth-handler:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "auth-handler:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/auth-handler-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "core": {
-      "projectType": "library",
-      "root": "libs/core",
-      "sourceRoot": "libs/core/src",
-      "prefix": "integrationsprojekt2",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/core/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/core/src/**/*.ts",
-              "libs/core/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "email-form": {
-      "projectType": "library",
-      "root": "libs/components/email-form",
-      "sourceRoot": "libs/components/email-form/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/email-form/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/email-form/src/**/*.ts",
-              "libs/components/email-form/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/email-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/email-form",
-            "config": {
-              "configFolder": "libs/components/email-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "email-form-e2e": {
-      "root": "apps/e2e/email-form-e2e",
-      "sourceRoot": "apps/e2e/email-form-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/email-form-e2e/cypress.json",
-            "devServerTarget": "email-form:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "email-form:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/email-form-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "env": {
-      "projectType": "library",
-      "root": "libs/env",
-      "sourceRoot": "libs/env/src",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/env/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/env/src/**/*.ts",
-              "libs/env/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "footer": {
-      "projectType": "library",
-      "root": "libs/components/footer",
-      "sourceRoot": "libs/components/footer/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/footer/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/footer/src/**/*.ts",
-              "libs/components/footer/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/footer/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/footer",
-            "config": {
-              "configFolder": "libs/components/footer/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "footer-e2e": {
-      "root": "apps/e2e/footer-e2e",
-      "sourceRoot": "apps/e2e/footer-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/footer-e2e/cypress.json",
-            "devServerTarget": "footer:storybook",
-            "tsConfig": "apps/e2e/footer-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "footer:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/footer-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "header": {
-      "projectType": "library",
-      "root": "libs/components/header",
-      "sourceRoot": "libs/components/header/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/header/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/header/src/**/*.ts",
-              "libs/components/header/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/header/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/header",
-            "config": {
-              "configFolder": "libs/components/header/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "header-e2e": {
-      "root": "apps/e2e/header-e2e",
-      "sourceRoot": "apps/header-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/header-e2e/cypress.json",
-            "devServerTarget": "header:storybook",
-            "tsConfig": "apps/e2e/header-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "header:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/header-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "landingpage": {
-      "projectType": "library",
-      "root": "libs/components/landingpage",
-      "sourceRoot": "libs/components/landingpage/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/landingpage/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/landingpage/src/**/*.ts",
-              "libs/components/landingpage/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/landingpage/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/landingpage",
-            "config": {
-              "configFolder": "libs/components/landingpage/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "landingpage-e2e": {
-      "root": "apps/e2e/landingpage-e2e",
-      "sourceRoot": "apps/e2e/landingpage-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/landingpage-e2e/cypress.json",
-            "devServerTarget": "landingpage:storybook",
-            "tsConfig": "apps/e2e/landingpage-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "landingpage:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/landingpage-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "loader": {
-      "projectType": "library",
-      "root": "libs/components/loader",
-      "sourceRoot": "libs/components/loader/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/loader/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/loader/src/**/*.ts",
-              "libs/components/loader/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/loader/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/loader",
-            "config": {
-              "configFolder": "libs/components/loader/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "loader-e2e": {
-      "root": "apps/e2e/loader-e2e",
-      "sourceRoot": "apps/e2e/loader-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/loader-e2e/cypress.json",
-            "devServerTarget": "loader:storybook",
-            "tsConfig": "apps/e2e/loader-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "loader:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/loader-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "login": {
-      "projectType": "library",
-      "root": "libs/components/login",
-      "sourceRoot": "libs/components/login/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/login/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/login/src/**/*.ts",
-              "libs/components/login/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/login/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/login",
-            "config": {
-              "configFolder": "libs/components/login/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "login-e2e": {
-      "root": "apps/e2e/login-e2e",
-      "sourceRoot": "apps/e2e/login-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/login-e2e/cypress.json",
-            "devServerTarget": "login:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "login:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/login-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "login-form": {
-      "projectType": "library",
-      "root": "libs/components/login-form",
-      "sourceRoot": "libs/components/login-form/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/login-form/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/login-form/src/**/*.ts",
-              "libs/components/login-form/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/login-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/login-form",
-            "config": {
-              "configFolder": "libs/components/login-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "login-form-e2e": {
-      "root": "apps/e2e/login-form-e2e",
-      "sourceRoot": "apps/e2e/login-form-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/login-form-e2e/cypress.json",
-            "devServerTarget": "login-form:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "login-form:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/login-form-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "mate-team": {
-      "projectType": "application",
-      "root": "apps/mate-team",
-      "sourceRoot": "apps/mate-team/src",
-      "prefix": "mate-team",
-      "architect": {
-        "compodoc": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/"
-              }
-            ]
-          }
-        },
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/mate-team",
-            "index": "apps/mate-team/src/index.html",
-            "main": "apps/mate-team/src/main.ts",
-            "polyfills": "apps/mate-team/src/polyfills.ts",
-            "tsConfig": "apps/mate-team/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/mate-team/src/favicon.ico",
-              "apps/mate-team/src/assets",
-              "apps/mate-team/src/manifest.webmanifest"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/mate-team/src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/styles/src/lib"
-              ]
-            },
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "apps/mate-team/ngsw-config.json"
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "1.5mb",
-                  "maximumError": "3mb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "projects": {
+        "alert": {
+            "projectType": "library",
+            "root": "libs/components/alert",
+            "sourceRoot": "libs/alert/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/alert/jest.config.js",
+                        "passWithNoTests": true
+                    }
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/alert/src/**/*.ts",
+                            "libs/components/alert/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/alert/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/alert",
+                        "config": {
+                            "configFolder": "libs/components/alert/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "libs/env/src/lib/environment.ts",
-                  "with": "libs/env/src/lib/environment.prod.ts"
+            }
+        },
+        "alert-e2e": {
+            "root": "apps/e2e/alert-e2e",
+            "sourceRoot": "apps/e2e/alert-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/alert-e2e/cypress.json",
+                        "devServerTarget": "alert:storybook",
+                        "tsConfig": "apps/e2e/alert-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "alert:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/alert-e2e/**/*.{js,ts}"]
+                    }
                 }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
-          },
-          "defaultConfiguration": "production"
         },
-        "firebase": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "npm run serve"
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "mate-team:build:production"
-            },
-            "development": {
-              "browserTarget": "mate-team:build:development"
+        "api": {
+            "root": "apps/api",
+            "sourceRoot": "apps/api/src",
+            "projectType": "application",
+            "architect": {
+                "compodoc": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            {
+                                "command": "npx compodoc -p apps/api/tsconfig.compodoc.json -d dist/apps/api/docs/api/"
+                            }
+                        ]
+                    }
+                },
+                "build-functions": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api/functions",
+                        "main": "apps/api/src/functions/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/package.json"]
+                    }
+                },
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/api",
+                        "main": "apps/api/src/main.ts",
+                        "tsConfig": "apps/api/tsconfig.app.json",
+                        "assets": ["apps/api/src/package.json"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": false,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "libs/env/src/lib/environment.ts",
+                                    "with": "libs/env/src/lib/environment.prod.ts"
+                                }
+                            ]
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "api:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "api:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/api/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/api/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "firebase deploy --only functions"
+                    }
+                }
             }
-          },
-          "defaultConfiguration": "production"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "mate-team:build"
-          }
+        "api-interfaces": {
+            "root": "libs/api-interfaces",
+            "sourceRoot": "libs/api-interfaces/src",
+            "projectType": "library",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+                    }
+                }
+            }
         },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/mate-team/src/**/*.ts",
-              "apps/mate-team/src/**/*.html"
-            ]
-          }
+        "auth-handler": {
+            "projectType": "library",
+            "root": "libs/components/auth-handler",
+            "sourceRoot": "libs/components/auth-handler/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/auth-handler/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/auth-handler/src/**/*.ts",
+                            "libs/components/auth-handler/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/auth-handler",
+                        "config": {
+                            "configFolder": "libs/components/auth-handler/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/mate-team/jest.config.js",
-            "passWithNoTests": true
-          }
+        "auth-handler-e2e": {
+            "root": "apps/e2e/auth-handler-e2e",
+            "sourceRoot": "apps/e2e/auth-handler-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/auth-handler-e2e/cypress.json",
+                        "devServerTarget": "auth-handler:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "auth-handler:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/auth-handler-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
         },
-        "deploy": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "firebase deploy --only hosting"
-          }
+        "change-email-form": {
+            "projectType": "library",
+            "root": "libs/components/change-email-form",
+            "sourceRoot": "libs/components/change-email-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-email-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-email-form/src/**/*.ts",
+                            "libs/components/change-email-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/change-email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/change-email-form",
+                        "config": {
+                            "configFolder": "libs/components/change-email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "change-email-form-e2e": {
+            "root": "apps/e2e/change-email-form-e2e",
+            "sourceRoot": "apps/e2e/change-email-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/change-email-form-e2e/cypress.json",
+                        "devServerTarget": "change-email-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "change-email-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/change-email-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "change-password-form": {
+            "projectType": "library",
+            "root": "libs/components/change-password-form",
+            "sourceRoot": "libs/components/change-password-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-password-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-password-form/src/**/*.ts",
+                            "libs/components/change-password-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/change-password-form",
+                        "config": {
+                            "configFolder": "libs/components/change-password-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "change-password-form-e2e": {
+            "root": "apps/e2e/change-password-form-e2e",
+            "sourceRoot": "apps/e2e/change-password-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/change-password-form-e2e/cypress.json",
+                        "devServerTarget": "change-password-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "change-password-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/change-password-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "change-profile-form": {
+            "projectType": "library",
+            "root": "libs/components/change-profile-form",
+            "sourceRoot": "libs/components/change-profile-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/change-profile-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/change-profile-form/src/**/*.ts",
+                            "libs/components/change-profile-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "core": {
+            "projectType": "library",
+            "root": "libs/core",
+            "sourceRoot": "libs/core/src",
+            "prefix": "integrationsprojekt2",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/core/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/core/src/**/*.ts",
+                            "libs/core/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "create-event": {
+            "projectType": "library",
+            "root": "libs/components/create-event",
+            "sourceRoot": "libs/components/create-event/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/create-event/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/create-event/src/**/*.ts",
+                            "libs/components/create-event/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/create-event/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/create-event",
+                        "config": {
+                            "configFolder": "libs/components/create-event/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "create-event-e2e": {
+            "root": "apps/e2e/create-event-e2e",
+            "sourceRoot": "apps/e2e/create-event-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/create-event-e2e/cypress.json",
+                        "devServerTarget": "create-event:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "create-event:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/create-event-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "email-form": {
+            "projectType": "library",
+            "root": "libs/components/email-form",
+            "sourceRoot": "libs/components/email-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/email-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/email-form/src/**/*.ts",
+                            "libs/components/email-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/email-form",
+                        "config": {
+                            "configFolder": "libs/components/email-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "email-form-e2e": {
+            "root": "apps/e2e/email-form-e2e",
+            "sourceRoot": "apps/e2e/email-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/email-form-e2e/cypress.json",
+                        "devServerTarget": "email-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "email-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/email-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "env": {
+            "projectType": "library",
+            "root": "libs/env",
+            "sourceRoot": "libs/env/src",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/env/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/env/src/**/*.ts",
+                            "libs/env/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "events": {
+            "projectType": "library",
+            "root": "libs/components/events",
+            "sourceRoot": "libs/components/events/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/events/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/events/src/**/*.ts",
+                            "libs/components/events/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "footer": {
+            "projectType": "library",
+            "root": "libs/components/footer",
+            "sourceRoot": "libs/components/footer/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/footer/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/footer/src/**/*.ts",
+                            "libs/components/footer/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/footer/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/footer",
+                        "config": {
+                            "configFolder": "libs/components/footer/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "footer-e2e": {
+            "root": "apps/e2e/footer-e2e",
+            "sourceRoot": "apps/e2e/footer-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/footer-e2e/cypress.json",
+                        "devServerTarget": "footer:storybook",
+                        "tsConfig": "apps/e2e/footer-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "footer:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/footer-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "groups": {
+            "projectType": "library",
+            "root": "libs/components/groups",
+            "sourceRoot": "libs/components/groups/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/groups/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/groups/src/**/*.ts",
+                            "libs/components/groups/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "header": {
+            "projectType": "library",
+            "root": "libs/components/header",
+            "sourceRoot": "libs/components/header/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/header/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/header/src/**/*.ts",
+                            "libs/components/header/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/header/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/header",
+                        "config": {
+                            "configFolder": "libs/components/header/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "header-e2e": {
+            "root": "apps/e2e/header-e2e",
+            "sourceRoot": "apps/header-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/header-e2e/cypress.json",
+                        "devServerTarget": "header:storybook",
+                        "tsConfig": "apps/e2e/header-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "header:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/header-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "landingpage": {
+            "projectType": "library",
+            "root": "libs/components/landingpage",
+            "sourceRoot": "libs/components/landingpage/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/landingpage/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/landingpage/src/**/*.ts",
+                            "libs/components/landingpage/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/landingpage/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/landingpage",
+                        "config": {
+                            "configFolder": "libs/components/landingpage/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "landingpage-e2e": {
+            "root": "apps/e2e/landingpage-e2e",
+            "sourceRoot": "apps/e2e/landingpage-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/landingpage-e2e/cypress.json",
+                        "devServerTarget": "landingpage:storybook",
+                        "tsConfig": "apps/e2e/landingpage-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "landingpage:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/landingpage-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "loader": {
+            "projectType": "library",
+            "root": "libs/components/loader",
+            "sourceRoot": "libs/components/loader/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/loader/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/loader/src/**/*.ts",
+                            "libs/components/loader/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/loader/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/loader",
+                        "config": {
+                            "configFolder": "libs/components/loader/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "loader-e2e": {
+            "root": "apps/e2e/loader-e2e",
+            "sourceRoot": "apps/e2e/loader-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/loader-e2e/cypress.json",
+                        "devServerTarget": "loader:storybook",
+                        "tsConfig": "apps/e2e/loader-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "loader:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/loader-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "login": {
+            "projectType": "library",
+            "root": "libs/components/login",
+            "sourceRoot": "libs/components/login/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/login/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/login/src/**/*.ts",
+                            "libs/components/login/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/login/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/login",
+                        "config": {
+                            "configFolder": "libs/components/login/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "login-e2e": {
+            "root": "apps/e2e/login-e2e",
+            "sourceRoot": "apps/e2e/login-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/login-e2e/cypress.json",
+                        "devServerTarget": "login:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "login:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/e2e/login-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "login-form": {
+            "projectType": "library",
+            "root": "libs/components/login-form",
+            "sourceRoot": "libs/components/login-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/login-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/login-form/src/**/*.ts",
+                            "libs/components/login-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/login-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/login-form",
+                        "config": {
+                            "configFolder": "libs/components/login-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "login-form-e2e": {
+            "root": "apps/e2e/login-form-e2e",
+            "sourceRoot": "apps/e2e/login-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/login-form-e2e/cypress.json",
+                        "devServerTarget": "login-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "login-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/login-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "mate-team": {
+            "projectType": "application",
+            "root": "apps/mate-team",
+            "sourceRoot": "apps/mate-team/src",
+            "prefix": "mate-team",
+            "architect": {
+                "compodoc": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "commands": [
+                            {
+                                "command": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/"
+                            }
+                        ]
+                    }
+                },
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/mate-team",
+                        "index": "apps/mate-team/src/index.html",
+                        "main": "apps/mate-team/src/main.ts",
+                        "polyfills": "apps/mate-team/src/polyfills.ts",
+                        "tsConfig": "apps/mate-team/tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            "apps/mate-team/src/favicon.ico",
+                            "apps/mate-team/src/assets",
+                            "apps/mate-team/src/manifest.webmanifest"
+                        ],
+                        "styles": ["apps/mate-team/src/styles.scss"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["libs/styles/src/lib"]
+                        },
+                        "scripts": [],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "apps/mate-team/ngsw-config.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "1.5mb",
+                                    "maximumError": "3mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "8kb",
+                                    "maximumError": "16kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "libs/env/src/lib/environment.ts",
+                                    "with": "libs/env/src/lib/environment.prod.ts"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "firebase": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "npm run serve"
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mate-team:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "mate-team:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "mate-team:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/mate-team/src/**/*.ts",
+                            "apps/mate-team/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/mate-team/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "deploy": {
+                    "builder": "@nrwl/workspace:run-commands",
+                    "options": {
+                        "command": "firebase deploy --only hosting"
+                    }
+                }
+            }
+        },
+        "mate-team-e2e": {
+            "root": "apps/e2e/mate-team-e2e",
+            "sourceRoot": "apps/e2e/mate-team-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/mate-team-e2e/cypress.json",
+                        "devServerTarget": "mate-team:serve:development",
+                        "tsConfig": "apps/e2e/mate-team-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "mate-team:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/mate-team-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "newgroup": {
+            "projectType": "library",
+            "root": "libs/components/newgroup",
+            "sourceRoot": "libs/components/newgroup/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup/src/**/*.ts",
+                            "libs/components/newgroup/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup",
+                        "config": {
+                            "configFolder": "libs/components/newgroup/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "newgroup-form": {
+            "projectType": "library",
+            "root": "libs/components/newgroup-form",
+            "sourceRoot": "libs/components/newgroup-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup-form/src/**/*.ts",
+                            "libs/components/newgroup-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup-form",
+                        "config": {
+                            "configFolder": "libs/components/newgroup-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "newgroup-success": {
+            "projectType": "library",
+            "root": "libs/components/newgroup-success",
+            "sourceRoot": "libs/components/newgroup-success/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/newgroup-success/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/newgroup-success/src/**/*.ts",
+                            "libs/components/newgroup-success/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/newgroup-success",
+                        "config": {
+                            "configFolder": "libs/components/newgroup-success/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "password-reset-form": {
+            "projectType": "library",
+            "root": "libs/components/password-reset-form",
+            "sourceRoot": "libs/components/password-reset-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/password-reset-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/password-reset-form/src/**/*.ts",
+                            "libs/components/password-reset-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/password-reset-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/password-reset-form",
+                        "config": {
+                            "configFolder": "libs/components/password-reset-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "password-reset-form-e2e": {
+            "root": "apps/e2e/password-reset-form-e2e",
+            "sourceRoot": "apps/e2e/password-reset-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/password-reset-form-e2e/cypress.json",
+                        "devServerTarget": "password-reset-form:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "password-reset-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/password-reset-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "profile": {
+            "projectType": "library",
+            "root": "libs/components/profile",
+            "sourceRoot": "libs/components/profile/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/profile/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/profile/src/**/*.ts",
+                            "libs/components/profile/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/profile",
+                        "config": {
+                            "configFolder": "libs/components/profile/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "profile-e2e": {
+            "root": "apps/e2e/profile-e2e",
+            "sourceRoot": "apps/e2e/profile-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/profile-e2e/cypress.json",
+                        "devServerTarget": "profile:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "profile:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/profile-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "register": {
+            "projectType": "library",
+            "root": "libs/components/register",
+            "sourceRoot": "libs/components/register/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/register/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/register/src/**/*.ts",
+                            "libs/components/register/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/register/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/register",
+                        "config": {
+                            "configFolder": "libs/components/register/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "register-e2e": {
+            "root": "apps/e2e/register-e2e",
+            "sourceRoot": "apps/e2e/register-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/register-e2e/cypress.json",
+                        "devServerTarget": "register:storybook",
+                        "tsConfig": "apps/e2e/register-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "register:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/register-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "register-form": {
+            "projectType": "library",
+            "root": "libs/components/register-form",
+            "sourceRoot": "libs/components/register-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/register-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/register-form/src/**/*.ts",
+                            "libs/components/register-form/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/register-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/register-form",
+                        "config": {
+                            "configFolder": "libs/components/register-form/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "register-form-e2e": {
+            "root": "apps/e2e/register-form-e2e",
+            "sourceRoot": "apps/e2e/register-form-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/register-form-e2e/cypress.json",
+                        "devServerTarget": "register-form:storybook",
+                        "tsConfig": "apps/e2e/register-form-e2e/tsconfig.json"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "register-form:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/register-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "services": {
+            "projectType": "library",
+            "root": "libs/services",
+            "sourceRoot": "libs/services/src",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/services/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/services/src/**/*.ts",
+                            "libs/services/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "slideshow": {
+            "projectType": "library",
+            "root": "libs/components/slideshow",
+            "sourceRoot": "libs/components/slideshow/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/slideshow/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/slideshow/src/**/*.ts",
+                            "libs/components/slideshow/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/slideshow",
+                        "config": {
+                            "configFolder": "libs/components/slideshow/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "slideshow-e2e": {
+            "root": "apps/e2e/slideshow-e2e",
+            "sourceRoot": "apps/e2e/slideshow-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/slideshow-e2e/cypress.json",
+                        "devServerTarget": "slideshow:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "slideshow:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/slideshow-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "styles": {
+            "projectType": "library",
+            "root": "libs/styles",
+            "sourceRoot": "libs/styles/src",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/styles/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/styles/src/**/*.ts",
+                            "libs/styles/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "user-icon": {
+            "projectType": "library",
+            "root": "libs/components/user-icon",
+            "sourceRoot": "libs/components/user-icon/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/user-icon/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/user-icon/src/**/*.ts",
+                            "libs/components/user-icon/src/**/*.html"
+                        ]
+                    }
+                }
+            }
         }
-      }
-    },
-    "mate-team-e2e": {
-      "root": "apps/e2e/mate-team-e2e",
-      "sourceRoot": "apps/e2e/mate-team-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/mate-team-e2e/cypress.json",
-            "devServerTarget": "mate-team:serve:development",
-            "tsConfig": "apps/e2e/mate-team-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "mate-team:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/mate-team-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "newgroup": {
-      "projectType": "library",
-      "root": "libs/components/newgroup",
-      "sourceRoot": "libs/components/newgroup/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/newgroup/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/newgroup/src/**/*.ts",
-              "libs/components/newgroup/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/newgroup/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/newgroup",
-            "config": {
-              "configFolder": "libs/components/newgroup/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "newgroup-form": {
-      "projectType": "library",
-      "root": "libs/components/newgroup-form",
-      "sourceRoot": "libs/components/newgroup-form/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/newgroup-form/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/newgroup-form/src/**/*.ts",
-              "libs/components/newgroup-form/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/newgroup-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/newgroup-form",
-            "config": {
-              "configFolder": "libs/components/newgroup-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "newgroup-success": {
-      "projectType": "library",
-      "root": "libs/components/newgroup-success",
-      "sourceRoot": "libs/components/newgroup-success/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/newgroup-success/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/newgroup-success/src/**/*.ts",
-              "libs/components/newgroup-success/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/newgroup-success/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/newgroup-success",
-            "config": {
-              "configFolder": "libs/components/newgroup-success/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "password-reset-form": {
-      "projectType": "library",
-      "root": "libs/components/password-reset-form",
-      "sourceRoot": "libs/components/password-reset-form/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/password-reset-form/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/password-reset-form/src/**/*.ts",
-              "libs/components/password-reset-form/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/password-reset-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/password-reset-form",
-            "config": {
-              "configFolder": "libs/components/password-reset-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "password-reset-form-e2e": {
-      "root": "apps/e2e/password-reset-form-e2e",
-      "sourceRoot": "apps/e2e/password-reset-form-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/password-reset-form-e2e/cypress.json",
-            "devServerTarget": "password-reset-form:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "password-reset-form:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/password-reset-form-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "register": {
-      "projectType": "library",
-      "root": "libs/components/register",
-      "sourceRoot": "libs/components/register/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/register/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/register/src/**/*.ts",
-              "libs/components/register/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/register/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/register",
-            "config": {
-              "configFolder": "libs/components/register/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "register-e2e": {
-      "root": "apps/e2e/register-e2e",
-      "sourceRoot": "apps/e2e/register-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/register-e2e/cypress.json",
-            "devServerTarget": "register:storybook",
-            "tsConfig": "apps/e2e/register-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "register:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/register-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "register-form": {
-      "projectType": "library",
-      "root": "libs/components/register-form",
-      "sourceRoot": "libs/components/register-form/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/register-form/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/register-form/src/**/*.ts",
-              "libs/components/register-form/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/register-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/register-form",
-            "config": {
-              "configFolder": "libs/components/register-form/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "register-form-e2e": {
-      "root": "apps/e2e/register-form-e2e",
-      "sourceRoot": "apps/e2e/register-form-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/register-form-e2e/cypress.json",
-            "devServerTarget": "register-form:storybook",
-            "tsConfig": "apps/e2e/register-form-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "register-form:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/register-form-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "services": {
-      "projectType": "library",
-      "root": "libs/services",
-      "sourceRoot": "libs/services/src",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/services/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/services/src/**/*.ts",
-              "libs/services/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "slideshow": {
-      "projectType": "library",
-      "root": "libs/components/slideshow",
-      "sourceRoot": "libs/components/slideshow/src",
-      "prefix": "mate-team",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/components/slideshow/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/components/slideshow/src/**/*.ts",
-              "libs/components/slideshow/src/**/*.html"
-            ]
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/components/slideshow/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/slideshow",
-            "config": {
-              "configFolder": "libs/components/slideshow/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "slideshow-e2e": {
-      "root": "apps/e2e/slideshow-e2e",
-      "sourceRoot": "apps/e2e/slideshow-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/e2e/slideshow-e2e/cypress.json",
-            "devServerTarget": "slideshow:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "slideshow:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/e2e/slideshow-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      }
-    },
-    "styles": {
-      "projectType": "library",
-      "root": "libs/styles",
-      "sourceRoot": "libs/styles/src",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/styles/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/styles/src/**/*.ts",
-              "libs/styles/src/**/*.html"
-            ]
-          }
-        }
-      }
     }
-  }
 }

@@ -4,10 +4,10 @@
         "indexes": "firestore.indexes.json"
     },
     "functions": {
-        "source": "dist/apps/api/functions"
+        "source": "dist/apps/api"
     },
     "hosting": {
-        "public": "dist/apps/api",
+        "public": "dist/apps/mate-team",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "headers": [
             {
@@ -32,10 +32,7 @@
         "rewrites": [
             {
                 "source": "**",
-                "run": {
-                    "serviceId": "mate-team",
-                    "region": "europe-west1"
-                }
+                "destinatin": "/index.html"
             }
         ]
     },

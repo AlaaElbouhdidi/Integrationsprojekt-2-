@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'mate-team-newgroup-success',
     templateUrl: './newgroup-success.component.html',
-    styleUrls: ['./newgroup-success.component.scss'],
+    styleUrls: ['./newgroup-success.component.scss']
 })
 export class NewgroupSuccessComponent implements OnDestroy {
     selectable = true;

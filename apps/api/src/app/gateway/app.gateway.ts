@@ -1,18 +1,19 @@
-import { Logger, UnauthorizedException } from '@nestjs/common';
 import {
     OnGatewayConnection,
     OnGatewayDisconnect,
     OnGatewayInit,
     WebSocketGateway,
-    WebSocketServer,
+    WebSocketServer
 } from '@nestjs/websockets';
+import { Logger, UnauthorizedException } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 import { environment } from '@env';
-import * as admin from 'firebase-admin';
 import { FirebaseService } from '../../firebase/service/firebase.service';
+import { EventService } from '../../event/service/event.service';
+import * as admin from 'firebase-admin';
 
 @WebSocketGateway({
-    cors: { origin: [environment.clientUrl] },
+    cors: { origin: [environment.clientUrl] }
 })
 export class AppGateway
     implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
@@ -20,7 +21,10 @@ export class AppGateway
     @WebSocketServer()
     server: Server;
     private logger: Logger = new Logger('AppGateway');
-    constructor(private firebaseService: FirebaseService) {}
+    constructor(
+        private eventService: EventService,
+        private firebaseService: FirebaseService
+    ) {}
 
     afterInit() {
         this.logger.log('Initialized');
@@ -53,4 +57,10 @@ export class AppGateway
             this.disconnect(socket);
         }
     }
+    // @SubscribeMessage('event')
+    // async handleEvents(@ConnectedSocket() socket: Socket) {
+    //     const events = await this.eventService.findAll()
+    //     this.logger.log(`Client ${socket.id} requested events`)
+    //     this.server.emit('event', events)
+    // }
 }
