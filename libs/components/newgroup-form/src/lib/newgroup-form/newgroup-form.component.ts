@@ -43,34 +43,34 @@ export class NewgroupFormComponent implements OnInit {
         return this.newGroupForm.controls.description;
     }
     get member(): Member {
+        const u =  this.authService.getCurrentUser();
         return {
-            uid: this.authService.getCurrentUser().id,
+            uid: u.id,
             isAdmin: true,
+            email: u.email || ''
         };
     }
 
     async newGroup(): Promise<void> {
         try {
+            const g = {
+                name: this.name.value,
+                activity: this.activity.value,
+                description: this.description.value
+            };
             this.loading = true;
-
-            await this.groupService.addNewGroup(
-                {
-                    name: this.name.value,
-                    activity: this.activity.value,
-                    description: this.description.value,
-                    member: [this.member],
-                },
-                this.member
-            );
+            const gid = await this.groupService.addNewGroup(g, this.member);
             this.loading = false;
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Successfully added a group.',
             });
-            this.groupService.toggleSuccess(true);
+            this.groupService.toggleSuccess(gid);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
+            console.error(err);
+            
             this.loading = false;
             this.newGroupForm.reset();
             this.alertService.addAlert({

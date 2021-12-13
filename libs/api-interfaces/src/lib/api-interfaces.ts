@@ -23,8 +23,9 @@ export interface Environment {
 }
 
 export interface Member {
-    uid: string;
-    isAdmin: boolean;
+    uid?: string;
+    isAdmin?: boolean;
+    email?: string
 }
 
 export interface Event {
@@ -35,10 +36,10 @@ export interface Event {
 }
 
 export interface Group {
-    name: string;
-    description: string;
-    activity: Activity;
-    member: Member[]; // Array of uid's
+    name?: string;
+    description?: string;
+    activity?: Activity;
+    member?: Member[]; // Array of uid's
 }
 
 export interface Game {

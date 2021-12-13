@@ -1,5 +1,4 @@
-@import '_variables';
-@import '_mixins';
+
 .container {
     background: $white;
     color: $dark;
@@ -19,5 +18,34 @@
     }
     @include for-tablet-portrait-up {
         width: 25rem;
+    }
+}
+
+/* Form error messages */
+.form-error {
+    margin-top: 0.5rem;
+    text-align: right;
+}
+.form-error-message {
+    color: #910b0b;
+    font-size: .7rem;
+}
+/* Form button */
+.form-btn {
+    margin-top: 3rem;
+    @include flex-center-column;
+    button {
+        width: 100%;
+        padding: 0.75rem 0;
+        background: $dark;
+        font-size: 1rem;
+        color: $white;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        transition: 0.25s;
+        &:hover {
+            background: $darkAccent;
+        }
     }
 }

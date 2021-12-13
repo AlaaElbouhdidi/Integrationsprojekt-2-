@@ -8,6 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const socketConfig: SocketIoConfig = {
     url: environment.clientUrl,
@@ -36,6 +37,7 @@ export const socketConfig: SocketIoConfig = {
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
+        BrowserAnimationsModule,
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective],

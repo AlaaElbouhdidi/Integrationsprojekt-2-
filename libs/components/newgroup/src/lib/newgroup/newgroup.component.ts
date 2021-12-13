@@ -17,7 +17,7 @@ export class NewgroupComponent implements OnDestroy {
     ) {
         this.subscription = this.groupService
             .onToggle()
-            .subscribe((value) => (this.success = value));
+            .subscribe((value) => (this.success = (value != '')));
     }
 
     ngOnDestroy() {
