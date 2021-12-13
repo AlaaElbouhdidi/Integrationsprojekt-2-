@@ -10,7 +10,7 @@ header {
     align-items: center;
     height: 3rem;
     padding: 0 1rem;
-    box-shadow: 0 2px 0.5vw #000000;
+    box-shadow: rgba(0, 0, 0, 0.45) 0 3px 8px;
     z-index: 101;
     @include for-tablet-landscape-up {
         padding: 0 5rem;

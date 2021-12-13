@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { isNil } from 'ramda';
 
 @Directive({
-    selector: 'a[mate-team-external-url]',
+    selector: 'a[mate-team-external-url]'
 })
 export class ExternalUrlDirective {
     constructor(private el: ElementRef, private router: Router) {}
@@ -16,7 +16,7 @@ export class ExternalUrlDirective {
         }
 
         this.router.navigate(['/externalRedirect', { externalUrl: url }], {
-            skipLocationChange: true,
+            skipLocationChange: true
         });
 
         event.preventDefault();

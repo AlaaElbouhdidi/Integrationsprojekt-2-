@@ -40,7 +40,7 @@ nx run <component>:storybook
 @NgModule({
     imports: [CommonModule],
     declarations: [HeaderComponent],
-    exports: [HeaderComponent], // Important to add this line, so it can be rendered in mate-team
+    exports: [HeaderComponent] // Important to add this line, so it can be rendered in mate-team
 })
 export class HeaderModule {}
 ```

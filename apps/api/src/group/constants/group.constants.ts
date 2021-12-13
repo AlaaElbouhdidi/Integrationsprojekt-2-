@@ -6,7 +6,7 @@ export const GroupConstants = {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 400,
+                example: 400
             },
             message: {
                 type: 'array',
@@ -18,45 +18,45 @@ export const GroupConstants = {
                     'activity must be a valid enum value',
                     'activity should not be empty',
                     'member must be an array',
-                    'member should not be empty',
-                ],
+                    'member should not be empty'
+                ]
             },
             error: {
                 type: 'string',
-                example: 'Bad Request',
-            },
-        },
+                example: 'Bad Request'
+            }
+        }
     },
     NOT_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'Could not find group',
+                example: 'Could not find group'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
+                example: 'Not Found'
+            }
+        }
     },
     NONE_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'No groups found',
+                example: 'No groups found'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
-    },
+                example: 'Not Found'
+            }
+        }
+    }
 };

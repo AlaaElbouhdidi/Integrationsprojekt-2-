@@ -23,6 +23,10 @@ const routes: Routes = [
         loadChildren: () => import('@newgroup').then((m) => m.NewgroupModule)
     },
     {
+        path: 'events',
+        loadChildren: () => import('@events').then((m) => m.EventsModule)
+    },
+    {
         path: 'auth/handler',
         loadChildren: () =>
             import('@auth-handler').then((m) => m.AuthHandlerModule)
@@ -36,6 +40,14 @@ const routes: Routes = [
     {
         path: 'profile',
         loadChildren: () => import('@profile').then((m) => m.ProfileModule)
+    },
+    {
+        path: 'group/:id',
+        loadChildren: () => import('@group').then((m) => m.GroupModule)
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
 

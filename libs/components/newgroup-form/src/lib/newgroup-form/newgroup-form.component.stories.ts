@@ -6,16 +6,16 @@ export default {
     component: NewgroupFormComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<NewgroupFormComponent>;
 
 const Template: Story<NewgroupFormComponent> = (
     args: NewgroupFormComponent
 ) => ({
     component: NewgroupFormComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

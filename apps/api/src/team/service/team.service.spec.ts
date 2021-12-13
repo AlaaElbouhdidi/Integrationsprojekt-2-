@@ -10,7 +10,7 @@ describe('TeamService', () => {
         if (!admin.apps.length) admin.initializeApp();
         const module: TestingModule = await Test.createTestingModule({
             imports: [FirebaseModule],
-            providers: [TeamService],
+            providers: [TeamService]
         }).compile();
 
         service = module.get<TeamService>(TeamService);

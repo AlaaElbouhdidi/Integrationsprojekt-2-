@@ -12,7 +12,7 @@ export class CreateEventDto implements Event {
     @IsString()
     @ApiProperty({
         example: 'Weihnachtsmarkt',
-        description: 'The name of the event',
+        description: 'The name of the event'
     })
     name: string;
     /**
@@ -22,7 +22,7 @@ export class CreateEventDto implements Event {
     @IsString()
     @ApiProperty({
         example: 'Weihnachtsmarkt in Gießen am Marktplatz',
-        description: 'The description of the event',
+        description: 'The description of the event'
     })
     description: string;
     /**
@@ -32,7 +32,7 @@ export class CreateEventDto implements Event {
     @IsDateString()
     @ApiProperty({
         example: '2021-11-29T12:00:00.666Z',
-        description: 'The date of the event',
+        description: 'The date of the event'
     })
     date: string;
     /**
@@ -41,7 +41,7 @@ export class CreateEventDto implements Event {
     @IsArray()
     @ApiProperty({
         example: ['TX5RYf6QIcW0WC8urdf8XUyNKMi2'],
-        description: 'The participants of an event',
+        description: 'The participants of an event'
     })
     participants?: string[];
 }

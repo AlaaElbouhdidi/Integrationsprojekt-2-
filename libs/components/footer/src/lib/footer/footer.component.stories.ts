@@ -8,14 +8,14 @@ export default {
     component: FooterComponent,
     decorators: [
         moduleMetadata({
-            imports: [FooterModule, RouterTestingModule],
-        }),
-    ],
+            imports: [FooterModule, RouterTestingModule]
+        })
+    ]
 } as Meta<FooterComponent>;
 
 const Template: Story<FooterComponent> = (args: FooterComponent) => ({
     component: FooterComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

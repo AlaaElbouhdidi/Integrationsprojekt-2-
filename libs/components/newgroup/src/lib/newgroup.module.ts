@@ -12,9 +12,9 @@ import { AlertModule } from '@alert';
         NewgroupRoutingModule,
         NewgroupFormModule,
         NewgroupSuccessModule,
-        AlertModule,
+        AlertModule
     ],
     declarations: [NewgroupComponent],
-    exports: [NewgroupComponent],
+    exports: [NewgroupComponent]
 })
 export class NewgroupModule {}

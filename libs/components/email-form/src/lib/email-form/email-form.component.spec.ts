@@ -13,20 +13,20 @@ describe('EmailFormComponent', () => {
     let fixture: ComponentFixture<EmailFormComponent>;
 
     const authServiceMock = {
-        resetPassword: jest.fn(),
+        resetPassword: jest.fn()
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 EmailFormModule,
                 FontAwesomeModule,
-                RouterTestingModule.withRoutes([]),
-            ],
+                RouterTestingModule.withRoutes([])
+            ]
         }).compileComponents();
     });
 

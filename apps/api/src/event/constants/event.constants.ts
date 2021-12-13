@@ -6,7 +6,7 @@ export const EventConstants = {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 400,
+                example: 400
             },
             message: {
                 type: 'array',
@@ -17,45 +17,45 @@ export const EventConstants = {
                     'description should not be empty',
                     'date must be a valid ISO 8601 date string',
                     'date should not be empty',
-                    'participants must be an array',
-                ],
+                    'participants must be an array'
+                ]
             },
             error: {
                 type: 'string',
-                example: 'Bad Request',
-            },
-        },
+                example: 'Bad Request'
+            }
+        }
     },
     NOT_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'Could not find event',
+                example: 'Could not find event'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
+                example: 'Not Found'
+            }
+        }
     },
     NONE_FOUND: {
         properties: {
             statusCode: {
                 type: 'number',
-                example: 404,
+                example: 404
             },
             message: {
                 type: 'string',
-                example: 'No events found',
+                example: 'No events found'
             },
             error: {
                 type: 'string',
-                example: 'Not Found',
-            },
-        },
-    },
+                example: 'Not Found'
+            }
+        }
+    }
 };

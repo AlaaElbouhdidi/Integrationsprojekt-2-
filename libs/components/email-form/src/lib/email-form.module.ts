@@ -4,7 +4,7 @@ import { EmailFormComponent } from './email-form/email-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
     FontAwesomeModule,
-    FaIconLibrary,
+    FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
 import { LoaderModule } from '@loader';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -14,10 +14,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
         CommonModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        LoaderModule,
+        LoaderModule
     ],
     declarations: [EmailFormComponent],
-    exports: [EmailFormComponent],
+    exports: [EmailFormComponent]
 })
 export class EmailFormModule {
     constructor(library: FaIconLibrary) {

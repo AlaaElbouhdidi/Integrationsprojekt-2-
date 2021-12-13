@@ -6,16 +6,16 @@ export default {
     component: NewgroupSuccessComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<NewgroupSuccessComponent>;
 
 const Template: Story<NewgroupSuccessComponent> = (
     args: NewgroupSuccessComponent
 ) => ({
     component: NewgroupSuccessComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

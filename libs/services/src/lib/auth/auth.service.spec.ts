@@ -13,11 +13,12 @@ describe('AuthServiceService', () => {
             email: 'email',
             displayName: '',
             sendEmailVerification: jest.fn(),
-        },
+            getIdToken: jest.fn()
+        }
     };
 
     const angularFireAuthMock = {
-        authState: of(mockUser),
+        authState: of({ getIdToken: jest.fn() }),
         createUserWithEmailAndPassword: jest.fn(),
         sendEmailVerification: jest.fn(),
         signInWithEmailAndPassword: jest.fn(),
@@ -26,15 +27,15 @@ describe('AuthServiceService', () => {
         verifyPasswordResetCode: jest.fn(),
         applyActionCode: jest.fn(),
         confirmPasswordReset: jest.fn(),
-        signOut: jest.fn(),
+        signOut: jest.fn()
     };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 AngularFireAuth,
-                { provide: AngularFireAuth, useValue: angularFireAuthMock },
-            ],
+                { provide: AngularFireAuth, useValue: angularFireAuthMock }
+            ]
         });
         service = TestBed.inject(AuthService);
     });
@@ -73,14 +74,14 @@ describe('AuthServiceService', () => {
         const spy = jest.spyOn(
             angularFireAuthMock,
             'signInWithEmailAndPassword'
-        );
+        ).mockReturnValue(mockUser);
         service.login(email, password);
         expect(spy).toHaveBeenCalledWith(email, password);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signInWithPopup in loginWithGoogle method', () => {
-        const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup');
+        const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup').mockReturnValue(mockUser);
         service.loginWithGoogle();
         expect(spy).toHaveBeenCalledTimes(1);
     });

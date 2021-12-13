@@ -5,14 +5,8 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
-    selector: 'mate-team-login-form',
-    template: '<p>Mock Login Form Component</p>',
-})
-class MockLoginFormComponent {}
-
-@Component({
     selector: 'mate-team-email-form',
-    template: '<p>Mock Email Form Component</p>',
+    template: '<p>Mock Email Form Component</p>'
 })
 class MockEmailFormComponent {}
 
@@ -22,11 +16,7 @@ describe('LoginComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                LoginComponent,
-                MockLoginFormComponent,
-                MockEmailFormComponent,
-            ],
+            declarations: [LoginComponent, MockEmailFormComponent]
         }).compileComponents();
     });
 

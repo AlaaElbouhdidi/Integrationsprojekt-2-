@@ -1,0 +1,21 @@
+@import '../../style';
+.mobile {
+    display: none;
+}
+.screen {
+    display: none;
+}
+
+@media (max-width: $breakPoint) {
+    .mobile {
+        display: block;
+    }
+}
+@media (min-width: $breakPoint) {
+    .screen {
+        display: block;
+    }
+}
+main {
+    background: $dark;
+}

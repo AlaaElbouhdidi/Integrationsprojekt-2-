@@ -13,22 +13,22 @@ describe('HeaderComponent', () => {
     const mockUser = {
         user: {
             email: 'email',
-            displayName: '',
-        },
+            displayName: ''
+        }
     };
     const authServiceMock = {
         authState$: of(mockUser),
-        logout: jest.fn(),
+        logout: jest.fn()
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [RouterTestingModule.withRoutes([]), HeaderModule],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
     });
 

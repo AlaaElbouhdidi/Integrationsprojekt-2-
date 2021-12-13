@@ -4,7 +4,7 @@ import { AlertService } from '@services';
 @Component({
     selector: 'mate-team-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss'],
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
     /**

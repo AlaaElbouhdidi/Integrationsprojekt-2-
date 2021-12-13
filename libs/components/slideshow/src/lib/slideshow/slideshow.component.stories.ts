@@ -6,14 +6,14 @@ export default {
     component: SlideshowComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<SlideshowComponent>;
 
 const Template: Story<SlideshowComponent> = (args: SlideshowComponent) => ({
     component: SlideshowComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

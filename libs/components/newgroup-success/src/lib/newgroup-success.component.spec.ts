@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewgroupSuccessComponent } from './newgroup-success.component';
 
@@ -8,7 +8,7 @@ describe('NewgroupSuccessComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NewgroupSuccessComponent],
+            declarations: [NewgroupSuccessComponent]
         }).compileComponents();
     });
 
