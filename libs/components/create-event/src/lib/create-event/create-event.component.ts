@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
-import {Event} from "@api-interfaces";
+import {Component} from '@angular/core';
+import {EventService} from "../../../../../services/src/lib/event/event.service";
 
 @Component({
     selector: 'mate-team-create-event',
@@ -11,16 +10,35 @@ export class CreateEventComponent {
     public event = {
         name: '',
         description: '',
-        date: ''
+        date: '',
     };
-    eventCollection: AngularFirestoreCollection<Event>;
 
-    constructor(public afs: AngularFirestore) {
-        this.eventCollection = this.afs.collection('events');
+    constructor(private eventService: EventService) {
     }
 
-    //Function to add a new Event to Firestore
-    async createEvent() {
-        await this.eventCollection.add(this.event);
+    createEvent() {
+        this.eventService.createEvent(this.event);
     }
+
+
+
+    /**
+     * Get all groups of currently logged in user.
+
+    async findAllUserGroups(): Promise<Group[]> {
+        console.log('Get all groups');
+        const snapshot = await this.afs
+            .collection<User>('users')
+            .doc(this.userService.user?.uid)
+            .collection<Group>('group')
+            .get()
+            .toPromise()
+        return snapshot.docs.map(doc => {
+            const group = doc.data();
+            console.log('Group: ' + group);
+            group.id = doc.id;
+            return group;
+        });
+    }
+     */
 }
