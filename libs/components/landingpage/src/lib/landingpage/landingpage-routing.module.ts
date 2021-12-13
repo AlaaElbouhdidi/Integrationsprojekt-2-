@@ -1,8 +1,20 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LandingpageComponent } from './landingpage.component';
+import {
+    canActivate,
+    redirectLoggedInTo
+} from '@angular/fire/compat/auth-guard';
 
-const routes: Routes = [{ path: '', component: LandingpageComponent }];
+const redirectUnauthenticatedToHome = () => redirectLoggedInTo(['/events']);
+
+const route = {
+    path: '',
+    component: LandingpageComponent,
+    ...canActivate(redirectUnauthenticatedToHome)
+};
+
+const routes = [route];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

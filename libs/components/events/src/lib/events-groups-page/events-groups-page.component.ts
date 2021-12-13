@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService, GroupService } from '@services';
 import { Event, Group } from '@api-interfaces';
-import { zip } from 'rxjs';
-// import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'mate-team-events-groups-page',
@@ -10,11 +9,11 @@ import { zip } from 'rxjs';
     styleUrls: ['./events-groups-page.component.scss']
 })
 export class EventsGroupsPageComponent implements OnInit {
-    loading = true;
+    loading = false;
     /**
      * Events that are displayed
      */
-    events: Event[] | undefined;
+    events: Observable<Event[]> = this.eventService.getEvents();
     /**
      * Groups that are displayed
      */
@@ -28,15 +27,21 @@ export class EventsGroupsPageComponent implements OnInit {
     constructor(
         private eventService: EventService,
         private groupService: GroupService
-    ) {}
+    ) {
+
+    }
 
     /**
      * Sets the events and groups.
      */
     ngOnInit(): void {
-        zip(this.eventService.getEvents()).subscribe(([events]) => {
+        this.events.subscribe();
+        /*
+        this.eventService.getEvents().subscribe((events) => {
             this.events = events;
             this.loading = false;
         });
+
+         */
     }
 }

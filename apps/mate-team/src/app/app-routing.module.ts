@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('@profile').then((m) => m.ProfileModule)
     },
     {
+        path: 'create-event',
+        loadChildren: () => import('@create-event').then((m) => m.CreateEventModule)
+    },
+    {
         path: 'group/:id',
         loadChildren: () => import('@group').then((m) => m.GroupModule)
     },
