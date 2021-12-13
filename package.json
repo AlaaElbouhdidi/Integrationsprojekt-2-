@@ -23,7 +23,7 @@
         "preserve": "npm run all:build:dev",
         "dev": "concurrently \"npm run serve:dev\" \"npm run serve\"",
         "prod": "concurrently \"npm run serve:prod\" \"npm run serve\"",
-        "serve": "firebase emulators:start --import=.firebase --export-on-exit",
+        "serve": "firebase serve",
         "serve:api": "firebase emulators:start --only functions --import=.firebase --export-on-exit",
         "serve:api:dev": "concurrently \"npm run api:build:dev\" \"npm run serve:api\"",
         "serve:api:prod": "concurrently \"npm run api:build:prod\" \"npm run serve:api\"",
