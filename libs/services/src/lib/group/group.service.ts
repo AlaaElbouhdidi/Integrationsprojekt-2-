@@ -5,7 +5,7 @@ import {
     AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

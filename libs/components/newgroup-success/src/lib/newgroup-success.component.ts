@@ -2,7 +2,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnDestroy } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Member } from '@api-interfaces';
-import { AuthService, GroupService } from '@services';
+import { AuthService, GroupService, AlertService } from '@services';
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth';
 import { Subscription } from 'rxjs';
 
@@ -12,17 +12,21 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./newgroup-success.component.scss']
 })
 export class NewgroupSuccessComponent implements OnDestroy {
+
     selectable = true;
     removable = true;
     addOnBlur = true;
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
     isUnvalid = false;
     emails: string[] = [];
+
     subscription: Subscription;
     private gid = '';
+
     constructor(
         private groupService: GroupService,
-        private authService: AuthService
+        private authService: AuthService,
+        private alertService: AlertService
     ) {
         this.subscription = this.groupService
             .onToggle()
@@ -80,12 +84,17 @@ export class NewgroupSuccessComponent implements OnDestroy {
                 } else {
                     console.log(e + ': not a member yet');
                     this.groupService.addMemberToGroup(this.gid, m);
+                    this.alertService.addAlert({
+                        type: 'success',
+                        message: 'Member successfully added'
+                    });
                 }
             }
             if (state === -1) {
                 console.log(e + ': User not exist  ');
                 this.sendSignInEmail(e);
                 this.groupService.addMemberToGroup(this.gid, {email: e, isAdmin: false});
+                console.log('email sent and member added');
             }
         }
     }
@@ -93,18 +102,9 @@ export class NewgroupSuccessComponent implements OnDestroy {
         const actionCodeSettings = {
             // URL you want to redirect back to. The domain (www.example.com) for this
             // URL must be in the authorized domains list in the Firebase Console.
-            url: 'https://www.example.com/finishSignUp?cartId=1234',
+            url: 'http://mate-team.de/login',
             // This must be true.
-            handleCodeInApp: true,
-            iOS: {
-                bundleId: 'com.example.ios',
-            },
-            android: {
-                packageName: 'com.example.android',
-                installApp: true,
-                minimumVersion: '12',
-            },
-            dynamicLinkDomain: 'example.page.link',
+            handleCodeInApp: true
         };
         const auth = getAuth();
         sendSignInLinkToEmail(auth, email, actionCodeSettings)

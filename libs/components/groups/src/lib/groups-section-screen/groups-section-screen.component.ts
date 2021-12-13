@@ -45,7 +45,7 @@ export class GroupsSectionScreenComponent implements OnChanges {
             this.shownGroups = this.groups.filter(
                 (x) =>
                     x.member?.find((y) =>
-                        y.uid.toUpperCase().includes(textSearch.toUpperCase())
+                        y.uid?.toUpperCase().includes(textSearch.toUpperCase())
                     ) !== undefined
             );
         } else {

@@ -37,7 +37,8 @@ export const socketConfig: SocketIoConfig = {
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
-        HttpClientModule
+        HttpClientModule,
+        BrowserAnimationsModule
     ],
     providers: [
         {

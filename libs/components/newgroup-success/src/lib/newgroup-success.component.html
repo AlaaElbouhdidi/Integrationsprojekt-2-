@@ -5,14 +5,12 @@
     <div class="form-input">
         <div id="emails-container" class="emails-container">
             <mat-form-field class="example-chip-list" appearance="fill">
-                <mat-label>Add emails</mat-label>
                 <mat-chip-list #chipList aria-label="Emails selection">
                     <mat-chip
                         *ngFor="let email of emails"
                         [selectable]="selectable"
                         [removable]="removable"
                         (removed)="remove(email)"
-                        value="alaa.el.bouhdidi@mni.thm.de"
                     >
                         {{ email }}
                         <button matChipRemove *ngIf="removable">
@@ -20,12 +18,11 @@
                         </button>
                     </mat-chip>
                     <input
-                        placeholder="Send invitation to..."
+                        placeholder="Send invitation to..." autofocus
                         [matChipInputFor]="chipList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                         [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)"
-                        value="alaa.el.bouhdidi@mni.thm.de"
                     />
                     <div class="form-error" *ngIf="isUnvalid">
                         <div class="form-error-message">
