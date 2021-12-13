@@ -1,4 +1,3 @@
-@import '_variables';
 .btn {
     background-color: $accent;
     padding-top: 10px;
@@ -9,4 +8,8 @@
 }
 a {
     cursor: pointer;
+}
+
+main {
+    min-height: calc(100vh - 6rem);
 }

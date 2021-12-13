@@ -30,6 +30,29 @@ main {
     }
 }
 
+input {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #b1d4e0;
+    background: transparent;
+    color: #b1d4e0;
+}
+textarea {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #b1d4e0;
+    background: transparent;
+    color: #b1d4e0;
+}
+button {
+    font-size: 15px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    border-radius: 20px;
+}
+
 /* MOBILE VIEW */
 .mobile-container {
     display: block;
@@ -44,33 +67,7 @@ main {
         color: #b1d4e0;
         margin-top: 2%;
     }
-    input {
-        border-radius: 10px;
-        border-style: solid;
-        border-width: 3px;
-        border-color: #b1d4e0;
-        background: transparent;
-        color: #b1d4e0;
-    }
-    textarea {
-        border-radius: 10px;
-        border-style: solid;
-        border-width: 3px;
-        border-color: #b1d4e0;
-        background: transparent;
-        color: #b1d4e0;
-    }
-    button {
-        font-size: 15px;
-        margin-bottom: 5%;
-        margin-top: 5%;
-        border-radius: 20px;
-    }
-    select {
-        font-size: 15px;
-        margin-bottom: 5%;
-        border-radius: 20px;
-    }
+
 }
 .content {
     text-align: center;
@@ -81,6 +78,12 @@ main {
     display: none;
     color: $white;
     @include for-tablet-landscape-up {
-        display: flex;
+        display: block;
+    }
+    div.col-5 {
+        margin-top: 5%;
+    }
+    img {
+        width: 75%;
     }
 }

@@ -42,4 +42,48 @@
             <div class="col-1"></div>
         </div>
     </div>
+
+    <div class="desktop-container">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <img src="assets/svgs/create-events.svg" alt="Create event" />
+            </div>
+            <div class="col-5">
+                <div>
+                    <label for="eventTitleInput">Event Title:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="this.event.name"/>
+                </div>
+                <div>
+                    <label for="eventDescriptionInput"
+                    >Event Description:</label
+                    >
+                    <textarea
+                        class="form-control"
+                        [(ngModel)]="this.event.description"
+                    ></textarea>
+                </div>
+                <div>
+                    <label for="eventDateInput">Event Date:</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="this.event.date"
+                    />
+                </div>
+                <div>
+                    <button
+                        class="btn btn-primary btn-sm"
+                        (click)="createEvent()"
+                    >
+                        Create Event
+                    </button>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
 </main>
