@@ -1,1 +1,39 @@
-<p>group works!</p>
+<main>
+    <nav>
+        <ul>
+            <li>
+                <a
+                    (click)="navigateTo('events')"
+                    [class.active-link]="activeRoute === '/group/' + groupId + '/events'" >
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                    Events
+                </a>
+            </li>
+            <li>
+                <a
+                    (click)="navigateTo('chat')"
+                    [class.active-link]="activeRoute === '/group/' + groupId + '/chat'" >
+                    <fa-icon icon="comment-alt"></fa-icon>
+                    Chat
+                </a>
+            </li>
+            <li>
+                <a
+                    (click)="navigateTo('statistics')"
+                    [class.active-link]="activeRoute === '/group/' + groupId + '/statistics'" >
+                    <fa-icon icon="table"></fa-icon>
+                    Statistics
+                </a>
+            </li>
+            <li>
+                <a
+                    (click)="navigateTo('members')"
+                    [class.active-link]="activeRoute === '/group/' + groupId + '/members'" >
+                    <fa-icon icon="user-friends"></fa-icon>
+                    Members
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <router-outlet></router-outlet>
+</main>

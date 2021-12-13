@@ -13,11 +13,7 @@ const route = {
     component: GroupComponent,
     ...canActivate(redirectUnauthenticatedToHome),
     children: [
-        // components get replaced by each individual group nav component
-        {
-            path: 'overview',
-            component: GroupComponent
-        },
+        // components get replaced by each individual group nav component (events, chat, statistics, members)
         {
             path: 'events',
             component: GroupComponent
@@ -31,7 +27,7 @@ const route = {
             component: GroupComponent
         },
         {
-            path: 'member',
+            path: 'members',
             component: GroupComponent
         }
     ]
