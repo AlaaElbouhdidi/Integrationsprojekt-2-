@@ -35,14 +35,17 @@
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@group": ["libs/components/group/src/index.ts"],
+            "@group-polls-events": [
+                "libs/components/group-polls-events/src/index.ts"
+            ],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@group-polls-events": [
-                "libs/components/group-polls-events/src/index.ts"
+            "@create-poll-form": [
+                "libs/components/create-poll-form/src/index.ts"
             ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
