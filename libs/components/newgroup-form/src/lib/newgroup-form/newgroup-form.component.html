@@ -16,15 +16,6 @@
     </div>
 
     <div class="form-input">
-        <label>Select the group activity:</label>
-        <select formControlName="activity">
-            <option *ngFor="let key of keys" [value]="key">
-                <img src="../../assets/activities/football.png" />
-                {{ key }}
-            </option>
-        </select>
-    </div>
-    <div class="form-input">
         <input
             type="text"
             formControlName="description"

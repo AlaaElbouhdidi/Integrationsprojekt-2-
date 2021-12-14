@@ -1,7 +1,7 @@
 <div class="container">
     <h1>You have successfully added a group</h1>
     <img src="../../assets/svgs/team.png" alt="Man opening a door" />
-    <h6>Invite your friends</h6>
+    <h6>Invite your friends via email</h6>
     <div class="form-input">
         <div id="emails-container" class="emails-container">
             <mat-form-field class="example-chip-list" appearance="fill">
@@ -31,7 +31,8 @@
                     </div>
                 </mat-chip-list>
                 <div class="form-btn">
-            <button type="button" (click)="sendInvites()">Send</button>
+            <button [disabled]="(emails.length < 1)" [class.disabled-btn]="(emails.length < 1)" 
+                type="button" (click)="sendInvites()" >Send</button>
                 </div>
             </mat-form-field>
         </div>

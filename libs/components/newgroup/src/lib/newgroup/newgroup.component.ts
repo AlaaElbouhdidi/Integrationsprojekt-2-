@@ -10,7 +10,11 @@ import { Subscription } from 'rxjs';
 export class NewgroupComponent implements OnDestroy {
     success = false;
     subscription: Subscription;
-
+    /**
+     * Constructor of register component
+     * @param alertService {AlertService}
+     * @param groupService {GroupService}
+     */
     constructor(
         public alertService: AlertService,
         private groupService: GroupService

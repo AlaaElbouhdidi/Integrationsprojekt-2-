@@ -1,6 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnDestroy } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Router } from '@angular/router';
 import { Member } from '@api-interfaces';
 import { AuthService, GroupService, AlertService } from '@services';
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth';
@@ -17,16 +18,31 @@ export class NewgroupSuccessComponent implements OnDestroy {
     removable = true;
     addOnBlur = true;
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
+    /**
+     * the state of the input
+     */
     isUnvalid = false;
     emails: string[] = [];
-
+    /**
+     * subscription for the gid from the form component
+     */
     subscription: Subscription;
+    /**
+     * created group id 
+     */
     private gid = '';
-
+    /**
+     * Constructor which initializes the reactive register form
+     * @param groupService {GroupService}
+     * @param authService {AuthService}
+     * @param alertService {AlertService}
+     * @param router {Router}
+     */
     constructor(
         private groupService: GroupService,
         private authService: AuthService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private router : Router
     ) {
         this.subscription = this.groupService
             .onToggle()
@@ -81,6 +97,10 @@ export class NewgroupSuccessComponent implements OnDestroy {
 
                 if (res) {
                     console.log(e + ': already member');
+                    this.alertService.addAlert({
+                        type: 'error',
+                        message: e+': Member already added'
+                    });
                 } else {
                     console.log(e + ': not a member yet');
                     this.groupService.addMemberToGroup(this.gid, m);
@@ -94,29 +114,25 @@ export class NewgroupSuccessComponent implements OnDestroy {
                 console.log(e + ': User not exist  ');
                 this.sendSignInEmail(e);
                 this.groupService.addMemberToGroup(this.gid, {email: e, isAdmin: false});
+                this.alertService.addAlert({
+                    type: 'success',
+                    message: 'Member successfully added'
+                });
                 console.log('email sent and member added');
             }
         }
     }
     sendSignInEmail(email: string) {
         const actionCodeSettings = {
-            // URL you want to redirect back to. The domain (www.example.com) for this
-            // URL must be in the authorized domains list in the Firebase Console.
             url: 'http://mate-team.de/login',
-            // This must be true.
             handleCodeInApp: true
         };
         const auth = getAuth();
         sendSignInLinkToEmail(auth, email, actionCodeSettings)
             .then(() => {
-                // The link was successfully sent. Inform the user.
-                // Save the email locally so you don't need to ask the user for it again
-                // if they open the link on the same device.
                 window.localStorage.setItem('emailForSignIn', email);
-                // ...
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 console.error(errorMessage);
                 

@@ -52,7 +52,6 @@ export interface Group {
     id?: string;
     name?: string;
     description?: string;
-    activity?: Activity;
     member?: Member[]; // Array of uid's
 }
 
