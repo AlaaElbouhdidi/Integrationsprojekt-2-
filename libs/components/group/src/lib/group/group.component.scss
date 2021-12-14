@@ -6,8 +6,14 @@ main {
     width: 100%;
     background: $dark;
     padding: 1rem 0.5rem;
+    @include for-tablet-portrait-up {
+        padding: 2rem;
+    }
+    @include for-tablet-landscape-up {
+        padding: 2rem 5rem;
+    }
     @include for-desktop-up {
-        padding: 3rem 5rem;
+        padding: 3rem 10rem;
     }
     nav {
         ul {

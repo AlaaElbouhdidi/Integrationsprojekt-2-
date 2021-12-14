@@ -1,1 +1,38 @@
-<p>group-polls-events works!</p>
+<section class="polls">
+    <div class="polls-header">
+        <h5>Polls</h5>
+        <fa-icon icon="poll"></fa-icon>
+        <button (click)="openPollModal(pollModal)">
+            + Create new poll
+        </button>
+    </div>
+    <div class="polls-body"></div>
+</section>
+
+<ng-template #pollModal>
+    <div class="modal-header">
+        <h5>
+            <fa-icon icon="poll"></fa-icon>
+            Create new poll
+        </h5>
+        <fa-icon
+            icon="times-circle"
+            (click)="closePollModal()">
+        </fa-icon>
+    </div>
+    <div class="modal-body">
+        <mate-team-create-poll-form
+            (createPollEvent)="createPoll($event)">
+        </mate-team-create-poll-form>
+    </div>
+</ng-template>
+
+<section class="events">
+    <div class="events-header">
+        <h5>Events</h5>
+        <fa-icon icon="calendar-alt"></fa-icon>
+        <button>
+            + Create new event
+        </button>
+    </div>
+</section>

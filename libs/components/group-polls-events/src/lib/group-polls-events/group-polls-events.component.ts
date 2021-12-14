@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreatePollData } from '@api-interfaces';
 
 @Component({
-  selector: 'mate-team-group-polls-events',
-  templateUrl: './group-polls-events.component.html',
-  styleUrls: ['./group-polls-events.component.scss']
+    selector: 'mate-team-group-polls-events',
+    templateUrl: './group-polls-events.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./group-polls-events.component.scss']
 })
-export class GroupPollsEventsComponent implements OnInit {
+export class GroupPollsEventsComponent {
 
-  constructor() { }
+    constructor(
+        private modalService: NgbModal
+    ) { }
 
-  ngOnInit(): void {
-  }
+    openPollModal(content: any) {
+        this.modalService.open(content, { windowClass: 'dark-modal' })
+    }
 
+    closePollModal() {
+        this.modalService.dismissAll();
+    }
+
+    createPoll(data: CreatePollData) {
+        console.log('poll form data: ', data);
+    }
 }

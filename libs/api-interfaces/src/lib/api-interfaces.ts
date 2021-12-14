@@ -18,6 +18,10 @@ export interface ChangeProfileData {
     displayName?: string;
     photoURL?: string;
 }
+export interface CreatePollData {
+    title: string;
+    choices: string[];
+}
 export interface Environment {
     firebase: {
         projectId: string;
