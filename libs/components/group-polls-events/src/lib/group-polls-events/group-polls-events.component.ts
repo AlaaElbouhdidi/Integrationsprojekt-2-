@@ -1,6 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreatePollData } from '@api-interfaces';
+import { CreatePollData, Poll } from '@api-interfaces';
+import { PollService } from '../../../../../services/src/lib/poll/poll.service';
+import { Subject, takeUntil } from 'rxjs';
+import { AlertService } from '@services';
 
 @Component({
     selector: 'mate-team-group-polls-events',
@@ -8,21 +11,50 @@ import { CreatePollData } from '@api-interfaces';
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./group-polls-events.component.scss']
 })
-export class GroupPollsEventsComponent {
+export class GroupPollsEventsComponent implements OnInit, OnDestroy {
+    private destroy$ = new Subject();
+    polls: Poll[] = [];
 
     constructor(
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private pollService: PollService,
+        private alertService: AlertService
     ) { }
 
-    openPollModal(content: any) {
+    openPollModal(content: any): void {
         this.modalService.open(content, { windowClass: 'dark-modal' })
     }
 
-    closePollModal() {
+    closePollModal(): void {
         this.modalService.dismissAll();
     }
 
-    createPoll(data: CreatePollData) {
-        console.log('poll form data: ', data);
+    async createPoll(data: CreatePollData): Promise<void> {
+        try {
+            await this.pollService.createPoll(data);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Poll successfully created'
+            })
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+        this.closePollModal();
+    }
+
+    ngOnInit(): void {
+        this.pollService.getPolls()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                data => this.polls = data as Poll[],
+            );
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.complete();
     }
 }

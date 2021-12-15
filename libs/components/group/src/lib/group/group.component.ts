@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { GroupService } from '@services';
 
 @Component({
     selector: 'mate-team-group',
@@ -14,7 +15,8 @@ export class GroupComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private groupService: GroupService
     ) {
         this.activeRoute = this.router.url;
     }
@@ -24,6 +26,7 @@ export class GroupComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((param) => {
                 this.groupId = param.get('id');
+                this.groupService.currentGroupId = param.get('id') === null ? undefined : param.get('id') as string;
             });
         this.router.events
             .pipe(takeUntil(this.destroy$))
@@ -34,7 +37,7 @@ export class GroupComponent implements OnInit, OnDestroy {
             });
     }
 
-    navigateTo(routeParam: 'events' | 'statistics' | 'chat' | 'members') {
+    navigateTo(routeParam: 'events' | 'statistics' | 'chat' | 'members'): void {
         this.router.navigate([routeParam], { relativeTo: this.route });
     }
 

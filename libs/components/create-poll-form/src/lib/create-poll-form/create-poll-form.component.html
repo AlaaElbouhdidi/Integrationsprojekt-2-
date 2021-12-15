@@ -65,7 +65,7 @@
         <ul *ngIf="choices.length > 0">
             <li *ngFor="let choice of choices; let i = index">
                 <span>{{i + 1}}.</span>
-                <span>{{choice}}</span>
+                <span>{{choice | date: 'mediumDate'}}</span>
                 <fa-icon
                     icon="trash"
                     (click)="deleteDateAsChoice(i)" >

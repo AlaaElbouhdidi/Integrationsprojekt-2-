@@ -22,6 +22,15 @@ export interface CreatePollData {
     title: string;
     choices: string[];
 }
+export interface Choice {
+    date: string;
+    votes: number;
+}
+export interface Poll {
+    id?: string;
+    title: string;
+    choices: Choice[];
+}
 export interface Environment {
     firebase: {
         projectId: string;
