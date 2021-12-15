@@ -446,6 +446,30 @@
                 }
             }
         },
+        "confirmation-modal": {
+            "projectType": "library",
+            "root": "libs/components/confirmation-modal",
+            "sourceRoot": "libs/components/confirmation-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/confirmation-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/confirmation-modal/src/**/*.ts",
+                            "libs/components/confirmation-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",

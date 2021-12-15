@@ -8,12 +8,14 @@ import {
     faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { CreatePollFormModule } from '@create-poll-form';
+import { ConfirmationModalModule } from '@confirmation-modal';
 
 @NgModule({
     imports: [
         CommonModule,
         FontAwesomeModule,
-        CreatePollFormModule
+        CreatePollFormModule,
+        ConfirmationModalModule
     ],
     declarations: [
       GroupPollsEventsComponent

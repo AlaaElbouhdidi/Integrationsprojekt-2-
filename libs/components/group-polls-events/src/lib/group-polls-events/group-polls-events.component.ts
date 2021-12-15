@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CreatePollData, Poll } from '@api-interfaces';
 import { PollService } from '../../../../../services/src/lib/poll/poll.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -14,6 +14,8 @@ import { AlertService } from '@services';
 export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject();
     polls: Poll[] = [];
+    confirmationModalRef: NgbModalRef | undefined;
+    pollModalRef: NgbModalRef | undefined;
 
     constructor(
         private modalService: NgbModal,
@@ -22,11 +24,27 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     ) { }
 
     openPollModal(content: any): void {
-        this.modalService.open(content, { windowClass: 'dark-modal' })
+        this.pollModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
     closePollModal(): void {
-        this.modalService.dismissAll();
+        this.pollModalRef?.dismiss();
+    }
+
+    openConfirmationModal(content: any) {
+        this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.confirmationModalRef.result
+            .then((data) => {
+                if (data) {
+                    console.log('proceed with delete action');
+                }
+                return;
+            })
+            .catch(() => {});
+    }
+
+    closeConfirmationModal(ind: boolean) {
+        this.confirmationModalRef?.close(ind);
     }
 
     async createPoll(data: CreatePollData): Promise<void> {
