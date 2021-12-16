@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreatePollData } from '@api-interfaces';
+import { Choice, Poll } from '@api-interfaces';
 
 @Component({
     selector: 'mate-team-create-poll-form',
@@ -9,15 +9,15 @@ import { CreatePollData } from '@api-interfaces';
 })
 export class CreatePollFormComponent {
     createPollForm: FormGroup;
-    @Output() createPollEvent = new EventEmitter<CreatePollData>();
-    choices: string[] = [];
+    @Output() createPollEvent = new EventEmitter<Poll>();
+    choices: Choice[] = [];
 
     constructor(
         private fb: FormBuilder
     ) {
         this.createPollForm = this.fb.group({
             title: new FormControl('', [
-                Validators.maxLength(100),
+                Validators.maxLength(50),
                 Validators.required
             ]),
             date: new FormControl('', [
@@ -35,7 +35,11 @@ export class CreatePollFormComponent {
     }
 
     addDateAsChoice(): void {
-        this.choices.push(this.date.value);
+        const choice: Choice = {
+            date: this.date.value,
+            votes: 0
+        };
+        this.choices.push(choice);
     }
 
     deleteDateAsChoice(index: number): void {
@@ -43,10 +47,11 @@ export class CreatePollFormComponent {
     }
 
     createPoll(): void {
-        const data: CreatePollData = {
+        const data: Poll = {
             title: this.title.value,
-            choices: this.choices
-        }
+            choices: this.choices,
+            usersVoted: []
+        };
         this.createPollEvent.emit(data);
         this.createPollForm.reset();
     }

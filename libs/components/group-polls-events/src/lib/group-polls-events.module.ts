@@ -5,7 +5,8 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import {
     faPoll,
     faCalendarAlt,
-    faTimesCircle
+    faTimesCircle,
+    faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { CreatePollFormModule } from '@create-poll-form';
 import { ConfirmationModalModule } from '@confirmation-modal';
@@ -29,7 +30,8 @@ export class GroupPollsEventsModule {
         library.addIcons(
             faPoll,
             faCalendarAlt,
-            faTimesCircle
+            faTimesCircle,
+            faExclamationCircle
         );
     }
 }

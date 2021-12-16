@@ -18,10 +18,6 @@ export interface ChangeProfileData {
     displayName?: string;
     photoURL?: string;
 }
-export interface CreatePollData {
-    title: string;
-    choices: string[];
-}
 export interface Choice {
     date: string;
     votes: number;
@@ -30,6 +26,7 @@ export interface Poll {
     id?: string;
     title: string;
     choices: Choice[];
+    usersVoted: string[];
 }
 export interface Environment {
     firebase: {

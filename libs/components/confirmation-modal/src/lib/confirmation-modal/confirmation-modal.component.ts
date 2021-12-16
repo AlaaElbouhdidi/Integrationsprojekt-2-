@@ -9,4 +9,5 @@ export class ConfirmationModalComponent {
     @Input() title = '';
     @Input() text = '';
     @Output() closeModalEvent = new EventEmitter<boolean>();
+    @Output() dismissModalEvent = new EventEmitter();
 }

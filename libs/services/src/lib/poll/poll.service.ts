@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { CreatePollData, Poll } from '@api-interfaces';
+import { Poll } from '@api-interfaces';
 import { GroupService } from '@services';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class PollService {
             .valueChanges({ idField: 'id' });
     }
 
-    async createPoll(poll: CreatePollData): Promise<void> {
+    async createPoll(poll: Poll): Promise<void> {
         await this.afs
             .collection('groups')
             .doc(this.groupService.currentGroupId)
@@ -50,6 +50,6 @@ export class PollService {
             .doc(this.groupService.currentGroupId)
             .collection('datePolls')
             .doc(pollId)
-            .delete()
+            .delete();
     }
 }

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { CreatePollData, Poll } from '@api-interfaces';
+import { Poll } from '@api-interfaces';
 import { PollService } from '../../../../../services/src/lib/poll/poll.service';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertService } from '@services';
+import { AlertService, AuthService } from '@services';
 
 @Component({
     selector: 'mate-team-group-polls-events',
@@ -20,7 +20,8 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     constructor(
         private modalService: NgbModal,
         private pollService: PollService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private authService: AuthService
     ) { }
 
     openPollModal(content: any): void {
@@ -31,23 +32,25 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         this.pollModalRef?.dismiss();
     }
 
-    openConfirmationModal(content: any) {
+    async openConfirmationModal(content: any): Promise<boolean> {
         this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
-        this.confirmationModalRef.result
-            .then((data) => {
-                if (data) {
-                    console.log('proceed with delete action');
-                }
-                return;
-            })
-            .catch(() => {});
+        try {
+            await this.confirmationModalRef.result;
+            return true;
+        } catch {
+            return false;
+        }
     }
 
-    closeConfirmationModal(ind: boolean) {
+    dismissConfirmationModal(): void {
+        this.confirmationModalRef?.dismiss();
+    }
+
+    closeConfirmationModal(ind: boolean): void {
         this.confirmationModalRef?.close(ind);
     }
 
-    async createPoll(data: CreatePollData): Promise<void> {
+    async createPoll(data: Poll): Promise<void> {
         try {
             await this.pollService.createPoll(data);
             this.alertService.addAlert({
@@ -63,11 +66,48 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         this.closePollModal();
     }
 
+    async updatePoll(poll: Poll): Promise<void> {
+        try {
+            const user = this.authService.getCurrentUser();
+            poll.usersVoted.push(user.uid);
+            await this.pollService.updatePoll(poll.id!, poll);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Vote successfully registered'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+    }
+
+    async deletePoll(id: string, modal: any): Promise<void> {
+        const result = await this.openConfirmationModal(modal);
+        if (!result) {
+            return;
+        }
+        try {
+            await this.pollService.deletePoll(id);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Poll successfully deleted'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+    }
+
     ngOnInit(): void {
         this.pollService.getPolls()
             .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                data => this.polls = data as Poll[],
+            .subscribe(data => {
+                    this.polls = data as Poll[];
+                }
             );
     }
 

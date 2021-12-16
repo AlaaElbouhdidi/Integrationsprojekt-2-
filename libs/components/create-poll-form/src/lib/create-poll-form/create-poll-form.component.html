@@ -22,7 +22,7 @@
         <div class="form-error-message" *ngIf="title.errors?.maxlength">
             <p>
                 <fa-icon icon="exclamation-circle"></fa-icon>
-                Maximum length of 100 characters exceeded
+                Maximum length of 50 characters exceeded
             </p>
         </div>
     </div>
@@ -65,7 +65,7 @@
         <ul *ngIf="choices.length > 0">
             <li *ngFor="let choice of choices; let i = index">
                 <span>{{i + 1}}.</span>
-                <span>{{choice | date: 'mediumDate'}}</span>
+                <span>{{choice.date | date: 'mediumDate'}}</span>
                 <fa-icon
                     icon="trash"
                     (click)="deleteDateAsChoice(i)" >

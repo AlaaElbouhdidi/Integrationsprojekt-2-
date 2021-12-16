@@ -2,13 +2,13 @@
     <h5>{{title}}</h5>
     <fa-icon
         icon="times-circle"
-        (click)="closeModalEvent.emit(false)">
+        (click)="dismissModalEvent.emit()">
     </fa-icon>
 </div>
 <div class="modal-body">
     <p>{{text}}</p>
 </div>
 <div class="modal-footer">
-    <button class="modal-footer-green-btn" (click)="closeModalEvent.emit(false)">Cancel</button>
+    <button class="modal-footer-green-btn" (click)="dismissModalEvent.emit()">Cancel</button>
     <button class="modal-footer-red-btn" (click)="closeModalEvent.emit(true)">Yes</button>
 </div>
