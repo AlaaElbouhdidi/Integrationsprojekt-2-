@@ -28,6 +28,9 @@
             "@change-profile-form": [
                 "libs/components/change-profile-form/src/index.ts"
             ],
+            "@confirmation-modal": [
+                "libs/components/confirmation-modal/src/index.ts"
+            ],
             "@core": ["libs/core/src/index.ts"],
             "@create-event": ["libs/components/create-event/src/index.ts"],
             "@create-poll-form": [
@@ -47,9 +50,7 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@confirmation-modal": [
-                "libs/components/confirmation-modal/src/index.ts"
-            ],
+            "@poll-item": ["libs/components/poll-item/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [

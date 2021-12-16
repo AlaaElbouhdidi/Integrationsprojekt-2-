@@ -9,13 +9,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { CreatePollFormModule } from '@create-poll-form';
 import { ConfirmationModalModule } from '@confirmation-modal';
+import { PollItemModule } from '@poll-item';
 
 @NgModule({
     imports: [
         CommonModule,
         FontAwesomeModule,
         CreatePollFormModule,
-        ConfirmationModalModule
+        ConfirmationModalModule,
+        PollItemModule
     ],
     declarations: [
       GroupPollsEventsComponent

@@ -1704,6 +1704,30 @@
                 }
             }
         },
+        "poll-item": {
+            "projectType": "library",
+            "root": "libs/components/poll-item",
+            "sourceRoot": "libs/components/poll-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/poll-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/poll-item/src/**/*.ts",
+                            "libs/components/poll-item/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "profile": {
             "projectType": "library",
             "root": "libs/components/profile",
