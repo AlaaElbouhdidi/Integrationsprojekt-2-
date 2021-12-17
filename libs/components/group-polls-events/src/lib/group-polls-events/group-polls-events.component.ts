@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Poll } from '@api-interfaces';
-import { PollService } from '../../../../../services/src/lib/poll/poll.service';
+import { Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertService, AuthService } from '@services';
+import { AlertService, AuthService, GroupService, PollService } from '@services';
 
 @Component({
     selector: 'mate-team-group-polls-events',
@@ -13,15 +12,18 @@ import { AlertService, AuthService } from '@services';
 })
 export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject();
+    group: Group = {} as Group;
     polls: Poll[] = [];
     confirmationModalRef: NgbModalRef | undefined;
     pollModalRef: NgbModalRef | undefined;
+    isAdmin = false;
 
     constructor(
         private modalService: NgbModal,
         private pollService: PollService,
         private alertService: AlertService,
-        private authService: AuthService
+        private authService: AuthService,
+        private groupService: GroupService
     ) { }
 
     openPollModal(content: any): void {
@@ -51,6 +53,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     }
 
     async createPoll(data: Poll): Promise<void> {
+        if (!this.checkIfAdmin(this.group.admin)) {
+            return;
+        }
         try {
             await this.pollService.createPoll(data);
             this.alertService.addAlert({
@@ -69,8 +74,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     async updatePoll(poll: Poll): Promise<void> {
         try {
             const user = this.authService.getCurrentUser();
+            if (poll.usersVoted.includes(user.uid, 0) || !poll.id) {
+                return;
+            }
             poll.usersVoted.push(user.uid);
-            await this.pollService.updatePoll(poll.id!, poll);
+            await this.pollService.updatePoll(poll.id, poll);
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Vote successfully registered'
@@ -88,6 +96,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         if (!result) {
             return;
         }
+        if (!this.checkIfAdmin(this.group.admin)) {
+            return;
+        }
         try {
             await this.pollService.deletePoll(id);
             this.alertService.addAlert({
@@ -102,13 +113,30 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnInit(): void {
-        this.pollService.getPolls()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(data => {
-                    this.polls = data as Poll[];
-                }
-            );
+    checkIfAdmin(adminId: string): boolean {
+        const userId = this.authService.getCurrentUser().uid;
+        return userId === adminId;
+    }
+
+    async ngOnInit(): Promise<void> {
+        try {
+            const group = await this.groupService.getGroupById(this.groupService.currentGroupId);
+            this.group = group ? group : {} as Group;
+            if (group) {
+                this.isAdmin = this.checkIfAdmin(group.admin);
+            }
+            this.pollService.getPolls()
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(data => {
+                        this.polls = data as Poll[];
+                    }
+                );
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
     }
 
     ngOnDestroy(): void {

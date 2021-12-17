@@ -4,3 +4,4 @@ export * from './lib/event/event.service';
 export * from './lib/auth/auth.service';
 export * from './lib/group/group.service';
 export * from './lib/icon/icon.service';
+export * from './lib/poll/poll.service';

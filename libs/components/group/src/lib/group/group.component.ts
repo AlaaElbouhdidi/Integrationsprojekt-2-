@@ -26,7 +26,7 @@ export class GroupComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((param) => {
                 this.groupId = param.get('id');
-                this.groupService.currentGroupId = param.get('id') === null ? undefined : param.get('id') as string;
+                this.groupService.currentGroupId = param.get('id') === null ? '' : param.get('id') as string;
             });
         this.router.events
             .pipe(takeUntil(this.destroy$))

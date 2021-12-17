@@ -2,13 +2,14 @@
     <div class="polls-header">
         <h5>Polls</h5>
         <fa-icon icon="poll"></fa-icon>
-        <button (click)="openPollModal(pollModal)">
+        <button *ngIf="isAdmin" (click)="openPollModal(pollModal)">
             + Create new poll
         </button>
     </div>
     <div class="polls-body">
         <div class="polls-body-item" *ngFor="let poll of polls">
             <mate-team-poll-item
+                [isAdmin]="isAdmin"
                 [poll]="poll"
                 (deletePollEvent)="deletePoll($event, confirmationModal)"
                 (voteEvent)="updatePoll($event)">
@@ -54,7 +55,7 @@
     <div class="events-header">
         <h5>Events</h5>
         <fa-icon icon="calendar-alt"></fa-icon>
-        <button>
+        <button *ngIf="isAdmin">
             + Create new event
         </button>
     </div>

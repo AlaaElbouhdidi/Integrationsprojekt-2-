@@ -27,10 +27,10 @@ import { AlertService, AuthService } from '@services';
 export class PollItemComponent implements OnChanges {
     @Output() voteEvent = new EventEmitter<Poll>();
     @Output() deletePollEvent = new EventEmitter<string>();
-    @Input() poll: Poll | undefined;
+    @Input() poll: Poll = {} as Poll;
+    @Input() isAdmin = false;
     userVoted = false;
     showResults = false;
-    noCheckedInput = false;
 
     constructor(
         private authService: AuthService,
@@ -42,7 +42,7 @@ export class PollItemComponent implements OnChanges {
     }
 
     calcBarWidth(votes: number): number {
-        const voteSum = this.poll!.choices.reduce((accumulator, currentVal) => accumulator + currentVal.votes, 0);
+        const voteSum = this.poll.choices.reduce((accumulator, currentVal) => accumulator + currentVal.votes, 0);
         return (votes * 100) / voteSum;
     }
 
@@ -55,13 +55,12 @@ export class PollItemComponent implements OnChanges {
     }
 
     deletePoll(): void {
-        this.deletePollEvent.emit(this.poll!.id!);
+        this.deletePollEvent.emit(this.poll.id);
     }
 
     vote(): void {
         const checkedInput = document.querySelector('input[name=choice]:checked') as HTMLInputElement;
         if (!checkedInput) {
-            this.noCheckedInput = true;
             this.alertService.addAlert({
                 type: 'error',
                 message: 'Please select a date in order to vote'
@@ -69,7 +68,7 @@ export class PollItemComponent implements OnChanges {
             return;
         }
         const checkedInputValue = Number(checkedInput.value);
-        const poll = this.poll!;
+        const poll = this.poll;
         for(let i = 0; i < poll.choices.length; i++) {
             if (i === checkedInputValue) {
                 poll.choices[i].votes++;
@@ -79,6 +78,7 @@ export class PollItemComponent implements OnChanges {
     }
 
     ngOnChanges(): void {
-        this.userVoted = this.checkIfUserVoted(this.poll!);
+        this.userVoted = this.checkIfUserVoted(this.poll);
+        this.showResults = this.userVoted;
     }
 }
