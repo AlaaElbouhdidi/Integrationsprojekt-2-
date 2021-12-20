@@ -69,11 +69,7 @@ export class PollItemComponent implements OnChanges {
         }
         const checkedInputValue = Number(checkedInput.value);
         const poll = this.poll;
-        for(let i = 0; i < poll.choices.length; i++) {
-            if (i === checkedInputValue) {
-                poll.choices[i].votes++;
-            }
-        }
+        poll.choices[checkedInputValue].votes++;
         this.voteEvent.emit(poll);
     }
 
