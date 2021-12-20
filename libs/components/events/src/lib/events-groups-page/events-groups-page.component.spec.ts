@@ -5,10 +5,13 @@ import { EventsGroupsPageMobileComponent } from '../events-groups-page-mobile/ev
 import { UpcomingEventSectionMobileComponent } from '../upcoming-event-section-mobile/upcoming-event-section-mobile.component';
 import { GroupsModule } from '@groups';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { GroupService } from '@services';
 
 describe('EventsGroupsPageComponent', () => {
     let component: EventsGroupsPageComponent;
     let fixture: ComponentFixture<EventsGroupsPageComponent>;
+
+    const groupServiceMock = {};
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -17,6 +20,9 @@ describe('EventsGroupsPageComponent', () => {
                 EventsGroupsPageScreenComponent,
                 EventsGroupsPageMobileComponent,
                 UpcomingEventSectionMobileComponent
+            ],
+            providers: [
+                { provide: GroupService, useValue: groupServiceMock }
             ],
             imports: [GroupsModule],
             schemas: [NO_ERRORS_SCHEMA]

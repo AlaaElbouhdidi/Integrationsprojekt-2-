@@ -59,6 +59,7 @@
         "@angular/animations": "^12.2.0",
         "@angular/common": "^12.2.0",
         "@angular/compiler": "^12.2.0",
+        "@compodoc/compodoc": "^1.1.15",
         "@angular/core": "^12.2.0",
         "@angular/fire": "^7.2.0",
         "@angular/forms": "^12.2.0",
