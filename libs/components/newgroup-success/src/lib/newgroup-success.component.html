@@ -1,5 +1,40 @@
 <div class="container">
     <h1>You have successfully added a group</h1>
     <img src="../../assets/svgs/team.png" alt="Man opening a door" />
-    <h6>Add your friends</h6>
+    <h6>Invite your friends via email</h6>
+    <div class="form-input">
+        <div id="emails-container" class="emails-container">
+            <mat-form-field class="example-chip-list" appearance="fill">
+                <mat-chip-list #chipList aria-label="Emails selection">
+                    <mat-chip
+                        *ngFor="let email of emails"
+                        [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="remove(email)"
+                    >
+                        {{ email }}
+                        <button matChipRemove *ngIf="removable">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input
+                        placeholder="Send invitation to..." autofocus
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)"
+                    />
+                    <div class="form-error" *ngIf="isUnvalid">
+                        <div class="form-error-message">
+                            <p>Email wrongly formatted</p>
+                        </div>
+                    </div>
+                </mat-chip-list>
+                <div class="form-btn">
+            <button [disabled]="(emails.length < 1)" [class.disabled-btn]="(emails.length < 1)" 
+                type="button" (click)="sendInvites()" >Send</button>
+                </div>
+            </mat-form-field>
+        </div>
+    </div>
 </div>
