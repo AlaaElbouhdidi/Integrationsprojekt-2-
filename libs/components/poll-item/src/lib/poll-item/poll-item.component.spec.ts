@@ -51,7 +51,7 @@ describe('PollItemComponent', () => {
         component.showResults = false;
         component.flipPollItem();
         fixture.detectChanges();
-        let form = fixture.debugElement.nativeElement.querySelector('form');
+        const form = fixture.debugElement.nativeElement.querySelector('form');
         expect(form).toBeNull();
     });
 

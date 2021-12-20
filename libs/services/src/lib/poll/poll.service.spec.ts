@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { PollService } from './poll.service';
-import { GroupService } from '@services';
+import { GroupService } from '../group/group.service';
 import { Poll } from '@api-interfaces';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { of } from 'rxjs';
