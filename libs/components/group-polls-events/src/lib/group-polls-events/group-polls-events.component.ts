@@ -26,7 +26,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         private groupService: GroupService
     ) { }
 
-    openPollModal(content: any): void {
+    openPollModal(content: unknown): void {
         this.pollModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
@@ -34,7 +34,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         this.pollModalRef?.dismiss();
     }
 
-    async openConfirmationModal(content: any): Promise<boolean> {
+    async openConfirmationModal(content: unknown): Promise<boolean> {
         this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
         try {
             await this.confirmationModalRef.result;
@@ -91,7 +91,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
-    async deletePoll(id: string, modal: any): Promise<void> {
+    async deletePoll(id: string, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
             return;
