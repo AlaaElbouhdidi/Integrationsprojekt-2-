@@ -41,6 +41,7 @@
                 <fa-icon icon="angle-double-right"></fa-icon>
             </div>
             <button
+                id="add-poll-choice-btn"
                 type="button"
                 class="green-btn"
                 [class.disabled-btn]="!date.valid || choices.length > 4"
@@ -76,6 +77,7 @@
 
     <div class="form-submit">
         <button
+            id="create-poll-submit-btn"
             type="submit"
             class="green-btn"
             [class.disabled-btn]="title.invalid || choices.length === 0"
