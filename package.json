@@ -60,7 +60,6 @@
         "@angular/cdk": "^13.0.3",
         "@angular/common": "^12.2.0",
         "@angular/compiler": "^12.2.0",
-        "@compodoc/compodoc": "^1.1.15",
         "@angular/core": "^12.2.0",
         "@angular/fire": "^7.2.0",
         "@angular/forms": "^12.2.0",
@@ -71,6 +70,7 @@
         "@angular/pwa": "^13.0.3",
         "@angular/router": "^12.2.0",
         "@angular/service-worker": "^12.2.0",
+        "@compodoc/compodoc": "^1.1.15",
         "@fortawesome/angular-fontawesome": "^0.9.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -113,6 +113,7 @@
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
+        "@angular-devkit/architect": "^0.1301.2",
         "@angular-devkit/build-angular": "~12.2.0",
         "@angular-eslint/eslint-plugin": "~12.3.0",
         "@angular-eslint/eslint-plugin-template": "~12.3.0",
