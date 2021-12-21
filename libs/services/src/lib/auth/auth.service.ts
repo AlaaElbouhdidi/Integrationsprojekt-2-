@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '@api-interfaces';
 import firebase from 'firebase/compat/app';
 import {
     getAuth,
     UserCredential,
+    EmailAuthProvider,
     reauthenticateWithCredential,
     updatePassword,
     updateEmail,
     updateProfile,
     sendEmailVerification
 } from 'firebase/auth';
-import { User } from '@api-interfaces';
 
 /**
  * Auth service
@@ -242,5 +243,36 @@ export class AuthService {
             };
         }
         throw new Error();
+    }
+    async emailIsAlreadyRegistred(email: string): Promise<number>{
+        const res = await firebase.auth().fetchSignInMethodsForEmail(email)
+        .then((signInMethods) => {
+            // This returns the same array as fetchProvidersForEmail but for email
+            // provider identified by 'password' string, signInMethods would contain 2
+            // different strings:
+            // 'emailLink' if the user previously signed in with an email/link
+            // 'password' if the user has a password.
+            // A user could have both.
+            if (signInMethods.indexOf(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) != -1) {
+              // User can sign in with email/password.
+              return 0;
+            }
+            else{
+                if (signInMethods.indexOf(EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD) != -1) {
+                // User can sign in with email/link.
+                return 1;
+                }
+                else {
+                // User doesnt exi
+                return -1
+              }
+            }
+
+          })
+          .catch((error) => {
+            // Some error occurred, you can inspect the code: error.code
+            console.log(error);
+          });
+            return Number(res);
     }
 }

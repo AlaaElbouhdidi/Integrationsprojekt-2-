@@ -115,8 +115,9 @@ export interface Environment {
 }
 
 export interface Member {
-    uid: string;
-    isAdmin: boolean;
+    uid?: string;
+    isAdmin?: boolean;
+    email?: string
 }
 
 export interface Event {
@@ -130,8 +131,8 @@ export interface Event {
 
 export interface Group {
     id?: string;
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     admin: string;
     activity: Activity;
     member?: Member[]; // Array of uid's
