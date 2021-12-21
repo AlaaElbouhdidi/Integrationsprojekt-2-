@@ -4,6 +4,9 @@ import { Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
 import { AlertService, AuthService, GroupService, PollService } from '@services';
 
+/**
+ * Group polls events component
+ */
 @Component({
     selector: 'mate-team-group-polls-events',
     templateUrl: './group-polls-events.component.html',
@@ -11,13 +14,40 @@ import { AlertService, AuthService, GroupService, PollService } from '@services'
     styleUrls: ['./group-polls-events.component.scss']
 })
 export class GroupPollsEventsComponent implements OnInit, OnDestroy {
+    /**
+     * Subject for unsubscribing from observables
+     * @private
+     */
     private destroy$ = new Subject();
+    /**
+     * Group
+     */
     group: Group = {} as Group;
+    /**
+     * Polls
+     */
     polls: Poll[] = [];
+    /**
+     * Reference for the confirmation modal
+     */
     confirmationModalRef: NgbModalRef | undefined;
+    /**
+     * Reference for the poll modal
+     */
     pollModalRef: NgbModalRef | undefined;
+    /**
+     * Determines if user is admin
+     */
     isAdmin = false;
 
+    /**
+     * Constructor of group polls events
+     * @param modalService {NgbModal}
+     * @param pollService {PollService}
+     * @param alertService {AlertService}
+     * @param authService {AuthService}
+     * @param groupService {GroupService}
+     */
     constructor(
         private modalService: NgbModal,
         private pollService: PollService,
@@ -26,14 +56,28 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         private groupService: GroupService
     ) { }
 
+    /**
+     * Opens the poll modal
+     *
+     * @param content {unknown} The modal to open
+     */
     openPollModal(content: unknown): void {
         this.pollModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
+    /**
+     * Closes the poll modal
+     */
     closePollModal(): void {
         this.pollModalRef?.dismiss();
     }
 
+    /**
+     * Opens the confirmation modal
+     *
+     * @param content {unknown} The modal to open
+     * @returns {Promise<boolean>} A promise containing true if modal is closed and false if modal is dismissed
+     */
     async openConfirmationModal(content: unknown): Promise<boolean> {
         this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
         try {
@@ -44,14 +88,27 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Dismiss the confirmation modal
+     */
     dismissConfirmationModal(): void {
         this.confirmationModalRef?.dismiss();
     }
 
+    /**
+     * Close the confirmation modal
+     *
+     * @param ind {boolean} Indicates if action was confirmed
+     */
     closeConfirmationModal(ind: boolean): void {
         this.confirmationModalRef?.close(ind);
     }
 
+    /**
+     * Create a poll
+     *
+     * @param data {Poll} The poll to create
+     */
     async createPoll(data: Poll): Promise<void> {
         if (!this.checkIfAdmin(this.group.admin)) {
             return;
@@ -71,6 +128,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         this.closePollModal();
     }
 
+    /**
+     * Update a poll
+     *
+     * @param poll {Poll} The poll data to update
+     */
     async updatePoll(poll: Poll): Promise<void> {
         try {
             const user = this.authService.getCurrentUser();
@@ -91,6 +153,12 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Delete a poll
+     *
+     * @param id {string} The id of the poll to delete
+     * @param modal {unknown} The confirmation modal to open
+     */
     async deletePoll(id: string, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
@@ -113,11 +181,20 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Checks if a given id matches the user id
+     *
+     * @param adminId {string} The id of the admin
+     * @returns {boolean} True if user id matches the given id, false if the ids do not match
+     */
     checkIfAdmin(adminId: string): boolean {
         const userId = this.authService.getCurrentUser().uid;
         return userId === adminId;
     }
 
+    /**
+     * Get group and polls of group on component init
+     */
     async ngOnInit(): Promise<void> {
         try {
             const group = await this.groupService.getGroupById(this.groupService.currentGroupId);
@@ -139,6 +216,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Unsubscribe from observables
+     */
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.complete();

@@ -1,31 +1,102 @@
+/**
+ * Message
+ */
 export interface Message {
+    /**
+     * Message
+     */
     message: string;
 }
 
+/**
+ * Alert
+ */
 export interface Alert {
+    /**
+     * Type of the alert
+     */
     type: 'error' | 'success' | 'neutral' | 'warn';
+    /**
+     * Message of the alert
+     */
     message: string;
 }
+
+/**
+ * Data to change password
+ */
 export interface ChangePasswordData {
+    /**
+     * Old password
+     */
     oldPassword: string;
+    /**
+     * New password
+     */
     newPassword: string;
 }
+
+/**
+ * Data to change email
+ */
 export interface ChangeEmailData {
+    /**
+     * Current password
+     */
     password: string;
+    /**
+     * New email
+     */
     newEmail: string;
 }
+
+/**
+ * Data to change profile
+ */
 export interface ChangeProfileData {
+    /**
+     * Display name
+     */
     displayName?: string;
+    /**
+     * Photo url
+     */
     photoURL?: string;
 }
+
+/**
+ * Choice of a poll
+ */
 export interface Choice {
+    /**
+     * Date
+     */
     date: string;
+    /**
+     * Number of votes
+     */
     votes: number;
 }
+
+/**
+ * Poll
+ */
 export interface Poll {
+    /**
+     * ID of a poll
+     */
     id?: string;
+    /**
+     * Title
+     */
     title: string;
+    /**
+     * Choices
+     */
     choices: Choice[];
+    /**
+     * Users that voted
+     */
     usersVoted: string[];
 }
 export interface Environment {
