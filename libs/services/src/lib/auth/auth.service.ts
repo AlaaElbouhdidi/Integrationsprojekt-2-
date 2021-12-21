@@ -13,6 +13,9 @@ import {
 } from 'firebase/auth';
 import { User } from '@api-interfaces';
 
+/**
+ * Auth service
+ */
 @Injectable({
     providedIn: 'root'
 })

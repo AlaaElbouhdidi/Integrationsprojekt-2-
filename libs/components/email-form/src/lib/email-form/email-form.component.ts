@@ -9,6 +9,9 @@ import {
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
+/**
+ * Email form component
+ */
 @Component({
     selector: 'mate-team-email-form',
     templateUrl: './email-form.component.html',

@@ -8,6 +8,9 @@ import {
 } from '@angular/forms';
 import { ChangeEmailData } from '@api-interfaces';
 
+/**
+ * Change email form component
+ */
 @Component({
     selector: 'mate-team-change-email-form',
     templateUrl: './change-email-form.component.html',

@@ -10,6 +10,9 @@ import { IconService } from '@services';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { ChangeProfileData } from '@api-interfaces';
 
+/**
+ * Change profile form component
+ */
 @Component({
     selector: 'mate-team-change-profile-form',
     templateUrl: './change-profile-form.component.html',
