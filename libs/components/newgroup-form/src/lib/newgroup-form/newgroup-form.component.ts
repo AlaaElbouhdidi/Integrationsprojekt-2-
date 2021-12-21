@@ -71,7 +71,8 @@ export class NewgroupFormComponent implements OnInit {
         try {
             const g = {
                 name: this.name.value,
-                description: this.description.value
+                description: this.description.value,
+                admin: ''
             };
             this.loading = true;
             const gid = await this.groupService.addNewGroup(g, this.member);

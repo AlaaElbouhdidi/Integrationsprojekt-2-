@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
+/**
+ * Slideshow component
+ */
 @Component({
     selector: 'mate-team-slideshow',
     templateUrl: './slideshow.component.html',

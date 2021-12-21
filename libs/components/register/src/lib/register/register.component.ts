@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AlertService } from '@services';
 
+/**
+ * Register component
+ */
 @Component({
     selector: 'mate-team-register',
     templateUrl: './register.component.html',

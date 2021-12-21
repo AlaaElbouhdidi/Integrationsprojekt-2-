@@ -14,6 +14,9 @@ import {
     sendEmailVerification
 } from 'firebase/auth';
 
+/**
+ * Auth service
+ */
 @Injectable({
     providedIn: 'root'
 })

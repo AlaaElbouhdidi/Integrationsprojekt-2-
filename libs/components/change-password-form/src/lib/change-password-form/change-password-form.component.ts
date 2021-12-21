@@ -8,6 +8,9 @@ import {
 } from '@angular/forms';
 import { ChangePasswordData } from '@api-interfaces';
 
+/**
+ * Change password form component
+ */
 @Component({
     selector: 'mate-team-change-password-form',
     templateUrl: './change-password-form.component.html',

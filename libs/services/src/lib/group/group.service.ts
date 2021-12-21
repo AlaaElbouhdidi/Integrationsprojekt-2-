@@ -7,17 +7,43 @@ import {
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
+/**
+ * Group service
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class GroupService {
+    /**
+     * ID of the current group
+     */
+    currentGroupId = '';
     groupCollection: AngularFirestoreCollection<Group>;
 
     private success = false;
     private subject = new BehaviorSubject<string>('');
 
+    /**
+     * Constructor of group service
+     * @param afs {AngularFirestore}
+     */
     constructor(public afs: AngularFirestore) {
         this.groupCollection = this.afs.collection('groups');
+    }
+
+    /**
+     * Get a group by id
+     *
+     * @param groupId {string} The id of the group to get
+     * @returns {Promise<Group | undefined>} A Promise containing the group or undefined if no group found
+     */
+    getGroupById(groupId: string): Promise<Group | undefined> {
+        return this.afs
+            .collection<Group>('groups')
+            .doc(groupId)
+            .ref
+            .get()
+            .then(group => group.data());
     }
 
     toggleSuccess( gid: string): void {

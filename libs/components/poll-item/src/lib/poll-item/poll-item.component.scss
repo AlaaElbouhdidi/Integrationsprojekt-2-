@@ -1,0 +1,105 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+.poll-item {
+    position: relative;
+    color: $white !important;
+    background: $darkAccent;
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    @include for-tablet-portrait-up {
+        width: 18rem;
+    }
+    @include for-tablet-landscape-up {
+        width: 20rem;
+    }
+    p, h5 {
+        margin: 0 !important;
+    }
+    &-header {
+        text-align: center;
+        h5 {
+            font-size: 1.05rem;
+        }
+        fa-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: 0.25s;
+            &:hover {
+                color: $error;
+            }
+        }
+    }
+    &-body {
+        padding: 1.5rem 0;
+        &-choice {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0.25rem 0;
+            input {
+                margin-right: 2rem;
+            }
+        }
+        &-results {
+            &-text {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.25rem 0;
+                span {
+                    font-size: 0.9rem;
+                    color: $light;
+                }
+            }
+            &-bar {
+                height: 0.5rem;
+                border-radius: 0.25rem;
+                background: $white;
+                width: 10rem;
+            }
+        }
+    }
+    &-footer {
+        &-choices-btn-wrapper {
+            @include flex-center;
+        }
+        &-results-btn-wrapper {
+            text-align: center;
+        }
+        button {
+            width: 50%;
+            cursor: pointer;
+            border: none;
+            border-radius: 0.25rem;
+            transition: 0.25s;
+        }
+        &-submit-btn {
+            background: $success;
+            color: $white;
+            margin-right: 0.25rem;
+            &:hover {
+                background: $successHover;
+            }
+        }
+        &-results-btn {
+            background: $white;
+            color: $dark;
+            margin-left: 0.25rem;
+            &:hover {
+                background: $main;
+                color: $white;
+            }
+        }
+    }
+}
+.disabled-btn {
+    opacity: 50%;
+    pointer-events: none;
+}

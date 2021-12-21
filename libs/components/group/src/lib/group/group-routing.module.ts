@@ -5,6 +5,10 @@ import {
     redirectUnauthorizedTo,
     canActivate
 } from '@angular/fire/compat/auth-guard';
+import { GroupPollsEventsModule } from '@group-polls-events';
+import {
+    GroupPollsEventsComponent
+} from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -16,7 +20,7 @@ const route = {
         // components get replaced by each individual group nav component (events, chat, statistics, members)
         {
             path: 'events',
-            component: GroupComponent
+            component: GroupPollsEventsComponent
         },
         {
             path: 'chat',
@@ -36,7 +40,10 @@ const route = {
 const routes = [route];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
+    imports: [
+        RouterModule.forChild(routes),
+        GroupPollsEventsModule
+    ],
     exports: [RouterModule]
 })
 export class GroupRoutingModule {}

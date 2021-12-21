@@ -24,6 +24,16 @@ export class CreateGroupDto implements Group {
     })
     name: string;
     /**
+     * The admin of a group
+     **/
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty({
+        example: 'adminId',
+        description: 'The admin of the group'
+    })
+    admin: string;
+    /**
      * The description property of a group
      **/
     @IsNotEmpty()

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * Login component
+ */
 @Component({
     selector: 'mate-team-login',
     templateUrl: './login.component.html',

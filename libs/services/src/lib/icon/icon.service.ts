@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
+/**
+ * Icon service
+ */
 @Injectable({
     providedIn: 'root'
 })
