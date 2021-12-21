@@ -76,7 +76,6 @@
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@nestjs/common": "^8.2.3",
         "@nestjs/config": "^1.1.2",
-        "@compodoc/compodoc": "^1.1.15",
         "@nestjs/core": "^8.2.3",
         "@nestjs/passport": "^8.0.1",
         "@nestjs/platform-express": "^8.2.0",

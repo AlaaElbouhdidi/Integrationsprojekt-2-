@@ -134,7 +134,6 @@ export interface Group {
     name?: string;
     description?: string;
     admin: string;
-    activity: Activity;
     member?: Member[]; // Array of uid's
 }
 
