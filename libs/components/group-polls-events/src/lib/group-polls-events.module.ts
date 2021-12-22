@@ -11,6 +11,7 @@ import {
 import { CreatePollFormModule } from '@create-poll-form';
 import { ConfirmationModalModule } from '@confirmation-modal';
 import { PollItemModule } from '@poll-item';
+import { GroupEventItemModule } from '@group-event-item';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { PollItemModule } from '@poll-item';
         FontAwesomeModule,
         CreatePollFormModule,
         ConfirmationModalModule,
-        PollItemModule
+        PollItemModule,
+        GroupEventItemModule
     ],
     declarations: [
       GroupPollsEventsComponent
