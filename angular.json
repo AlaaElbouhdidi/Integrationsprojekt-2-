@@ -446,6 +446,30 @@
                 }
             }
         },
+        "confirmation-modal": {
+            "projectType": "library",
+            "root": "libs/components/confirmation-modal",
+            "sourceRoot": "libs/components/confirmation-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/confirmation-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/confirmation-modal/src/**/*.ts",
+                            "libs/components/confirmation-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",
@@ -546,6 +570,30 @@
                     "options": {
                         "lintFilePatterns": [
                             "apps/e2e/create-event-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "create-poll-form": {
+            "projectType": "library",
+            "root": "libs/components/create-poll-form",
+            "sourceRoot": "libs/components/create-poll-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/create-poll-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/create-poll-form/src/**/*.ts",
+                            "libs/components/create-poll-form/src/**/*.html"
                         ]
                     }
                 }
@@ -755,6 +803,87 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["apps/e2e/footer-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "group-polls-events": {
+            "projectType": "library",
+            "root": "libs/components/group-polls-events",
+            "sourceRoot": "libs/components/group-polls-events/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-polls-events/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-polls-events/src/**/*.ts",
+                            "libs/components/group-polls-events/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/group-polls-events/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/group-polls-events",
+                        "config": {
+                            "configFolder": "libs/components/group-polls-events/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "group-polls-events-e2e": {
+            "root": "apps/e2e/group-polls-events-e2e",
+            "sourceRoot": "apps/e2e/group-polls-events-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/group-polls-events-e2e/cypress.json",
+                        "devServerTarget": "group-polls-events:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "group-polls-events:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/group-polls-events-e2e/**/*.{js,ts}"
+                        ]
                     }
                 }
             }
@@ -1570,6 +1699,30 @@
                     "options": {
                         "lintFilePatterns": [
                             "apps/e2e/password-reset-form-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "poll-item": {
+            "projectType": "library",
+            "root": "libs/components/poll-item",
+            "sourceRoot": "libs/components/poll-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/poll-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/poll-item/src/**/*.ts",
+                            "libs/components/poll-item/src/**/*.html"
                         ]
                     }
                 }

@@ -9,6 +9,9 @@ import {
     ChangeProfileData
 } from '@api-interfaces';
 
+/**
+ * Profile component
+ */
 @Component({
     selector: 'mate-team-profile',
     templateUrl: './profile.component.html',

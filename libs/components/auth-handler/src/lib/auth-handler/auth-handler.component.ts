@@ -4,6 +4,9 @@ import { Subject } from 'rxjs';
 import { AlertService, AuthService } from '@services';
 import { takeUntil } from 'rxjs/operators';
 
+/**
+ * Auth handler component
+ */
 @Component({
     selector: 'mate-team-auth-handler',
     templateUrl: './auth-handler.component.html',

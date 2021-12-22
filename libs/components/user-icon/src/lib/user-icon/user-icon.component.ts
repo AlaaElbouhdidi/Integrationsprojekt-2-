@@ -2,6 +2,9 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IconService } from '@services';
 
+/**
+ * User icon component
+ */
 @Component({
     selector: 'mate-team-user-icon',
     templateUrl: './user-icon.component.html',
