@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EventService, GroupService } from '@services';
 import { Event, Group } from '@api-interfaces';
-import { zip } from 'rxjs';
-// import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
     selector: 'mate-team-events-groups-page',
     templateUrl: './events-groups-page.component.html',
     styleUrls: ['./events-groups-page.component.scss']
 })
-export class EventsGroupsPageComponent implements OnInit {
+export class EventsGroupsPageComponent {
     loading = true;
     /**
      * Events that are displayed
@@ -29,14 +27,4 @@ export class EventsGroupsPageComponent implements OnInit {
         private eventService: EventService,
         private groupService: GroupService
     ) {}
-
-    /**
-     * Sets the events and groups.
-     */
-    ngOnInit(): void {
-        zip(this.eventService.getEvents()).subscribe(([events]) => {
-            this.events = events;
-            this.loading = false;
-        });
-    }
 }

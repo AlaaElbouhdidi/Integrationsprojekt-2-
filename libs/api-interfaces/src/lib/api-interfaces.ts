@@ -124,9 +124,16 @@ export interface Event {
     id?: string;
     name: string;
     description: string;
-    date: Date;
-    participants?: string[]; // Array of uid's
-    owner?: string;
+    date: string;
+    groupID: string;
+    done: boolean;
+    participants: Participant[];
+}
+
+export interface Participant {
+    uid: string;
+    displayName: string;
+    icon: string;
 }
 
 export interface Group {
