@@ -1,0 +1,87 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+.group-event-item {
+    color: $white !important;
+    background: $darkAccent;
+    border: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    @include for-tablet-portrait-up {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &-info {
+        @include flex-center;
+        p {
+            margin: 0;
+        }
+        &-title {
+            @include flex-center;
+            text-align: left;
+            fa-icon {
+                margin-right: 0.5rem;
+            }
+        }
+        &-date {
+            @include flex-center;
+            margin-left: 2rem;
+            fa-icon {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    &-buttons {
+        margin-top: 1rem;
+        @include for-tablet-portrait-up {
+            margin-top: 0;
+        }
+        button {
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: 0.25s;
+            padding: 0 1.5rem;
+        }
+        &-description {
+            background: $white;
+            color: $dark;
+            margin-right: 0.5rem;
+            &:hover {
+                background: $main;
+                color: $white;
+            }
+        }
+        &-participate {
+            background: $success;
+            color: $white;
+            margin-left: 0.5rem;
+            &:hover {
+                background: $successHover;
+            }
+        }
+        fa-icon {
+            cursor: pointer;
+            transition: 0.25s;
+            margin-left: 1rem;
+        }
+        fa-icon[icon="trash"] {
+            &:hover {
+                color: $error;
+            }
+        }
+        fa-icon[icon="edit"] {
+            &:hover {
+                color: $success;
+            }
+        }
+    }
+}
+.disabled-btn {
+    opacity: 50%;
+    pointer-events: none;
+}
