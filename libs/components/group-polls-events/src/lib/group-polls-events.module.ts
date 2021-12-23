@@ -12,6 +12,7 @@ import { CreatePollFormModule } from '@create-poll-form';
 import { ConfirmationModalModule } from '@confirmation-modal';
 import { PollItemModule } from '@poll-item';
 import { GroupEventItemModule } from '@group-event-item';
+import { EventDescriptionModalModule } from '@event-description-modal';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { GroupEventItemModule } from '@group-event-item';
         CreatePollFormModule,
         ConfirmationModalModule,
         PollItemModule,
-        GroupEventItemModule
+        GroupEventItemModule,
+        EventDescriptionModalModule
     ],
     declarations: [
       GroupPollsEventsComponent

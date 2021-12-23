@@ -28,14 +28,15 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      */
     polls: Poll[] = [];
     events: Event[] = [];
+    descriptionEvent: Event = {} as Event;
     /**
      * Reference for the confirmation modal
      */
     confirmationModalRef: NgbModalRef | undefined;
     /**
-     * Reference for the poll modal
+     * Modal reference
      */
-    pollModalRef: NgbModalRef | undefined;
+    modalRef: NgbModalRef | undefined;
     /**
      * Determines if user is admin
      */
@@ -64,15 +65,15 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      *
      * @param content {unknown} The modal to open
      */
-    openPollModal(content: unknown): void {
-        this.pollModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+    openModal(content: unknown): void {
+        this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
     /**
      * Closes the poll modal
      */
-    closePollModal(): void {
-        this.pollModalRef?.dismiss();
+    closeModal(): void {
+        this.modalRef?.dismiss();
     }
 
     /**
@@ -128,7 +129,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
-        this.closePollModal();
+        this.closeModal();
     }
 
     /**
@@ -182,6 +183,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
+    }
+
+    showEventDescription(event: Event, modal: unknown) {
+        this.descriptionEvent = event;
+        this.openModal(modal);
     }
 
     async updateEvent(event: Event): Promise<void> {

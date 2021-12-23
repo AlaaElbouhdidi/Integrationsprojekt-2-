@@ -2,7 +2,7 @@
     <div class="polls-header">
         <h5>Polls</h5>
         <fa-icon icon="poll"></fa-icon>
-        <button *ngIf="isAdmin" (click)="openPollModal(pollModal)">
+        <button *ngIf="isAdmin" (click)="openModal(pollModal)">
             + Create new poll
         </button>
     </div>
@@ -32,7 +32,7 @@
         </h5>
         <fa-icon
             icon="times-circle"
-            (click)="closePollModal()">
+            (click)="closeModal()">
         </fa-icon>
     </div>
     <div class="modal-body">
@@ -60,6 +60,13 @@
     </mate-team-confirmation-modal>
 </ng-template>
 
+<ng-template #eventDescriptionModal>
+    <mate-team-event-description-modal
+        [event]="descriptionEvent"
+        (dismissModalEvent)="closeModal()" >
+    </mate-team-event-description-modal>
+</ng-template>
+
 <section class="events">
     <div class="events-header">
         <h5>Events</h5>
@@ -73,6 +80,7 @@
             <mate-team-group-event-item
                 [event]="event"
                 [isAdmin]="isAdmin"
+                (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
                 (participateEvent)="updateEvent($event)"
                 (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
             >

@@ -10,7 +10,7 @@ import { AuthService } from '@services';
 export class GroupEventItemComponent implements OnChanges {
     @Output() participateEvent = new EventEmitter<Event>();
     @Output() deleteEvent = new EventEmitter<string>();
-    @Output() descriptionEvent = new EventEmitter();
+    @Output() descriptionEvent = new EventEmitter<Event>();
     @Input() event: Event = {} as Event;
     @Input() isAdmin = false;
     participating = false;
@@ -26,7 +26,7 @@ export class GroupEventItemComponent implements OnChanges {
     }
 
     showDescription(): void {
-        this.descriptionEvent.emit();
+        this.descriptionEvent.emit(this.event);
     }
 
     participate(): void {
