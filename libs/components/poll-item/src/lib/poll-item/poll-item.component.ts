@@ -122,6 +122,8 @@ export class PollItemComponent implements OnChanges {
 
     /**
      * Check if user voted on a given poll if input changes
+     *
+     * @param changes {SimpleChanges} The changes
      */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.poll) {

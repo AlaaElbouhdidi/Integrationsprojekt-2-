@@ -27,7 +27,13 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * Polls
      */
     polls: Poll[] = [];
+    /**
+     * Events
+     */
     events: Event[] = [];
+    /**
+     * Event to show the description of
+     */
     descriptionEvent: Event = {} as Event;
     /**
      * Reference for the confirmation modal
@@ -61,16 +67,16 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     ) { }
 
     /**
-     * Opens the poll modal
+     * Opens a modal
      *
-     * @param content {unknown} The modal to open
+     * @param content {unknown} The modal reference
      */
     openModal(content: unknown): void {
         this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
     /**
-     * Closes the poll modal
+     * Closes a modal
      */
     closeModal(): void {
         this.modalRef?.dismiss();
@@ -185,11 +191,22 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Show the description of an event
+     *
+     * @param event {Event} The event to show the description of
+     * @param modal {unknown} The description modal reference
+     */
     showEventDescription(event: Event, modal: unknown) {
         this.descriptionEvent = event;
         this.openModal(modal);
     }
 
+    /**
+     * Update an event
+     *
+     * @param event {Event} The event data to update
+     */
     async updateEvent(event: Event): Promise<void> {
         if (!event.id) {
             return;
@@ -208,6 +225,12 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Delete an event
+     *
+     * @param id {string} The id of the event to delete
+     * @param modal {unknown} The confirmation modal to open
+     */
     async deleteEvent(id: string, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {

@@ -4,21 +4,42 @@ import { Event } from '@api-interfaces';
 import { GroupService } from '../group/group.service';
 import { Observable } from 'rxjs';
 
+/**
+ * Event service
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class EventService {
+
+    /**
+     * Constructor of event service
+     * @param afs {AngularFirestore}
+     * @param groupService {GroupService}
+     */
     constructor(
         private afs: AngularFirestore,
         private groupService: GroupService
     ) { }
 
+    /**
+     * Remove id from an event
+     *
+     * @param event {Event} Event to prepare for saving
+     * @returns {Event} Event without id
+     * @private
+     */
     private static copyAndPrepare(event: Event): Event {
         const copy = {...event};
         delete copy.id;
         return copy;
     }
 
+    /**
+     * Get all active events of a group
+     *
+     * @returns {Observable<Event[]>} Observable containing array of events
+     */
     getActiveEventsOfGroup(): Observable<Event[]> {
         return this.afs
             .collection<Event>(
@@ -29,6 +50,12 @@ export class EventService {
             .valueChanges({ idField: 'id' });
     }
 
+    /**
+     * Update an event
+     *
+     * @param eventId {string} The id of the event to update
+     * @param event {Event} The event data to update
+     */
     updateEvent(eventId: string, event: Event): Promise<void> {
         return this.afs
             .collection<Event>('events')
@@ -36,6 +63,11 @@ export class EventService {
             .update(EventService.copyAndPrepare(event));
     }
 
+    /**
+     * Delete an event
+     *
+     * @param eventId {string} The id of the event to delete
+     */
     deleteEvent(eventId: string): Promise<void> {
         return this.afs
             .collection<Event>('events')

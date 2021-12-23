@@ -120,19 +120,55 @@ export interface Member {
     email?: string
 }
 
+/**
+ * Event
+ */
 export interface Event {
+    /**
+     * ID of an event
+     */
     id?: string;
+    /**
+     * Name
+     */
     name: string;
+    /**
+     * Description
+     */
     description: string;
+    /**
+     * Event date
+     */
     date: string;
+    /**
+     * ID of the group to which the event belongs
+     */
     groupID: string;
+    /**
+     * Indicates if event is active
+     */
     done: boolean;
+    /**
+     * Participants of an event
+     */
     participants: Participant[];
 }
 
+/**
+ * Participant
+ */
 export interface Participant {
+    /**
+     * User id
+     */
     uid: string;
+    /**
+     * Display name
+     */
     displayName: string;
+    /**
+     * Icon code
+     */
     icon: string;
 }
 
