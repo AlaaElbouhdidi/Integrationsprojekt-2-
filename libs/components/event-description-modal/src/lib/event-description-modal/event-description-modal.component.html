@@ -1,6 +1,7 @@
 <div class="modal-header">
     <h5>EVENT INFORMATION</h5>
     <fa-icon
+        id="dismiss-modal-icon"
         icon="times-circle"
         (click)="dismissModalEvent.emit()" >
     </fa-icon>
@@ -20,5 +21,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="modal-footer-green-btn" (click)="dismissModalEvent.emit()">Close</button>
+    <button class="modal-footer-red-btn" (click)="dismissModalEvent.emit()">Close</button>
 </div>

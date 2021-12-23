@@ -5,7 +5,8 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import {
     faClock,
     faAngleDoubleRight,
-    faAlignJustify
+    faAlignJustify,
+    faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
@@ -23,7 +24,8 @@ export class EventDescriptionModalModule {
         library.addIcons(
             faClock,
             faAngleDoubleRight,
-            faAlignJustify
+            faAlignJustify,
+            faTimesCircle
         );
     }
 }

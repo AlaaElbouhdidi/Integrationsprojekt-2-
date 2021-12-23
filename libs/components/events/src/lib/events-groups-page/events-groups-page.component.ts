@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EventService, GroupService } from '@services';
+import { GroupService } from '@services';
 import { Event, Group } from '@api-interfaces';
 
 @Component({
@@ -19,12 +19,10 @@ export class EventsGroupsPageComponent {
     groups: Group[] | undefined;
 
     /**
-     * Constructor which gets the GroupService and EventService
-     * @param eventService
+     * Constructor which gets the GroupService
      * @param groupService
      */
     constructor(
-        private eventService: EventService,
         private groupService: GroupService
     ) {}
 }
