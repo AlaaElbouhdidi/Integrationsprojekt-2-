@@ -703,6 +703,30 @@
                 }
             }
         },
+        "event-description-modal": {
+            "projectType": "library",
+            "root": "libs/components/event-description-modal",
+            "sourceRoot": "libs/components/event-description-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/event-description-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/event-description-modal/src/**/*.ts",
+                            "libs/components/event-description-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "events": {
             "projectType": "library",
             "root": "libs/components/events",
