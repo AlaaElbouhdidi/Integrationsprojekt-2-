@@ -78,6 +78,8 @@ export class SlideshowComponent implements OnDestroy {
     }
 
     /**
+     * Set the slide interval
+     *
      * @returns {NodeJS.Timeout} Interval of the slideshow
      */
     setSlideInterval(): ReturnType<typeof setInterval> {

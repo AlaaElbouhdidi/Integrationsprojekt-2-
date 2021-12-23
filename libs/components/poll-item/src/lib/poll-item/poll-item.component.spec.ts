@@ -5,6 +5,7 @@ import { AlertService, AuthService } from '@services';
 import { PollItemModule } from '../poll-item.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Poll } from '@api-interfaces';
+import { SimpleChanges } from '@angular/core';
 
 describe('PollItemComponent', () => {
     let component: PollItemComponent;
@@ -143,11 +144,21 @@ describe('PollItemComponent', () => {
         expect(spy).toHaveBeenCalledWith(pollMock);
     });
 
-    it('should check if user voted on ngOnChange', () => {
+    it('should check if user voted on component change if poll provided', () => {
+        const changesMock: SimpleChanges = {
+            poll: {
+                previousValue: '',
+                currentValue: '',
+                firstChange: true,
+                isFirstChange(): boolean {
+                    return true
+                }
+            }
+        }
         const spy = jest.spyOn(component, 'checkIfUserVoted');
         component.poll = pollMock;
         fixture.detectChanges();
-        component.ngOnChanges();
+        component.ngOnChanges(changesMock);
         expect(spy).toHaveBeenCalled();
     });
 });

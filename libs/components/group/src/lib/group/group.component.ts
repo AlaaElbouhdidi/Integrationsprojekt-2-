@@ -64,7 +64,7 @@ export class GroupComponent implements OnInit, OnDestroy {
      *
      * @param routeParam The parameter to navigate to
      */
-    navigateTo(routeParam: 'events' | 'statistics' | 'chat' | 'members'): void {
+    navigateTo(routeParam: 'events' | 'statistics' | 'members'): void {
         this.router.navigate([routeParam], { relativeTo: this.route });
     }
 

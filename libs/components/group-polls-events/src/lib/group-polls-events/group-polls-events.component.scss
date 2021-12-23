@@ -54,3 +54,17 @@
         }
     }
 }
+.events {
+    &-body {
+        width: 100%;
+        &-item {
+            margin-top: 1rem;
+        }
+        &-message {
+            margin-top: 1rem;
+            fa-icon {
+                color: $warning;
+            }
+        }
+    }
+}

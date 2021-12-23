@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { IconService } from './icon/icon.service';
 import { PollService } from './poll/poll.service';
 import { GroupService } from './group/group.service';
+import { EventService } from './event/event.service';
 
 @NgModule({
     imports: [CommonModule, AngularFireAuthModule],
@@ -16,6 +17,7 @@ import { GroupService } from './group/group.service';
         IconService,
         PollService,
         GroupService,
+        EventService,
         AngularFireAuth
     ],
     exports: [AngularFireAuthModule]

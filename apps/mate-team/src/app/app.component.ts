@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertService } from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@env';
-import { map, Observable } from 'rxjs';
-import { Event } from '@api-interfaces';
 
+/**
+ * App component
+ */
 @Component({
     selector: 'mate-team-root',
     templateUrl: './app.component.html',
@@ -29,22 +28,10 @@ import { Event } from '@api-interfaces';
         ])
     ]
 })
-export class AppComponent implements OnInit {
-    apiUrl = environment.apiUrl;
-    events$: Observable<Event[]> = this.getEvents();
-    constructor(private http: HttpClient, public alertService: AlertService) {}
-    ngOnInit() {
-        this.events$
-            .pipe(
-                map((events: Event[]) =>
-                    events.forEach((event: Event) => {
-                        console.log(event);
-                    })
-                )
-            )
-            .subscribe();
-    }
-    getEvents() {
-        return (this.events$ = this.http.get<Event[]>(`${this.apiUrl}/event`));
-    }
+export class AppComponent {
+    /**
+     * Constructor of app component
+     * @param alertService {AlertService}
+     */
+    constructor(public alertService: AlertService) {}
 }

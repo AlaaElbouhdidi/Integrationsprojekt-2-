@@ -1,0 +1,116 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+.group-event-item {
+    position: relative;
+    color: $white !important;
+    background: $darkAccent;
+    border: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    @include for-tablet-portrait-up {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &-info {
+        @include flex-center;
+        p {
+            margin: 0;
+        }
+        &-title {
+            @include flex-center;
+            text-align: left;
+            fa-icon {
+                margin-right: 0.5rem;
+            }
+        }
+        &-date {
+            display: none;
+            margin-left: 2rem;
+            @include for-tablet-landscape-up {
+                @include flex-center;
+            }
+            fa-icon {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+    &-buttons {
+        margin-top: 1rem;
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        @include for-tablet-portrait-up {
+            flex-direction: row;
+            margin-top: 0;
+            width: auto;
+            justify-content: flex-end;
+        }
+        button {
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: 0.25s;
+            padding: 0 1.5rem;
+            width: 100%;
+            @include for-tablet-portrait-up {
+                width: auto;
+            }
+        }
+        &-description {
+            background: $white;
+            color: $dark;
+            @include for-tablet-portrait-up {
+               margin-right: 0.5rem;
+            }
+            &:hover {
+                background: $main;
+                color: $white;
+            }
+        }
+        &-participate {
+            background: $success;
+            color: $white;
+            margin-top: 0.5rem;
+            @include for-tablet-portrait-up {
+                margin-top: 0;
+                margin-left: 0.5rem;
+            }
+            &:hover {
+                background: $successHover;
+            }
+        }
+        fa-icon {
+            cursor: pointer;
+            transition: 0.25s;
+            position: absolute;
+            padding: 0.5rem;
+            top: 0;
+            @include for-tablet-portrait-up {
+                position: static;
+                padding: 0;
+                margin-left: 1rem;
+            }
+        }
+        fa-icon[icon="trash"] {
+            right: 0;
+            &:hover {
+                color: $error;
+            }
+        }
+        fa-icon[icon="edit"] {
+            left: 0;
+            &:hover {
+                color: $success;
+            }
+        }
+    }
+}
+.disabled-btn {
+    opacity: 50%;
+    pointer-events: none;
+}

@@ -39,13 +39,13 @@
             padding: 0.25rem 1.5rem;
             transition: 0.25s;
         }
-        &-red-btn {
+        &-green-btn {
             background: $success;
             &:hover {
                 background: $successHover;
             }
         }
-        &-green-btn {
+        &-red-btn {
             background: $error;
             &:hover {
                 background: $errorHover;
