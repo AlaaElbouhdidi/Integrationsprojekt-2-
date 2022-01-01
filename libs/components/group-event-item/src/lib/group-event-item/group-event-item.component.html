@@ -12,6 +12,11 @@
     <div class="group-event-item-buttons">
         <button
             class="group-event-item-buttons-description"
+            (click)="showTeams()" >
+            Teams
+        </button>
+        <button
+            class="group-event-item-buttons-description"
             (click)="showDescription()" >
             Description
         </button>
@@ -22,11 +27,6 @@
             (click)="participate()" >
             {{ participating ? 'Participating' : 'Participate' }}
         </button>
-        <fa-icon
-            icon="edit"
-            (click)="edit()"
-            *ngIf="isAdmin" >
-        </fa-icon>
         <fa-icon
             icon="trash"
             *ngIf="isAdmin"

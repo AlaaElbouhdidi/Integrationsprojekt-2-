@@ -1,5 +1,8 @@
 <div class="modal-header">
-    <h5>TEAMS</h5>
+    <h5>
+        <fa-icon icon="users"></fa-icon>
+        TEAMS
+    </h5>
     <fa-icon
         id="dismiss-modal-icon"
         icon="times-circle"
@@ -7,7 +10,16 @@
     </fa-icon>
 </div>
 <div class="modal-body">
-    <mate-team-team-form></mate-team-team-form>
+    <mate-team-team-form
+        *ngIf="isAdmin"
+        (createTeamEvent)="createTeam($event)">
+    </mate-team-team-form>
+    <mate-team-team-list
+        [isAdmin]="isAdmin"
+        [teams]="teams"
+        (removeUserFromTeamEvent)="updateTeam($event)"
+        (deleteTeamEvent)="deleteTeam($event)">
+    </mate-team-team-list>
 </div>
 <div class="modal-footer">
     <button class="modal-footer-red-btn" (click)="dismissModalEvent.emit()">Close</button>

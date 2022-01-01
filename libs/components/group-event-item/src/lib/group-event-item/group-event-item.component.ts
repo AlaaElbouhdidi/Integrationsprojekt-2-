@@ -15,7 +15,7 @@ export class GroupEventItemComponent implements OnChanges {
      * Participate event
      */
     @Output() participateEvent = new EventEmitter<Event>();
-    @Output() editEvent = new EventEmitter();
+    @Output() teamEvent = new EventEmitter<Event>();
     /**
      * Delete event
      */
@@ -63,6 +63,10 @@ export class GroupEventItemComponent implements OnChanges {
         this.descriptionEvent.emit(this.event);
     }
 
+    showTeams(): void {
+        this.teamEvent.emit(this.event);
+    }
+
     /**
      * Adds user to participants and emits participate event to parent component with event data
      */
@@ -78,10 +82,6 @@ export class GroupEventItemComponent implements OnChanges {
         }
         this.event.participants.push(participant);
         this.participateEvent.emit(this.event);
-    }
-
-    edit(): void {
-        this.editEvent.emit();
     }
 
     /**

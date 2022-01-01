@@ -197,6 +197,11 @@ export interface Team {
     participants: Participant[];
 }
 
+export interface UpdateTeamParticipantsData {
+    team: Team;
+    participant: Participant;
+}
+
 export interface User {
     uid: string;
     email?: string;

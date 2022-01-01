@@ -69,7 +69,10 @@
 
 <ng-template #teamModal>
     <mate-team-team-modal
-    (dismissModalEvent)="closeModal()">
+        [isAdmin]="isAdmin"
+        [groupAdmin]="group.admin"
+        [event]="descriptionEvent"
+        (dismissModalEvent)="closeModal()">
     </mate-team-team-modal>
 </ng-template>
 
@@ -88,7 +91,7 @@
                 [isAdmin]="isAdmin"
                 (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
                 (participateEvent)="updateEvent($event)"
-                (editEvent)="editEvent(teamModal)"
+                (teamEvent)="editEvent($event, teamModal)"
                 (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
             >
             </mate-team-group-event-item>
