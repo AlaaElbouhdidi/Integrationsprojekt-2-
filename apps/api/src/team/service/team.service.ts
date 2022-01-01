@@ -50,8 +50,8 @@ export class TeamService {
             this.logger.log(`Successfully created team with id ${team.id}`);
             const teamData: Team = {
                 id: team.id,
-                member: team.get('member'),
-                groupId: team.get('groupId')
+                name: team.get('name'),
+                participants: team.get('participants')
             };
             return teamData;
         } catch (e) {
@@ -86,8 +86,8 @@ export class TeamService {
                     snapshot.forEach((team) => {
                         const teamData: Team = {
                             id: team.id,
-                            groupId: team.get('groupId'),
-                            member: team.get('member')
+                            name: team.get('name'),
+                            participants: team.get('participants')
                         };
                         this.logger.log(teamData);
                         teams.push(teamData);
@@ -125,8 +125,8 @@ export class TeamService {
                     }
                     const teamData: Team = {
                         id: team.id,
-                        member: team.get('member'),
-                        groupId: team.get('groupId')
+                        name: team.get('name'),
+                        participants: team.get('participants')
                     };
                     this.logger.log(`Successfully fetched team with id ${id}`);
                     this.logger.log(teamData);
@@ -174,8 +174,8 @@ export class TeamService {
                     const team = await this.teamsRef.doc(id).get();
                     const teamData: Team = {
                         id: oldTeam.id,
-                        groupId: team.get('groupId'),
-                        member: team.get('member')
+                        name: team.get('name'),
+                        participants: team.get('participants')
                     };
                     this.logger.log(`Successfully updated team with id ${id}`);
                     this.logger.log(teamData);
@@ -212,8 +212,8 @@ export class TeamService {
                     }
                     const teamData: Team = {
                         id: team.id,
-                        groupId: team.get('groupId'),
-                        member: team.get('member')
+                        name: team.get('name'),
+                        participants: team.get('participants')
                     };
                     await this.teamsRef.doc(id).delete();
                     this.logger.log(`Successfully deleted team with id ${id}`);

@@ -193,8 +193,8 @@ export interface Game {
 
 export interface Team {
     id?: string;
-    member: Member[];
-    groupId: string;
+    name: string;
+    participants: Participant[];
 }
 
 export interface User {
