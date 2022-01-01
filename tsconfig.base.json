@@ -56,9 +56,7 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@team-modal": [
-                "libs/components/team-modal/src/index.ts"
-            ],
+            "@team-form": ["libs/components/team-form/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [
@@ -74,6 +72,7 @@
             "@services": ["libs/services/src/index.ts"],
             "@slideshow": ["libs/components/slideshow/src/index.ts"],
             "@styles": ["libs/styles/src/index.ts"],
+            "@team-modal": ["libs/components/team-modal/src/index.ts"],
             "@user-icon": ["libs/components/user-icon/src/index.ts"]
         }
     },

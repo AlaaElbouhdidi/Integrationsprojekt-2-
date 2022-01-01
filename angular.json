@@ -2148,6 +2148,30 @@
                 }
             }
         },
+        "team-form": {
+            "projectType": "library",
+            "root": "libs/components/team-form",
+            "sourceRoot": "libs/components/team-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-form/src/**/*.ts",
+                            "libs/components/team-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "team-modal": {
             "projectType": "library",
             "root": "libs/components/team-modal",
