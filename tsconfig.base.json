@@ -38,6 +38,9 @@
             ],
             "@email-form": ["libs/components/email-form/src/index.ts"],
             "@env": ["libs/env/src/index.ts"],
+            "@event-description-modal": [
+                "libs/components/event-description-modal/src/index.ts"
+            ],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@group": ["libs/components/group/src/index.ts"],
@@ -53,8 +56,8 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@event-description-modal": [
-                "libs/components/event-description-modal/src/index.ts"
+            "@team-modal": [
+                "libs/components/team-modal/src/index.ts"
             ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],

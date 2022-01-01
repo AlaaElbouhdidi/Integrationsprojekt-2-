@@ -13,6 +13,7 @@ import { ConfirmationModalModule } from '@confirmation-modal';
 import { PollItemModule } from '@poll-item';
 import { GroupEventItemModule } from '@group-event-item';
 import { EventDescriptionModalModule } from '@event-description-modal';
+import { TeamModalModule } from '@team-modal';
 
 @NgModule({
     imports: [
@@ -20,6 +21,7 @@ import { EventDescriptionModalModule } from '@event-description-modal';
         FontAwesomeModule,
         CreatePollFormModule,
         ConfirmationModalModule,
+        TeamModalModule,
         PollItemModule,
         GroupEventItemModule,
         EventDescriptionModalModule

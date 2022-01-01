@@ -225,6 +225,10 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    editEvent(modal: unknown): void {
+        this.openModal(modal);
+    }
+
     /**
      * Delete an event
      *
