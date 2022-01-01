@@ -5,7 +5,7 @@ import {
     AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -54,4 +54,18 @@ export class GroupService {
         })
         return q;
     }
+     getAllMembers(gid: string): Observable<Member[]>{
+        return this.afs.collection<Member>(`groups/${gid}/members`).snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+              const data = a.payload.doc.data() as Member;
+              return {...data};
+            }))
+        );
+    }
+    deleteMember(gid: string, m: Member){
+         this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).delete();
+    }
+    toggleIsAdmin(gid: string, m: Member){
+        this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).update({ isAdmin: !m.isAdmin});
+   }
 }

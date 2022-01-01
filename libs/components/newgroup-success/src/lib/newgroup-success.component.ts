@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./newgroup-success.component.scss']
 })
 export class NewgroupSuccessComponent implements OnDestroy {
-
     selectable = true;
     removable = true;
     addOnBlur = true;
@@ -28,7 +27,7 @@ export class NewgroupSuccessComponent implements OnDestroy {
      */
     subscription: Subscription;
     /**
-     * created group id 
+     * created group id
      */
     private gid = '';
     /**
@@ -42,11 +41,11 @@ export class NewgroupSuccessComponent implements OnDestroy {
         private groupService: GroupService,
         private authService: AuthService,
         private alertService: AlertService,
-        private router : Router
+        private router: Router
     ) {
-        this.subscription = this.groupService
-            .onToggle()
-            .subscribe((value) => {this.gid = value;}); 
+        this.subscription = this.groupService.onToggle().subscribe((value) => {
+            this.gid = value;
+        });
     }
 
     ngOnDestroy() {
@@ -87,7 +86,7 @@ export class NewgroupSuccessComponent implements OnDestroy {
             if (state === 0 || state === 1) {
                 const m: Member = {
                     isAdmin: false,
-                    email: e,
+                    email: e
                 };
                 const res = await this.groupService.isAlreadyMember(
                     this.gid,
@@ -99,7 +98,7 @@ export class NewgroupSuccessComponent implements OnDestroy {
                     console.log(e + ': already member');
                     this.alertService.addAlert({
                         type: 'error',
-                        message: e+': Member already added'
+                        message: e + ': Member already added'
                     });
                 } else {
                     console.log(e + ': not a member yet');
@@ -113,7 +112,10 @@ export class NewgroupSuccessComponent implements OnDestroy {
             if (state === -1) {
                 console.log(e + ': User not exist  ');
                 this.sendSignInEmail(e);
-                this.groupService.addMemberToGroup(this.gid, {email: e, isAdmin: false});
+                this.groupService.addMemberToGroup(this.gid, {
+                    email: e,
+                    isAdmin: false
+                });
                 this.alertService.addAlert({
                     type: 'success',
                     message: 'Member successfully added'
@@ -135,7 +137,6 @@ export class NewgroupSuccessComponent implements OnDestroy {
             .catch((error) => {
                 const errorMessage = error.message;
                 console.error(errorMessage);
-                
             });
     }
 }
