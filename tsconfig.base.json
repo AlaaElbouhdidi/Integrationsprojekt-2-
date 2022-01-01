@@ -28,13 +28,25 @@
             "@change-profile-form": [
                 "libs/components/change-profile-form/src/index.ts"
             ],
+            "@confirmation-modal": [
+                "libs/components/confirmation-modal/src/index.ts"
+            ],
             "@core": ["libs/core/src/index.ts"],
             "@create-event": ["libs/components/create-event/src/index.ts"],
+            "@create-poll-form": [
+                "libs/components/create-poll-form/src/index.ts"
+            ],
             "@email-form": ["libs/components/email-form/src/index.ts"],
             "@env": ["libs/env/src/index.ts"],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@group": ["libs/components/group/src/index.ts"],
+            "@group-event-item": [
+                "libs/components/group-event-item/src/index.ts"
+            ],
+            "@group-polls-events": [
+                "libs/components/group-polls-events/src/index.ts"
+            ],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
@@ -47,6 +59,9 @@
             "@group-members-list-item": [
                 "libs/components/group-members/members-list-item/src/index.ts"
             ],
+            "@event-description-modal": [
+                "libs/components/event-description-modal/src/index.ts"
+            ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [
@@ -55,6 +70,7 @@
             "@password-reset-form": [
                 "libs/components/password-reset-form/src/index.ts"
             ],
+            "@poll-item": ["libs/components/poll-item/src/index.ts"],
             "@profile": ["libs/components/profile/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],

@@ -9,6 +9,9 @@ import {
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
+/**
+ * Register form component
+ */
 @Component({
     selector: 'mate-team-register-form',
     templateUrl: './register-form.component.html',

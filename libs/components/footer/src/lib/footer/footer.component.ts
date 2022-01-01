@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { environment } from '@env';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 
+/**
+ * Footer component
+ */
 @Component({
     selector: 'mate-team-footer',
     templateUrl: './footer.component.html',

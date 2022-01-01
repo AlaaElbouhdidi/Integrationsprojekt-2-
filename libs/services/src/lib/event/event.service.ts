@@ -1,40 +1,77 @@
 import { Injectable } from '@angular/core';
-// import { of } from 'rxjs';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Event } from '@api-interfaces';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@env';
-import { map } from 'rxjs/operators';
+import { GroupService } from '../group/group.service';
+import { Observable } from 'rxjs';
 
-interface EventDto {
-    id: string;
-    name: string;
-    description: string;
-    participants: string[];
-    date: Date;
-}
-
+/**
+ * Event service
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class EventService {
-    private apiUrl: string;
-    constructor(private http: HttpClient) {
-        this.apiUrl = environment.apiUrl;
+
+    /**
+     * Constructor of event service
+     * @param afs {AngularFirestore}
+     * @param groupService {GroupService}
+     */
+    constructor(
+        private afs: AngularFirestore,
+        private groupService: GroupService
+    ) { }
+
+    /**
+     * Remove id from an event
+     *
+     * @param event {Event} Event to prepare for saving
+     * @returns {Event} Event without id
+     * @private
+     */
+    private static copyAndPrepare(event: Event): Event {
+        const copy = {...event};
+        delete copy.id;
+        return copy;
     }
 
-    getEvents(): Observable<Event[]> {
-        return this.http.get<EventDto[]>(`${this.apiUrl}/event`).pipe(
-            map((x) => {
-                return x.map((z) => {
-                    return {
-                        id: z.id,
-                        name: z.name,
-                        description: z.description,
-                        date: z.date
-                    };
-                });
-            })
-        );
+    /**
+     * Get all active events of a group
+     *
+     * @returns {Observable<Event[]>} Observable containing array of events
+     */
+    getActiveEventsOfGroup(): Observable<Event[]> {
+        return this.afs
+            .collection<Event>(
+                'events', ref => ref
+                    .where('groupID', '==', this.groupService.currentGroupId)
+                    .where('done', '==', false)
+            )
+            .valueChanges({ idField: 'id' });
+    }
+
+    /**
+     * Update an event
+     *
+     * @param eventId {string} The id of the event to update
+     * @param event {Event} The event data to update
+     */
+    updateEvent(eventId: string, event: Event): Promise<void> {
+        return this.afs
+            .collection<Event>('events')
+            .doc(eventId)
+            .update(EventService.copyAndPrepare(event));
+    }
+
+    /**
+     * Delete an event
+     *
+     * @param eventId {string} The id of the event to delete
+     */
+    deleteEvent(eventId: string): Promise<void> {
+        return this.afs
+            .collection<Event>('events')
+            .doc(eventId)
+            .delete();
     }
 }

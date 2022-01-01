@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
+/**
+ * Slideshow component
+ */
 @Component({
     selector: 'mate-team-slideshow',
     templateUrl: './slideshow.component.html',
@@ -75,6 +78,8 @@ export class SlideshowComponent implements OnDestroy {
     }
 
     /**
+     * Set the slide interval
+     *
      * @returns {NodeJS.Timeout} Interval of the slideshow
      */
     setSlideInterval(): ReturnType<typeof setInterval> {

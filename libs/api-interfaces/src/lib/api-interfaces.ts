@@ -1,22 +1,103 @@
+/**
+ * Message
+ */
 export interface Message {
+    /**
+     * Message
+     */
     message: string;
 }
 
+/**
+ * Alert
+ */
 export interface Alert {
+    /**
+     * Type of the alert
+     */
     type: 'error' | 'success' | 'neutral' | 'warn';
+    /**
+     * Message of the alert
+     */
     message: string;
 }
+
+/**
+ * Data to change password
+ */
 export interface ChangePasswordData {
+    /**
+     * Old password
+     */
     oldPassword: string;
+    /**
+     * New password
+     */
     newPassword: string;
 }
+
+/**
+ * Data to change email
+ */
 export interface ChangeEmailData {
+    /**
+     * Current password
+     */
     password: string;
+    /**
+     * New email
+     */
     newEmail: string;
 }
+
+/**
+ * Data to change profile
+ */
 export interface ChangeProfileData {
+    /**
+     * Display name
+     */
     displayName?: string;
+    /**
+     * Photo url
+     */
     photoURL?: string;
+}
+
+/**
+ * Choice of a poll
+ */
+export interface Choice {
+    /**
+     * Date
+     */
+    date: string;
+    /**
+     * Number of votes
+     */
+    votes: number;
+}
+
+/**
+ * Poll
+ */
+export interface Poll {
+    /**
+     * ID of a poll
+     */
+    id?: string;
+    /**
+     * Title
+     */
+    title: string;
+    /**
+     * Choices
+     */
+    choices: Choice[];
+    /**
+     * Users that voted
+     */
+    usersVoted: string[];
 }
 export interface Environment {
     firebase: {
@@ -39,19 +120,63 @@ export interface Member {
     email?: string
 }
 
+/**
+ * Event
+ */
 export interface Event {
+    /**
+     * ID of an event
+     */
     id?: string;
+    /**
+     * Name
+     */
     name: string;
+    /**
+     * Description
+     */
     description: string;
-    date: Date;
-    participants?: string[]; // Array of uid's
-    owner?: string;
+    /**
+     * Event date
+     */
+    date: string;
+    /**
+     * ID of the group to which the event belongs
+     */
+    groupID: string;
+    /**
+     * Indicates if event is active
+     */
+    done: boolean;
+    /**
+     * Participants of an event
+     */
+    participants: Participant[];
+}
+
+/**
+ * Participant
+ */
+export interface Participant {
+    /**
+     * User id
+     */
+    uid: string;
+    /**
+     * Display name
+     */
+    displayName: string;
+    /**
+     * Icon code
+     */
+    icon: string;
 }
 
 export interface Group {
     id?: string;
     name?: string;
     description?: string;
+    admin: string;
     member?: Member[]; // Array of uid's
 }
 

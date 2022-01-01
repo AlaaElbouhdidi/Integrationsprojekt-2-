@@ -3,6 +3,9 @@ import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+/**
+ * Header component
+ */
 @Component({
     selector: 'mate-team-header',
     templateUrl: './header.component.html',

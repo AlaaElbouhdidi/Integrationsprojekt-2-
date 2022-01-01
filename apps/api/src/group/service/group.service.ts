@@ -57,6 +57,7 @@ export class GroupService {
             const groupData: Group = {
                 id: group.id,
                 name: group.get('name'),
+                admin: group.get('admin'),
                 description: group.get('description'),
                 member: group.get('member')
             };
@@ -94,6 +95,7 @@ export class GroupService {
                         const groupData: Group = {
                             id: group.id,
                             name: group.get('name'),
+                            admin: group.get('admin'),
                             description: group.get('description'),
                             member: group.get('member')
                         };
@@ -134,6 +136,7 @@ export class GroupService {
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
                         member: group.get('member')
                     };
@@ -182,6 +185,7 @@ export class GroupService {
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
                         member: group.get('member')
                     };
@@ -222,6 +226,7 @@ export class GroupService {
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
                         member: group.get('member')
                     };

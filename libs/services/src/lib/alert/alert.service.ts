@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Alert } from '@api-interfaces';
 
+/**
+ * Alert service
+ */
 @Injectable({
     providedIn: 'root'
 })

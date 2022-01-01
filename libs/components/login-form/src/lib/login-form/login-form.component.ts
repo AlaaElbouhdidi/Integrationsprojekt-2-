@@ -9,6 +9,9 @@ import {
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
+/**
+ * Login form component
+ */
 @Component({
     selector: 'mate-team-login-form',
     templateUrl: './login-form.component.html',
