@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Event, Team, UpdateTeamParticipantsData } from '@api-interfaces';
+import { Event, Participant, Team, UpdateTeamParticipantsData } from '@api-interfaces';
 import { AlertService, AuthService, TeamService } from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -15,6 +15,9 @@ export class TeamModalComponent implements OnInit, OnDestroy {
     @Input() groupAdmin = '';
     private destroy$ = new Subject();
     teams: Team[] = [];
+    selectedTeam: Team = {} as Team;
+    filteredParticipants: Participant[] = [];
+    showTeams = true;
 
     constructor(
         private teamService: TeamService,
@@ -39,7 +42,7 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         }
     }
 
-    async updateTeam(data: UpdateTeamParticipantsData) {
+    async updateTeam(data: UpdateTeamParticipantsData): Promise<void> {
         if (!this.event.id) {
             return;
         }
@@ -79,6 +82,48 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         return userId === adminId;
     }
 
+    filterParticipantsList(): Participant[] {
+        const allUsersInTeams: Participant[] = [];
+        this.teams.forEach(team => allUsersInTeams.push(...team.participants));
+        const filteredParticipants: Participant[] = [...this.event.participants];
+        if (allUsersInTeams.length === filteredParticipants.length) {
+            return [];
+        }
+        for (let i = 0; i < filteredParticipants.length; i++) {
+            allUsersInTeams.forEach(user => {
+                if (user.uid === filteredParticipants[i].uid) {
+                    filteredParticipants.splice(i, 1);
+                }
+            })
+        }
+        return filteredParticipants;
+    }
+
+    async addParticipantToTeam(participant: Participant): Promise<void> {
+        if (!this.selectedTeam.id || !this.event.id) {
+            return;
+        }
+        if (!this.checkIfAdmin(this.groupAdmin)) {
+            return;
+        }
+        const updatedTeam = this.selectedTeam;
+        updatedTeam.participants.push(participant);
+        try {
+            await this.teamService.updateTeam(this.event.id, updatedTeam);
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+        this.showTeams = true;
+    }
+
+    showParticipantsList(team: Team): void {
+        this.selectedTeam = team;
+        this.showTeams = false;
+    }
+
     ngOnInit(): void {
         if (!this.event.id) {
             return;
@@ -88,6 +133,7 @@ export class TeamModalComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe(teams => {
                 this.teams = teams;
+                this.filteredParticipants = this.filterParticipantsList();
             });
     }
 

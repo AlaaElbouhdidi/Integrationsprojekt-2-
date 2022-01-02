@@ -8,12 +8,17 @@ import { Participant, Team, UpdateTeamParticipantsData } from '@api-interfaces';
 })
 export class TeamListComponent {
     @Output() removeUserFromTeamEvent = new EventEmitter<UpdateTeamParticipantsData>();
+    @Output() addUserToTeamEvent = new EventEmitter<Team>();
     @Output() deleteTeamEvent = new EventEmitter<Team>();
     @Input() teams: Team[] = [];
     @Input() isAdmin = false;
 
     deleteTeam(team: Team): void {
         this.deleteTeamEvent.emit(team);
+    }
+
+    addUserToTeam(team: Team): void {
+        this.addUserToTeamEvent.emit(team);
     }
 
     removeUserFromTeam(team: Team, participant: Participant): void {

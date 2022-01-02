@@ -1,7 +1,12 @@
 <div class="modal-header">
+    <fa-icon
+        icon="arrow-circle-left"
+        *ngIf="!showTeams"
+        (click)="showTeams = true">
+    </fa-icon>
     <h5>
         <fa-icon icon="users"></fa-icon>
-        TEAMS
+        {{ showTeams ? 'TEAMS' : 'PARTICIPANTS' }}
     </h5>
     <fa-icon
         id="dismiss-modal-icon"
@@ -10,17 +15,25 @@
     </fa-icon>
 </div>
 <div class="modal-body">
-    <mate-team-team-form
-        *ngIf="isAdmin"
-        (createTeamEvent)="createTeam($event)">
-    </mate-team-team-form>
-    <mate-team-team-list
-        [isAdmin]="isAdmin"
-        [teams]="teams"
-        (removeUserFromTeamEvent)="updateTeam($event)"
-        (deleteTeamEvent)="deleteTeam($event)">
-    </mate-team-team-list>
-</div>
-<div class="modal-footer">
-    <button class="modal-footer-red-btn" (click)="dismissModalEvent.emit()">Close</button>
+    <ng-container *ngIf="!showTeams">
+        <mate-team-event-participants-list
+            *ngIf="isAdmin"
+            [participants]="filteredParticipants"
+            (addToTeamEvent)="addParticipantToTeam($event)">
+        </mate-team-event-participants-list>
+    </ng-container>
+
+    <ng-container *ngIf="showTeams">
+        <mate-team-team-form
+            *ngIf="isAdmin"
+            (createTeamEvent)="createTeam($event)">
+        </mate-team-team-form>
+        <mate-team-team-list
+            [isAdmin]="isAdmin"
+            [teams]="teams"
+            (addUserToTeamEvent)="showParticipantsList($event)"
+            (removeUserFromTeamEvent)="updateTeam($event)"
+            (deleteTeamEvent)="deleteTeam($event)">
+        </mate-team-team-list>
+    </ng-container>
 </div>
