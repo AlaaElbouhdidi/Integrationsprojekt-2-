@@ -11,6 +11,9 @@ export class CreateEventComponent {
         name: '',
         description: '',
         date: '',
+        groupID: '',
+        done: false,
+        participants: []
     };
 
     constructor(private eventService: EventService) {
@@ -19,8 +22,4 @@ export class CreateEventComponent {
     createEvent() {
         this.eventService.createEvent(this.event);
     }
-
-
-
-
 }

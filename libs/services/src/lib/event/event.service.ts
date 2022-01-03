@@ -16,19 +16,16 @@ export class EventService {
     private apiUrl: string;
     eventCollection: AngularFirestoreCollection<Event>;
 
-    constructor(public afs: AngularFirestore, private http: HttpClient) {
-        this.eventCollection = this.afs.collection('events');
-        this.apiUrl = environment.apiUrl;
-
     /**
      * Constructor of event service
      * @param afs {AngularFirestore}
+     * @param http
      * @param groupService {GroupService}
      */
-    constructor(
-        private afs: AngularFirestore,
-        private groupService: GroupService
-    ) { }
+    constructor(public afs: AngularFirestore, private http: HttpClient, private groupService: GroupService) {
+        this.eventCollection = this.afs.collection('events');
+        this.apiUrl = environment.apiUrl;
+    }
 
     /**
      * Remove id from an event
