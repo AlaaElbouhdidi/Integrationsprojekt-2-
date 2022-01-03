@@ -191,14 +191,35 @@ export interface Game {
     secondTeamScore?: number;
 }
 
+/**
+ * Team
+ */
 export interface Team {
+    /**
+     * Team id
+     */
     id?: string;
+    /**
+     * Team name
+     */
     name: string;
+    /**
+     * Participants of the team
+     */
     participants: Participant[];
 }
 
+/**
+ * Update team participants data
+ */
 export interface UpdateTeamParticipantsData {
+    /**
+     * Team
+     */
     team: Team;
+    /**
+     * Participant
+     */
     participant: Participant;
 }
 

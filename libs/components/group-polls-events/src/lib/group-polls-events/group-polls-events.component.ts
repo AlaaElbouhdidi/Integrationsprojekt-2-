@@ -225,6 +225,12 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Open edit modal
+     *
+     * @param event {Event} The event to edit
+     * @param modal {unknown} The reference of the modal to open
+     */
     editEvent(event: Event, modal: unknown): void {
         this.descriptionEvent = event;
         this.openModal(modal);

@@ -3,28 +3,70 @@ import { Event, Participant, Team, UpdateTeamParticipantsData } from '@api-inter
 import { AlertService, AuthService, TeamService } from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
+/**
+ * Team modal component
+ */
 @Component({
     selector: 'mate-team-team-modal',
     templateUrl: './team-modal.component.html',
     styleUrls: ['./team-modal.component.scss']
 })
 export class TeamModalComponent implements OnInit, OnDestroy {
+    /**
+     * Dismiss modal event
+     */
     @Output() dismissModalEvent = new EventEmitter();
+    /**
+     * Event
+     */
     @Input() event: Event = {} as Event;
+    /**
+     * Determines if user is admin
+     */
     @Input() isAdmin = false;
+    /**
+     * Group admin id
+     */
     @Input() groupAdmin = '';
+    /**
+     * Subject to unsubscribe from observables
+     * @private
+     */
     private destroy$ = new Subject();
+    /**
+     * All teams of an event
+     */
     teams: Team[] = [];
+    /**
+     * Selected team
+     */
     selectedTeam: Team = {} as Team;
+    /**
+     * Filtered list of participants of event
+     */
     filteredParticipants: Participant[] = [];
+    /**
+     * Determines if teams are shown
+     */
     showTeams = true;
 
+    /**
+     * Constructor of team modal component
+     * @param teamService {TeamService}
+     * @param alertService {AlertService}
+     * @param authService {AuthService}
+     */
     constructor(
         private teamService: TeamService,
         private alertService: AlertService,
         private authService: AuthService
     ) { }
 
+    /**
+     * Create a new team
+     *
+     * @param team {Team} The team to create
+     */
     async createTeam(team: Team): Promise<void> {
         if (!this.event.id) {
             return;
@@ -42,6 +84,11 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Update a team
+     *
+     * @param data {UpdateTeamParticipantsData} The team data to update
+     */
     async updateTeam(data: UpdateTeamParticipantsData): Promise<void> {
         if (!this.event.id) {
             return;
@@ -60,6 +107,11 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Delete a team
+     *
+     * @param team {Team} The team to delete
+     */
     async deleteTeam(team: Team): Promise<void> {
         if (!this.event.id || !team.id) {
             return;
@@ -77,11 +129,22 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Checks if a given id matches the user id
+     *
+     * @param adminId {string} The id of the admin
+     * @returns {boolean} True if user id matches the given id, false if the ids do not match
+     */
     checkIfAdmin(adminId: string): boolean {
         const userId = this.authService.getCurrentUser().uid;
         return userId === adminId;
     }
 
+    /**
+     * Filter out participants which are already in a team
+     *
+     * @returns {Participant[]} Participants which are not in a team
+     */
     filterParticipantsList(): Participant[] {
         const allUsersInTeams: Participant[] = [];
         this.teams.forEach(team => allUsersInTeams.push(...team.participants));
@@ -99,6 +162,11 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         return filteredParticipants;
     }
 
+    /**
+     * Add participant to a team
+     *
+     * @param participant {Participant} The participant to add to the team
+     */
     async addParticipantToTeam(participant: Participant): Promise<void> {
         if (!this.selectedTeam.id || !this.event.id) {
             return;
@@ -119,11 +187,19 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         this.showTeams = true;
     }
 
+    /**
+     * Show the filtered participants of the event
+     *
+     * @param team {Team} The team to select
+     */
     showParticipantsList(team: Team): void {
         this.selectedTeam = team;
         this.showTeams = false;
     }
 
+    /**
+     * Get teams of event
+     */
     ngOnInit(): void {
         if (!this.event.id) {
             return;
@@ -137,6 +213,9 @@ export class TeamModalComponent implements OnInit, OnDestroy {
             });
     }
 
+    /**
+     * Unsubscribe from observables
+     */
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.complete();

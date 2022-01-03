@@ -15,6 +15,9 @@ export class GroupEventItemComponent implements OnChanges {
      * Participate event
      */
     @Output() participateEvent = new EventEmitter<Event>();
+    /**
+     * Team event
+     */
     @Output() teamEvent = new EventEmitter<Event>();
     /**
      * Delete event
@@ -63,6 +66,9 @@ export class GroupEventItemComponent implements OnChanges {
         this.descriptionEvent.emit(this.event);
     }
 
+    /**
+     * Emit team event
+     */
     showTeams(): void {
         this.teamEvent.emit(this.event);
     }
