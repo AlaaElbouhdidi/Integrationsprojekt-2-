@@ -25,6 +25,8 @@ export class IconService {
     ];
 
     /**
+     * Get all user icons
+     *
      * @returns {IconProp[]} All icons
      */
     getIcons(): IconProp[] {

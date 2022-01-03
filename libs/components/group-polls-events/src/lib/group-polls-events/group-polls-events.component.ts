@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Group, Poll } from '@api-interfaces';
+import { Event, Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertService, AuthService, GroupService, PollService } from '@services';
+import { AlertService, AuthService, EventService, GroupService, PollService } from '@services';
 
 /**
  * Group polls events component
@@ -28,13 +28,21 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      */
     polls: Poll[] = [];
     /**
+     * Events
+     */
+    events: Event[] = [];
+    /**
+     * Event to show the description of
+     */
+    descriptionEvent: Event = {} as Event;
+    /**
      * Reference for the confirmation modal
      */
     confirmationModalRef: NgbModalRef | undefined;
     /**
-     * Reference for the poll modal
+     * Modal reference
      */
-    pollModalRef: NgbModalRef | undefined;
+    modalRef: NgbModalRef | undefined;
     /**
      * Determines if user is admin
      */
@@ -47,29 +55,31 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @param alertService {AlertService}
      * @param authService {AuthService}
      * @param groupService {GroupService}
+     * @param eventService {EventService}
      */
     constructor(
         private modalService: NgbModal,
         private pollService: PollService,
         private alertService: AlertService,
         private authService: AuthService,
-        private groupService: GroupService
+        private groupService: GroupService,
+        private eventService: EventService
     ) { }
 
     /**
-     * Opens the poll modal
+     * Opens a modal
      *
-     * @param content {unknown} The modal to open
+     * @param content {unknown} The modal reference
      */
-    openPollModal(content: unknown): void {
-        this.pollModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+    openModal(content: unknown): void {
+        this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
     }
 
     /**
-     * Closes the poll modal
+     * Closes a modal
      */
-    closePollModal(): void {
-        this.pollModalRef?.dismiss();
+    closeModal(): void {
+        this.modalRef?.dismiss();
     }
 
     /**
@@ -125,7 +135,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
-        this.closePollModal();
+        this.closeModal();
     }
 
     /**
@@ -182,6 +192,68 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * Show the description of an event
+     *
+     * @param event {Event} The event to show the description of
+     * @param modal {unknown} The description modal reference
+     */
+    showEventDescription(event: Event, modal: unknown) {
+        this.descriptionEvent = event;
+        this.openModal(modal);
+    }
+
+    /**
+     * Update an event
+     *
+     * @param event {Event} The event data to update
+     */
+    async updateEvent(event: Event): Promise<void> {
+        if (!event.id) {
+            return;
+        }
+        try {
+            await this.eventService.updateEvent(event.id, event);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Participation successfully registered'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+    }
+
+    /**
+     * Delete an event
+     *
+     * @param id {string} The id of the event to delete
+     * @param modal {unknown} The confirmation modal to open
+     */
+    async deleteEvent(id: string, modal: unknown): Promise<void> {
+        const result = await this.openConfirmationModal(modal);
+        if (!result) {
+            return;
+        }
+        if (!this.checkIfAdmin(this.group.admin)) {
+            return;
+        }
+        try {
+            await this.eventService.deleteEvent(id);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Event successfully deleted'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+    }
+
+    /**
      * Checks if a given id matches the user id
      *
      * @param adminId {string} The id of the admin
@@ -208,6 +280,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
                         this.polls = data as Poll[];
                     }
                 );
+            this.eventService.getActiveEventsOfGroup()
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((data: Event[]) => {
+                    this.events = data;
+                });
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',

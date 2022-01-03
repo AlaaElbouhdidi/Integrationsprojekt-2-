@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h5>EVENT INFORMATION</h5>
+    <fa-icon
+        id="dismiss-modal-icon"
+        icon="times-circle"
+        (click)="dismissModalEvent.emit()" >
+    </fa-icon>
+</div>
+<div class="modal-body">
+    <div class="modal-body-event-name">
+        <fa-icon icon="angle-double-right"></fa-icon>
+        <p>{{ event.name }}</p>
+    </div>
+    <div class="modal-body-event-date">
+        <fa-icon icon="clock"></fa-icon>
+        <p>{{ event.date | date: 'mediumDate' }}</p>
+    </div>
+    <div class="modal-body-event-description">
+        <fa-icon icon="align-justify"></fa-icon>
+        <p>{{ event.description }}</p>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="modal-footer-red-btn" (click)="dismissModalEvent.emit()">Close</button>
+</div>

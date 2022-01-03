@@ -1,0 +1,16 @@
+@import 'libs/styles/src/lib/modals';
+
+.modal-body {
+    &-event-name, &-event-date, &-event-description {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        fa-icon {
+            margin-right: 0.5rem;
+            align-self: flex-start;
+        }
+    }
+    &-event-date {
+        margin: 1rem 0;
+    }
+}

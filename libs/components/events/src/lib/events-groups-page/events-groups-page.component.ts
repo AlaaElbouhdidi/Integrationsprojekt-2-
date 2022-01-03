@@ -1,47 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { EventService, GroupService } from '@services';
+import { Component } from '@angular/core';
+import { GroupService } from '@services';
 import { Event, Group } from '@api-interfaces';
-import {Observable} from 'rxjs';
 
 @Component({
     selector: 'mate-team-events-groups-page',
     templateUrl: './events-groups-page.component.html',
     styleUrls: ['./events-groups-page.component.scss']
 })
-export class EventsGroupsPageComponent implements OnInit {
-    loading = false;
+export class EventsGroupsPageComponent {
+    loading = true;
     /**
      * Events that are displayed
      */
-    events: Observable<Event[]> = this.eventService.getEvents();
+    events: Event[] | undefined;
     /**
      * Groups that are displayed
      */
     groups: Group[] | undefined;
 
     /**
-     * Constructor which gets the GroupService and EventService
-     * @param eventService
+     * Constructor which gets the GroupService
      * @param groupService
      */
     constructor(
-        private eventService: EventService,
         private groupService: GroupService
-    ) {
-
-    }
-
-    /**
-     * Sets the events and groups.
-     */
-    ngOnInit(): void {
-        this.events.subscribe();
-        /*
-        this.eventService.getEvents().subscribe((events) => {
-            this.events = events;
-            this.loading = false;
-        });
-
-         */
-    }
+    ) {}
 }

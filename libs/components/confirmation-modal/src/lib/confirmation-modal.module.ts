@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
     imports: [
@@ -13,4 +14,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ],
     exports: [ConfirmationModalComponent]
 })
-export class ConfirmationModalModule {}
+export class ConfirmationModalModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faTimesCircle
+        );
+    }
+}

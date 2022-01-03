@@ -703,6 +703,30 @@
                 }
             }
         },
+        "event-description-modal": {
+            "projectType": "library",
+            "root": "libs/components/event-description-modal",
+            "sourceRoot": "libs/components/event-description-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/event-description-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/event-description-modal/src/**/*.ts",
+                            "libs/components/event-description-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "events": {
             "projectType": "library",
             "root": "libs/components/events",
@@ -803,6 +827,30 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["apps/e2e/footer-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "group-event-item": {
+            "projectType": "library",
+            "root": "libs/components/group-event-item",
+            "sourceRoot": "libs/components/group-event-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-event-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-event-item/src/**/*.ts",
+                            "libs/components/group-event-item/src/**/*.html"
+                        ]
                     }
                 }
             }

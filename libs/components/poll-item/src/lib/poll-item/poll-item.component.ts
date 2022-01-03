@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Poll } from '@api-interfaces';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { AlertService, AuthService } from '@services';
@@ -122,9 +122,13 @@ export class PollItemComponent implements OnChanges {
 
     /**
      * Check if user voted on a given poll if input changes
+     *
+     * @param changes {SimpleChanges} The changes
      */
-    ngOnChanges(): void {
-        this.userVoted = this.checkIfUserVoted(this.poll);
-        this.showResults = this.userVoted;
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.poll) {
+            this.userVoted = this.checkIfUserVoted(this.poll);
+            this.showResults = this.userVoted;
+        }
     }
 }
