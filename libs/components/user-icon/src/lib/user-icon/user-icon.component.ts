@@ -27,6 +27,10 @@ export class UserIconComponent implements OnInit, OnChanges {
      * Icon background color
      */
     iconBackground = '#ffffff';
+    /**
+     * Determines if user icon is scaled
+     */
+    @Input() scaled = false;
 
     /**
      * Constructor of icon service

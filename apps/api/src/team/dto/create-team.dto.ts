@@ -36,7 +36,7 @@ export class CreateMemberDto implements Member {
 /**
  * The Data Transfer Object to create the member property of a team
  **/
-export class CreateTeamDto implements Team {
+export class CreateTeamDto {
     /**
      * The member property of a team
      **/

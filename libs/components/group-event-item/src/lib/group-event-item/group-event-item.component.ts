@@ -16,6 +16,10 @@ export class GroupEventItemComponent implements OnChanges {
      */
     @Output() participateEvent = new EventEmitter<Event>();
     /**
+     * Team event
+     */
+    @Output() teamEvent = new EventEmitter<Event>();
+    /**
      * Delete event
      */
     @Output() deleteEvent = new EventEmitter<string>();
@@ -60,6 +64,13 @@ export class GroupEventItemComponent implements OnChanges {
      */
     showDescription(): void {
         this.descriptionEvent.emit(this.event);
+    }
+
+    /**
+     * Emit team event
+     */
+    showTeams(): void {
+        this.teamEvent.emit(this.event);
     }
 
     /**

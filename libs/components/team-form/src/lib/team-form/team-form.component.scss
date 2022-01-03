@@ -1,0 +1,13 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+
+form {
+    color: $dark;
+}
+.form-input {
+    margin-top: 1rem !important;
+}
+.form-submit {
+    @include flex-center;
+    text-align: center;
+}
