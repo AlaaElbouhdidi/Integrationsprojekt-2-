@@ -41,6 +41,9 @@
             "@event-description-modal": [
                 "libs/components/event-description-modal/src/index.ts"
             ],
+            "@event-participants-list": [
+                "libs/components/event-participants-list/src/index.ts"
+            ],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
             "@group": ["libs/components/group/src/index.ts"],
@@ -56,8 +59,8 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@event-participants-list": [
-                "libs/components/event-participants-list/src/index.ts"
+            "@mate-team/group-statistics": [
+                "libs/components/group-statistics/src/index.ts"
             ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
