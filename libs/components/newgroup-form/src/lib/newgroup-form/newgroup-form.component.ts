@@ -72,7 +72,7 @@ export class NewgroupFormComponent implements OnInit {
             const g = {
                 name: this.name.value,
                 description: this.description.value,
-                admin: ''
+                admin: this.member.uid || ''
             };
             this.loading = true;
             const gid = await this.groupService.addNewGroup(g, this.member);

@@ -1,5 +1,33 @@
-
-<h5>{{member.email}}</h5>
-<h1>{{member.isAdmin}}</h1>
-<button (click)="onToggleIsAdmin(member)">isAdmin</button>
-<button (click)="onDeleteMember(member)">delete</button>
+<div [class.this-is-me]="me.email === member.email" class="members-list-item">
+    <div class="members-list-item-name">
+        <fa-icon icon="user"></fa-icon>
+        <p>{{ member.email }}</p>
+    </div>
+    <div class="members-list-item-side">
+        <div
+            class="members-list-item-side-buttons"
+            *ngIf="(me.email !== member.email) && (gAdmin === me.uid)"
+        >
+            <!-- <fa-icon
+            *ngIf="!member.isAdmin"
+            (click)="onToggleIsAdmin(member)"
+            icon="user-cog"
+        ></fa-icon>
+        <fa-icon
+            *ngIf="member.isAdmin"
+            (click)="onToggleIsAdmin(member)"
+            matTooltip="Change Admin status"
+            icon="user-tie"
+        ></fa-icon> -->
+            <fa-icon
+                mat-raised-button
+                matTooltip="Delete Member"
+                (click)="onDeleteMember(member)"
+                icon="user-times"
+            ></fa-icon>
+        </div>
+        <div *ngIf="gAdmin === member.uid" class="members-list-item-side-admin">
+            <p>~Admin</p>
+        </div>
+    </div>
+</div>

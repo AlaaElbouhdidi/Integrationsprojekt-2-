@@ -13,6 +13,7 @@ import {
     updateProfile,
     sendEmailVerification
 } from 'firebase/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 /**
  * Auth service
@@ -41,7 +42,7 @@ export class AuthService {
      * Constructor of auth service
      * @param auth {AngularFireAuth}
      */
-    constructor(private auth: AngularFireAuth) {
+    constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {
         this.auth.authState.subscribe(async (user) => {
             if (user) {
                 this.user = user;
@@ -244,35 +245,58 @@ export class AuthService {
         }
         throw new Error();
     }
-    async emailIsAlreadyRegistred(email: string): Promise<number>{
-        const res = await firebase.auth().fetchSignInMethodsForEmail(email)
-        .then((signInMethods) => {
-            // This returns the same array as fetchProvidersForEmail but for email
-            // provider identified by 'password' string, signInMethods would contain 2
-            // different strings:
-            // 'emailLink' if the user previously signed in with an email/link
-            // 'password' if the user has a password.
-            // A user could have both.
-            if (signInMethods.indexOf(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD) != -1) {
-              // User can sign in with email/password.
-              return 0;
-            }
-            else{
-                if (signInMethods.indexOf(EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD) != -1) {
-                // User can sign in with email/link.
-                return 1;
+    async emailIsAlreadyRegistred(email: string): Promise<number> {
+        const res = await firebase
+            .auth()
+            .fetchSignInMethodsForEmail(email)
+            .then((signInMethods) => {
+                // 'emailLink' if the user previously signed in with an email/link
+                // 'password' if the user has a password.
+                // A user could have both.
+                if (
+                    signInMethods.indexOf(
+                        EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+                    ) != -1
+                ) {
+                    // User can sign in with email/password.
+                    return 0;
+                } else {
+                    if (
+                        signInMethods.indexOf(
+                            EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+                        ) != -1
+                    ) {
+                        // User can sign in with email/link.
+                        return 1;
+                    } else {
+                        // User doesnt exi
+                        return -1;
+                    }
                 }
-                else {
-                // User doesnt exi
-                return -1
-              }
-            }
+            })
+            .catch((error) => {
+                // Some error occurred, you can inspect the code: error.code
+                console.log(error);
+            });
+        return Number(res);
+    }
 
-          })
-          .catch((error) => {
-            // Some error occurred, you can inspect the code: error.code
-            console.log(error);
-          });
-            return Number(res);
+    async getUser(email: string): Promise<User> {
+        let user: User = {} as User;
+        await this.afs
+            .collection<User>('users')
+            .ref.where('email', '==', email)
+            .get()
+            .then((qs) => {
+                qs.forEach((doc) => {
+                    user = {
+                        uid: doc.id,
+                        email: doc.get('email'),
+                        photoURL: doc.get('photoURL'),
+                        displayName: doc.get('displayName')
+                    };
+                });
+            });
+        return user;
     }
 }

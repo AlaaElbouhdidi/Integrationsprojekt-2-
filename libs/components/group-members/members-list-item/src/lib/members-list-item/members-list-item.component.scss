@@ -1,0 +1,94 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+@import 'libs/styles/src/lib/modals';
+.members-list-item {
+    position: relative;
+    color: $white !important;
+    background: $darkAccent;
+    border: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    @include for-tablet-portrait-up {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &-name {
+        @include flex-center;
+        p {
+            margin-left: 0;
+            margin: auto;
+        }
+
+        fa-icon {
+            margin-right: 0.5rem;
+        }
+    }
+    &-side {
+        margin-top: 1rem;
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        @include for-tablet-portrait-up {
+            flex-direction: row;
+            margin-top: 0;
+            width: auto;
+            justify-content: flex-end;
+        }
+        &-buttons {
+            fa-icon {
+                cursor: pointer;
+                transition: 0.25s;
+                position: absolute;
+                padding: 0.5rem;
+                top: 0;
+                @include for-tablet-portrait-up {
+                    position: static;
+                    padding: 0;
+                    margin-left: 1rem;
+                }
+            }
+            fa-icon[icon='user-times'] {
+                right: 0;
+                &:hover {
+                    color: $error;
+                }
+            }
+            fa-icon[icon='user-cog'] {
+                left: 0;
+                &:hover {
+                    color: $success;
+                }
+            }
+            fa-icon[icon='user-tie'] {
+                left: 0;
+                &:hover {
+                    color: $success;
+                }
+            }
+        }
+        &-admin {
+            cursor: pointer;
+            transition: 0.25s;
+            position: absolute;
+            padding: 0.5rem;
+            top: 0;
+            @include for-tablet-portrait-up {
+                position: static;
+                padding: 0;
+                margin-left: 1rem;
+            }
+            p{
+                margin: auto;
+                font-style: italic;
+                font-size: small;
+            }
+        }
+    }
+}
+.this-is-me {
+    background: $main;
+}

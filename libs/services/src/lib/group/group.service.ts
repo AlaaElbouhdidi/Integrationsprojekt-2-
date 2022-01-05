@@ -5,7 +5,7 @@ import {
     AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Group service
@@ -81,12 +81,8 @@ export class GroupService {
         return q;
     }
      getAllMembers(gid: string): Observable<Member[]>{
-        return this.afs.collection<Member>(`groups/${gid}/members`).snapshotChanges().pipe(
-            map(actions => actions.map(a => {
-              const data = a.payload.doc.data() as Member;
-              return {...data};
-            }))
-        );
+        return this.afs.collection<Member>(`groups/${gid}/members`)
+        .valueChanges({ idField: 'id' });
     }
     deleteMember(gid: string, m: Member){
          this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).delete();

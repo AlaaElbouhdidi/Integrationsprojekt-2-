@@ -1,40 +1,23 @@
 <div class="container">
     <h1>You have successfully added a group</h1>
     <img src="../../assets/svgs/team.png" alt="Man opening a door" />
-    <h6>Invite your friends via email</h6>
-    <div class="form-input">
-        <div id="emails-container" class="emails-container">
-            <mat-form-field class="example-chip-list" appearance="fill">
-                <mat-chip-list #chipList aria-label="Emails selection">
-                    <mat-chip
-                        *ngFor="let email of emails"
-                        [selectable]="selectable"
-                        [removable]="removable"
-                        (removed)="remove(email)"
-                    >
-                        {{ email }}
-                        <button matChipRemove *ngIf="removable">
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input
-                        placeholder="Send invitation to..." autofocus
-                        [matChipInputFor]="chipList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="add($event)"
-                    />
-                    <div class="form-error" *ngIf="isUnvalid">
-                        <div class="form-error-message">
-                            <p>Email wrongly formatted</p>
-                        </div>
-                    </div>
-                </mat-chip-list>
-                <div class="form-btn">
-            <button [disabled]="(emails.length < 1)" [class.disabled-btn]="(emails.length < 1)" 
-                type="button" (click)="sendInvites()" >Send</button>
-                </div>
-            </mat-form-field>
-        </div>
-    </div>
+    <h6>Add your friends via email</h6>
+    <form action="" class="btn"></form>
+    <button id="add" (click)="openModal(newMember)">+ add members</button>
+    <button id="done" (click)="addMember(false)">Finish</button>
 </div>
+<ng-template #newMember>
+    <div class="modal-header">
+        <h5>
+            <fa-icon icon="user-plus"></fa-icon>
+            Add new member
+        </h5>
+        <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
+    </div>
+    <div class="modal-body">
+        <mate-team-invite-members
+            (sendInvitesEvent)="addMember($event)"
+            [gid]="gid" >
+        </mate-team-invite-members>
+    </div>
+</ng-template>
