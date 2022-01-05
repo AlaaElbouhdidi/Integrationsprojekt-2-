@@ -575,6 +575,30 @@
                 }
             }
         },
+        "create-event-modal": {
+            "projectType": "library",
+            "root": "libs/components/create-event-modal",
+            "sourceRoot": "libs/components/create-event-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/create-event-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/create-event-modal/src/**/*.ts",
+                            "libs/components/create-event-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "create-poll-form": {
             "projectType": "library",
             "root": "libs/components/create-poll-form",
