@@ -968,7 +968,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/group-statistics"],
                     "options": {
                         "jestConfig": "libs/components/group-statistics/jest.config.js",
                         "passWithNoTests": true
@@ -1000,7 +999,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/group-statistics",
@@ -1014,8 +1012,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "group-statistics-e2e": {
             "root": "apps/e2e/group-statistics-e2e",
@@ -1036,16 +1033,13 @@
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
-                    "outputs": ["{options.outputFile}"],
                     "options": {
                         "lintFilePatterns": [
                             "apps/e2e/group-statistics-e2e/**/*.{js,ts}"
                         ]
                     }
                 }
-            },
-            "tags": [],
-            "implicitDependencies": ["group-statistics"]
+            }
         },
         "groups": {
             "projectType": "library",
