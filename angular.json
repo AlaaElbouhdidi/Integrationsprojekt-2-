@@ -727,6 +727,30 @@
                 }
             }
         },
+        "event-participants-list": {
+            "projectType": "library",
+            "root": "libs/components/event-participants-list",
+            "sourceRoot": "libs/components/event-participants-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/event-participants-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/event-participants-list/src/**/*.ts",
+                            "libs/components/event-participants-list/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "events": {
             "projectType": "library",
             "root": "libs/components/events",
@@ -2199,6 +2223,78 @@
                         "lintFilePatterns": [
                             "libs/styles/src/**/*.ts",
                             "libs/styles/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-form": {
+            "projectType": "library",
+            "root": "libs/components/team-form",
+            "sourceRoot": "libs/components/team-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-form/src/**/*.ts",
+                            "libs/components/team-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-list": {
+            "projectType": "library",
+            "root": "libs/components/team-list",
+            "sourceRoot": "libs/components/team-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-list/src/**/*.ts",
+                            "libs/components/team-list/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-modal": {
+            "projectType": "library",
+            "root": "libs/components/team-modal",
+            "sourceRoot": "libs/components/team-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-modal/src/**/*.ts",
+                            "libs/components/team-modal/src/**/*.html"
                         ]
                     }
                 }

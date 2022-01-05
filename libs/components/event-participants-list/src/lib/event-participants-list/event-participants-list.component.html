@@ -1,0 +1,27 @@
+<section class="event-participants-list">
+    <div class="event-participants-list-searchbar">
+        <div class="form-input">
+            <input type="text" placeholder="Search..." [(ngModel)]="searchInput" (input)="filterList()">
+            <fa-icon icon="search"></fa-icon>
+        </div>
+    </div>
+    <div
+        class="event-participants-list-item"
+        *ngFor="let participant of filteredParticipants"
+        (click)="addToTeam(participant)">
+        <div class="event-participants-list-item-icon">
+            <mate-team-user-icon
+                [userIconString]="participant.icon ? participant.icon : ''">
+            </mate-team-user-icon>
+        </div>
+        <p>{{ participant.displayName }}</p>
+    </div>
+    <div class="event-participants-list-warning" *ngIf="participants.length === 0 && searchInput.length === 0">
+        <fa-icon icon="exclamation-circle"></fa-icon>
+        <p>All participants in teams</p>
+    </div>
+    <div class="event-participants-list-warning" *ngIf="filteredParticipants.length === 0 && searchInput.length > 0">
+        <fa-icon icon="exclamation-circle"></fa-icon>
+        <p>No search result</p>
+    </div>
+</section>
