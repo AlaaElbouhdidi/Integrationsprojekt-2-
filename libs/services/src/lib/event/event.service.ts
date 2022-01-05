@@ -50,6 +50,12 @@ export class EventService {
             .valueChanges({ idField: 'id' });
     }
 
+    async createEvent(event: Event): Promise<void> {
+        await this.afs
+            .collection<Event>('events')
+            .add(event)
+    }
+
     /**
      * Update an event
      *

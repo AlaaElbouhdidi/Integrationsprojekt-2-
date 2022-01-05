@@ -28,7 +28,7 @@
     <div class="modal-header">
         <h5>
             <fa-icon icon="poll"></fa-icon>
-            Create new poll
+            Create poll
         </h5>
         <fa-icon
             icon="times-circle"
@@ -76,11 +76,18 @@
     </mate-team-team-modal>
 </ng-template>
 
+<ng-template #createEventModal>
+    <mate-team-create-event-modal
+        (dismissModalEvent)="closeModal()"
+        (createEventEvent)="createEvent($event)">
+    </mate-team-create-event-modal>
+</ng-template>
+
 <section class="events">
     <div class="events-header">
         <h5>Events</h5>
         <fa-icon icon="calendar-alt"></fa-icon>
-        <button *ngIf="isAdmin">
+        <button *ngIf="isAdmin" (click)="openModal(createEventModal)">
             + Create new event
         </button>
     </div>

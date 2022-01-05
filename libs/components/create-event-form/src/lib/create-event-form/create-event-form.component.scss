@@ -1,0 +1,24 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+form {
+    color: $dark;
+}
+#event-name {
+    margin-top: 0 !important;
+}
+.form-input {
+    margin-top: 1rem !important;
+    textarea {
+        width: 100%;
+        color: $dark;
+        padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+        font-size: 1rem;
+        resize: none;
+    }
+}
+.form-submit {
+    @include flex-center;
+    text-align: center;
+}

@@ -154,6 +154,12 @@ export interface Event {
     participants: Participant[];
 }
 
+export interface CreateEventFormData {
+    name: string;
+    description: string;
+    date: string;
+}
+
 /**
  * Participant
  */
