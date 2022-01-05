@@ -202,7 +202,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         this.openModal(modal);
     }
 
-
+    /**
+     * Create an event
+     *
+     * @param data {CreateEventFormData} Data to create the event with
+     */
     async createEvent(data: CreateEventFormData): Promise<void> {
         if (!this.checkIfAdmin(this.group.admin)) {
             return;

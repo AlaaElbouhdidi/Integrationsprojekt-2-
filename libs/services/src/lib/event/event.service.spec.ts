@@ -32,6 +32,7 @@ describe('EventService', () => {
     }
     const eventCollectionMock = {
         doc: jest.fn().mockReturnValue(eventDocumentMock),
+        add: jest.fn(),
         valueChanges: jest.fn()
     }
     const angularFirestoreMock = {
@@ -56,6 +57,12 @@ describe('EventService', () => {
         const spy = jest.spyOn(eventCollectionMock, 'valueChanges');
         service.getActiveEventsOfGroup();
         expect(spy).toHaveBeenCalledWith({ idField: 'id' });
+    });
+
+    it('should call firestore add method when creating an event', () => {
+        const spy = jest.spyOn(eventCollectionMock, 'add');
+        service.createEvent(eventMock);
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should call firestore update method when updating an event', () => {
