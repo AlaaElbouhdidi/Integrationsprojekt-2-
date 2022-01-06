@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User, Member } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, AuthService, GroupService } from '@services';
+import { AlertService, AuthService, GroupService, UserService } from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -57,6 +57,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
         private groupService: GroupService,
         private modalService: NgbModal,
         private authService: AuthService,
+        private userService: UserService,
         private alertService: AlertService,
         private route: ActivatedRoute
     ) {
@@ -157,7 +158,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
                     if (fil.length > 0) this.isAdmin = true;
                     else this.isAdmin = false */
                     items.forEach((i) => {
-                        this.authService.getUser(i.email || '').then((u)=> {
+                        this.userService.getUser(i.email || '').then((u)=> {
                             i.user = u;
                         });
                     });

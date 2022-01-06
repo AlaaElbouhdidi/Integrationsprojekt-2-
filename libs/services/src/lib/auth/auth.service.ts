@@ -13,7 +13,6 @@ import {
     updateProfile,
     sendEmailVerification
 } from 'firebase/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 /**
  * Auth service
@@ -42,7 +41,7 @@ export class AuthService {
      * Constructor of auth service
      * @param auth {AngularFireAuth}
      */
-    constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {
+    constructor(private auth: AngularFireAuth) {
         this.auth.authState.subscribe(async (user) => {
             if (user) {
                 this.user = user;
@@ -281,22 +280,5 @@ export class AuthService {
         return Number(res);
     }
 
-    async getUser(email: string): Promise<User> {
-        let user: User = {} as User;
-        await this.afs
-            .collection<User>('users')
-            .ref.where('email', '==', email)
-            .get()
-            .then((qs) => {
-                qs.forEach((doc) => {
-                    user = {
-                        uid: doc.id,
-                        email: doc.get('email'),
-                        photoURL: doc.get('photoURL'),
-                        displayName: doc.get('displayName')
-                    };
-                });
-            });
-        return user;
-    }
+    
 }
