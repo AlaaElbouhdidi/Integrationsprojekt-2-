@@ -1,0 +1,63 @@
+@import '_variables';
+@import '_mixins';
+.container {
+    background: $white;
+    color: $dark;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    width: 100%;
+    max-width: 25rem;
+    border-radius: 2px;
+    h1 {
+        text-align: center;
+        font-weight: normal;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+    }
+    h6 {
+        font-size: 1rem;
+    }
+    @include for-tablet-portrait-up {
+        width: 25rem;
+    }
+}
+
+/* Form error messages */
+.form-error {
+    margin-top: 0.5rem;
+    text-align: left;
+}
+.form-error-message {
+    color: #910b0b;
+    font-size: .7rem;
+}
+/* Form button */
+.form-btn {
+    @include flex-center-column;
+    button {
+        width: 100%;
+        padding: 0.75rem 0;
+        margin: 0.5rem;
+        background: $green;
+        font-size: 1rem;
+        color: $white;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        transition: 0.25s;
+        &:hover {
+            background: $darkAccent;
+        }
+    }
+}
+
+.disabled-btn {
+    opacity: 20%;
+    pointer-events: none;
+}
+.example-chip-list {
+    width: 100%;
+  }
+.chip{
+    background-color: #2e8bc0;
+}
