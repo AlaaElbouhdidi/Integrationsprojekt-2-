@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'create-event',
+    displayName: 'create-event-form',
     preset: '../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
@@ -8,7 +8,7 @@ module.exports = {
             stringifyContentPathRegex: '\\.(html|svg)$'
         }
     },
-    coverageDirectory: '../../../coverage/libs/create-event',
+    coverageDirectory: '../../../coverage/libs/components/create-event-form',
     transform: {
         '^.+\\.(ts|js|html)$': 'jest-preset-angular'
     },

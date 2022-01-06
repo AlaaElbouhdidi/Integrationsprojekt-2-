@@ -494,16 +494,16 @@
                 }
             }
         },
-        "create-event": {
+        "create-event-form": {
             "projectType": "library",
-            "root": "libs/components/create-event",
-            "sourceRoot": "libs/components/create-event/src",
+            "root": "libs/components/create-event-form",
+            "sourceRoot": "libs/components/create-event-form/src",
             "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/components/create-event/jest.config.js",
+                        "jestConfig": "libs/components/create-event-form/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -511,65 +511,32 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/components/create-event/src/**/*.ts",
-                            "libs/components/create-event/src/**/*.html"
+                            "libs/components/create-event-form/src/**/*.ts",
+                            "libs/components/create-event-form/src/**/*.html"
                         ]
-                    }
-                },
-                "storybook": {
-                    "builder": "@nrwl/storybook:storybook",
-                    "options": {
-                        "uiFramework": "@storybook/angular",
-                        "port": 4400,
-                        "config": {
-                            "configFolder": "libs/components/create-event/.storybook"
-                        }
-                    },
-                    "configurations": {
-                        "ci": {
-                            "quiet": true
-                        }
-                    }
-                },
-                "build-storybook": {
-                    "builder": "@nrwl/storybook:build",
-                    "options": {
-                        "uiFramework": "@storybook/angular",
-                        "outputPath": "dist/storybook/create-event",
-                        "config": {
-                            "configFolder": "libs/components/create-event/.storybook"
-                        }
-                    },
-                    "configurations": {
-                        "ci": {
-                            "quiet": true
-                        }
                     }
                 }
             }
         },
-        "create-event-e2e": {
-            "root": "apps/e2e/create-event-e2e",
-            "sourceRoot": "apps/e2e/create-event-e2e/src",
-            "projectType": "application",
+        "create-event-modal": {
+            "projectType": "library",
+            "root": "libs/components/create-event-modal",
+            "sourceRoot": "libs/components/create-event-modal/src",
+            "prefix": "mate-team",
             "architect": {
-                "e2e": {
-                    "builder": "@nrwl/cypress:cypress",
+                "test": {
+                    "builder": "@nrwl/jest:jest",
                     "options": {
-                        "cypressConfig": "apps/e2e/create-event-e2e/cypress.json",
-                        "devServerTarget": "create-event:storybook"
-                    },
-                    "configurations": {
-                        "ci": {
-                            "devServerTarget": "create-event:storybook:ci"
-                        }
+                        "jestConfig": "libs/components/create-event-modal/jest.config.js",
+                        "passWithNoTests": true
                     }
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "apps/e2e/create-event-e2e/**/*.{js,ts}"
+                            "libs/components/create-event-modal/src/**/*.ts",
+                            "libs/components/create-event-modal/src/**/*.html"
                         ]
                     }
                 }

@@ -155,6 +155,24 @@ export interface Event {
 }
 
 /**
+ * Create event form data
+ */
+export interface CreateEventFormData {
+    /**
+     * Event name
+     */
+    name: string;
+    /**
+     * Event description
+     */
+    description: string;
+    /**
+     * Event date
+     */
+    date: string;
+}
+
+/**
  * Participant
  */
 export interface Participant {

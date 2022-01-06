@@ -32,7 +32,9 @@
                 "libs/components/confirmation-modal/src/index.ts"
             ],
             "@core": ["libs/core/src/index.ts"],
-            "@create-event": ["libs/components/create-event/src/index.ts"],
+            "@create-event-modal": [
+                "libs/components/create-event-modal/src/index.ts"
+            ],
             "@create-poll-form": [
                 "libs/components/create-poll-form/src/index.ts"
             ],
@@ -61,6 +63,9 @@
             "@login-form": ["libs/components/login-form/src/index.ts"],
             "@mate-team/group-statistics": [
                 "libs/components/group-statistics/src/index.ts"
+            ],
+            "@create-event-form": [
+                "libs/components/create-event-form/src/index.ts"
             ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],

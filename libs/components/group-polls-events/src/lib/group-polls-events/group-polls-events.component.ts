@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Event, Group, Poll } from '@api-interfaces';
+import { CreateEventFormData, Event, Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
 import { AlertService, AuthService, EventService, GroupService, PollService } from '@services';
 
@@ -128,7 +128,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Poll successfully created'
-            })
+            });
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
@@ -200,6 +200,38 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     showEventDescription(event: Event, modal: unknown) {
         this.descriptionEvent = event;
         this.openModal(modal);
+    }
+
+    /**
+     * Create an event
+     *
+     * @param data {CreateEventFormData} Data to create the event with
+     */
+    async createEvent(data: CreateEventFormData): Promise<void> {
+        if (!this.checkIfAdmin(this.group.admin)) {
+            return;
+        }
+        const event: Event = {
+            name: data.name,
+            description: data.description,
+            date: data.date,
+            done: false,
+            participants: [],
+            groupID: this.groupService.currentGroupId
+        }
+        try {
+            await this.eventService.createEvent(event);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Event successfully created'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+        this.closeModal();
     }
 
     /**
