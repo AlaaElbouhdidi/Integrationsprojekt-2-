@@ -30,20 +30,33 @@ main {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                &:hover {
-                    fa-icon {
-                        color: $light;
-                    }
-                }
+                position: relative;
                 @include for-tablet-landscape-up {
                     margin: 0 2rem;
+                }
+                &:hover fa-icon {
+                    transform: translateY(-1.5rem);
+                    opacity: 0;
+                }
+                fa-icon {
+                    position: absolute;
+                    top: 0;
+                    transition: 0.25s;
+                }
+                fa-icon[icon="user-friends"] {
+                    left: -1.9rem;
+                }
+                fa-icon[icon="table"] {
+                    left: -1.6rem;
+                }
+                fa-icon[icon="calendar-alt"] {
+                    left: -1.6rem;
                 }
                 a {
                     color: $white;
                     cursor: pointer;
                     text-decoration: none;
                     font-size: 0.9rem;
-                    padding-bottom: 0.25rem;
                     @include for-tablet-portrait-up {
                         font-size: 1.2rem;
                     }
