@@ -1,0 +1,38 @@
+@import 'libs/styles/src/lib/modals';
+.members{
+    color: $white;
+    margin: 2rem 0;
+    &-header {
+        display: flex;
+        align-items: center;
+        border-left: 2px solid white;
+        padding: 0.25rem 0.75rem;
+        h5 {
+            margin: 0 0.5rem 0 0;
+        }
+        fa-icon {
+            font-size: 1.35rem;
+            margin-right: 1rem;
+        }
+        button {
+            padding: 0 0.75rem;
+            border: none;
+            background: $success;
+            color: $white;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: 0.25s;
+            &:hover {
+                background: $successHover;
+            }
+        }
+    }
+}
+.members {
+    &-body {
+        width: 100%;
+        &-item {
+            margin-top: 1rem;
+        }
+    }
+}

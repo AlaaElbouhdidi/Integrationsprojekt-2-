@@ -47,6 +47,12 @@
             "@group-event-item": [
                 "libs/components/group-event-item/src/index.ts"
             ],
+            "@group-members-list": [
+                "libs/components/group-members/members-list/src/index.ts"
+            ],
+            "@group-members-list-item": [
+                "libs/components/group-members/members-list-item/src/index.ts"
+            ],
             "@group-polls-events": [
                 "libs/components/group-polls-events/src/index.ts"
             ],
@@ -59,6 +65,7 @@
             "@event-participants-list": [
                 "libs/components/event-participants-list/src/index.ts"
             ],
+            "@invite-members": ["libs/components/invite-members/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [
