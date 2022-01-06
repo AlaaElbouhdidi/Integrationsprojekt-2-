@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { GroupComponent } from './group.component';
+import {GroupStatisticsComponent} from "../../../../group-statistics/src/lib/group-statistics/group-statistics.component";
 import {
     redirectUnauthorizedTo,
     canActivate
@@ -9,6 +10,7 @@ import { GroupPollsEventsModule } from '@group-polls-events';
 import {
     GroupPollsEventsComponent
 } from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
+import {GroupStatisticsModule} from "@mate-team/group-statistics";
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -28,7 +30,7 @@ const route = {
         },
         {
             path: 'statistics',
-            component: GroupComponent
+            component: GroupStatisticsComponent
         },
         {
             path: 'members',
@@ -42,7 +44,8 @@ const routes = [route];
 @NgModule({
     imports: [
         RouterModule.forChild(routes),
-        GroupPollsEventsModule
+        GroupPollsEventsModule,
+        GroupStatisticsModule
     ],
     exports: [RouterModule]
 })

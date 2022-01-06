@@ -31,6 +31,7 @@ import {
     faOtter
 } from '@fortawesome/free-solid-svg-icons';
 import { GroupModule } from '@group';
+import { GroupStatisticsModule} from "@mate-team/group-statistics";
 
 @NgModule({
     exports: [
@@ -50,7 +51,8 @@ import { GroupModule } from '@group';
         AuthHandlerModule,
         AngularFireFunctionsModule,
         StylesModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        GroupStatisticsModule
     ]
 })
 export class CoreModule {

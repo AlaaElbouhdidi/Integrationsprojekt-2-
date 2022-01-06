@@ -8,7 +8,7 @@ import { Event, Group } from '@api-interfaces';
     styleUrls: ['./events-groups-page.component.scss']
 })
 export class EventsGroupsPageComponent {
-    loading = true;
+    loading = false;
     /**
      * Events that are displayed
      */

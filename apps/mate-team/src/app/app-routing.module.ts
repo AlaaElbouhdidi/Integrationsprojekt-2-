@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('@profile').then((m) => m.ProfileModule)
     },
     {
+        path: 'group-statistics',
+        loadChildren: () => import('@mate-team/group-statistics').then((m) => m.GroupStatisticsModule)
+    },
+    {
         path: 'group/:id',
         loadChildren: () => import('@group').then((m) => m.GroupModule)
     },

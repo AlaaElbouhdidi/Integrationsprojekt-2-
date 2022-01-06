@@ -39,6 +39,9 @@ export class HeaderComponent implements OnDestroy {
                     : (this.authenticated = false);
             }
         );
+        if(!this.authenticated) {
+            router.navigate(['/events']);
+        }
     }
 
     /**

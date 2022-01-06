@@ -10,3 +10,7 @@
 a {
     cursor: pointer;
 }
+
+main {
+    min-height: calc(100vh - 6rem);
+}
