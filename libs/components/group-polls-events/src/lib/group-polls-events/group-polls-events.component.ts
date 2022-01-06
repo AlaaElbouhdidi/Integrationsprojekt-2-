@@ -3,6 +3,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CreateEventFormData, Event, Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
 import { AlertService, AuthService, EventService, GroupService, PollService } from '@services';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 /**
  * Group polls events component
@@ -11,7 +12,18 @@ import { AlertService, AuthService, EventService, GroupService, PollService } fr
     selector: 'mate-team-group-polls-events',
     templateUrl: './group-polls-events.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./group-polls-events.component.scss']
+    styleUrls: ['./group-polls-events.component.scss'],
+    animations: [
+        trigger('itemAnimation', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate(
+                    '200ms',
+                    style({ opacity: 1 })
+                )
+            ]),
+        ])
+    ]
 })
 export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     /**

@@ -10,8 +10,8 @@
     <div class="poll-item-body">
         <form *ngIf="!showResults; else pollResults">
             <div class="poll-item-body-choice" *ngFor="let choice of poll!.choices; let i = index">
-                <input class="choice-input" type="radio" [value]="i" name="choice">
-                <p>{{ choice.date | date: 'mediumDate' }}</p>
+                <input class="choice-input" [disabled]="userVoted" type="radio" [value]="i" name="choice">
+                <p [class.disabled-text]="userVoted">{{ choice.date | date: 'mediumDate' }}</p>
             </div>
         </form>
         <ng-template #pollResults>

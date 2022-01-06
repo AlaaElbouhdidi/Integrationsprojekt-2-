@@ -59,8 +59,8 @@
                 }
             }
             &-bar {
-                height: 0.5rem;
-                border-radius: 0.25rem;
+                height: 0.3rem;
+                border-radius: 0.1rem;
                 background: $white;
                 width: 10rem;
             }
@@ -102,4 +102,7 @@
 .disabled-btn {
     opacity: 50%;
     pointer-events: none;
+}
+.disabled-text {
+    opacity: 50%;
 }
