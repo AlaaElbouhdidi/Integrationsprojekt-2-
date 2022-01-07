@@ -260,6 +260,30 @@
                 }
             }
         },
+        "bg-animation": {
+            "projectType": "library",
+            "root": "libs/components/bg-animation",
+            "sourceRoot": "libs/components/bg-animation/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/bg-animation/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/bg-animation/src/**/*.ts",
+                            "libs/components/bg-animation/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "change-email-form": {
             "projectType": "library",
             "root": "libs/components/change-email-form",

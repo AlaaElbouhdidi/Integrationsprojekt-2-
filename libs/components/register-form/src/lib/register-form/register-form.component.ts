@@ -81,7 +81,6 @@ export class RegisterFormComponent {
                     'Successfully logged in with new account. Please verify your email.'
             });
             await this.router.navigate(['/']);
-            window.location.reload();
         } catch (e) {
             if (e instanceof Error) {
                 this.loading = false;

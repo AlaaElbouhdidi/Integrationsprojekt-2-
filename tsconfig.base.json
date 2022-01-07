@@ -32,6 +32,9 @@
                 "libs/components/confirmation-modal/src/index.ts"
             ],
             "@core": ["libs/core/src/index.ts"],
+            "@create-event-form": [
+                "libs/components/create-event-form/src/index.ts"
+            ],
             "@create-event-modal": [
                 "libs/components/create-event-modal/src/index.ts"
             ],
@@ -61,8 +64,8 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@create-event-form": [
-                "libs/components/create-event-form/src/index.ts"
+            "@bg-animation": [
+                "libs/components/bg-animation/src/index.ts"
             ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
