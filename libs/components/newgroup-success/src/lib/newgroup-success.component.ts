@@ -68,6 +68,8 @@ export class NewgroupSuccessComponent implements OnDestroy {
             });
         }
         this.closeModal();
-        this.router.navigate([`group/${this.gid}/members`]);
+        this.router.navigate([`group/${this.gid}/members`]).then(() => {
+            window.location.reload();
+        });
     }
 }

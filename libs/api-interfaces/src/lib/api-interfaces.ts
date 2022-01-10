@@ -229,6 +229,7 @@ export interface User {
     email?: string;
     emailVerified?: boolean;
     photoURL?: string;
+    groups?: string[];
     displayName?: string;
 }
 

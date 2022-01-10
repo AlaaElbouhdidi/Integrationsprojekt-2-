@@ -8,7 +8,7 @@ import {
     FaIconLibrary,
     FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
-import { faSearch, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faSearch, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 
@@ -28,6 +28,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class GroupsModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faUserFriends, faSearch);
+        library.addIcons(faUserFriends, faSearch, faCircle);
     }
 }

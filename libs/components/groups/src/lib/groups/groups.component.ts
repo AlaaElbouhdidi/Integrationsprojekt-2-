@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Group } from '@api-interfaces';
 import { GroupService } from '@services';
 
@@ -8,14 +9,12 @@ import { GroupService } from '@services';
     styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
-    groups!: Group[]
+    groups: Promise<Group[]>;
     /**
      * keyword to filter the list of members
      */
     term = '';
-    constructor(public groupService: GroupService) {
-        this.groupService.groupCollection.valueChanges({ idField: 'id'}).subscribe(groups => {
-            this.groups = groups
-        });
+    constructor(public groupService: GroupService, private router: Router) {
+        this.groups = this.groupService.getUserGroups();
     }
 }

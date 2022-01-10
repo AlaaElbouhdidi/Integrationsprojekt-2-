@@ -9,16 +9,21 @@
         </div>
         <div class="search">
             <fa-icon icon="search"></fa-icon>
-            <input type="text" name="term"  [(ngModel)]="term" placeholder="Search" autofocus/>
+            <input
+                type="text"
+                name="term"
+                [(ngModel)]="term"
+                placeholder="Search"
+                autofocus
+            />
             <span>Filter by: </span>
             <button>Members</button>
             <button>Creation Date</button>
         </div>
     </div>
-    <div *ngFor="let group of groups | filter:term" class="group">
-        <img src="" alt="Groupicon" />
+    <div *ngFor="let group of groups | async | filter: term" class="group">
+        <fa-icon icon="circle" size="3x"></fa-icon>
         <span>{{ group.name }}</span>
-        <span>|</span>
         <button [routerLink]="'/group/' + group.id + '/events'">Open</button>
     </div>
 </main>
