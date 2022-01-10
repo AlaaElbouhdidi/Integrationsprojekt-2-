@@ -983,7 +983,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/groups"],
                     "options": {
                         "jestConfig": "libs/components/groups/jest.config.js",
                         "passWithNoTests": true
@@ -998,8 +997,7 @@
                         ]
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "header": {
             "projectType": "library",

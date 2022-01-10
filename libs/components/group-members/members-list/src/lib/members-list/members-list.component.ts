@@ -81,11 +81,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
                 type: 'success',
                 message: 'Member successfully deleted'
             });
-        } catch (e: any) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
+        } catch (e) {
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
     toggleIsAdmin(m: Member) {
@@ -176,11 +178,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
             this.groupService.getGroupById(this.gid).then((res) => {
                 if (res) this.gAdmin = res.admin;
             });
-        } catch (err: any) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: err.message
-            });
+        } catch (e) {
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
     /**

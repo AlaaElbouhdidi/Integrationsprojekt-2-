@@ -1,4 +1,4 @@
-import { Member, Team } from '@api-interfaces';
+import { Member } from '@api-interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {

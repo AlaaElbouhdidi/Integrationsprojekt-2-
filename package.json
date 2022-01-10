@@ -71,7 +71,7 @@
         "@angular/pwa": "^13.0.3",
         "@angular/router": "^12.2.0",
         "@angular/service-worker": "^12.2.0",
-        "@compodoc/compodoc": "^1.1.15",
+        "@compodoc/compodoc": "1.1.18",
         "@fortawesome/angular-fontawesome": "^0.9.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",

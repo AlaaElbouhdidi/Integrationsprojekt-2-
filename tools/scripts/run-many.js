@@ -26,5 +26,5 @@ var cmd = target !== 'e2e'
     ? "npx nx run-many --target=" + target + " --projects=" + projects + " --parallel " + restArgs()
     : "npx nx run-many --target=" + target + " --projects=" + projects + " " + restArgs();
 if (projects.length > 0)
-    (0, child_process_1.execSync)(cmd, { stdio: [0, 1, 2] });
+    child_process_1.execSync(cmd, { stdio: [0, 1, 2] });
 //# sourceMappingURL=run-many.js.map
