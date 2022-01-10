@@ -2,10 +2,32 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GroupsComponent } from './groups/groups.component';
 import { ServicesModule } from '@services';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import {
+    FaIconLibrary,
+    FontAwesomeModule
+} from '@fortawesome/angular-fontawesome';
+import { faSearch, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [CommonModule, ServicesModule],
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        ServicesModule,
+        BrowserModule,
+        Ng2SearchPipeModule,
+        FormsModule,
+        RouterModule
+    ],
+
     declarations: [GroupsComponent],
     exports: [GroupsComponent]
 })
-export class GroupsModule {}
+export class GroupsModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faUserFriends, faSearch);
+    }
+}

@@ -5,7 +5,7 @@
         <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">+ add new member</button>
     </div>
     <div class="members-body">
-        <p>{{membersList.length}} members founded</p>
+        <p>{{membersList.length}} members found</p>
         <div class="members-body-item" *ngFor="let i of membersList | filter:term ">
             <mate-team-members-list-item
                 [me]="currentUser"

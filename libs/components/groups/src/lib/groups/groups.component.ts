@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Group } from '@api-interfaces';
 import { GroupService } from '@services';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'mate-team-groups',
@@ -9,8 +8,14 @@ import { Observable } from 'rxjs';
     styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
-    groups!: Observable<Group[]>
+    groups!: Group[]
+    /**
+     * keyword to filter the list of members
+     */
+    term = '';
     constructor(public groupService: GroupService) {
-        this.groups = this.groupService.groupCollection.valueChanges().pipe();
+        this.groupService.groupCollection.valueChanges({ idField: 'id'}).subscribe(groups => {
+            this.groups = groups
+        });
     }
 }
