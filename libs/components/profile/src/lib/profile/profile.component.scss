@@ -121,7 +121,7 @@
         margin: 0;
     }
     select {
-        display: block;
+        display: none;
         background: $darkAccent;
         box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
         color: $white;
@@ -143,10 +143,7 @@
         }
     }
     nav {
-        display: none;
-        @include for-tablet-portrait-up {
-            display: block;
-        }
+        display: block;
         ul {
             list-style: none;
             padding: 0;
@@ -163,8 +160,15 @@
                 fa-icon {
                     position: absolute;
                     top: 0;
-                    left: -1.25rem;
+                    left: 0;
                     transition: 0.25s;
+                    @include for-tablet-portrait-up {
+                        left: -1.25rem;
+                    }
+                }
+                a {
+                    text-decoration: none;
+                    color: $white;
                 }
                 &:hover fa-icon {
                     transform: translateY(-1.5rem);
@@ -207,9 +211,9 @@
     width: 100%;
 }
 .selected-nav {
-    border-bottom: 2px solid $light;
+    border-bottom: 2px solid $white;
     fa-icon {
-        color: $light;
+        color: $white;
     }
 }
 @include slide-in-left(-5rem, 0);

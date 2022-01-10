@@ -17,16 +17,15 @@ main {
     }
     nav {
         ul {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
             list-style: none;
             padding: 0;
-            @include for-tablet-landscape-up {
+            @include for-tablet-portrait-up {
+                display: flex;
+                align-items: center;
                 justify-content: center;
             }
             li {
-                margin: 0 0.25rem;
+                margin: 0.35rem 2rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -56,7 +55,8 @@ main {
                     color: $white;
                     cursor: pointer;
                     text-decoration: none;
-                    font-size: 0.9rem;
+                    font-size: 1rem;
+                    white-space: nowrap;
                     @include for-tablet-portrait-up {
                         font-size: 1.2rem;
                     }
@@ -66,8 +66,8 @@ main {
     }
 }
 .active-link {
-    border-bottom: 2px solid $light;
+    border-bottom: 2px solid $white;
     fa-icon {
-        color: $light;
+        color: $white;
     }
 }
