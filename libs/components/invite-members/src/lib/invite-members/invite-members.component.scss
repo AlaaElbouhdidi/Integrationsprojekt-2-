@@ -1,63 +1,101 @@
-@import '_variables';
-@import '_mixins';
-.container {
-    background: $white;
-    color: $dark;
-    padding: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-    width: 100%;
-    max-width: 25rem;
-    border-radius: 2px;
-    h1 {
-        text-align: center;
-        font-weight: normal;
-        margin-bottom: 3rem;
-        font-size: 2rem;
-    }
-    h6 {
-        font-size: 1rem;
-    }
-    @include for-tablet-portrait-up {
-        width: 25rem;
-    }
-}
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
 
-/* Form error messages */
-.form-error {
-    margin-top: 0.5rem;
-    text-align: left;
-}
-.form-error-message {
-    color: #910b0b;
-    font-size: .7rem;
-}
-/* Form button */
-.form-btn {
-    @include flex-center-column;
-    button {
+.chip-list {
+    width: 100%;
+    mat-chip-list {
         width: 100%;
-        padding: 0.75rem 0;
-        margin: 0.5rem;
-        background: $green;
-        font-size: 1rem;
-        color: $white;
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        transition: 0.25s;
-        &:hover {
-            background: $darkAccent;
+        display: flex;
+        flex-direction: column;
+    }
+    &-input {
+        width: 100%;
+        position: relative;
+        fa-icon[icon="angle-double-right"] {
+            position: absolute;
+            top: 0.7rem;
+            left: 0.5rem;
+            font-size: 1.2rem;
+            color: $dark;
+            transition: 0.25s;
+        }
+        input {
+            background: $white;
+            color: $dark;
+            font-size: 1rem;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid $dark;
+            padding: 0.5rem 0 0.5rem 2.5rem;
+            transition: 0.25s;
+            &:focus {
+                border-bottom: 1px solid $main !important;
+            }
+            &:focus + fa-icon {
+                color: $main !important;
+            }
+        }
+        .form-error {
+            margin-top: 0.5rem;
+            margin-left: 0.2rem;
+            text-align: left;
+            &-message {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                color: $error;
+                font-size: 1rem;
+                fa-icon {
+                    margin-right: 0.25rem;
+                }
+            }
         }
     }
-}
+    .add-member-btn {
+        border: none;
+        cursor: pointer;
+        background: $success;
+        color: $white;
+        padding: 0.5rem 2rem;
+        margin-top: 1rem;
+        border-radius: 0.25rem;
+        width: 100%;
+        transition: 0.25s;
+        &:hover {
+            background: #1fb61f;
+        }
+    }
 
+}
+.invite-members-info {
+    @include flex-center;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    fa-icon {
+        margin-right: 0.25rem;
+        color: $warning;
+    }
+}
 .disabled-btn {
-    opacity: 20%;
+    opacity: 50%;
     pointer-events: none;
 }
-.example-chip-list {
-    width: 100%;
-  }
 .chip{
     background-color: #2e8bc0;
+    margin: 1rem 0 1rem 0.25rem !important;
+    button {
+        color: $dark;
+    }
+}
+.mat-chip-list-wrapper {
+    width: 100%;
+}
+#invite-member-input {
+    box-sizing: border-box !important;
+    flex-basis: 0 !important;
+    width: auto !important;
+    min-width: 100% !important;
+}
+.emails-container {
+    overflow: hidden;
 }
