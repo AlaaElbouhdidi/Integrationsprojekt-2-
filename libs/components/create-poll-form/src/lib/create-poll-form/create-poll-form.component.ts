@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { Choice, Poll } from '@api-interfaces';
 
 /**
@@ -28,17 +34,13 @@ export class CreatePollFormComponent {
      * Constructor which initializes create poll reactive form
      * @param fb {FormBuilder}
      */
-    constructor(
-        private fb: FormBuilder
-    ) {
+    constructor(private fb: FormBuilder) {
         this.createPollForm = this.fb.group({
             title: new FormControl('', [
                 Validators.maxLength(50),
                 Validators.required
             ]),
-            date: new FormControl('', [
-                Validators.required
-            ])
+            date: new FormControl('', [Validators.required])
         });
     }
 

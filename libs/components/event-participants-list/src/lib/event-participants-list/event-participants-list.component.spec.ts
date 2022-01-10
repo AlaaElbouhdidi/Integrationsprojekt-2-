@@ -17,8 +17,7 @@ describe('EventParticipantsListComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [EventParticipantsListModule]
-        })
-        .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -34,7 +33,9 @@ describe('EventParticipantsListComponent', () => {
     it('should emit event on adding participant to team', () => {
         jest.spyOn(component.addToTeamEvent, 'emit');
         component.addToTeam(participantMock);
-        expect(component.addToTeamEvent.emit).toHaveBeenCalledWith(participantMock);
+        expect(component.addToTeamEvent.emit).toHaveBeenCalledWith(
+            participantMock
+        );
     });
 
     it('should filter list', () => {
@@ -50,7 +51,9 @@ describe('EventParticipantsListComponent', () => {
         component.participants = [participantMock];
         fixture.detectChanges();
         component.filterList();
-        expect(component.filteredParticipants).not.toEqual(component.participants);
+        expect(component.filteredParticipants).not.toEqual(
+            component.participants
+        );
     });
 
     it('should set filtered participants on component init', () => {

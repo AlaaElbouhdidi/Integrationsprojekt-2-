@@ -2,7 +2,8 @@
 @import 'libs/styles/src/lib/mixins';
 @import 'libs/styles/src/lib/modals';
 
-.polls, .events {
+.polls,
+.events {
     color: $white;
     margin: 2rem 0;
     &-header {

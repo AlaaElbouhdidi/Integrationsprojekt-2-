@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class EventService {
-
     /**
      * Constructor of event service
      * @param afs {AngularFirestore}
@@ -20,7 +19,7 @@ export class EventService {
     constructor(
         private afs: AngularFirestore,
         private groupService: GroupService
-    ) { }
+    ) {}
 
     /**
      * Remove id from an event
@@ -30,7 +29,7 @@ export class EventService {
      * @private
      */
     private static copyAndPrepare(event: Event): Event {
-        const copy = {...event};
+        const copy = { ...event };
         delete copy.id;
         return copy;
     }
@@ -42,8 +41,8 @@ export class EventService {
      */
     getActiveEventsOfGroup(): Observable<Event[]> {
         return this.afs
-            .collection<Event>(
-                'events', ref => ref
+            .collection<Event>('events', (ref) =>
+                ref
                     .where('groupID', '==', this.groupService.currentGroupId)
                     .where('done', '==', false)
             )
@@ -69,9 +68,6 @@ export class EventService {
      * @param eventId {string} The id of the event to delete
      */
     deleteEvent(eventId: string): Promise<void> {
-        return this.afs
-            .collection<Event>('events')
-            .doc(eventId)
-            .delete();
+        return this.afs.collection<Event>('events').doc(eventId).delete();
     }
 }

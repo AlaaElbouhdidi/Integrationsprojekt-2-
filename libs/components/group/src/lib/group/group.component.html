@@ -4,7 +4,10 @@
             <li>
                 <a
                     (click)="navigateTo('events')"
-                    [class.active-link]="activeRoute === '/group/' + groupId + '/events'" >
+                    [class.active-link]="
+                        activeRoute === '/group/' + groupId + '/events'
+                    "
+                >
                     <fa-icon icon="calendar-alt"></fa-icon>
                     Polls & Events
                 </a>
@@ -12,7 +15,10 @@
             <li>
                 <a
                     (click)="navigateTo('statistics')"
-                    [class.active-link]="activeRoute === '/group/' + groupId + '/statistics'" >
+                    [class.active-link]="
+                        activeRoute === '/group/' + groupId + '/statistics'
+                    "
+                >
                     <fa-icon icon="table"></fa-icon>
                     Statistics
                 </a>
@@ -20,7 +26,10 @@
             <li>
                 <a
                     (click)="navigateTo('members')"
-                    [class.active-link]="activeRoute === '/group/' + groupId + '/members'" >
+                    [class.active-link]="
+                        activeRoute === '/group/' + groupId + '/members'
+                    "
+                >
                     <fa-icon icon="user-friends"></fa-icon>
                     Members
                 </a>

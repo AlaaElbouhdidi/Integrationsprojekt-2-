@@ -10,32 +10,38 @@ describe('PollService', () => {
     let service: PollService;
     const groupServiceMock = {
         currentGroupId: 0
-    }
+    };
     const pollMock: Poll = {
-        title: 'poll mock title', choices: [{ date: '02/02/2022', votes: 0 }], usersVoted: []
-    }
+        title: 'poll mock title',
+        choices: [{ date: '02/02/2022', votes: 0 }],
+        usersVoted: []
+    };
     const pollInput: Poll[] = [
-        { title: 'poll1', choices: [{ date: '01/01/2021', votes: 0 }], usersVoted: [] }
+        {
+            title: 'poll1',
+            choices: [{ date: '01/01/2021', votes: 0 }],
+            usersVoted: []
+        }
     ];
     const data = of(pollInput);
     const pollDocumentMock = {
         update: jest.fn(),
         delete: jest.fn()
-    }
+    };
     const pollCollectionMock = {
         doc: jest.fn().mockReturnValue(pollDocumentMock),
         valueChanges: jest.fn().mockReturnValue(data),
         add: jest.fn()
-    }
+    };
     const groupDocumentMock = {
         collection: jest.fn().mockReturnValue(pollCollectionMock)
-    }
+    };
     const groupCollectionMock = {
-        doc: jest.fn().mockReturnValue(groupDocumentMock),
-    }
+        doc: jest.fn().mockReturnValue(groupDocumentMock)
+    };
     const angularFirestoreMock = {
         collection: jest.fn().mockReturnValue(groupCollectionMock)
-    }
+    };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -64,14 +70,14 @@ describe('PollService', () => {
     });
 
     it('should call firestore update method when updating a poll', () => {
-       const spy = jest.spyOn(pollDocumentMock, 'update');
-       service.updatePoll('pollId', pollMock);
-       expect(spy).toHaveBeenCalled();
+        const spy = jest.spyOn(pollDocumentMock, 'update');
+        service.updatePoll('pollId', pollMock);
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should call firestore delete method when deleting a poll', () => {
-       const spy = jest.spyOn(pollDocumentMock, 'delete');
-       service.deletePoll('pollId');
-       expect(spy).toHaveBeenCalled();
+        const spy = jest.spyOn(pollDocumentMock, 'delete');
+        service.deletePoll('pollId');
+        expect(spy).toHaveBeenCalled();
     });
 });

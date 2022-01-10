@@ -78,7 +78,7 @@ export class GroupService {
                     await this.groupCollection.doc(groupId).ref.get()
                 ).data();
                 if (group) {
-                    userGroups.push({...group, id: groupId});
+                    userGroups.push({ ...group, id: groupId });
                 }
             });
         } else {

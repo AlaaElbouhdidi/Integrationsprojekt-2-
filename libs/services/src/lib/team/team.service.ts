@@ -10,14 +10,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class TeamService {
-
     /**
      * Constructor of team service
      * @param afs {AngularFirestore}
      */
-    constructor(
-        private afs: AngularFirestore
-    ) { }
+    constructor(private afs: AngularFirestore) {}
 
     /**
      * Remove id from a team
@@ -27,7 +24,7 @@ export class TeamService {
      * @private
      */
     private static copyAndPrepare(team: Team): Team {
-        const copy = {...team};
+        const copy = { ...team };
         delete copy.id;
         return copy;
     }
@@ -38,7 +35,7 @@ export class TeamService {
      * @param eventID {string} The id of the event
      * @returns {Observable<(Team & {id: string})[]>} Observable containing the teams of an event
      */
-    getTeams(eventID: string): Observable<(Team & {id: string})[]> {
+    getTeams(eventID: string): Observable<(Team & { id: string })[]> {
         return this.afs
             .collection<Event>('events')
             .doc(eventID)

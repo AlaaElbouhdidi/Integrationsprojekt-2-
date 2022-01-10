@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { Team } from '@api-interfaces';
 
 /**
@@ -24,9 +30,7 @@ export class TeamFormComponent {
      * Constructor of team form component
      * @param fb {FormBuilder}
      */
-    constructor(
-        private fb: FormBuilder
-    ) {
+    constructor(private fb: FormBuilder) {
         this.teamForm = this.fb.group({
             name: new FormControl('', [
                 Validators.required,

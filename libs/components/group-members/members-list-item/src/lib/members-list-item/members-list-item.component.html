@@ -6,7 +6,7 @@
     <div class="members-list-item-side">
         <div
             class="members-list-item-side-buttons"
-            *ngIf="(me.email !== member.email) && (gAdmin === me.uid)"
+            *ngIf="me.email !== member.email && gAdmin === me.uid"
         >
             <!-- <fa-icon
             *ngIf="!member.isAdmin"

@@ -24,7 +24,7 @@ describe('GroupPollsEventsComponent', () => {
     const eventServiceMock = {
         getActiveEventsOfGroup: jest.fn(),
         updateEvent: jest.fn()
-    }
+    };
     const authServiceMock = {
         getCurrentUser: jest.fn().mockReturnValue({ uid: 'userId' })
     };
@@ -35,7 +35,10 @@ describe('GroupPollsEventsComponent', () => {
         addAlert: jest.fn()
     };
     const pollMock: Poll = {
-        id: 'pollId', title: 'poll', choices: [{ date: '01/01/2021', votes: 2 }], usersVoted: []
+        id: 'pollId',
+        title: 'poll',
+        choices: [{ date: '01/01/2021', votes: 2 }],
+        usersVoted: []
     };
     const eventMock: Event = {
         id: 'event1ID',
@@ -62,9 +65,8 @@ describe('GroupPollsEventsComponent', () => {
                 { provide: AlertService, useValue: alertServiceMock },
                 { provide: EventService, useValue: eventServiceMock }
             ],
-            imports: [GroupPollsEventsModule],
-    })
-    .compileComponents();
+            imports: [GroupPollsEventsModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -78,13 +80,17 @@ describe('GroupPollsEventsComponent', () => {
     });
 
     it('should render info message if no poll active', () => {
-        const message = fixture.debugElement.nativeElement.querySelector('.polls-body-message');
+        const message = fixture.debugElement.nativeElement.querySelector(
+            '.polls-body-message'
+        );
         expect(component.polls.length).toEqual(0);
         expect(message).not.toBeNull();
     });
 
     it('should render info message if no events in group', () => {
-        const message = fixture.debugElement.nativeElement.querySelector('.events-body-message');
+        const message = fixture.debugElement.nativeElement.querySelector(
+            '.events-body-message'
+        );
         expect(component.events.length).toEqual(0);
         expect(message).not.toBeNull();
     });
@@ -122,9 +128,7 @@ describe('GroupPollsEventsComponent', () => {
     it('should not update poll if user has already voted', () => {
         const pollMockWithUserVote = {
             title: 'poll',
-            choices: [
-                { date: '01/01/2021', votes: 2 }
-            ],
+            choices: [{ date: '01/01/2021', votes: 2 }],
             usersVoted: ['userId']
         };
         const spy = jest.spyOn(pollServiceMock, 'updatePoll');

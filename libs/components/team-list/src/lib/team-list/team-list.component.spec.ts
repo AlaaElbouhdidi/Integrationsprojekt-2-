@@ -20,9 +20,8 @@ describe('TeamListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ TeamListComponent ]
-        })
-        .compileComponents();
+            declarations: [TeamListComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -44,7 +43,9 @@ describe('TeamListComponent', () => {
     it('should emit event on adding user to team', () => {
         jest.spyOn(component.addUserToTeamEvent, 'emit');
         component.addUserToTeam(teamMock);
-        expect(component.addUserToTeamEvent.emit).toHaveBeenCalledWith(teamMock);
+        expect(component.addUserToTeamEvent.emit).toHaveBeenCalledWith(
+            teamMock
+        );
     });
 
     it('should emit event on removing user from team', () => {

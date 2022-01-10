@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Group } from '@api-interfaces';
 import { GroupService } from '@services';
 
@@ -14,7 +13,7 @@ export class GroupsComponent {
      * keyword to filter the list of members
      */
     term = '';
-    constructor(public groupService: GroupService, private router: Router) {
+    constructor(public groupService: GroupService) {
         this.groups = this.groupService.getUserGroups();
     }
 }

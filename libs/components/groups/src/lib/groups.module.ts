@@ -8,7 +8,11 @@ import {
     FaIconLibrary,
     FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
-import { faCircle, faSearch, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircle,
+    faSearch,
+    faUserFriends
+} from '@fortawesome/free-solid-svg-icons';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 

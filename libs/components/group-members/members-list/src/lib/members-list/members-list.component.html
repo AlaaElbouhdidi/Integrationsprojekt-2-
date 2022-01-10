@@ -1,12 +1,26 @@
 <section class="members">
     <div class="members-header">
         <fa-icon icon="search"></fa-icon>
-        <input type="text" name="term"  [(ngModel)]="term" placeholder="Search" autofocus/>
-        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">+ add new member</button>
+        <input
+            type="text"
+            name="term"
+            [(ngModel)]="term"
+            placeholder="Search"
+            autofocus
+        />
+        <button
+            *ngIf="gAdmin === currentUser.uid"
+            (click)="openModal(newMember)"
+        >
+            + add new member
+        </button>
     </div>
     <div class="members-body">
-        <p>{{membersList.length}} members found</p>
-        <div class="members-body-item" *ngFor="let i of membersList | filter:term ">
+        <p>{{ membersList.length }} members found</p>
+        <div
+            class="members-body-item"
+            *ngFor="let i of membersList | filter: term"
+        >
             <mate-team-members-list-item
                 [me]="currentUser"
                 [gAdmin]="gAdmin"
@@ -29,7 +43,8 @@
     <div class="modal-body">
         <mate-team-invite-members
             (sendInvitesEvent)="addMember($event)"
-            [gid]="gid" >
+            [gid]="gid"
+        >
         </mate-team-invite-members>
     </div>
 </ng-template>

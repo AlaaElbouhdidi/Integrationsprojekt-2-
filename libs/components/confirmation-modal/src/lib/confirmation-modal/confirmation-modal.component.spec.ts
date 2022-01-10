@@ -10,8 +10,7 @@ describe('ConfirmationModalComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ConfirmationModalModule]
-    })
-    .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -26,21 +25,27 @@ describe('ConfirmationModalComponent', () => {
 
     it('should emit close modal event on confirm button click', () => {
         jest.spyOn(component.closeModalEvent, 'emit');
-        const confirmButton = fixture.debugElement.nativeElement.querySelector('.modal-footer-green-btn');
+        const confirmButton = fixture.debugElement.nativeElement.querySelector(
+            '.modal-footer-green-btn'
+        );
         confirmButton.click();
         expect(component.closeModalEvent.emit).toHaveBeenCalledWith(true);
     });
 
     it('should emit dismiss modal event on cancel button click', () => {
         jest.spyOn(component.dismissModalEvent, 'emit');
-        const cancelButton = fixture.debugElement.nativeElement.querySelector('.modal-footer-red-btn');
+        const cancelButton = fixture.debugElement.nativeElement.querySelector(
+            '.modal-footer-red-btn'
+        );
         cancelButton.click();
         expect(component.dismissModalEvent.emit).toHaveBeenCalled();
     });
 
     it('should emit dismiss modal event on icon click', () => {
         jest.spyOn(component.dismissModalEvent, 'emit');
-        const icon = fixture.debugElement.nativeElement.querySelector('#close-confirmation-modal-icon');
+        const icon = fixture.debugElement.nativeElement.querySelector(
+            '#close-confirmation-modal-icon'
+        );
         icon.click();
         expect(component.dismissModalEvent.emit).toHaveBeenCalled();
     });

@@ -1,7 +1,9 @@
 @import 'libs/styles/src/lib/modals';
 
 .modal-body {
-    &-event-name, &-event-date, &-event-description {
+    &-event-name,
+    &-event-date,
+    &-event-description {
         display: flex;
         align-items: center;
         justify-content: flex-start;

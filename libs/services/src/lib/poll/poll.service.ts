@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class PollService {
-
     /**
      * Constructor of poll service
      * @param afs {AngularFirestore}
@@ -20,7 +19,7 @@ export class PollService {
     constructor(
         private afs: AngularFirestore,
         private groupService: GroupService
-    ) { }
+    ) {}
 
     /**
      * Remove id from a poll
@@ -30,7 +29,7 @@ export class PollService {
      * @private
      */
     private static copyAndPrepare(poll: Poll): Poll {
-        const copy = {...poll};
+        const copy = { ...poll };
         delete copy.id;
         return copy;
     }
@@ -40,7 +39,7 @@ export class PollService {
      *
      * @returns {Observable<Poll & {id: string}>} Observable containing the polls of a group with id attribute
      */
-    getPolls(): Observable<(Poll & {id: string})[]> {
+    getPolls(): Observable<(Poll & { id: string })[]> {
         return this.afs
             .collection<Group>('groups')
             .doc(this.groupService.currentGroupId)

@@ -51,6 +51,7 @@
         "affected:doc": "nx affected --target=compodoc --parallel  --max-parallel=3",
         "affected:e2e": "nx affected --target=e2e",
         "format": "nx format:write",
+        "failed": "nx run-many --target=test --all=true --parallel=true --only-failed=true",
         "format:check": "nx format:check --files apps/**/*.ts libs/**/*.ts",
         "deps": "nx dep-graph",
         "help": "nx help"

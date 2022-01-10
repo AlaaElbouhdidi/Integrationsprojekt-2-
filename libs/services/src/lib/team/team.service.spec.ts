@@ -11,25 +11,25 @@ describe('TeamService', () => {
         id: 'teamID',
         name: 'Team 1',
         participants: []
-    }
+    };
     const teamDocumentMock = {
         update: jest.fn(),
         delete: jest.fn()
-    }
+    };
     const teamCollectionMock = {
         doc: jest.fn().mockReturnValue(teamDocumentMock),
         valueChanges: jest.fn(),
         add: jest.fn()
-    }
+    };
     const eventDocumentMock = {
         collection: jest.fn().mockReturnValue(teamCollectionMock)
-    }
+    };
     const eventCollectionMock = {
         doc: jest.fn().mockReturnValue(eventDocumentMock)
-    }
+    };
     const angularFirestoreMock = {
         collection: jest.fn().mockReturnValue(eventCollectionMock)
-    }
+    };
 
     beforeEach(() => {
         TestBed.configureTestingModule({

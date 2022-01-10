@@ -2,7 +2,12 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User, Member } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, AuthService, GroupService, UserService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    GroupService,
+    UserService
+} from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -105,7 +110,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @param content {unknown} The modal reference
      */
     openModal(content: unknown) {
-        this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.modalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
     }
     /**
      * Closes a modal
@@ -120,7 +127,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @returns {Promise<boolean>} A promise containing true if modal is closed and false if modal is dismissed
      */
     async openConfirmationModal(content: unknown): Promise<boolean> {
-        this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.confirmationModalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
         try {
             await this.confirmationModalRef.result;
             return true;
@@ -158,7 +167,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
                     if (fil.length > 0) this.isAdmin = true;
                     else this.isAdmin = false */
                     items.forEach((i) => {
-                        this.userService.getUser(i.email || '').then((u)=> {
+                        this.userService.getUser(i.email || '').then((u) => {
                             i.user = u;
                         });
                     });

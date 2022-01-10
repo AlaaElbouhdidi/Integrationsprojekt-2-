@@ -41,7 +41,7 @@ export class EventParticipantsListComponent implements OnInit {
      */
     filterList(): void {
         const input = this.searchInput.toLowerCase();
-        this.filteredParticipants = this.participants.filter(participant => {
+        this.filteredParticipants = this.participants.filter((participant) => {
             const participantName = participant.displayName.toLowerCase();
             return participantName.indexOf(input) > -1;
         });

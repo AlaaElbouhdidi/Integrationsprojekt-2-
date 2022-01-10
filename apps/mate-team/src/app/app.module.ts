@@ -46,7 +46,7 @@ export const socketConfig: SocketIoConfig = {
             useClass: JwtInterceptor,
             multi: true
         },
-        BrowserAnimationsModule,
+        BrowserAnimationsModule
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective]

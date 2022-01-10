@@ -279,6 +279,4 @@ export class AuthService {
             });
         return Number(res);
     }
-
-
 }

@@ -48,15 +48,14 @@ export class GroupComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((param) => {
                 this.groupId = param.get('id');
-                this.groupService.currentGroupId = param.get('id') === null ? '' : param.get('id') as string;
+                this.groupService.currentGroupId =
+                    param.get('id') === null ? '' : (param.get('id') as string);
             });
-        this.router.events
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    this.activeRoute = this.router.url;
-                }
-            });
+        this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.activeRoute = this.router.url;
+            }
+        });
     }
 
     /**

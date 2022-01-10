@@ -7,11 +7,7 @@ import { AuthService } from '@services';
 
 @NgModule({
     declarations: [LandingpageComponent],
-    imports: [
-        CommonModule,
-        LandingpageRoutingModule,
-        SlideshowModule
-    ],
+    imports: [CommonModule, LandingpageRoutingModule, SlideshowModule],
     providers: [AuthService],
     exports: [LandingpageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -5,7 +5,7 @@
             formControlName="title"
             placeholder="Title"
             required
-        >
+        />
         <fa-icon icon="angle-double-right"></fa-icon>
     </div>
 
@@ -37,7 +37,7 @@
                     formControlName="date"
                     placeholder="Date"
                     required
-                >
+                />
                 <fa-icon icon="angle-double-right"></fa-icon>
             </div>
             <button
@@ -46,7 +46,8 @@
                 class="green-btn"
                 [class.disabled-btn]="!date.valid || choices.length > 4"
                 [disabled]="!date.valid || choices.length > 4"
-                (click)="addDateAsChoice()">
+                (click)="addDateAsChoice()"
+            >
                 Add date
             </button>
         </div>
@@ -65,11 +66,9 @@
 
         <ul *ngIf="choices.length > 0">
             <li *ngFor="let choice of choices; let i = index">
-                <span>{{i + 1}}.</span>
-                <span>{{choice.date | date: 'mediumDate'}}</span>
-                <fa-icon
-                    icon="trash"
-                    (click)="deleteDateAsChoice(i)" >
+                <span>{{ i + 1 }}.</span>
+                <span>{{ choice.date | date: 'mediumDate' }}</span>
+                <fa-icon icon="trash" (click)="deleteDateAsChoice(i)">
                 </fa-icon>
             </li>
         </ul>

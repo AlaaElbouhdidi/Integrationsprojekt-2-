@@ -56,8 +56,7 @@ describe('TeamModalComponent', () => {
                 { provide: AlertService, useValue: alertServiceMock }
             ],
             imports: [TeamModalModule]
-        })
-        .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

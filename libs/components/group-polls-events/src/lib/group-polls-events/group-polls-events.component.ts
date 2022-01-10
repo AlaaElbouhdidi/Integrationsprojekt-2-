@@ -2,7 +2,13 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Event, Group, Poll } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertService, AuthService, EventService, GroupService, PollService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    EventService,
+    GroupService,
+    PollService
+} from '@services';
 
 /**
  * Group polls events component
@@ -64,7 +70,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private groupService: GroupService,
         private eventService: EventService
-    ) { }
+    ) {}
 
     /**
      * Opens a modal
@@ -72,7 +78,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @param content {unknown} The modal reference
      */
     openModal(content: unknown): void {
-        this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.modalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
     }
 
     /**
@@ -89,7 +97,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @returns {Promise<boolean>} A promise containing true if modal is closed and false if modal is dismissed
      */
     async openConfirmationModal(content: unknown): Promise<boolean> {
-        this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.confirmationModalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
         try {
             await this.confirmationModalRef.result;
             return true;
@@ -128,7 +138,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Poll successfully created'
-            })
+            });
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
@@ -280,18 +290,21 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      */
     async ngOnInit(): Promise<void> {
         try {
-            const group = await this.groupService.getGroupById(this.groupService.currentGroupId);
-            this.group = group ? group : {} as Group;
+            const group = await this.groupService.getGroupById(
+                this.groupService.currentGroupId
+            );
+            this.group = group ? group : ({} as Group);
             if (group) {
                 this.isAdmin = this.checkIfAdmin(group.admin);
             }
-            this.pollService.getPolls()
+            this.pollService
+                .getPolls()
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(data => {
-                        this.polls = data as Poll[];
-                    }
-                );
-            this.eventService.getActiveEventsOfGroup()
+                .subscribe((data) => {
+                    this.polls = data as Poll[];
+                });
+            this.eventService
+                .getActiveEventsOfGroup()
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((data: Event[]) => {
                     this.events = data;

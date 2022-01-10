@@ -12,25 +12,24 @@
     <div class="group-event-item-buttons">
         <button
             class="group-event-item-buttons-description"
-            (click)="showTeams()" >
+            (click)="showTeams()"
+        >
             Teams
         </button>
         <button
             class="group-event-item-buttons-description"
-            (click)="showDescription()" >
+            (click)="showDescription()"
+        >
             Description
         </button>
         <button
             class="group-event-item-buttons-participate"
             [disabled]="participating"
             [class.disabled-btn]="participating"
-            (click)="participate()" >
+            (click)="participate()"
+        >
             {{ participating ? 'Participating' : 'Participate' }}
         </button>
-        <fa-icon
-            icon="trash"
-            *ngIf="isAdmin"
-            (click)="delete()" >
-        </fa-icon>
+        <fa-icon icon="trash" *ngIf="isAdmin" (click)="delete()"> </fa-icon>
     </div>
 </div>

@@ -37,7 +37,7 @@ export class InviteMembersComponent {
     constructor(
         private groupService: GroupService,
         private authService: AuthService,
-        private userService: UserService,
+        private userService: UserService
     ) {}
 
     async add(event: MatChipInputEvent): Promise<void> {
@@ -92,7 +92,7 @@ export class InviteMembersComponent {
                     isAdmin: false,
                     email: e
                 };
-                await this.userService.getUser(e).then((u)=> {
+                await this.userService.getUser(e).then((u) => {
                     m.uid = u.uid;
                 });
                 this.groupService.addMemberToGroup(this.gid, m);

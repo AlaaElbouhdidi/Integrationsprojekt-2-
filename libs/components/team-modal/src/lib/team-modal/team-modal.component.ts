@@ -1,5 +1,17 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Event, Participant, Team, UpdateTeamParticipantsData } from '@api-interfaces';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output
+} from '@angular/core';
+import {
+    Event,
+    Participant,
+    Team,
+    UpdateTeamParticipantsData
+} from '@api-interfaces';
 import { AlertService, AuthService, TeamService } from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -60,7 +72,7 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         private teamService: TeamService,
         private alertService: AlertService,
         private authService: AuthService
-    ) { }
+    ) {}
 
     /**
      * Create a new team
@@ -96,7 +108,9 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         if (!this.checkIfAdmin(this.groupAdmin)) {
             return;
         }
-        data.team.participants = data.team.participants.filter(participant => participant.uid !== data.participant.uid);
+        data.team.participants = data.team.participants.filter(
+            (participant) => participant.uid !== data.participant.uid
+        );
         try {
             await this.teamService.updateTeam(this.event.id, data.team);
         } catch (e) {
@@ -147,17 +161,21 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     filterParticipantsList(): Participant[] {
         const allUsersInTeams: Participant[] = [];
-        this.teams.forEach(team => allUsersInTeams.push(...team.participants));
-        const filteredParticipants: Participant[] = [...this.event.participants];
+        this.teams.forEach((team) =>
+            allUsersInTeams.push(...team.participants)
+        );
+        const filteredParticipants: Participant[] = [
+            ...this.event.participants
+        ];
         if (allUsersInTeams.length === filteredParticipants.length) {
             return [];
         }
         for (let i = 0; i < filteredParticipants.length; i++) {
-            allUsersInTeams.forEach(user => {
+            allUsersInTeams.forEach((user) => {
                 if (user.uid === filteredParticipants[i].uid) {
                     filteredParticipants.splice(i, 1);
                 }
-            })
+            });
         }
         return filteredParticipants;
     }
@@ -207,7 +225,7 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         this.teamService
             .getTeams(this.event.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(teams => {
+            .subscribe((teams) => {
                 this.teams = teams;
                 this.filteredParticipants = this.filterParticipantsList();
             });

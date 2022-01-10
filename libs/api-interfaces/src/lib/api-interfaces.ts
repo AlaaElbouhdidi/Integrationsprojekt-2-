@@ -118,7 +118,7 @@ export interface Member {
     uid?: string;
     isAdmin?: boolean;
     email?: string;
-    user?: User
+    user?: User;
 }
 
 /**

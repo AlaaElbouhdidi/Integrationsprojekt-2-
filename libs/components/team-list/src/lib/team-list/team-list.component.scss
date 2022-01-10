@@ -19,12 +19,12 @@
                 cursor: pointer;
                 transition: 0.25s;
             }
-            fa-icon[icon="user-plus"] {
+            fa-icon[icon='user-plus'] {
                 &:hover {
                     color: $success;
                 }
             }
-            fa-icon[icon="trash"] {
+            fa-icon[icon='trash'] {
                 &:hover {
                     color: $error;
                 }
@@ -43,9 +43,8 @@
                         height: 2rem;
                         margin-right: 1rem;
                     }
-
                 }
-                fa-icon[icon="minus"] {
+                fa-icon[icon='minus'] {
                     cursor: pointer;
                     transition: 0.25s;
                     &:hover {

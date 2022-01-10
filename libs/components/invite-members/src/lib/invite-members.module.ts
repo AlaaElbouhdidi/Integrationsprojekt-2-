@@ -7,11 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     imports: [CommonModule, MatChipsModule, MatFormFieldModule, MatIconModule],
-    declarations: [
-      InviteMembersComponent
-    ],
-    exports: [
-      InviteMembersComponent
-    ]
+    declarations: [InviteMembersComponent],
+    exports: [InviteMembersComponent]
 })
 export class InviteMembersModule {}

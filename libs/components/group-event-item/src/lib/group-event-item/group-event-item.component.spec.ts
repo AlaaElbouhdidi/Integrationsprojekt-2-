@@ -31,12 +31,9 @@ describe('GroupEventItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            providers: [
-                { provide: AuthService, useValue: authServiceMock }
-            ],
+            providers: [{ provide: AuthService, useValue: authServiceMock }],
             imports: [GroupEventItemModule]
-    })
-    .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -99,9 +96,9 @@ describe('GroupEventItemComponent', () => {
                 currentValue: '',
                 firstChange: true,
                 isFirstChange(): boolean {
-                    return true
+                    return true;
                 }
-            },
+            }
         };
         const spy = jest.spyOn(component, 'checkIfParticipant');
         component.ngOnChanges(changesMock);
