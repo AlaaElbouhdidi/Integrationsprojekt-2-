@@ -15,12 +15,14 @@ import {
 import {
     MembersListModule
 } from '@group-members-list';
+import { GroupsModule } from '@groups';
 
 @NgModule({
     imports: [
         CommonModule,
         GroupRoutingModule,
         FontAwesomeModule,
+        GroupsModule,
         MembersListModule
     ],
     declarations: [GroupComponent],

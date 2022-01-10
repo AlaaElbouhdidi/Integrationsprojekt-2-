@@ -984,6 +984,32 @@
                 }
             }
         },
+        "groups": {
+            "projectType": "library",
+            "root": "libs/components/groups",
+            "sourceRoot": "libs/components/groups/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/components/groups"],
+                    "options": {
+                        "jestConfig": "libs/components/groups/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/groups/src/**/*.ts",
+                            "libs/components/groups/src/**/*.html"
+                        ]
+                    }
+                }
+            },
+            "tags": []
+        },
         "header": {
             "projectType": "library",
             "root": "libs/components/header",

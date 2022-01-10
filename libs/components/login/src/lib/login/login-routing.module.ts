@@ -6,7 +6,7 @@ import {
     redirectLoggedInTo
 } from '@angular/fire/compat/auth-guard';
 
-const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/']);
+const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/group']);
 
 const route = {
     path: 'login',
