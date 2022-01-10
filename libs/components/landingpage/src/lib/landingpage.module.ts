@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { LandingpageRoutingModule } from './landingpage/landingpage-routing.module';
 import { SlideshowModule } from '@slideshow';
-import { EventsModule } from '@events';
 import { AuthService } from '@services';
 
 @NgModule({
@@ -11,7 +10,6 @@ import { AuthService } from '@services';
     imports: [
         CommonModule,
         LandingpageRoutingModule,
-        EventsModule,
         SlideshowModule
     ],
     providers: [AuthService],

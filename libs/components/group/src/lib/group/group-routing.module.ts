@@ -10,7 +10,6 @@ import { GroupPollsEventsModule } from '@group-polls-events';
 import {
     GroupPollsEventsComponent
 } from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
-import { GroupsSectionScreenComponent } from '@groups';
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -39,12 +38,7 @@ const route = {
     ]
 };
 
-const group = {
-    path: 'group',
-    component: GroupsSectionScreenComponent,
-    ...canActivate(redirectUnauthenticatedToHome),
-}
-const routes = [group, route];
+const routes = [route];
 
 @NgModule({
     imports: [
