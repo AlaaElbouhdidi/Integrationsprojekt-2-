@@ -1,11 +1,13 @@
 <section class="members">
     <div class="members-header">
-        <fa-icon icon="search"></fa-icon>
-        <input type="text" name="term"  [(ngModel)]="term" placeholder="Search" autofocus/>
-        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">+ add new member</button>
+        <div class="members-header-searchbar">
+            <fa-icon icon="search"></fa-icon>
+            <input type="text" name="term" [(ngModel)]="term" placeholder="Search..." autofocus >
+        </div>
+        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">+ Add new member</button>
     </div>
     <div class="members-body">
-        <p>{{membersList.length}} members founded</p>
+        <p *ngIf="term.length === 0">{{membersList.length}} members found</p>
         <div class="members-body-item" *ngFor="let i of membersList | filter:term ">
             <mate-team-members-list-item
                 [me]="currentUser"

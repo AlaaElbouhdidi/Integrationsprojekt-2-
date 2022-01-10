@@ -1,9 +1,30 @@
-<div class="form-input">
+<div class="invite-members">
+    <div class="invite-members-info">
+        <fa-icon icon="info-circle"></fa-icon>
+        <p>Enter email of the user you want to add</p>
+    </div>
     <div id="emails-container" class="emails-container">
-        <mat-form-field class="chip-list" appearance="fill">
+        <mat-form-field class="chip-list">
             <mat-chip-list #chipList aria-label="Emails selection">
+                <div class="chip-list-input">
+                    <input
+                        autofocus
+                        id="invite-member-input"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)"
+                    >
+                    <fa-icon icon="angle-double-right"></fa-icon>
+                    <div class="form-error" *ngIf="isUnvalid">
+                        <div class="form-error-message">
+                            <fa-icon icon="exclamation-circle"></fa-icon>
+                            <p>{{errorMessage}}</p>
+                        </div>
+                    </div>
+                </div>
                 <mat-chip
-                class="chip"
+                    class="chip"
                     *ngFor="let email of emails"
                     [selectable]="selectable"
                     [removable]="removable"
@@ -14,23 +35,17 @@
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip>
-                <input
-                    placeholder="" autofocus
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)"
-                />
-                <div class="form-error" *ngIf="isUnvalid">
-                    <div class="form-error-message">
-                        <p>{{errorMessage}}</p>
-                    </div>
-                </div>
             </mat-chip-list>
-            <div class="form-btn">
-        <button [disabled]="(emails.length < 1)" [class.disabled-btn]="(emails.length < 1)" 
-            type="button" (click)="sendInvites()" >Add members</button>
-            </div>
+
+            <button
+                class="add-member-btn"
+                type="button"
+                [disabled]="(emails.length < 1)"
+                [class.disabled-btn]="(emails.length < 1)"
+                (click)="sendInvites()" >
+                {{emails.length > 1 ? 'Add members' : 'Add member'}}
+            </button>
+
         </mat-form-field>
     </div>
 </div>

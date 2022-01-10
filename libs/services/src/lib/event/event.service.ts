@@ -51,6 +51,17 @@ export class EventService {
     }
 
     /**
+     * Create an event
+     *
+     * @param event {Event} The event to create
+     */
+    async createEvent(event: Event): Promise<void> {
+        await this.afs
+            .collection<Event>('events')
+            .add(event)
+    }
+
+    /**
      * Update an event
      *
      * @param eventId {string} The id of the event to update

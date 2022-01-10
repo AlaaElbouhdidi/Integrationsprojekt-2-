@@ -13,18 +13,20 @@ header {
     box-shadow: rgba(0, 0, 0, 0.45) 0 3px 8px;
     z-index: 101;
     @include for-tablet-landscape-up {
-        padding: 0 5rem;
+        padding: 0 7rem;
     }
     h2 {
         font-weight: normal;
         letter-spacing: 1px;
         font-size: 1.2rem;
+        margin: 0;
         span {
             color: $light;
         }
         a {
             color: $white;
             cursor: pointer;
+            text-decoration: none;
         }
         @include for-phone-only {
             font-size: 1.5rem;
@@ -35,15 +37,9 @@ header {
             color: $white;
             transition: 0.25s;
             cursor: pointer;
-            text-decoration: underline;
+            text-decoration: none;
             &:hover {
                 color: $light;
-            }
-        }
-        a:nth-child(2) {
-            margin-left: 1rem;
-            @include for-tablet-portrait-up {
-                margin-left: 3rem;
             }
         }
         fa-icon {
@@ -53,6 +49,19 @@ header {
                 color: $light;
             }
         }
+        fa-icon[icon="user-circle"] {
+            margin: 0 1rem;
+            @include for-tablet-portrait-up {
+                margin: 0 3rem;
+            }
+        }
+        .register-link {
+            margin-left: 1rem;
+            @include for-tablet-portrait-up {
+                margin-left: 3rem;
+            }
+        }
+
     }
 }
 .logo {
@@ -60,9 +69,10 @@ header {
     overflow: hidden;
     height: 2.9rem;
     img {
-        width: 50px;
+        width: 35px;
+        @include for-tablet-portrait-up {
+            width: 50px;
+        }
     }
-    h2 {
-        margin-top: 5px;
-    }
+
 }

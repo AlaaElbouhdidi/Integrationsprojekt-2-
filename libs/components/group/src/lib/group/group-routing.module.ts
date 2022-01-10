@@ -24,10 +24,6 @@ const route = {
             component: GroupPollsEventsComponent
         },
         {
-            path: 'chat',
-            component: GroupComponent
-        },
-        {
             path: 'statistics',
             component: GroupComponent
         },

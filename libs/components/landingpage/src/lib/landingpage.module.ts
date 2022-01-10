@@ -5,6 +5,7 @@ import { LandingpageRoutingModule } from './landingpage/landingpage-routing.modu
 import { SlideshowModule } from '@slideshow';
 import { EventsModule } from '@events';
 import { AuthService } from '@services';
+import { BgAnimationModule } from '@bg-animation';
 
 @NgModule({
     declarations: [LandingpageComponent],
@@ -12,7 +13,8 @@ import { AuthService } from '@services';
         CommonModule,
         LandingpageRoutingModule,
         EventsModule,
-        SlideshowModule
+        SlideshowModule,
+        BgAnimationModule
     ],
     providers: [AuthService],
     exports: [LandingpageComponent],

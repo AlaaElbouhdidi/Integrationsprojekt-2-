@@ -4,9 +4,21 @@ import { InviteMembersComponent } from './invite-members/invite-members.componen
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    faExclamationCircle,
+    faAngleDoubleRight,
+    faInfoCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
-    imports: [CommonModule, MatChipsModule, MatFormFieldModule, MatIconModule],
+    imports: [
+        CommonModule,
+        MatChipsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        FontAwesomeModule
+    ],
     declarations: [
       InviteMembersComponent
     ],
@@ -14,4 +26,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
       InviteMembersComponent
     ]
 })
-export class InviteMembersModule {}
+export class InviteMembersModule {
+    constructor(library: FaIconLibrary) {
+        library.addIcons(
+            faExclamationCircle,
+            faAngleDoubleRight,
+            faInfoCircle
+        );
+    }
+}

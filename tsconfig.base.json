@@ -32,7 +32,12 @@
                 "libs/components/confirmation-modal/src/index.ts"
             ],
             "@core": ["libs/core/src/index.ts"],
-            "@create-event": ["libs/components/create-event/src/index.ts"],
+            "@create-event-form": [
+                "libs/components/create-event-form/src/index.ts"
+            ],
+            "@create-event-modal": [
+                "libs/components/create-event-modal/src/index.ts"
+            ],
             "@create-poll-form": [
                 "libs/components/create-poll-form/src/index.ts"
             ],
@@ -40,6 +45,9 @@
             "@env": ["libs/env/src/index.ts"],
             "@event-description-modal": [
                 "libs/components/event-description-modal/src/index.ts"
+            ],
+            "@event-participants-list": [
+                "libs/components/event-participants-list/src/index.ts"
             ],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
@@ -62,8 +70,8 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@event-participants-list": [
-                "libs/components/event-participants-list/src/index.ts"
+            "@bg-animation": [
+                "libs/components/bg-animation/src/index.ts"
             ],
             "@invite-members": ["libs/components/invite-members/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],

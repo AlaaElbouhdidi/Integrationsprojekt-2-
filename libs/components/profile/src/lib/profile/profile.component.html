@@ -77,27 +77,24 @@
                     <ul>
                         <li
                             (click)="setActiveLink('profile')"
-                            [class.selected-nav]="activeNavLink === 'profile'"
                         >
-                            <a>
+                            <a [class.selected-nav]="activeNavLink === 'profile'">
                                 <fa-icon icon="user"></fa-icon>
                                 Change profile
                             </a>
                         </li>
                         <li
                             (click)="setActiveLink('password')"
-                            [class.selected-nav]="activeNavLink === 'password'"
                         >
-                            <a>
+                            <a [class.selected-nav]="activeNavLink === 'password'">
                                 <fa-icon icon="lock"></fa-icon>
                                 Change password
                             </a>
                         </li>
                         <li
                             (click)="setActiveLink('email')"
-                            [class.selected-nav]="activeNavLink === 'email'"
                         >
-                            <a>
+                            <a [class.selected-nav]="activeNavLink === 'email'">
                                 <fa-icon icon="envelope"></fa-icon>
                                 Change email
                             </a>

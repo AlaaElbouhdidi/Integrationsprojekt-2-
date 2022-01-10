@@ -14,7 +14,8 @@ import {
     faExclamationCircle,
     faCheckCircle,
     faTimesCircle,
-    faExclamationTriangle
+    faExclamationTriangle,
+    faAngleDoubleRight
 } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
@@ -36,7 +37,8 @@ export class NewgroupFormModule {
             faExclamationCircle,
             faCheckCircle,
             faTimesCircle,
-            faExclamationTriangle
+            faExclamationTriangle,
+            faAngleDoubleRight
         );
     }
 }
