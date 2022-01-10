@@ -16,16 +16,26 @@
         flex-direction: row;
         justify-content: space-between;
     }
-    &-name {
+    &-name, &-email {
         @include flex-center;
         p {
             margin-left: 0;
             margin: auto;
         }
-
+        .error-dn{
+            font-style: italic;
+            margin: auto;
+            font-size: small;
+        }
         fa-icon {
             margin-right: 0.5rem;
         }
+    }
+    @include flex-center;
+    &-icon {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 1rem;
     }
     &-side {
         margin-top: 1rem;

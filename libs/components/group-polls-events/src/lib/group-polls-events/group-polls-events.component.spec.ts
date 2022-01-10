@@ -23,6 +23,7 @@ describe('GroupPollsEventsComponent', () => {
     };
     const eventServiceMock = {
         getActiveEventsOfGroup: jest.fn(),
+        createEvent: jest.fn(),
         updateEvent: jest.fn()
     };
     const authServiceMock = {
@@ -142,6 +143,18 @@ describe('GroupPollsEventsComponent', () => {
         component.updatePoll(pollMock);
         expect(spy).toHaveBeenCalled();
         expect(alertSpy).toHaveBeenCalled();
+    });
+
+    it('should create event', () => {
+        component.group.admin = 'userId';
+        fixture.detectChanges();
+        const spy = jest.spyOn(eventServiceMock, 'createEvent');
+        component.createEvent({
+            name: 'event name',
+            description: 'event description',
+            date: 'event date'
+        });
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should not update event if no event id provided', () => {

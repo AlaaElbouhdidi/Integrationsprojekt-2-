@@ -12,15 +12,15 @@
     <div class="group-event-item-buttons">
         <button
             class="group-event-item-buttons-description"
-            (click)="showTeams()"
-        >
-            Teams
+            (click)="showTeams()" >
+            <span id="teams-full">Teams</span>
+            <span id="teams-single">T</span>
         </button>
         <button
             class="group-event-item-buttons-description"
-            (click)="showDescription()"
-        >
-            Description
+            (click)="showDescription()" >
+            <span id="description-full">Description</span>
+            <span id="description-single">D</span>
         </button>
         <button
             class="group-event-item-buttons-participate"
@@ -30,6 +30,13 @@
         >
             {{ participating ? 'Participating' : 'Participate' }}
         </button>
-        <fa-icon icon="trash" *ngIf="isAdmin" (click)="delete()"> </fa-icon>
+        <fa-icon
+            icon="edit">
+        </fa-icon>
+        <fa-icon
+            icon="trash"
+            *ngIf="isAdmin"
+            (click)="delete()" >
+        </fa-icon>
     </div>
 </div>

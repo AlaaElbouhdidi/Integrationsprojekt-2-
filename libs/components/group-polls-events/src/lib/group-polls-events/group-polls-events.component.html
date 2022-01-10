@@ -7,21 +7,23 @@
         </button>
     </div>
     <div class="polls-body">
-        <div class="polls-body-item" *ngFor="let poll of polls">
-            <mate-team-poll-item
-                [isAdmin]="isAdmin"
-                [poll]="poll"
-                (deletePollEvent)="deletePoll($event, confirmationModal)"
-                (voteEvent)="updatePoll($event)"
-            >
-            </mate-team-poll-item>
+        <div class="polls-body-wrapper" *ngIf="polls.length > 0; else pollMessage">
+            <div class="polls-body-wrapper-item" @itemAnimation *ngFor="let poll of polls">
+                <mate-team-poll-item
+                    [isAdmin]="isAdmin"
+                    [poll]="poll"
+                    (deletePollEvent)="deletePoll($event, confirmationModal)"
+                    (voteEvent)="updatePoll($event)">
+                </mate-team-poll-item>
+            </div>
         </div>
-        <div class="polls-body-message" *ngIf="polls.length === 0">
-            <p>
+
+        <ng-template #pollMessage>
+            <p class="polls-body-message">
                 <fa-icon icon="exclamation-circle"></fa-icon>
                 No active polls in this group
             </p>
-        </div>
+        </ng-template>
     </div>
 </section>
 
@@ -29,7 +31,7 @@
     <div class="modal-header">
         <h5>
             <fa-icon icon="poll"></fa-icon>
-            Create new poll
+            Create poll
         </h5>
         <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
@@ -77,31 +79,40 @@
     </mate-team-team-modal>
 </ng-template>
 
+<ng-template #createEventModal>
+    <mate-team-create-event-modal
+        (dismissModalEvent)="closeModal()"
+        (createEventEvent)="createEvent($event)">
+    </mate-team-create-event-modal>
+</ng-template>
+
 <section class="events">
     <div class="events-header">
         <h5>Events</h5>
         <fa-icon icon="calendar-alt"></fa-icon>
-        <button *ngIf="isAdmin">+ Create new event</button>
+        <button *ngIf="isAdmin" (click)="openModal(createEventModal)">
+            + Create new event
+        </button>
     </div>
     <div class="events-body">
-        <div class="events-body-item" *ngFor="let event of events">
-            <mate-team-group-event-item
-                [event]="event"
-                [isAdmin]="isAdmin"
-                (descriptionEvent)="
-                    showEventDescription($event, eventDescriptionModal)
-                "
-                (participateEvent)="updateEvent($event)"
-                (teamEvent)="editEvent($event, teamModal)"
-                (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
-            >
-            </mate-team-group-event-item>
+        <div *ngIf="events.length > 0; else eventMessage">
+            <div class="events-body-item" @itemAnimation *ngFor="let event of events">
+                <mate-team-group-event-item
+                    [event]="event"
+                    [isAdmin]="isAdmin"
+                    (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
+                    (participateEvent)="updateEvent($event)"
+                    (teamEvent)="editEvent($event, teamModal)"
+                    (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
+                >
+                </mate-team-group-event-item>
+            </div>
         </div>
-        <div class="events-body-message" *ngIf="events.length === 0">
-            <p>
+        <ng-template #eventMessage>
+            <p class="events-body-message">
                 <fa-icon icon="exclamation-circle"></fa-icon>
                 No active events in this group
             </p>
-        </div>
+        </ng-template>
     </div>
 </section>

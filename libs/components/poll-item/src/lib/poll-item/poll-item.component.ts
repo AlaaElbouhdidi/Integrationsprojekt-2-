@@ -152,7 +152,6 @@ export class PollItemComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.poll) {
             this.userVoted = this.checkIfUserVoted(this.poll);
-            this.showResults = this.userVoted;
         }
     }
 }

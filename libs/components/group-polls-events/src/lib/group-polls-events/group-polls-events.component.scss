@@ -34,17 +34,19 @@
 }
 .polls {
     &-body {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        overflow-x: auto;
-        @include for-tablet-portrait-up {
-            flex-direction: row;
-        }
-        &-item {
-            margin-top: 1rem;
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow-x: auto;
             @include for-tablet-portrait-up {
-                margin-right: 1rem;
+                flex-direction: row;
+            }
+            &-item {
+                margin-top: 1rem;
+                @include for-tablet-portrait-up {
+                    margin-right: 1rem;
+                }
             }
         }
         &-message {

@@ -18,6 +18,11 @@ footer {
     a {
         color: $white;
         cursor: pointer;
+        text-decoration: none;
+        transition: 0.25s;
+        &:hover {
+            color: $light;
+        }
     }
 }
 .dropdown {

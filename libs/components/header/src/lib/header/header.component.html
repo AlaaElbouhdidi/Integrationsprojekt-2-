@@ -11,12 +11,13 @@
         </ng-template>
     </div>
     <nav *ngIf="!authenticated; else authenticatedNav">
-        <a routerLink="/login">Login</a>
-        <a routerLink="/register">Register</a>
+        <a class="login-link" routerLink="/login">Login</a>
+        <a class="register-link" routerLink="/register">Register</a>
     </nav>
     <ng-template #authenticatedNav>
         <nav>
-            <fa-icon icon="user-circle" routerLink="/profile"></fa-icon>
+            <fa-icon icon="layer-group" title="My groups" routerLink="/group"></fa-icon>
+            <fa-icon icon="user-circle" title="Profile" routerLink="/profile"></fa-icon>
             <a (click)="logout()">Logout</a>
         </nav>
     </ng-template>

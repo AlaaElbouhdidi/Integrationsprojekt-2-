@@ -33,4 +33,12 @@ export class UserService {
             });
         return user;
     }
+
+    async updateProfile(uid: string, displayName?: string, photoURL?: string): Promise<void> {
+        await this.afs
+        .collection<User>('users').doc(uid).update({
+            displayName: displayName,
+            photoURL: photoURL
+        });
+    }
 }

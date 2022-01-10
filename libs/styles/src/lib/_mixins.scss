@@ -40,6 +40,11 @@
         }
     }
 }
+@mixin bg-animation($size, $animation-delay) {
+    width: $size;
+    height: $size;
+    animation-delay: $animation-delay;
+}
 
 // Media Queries
 @mixin for-phone-only {

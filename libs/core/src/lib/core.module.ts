@@ -13,7 +13,6 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
-import { CreateEventModule } from '@create-event';
 import { ProfileModule } from '@profile';
 import {
     FontAwesomeModule,
@@ -51,7 +50,6 @@ import { GroupModule } from '@group';
         AuthHandlerModule,
         AngularFireFunctionsModule,
         StylesModule,
-        CreateEventModule,
         FontAwesomeModule
     ]
 })

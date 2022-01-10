@@ -1,0 +1,96 @@
+<form (ngSubmit)="createEvent()" [formGroup]="createEventForm">
+
+    <div class="form-input" id="event-name">
+        <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            required
+        >
+        <fa-icon icon="angle-double-right"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+    >
+        <div class="form-error-message" *ngIf="name.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Name required
+            </p>
+        </div>
+        <div class="form-error-message" *ngIf="name.errors?.maxlength">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Maximum length of 20 characters exceeded
+            </p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <input
+            type="date"
+            formControlName="date"
+            placeholder="Date"
+            required
+        >
+        <fa-icon icon="angle-double-right"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="date.invalid && (date.dirty || date.touched)"
+    >
+        <div class="form-error-message">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Date required
+            </p>
+        </div>
+    </div>
+
+    <div class="form-input">
+        <textarea
+            name="event-description"
+            id="event-description-area"
+            rows="5"
+            formControlName="description"
+            placeholder="Description"
+            spellcheck="false"
+            required>
+        </textarea>
+        <fa-icon icon="angle-double-right"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="description.invalid && (description.dirty || description.touched)"
+    >
+        <div class="form-error-message" *ngIf="description.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Description required
+            </p>
+        </div>
+        <div class="form-error-message" *ngIf="description.errors?.maxlength">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Maximum length of 255 characters exceeded
+            </p>
+        </div>
+    </div>
+
+    <div class="form-submit">
+        <button
+            id="create-event-submit-btn"
+            type="submit"
+            class="green-btn"
+            [class.disabled-btn]="createEventForm.invalid"
+            [disabled]="createEventForm.invalid"
+        >
+            Create event
+        </button>
+    </div>
+
+</form>
