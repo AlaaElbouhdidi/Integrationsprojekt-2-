@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AlertService, AuthService } from '@services';
+import { AlertService, AuthService, UserService } from '@services';
 import firebase from 'firebase/compat';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -44,10 +44,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Constructor of the profile component
      * @param authService {AuthService}
      * @param alertService {AlertService}
+     * @param userService {UserService}
      */
     constructor(
         private authService: AuthService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private userService: UserService
     ) {}
 
     /**
@@ -107,6 +109,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.loading = true;
         try {
             await this.authService.updateProfile(
+                data.displayName,
+                data.photoURL
+            );
+            await this.userService.updateProfile(
+                this.authService.getCurrentUser().uid,
                 data.displayName,
                 data.photoURL
             );
