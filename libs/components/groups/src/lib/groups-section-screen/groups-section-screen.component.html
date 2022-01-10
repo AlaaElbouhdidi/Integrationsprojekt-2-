@@ -9,10 +9,6 @@
 </div>
 
 <div style="margin-bottom: 20px; display: flex">
-    <mate-team-search-input-field
-        name="searchInputField"
-        ngDefaultControl
-    ></mate-team-search-input-field>
     <div>
         Filter by
         <a
@@ -33,14 +29,14 @@
 <div style="position: relative">
     <div style="position: absolute; top: 0; visibility: hidden">
         <mate-team-group-item-screen
-            *ngFor="let x of groups"
-            [group]="x"
+            *ngFor="let group of groups"
+            [group]="group"
         ></mate-team-group-item-screen>
     </div>
     <mate-team-group-item-screen
-        *ngFor="let x of shownGroups"
-        (clicked)="clicked(x)"
-        [group]="x"
+        *ngFor="let group of shownGroups"
+        (clicked)="clicked(group)"
+        [group]="group"
     ></mate-team-group-item-screen>
     <p *ngIf="shownGroups && shownGroups.length === 0">No group found.</p>
 </div>
