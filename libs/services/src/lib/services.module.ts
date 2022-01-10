@@ -9,6 +9,7 @@ import { PollService } from './poll/poll.service';
 import { GroupService } from './group/group.service';
 import { EventService } from './event/event.service';
 import { TeamService } from './team/team.service';
+import { UserService } from './user/user.service';
 
 @NgModule({
     imports: [CommonModule, AngularFireAuthModule],
@@ -20,6 +21,7 @@ import { TeamService } from './team/team.service';
         GroupService,
         EventService,
         TeamService,
+        UserService,
         AngularFireAuth
     ],
     exports: [AngularFireAuthModule]

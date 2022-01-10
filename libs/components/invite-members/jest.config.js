@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'components-newgroup',
+    displayName: 'invite-members',
     preset: '../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
@@ -8,7 +8,7 @@ module.exports = {
             stringifyContentPathRegex: '\\.(html|svg)$'
         }
     },
-    coverageDirectory: '../../../coverage/libs/components/newgroup/newgroup',
+    coverageDirectory: '../../../coverage/libs/components/invite-members',
     transform: {
         '^.+\\.(ts|js|html)$': 'jest-preset-angular'
     },

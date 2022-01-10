@@ -1,6 +1,6 @@
 module.exports = {
-    displayName: 'components-newgroup',
-    preset: '../../../jest.preset.js',
+    displayName: 'group-members-members-list-item',
+    preset: '../../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
         'ts-jest': {
@@ -8,7 +8,8 @@ module.exports = {
             stringifyContentPathRegex: '\\.(html|svg)$'
         }
     },
-    coverageDirectory: '../../../coverage/libs/components/newgroup/newgroup',
+    coverageDirectory:
+        '../../../../coverage/libs/components/group-members/members-list-item',
     transform: {
         '^.+\\.(ts|js|html)$': 'jest-preset-angular'
     },

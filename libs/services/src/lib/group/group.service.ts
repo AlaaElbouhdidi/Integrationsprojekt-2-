@@ -80,4 +80,14 @@ export class GroupService {
         })
         return q;
     }
+     getAllMembers(gid: string): Observable<Member[]>{
+        return this.afs.collection<Member>(`groups/${gid}/members`)
+        .valueChanges({ idField: 'id' });
+    }
+    deleteMember(gid: string, m: Member){
+         this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).delete();
+    }
+    toggleIsAdmin(gid: string, m: Member){
+        this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).update({ isAdmin: !m.isAdmin});
+   }
 }

@@ -5,6 +5,7 @@ import {
     redirectUnauthorizedTo,
     canActivate
 } from '@angular/fire/compat/auth-guard';
+import {MembersListComponent} from '../../../../group-members/members-list/src/lib/members-list/members-list.component'
 import { GroupPollsEventsModule } from '@group-polls-events';
 import {
     GroupPollsEventsComponent
@@ -28,7 +29,7 @@ const route = {
         },
         {
             path: 'members',
-            component: GroupComponent
+            component: MembersListComponent
         }
     ]
 };

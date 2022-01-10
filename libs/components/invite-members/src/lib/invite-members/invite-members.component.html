@@ -1,0 +1,36 @@
+<div class="form-input">
+    <div id="emails-container" class="emails-container">
+        <mat-form-field class="chip-list" appearance="fill">
+            <mat-chip-list #chipList aria-label="Emails selection">
+                <mat-chip
+                class="chip"
+                    *ngFor="let email of emails"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(email)"
+                >
+                    {{ email }}
+                    <button matChipRemove *ngIf="removable">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input
+                    placeholder="" autofocus
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)"
+                />
+                <div class="form-error" *ngIf="isUnvalid">
+                    <div class="form-error-message">
+                        <p>{{errorMessage}}</p>
+                    </div>
+                </div>
+            </mat-chip-list>
+            <div class="form-btn">
+        <button [disabled]="(emails.length < 1)" [class.disabled-btn]="(emails.length < 1)" 
+            type="button" (click)="sendInvites()" >Add members</button>
+            </div>
+        </mat-form-field>
+    </div>
+</div>

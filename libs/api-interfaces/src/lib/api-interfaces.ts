@@ -117,7 +117,8 @@ export interface Environment {
 export interface Member {
     uid?: string;
     isAdmin?: boolean;
-    email?: string
+    email?: string;
+    user?: User
 }
 
 /**
