@@ -153,15 +153,19 @@ export class MembersListComponent implements OnInit, OnDestroy {
                 .getAllMembers(this.gid)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((items) => {
-                    this.membersList = items;
                     /* const fil = items.filter((m) => ((m.email === this.myEmail) && m.isAdmin));
                     if (fil.length > 0) this.isAdmin = true;
                     else this.isAdmin = false */
                     items.forEach((i) => {
+                        i.user = {} as User;
                         this.userService.getUser(i.email || '').then((u)=> {
-                            i.user = u;
+                            if(u) i.user = u;
+                            else{i.user = {} as User}
+
                         });
                     });
+                    this.membersList = items;
+                    console.log(items);
                 });
             this.groupService.getGroupById(this.gid).then((res) => {
                 if (res) this.gAdmin = res.admin;
