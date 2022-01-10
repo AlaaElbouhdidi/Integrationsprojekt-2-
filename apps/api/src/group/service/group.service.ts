@@ -174,8 +174,7 @@ export class GroupService {
                         this.logger.error(message);
                         throw new NotFoundException(message);
                     }
-                    const { name, description, member } =
-                        updateGroupDto;
+                    const { name, description, member } = updateGroupDto;
                     await this.groupsRef.doc(id).update({
                         name: name,
                         description: description,

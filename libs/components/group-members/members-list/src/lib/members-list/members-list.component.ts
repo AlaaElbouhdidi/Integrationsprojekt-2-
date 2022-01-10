@@ -2,7 +2,12 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User, Member } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService, AuthService, GroupService, UserService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    GroupService,
+    UserService
+} from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -76,11 +81,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
                 type: 'success',
                 message: 'Member successfully deleted'
             });
-        } catch (e: any) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
+        } catch (e) {
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
     toggleIsAdmin(m: Member) {
@@ -105,7 +112,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @param content {unknown} The modal reference
      */
     openModal(content: unknown) {
-        this.modalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.modalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
     }
     /**
      * Closes a modal
@@ -113,14 +122,12 @@ export class MembersListComponent implements OnInit, OnDestroy {
     closeModal(): void {
         this.modalRef?.dismiss();
     }
-    /**
-     * Opens the confirmation modal
-     *
-     * @param content {unknown} The modal to open
-     * @returns {Promise<boolean>} A promise containing true if modal is closed and false if modal is dismissed
+    /**fixed lint of added events and groups componentsise containing true if modal is closed and false if modal is dismissed
      */
     async openConfirmationModal(content: unknown): Promise<boolean> {
-        this.confirmationModalRef = this.modalService.open(content, { windowClass: 'dark-modal' });
+        this.confirmationModalRef = this.modalService.open(content, {
+            windowClass: 'dark-modal'
+        });
         try {
             await this.confirmationModalRef.result;
             return true;
@@ -158,10 +165,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
                     else this.isAdmin = false */
                     items.forEach((i) => {
                         i.user = {} as User;
-                        this.userService.getUser(i.email || '').then((u)=> {
-                            if(u) i.user = u;
-                            else{i.user = {} as User}
-
+                        this.userService.getUser(i.email || '').then((u) => {
+                            if (u) i.user = u;
+                            else {
+                                i.user = {} as User;
+                            }
                         });
                     });
                     this.membersList = items;
@@ -170,11 +178,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
             this.groupService.getGroupById(this.gid).then((res) => {
                 if (res) this.gAdmin = res.admin;
             });
-        } catch (err: any) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: err.message
-            });
+        } catch (e) {
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
     /**

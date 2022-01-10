@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { GroupService } from './group.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../auth/auth.service';
 
 describe('GroupService', () => {
     let service: GroupService;
@@ -10,7 +11,9 @@ describe('GroupService', () => {
     };
     const groupDocumentMock = {
         ref: {
-            get: jest.fn().mockImplementation(() => Promise.resolve(promiseDataMock))
+            get: jest
+                .fn()
+                .mockImplementation(() => Promise.resolve(promiseDataMock))
         }
     };
     const groupCollectionMock = {
@@ -19,12 +22,14 @@ describe('GroupService', () => {
     const angularFireStoreMock = {
         collection: jest.fn().mockReturnValue(groupCollectionMock)
     };
+    const authServiceMock = {}
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                { provide: AngularFirestore, useValue: angularFireStoreMock }
-            ],
+                { provide: AngularFirestore, useValue: angularFireStoreMock },
+                { provide: AuthService, useValue: authServiceMock}
+            ]
         });
         service = TestBed.inject(GroupService);
     });

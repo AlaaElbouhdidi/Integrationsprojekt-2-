@@ -742,30 +742,6 @@
                 }
             }
         },
-        "events": {
-            "projectType": "library",
-            "root": "libs/components/events",
-            "sourceRoot": "libs/components/events/src",
-            "prefix": "mate-team",
-            "architect": {
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/components/events/jest.config.js",
-                        "passWithNoTests": true
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "libs/components/events/src/**/*.ts",
-                            "libs/components/events/src/**/*.html"
-                        ]
-                    }
-                }
-            }
-        },
         "footer": {
             "projectType": "library",
             "root": "libs/components/footer",
@@ -878,9 +854,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": [
-                        "coverage/libs/components/group-members/members-list"
-                    ],
                     "options": {
                         "jestConfig": "libs/components/group-members/members-list/jest.config.js",
                         "passWithNoTests": true
@@ -895,8 +868,7 @@
                         ]
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "group-members-list-item": {
             "projectType": "library",
@@ -906,9 +878,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": [
-                        "coverage/libs/components/group-members/members-list-item"
-                    ],
                     "options": {
                         "jestConfig": "libs/components/group-members/members-list-item/jest.config.js",
                         "passWithNoTests": true
@@ -923,8 +892,7 @@
                         ]
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "group-polls-events": {
             "projectType": "library",
@@ -1119,7 +1087,6 @@
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/components/invite-members"],
                     "options": {
                         "jestConfig": "libs/components/invite-members/jest.config.js",
                         "passWithNoTests": true
@@ -1151,7 +1118,6 @@
                 },
                 "build-storybook": {
                     "builder": "@nrwl/storybook:build",
-                    "outputs": ["{options.outputPath}"],
                     "options": {
                         "uiFramework": "@storybook/angular",
                         "outputPath": "dist/storybook/invite-members",
@@ -1165,8 +1131,7 @@
                         }
                     }
                 }
-            },
-            "tags": []
+            }
         },
         "landingpage": {
             "projectType": "library",

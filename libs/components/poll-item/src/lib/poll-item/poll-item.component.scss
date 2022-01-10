@@ -16,7 +16,8 @@
     @include for-tablet-landscape-up {
         width: 20rem;
     }
-    p, h5 {
+    p,
+    h5 {
         margin: 0 !important;
     }
     &-header {

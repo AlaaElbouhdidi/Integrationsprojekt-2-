@@ -71,17 +71,18 @@ describe('AuthServiceService', () => {
     });
 
     it('should call firebase auth signInWithEmailAndPassword in login method', () => {
-        const spy = jest.spyOn(
-            angularFireAuthMock,
-            'signInWithEmailAndPassword'
-        ).mockReturnValue(mockUser);
+        const spy = jest
+            .spyOn(angularFireAuthMock, 'signInWithEmailAndPassword')
+            .mockReturnValue(mockUser);
         service.login(email, password);
         expect(spy).toHaveBeenCalledWith(email, password);
         expect(spy).toHaveBeenCalledTimes(1);
     });
 
     it('should call firebase auth signInWithPopup in loginWithGoogle method', () => {
-        const spy = jest.spyOn(angularFireAuthMock, 'signInWithPopup').mockReturnValue(mockUser);
+        const spy = jest
+            .spyOn(angularFireAuthMock, 'signInWithPopup')
+            .mockReturnValue(mockUser);
         service.loginWithGoogle();
         expect(spy).toHaveBeenCalledTimes(1);
     });

@@ -10,8 +10,7 @@ describe('EventDescriptionModalComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [EventDescriptionModalModule]
-    })
-    .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -26,14 +25,18 @@ describe('EventDescriptionModalComponent', () => {
 
     it('should emit dismiss event on button click', () => {
         jest.spyOn(component.dismissModalEvent, 'emit');
-        const button = fixture.debugElement.nativeElement.querySelector('.modal-footer-red-btn');
+        const button = fixture.debugElement.nativeElement.querySelector(
+            '.modal-footer-red-btn'
+        );
         button.click();
         expect(component.dismissModalEvent.emit).toHaveBeenCalled();
     });
 
     it('should emit dismiss event on cross icon click', () => {
         jest.spyOn(component.dismissModalEvent, 'emit');
-        const icon = fixture.debugElement.nativeElement.querySelector('#dismiss-modal-icon');
+        const icon = fixture.debugElement.nativeElement.querySelector(
+            '#dismiss-modal-icon'
+        );
         icon.click();
         expect(component.dismissModalEvent.emit).toHaveBeenCalled();
     });

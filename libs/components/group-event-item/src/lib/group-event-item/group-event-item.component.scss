@@ -85,7 +85,7 @@
             }
 
             @include for-tablet-portrait-up {
-               margin: 0 0.5rem;
+                margin: 0 0.5rem;
             }
             &:hover {
                 background: $main;
@@ -116,13 +116,13 @@
                 margin-left: 1rem;
             }
         }
-        fa-icon[icon="trash"] {
+        fa-icon[icon='trash'] {
             right: 0;
             &:hover {
                 color: $error;
             }
         }
-        fa-icon[icon="edit"] {
+        fa-icon[icon='edit'] {
             left: 0;
             &:hover {
                 color: $success;

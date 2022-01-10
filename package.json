@@ -51,6 +51,7 @@
         "affected:doc": "nx affected --target=compodoc --parallel  --max-parallel=3",
         "affected:e2e": "nx affected --target=e2e",
         "format": "nx format:write",
+        "failed": "nx run-many --target=test --all=true --parallel=true --only-failed=true",
         "format:check": "nx format:check --files apps/**/*.ts libs/**/*.ts",
         "deps": "nx dep-graph",
         "help": "nx help"
@@ -70,7 +71,7 @@
         "@angular/pwa": "^13.0.3",
         "@angular/router": "^12.2.0",
         "@angular/service-worker": "^12.2.0",
-        "@compodoc/compodoc": "^1.1.15",
+        "@compodoc/compodoc": "1.1.18",
         "@fortawesome/angular-fontawesome": "^0.9.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.36",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",

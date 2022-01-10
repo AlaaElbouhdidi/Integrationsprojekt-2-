@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GroupPollsEventsComponent } from './group-polls-events/group-polls-events.component';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faPoll,
     faCalendarAlt,
@@ -28,9 +31,7 @@ import { CreateEventModalModule } from '@create-event-modal';
         CreateEventModalModule,
         EventDescriptionModalModule
     ],
-    declarations: [
-      GroupPollsEventsComponent
-    ],
+    declarations: [GroupPollsEventsComponent],
     exports: [GroupPollsEventsComponent]
 })
 export class GroupPollsEventsModule {

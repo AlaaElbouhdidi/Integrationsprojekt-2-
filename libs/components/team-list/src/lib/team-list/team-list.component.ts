@@ -13,7 +13,8 @@ export class TeamListComponent {
     /**
      * Remove user from team event
      */
-    @Output() removeUserFromTeamEvent = new EventEmitter<UpdateTeamParticipantsData>();
+    @Output() removeUserFromTeamEvent =
+        new EventEmitter<UpdateTeamParticipantsData>();
     /**
      * Add user to team event
      */
@@ -59,7 +60,7 @@ export class TeamListComponent {
         const data: UpdateTeamParticipantsData = {
             team: team,
             participant: participant
-        }
+        };
         this.removeUserFromTeamEvent.emit(data);
     }
 }

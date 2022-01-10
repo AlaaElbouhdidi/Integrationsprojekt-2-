@@ -29,12 +29,12 @@ describe('EventService', () => {
     const eventDocumentMock = {
         update: jest.fn(),
         delete: jest.fn()
-    }
+    };
     const eventCollectionMock = {
         doc: jest.fn().mockReturnValue(eventDocumentMock),
         add: jest.fn(),
         valueChanges: jest.fn()
-    }
+    };
     const angularFirestoreMock = {
         collection: jest.fn().mockReturnValue(eventCollectionMock)
     };

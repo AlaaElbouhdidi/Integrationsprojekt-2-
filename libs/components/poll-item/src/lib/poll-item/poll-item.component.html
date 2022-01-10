@@ -1,11 +1,7 @@
 <div class="poll-item" [@flipPollItem]="showResults ? 'open' : 'closed'">
     <div class="poll-item-header">
         <h5>{{ poll!.title }}</h5>
-        <fa-icon
-            icon="trash"
-            *ngIf="isAdmin"
-            (click)="deletePoll()">
-        </fa-icon>
+        <fa-icon icon="trash" *ngIf="isAdmin" (click)="deletePoll()"> </fa-icon>
     </div>
     <div class="poll-item-body">
         <form *ngIf="!showResults; else pollResults">
@@ -15,7 +11,10 @@
             </div>
         </form>
         <ng-template #pollResults>
-            <div class="poll-item-body-results" *ngFor="let choice of poll!.choices">
+            <div
+                class="poll-item-body-results"
+                *ngFor="let choice of poll!.choices"
+            >
                 <div class="poll-item-body-results-text">
                     <p>{{ choice.date | date: 'mediumDate' }}</p>
                     <p>
@@ -23,22 +22,30 @@
                         <span>Votes</span>
                     </p>
                 </div>
-                <div class="poll-item-body-results-bar" [style.width]="calcBarWidth(choice.votes) + '%'"></div>
+                <div
+                    class="poll-item-body-results-bar"
+                    [style.width]="calcBarWidth(choice.votes) + '%'"
+                ></div>
             </div>
         </ng-template>
     </div>
     <div class="poll-item-footer">
-        <div class="poll-item-footer-choices-btn-wrapper" *ngIf="!showResults; else resultsBtn">
+        <div
+            class="poll-item-footer-choices-btn-wrapper"
+            *ngIf="!showResults; else resultsBtn"
+        >
             <button
                 class="poll-item-footer-submit-btn"
                 [disabled]="userVoted"
                 [class.disabled-btn]="userVoted"
-                (click)="vote()">
+                (click)="vote()"
+            >
                 {{ userVoted ? 'Already voted' : 'Vote' }}
             </button>
             <button
                 class="poll-item-footer-results-btn"
-                (click)="flipPollItem()">
+                (click)="flipPollItem()"
+            >
                 Show results
             </button>
         </div>
@@ -46,7 +53,8 @@
             <div class="poll-item-footer-results-btn-wrapper">
                 <button
                     class="poll-item-footer-results-btn"
-                    (click)="flipPollItem()">
+                    (click)="flipPollItem()"
+                >
                     Show Choices
                 </button>
             </div>

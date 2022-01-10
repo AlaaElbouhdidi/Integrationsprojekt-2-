@@ -1,9 +1,14 @@
 <header>
     <div class="logo">
         <img src="assets/icons/icon-128x128.png" alt="Mate Team Logo" />
-        <h2>
+        <h2 *ngIf="!authenticated; else authenticatedLogo">
             <a routerLink="/"> <span>M</span>ate <span>T</span>eam </a>
         </h2>
+        <ng-template #authenticatedLogo>
+            <h2>
+                <a routerLink="/group"> <span>M</span>ate <span>T</span>eam</a>
+            </h2>
+        </ng-template>
     </div>
     <nav *ngIf="!authenticated; else authenticatedNav">
         <a class="login-link" routerLink="/login">Login</a>
@@ -11,7 +16,7 @@
     </nav>
     <ng-template #authenticatedNav>
         <nav>
-            <fa-icon icon="layer-group" title="My groups"></fa-icon>
+            <fa-icon icon="layer-group" title="My groups" routerLink="/group"></fa-icon>
             <fa-icon icon="user-circle" title="Profile" routerLink="/profile"></fa-icon>
             <a (click)="logout()">Logout</a>
         </nav>

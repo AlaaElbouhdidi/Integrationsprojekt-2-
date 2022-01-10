@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Group, Member } from '@api-interfaces';
+import { Group, Member, User } from '@api-interfaces';
 import {
     AngularFirestore,
     AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 /**
  * Group service
@@ -27,7 +28,7 @@ export class GroupService {
      * Constructor of group service
      * @param afs {AngularFirestore}
      */
-    constructor(public afs: AngularFirestore) {
+    constructor(public afs: AngularFirestore, public authService: AuthService) {
         this.groupCollection = this.afs.collection('groups');
     }
 
@@ -41,13 +42,55 @@ export class GroupService {
         return this.afs
             .collection<Group>('groups')
             .doc(groupId)
-            .ref
-            .get()
-            .then(group => group.data());
+            .ref.get()
+            .then((group) => group.data());
+    }
+    // getOwnedGroups() {
+    //     const { uid } = this.authService.getCurrentUser();
+    //     const groupCollection = this.afs.collection<Group>('groups', (ref) =>
+    //         ref.where('admin', '==', uid)
+    //     );
+    //     return groupCollection.snapshotChanges().pipe(
+    //         map((groups) =>
+    //             groups.map((g) => {
+    //                 const data = g.payload.doc.data() as Group;
+    //                 const id = g.payload.doc.id;
+    //                 const group: Group = { id, ...data };
+    //                 console.log(group);
+    //                 return group;
+    //             })
+    //         )
+    //     );
+    // }
+    async getUserGroups() {
+        const { uid } = this.authService.getCurrentUser();
+        const user = (
+            await this.afs.collection(`/users`).doc<User>(uid).ref.get()
+        ).data();
+        const userGroups: Group[] = [];
+        if (user) {
+            const { groups } = user;
+            if (!groups) {
+                return [];
+            }
+            groups.forEach(async (groupId) => {
+                const group = (
+                    await this.groupCollection.doc(groupId).ref.get()
+                ).data();
+                if (group) {
+                    userGroups.push({ ...group, id: groupId });
+                }
+            });
+        } else {
+            return [];
+        }
+        return userGroups;
     }
 
-    toggleSuccess( gid: string): void {
-        if (gid != '') {this.success = true;}
+    toggleSuccess(gid: string): void {
+        if (gid != '') {
+            this.success = true;
+        }
         this.subject.next(gid);
     }
     onToggle(): Observable<string> {
@@ -55,39 +98,64 @@ export class GroupService {
     }
 
     async addNewGroup(g: Group, m: Member): Promise<string> {
-        const ref = await this.groupCollection.add(g).then((ref) => {
-           this.groupCollection
-            .doc(ref.id)
-            .collection('members')
-            .doc(m.email)
-            .set(m);
-        return ref.id;
+        const groupId = await this.groupCollection.add(g).then((ref) => {
+            this.groupCollection
+                .doc(ref.id)
+                .collection('members')
+                .doc(m.email)
+                .set(m);
+            return ref.id;
         });
-
-        return ref;
+        const { uid } = this.authService.getCurrentUser();
+        const user = (
+            await this.afs.collection(`/users`).doc<User>(uid).ref.get()
+        ).data();
+        if (user) {
+            let { groups } = user;
+            if (!groups) {
+                groups = [];
+            }
+            await this.afs
+                .collection(`/users`)
+                .doc(uid)
+                .set(
+                    {
+                        groups: [...groups, groupId]
+                    },
+                    { merge: true }
+                );
+        }
+        return groupId;
     }
     async addMemberToGroup(gid: string, m: Member): Promise<void> {
-        this.groupCollection
-            .doc(gid)
-            .collection('members')
-            .doc(m.email)
-            .set(m);
+        this.groupCollection.doc(gid).collection('members').doc(m.email).set(m);
     }
     async isAlreadyMember(gid: string, email: string): Promise<boolean> {
-        const q = await this.afs.collection('groups/'+gid+'/members/').ref.where("email", '==', email).get().then((qs) => {
-            if (qs.size > 0) return true;
-            else return false
-        })
+        const q = await this.afs
+            .collection('groups/' + gid + '/members/')
+            .ref.where('email', '==', email)
+            .get()
+            .then((qs) => {
+                if (qs.size > 0) return true;
+                else return false;
+            });
         return q;
     }
-     getAllMembers(gid: string): Observable<Member[]>{
-        return this.afs.collection<Member>(`groups/${gid}/members`)
-        .valueChanges({ idField: 'id' });
+    getAllMembers(gid: string): Observable<Member[]> {
+        return this.afs
+            .collection<Member>(`groups/${gid}/members`)
+            .valueChanges({ idField: 'id' });
     }
-    deleteMember(gid: string, m: Member){
-         this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).delete();
+    deleteMember(gid: string, m: Member) {
+        this.afs
+            .collection<Member>(`groups/${gid}/members`)
+            .doc(m.email)
+            .delete();
     }
-    toggleIsAdmin(gid: string, m: Member){
-        this.afs.collection<Member>(`groups/${gid}/members`).doc(m.email).update({ isAdmin: !m.isAdmin});
-   }
+    toggleIsAdmin(gid: string, m: Member) {
+        this.afs
+            .collection<Member>(`groups/${gid}/members`)
+            .doc(m.email)
+            .update({ isAdmin: !m.isAdmin });
+    }
 }

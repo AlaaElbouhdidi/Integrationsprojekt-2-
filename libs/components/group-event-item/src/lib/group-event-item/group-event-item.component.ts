@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import { Event, Participant } from '@api-interfaces';
 import { AuthService } from '@services';
 
@@ -44,9 +51,7 @@ export class GroupEventItemComponent implements OnChanges {
      * Constructor of group event item
      * @param authService {AuthService}
      */
-    constructor(
-        private authService: AuthService
-    ) { }
+    constructor(private authService: AuthService) {}
 
     /**
      * Check if a user participates an event
@@ -55,7 +60,9 @@ export class GroupEventItemComponent implements OnChanges {
      */
     checkIfParticipant(): boolean {
         const userId = this.authService.getCurrentUser().uid;
-        const participant = this.event.participants.find(participant => participant.uid === userId);
+        const participant = this.event.participants.find(
+            (participant) => participant.uid === userId
+        );
         return !!participant;
     }
 
@@ -85,7 +92,7 @@ export class GroupEventItemComponent implements OnChanges {
             uid: user.uid,
             displayName: user.displayName ? user.displayName : 'No name',
             icon: user.photoURL ? user.photoURL : 'No icon'
-        }
+        };
         this.event.participants.push(participant);
         this.participateEvent.emit(this.event);
     }

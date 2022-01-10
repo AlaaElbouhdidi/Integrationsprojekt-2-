@@ -26,7 +26,8 @@
             class="group-event-item-buttons-participate"
             [disabled]="participating"
             [class.disabled-btn]="participating"
-            (click)="participate()" >
+            (click)="participate()"
+        >
             {{ participating ? 'Participating' : 'Participate' }}
         </button>
         <fa-icon

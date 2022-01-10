@@ -5,11 +5,10 @@ import {
     redirectUnauthorizedTo,
     canActivate
 } from '@angular/fire/compat/auth-guard';
-import {MembersListComponent} from '../../../../group-members/members-list/src/lib/members-list/members-list.component'
+import { MembersListComponent } from '../../../../group-members/members-list/src/lib/members-list/members-list.component';
 import { GroupPollsEventsModule } from '@group-polls-events';
-import {
-    GroupPollsEventsComponent
-} from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
+import { GroupPollsEventsComponent } from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
+import { GroupsComponent } from '@groups';
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -33,14 +32,15 @@ const route = {
         }
     ]
 };
-
-const routes = [route];
+const group = {
+    path: 'group',
+    component: GroupsComponent,
+    ...canActivate(redirectUnauthenticatedToHome)
+};
+const routes = [group, route];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        GroupPollsEventsModule
-    ],
+    imports: [RouterModule.forChild(routes), GroupPollsEventsModule],
     exports: [RouterModule]
 })
 export class GroupRoutingModule {}

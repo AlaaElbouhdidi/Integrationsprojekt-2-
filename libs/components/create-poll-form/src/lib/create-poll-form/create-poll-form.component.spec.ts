@@ -9,10 +9,9 @@ describe('CreatePollFormComponent', () => {
     let fixture: ComponentFixture<CreatePollFormComponent>;
 
     beforeEach(async () => {
-    await TestBed.configureTestingModule({
-        imports: [CreatePollFormModule]
-    })
-    .compileComponents();
+        await TestBed.configureTestingModule({
+            imports: [CreatePollFormModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -31,15 +30,15 @@ describe('CreatePollFormComponent', () => {
     });
 
     it('should render two input elements', () => {
-       const form = fixture.debugElement.nativeElement.querySelector('form');
-       const input = form.querySelectorAll('input');
-       expect(input.length).toEqual(2);
+        const form = fixture.debugElement.nativeElement.querySelector('form');
+        const input = form.querySelectorAll('input');
+        expect(input.length).toEqual(2);
     });
 
     it('should emit event on form submit', () => {
-       jest.spyOn(component.createPollEvent, 'emit');
-       component.createPoll();
-       expect(component.createPollEvent.emit).toHaveBeenCalled();
+        jest.spyOn(component.createPollEvent, 'emit');
+        component.createPoll();
+        expect(component.createPollEvent.emit).toHaveBeenCalled();
     });
 
     it('should reset form on form submit', () => {
@@ -55,9 +54,9 @@ describe('CreatePollFormComponent', () => {
     });
 
     it('should remove date from choices', () => {
-       component.addDateAsChoice();
-       component.deleteDateAsChoice(0);
-       expect(component.choices.length).toEqual(0);
+        component.addDateAsChoice();
+        component.deleteDateAsChoice(0);
+        expect(component.choices.length).toEqual(0);
     });
 
     it('should disable button to add choice when five choices are already provided', () => {
@@ -70,31 +69,37 @@ describe('CreatePollFormComponent', () => {
         ];
         component.date.setValue('09/12/2022');
         fixture.detectChanges();
-        const button = fixture.debugElement.nativeElement.querySelector('#add-poll-choice-btn');
+        const button = fixture.debugElement.nativeElement.querySelector(
+            '#add-poll-choice-btn'
+        );
         expect(button.getAttribute('disabled')).toEqual('');
     });
 
     it('should enable button to add choice when date and less than five choices provided', () => {
         component.date.setValue('09/12/2022');
         fixture.detectChanges();
-        const button = fixture.debugElement.nativeElement.querySelector('#add-poll-choice-btn');
+        const button = fixture.debugElement.nativeElement.querySelector(
+            '#add-poll-choice-btn'
+        );
         expect(button.getAttribute('disabled')).toEqual(null);
     });
 
     it('should disable submit button when no choice is provided', () => {
         component.title.setValue('poll');
         fixture.detectChanges();
-        const button = fixture.debugElement.nativeElement.querySelector('#create-poll-submit-btn');
+        const button = fixture.debugElement.nativeElement.querySelector(
+            '#create-poll-submit-btn'
+        );
         expect(button.getAttribute('disabled')).toEqual('');
     });
 
     it('should enable submit button when at least one choice is given and a title is provided', () => {
-        component.choices = [
-            { date: '01/02/2022', votes: 0 }
-        ];
+        component.choices = [{ date: '01/02/2022', votes: 0 }];
         component.title.setValue('poll');
         fixture.detectChanges();
-        const button = fixture.debugElement.nativeElement.querySelector('#create-poll-submit-btn');
+        const button = fixture.debugElement.nativeElement.querySelector(
+            '#create-poll-submit-btn'
+        );
         expect(button.getAttribute('disabled')).toEqual(null);
     });
 });

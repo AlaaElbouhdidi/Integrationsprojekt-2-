@@ -80,7 +80,7 @@ export class LoginFormComponent {
                 type: 'success',
                 message: 'Successfully logged in'
             });
-            await this.router.navigate(['/']);
+            await this.router.navigate(['/group']);
         } catch (e) {
             this.loading = false;
             this.loginForm.reset();
@@ -101,7 +101,7 @@ export class LoginFormComponent {
                 type: 'success',
                 message: 'Successfully logged in with google'
             });
-            await this.router.navigate(['/']);
+            await this.router.navigate(['/group']);
         } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({

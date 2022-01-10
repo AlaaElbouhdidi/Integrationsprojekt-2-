@@ -22,7 +22,7 @@ export class NewgroupFormComponent implements OnInit {
      * Loading state
      */
     loading = false;
-/**
+    /**
      * Constructor which initializes the reactive register form
      * @param fb {FormBuilder}
      * @param authService {AuthService}
@@ -56,7 +56,7 @@ export class NewgroupFormComponent implements OnInit {
      * @returns {Member} The signed in user as the admin and the member of the to be created group
      */
     get member(): Member {
-        const u =  this.authService.getCurrentUser();
+        const u = this.authService.getCurrentUser();
         return {
             uid: u.uid,
             isAdmin: true,
@@ -80,7 +80,7 @@ export class NewgroupFormComponent implements OnInit {
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully added a group.',
+                message: 'Successfully added a group.'
             });
             this.groupService.toggleSuccess(gid);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -91,7 +91,7 @@ export class NewgroupFormComponent implements OnInit {
             this.newGroupForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: err.message,
+                message: err.message
             });
         }
     }

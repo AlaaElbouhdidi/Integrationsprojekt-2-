@@ -1,6 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges
+} from '@angular/core';
 import { Poll } from '@api-interfaces';
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import {
+    animate,
+    keyframes,
+    style,
+    transition,
+    trigger
+} from '@angular/animations';
 import { AlertService, AuthService } from '@services';
 
 /**
@@ -13,18 +26,24 @@ import { AlertService, AuthService } from '@services';
     animations: [
         trigger('flipPollItem', [
             transition('open => closed', [
-                animate('0.5s', keyframes([
-                    style({transform: 'rotateX(180deg)'}),
-                    style({transform: 'rotateX(0)'})
-                ]))
+                animate(
+                    '0.5s',
+                    keyframes([
+                        style({ transform: 'rotateX(180deg)' }),
+                        style({ transform: 'rotateX(0)' })
+                    ])
+                )
             ]),
             transition('closed => open', [
-                animate('0.5s', keyframes([
-                    style({transform: 'rotateX(180deg)'}),
-                    style({transform: 'rotateX(0)'})
-                ]))
-            ]),
-        ]),
+                animate(
+                    '0.5s',
+                    keyframes([
+                        style({ transform: 'rotateX(180deg)' }),
+                        style({ transform: 'rotateX(0)' })
+                    ])
+                )
+            ])
+        ])
     ]
 })
 export class PollItemComponent implements OnChanges {
@@ -61,7 +80,7 @@ export class PollItemComponent implements OnChanges {
     constructor(
         private authService: AuthService,
         private alertService: AlertService
-    ) { }
+    ) {}
 
     /**
      * Changes value of showResults variable
@@ -77,7 +96,10 @@ export class PollItemComponent implements OnChanges {
      * @returns {number} Percentage
      */
     calcBarWidth(votes: number): number {
-        const voteSum = this.poll.choices.reduce((accumulator, currentVal) => accumulator + currentVal.votes, 0);
+        const voteSum = this.poll.choices.reduce(
+            (accumulator, currentVal) => accumulator + currentVal.votes,
+            0
+        );
         return (votes * 100) / voteSum;
     }
 
@@ -106,7 +128,9 @@ export class PollItemComponent implements OnChanges {
      * Register a vote on a poll and send an event to the parent component
      */
     vote(): void {
-        const checkedInput = document.querySelector('input[name=choice]:checked') as HTMLInputElement;
+        const checkedInput = document.querySelector(
+            'input[name=choice]:checked'
+        ) as HTMLInputElement;
         if (!checkedInput) {
             this.alertService.addAlert({
                 type: 'error',

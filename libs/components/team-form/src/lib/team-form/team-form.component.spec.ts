@@ -10,9 +10,8 @@ describe('TeamFormComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ TeamFormModule ]
-        })
-        .compileComponents();
+            imports: [TeamFormModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -30,8 +29,7 @@ describe('TeamFormComponent', () => {
     });
 
     it('should render one input element', () => {
-        const form =
-            fixture.debugElement.nativeElement.querySelector('form');
+        const form = fixture.debugElement.nativeElement.querySelector('form');
         const input = form.querySelectorAll('input');
         expect(input.length).toEqual(1);
     });

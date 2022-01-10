@@ -12,15 +12,15 @@ import {
     faTable,
     faCalendarAlt
 } from '@fortawesome/free-solid-svg-icons';
-import {
-    MembersListModule
-} from '@group-members-list';
+import { MembersListModule } from '@group-members-list';
+import { GroupsModule } from '@groups';
 
 @NgModule({
     imports: [
         CommonModule,
         GroupRoutingModule,
         FontAwesomeModule,
+        GroupsModule,
         MembersListModule
     ],
     declarations: [GroupComponent],

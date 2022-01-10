@@ -18,12 +18,7 @@ export const membersListItemRoutes: Route[] = [];
     ]
 })
 export class MembersListItemModule {
-  constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faUser,
-      faUserCog,
-      faUserTie,
-      faUserTimes,
-    );
-  }
+    constructor(library: FaIconLibrary) {
+        library.addIcons(faUser, faUserCog, faUserTie, faUserTimes);
+    }
 }

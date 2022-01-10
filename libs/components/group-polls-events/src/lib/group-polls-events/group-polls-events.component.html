@@ -33,14 +33,10 @@
             <fa-icon icon="poll"></fa-icon>
             Create poll
         </h5>
-        <fa-icon
-            icon="times-circle"
-            (click)="closeModal()">
-        </fa-icon>
+        <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
     <div class="modal-body">
-        <mate-team-create-poll-form
-            (createPollEvent)="createPoll($event)">
+        <mate-team-create-poll-form (createPollEvent)="createPoll($event)">
         </mate-team-create-poll-form>
     </div>
 </ng-template>
@@ -50,7 +46,8 @@
         (closeModalEvent)="closeConfirmationModal($event)"
         (dismissModalEvent)="dismissConfirmationModal()"
         [title]="'DELETE POLL'"
-        [text]="'Are you sure you want to delete this poll?'">
+        [text]="'Are you sure you want to delete this poll?'"
+    >
     </mate-team-confirmation-modal>
 </ng-template>
 
@@ -59,14 +56,16 @@
         (closeModalEvent)="closeConfirmationModal($event)"
         (dismissModalEvent)="dismissConfirmationModal()"
         [title]="'DELETE EVENT'"
-        [text]="'Are you sure you want to delete this event?'">
+        [text]="'Are you sure you want to delete this event?'"
+    >
     </mate-team-confirmation-modal>
 </ng-template>
 
 <ng-template #eventDescriptionModal>
     <mate-team-event-description-modal
         [event]="descriptionEvent"
-        (dismissModalEvent)="closeModal()" >
+        (dismissModalEvent)="closeModal()"
+    >
     </mate-team-event-description-modal>
 </ng-template>
 
@@ -75,7 +74,8 @@
         [isAdmin]="isAdmin"
         [groupAdmin]="group.admin"
         [event]="descriptionEvent"
-        (dismissModalEvent)="closeModal()">
+        (dismissModalEvent)="closeModal()"
+    >
     </mate-team-team-modal>
 </ng-template>
 

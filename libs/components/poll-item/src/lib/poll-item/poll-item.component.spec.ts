@@ -12,7 +12,9 @@ describe('PollItemComponent', () => {
     let fixture: ComponentFixture<PollItemComponent>;
 
     const pollMock: Poll = {
-        title: 'poll', choices: [{ date: '01/01/2021', votes: 2 }], usersVoted: []
+        title: 'poll',
+        choices: [{ date: '01/01/2021', votes: 2 }],
+        usersVoted: []
     };
     const userMock = {
         uid: 'user1Id'
@@ -30,12 +32,8 @@ describe('PollItemComponent', () => {
                 { provide: AuthService, useValue: authServiceMock },
                 { provide: AlertService, useValue: alertServiceMock }
             ],
-            imports: [
-                BrowserAnimationsModule,
-                PollItemModule
-            ]
-    })
-    .compileComponents();
+            imports: [BrowserAnimationsModule, PollItemModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -60,7 +58,9 @@ describe('PollItemComponent', () => {
         component.showResults = false;
         component.flipPollItem();
         fixture.detectChanges();
-        const buttonWrapper = fixture.debugElement.nativeElement.querySelector('.poll-item-footer-choices-btn-wrapper');
+        const buttonWrapper = fixture.debugElement.nativeElement.querySelector(
+            '.poll-item-footer-choices-btn-wrapper'
+        );
         expect(buttonWrapper).toBeNull();
     });
 
@@ -70,7 +70,7 @@ describe('PollItemComponent', () => {
             { date: '02/01/2021', votes: 1 },
             { date: '03/01/2021', votes: 2 },
             { date: '04/01/2021', votes: 5 },
-            { date: '05/01/2021', votes: 0 },
+            { date: '05/01/2021', votes: 0 }
         ];
         expect(component.calcBarWidth(0)).toEqual(0);
         expect(component.calcBarWidth(2)).toEqual(20);
@@ -127,7 +127,10 @@ describe('PollItemComponent', () => {
     it('should increase votes of poll on vote', () => {
         component.poll = pollMock;
         fixture.detectChanges();
-        const input = fixture.debugElement.nativeElement.querySelector('input[name=choice]');
+        const input =
+            fixture.debugElement.nativeElement.querySelector(
+                'input[name=choice]'
+            );
         input.checked = true;
         expect(component.poll.choices[input.value].votes).toEqual(2);
         component.vote();
@@ -137,7 +140,10 @@ describe('PollItemComponent', () => {
     it('should emit vote event with poll on vote', () => {
         component.poll = pollMock;
         fixture.detectChanges();
-        const input = fixture.debugElement.nativeElement.querySelector('input[name=choice]');
+        const input =
+            fixture.debugElement.nativeElement.querySelector(
+                'input[name=choice]'
+            );
         input.checked = true;
         const spy = jest.spyOn(component.voteEvent, 'emit');
         component.vote();
@@ -151,10 +157,10 @@ describe('PollItemComponent', () => {
                 currentValue: '',
                 firstChange: true,
                 isFirstChange(): boolean {
-                    return true
+                    return true;
                 }
             }
-        }
+        };
         const spy = jest.spyOn(component, 'checkIfUserVoted');
         component.poll = pollMock;
         fixture.detectChanges();
