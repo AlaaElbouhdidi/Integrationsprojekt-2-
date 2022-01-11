@@ -5,7 +5,10 @@
                 My groups
             </h5>
             <fa-icon icon="user-friends"></fa-icon>
-            <button routerLink="/newgroup">+ Create new group</button>
+            <button routerLink="/newgroup">
+                <span class="groups-header-small-btn">+</span>
+                <span class="groups-header-full-btn">+ Create new group</span>
+            </button>
         </div>
         <div class="groups-body">
             <div class="groups-body-search">
@@ -19,9 +22,11 @@
                         autofocus
                     >
                 </div>
-                <span>Order by: </span>
-                <button [class.active-button]="orderByName" (click)="orderListByName()">Name</button>
-                <button [class.active-button]="!orderByName" (click)="orderListByAdmin()">Admin</button>
+                <div class="groups-body-search-order">
+                    <span>Order by: </span>
+                    <button [class.active-button]="orderByName" (click)="orderListByName()">Name</button>
+                    <button [class.active-button]="!orderByName" (click)="orderListByAdmin()">Admin</button>
+                </div>
             </div>
             <div *ngFor="let group of groups | async | filter: term" class="groups-body-group-item">
                 <div class="groups-body-group-item-info">

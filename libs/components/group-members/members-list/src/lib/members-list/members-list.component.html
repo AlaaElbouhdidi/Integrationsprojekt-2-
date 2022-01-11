@@ -4,7 +4,10 @@
             <fa-icon icon="search"></fa-icon>
             <input type="text" name="term" [(ngModel)]="term" placeholder="Search..." autofocus >
         </div>
-        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">+ Add new member</button>
+        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">
+            <span>+</span>
+            <span>+ Add new member</span>
+        </button>
     </div>
     <div class="members-body">
         <p *ngIf="term.length === 0">{{membersList.length}} members found</p>
