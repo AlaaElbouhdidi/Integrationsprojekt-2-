@@ -18,80 +18,158 @@ main {
     .groups {
         color: $white;
         margin: 2rem 0;
-        display: flex;
         &-header {
+            display: flex;
             align-items: center;
             border-left: 2px solid white;
             padding: 0.25rem 0.75rem;
             h5 {
                 margin: 0 0.5rem 0 0;
+                white-space: nowrap;
             }
             fa-icon {
                 font-size: 1.35rem;
                 margin-right: 1rem;
             }
-        }
-        button {
-            padding: 0 0.75rem;
-            border: none;
-            background: $success;
-            color: $white;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: 0.25s;
-            &:hover {
-                background: $successHover;
+            button {
+                padding: 0 0.75rem;
+                border: none;
+                background: $success;
+                color: $white;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                transition: 0.25s;
+                span:nth-child(1) {
+                    display: block;
+                    @include for-tablet-portrait-up {
+                        display: none;
+                    }
+                }
+                span:nth-child(2) {
+                    display: none;
+                    @include for-tablet-portrait-up {
+                        display: block;
+                    }
+                }
+                &:hover {
+                    background: $successHover;
+                }
             }
         }
     }
-    .search {
-        color: $white;
-        margin: 2rem 0;
-        button {
-            padding: 0 0.75rem;
-            border: none;
-            background: $main;
+    .groups-body {
+        &-search {
             color: $white;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: 0.25s;
-            &:hover {
-                filter: brightness(200%);
+            margin: 2rem 0;
+            @include flex-center-column;
+            @include for-tablet-portrait-up {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            &-order {
+                display: flex;
+                align-items: center;
+                margin-top: 1rem;
+                @include for-tablet-portrait-up {
+                    margin: 0;
+                }
+            }
+            &-input {
+                color: $white;
+                position: relative;
+                width: 100%;
+                @include for-tablet-portrait-up {
+                    width: auto;
+                    margin-right: 2rem;
+                }
+                input {
+                    width: 100%;
+                    padding-left: 2rem;
+                    background: transparent;
+                    border: none;
+                    border-bottom: 1px solid $white;
+                    color: $white;
+                    padding-bottom: 0.25rem;
+                    @include for-tablet-portrait-up {
+                        width: auto;
+                    }
+                }
+                fa-icon {
+                    position: absolute;
+                    top: 0;
+                    left: 0.25rem;
+                    color: $white;
+                }
+            }
+            button {
+                padding: 0 0.75rem;
+                background: $main;
+                border: 2px solid $main;
+                background: transparent;
+                color: $white;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                transition: 0.25s;
             }
         }
-    }
-    .search > * {
-        margin-right: 1rem;
-    }
-    .group {
-        width: 100%;
-        color: $white !important;
-        background: $darkAccent;
-        margin-bottom: 1rem;
-        border: 0.25rem;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 0.5rem;
-        box-shadow: rgba(0, 0, 0, 0.44) 0 18px 44px;
-        width: 100%;
-        @include for-tablet-portrait-up {
-            flex-direction: row;
-            justify-content: space-between;
-        }
-        button {
-            padding: 0 0.75rem;
-            border: none;
-            background: $white;
-            color: $black;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            width: 10%;
+        &-search-order > * {
             margin-right: 1rem;
-            transition: 0.25s;
-            &:hover {
-                filter: brightness(200%);
+        }
+        &-group-item {
+            width: 100%;
+            color: $white !important;
+            background: $darkAccent;
+            margin-bottom: 1rem;
+            border: 0.25rem;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 1rem;
+            box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+            @include for-tablet-portrait-up {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            &-info {
+                display: flex;
+                align-items: center;
+                p {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-style: italic;
+                    fa-icon {
+                        color: #c2c233;
+                        margin-left: 1rem;
+                    }
+                }
+            }
+            button {
+                padding: 0 0.75rem;
+                border: none;
+                background: $white;
+                color: $black;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 0.5rem;
+                transition: 0.25s;
+                &:hover {
+                    background: $main;
+                    color: $white;
+                }
+                @include for-tablet-portrait-up {
+                    width: auto;
+                    padding: 0 3rem;
+                    margin-top: 0;
+                }
+                @include for-tablet-landscape-up {
+                    width: auto;
+                    padding: 0 4rem;
+                }
             }
         }
     }
+}
+.active-button {
+    background: $main !important;
 }

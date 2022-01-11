@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GroupService } from '@services';
+import { AuthService, GroupService } from '@services';
 import { GroupsModule } from '../groups.module';
 import { GroupsComponent } from './groups.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,10 +10,16 @@ describe('GroupsComponent', () => {
     const groupServiceMock = {
         getUserGroups: jest.fn()
     };
+    const authServiceMock = {
+        getCurrentUser: jest.fn().mockReturnValue({ uid: 'userId' })
+    };
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [GroupsModule, RouterTestingModule.withRoutes([])],
-            providers: [{ provide: GroupService, useValue: groupServiceMock }]
+            providers: [
+                { provide: GroupService, useValue: groupServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
+            ]
         }).compileComponents();
     });
 
