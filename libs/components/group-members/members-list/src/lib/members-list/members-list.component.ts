@@ -57,6 +57,8 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @param alertService {AlertService}
      * @param authService {AuthService}
      * @param groupService {GroupService}
+     * @param route {ActivatedRoute}
+     * @param modalService {NgbModal}
      */
     constructor(
         private groupService: GroupService,
@@ -173,7 +175,6 @@ export class MembersListComponent implements OnInit, OnDestroy {
                         });
                     });
                     this.membersList = items;
-                    console.log(items);
                 });
             this.groupService.getGroupById(this.gid).then((res) => {
                 if (res) this.gAdmin = res.admin;

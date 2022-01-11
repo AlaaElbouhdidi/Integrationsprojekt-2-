@@ -57,3 +57,59 @@
         }
     }
 }
+.light-modal {
+    .modal-content {
+        background: $white;
+        color: $dark;
+        border-radius: 0.25rem;
+    }
+    .modal-header {
+        @include flex-center;
+        justify-content: space-between;
+        border-bottom: 1px solid $light;
+        h5 {
+            margin: 0;
+            text-transform: uppercase;
+        }
+        fa-icon[icon="arrow-circle-left"] {
+            color: $white;
+            cursor: pointer;
+        }
+        fa-icon[icon="times-circle"] {
+            color: $error;
+            transition: 0.25s;
+            cursor: pointer;
+            font-size: 1.1rem;
+            &:hover {
+                color: $errorHover;
+            }
+        }
+    }
+    .modal-body {
+        p {
+            margin: 0;
+        }
+    }
+    .modal-footer {
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 0.25rem;
+            color: $white;
+            padding: 0.25rem 1.5rem;
+            transition: 0.25s;
+        }
+        &-green-btn {
+            background: $success;
+            &:hover {
+                background: $successHover;
+            }
+        }
+        &-red-btn {
+            background: $error;
+            &:hover {
+                background: $errorHover;
+            }
+        }
+    }
+}

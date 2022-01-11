@@ -64,6 +64,9 @@
             "@group-polls-events": [
                 "libs/components/group-polls-events/src/index.ts"
             ],
+            "@group-setting": [
+                "libs/components/group-setting/src/index.ts"
+            ],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
             "@invite-members": ["libs/components/invite-members/src/index.ts"],

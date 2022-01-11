@@ -1,7 +1,7 @@
 <div class="invite-members">
     <div class="invite-members-info">
         <fa-icon icon="info-circle"></fa-icon>
-        <p>Enter email of the user you want to add</p>
+        <p>Enter email of the users you want to add</p>
     </div>
     <div id="emails-container" class="emails-container">
         <mat-form-field class="chip-list">
@@ -16,7 +16,7 @@
                         (matChipInputTokenEnd)="add($event)"
                     >
                     <fa-icon icon="angle-double-right"></fa-icon>
-                    <div class="form-error" *ngIf="isUnvalid">
+                    <div class="form-error" *ngIf="isInvalid">
                         <div class="form-error-message">
                             <fa-icon icon="exclamation-circle"></fa-icon>
                             <p>{{errorMessage}}</p>
@@ -36,7 +36,6 @@
                     </button>
                 </mat-chip>
             </mat-chip-list>
-
             <button
                 class="add-member-btn"
                 type="button"

@@ -158,4 +158,25 @@ export class GroupService {
             .doc(m.email)
             .update({ isAdmin: !m.isAdmin });
     }
+    /**
+     * update the name or the description of a group
+     */
+    async updateGroup(gid: string, name: string, description: string): Promise<void> {
+        await this.groupCollection.doc(gid).update({
+            name: name,
+            description: description
+        });
+    }
+    /**
+     * delete a group
+     */
+     async deleteGroup(gid: string): Promise<void> {
+
+        await this.afs.collection(`groups/${gid}/members`).get().forEach((qs) => {
+            qs.docs.forEach((i) =>{
+                this.afs.collection(`groups/${gid}/members`).doc(i.id).delete();
+            })
+        })
+        await this.groupCollection.doc(gid).delete();
+    }
 }
