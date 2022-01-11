@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Group } from '@api-interfaces';
-import { GroupService } from '@services';
+import { AuthService, GroupService } from '@services';
 
 @Component({
     selector: 'mate-team-groups',
@@ -13,7 +13,24 @@ export class GroupsComponent {
      * keyword to filter the list of members
      */
     term = '';
-    constructor(public groupService: GroupService) {
+    orderByName = true;
+    constructor(
+        public groupService: GroupService,
+        private authService: AuthService
+    ) {
         this.groups = this.groupService.getUserGroups();
+    }
+
+    checkIfAdmin(adminId: string): boolean {
+        const userId = this.authService.getCurrentUser().uid;
+        return userId === adminId;
+    }
+
+    orderListByName() {
+        this.orderByName = true;
+    }
+
+    orderListByAdmin() {
+        this.orderByName = false;
     }
 }

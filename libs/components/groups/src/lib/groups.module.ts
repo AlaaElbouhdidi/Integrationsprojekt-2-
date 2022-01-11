@@ -11,7 +11,8 @@ import {
 import {
     faCircle,
     faSearch,
-    faUserFriends
+    faUserFriends,
+    faStar
 } from '@fortawesome/free-solid-svg-icons';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
@@ -32,6 +33,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class GroupsModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faUserFriends, faSearch, faCircle);
+        library.addIcons(faUserFriends, faSearch, faCircle, faStar);
     }
 }

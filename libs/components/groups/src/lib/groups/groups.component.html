@@ -1,29 +1,39 @@
 <main>
-    <div>
-        <div class="groups">
-            <h5 class="groups-header">
+    <section class="groups">
+        <div class="groups-header">
+            <h5>
                 My groups
-                <fa-icon icon="user-friends"></fa-icon>
             </h5>
+            <fa-icon icon="user-friends"></fa-icon>
             <button routerLink="/newgroup">+ Create new group</button>
         </div>
-        <div class="search">
-            <fa-icon icon="search"></fa-icon>
-            <input
-                type="text"
-                name="term"
-                [(ngModel)]="term"
-                placeholder="Search"
-                autofocus
-            />
-            <span>Filter by: </span>
-            <button>Members</button>
-            <button>Creation Date</button>
+        <div class="groups-body">
+            <div class="groups-body-search">
+                <div class="groups-body-search-input">
+                    <fa-icon icon="search"></fa-icon>
+                    <input
+                        type="text"
+                        name="term"
+                        [(ngModel)]="term"
+                        placeholder="Search"
+                        autofocus
+                    >
+                </div>
+                <span>Order by: </span>
+                <button [class.active-button]="orderByName" (click)="orderListByName()">Name</button>
+                <button [class.active-button]="!orderByName" (click)="orderListByAdmin()">Admin</button>
+            </div>
+            <div *ngFor="let group of groups | async | filter: term" class="groups-body-group-item">
+                <div class="groups-body-group-item-info">
+                    <span>{{ group.name }}</span>
+                    <p *ngIf="checkIfAdmin(group.admin)">
+                        <fa-icon icon="star"></fa-icon>
+                        (~Admin)
+                    </p>
+                </div>
+                <button [routerLink]="'/group/' + group.id + '/events'">Open</button>
+            </div>
         </div>
-    </div>
-    <div *ngFor="let group of groups | async | filter: term" class="group">
-        <fa-icon icon="circle" size="3x"></fa-icon>
-        <span>{{ group.name }}</span>
-        <button [routerLink]="'/group/' + group.id + '/events'">Open</button>
-    </div>
+    </section>
 </main>
+
