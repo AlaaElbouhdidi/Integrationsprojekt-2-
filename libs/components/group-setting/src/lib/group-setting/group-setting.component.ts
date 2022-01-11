@@ -50,7 +50,7 @@ export class GroupSettingComponent implements OnInit {
         this.editGroupForm = this.fb.group({
             name: new FormControl(null, [
                 Validators.required,
-                Validators.maxLength(15)
+                Validators.maxLength(50)
             ]),
             description: new FormControl(null, Validators.maxLength(200))
         });

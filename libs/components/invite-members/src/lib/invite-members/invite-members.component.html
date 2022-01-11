@@ -35,20 +35,7 @@
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-chip>
-                <input
-                    placeholder="" autofocus
-                    [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="add($event)"
-                />
-                <div class="form-error" *ngIf="isInvalid">
-                    <div class="form-error-message">
-                        <p>{{errorMessage}}</p>
-                    </div>
-                </div>
             </mat-chip-list>
-
             <button
                 class="add-member-btn"
                 type="button"

@@ -65,6 +65,9 @@ main {
                 fa-icon[icon="calendar-alt"] {
                     left: -1.6rem;
                 }
+                fa-icon[icon="cog"] {
+                    left: -1.6rem;
+                }
                 a {
                     color: $white;
                     cursor: pointer;
@@ -75,10 +78,6 @@ main {
                         font-size: 1.2rem;
                     }
                 }
-            }
-            .setting-cog{
-                color: $white;
-                font-size: x-large;
             }
         }
     }

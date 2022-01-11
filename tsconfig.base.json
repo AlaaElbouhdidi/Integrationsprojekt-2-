@@ -46,8 +46,8 @@
             "@event-description-modal": [
                 "libs/components/event-description-modal/src/index.ts"
             ],
-            "@group-setting": [
-                "libs/components/group-setting/src/index.ts"
+            "@event-participants-list": [
+                "libs/components/event-participants-list/src/index.ts"
             ],
             "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
@@ -63,6 +63,9 @@
             ],
             "@group-polls-events": [
                 "libs/components/group-polls-events/src/index.ts"
+            ],
+            "@group-setting": [
+                "libs/components/group-setting/src/index.ts"
             ],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],

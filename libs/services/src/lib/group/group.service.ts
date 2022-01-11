@@ -174,7 +174,6 @@ export class GroupService {
 
         await this.afs.collection(`groups/${gid}/members`).get().forEach((qs) => {
             qs.docs.forEach((i) =>{
-                console.log(i.id);
                 this.afs.collection(`groups/${gid}/members`).doc(i.id).delete();
             })
         })
