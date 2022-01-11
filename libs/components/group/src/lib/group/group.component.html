@@ -1,4 +1,6 @@
 <main>
+    <h1>{{ group.name }}</h1>
+    <h6>{{ group.description }}</h6>
     <nav>
         <ul>
             <li>
@@ -34,7 +36,43 @@
                     Members
                 </a>
             </li>
+            <li>
+                <div *ngIf="isAdmin" class="setting-cog">
+                    <fa-icon
+                        icon="cog"
+                        (click)="openModal(openSetting)"
+                    ></fa-icon>
+                </div>
+            </li>
         </ul>
     </nav>
+
+    <ng-template #openSetting>
+        <div class="modal-header">
+            <h5>
+                <fa-icon icon="cog"></fa-icon>
+                Manage your group
+            </h5>
+            <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
+        </div>
+        <div class="modal-body">
+            <mate-team-group-setting
+                (manageGroup)="manageGroup($event)"
+                (deleteGroupEvent)="deleteGroup(deleteConfirmationModal)"
+                [group]="group"
+            >
+            </mate-team-group-setting>
+        </div>
+    </ng-template>
+
+    <ng-template #deleteConfirmationModal>
+        <mate-team-confirmation-modal
+            (closeModalEvent)="closeConfirmationModal($event)"
+            (dismissModalEvent)="dismissConfirmationModal()"
+            [title]="'DELETE GROUP'"
+            [text]="'Are you sure you want to delete this entire group? this action is not reversable'"
+        >
+        </mate-team-confirmation-modal>
+    </ng-template>
     <router-outlet></router-outlet>
 </main>

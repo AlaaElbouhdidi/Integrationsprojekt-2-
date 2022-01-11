@@ -17,7 +17,7 @@ export class InviteMembersComponent {
     /**
      * the state of the input
      */
-    isUnvalid = false;
+    isInvalid = false;
     /**
      * the error message when the state is wrong
      */
@@ -56,20 +56,20 @@ export class InviteMembersComponent {
                     e
                 );
                 if (res) {
-                    this.isUnvalid = true;
+                    this.isInvalid = true;
                     this.errorMessage = `${e} is already assigned to the group`;
                 } else {
-                    this.isUnvalid = false;
+                    this.isInvalid = false;
                     this.errorMessage = '';
                     this.emails.push(e);
                 }
             } else {
-                this.isUnvalid = true;
+                this.isInvalid = true;
                 this.errorMessage = `${e} is is not registred`;
             }
         } else {
             if (e != '') {
-                this.isUnvalid = true;
+                this.isInvalid = true;
                 this.errorMessage = `${e} is not correctly formatted`;
             }
         }

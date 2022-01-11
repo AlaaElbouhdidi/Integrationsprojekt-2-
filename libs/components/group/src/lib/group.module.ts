@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GroupComponent } from './group/group.component';
 import { GroupRoutingModule } from './group/group-routing.module';
+import { ConfirmationModalModule } from '@confirmation-modal';
 import {
     FontAwesomeModule,
     FaIconLibrary
@@ -10,10 +11,14 @@ import {
     faCommentAlt,
     faUserFriends,
     faTable,
-    faCalendarAlt
+    faCalendarAlt,
+    faCog
 } from '@fortawesome/free-solid-svg-icons';
 import { MembersListModule } from '@group-members-list';
 import { GroupsModule } from '@groups';
+import {
+    GroupSettingModule
+} from '@group-setting';
 
 @NgModule({
     imports: [
@@ -21,13 +26,15 @@ import { GroupsModule } from '@groups';
         GroupRoutingModule,
         FontAwesomeModule,
         GroupsModule,
-        MembersListModule
+        MembersListModule,
+        GroupSettingModule,
+        ConfirmationModalModule
     ],
     declarations: [GroupComponent],
     exports: [GroupComponent]
 })
 export class GroupModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faCommentAlt, faUserFriends, faTable, faCalendarAlt);
+        library.addIcons(faCommentAlt, faUserFriends, faTable, faCalendarAlt, faCog);
     }
 }
