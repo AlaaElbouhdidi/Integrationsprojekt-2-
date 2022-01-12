@@ -136,9 +136,6 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @param data {Poll} The poll to create
      */
     async createPoll(data: Poll): Promise<void> {
-        if (!this.checkIfAdmin(this.group.admin)) {
-            return;
-        }
         try {
             await this.pollService.createPoll(data);
             this.alertService.addAlert({
@@ -190,9 +187,6 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         if (!result) {
             return;
         }
-        if (!this.checkIfAdmin(this.group.admin)) {
-            return;
-        }
         try {
             await this.pollService.deletePoll(id);
             this.alertService.addAlert({
@@ -224,9 +218,6 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @param data {CreateEventFormData} Data to create the event with
      */
     async createEvent(data: CreateEventFormData): Promise<void> {
-        if (!this.checkIfAdmin(this.group.admin)) {
-            return;
-        }
         const event: Event = {
             name: data.name,
             description: data.description,
@@ -293,9 +284,6 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     async deleteEvent(id: string, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
-            return;
-        }
-        if (!this.checkIfAdmin(this.group.admin)) {
             return;
         }
         try {

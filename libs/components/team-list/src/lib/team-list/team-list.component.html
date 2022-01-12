@@ -4,13 +4,11 @@
             <fa-icon
                 icon="user-plus"
                 (click)="addUserToTeam(team)"
-                *ngIf="isAdmin"
             ></fa-icon>
             <p>{{ team.name }}</p>
             <fa-icon
                 icon="trash"
                 (click)="deleteTeam(team)"
-                *ngIf="isAdmin"
             ></fa-icon>
         </div>
         <div class="team-list-item-body" *ngIf="team.participants.length > 0">
@@ -31,7 +29,6 @@
                 </div>
                 <fa-icon
                     icon="minus"
-                    *ngIf="isAdmin"
                     (click)="removeUserFromTeam(team, participant)"
                 ></fa-icon>
             </div>

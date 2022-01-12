@@ -43,10 +43,6 @@ export class GroupEventItemComponent implements OnChanges {
      */
     @Input() event: Event = {} as Event;
     /**
-     * Determines if a user is admin
-     */
-    @Input() isAdmin = false;
-    /**
      * Determines if a user participates an event
      */
     participating = false;

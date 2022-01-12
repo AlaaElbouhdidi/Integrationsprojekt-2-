@@ -96,7 +96,6 @@ describe('TeamModalComponent', () => {
 
     it('should create team', () => {
         component.event.id = 'eventId';
-        component.groupAdmin = 'userId';
         fixture.detectChanges();
         const spy = jest.spyOn(teamServiceMock, 'createTeam');
         component.createTeam(teamMock);
@@ -106,7 +105,6 @@ describe('TeamModalComponent', () => {
     it('should add participant to team', () => {
         component.selectedTeam = teamMock;
         component.event.id = 'eventId';
-        component.groupAdmin = 'userId';
         fixture.detectChanges();
         const spy = jest.spyOn(teamServiceMock, 'updateTeam');
         component.addParticipantToTeam(participantMock);
@@ -117,7 +115,6 @@ describe('TeamModalComponent', () => {
 
     it('should update team', () => {
         component.event.id = 'eventId';
-        component.groupAdmin = 'userId';
         fixture.detectChanges();
         const spy = jest.spyOn(teamServiceMock, 'updateTeam');
         const updateTeamData = {
@@ -130,7 +127,6 @@ describe('TeamModalComponent', () => {
 
     it('should delete team', () => {
         component.event.id = 'eventId';
-        component.groupAdmin = 'userId';
         fixture.detectChanges();
         const spy = jest.spyOn(teamServiceMock, 'deleteTeam');
         component.deleteTeam(teamMock);
@@ -141,18 +137,6 @@ describe('TeamModalComponent', () => {
         component.showParticipantsList(teamMock);
         expect(component.selectedTeam).toBe(teamMock);
         expect(component.showTeams).toEqual(false);
-    });
-
-    it('should return false on admin check if user is not admin', () => {
-        const spy = jest.spyOn(component, 'checkIfAdmin');
-        component.checkIfAdmin('adminId');
-        expect(spy).toReturnWith(false);
-    });
-
-    it('should return true on admin check if user is admin', () => {
-        const spy = jest.spyOn(component, 'checkIfAdmin');
-        component.checkIfAdmin('userId');
-        expect(spy).toReturnWith(true);
     });
 
     it('should get teams on component init and filter participants list', () => {

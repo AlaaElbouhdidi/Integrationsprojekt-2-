@@ -108,17 +108,7 @@ describe('GroupPollsEventsComponent', () => {
         expect(spy).toReturnWith(true);
     });
 
-    it('should not create poll if user is not admin of the group', () => {
-        component.group.admin = 'adminId';
-        fixture.detectChanges();
-        const spy = jest.spyOn(pollServiceMock, 'createPoll');
-        component.createPoll(pollMock);
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it('should create poll if user is admin of the group', () => {
-        component.group.admin = 'userId';
-        fixture.detectChanges();
+    it('should create poll', () => {
         const spy = jest.spyOn(pollServiceMock, 'createPoll');
         const alertSpy = jest.spyOn(alertServiceMock, 'addAlert');
         component.createPoll(pollMock);

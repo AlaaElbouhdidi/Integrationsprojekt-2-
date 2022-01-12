@@ -33,14 +33,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     @Input() event: Event = {} as Event;
     /**
-     * Determines if user is admin
-     */
-    @Input() isAdmin = false;
-    /**
-     * Group admin id
-     */
-    @Input() groupAdmin = '';
-    /**
      * Subject to unsubscribe from observables
      * @private
      */
@@ -83,9 +75,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         if (!this.event.id) {
             return;
         }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
-            return;
-        }
         try {
             await this.teamService.createTeam(this.event.id, team);
         } catch (e) {
@@ -103,9 +92,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     async updateTeam(data: UpdateTeamParticipantsData): Promise<void> {
         if (!this.event.id) {
-            return;
-        }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
             return;
         }
         data.team.participants = data.team.participants.filter(
@@ -130,9 +116,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         if (!this.event.id || !team.id) {
             return;
         }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
-            return;
-        }
         try {
             await this.teamService.deleteTeam(this.event.id, team.id);
         } catch (e) {
@@ -141,17 +124,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
-    }
-
-    /**
-     * Checks if a given id matches the user id
-     *
-     * @param adminId {string} The id of the admin
-     * @returns {boolean} True if user id matches the given id, false if the ids do not match
-     */
-    checkIfAdmin(adminId: string): boolean {
-        const userId = this.authService.getCurrentUser().uid;
-        return userId === adminId;
     }
 
     /**
@@ -187,9 +159,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     async addParticipantToTeam(participant: Participant): Promise<void> {
         if (!this.selectedTeam.id || !this.event.id) {
-            return;
-        }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
             return;
         }
         const updatedTeam = this.selectedTeam;

@@ -2,7 +2,7 @@
     <div class="polls-header">
         <h5>Polls</h5>
         <fa-icon icon="poll"></fa-icon>
-        <button *ngIf="isAdmin" (click)="openModal(pollModal)">
+        <button (click)="openModal(pollModal)">
             + Create new poll
         </button>
     </div>
@@ -10,7 +10,6 @@
         <div class="polls-body-wrapper" *ngIf="polls.length > 0; else pollMessage">
             <div class="polls-body-wrapper-item" @itemAnimation *ngFor="let poll of polls">
                 <mate-team-poll-item
-                    [isAdmin]="isAdmin"
                     [poll]="poll"
                     (deletePollEvent)="deletePoll($event, confirmationModal)"
                     (voteEvent)="updatePoll($event)">
@@ -71,8 +70,6 @@
 
 <ng-template #teamModal>
     <mate-team-team-modal
-        [isAdmin]="isAdmin"
-        [groupAdmin]="group.admin"
         [event]="descriptionEvent"
         (dismissModalEvent)="closeModal()"
     >
@@ -98,7 +95,7 @@
     <div class="events-header">
         <h5>Events</h5>
         <fa-icon icon="calendar-alt"></fa-icon>
-        <button *ngIf="isAdmin" (click)="openModal(createEventModal)">
+        <button (click)="openModal(createEventModal)">
             + Create new event
         </button>
     </div>
@@ -107,7 +104,6 @@
             <div class="events-body-item" @itemAnimation *ngFor="let event of events">
                 <mate-team-group-event-item
                     [event]="event"
-                    [isAdmin]="isAdmin"
                     (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
                     (participateEvent)="updateEvent($event)"
                     (teamEvent)="editEvent($event, teamModal)"
