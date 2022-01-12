@@ -274,6 +274,11 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * Cancel participation from event
+     *
+     * @param event {Event} The event to cancel the participation from
+     */
     async cancelParticipation(event: Event) {
         if (!event.id) {
             return;

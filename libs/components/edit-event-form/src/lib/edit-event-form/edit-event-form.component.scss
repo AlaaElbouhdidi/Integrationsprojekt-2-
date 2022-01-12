@@ -22,3 +22,18 @@ form {
     @include flex-center;
     text-align: center;
 }
+.form-input-checkbox {
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    input {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+    }
+    label {
+        margin-left: 1rem;
+    }
+}
