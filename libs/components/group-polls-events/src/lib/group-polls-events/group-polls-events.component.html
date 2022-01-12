@@ -106,6 +106,7 @@
                     [event]="event"
                     (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
                     (participateEvent)="updateEvent($event)"
+                    (cancelParticipationEvent)="updateEvent($event)"
                     (teamEvent)="editEvent($event, teamModal)"
                     (editEvent)="editEvent($event, editEventModal)"
                     (deleteEvent)="deleteEvent($event, eventConfirmationModal)"

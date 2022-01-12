@@ -23,6 +23,10 @@ export class GroupEventItemComponent implements OnChanges {
      */
     @Output() participateEvent = new EventEmitter<Event>();
     /**
+     * Cancel participation event
+     */
+    @Output() cancelParticipationEvent = new EventEmitter<Event>();
+    /**
      * Team event
      */
     @Output() teamEvent = new EventEmitter<Event>();
@@ -95,6 +99,18 @@ export class GroupEventItemComponent implements OnChanges {
         };
         this.event.participants.push(participant);
         this.participateEvent.emit(this.event);
+    }
+
+    /**
+     * Cancel participation of event
+     */
+    cancelParticipation(): void {
+        if (!this.checkIfParticipant()) {
+            return;
+        }
+        const user = this.authService.getCurrentUser();
+        this.event.participants = this.event.participants.filter(participant => participant.uid !== user.uid);
+        this.cancelParticipationEvent.emit(this.event);
     }
 
     /**

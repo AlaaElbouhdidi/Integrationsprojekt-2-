@@ -254,7 +254,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
             await this.eventService.updateEvent(event.id, event);
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Participation successfully registered'
+                message: 'Successfully updated'
             });
         } catch (e) {
             this.alertService.addAlert({

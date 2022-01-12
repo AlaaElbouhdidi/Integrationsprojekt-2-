@@ -104,6 +104,18 @@
                 background: $successHover;
             }
         }
+        &-cancel {
+            background: $error;
+            color: $white;
+            margin-top: 0.5rem;
+            @include for-tablet-portrait-up {
+                margin-top: 0;
+                margin-left: 0.5rem;
+            }
+            &:hover {
+                background: $errorHover;
+            }
+        }
         fa-icon {
             cursor: pointer;
             transition: 0.25s;
