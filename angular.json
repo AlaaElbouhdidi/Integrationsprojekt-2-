@@ -614,6 +614,30 @@
                 }
             }
         },
+        "edit-event-modal": {
+            "projectType": "library",
+            "root": "libs/components/edit-event-modal",
+            "sourceRoot": "libs/components/edit-event-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/edit-event-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/edit-event-modal/src/**/*.ts",
+                            "libs/components/edit-event-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "email-form": {
             "projectType": "library",
             "root": "libs/components/email-form",
