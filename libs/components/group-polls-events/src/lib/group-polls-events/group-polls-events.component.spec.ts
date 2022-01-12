@@ -6,7 +6,8 @@ import {
     AuthService,
     EventService,
     GroupService,
-    PollService
+    PollService,
+    TeamService
 } from '@services';
 import { GroupPollsEventsModule } from '../group-polls-events.module';
 import { Event, Poll } from '@api-interfaces';
@@ -15,6 +16,9 @@ describe('GroupPollsEventsComponent', () => {
     let component: GroupPollsEventsComponent;
     let fixture: ComponentFixture<GroupPollsEventsComponent>;
 
+    const teamServiceMock = {
+        getTeamsSync: jest.fn()
+    };
     const pollServiceMock = {
         getPolls: jest.fn(),
         createPoll: jest.fn(),
@@ -64,7 +68,8 @@ describe('GroupPollsEventsComponent', () => {
                 { provide: AuthService, useValue: authServiceMock },
                 { provide: GroupService, useValue: groupServiceMock },
                 { provide: AlertService, useValue: alertServiceMock },
-                { provide: EventService, useValue: eventServiceMock }
+                { provide: EventService, useValue: eventServiceMock },
+                { provide: TeamService, useValue: teamServiceMock }
             ],
             imports: [GroupPollsEventsModule]
         }).compileComponents();
@@ -150,7 +155,7 @@ describe('GroupPollsEventsComponent', () => {
     it('should not update event if no event id provided', () => {
         delete eventMock.id;
         const spy = jest.spyOn(eventServiceMock, 'updateEvent');
-        component.updateEvent(eventMock);
+        component.updateEvent(eventMock, false);
         expect(spy).not.toHaveBeenCalled();
     });
 
@@ -159,7 +164,7 @@ describe('GroupPollsEventsComponent', () => {
         const alertSpy = jest.spyOn(alertServiceMock, 'addAlert');
         eventMock.id = 'eventID';
         fixture.detectChanges();
-        component.updateEvent(eventMock);
+        component.updateEvent(eventMock, false);
         expect(spy).toHaveBeenCalled();
         expect(alertSpy).toHaveBeenCalled();
     });

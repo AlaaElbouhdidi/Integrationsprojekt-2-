@@ -44,6 +44,26 @@ export class TeamService {
     }
 
     /**
+     * Get teams of an event
+     *
+     * @param eventID The id of the event
+     */
+    async getTeamsSync(eventID: string) {
+        const snapshot = await this.afs
+            .collection('events')
+            .doc(eventID)
+            .collection('teams')
+            .ref.get();
+        return snapshot.docs.map((doc) => {
+            return {
+                id: doc.id,
+                name: doc.get('name'),
+                participants: doc.get('participants')
+            };
+        });
+    }
+
+    /**
      * Create a team
      *
      * @param eventID {string} The id of the event to which the team belongs

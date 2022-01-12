@@ -1,8 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { CreateEventFormData, Event, Group, Poll } from '@api-interfaces';
+import { CreateEventFormData, Event, Group, Poll, Team } from '@api-interfaces';
 import { Subject, takeUntil } from 'rxjs';
-import { AlertService, AuthService, EventService, GroupService, PollService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    EventService,
+    GroupService,
+    PollService,
+    TeamService
+} from '@services';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 /**
@@ -17,11 +24,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
         trigger('itemAnimation', [
             transition(':enter', [
                 style({ opacity: 0 }),
-                animate(
-                    '200ms',
-                    style({ opacity: 1 })
-                )
-            ]),
+                animate('200ms', style({ opacity: 1 }))
+            ])
         ])
     ]
 })
@@ -68,6 +72,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * @param authService {AuthService}
      * @param groupService {GroupService}
      * @param eventService {EventService}
+     * @param teamService {TeamService}
      */
     constructor(
         private modalService: NgbModal,
@@ -75,7 +80,8 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
         private alertService: AlertService,
         private authService: AuthService,
         private groupService: GroupService,
-        private eventService: EventService
+        private eventService: EventService,
+        private teamService: TeamService
     ) {}
 
     /**
@@ -225,7 +231,7 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
             done: false,
             participants: [],
             groupID: this.groupService.currentGroupId
-        }
+        };
         try {
             await this.eventService.createEvent(event);
             this.alertService.addAlert({
@@ -245,8 +251,9 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
      * Update an event
      *
      * @param event {Event} The event data to update
+     * @param closeModal {boolean} Determines if modal should be closed after update
      */
-    async updateEvent(event: Event): Promise<void> {
+    async updateEvent(event: Event, closeModal: boolean): Promise<void> {
         if (!event.id) {
             return;
         }
@@ -256,6 +263,48 @@ export class GroupPollsEventsComponent implements OnInit, OnDestroy {
                 type: 'success',
                 message: 'Successfully updated'
             });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+        if (closeModal) {
+            this.closeModal();
+        }
+    }
+
+    async cancelParticipation(event: Event) {
+        if (!event.id) {
+            return;
+        }
+
+        try {
+            await this.updateEvent(event, false);
+            const teams = (await this.teamService.getTeamsSync(
+                event.id
+            )) as Team[];
+            const user = this.authService.getCurrentUser();
+            for (let i = 0; i < teams.length; i++) {
+                const deletedUser = teams[i].participants.find(
+                    (participant) => participant.uid === user.uid
+                );
+                if (deletedUser && event.id) {
+                    teams[i].participants.splice(
+                        teams[i].participants.indexOf(deletedUser),
+                        1
+                    );
+                    try {
+                        await this.teamService.updateTeam(event.id, teams[i]);
+                    } catch (e) {
+                        this.alertService.addAlert({
+                            type: 'error',
+                            message: e.message
+                        });
+                    }
+                    return;
+                }
+            }
         } catch (e) {
             this.alertService.addAlert({
                 type: 'error',

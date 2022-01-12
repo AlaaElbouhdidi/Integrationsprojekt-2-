@@ -87,6 +87,7 @@
     <mate-team-edit-event-modal
         [event]="descriptionEvent"
         (dismissModalEvent)="closeModal()"
+        (updateEvent)="updateEvent($event, true)"
     >
     </mate-team-edit-event-modal>
 </ng-template>
@@ -105,8 +106,8 @@
                 <mate-team-group-event-item
                     [event]="event"
                     (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
-                    (participateEvent)="updateEvent($event)"
-                    (cancelParticipationEvent)="updateEvent($event)"
+                    (participateEvent)="updateEvent($event, false)"
+                    (cancelParticipationEvent)="cancelParticipation($event)"
                     (teamEvent)="editEvent($event, teamModal)"
                     (editEvent)="editEvent($event, editEventModal)"
                     (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
