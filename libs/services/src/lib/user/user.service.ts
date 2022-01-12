@@ -34,9 +34,31 @@ export class UserService {
         return user;
     }
 
-    async updateProfile(uid: string, displayName?: string, photoURL?: string): Promise<void> {
+    async getUserByUid(uid: string): Promise<User> {
+        let user: User = {} as User;
         await this.afs
-        .collection<User>('users').doc(uid).update({
+            .collection<User>('users')
+            .doc(uid)
+            .ref.get()
+            .then((doc) => {
+                if (doc.data()) {
+                    user = {
+                        uid: doc.id,
+                        email: doc.get('email'),
+                        photoURL: doc.get('photoURL'),
+                        displayName: doc.get('displayName')
+                    };
+                }
+            });
+        return user;
+    }
+
+    async updateProfile(
+        uid: string,
+        displayName?: string,
+        photoURL?: string
+    ): Promise<void> {
+        await this.afs.collection<User>('users').doc(uid).update({
             displayName: displayName,
             photoURL: photoURL
         });

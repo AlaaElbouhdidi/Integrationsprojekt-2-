@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EventParticipantsListComponent } from './event-participants-list.component';
 import { EventParticipantsListModule } from '../event-participants-list.module';
 import { Participant } from '@api-interfaces';
+import { UserService } from '@services';
 
 describe('EventParticipantsListComponent', () => {
     let component: EventParticipantsListComponent;
@@ -13,10 +14,14 @@ describe('EventParticipantsListComponent', () => {
         displayName: 'Max',
         icon: 'iconCode'
     };
+    const userServiceMock = {
+        getUserByUid: jest.fn()
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [EventParticipantsListModule]
+            imports: [EventParticipantsListModule],
+            providers: [{ provide: UserService, useValue: userServiceMock }]
         }).compileComponents();
     });
 

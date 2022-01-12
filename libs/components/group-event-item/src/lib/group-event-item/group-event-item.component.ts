@@ -23,9 +23,17 @@ export class GroupEventItemComponent implements OnChanges {
      */
     @Output() participateEvent = new EventEmitter<Event>();
     /**
+     * Cancel participation event
+     */
+    @Output() cancelParticipationEvent = new EventEmitter<Event>();
+    /**
      * Team event
      */
     @Output() teamEvent = new EventEmitter<Event>();
+    /**
+     * Edit event
+     */
+    @Output() editEvent = new EventEmitter<Event>();
     /**
      * Delete event
      */
@@ -38,10 +46,6 @@ export class GroupEventItemComponent implements OnChanges {
      * Event
      */
     @Input() event: Event = {} as Event;
-    /**
-     * Determines if a user is admin
-     */
-    @Input() isAdmin = false;
     /**
      * Determines if a user participates an event
      */
@@ -90,11 +94,32 @@ export class GroupEventItemComponent implements OnChanges {
         const user = this.authService.getCurrentUser();
         const participant: Participant = {
             uid: user.uid,
-            displayName: user.displayName ? user.displayName : 'No name',
-            icon: user.photoURL ? user.photoURL : 'No icon'
+            displayName: '',
+            icon: ''
         };
         this.event.participants.push(participant);
         this.participateEvent.emit(this.event);
+    }
+
+    /**
+     * Cancel participation of event
+     */
+    cancelParticipation(): void {
+        if (!this.checkIfParticipant()) {
+            return;
+        }
+        const user = this.authService.getCurrentUser();
+        this.event.participants = this.event.participants.filter(
+            (participant) => participant.uid !== user.uid
+        );
+        this.cancelParticipationEvent.emit(this.event);
+    }
+
+    /**
+     * Emit edit event to parent component
+     */
+    edit(): void {
+        this.editEvent.emit(this.event);
     }
 
     /**

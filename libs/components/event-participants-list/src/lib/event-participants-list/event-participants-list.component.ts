@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Participant } from '@api-interfaces';
+import { AlertService, UserService } from '@services';
 
 /**
  * Event participants list component
@@ -27,6 +28,11 @@ export class EventParticipantsListComponent implements OnInit {
      */
     searchInput = '';
 
+    constructor(
+        private userService: UserService,
+        private alertService: AlertService
+    ) {}
+
     /**
      * Emit add to team event with participant data
      *
@@ -51,6 +57,26 @@ export class EventParticipantsListComponent implements OnInit {
      * Set filtered participants data
      */
     ngOnInit(): void {
+        this.participants.forEach(async (participant) => {
+            try {
+                const eventParticipant = await this.userService.getUserByUid(
+                    participant.uid
+                );
+                if (eventParticipant.displayName && eventParticipant.photoURL) {
+                    this.participants[
+                        this.participants.indexOf(participant)
+                    ].displayName = eventParticipant.displayName;
+                    this.participants[
+                        this.participants.indexOf(participant)
+                    ].icon = eventParticipant.photoURL;
+                }
+            } catch (e) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
+        });
         this.filteredParticipants = this.participants;
     }
 }

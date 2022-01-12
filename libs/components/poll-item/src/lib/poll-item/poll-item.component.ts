@@ -60,10 +60,6 @@ export class PollItemComponent implements OnChanges {
      */
     @Input() poll: Poll = {} as Poll;
     /**
-     * Determines if user is admin
-     */
-    @Input() isAdmin = false;
-    /**
      * Determines if user has voted
      */
     userVoted = false;

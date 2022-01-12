@@ -18,6 +18,7 @@ import { GroupEventItemModule } from '@group-event-item';
 import { EventDescriptionModalModule } from '@event-description-modal';
 import { TeamModalModule } from '@team-modal';
 import { CreateEventModalModule } from '@create-event-modal';
+import { EditEventModalModule } from '@edit-event-modal';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { CreateEventModalModule } from '@create-event-modal';
         PollItemModule,
         GroupEventItemModule,
         CreateEventModalModule,
-        EventDescriptionModalModule
+        EventDescriptionModalModule,
+        EditEventModalModule
     ],
     declarations: [GroupPollsEventsComponent],
     exports: [GroupPollsEventsComponent]

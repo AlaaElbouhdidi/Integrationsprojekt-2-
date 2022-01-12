@@ -19,7 +19,6 @@
 <div class="modal-body">
     <ng-container *ngIf="!showTeams">
         <mate-team-event-participants-list
-            *ngIf="isAdmin"
             [participants]="filteredParticipants"
             (addToTeamEvent)="addParticipantToTeam($event)"
         >
@@ -28,12 +27,10 @@
 
     <ng-container *ngIf="showTeams">
         <mate-team-team-form
-            *ngIf="isAdmin"
             (createTeamEvent)="createTeam($event)"
         >
         </mate-team-team-form>
         <mate-team-team-list
-            [isAdmin]="isAdmin"
             [teams]="teams"
             (addUserToTeamEvent)="showParticipantsList($event)"
             (removeUserFromTeamEvent)="updateTeam($event)"

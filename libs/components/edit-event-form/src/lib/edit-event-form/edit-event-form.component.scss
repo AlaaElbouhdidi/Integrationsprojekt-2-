@@ -1,0 +1,39 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+form {
+    color: $dark;
+}
+#event-name {
+    margin-top: 0 !important;
+}
+.form-input {
+    margin-top: 1rem !important;
+    textarea {
+        width: 100%;
+        color: $dark;
+        padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+        font-size: 1rem;
+        resize: none;
+    }
+}
+.form-submit {
+    @include flex-center;
+    text-align: center;
+}
+.form-input-checkbox {
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+    input {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+    }
+    label {
+        margin-left: 1rem;
+    }
+}

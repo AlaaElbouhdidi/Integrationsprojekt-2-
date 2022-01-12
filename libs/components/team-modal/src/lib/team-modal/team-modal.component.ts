@@ -12,7 +12,7 @@ import {
     Team,
     UpdateTeamParticipantsData
 } from '@api-interfaces';
-import { AlertService, AuthService, TeamService } from '@services';
+import { AlertService, AuthService, TeamService, UserService } from '@services';
 import { Subject, takeUntil } from 'rxjs';
 
 /**
@@ -32,14 +32,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      * Event
      */
     @Input() event: Event = {} as Event;
-    /**
-     * Determines if user is admin
-     */
-    @Input() isAdmin = false;
-    /**
-     * Group admin id
-     */
-    @Input() groupAdmin = '';
     /**
      * Subject to unsubscribe from observables
      * @private
@@ -67,11 +59,13 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      * @param teamService {TeamService}
      * @param alertService {AlertService}
      * @param authService {AuthService}
+     * @param userService {UserService}
      */
     constructor(
         private teamService: TeamService,
         private alertService: AlertService,
-        private authService: AuthService
+        private authService: AuthService,
+        private userService: UserService
     ) {}
 
     /**
@@ -81,9 +75,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     async createTeam(team: Team): Promise<void> {
         if (!this.event.id) {
-            return;
-        }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
             return;
         }
         try {
@@ -103,9 +94,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
      */
     async updateTeam(data: UpdateTeamParticipantsData): Promise<void> {
         if (!this.event.id) {
-            return;
-        }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
             return;
         }
         data.team.participants = data.team.participants.filter(
@@ -130,9 +118,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         if (!this.event.id || !team.id) {
             return;
         }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
-            return;
-        }
         try {
             await this.teamService.deleteTeam(this.event.id, team.id);
         } catch (e) {
@@ -141,17 +126,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
                 message: e.message
             });
         }
-    }
-
-    /**
-     * Checks if a given id matches the user id
-     *
-     * @param adminId {string} The id of the admin
-     * @returns {boolean} True if user id matches the given id, false if the ids do not match
-     */
-    checkIfAdmin(adminId: string): boolean {
-        const userId = this.authService.getCurrentUser().uid;
-        return userId === adminId;
     }
 
     /**
@@ -189,9 +163,6 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         if (!this.selectedTeam.id || !this.event.id) {
             return;
         }
-        if (!this.checkIfAdmin(this.groupAdmin)) {
-            return;
-        }
         const updatedTeam = this.selectedTeam;
         updatedTeam.participants.push(participant);
         try {
@@ -225,10 +196,44 @@ export class TeamModalComponent implements OnInit, OnDestroy {
         this.teamService
             .getTeams(this.event.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((teams) => {
+            .subscribe(async (teams) => {
                 this.teams = teams;
+                await this.setParticipantsDataOfTeams(teams);
                 this.filteredParticipants = this.filterParticipantsList();
             });
+    }
+
+    /**
+     * Set data of team participants
+     *
+     * @param teams {Team[]} The teams to set the participant data of
+     */
+    async setParticipantsDataOfTeams(teams: Team[]): Promise<void> {
+        teams.forEach((team) => {
+            team.participants.forEach(async (participant) => {
+                try {
+                    const teamParticipant = await this.userService.getUserByUid(
+                        participant.uid
+                    );
+                    if (
+                        teamParticipant.displayName &&
+                        teamParticipant.photoURL
+                    ) {
+                        team.participants[
+                            team.participants.indexOf(participant)
+                        ].displayName = teamParticipant.displayName;
+                        team.participants[
+                            team.participants.indexOf(participant)
+                        ].icon = teamParticipant.photoURL;
+                    }
+                } catch (e) {
+                    this.alertService.addAlert({
+                        type: 'error',
+                        message: e.message
+                    });
+                }
+            });
+        });
     }
 
     /**

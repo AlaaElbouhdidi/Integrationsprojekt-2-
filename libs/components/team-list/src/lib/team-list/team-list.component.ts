@@ -27,10 +27,6 @@ export class TeamListComponent {
      * Teams of an event
      */
     @Input() teams: Team[] = [];
-    /**
-     * Determines if user is admin
-     */
-    @Input() isAdmin = false;
 
     /**
      * Emit delete team event with team data

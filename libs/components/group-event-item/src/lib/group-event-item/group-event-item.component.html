@@ -24,18 +24,27 @@
         </button>
         <button
             class="group-event-item-buttons-participate"
+            *ngIf="!participating; else cancelParticipationBtn"
             [disabled]="participating"
             [class.disabled-btn]="participating"
             (click)="participate()"
         >
-            {{ participating ? 'Participating' : 'Participate' }}
+            Participate
         </button>
+        <ng-template #cancelParticipationBtn>
+            <button
+                class="group-event-item-buttons-cancel"
+                (click)="cancelParticipation()"
+            >
+                Cancel participation
+            </button>
+        </ng-template>
         <fa-icon
-            icon="edit">
+            icon="edit"
+            (click)="edit()">
         </fa-icon>
         <fa-icon
             icon="trash"
-            *ngIf="isAdmin"
             (click)="delete()" >
         </fa-icon>
     </div>
