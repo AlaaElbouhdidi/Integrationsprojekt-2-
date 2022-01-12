@@ -10,5 +10,8 @@
     </fa-icon>
 </div>
 <div class="modal-body">
-    <p>Test</p>
+    <mate-team-edit-event-form
+        (editEventEvent)="updateEvent.emit($event)"
+        [event]="event">
+    </mate-team-edit-event-form>
 </div>

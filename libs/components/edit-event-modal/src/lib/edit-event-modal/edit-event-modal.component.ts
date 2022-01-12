@@ -8,5 +8,6 @@ import { Event } from '@api-interfaces';
 })
 export class EditEventModalComponent {
     @Output() dismissModalEvent = new EventEmitter();
+    @Output() updateEvent = new EventEmitter<Event>();
     @Input() event: Event = {} as Event;
 }
