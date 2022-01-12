@@ -94,8 +94,8 @@ export class GroupEventItemComponent implements OnChanges {
         const user = this.authService.getCurrentUser();
         const participant: Participant = {
             uid: user.uid,
-            displayName: user.displayName ? user.displayName : 'No name',
-            icon: user.photoURL ? user.photoURL : 'No icon'
+            displayName: '',
+            icon: ''
         };
         this.event.participants.push(participant);
         this.participateEvent.emit(this.event);
@@ -109,7 +109,9 @@ export class GroupEventItemComponent implements OnChanges {
             return;
         }
         const user = this.authService.getCurrentUser();
-        this.event.participants = this.event.participants.filter(participant => participant.uid !== user.uid);
+        this.event.participants = this.event.participants.filter(
+            (participant) => participant.uid !== user.uid
+        );
         this.cancelParticipationEvent.emit(this.event);
     }
 

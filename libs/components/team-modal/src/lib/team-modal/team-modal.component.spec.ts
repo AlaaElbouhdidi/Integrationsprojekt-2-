@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TeamModalComponent } from './team-modal.component';
 import { TeamModalModule } from '../team-modal.module';
-import { AlertService, AuthService, TeamService } from '@services';
+import { AlertService, AuthService, TeamService, UserService } from '@services';
 import { Event, Participant, Team } from '@api-interfaces';
 import { of } from 'rxjs';
 
@@ -47,13 +47,17 @@ describe('TeamModalComponent', () => {
     const alertServiceMock = {
         addAlert: jest.fn()
     };
+    const userServiceMock = {
+        getUserByUid: jest.fn()
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 { provide: TeamService, useValue: teamServiceMock },
                 { provide: AuthService, useValue: authServiceMock },
-                { provide: AlertService, useValue: alertServiceMock }
+                { provide: AlertService, useValue: alertServiceMock },
+                { provide: UserService, useValue: userServiceMock }
             ],
             imports: [TeamModalModule]
         }).compileComponents();
@@ -137,17 +141,6 @@ describe('TeamModalComponent', () => {
         component.showParticipantsList(teamMock);
         expect(component.selectedTeam).toBe(teamMock);
         expect(component.showTeams).toEqual(false);
-    });
-
-    it('should get teams on component init and filter participants list', () => {
-        component.event = eventMock;
-        component.teams = [teamMock];
-        fixture.detectChanges();
-        const spy = jest.spyOn(teamServiceMock, 'getTeams');
-        const filterSpy = jest.spyOn(component, 'filterParticipantsList');
-        component.ngOnInit();
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(filterSpy).toHaveBeenCalled();
     });
 
     it('should trigger unsubscribe from observables on destroy', () => {
