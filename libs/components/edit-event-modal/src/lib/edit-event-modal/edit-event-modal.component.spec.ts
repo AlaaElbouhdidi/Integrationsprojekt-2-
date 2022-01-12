@@ -22,4 +22,13 @@ describe('EditEventModalComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should emit dismiss modal event on icon click', () => {
+        jest.spyOn(component.dismissModalEvent, 'emit');
+        const icon = fixture.debugElement.nativeElement.querySelector(
+            '#dismiss-modal-icon'
+        );
+        icon.click();
+        expect(component.dismissModalEvent.emit).toHaveBeenCalled();
+    });
 });
