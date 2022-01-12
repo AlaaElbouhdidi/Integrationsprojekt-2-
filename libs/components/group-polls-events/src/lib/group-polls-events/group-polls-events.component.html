@@ -86,6 +86,14 @@
     </mate-team-create-event-modal>
 </ng-template>
 
+<ng-template #editEventModal>
+    <mate-team-edit-event-modal
+        [event]="descriptionEvent"
+        (dismissModalEvent)="closeModal()"
+    >
+    </mate-team-edit-event-modal>
+</ng-template>
+
 <section class="events">
     <div class="events-header">
         <h5>Events</h5>
@@ -103,6 +111,7 @@
                     (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
                     (participateEvent)="updateEvent($event)"
                     (teamEvent)="editEvent($event, teamModal)"
+                    (editEvent)="editEvent($event, editEventModal)"
                     (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
                 >
                 </mate-team-group-event-item>
