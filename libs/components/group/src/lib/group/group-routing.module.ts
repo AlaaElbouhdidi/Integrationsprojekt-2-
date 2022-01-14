@@ -11,7 +11,7 @@ import { GroupPollsEventsComponent } from '../../../../group-polls-events/src/li
 import { GroupsComponent } from '@groups';
 import {
     GroupStatisticsListComponent
-} from "../../../../group-statistics-list/src/lib/group-statistics-list/group-statistics-list.component";
+} from "@group-statistics-list";
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 

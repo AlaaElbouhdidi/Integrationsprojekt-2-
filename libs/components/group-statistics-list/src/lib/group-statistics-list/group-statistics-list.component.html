@@ -1,11 +1,24 @@
-<div class="statistics-list" *ngFor="let test of this.events">
+<div class="statistics-list" *ngFor="let event of this.events">
     <div class="statistics-item">
-        <span class="statistics-item-text">{{test.name}}</span>
-        <span class="statistics-item-text">{{test.date}}</span>
+        <span class="statistics-item-text">{{event.name}}</span>
+        <span class="statistics-item-text">{{event.date}}</span>
         <span>Winner:&nbsp;</span>
-        <span class="statistics-item-text">Team1</span>
-        <span>Points:&nbsp;</span>
-        <span class="statistics-item-text">1</span>
-        <fa-icon icon="edit"></fa-icon>
+        <span class="statistics-item-text">{{event.winnerTeam}}</span>
+        <fa-icon icon="edit" (click)="openModal(editModal)"></fa-icon>
     </div>
 </div>
+
+<ng-template #editModal>
+    <div class="modal-header">
+        <h5>
+            <fa-icon icon="poll"></fa-icon>
+            Create poll
+        </h5>
+        <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
+    </div>
+    <div class="modal-body">
+        <div id="text-input">
+
+        </div>
+    </div>
+</ng-template>

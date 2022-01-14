@@ -100,7 +100,7 @@
             "@team-form": ["libs/components/team-form/src/index.ts"],
             "@team-list": ["libs/components/team-list/src/index.ts"],
             "@team-modal": ["libs/components/team-modal/src/index.ts"],
-            "@user-icon": ["libs/components/user-icon/src/index.ts"]
+            "@user-icon": ["libs/components/user-icon/src/index.ts"],
         }
     },
     "exclude": ["node_modules", "tmp"]
