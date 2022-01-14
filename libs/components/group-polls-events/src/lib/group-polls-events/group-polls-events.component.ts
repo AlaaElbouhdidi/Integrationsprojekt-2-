@@ -10,7 +10,7 @@ import {
     PollService,
     TeamService
 } from '@services';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { slideAnimation, itemAnimation } from '@animations';
 
 /**
  * Group polls events component
@@ -20,14 +20,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
     templateUrl: './group-polls-events.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./group-polls-events.component.scss'],
-    animations: [
-        trigger('itemAnimation', [
-            transition(':enter', [
-                style({ opacity: 0 }),
-                animate('200ms', style({ opacity: 1 }))
-            ])
-        ])
-    ]
+    animations: [slideAnimation, itemAnimation]
 })
 export class GroupPollsEventsComponent implements OnInit, OnDestroy {
     /**

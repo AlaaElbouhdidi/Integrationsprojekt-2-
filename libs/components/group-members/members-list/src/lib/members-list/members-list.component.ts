@@ -9,12 +9,14 @@ import {
     UserService
 } from '@services';
 import { Subject, takeUntil } from 'rxjs';
+import { itemAnimation, slideAnimation } from '@animations';
 
 @Component({
     selector: 'mate-team-members-list',
     templateUrl: './members-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./members-list.component.scss']
+    styleUrls: ['./members-list.component.scss'],
+    animations: [slideAnimation, itemAnimation]
 })
 export class MembersListComponent implements OnInit, OnDestroy {
     /**
@@ -59,6 +61,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @param groupService {GroupService}
      * @param route {ActivatedRoute}
      * @param modalService {NgbModal}
+     * @param userService {UserService}
      */
     constructor(
         private groupService: GroupService,
