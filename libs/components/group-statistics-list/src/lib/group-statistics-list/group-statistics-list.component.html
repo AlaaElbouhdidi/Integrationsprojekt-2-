@@ -2,9 +2,14 @@
     <div class="statistics-item">
         <span class="statistics-item-text">{{event.name}}</span>
         <span class="statistics-item-text">{{event.date}}</span>
-        <span>Winner:&nbsp;</span>
+        <span *ngIf="event.winnerTeam">
+             <span>Winner:&nbsp;</span>
         <span class="statistics-item-text">{{event.winnerTeam}}</span>
+        </span>
+        <span class="statistics-item-options">
+            <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
         <fa-icon icon="edit" (click)="openModal(editModal)"></fa-icon>
+        </span>
     </div>
 </div>
 
@@ -12,13 +17,21 @@
     <div class="modal-header">
         <h5>
             <fa-icon icon="poll"></fa-icon>
-            Create poll
+            Choose winner team
         </h5>
         <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
     <div class="modal-body">
-        <div id="text-input">
-
+        <div class="form-group">
+            <select class="form-control w-50" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
         </div>
+        <button type="button" class="btn btn-success">Set winner</button>
     </div>
 </ng-template>
+

@@ -12,6 +12,21 @@
     margin-right: 2%;
 }
 
-fa-icon {
+.statistics-item-options {
     float: right;
+}
+
+button {
+    margin: 3%;
+    border-radius: 5px;
+    float: inside;
+}
+
+select {
+    margin-left: 3%;
+    border-radius: 5px;
+}
+
+.modal-body {
+    text-align: center;
 }
