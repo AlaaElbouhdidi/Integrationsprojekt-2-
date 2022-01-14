@@ -50,6 +50,21 @@ export class EventService {
     }
 
     /**
+     * Get all active events of a group
+     *
+     * @returns {Observable<Event[]>} Observable containing array of events
+     */
+    getDoneEventsOfGroup(): Observable<Event[]> {
+        return this.afs
+            .collection<Event>('events', (ref) =>
+                ref
+                    .where('groupID', '==', this.groupService.currentGroupId)
+                    .where('done', '==', true)
+            )
+            .valueChanges({ idField: 'id' });
+    }
+
+    /**
      * Create an event
      *
      * @param event {Event} The event to create
