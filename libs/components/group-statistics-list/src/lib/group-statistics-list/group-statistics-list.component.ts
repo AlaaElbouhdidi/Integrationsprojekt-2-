@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EventService} from "@services";
 import {Event} from "@api-interfaces";
+import {Team} from "@api-interfaces";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -11,6 +12,10 @@ import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 export class GroupStatisticsListComponent implements OnInit {
 
     public events: Event[] = [];
+
+    public teamsOfEvent: Team[] = [];
+
+    public winningTeam: string | undefined = '';
 
     /**
      * Modal reference
@@ -25,6 +30,18 @@ export class GroupStatisticsListComponent implements OnInit {
     ngOnInit(): void {
         console.log('GroupStatisticsListComponent loaded');
         console.log(this.events);
+    }
+
+    getTeamsOfEvent(eventID: string | undefined) {
+        this.eventService.getTeamsOfEvent(eventID).subscribe(teams => this.teamsOfEvent.push(...teams));
+    }
+
+    setWinner(winnderID: string | undefined) {
+        this.winningTeam = winnderID;
+    }
+
+    setWinningTeam() {
+        console.log('Setting winning Team: ' + this.winningTeam)
     }
 
     /**
@@ -43,6 +60,7 @@ export class GroupStatisticsListComponent implements OnInit {
      */
     closeModal(): void {
         this.modalRef?.dismiss();
+        this.teamsOfEvent = [];
     }
 
 }

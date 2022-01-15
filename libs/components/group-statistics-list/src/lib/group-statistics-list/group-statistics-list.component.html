@@ -8,7 +8,7 @@
         </span>
         <span class="statistics-item-options">
             <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
-        <fa-icon icon="edit" (click)="openModal(editModal)"></fa-icon>
+        <fa-icon icon="edit" (click)="openModal(editModal); getTeamsOfEvent(event.id)"></fa-icon>
         </span>
     </div>
 </div>
@@ -22,16 +22,13 @@
         <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
     <div class="modal-body">
-        <div class="form-group">
-            <select class="form-control w-50" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+        <div class="mb-3">
+            <select class="form-select" id="exampleFormControlSelect1">
+                <option selected>Select Winner</option>
+                <option *ngFor="let team of teamsOfEvent" (click)="setWinner(team.name)">{{team.name}}</option>
             </select>
+            <button type="button" class="btn btn-success w-100" (click)="setWinningTeam()">Set winner</button>
         </div>
-        <button type="button" class="btn btn-success">Set winner</button>
     </div>
 </ng-template>
 

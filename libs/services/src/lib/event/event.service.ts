@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Event } from '@api-interfaces';
+import {Event, Team} from '@api-interfaces';
 import { GroupService } from '../group/group.service';
 import { Observable } from 'rxjs';
 
@@ -61,6 +61,12 @@ export class EventService {
                     .where('groupID', '==', this.groupService.currentGroupId)
                     .where('done', '==', true)
             )
+            .valueChanges({ idField: 'id' });
+    }
+
+    getTeamsOfEvent(eventID: string | undefined): Observable<Team[]> {
+        return this.afs
+            .collection<Event>('events/' + eventID + '/teams')
             .valueChanges({ idField: 'id' });
     }
 
