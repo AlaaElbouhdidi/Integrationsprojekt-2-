@@ -23,11 +23,10 @@
     </div>
     <div class="modal-body">
         <div class="mb-3">
-            <select class="form-select" id="exampleFormControlSelect1">
-                <option selected>Select Winner</option>
-                <option *ngFor="let team of teamsOfEvent" (click)="setWinner(team.name)">{{team.name}}</option>
+            <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="winningTeam">
+                <option *ngFor="let team of teamsOfEvent" [ngValue]="team">{{team.name}}</option>
             </select>
-            <button type="button" class="btn btn-success w-100" (click)="setWinningTeam()">Set winner</button>
+            <button type="button" class="btn btn-success w-100" (click)="setWinningTeam(winningTeam)">Set winner</button>
         </div>
     </div>
 </ng-template>

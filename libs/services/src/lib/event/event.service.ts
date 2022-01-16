@@ -64,10 +64,23 @@ export class EventService {
             .valueChanges({ idField: 'id' });
     }
 
+    /**
+     * Get Teams of a specified event
+     *
+     * @returns {Observable<Team[]>} Observable containing array of teams
+     */
     getTeamsOfEvent(eventID: string | undefined): Observable<Team[]> {
         return this.afs
             .collection<Event>('events/' + eventID + '/teams')
             .valueChanges({ idField: 'id' });
+    }
+
+    setWinningTeam(teamID: string | undefined, eventID: string | undefined, teamName: string): Promise<void> {
+        console.log('set winner: ' + teamID + ' of Event: ' + eventID)
+        return this.afs
+            .collection<Event>('events')
+            .doc(eventID)
+            .update({winnerTeam: teamName})
     }
 
     /**

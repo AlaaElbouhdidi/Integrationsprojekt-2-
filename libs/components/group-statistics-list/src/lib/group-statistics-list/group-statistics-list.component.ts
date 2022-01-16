@@ -15,16 +15,18 @@ export class GroupStatisticsListComponent implements OnInit {
 
     public teamsOfEvent: Team[] = [];
 
-    public winningTeam: string | undefined = '';
+    public currentEventID : string | undefined = '';
+
+    public winningTeam!: Team;
 
     /**
      * Modal reference
      */
     modalRef: NgbModalRef | undefined;
 
-
     constructor(public eventService: EventService, private modalService: NgbModal) {
         this.eventService.getDoneEventsOfGroup().subscribe(events => this.events.push(...events));
+        console.log('Render events');
     }
 
     ngOnInit(): void {
@@ -33,15 +35,21 @@ export class GroupStatisticsListComponent implements OnInit {
     }
 
     getTeamsOfEvent(eventID: string | undefined) {
+        this.currentEventID = eventID;
         this.eventService.getTeamsOfEvent(eventID).subscribe(teams => this.teamsOfEvent.push(...teams));
     }
 
     setWinner(winnderID: string | undefined) {
-        this.winningTeam = winnderID;
+        this.winningTeam.id = winnderID;
+        console.log(winnderID);
     }
 
-    setWinningTeam() {
-        console.log('Setting winning Team: ' + this.winningTeam)
+    setWinningTeam(team: Team) {
+        if(team.id == '') {
+            alert('Please select valid Team');
+        } else {
+            this.eventService.setWinningTeam(team.id, this.currentEventID, team.name);
+        }
     }
 
     /**
@@ -50,6 +58,7 @@ export class GroupStatisticsListComponent implements OnInit {
      * @param content {unknown} The modal reference
      */
     openModal(content: unknown): void {
+        this.teamsOfEvent = [];
         this.modalRef = this.modalService.open(content, {
             windowClass: 'dark-modal'
         });
@@ -60,7 +69,6 @@ export class GroupStatisticsListComponent implements OnInit {
      */
     closeModal(): void {
         this.modalRef?.dismiss();
-        this.teamsOfEvent = [];
     }
 
 }
