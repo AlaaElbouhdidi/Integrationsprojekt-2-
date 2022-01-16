@@ -56,7 +56,7 @@ export class SlideshowComponent implements OnDestroy {
         {
             src: '/assets/svgs/winners.svg',
             alt: 'Two people celebrating next to a trophy',
-            text: 'Track your results and see who leads the leaderboard'
+            text: 'Track your results and see who won the event'
         }
     ];
 

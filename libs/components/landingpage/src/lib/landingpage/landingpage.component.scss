@@ -25,7 +25,7 @@ main {
 /* MOBILE VIEW */
 .mobile-container {
     display: flex;
-    @include for-tablet-landscape-up {
+    @include for-tablet-portrait-up {
         display: none;
     }
     p {
@@ -33,10 +33,12 @@ main {
         padding-top: 2%;
     }
     button {
-        font-size: 30px;
+        border: none;
+        border-radius: 0.25rem;
+        background: $main;
+        color: $white;
         padding: 5% 25%;
-        margin-bottom: 5%;
-        border-radius: 20px;
+        font-size: 1.75rem;
     }
 }
 .content {
@@ -50,8 +52,11 @@ main {
 .desktop-container {
     display: none;
     color: $white;
+    @include for-tablet-portrait-up {
+        @include flex-center-column;
+    }
     @include for-tablet-landscape-up {
-        display: flex;
+        flex-direction: row;
     }
 }
 .slideshow-container {
@@ -64,6 +69,12 @@ main {
     justify-content: center;
     align-items: center;
     z-index: 15;
+    text-align: center;
+    margin-bottom: 4rem;
+    white-space: nowrap;
+    @include for-tablet-landscape-up {
+        margin-bottom: 0;
+    }
     &-body {
         animation: textInAnimation 0.5s forwards;
         opacity: 0;
