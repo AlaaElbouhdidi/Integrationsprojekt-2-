@@ -25,7 +25,9 @@ describe('LoginFormComponent', () => {
             imports: [
                 FontAwesomeModule,
                 LoginFormModule,
-                RouterTestingModule.withRoutes([])
+                RouterTestingModule.withRoutes([
+                    { path: 'group', redirectTo: '/' }
+                ])
             ]
         }).compileComponents();
     });

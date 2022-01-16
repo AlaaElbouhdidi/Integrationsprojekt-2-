@@ -59,6 +59,12 @@ describe('EventService', () => {
         expect(spy).toHaveBeenCalledWith({ idField: 'id' });
     });
 
+    it('should call valueChanges method when getting teams of a specified event', () => {
+        const spy = jest.spyOn(eventCollectionMock, 'valueChanges');
+        service.getTeamsOfEvent(eventMock.id);
+        expect(spy).toHaveBeenCalledWith({ idField: 'id' });
+    });
+
     it('should call firestore add method when creating an event', () => {
         const spy = jest.spyOn(eventCollectionMock, 'add');
         service.createEvent(eventMock);
