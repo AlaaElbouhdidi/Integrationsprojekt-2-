@@ -13,7 +13,7 @@ function restArgs() {
         .join(' ');
 }
 var affected = "npx nx print-affected --base=" + baseSha + " --target=" + target;
-affected = child_process_1.execSync(affected).toString('utf-8');
+affected = (0, child_process_1.execSync)(affected).toString('utf-8');
 var tasksArray = JSON.parse(affected).tasks.sort();
 var projectsArray = tasksArray.map(function (task) { return task.target.project; });
 var sliceSize = Math.floor(projectsArray.length / jobCount);
@@ -26,5 +26,5 @@ var cmd = target !== 'e2e'
     ? "npx nx run-many --target=" + target + " --projects=" + projects + " --parallel " + restArgs()
     : "npx nx run-many --target=" + target + " --projects=" + projects + " " + restArgs();
 if (projects.length > 0)
-    child_process_1.execSync(cmd, { stdio: [0, 1, 2] });
+    (0, child_process_1.execSync)(cmd, { stdio: [0, 1, 2] });
 //# sourceMappingURL=run-many.js.map

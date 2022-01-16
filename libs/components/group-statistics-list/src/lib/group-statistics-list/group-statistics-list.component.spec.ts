@@ -69,7 +69,9 @@ describe('GroupStatisticsListComponent', () => {
     it('should not set winning team if team id is empty', () => {
         teamMock.id = '';
         fixture.detectChanges();
-        jest.spyOn(window, 'alert').mockImplementation(() => {});
+        jest.spyOn(window, 'alert').mockImplementation(() => {
+            console.log('alert opened');
+        });
         const spy = jest.spyOn(eventServiceMock, 'setWinningTeam');
         component.setWinningTeam(teamMock);
         expect(spy).not.toHaveBeenCalled();
