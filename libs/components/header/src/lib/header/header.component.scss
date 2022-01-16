@@ -69,7 +69,11 @@ header {
     overflow: hidden;
     height: 2.9rem;
     img {
-        width: 35px;
+        display: none;
+        @include for-tablet-portrait-up {
+            display: block;
+            width: 35px;
+        }
         @include for-tablet-portrait-up {
             width: 50px;
         }
