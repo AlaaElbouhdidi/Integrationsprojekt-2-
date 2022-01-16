@@ -153,6 +153,10 @@ export interface Event {
      * Participants of an event
      */
     participants: Participant[];
+    /**
+     * Winning team of an event
+     */
+    winnerTeam?: string;
 }
 
 /**

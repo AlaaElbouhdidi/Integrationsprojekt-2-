@@ -9,6 +9,9 @@ import { MembersListComponent } from '../../../../group-members/members-list/src
 import { GroupPollsEventsModule } from '@group-polls-events';
 import { GroupPollsEventsComponent } from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
 import { GroupsComponent } from '@groups';
+import {
+    GroupStatisticsListComponent
+} from "@group-statistics-list";
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -24,7 +27,7 @@ const route = {
         },
         {
             path: 'statistics',
-            component: GroupComponent
+            component: GroupStatisticsListComponent
         },
         {
             path: 'members',

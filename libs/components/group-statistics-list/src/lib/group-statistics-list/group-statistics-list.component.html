@@ -1,0 +1,34 @@
+<div class="statistics-list" *ngFor="let event of this.events">
+    <div class="statistics-item">
+        <span class="statistics-item-text">{{event.name}}</span>
+        <span class="statistics-item-text">{{event.date}}</span>
+        <span *ngIf="event.winnerTeam">
+             <span>Winner:&nbsp;</span>
+        <span class="statistics-item-text">{{event.winnerTeam}}</span>
+        </span>
+        <span class="statistics-item-options">
+            <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
+        <fa-icon icon="edit" (click)="openModal(editModal); getTeamsOfEvent(event.id)"></fa-icon>
+        </span>
+    </div>
+</div>
+
+<ng-template #editModal>
+    <div class="modal-header">
+        <h5>
+            <fa-icon icon="poll"></fa-icon>
+            Choose winner team
+        </h5>
+        <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <select class="form-select" id="exampleFormControlSelect1">
+                <option selected>Select Winner</option>
+                <option *ngFor="let team of teamsOfEvent" (click)="setWinner(team.name)">{{team.name}}</option>
+            </select>
+            <button type="button" class="btn btn-success w-100" (click)="setWinningTeam()">Set winner</button>
+        </div>
+    </div>
+</ng-template>
+
