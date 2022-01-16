@@ -2,26 +2,28 @@
     <div class="profile" @slideAnimation>
         <div class="profile-container">
             <div class="profile-user">
-                <div class="profile-user-banner">
-                    <div class="profile-user-photo">
-                        <mate-team-user-icon
-                            [scaled]="true"
-                            [userIconString]="
-                                user!.photoURL ? user!.photoURL : ''
-                            "
-                        >
-                        </mate-team-user-icon>
-                    </div>
+                <div class="profile-user-banner-wrapper">
+                    <div class="profile-user-banner">
+                        <div class="profile-user-photo">
+                            <mate-team-user-icon
+                                [scaled]="true"
+                                [userIconString]="
+                                    user!.photoURL ? user!.photoURL : ''
+                                "
+                            >
+                            </mate-team-user-icon>
+                        </div>
 
-                    <div class="profile-user-name">
-                        <p>
-                            <fa-icon icon="user-tag"></fa-icon>
-                            {{
-                                user?.displayName === null
-                                    ? 'No name set'
-                                    : user?.displayName
-                            }}
-                        </p>
+                        <div class="profile-user-name">
+                            <p>
+                                <fa-icon icon="user-tag"></fa-icon>
+                                {{
+                                    user?.displayName === null
+                                        ? 'No name set'
+                                        : user?.displayName
+                                }}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -52,27 +54,6 @@
             </div>
 
             <div class="profile-wrapper">
-                <select name="nav-selection-mobile" id="nav-selection">
-                    <option
-                        (click)="setActiveLink('profile')"
-                        [selected]="activeNavLink === 'profile'"
-                    >
-                        Change profile
-                    </option>
-                    <option
-                        (click)="setActiveLink('password')"
-                        [selected]="activeNavLink === 'password'"
-                    >
-                        Change password
-                    </option>
-                    <option
-                        (click)="setActiveLink('email')"
-                        [selected]="activeNavLink === 'email'"
-                    >
-                        Change email
-                    </option>
-                </select>
-
                 <nav>
                     <ul>
                         <li
