@@ -1,5 +1,3 @@
-nx g c # How to add a new component
-
 ## Create it as a lib using nx
 
 ```bash

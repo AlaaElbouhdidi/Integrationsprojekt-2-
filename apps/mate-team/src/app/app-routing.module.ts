@@ -38,6 +38,14 @@ const routes: Routes = [
         loadChildren: () => import('@profile').then((m) => m.ProfileModule)
     },
     {
+        path: 'imprint',
+        loadChildren: () => import('@imprint').then((m) => m.ImprintModule)
+    },
+    {
+        path: 'privacy',
+        loadChildren: () => import('@privacy').then((m) => m.PrivacyModule)
+    },
+    {
         path: 'group/:id',
         loadChildren: () => import('@group').then((m) => m.GroupModule)
     },
