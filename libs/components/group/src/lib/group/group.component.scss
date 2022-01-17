@@ -21,6 +21,7 @@ main {
         display: flex;
         justify-content: center;
         color: $white;
+        animation: textInAnimation 0.25s forwards;
     }
     h6 {
         margin-bottom: 1rem;
@@ -28,6 +29,7 @@ main {
         display: flex;
         justify-content: center;
         color: $white;
+        animation: textInAnimation 0.25s forwards;
     }
     nav {
         ul {
@@ -86,5 +88,13 @@ main {
     border-bottom: 2px solid $white;
     fa-icon {
         color: $white;
+    }
+}
+@keyframes textInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

@@ -1,8 +1,11 @@
-<section class="polls">
+<section class="polls" @slideAnimation>
     <div class="polls-header">
         <h5>Polls</h5>
         <fa-icon icon="poll"></fa-icon>
-        <button (click)="openModal(pollModal)">+ Create new poll</button>
+        <button (click)="openModal(pollModal)">
+            <span>+</span>
+            <span>+ Create new poll</span>
+        </button>
     </div>
     <div class="polls-body">
         <div
@@ -22,11 +25,43 @@
                 </mate-team-poll-item>
             </div>
         </div>
-
         <ng-template #pollMessage>
             <p class="polls-body-message">
                 <fa-icon icon="exclamation-circle"></fa-icon>
                 No active polls in this group
+            </p>
+        </ng-template>
+    </div>
+</section>
+
+<section class="events" @slideAnimation>
+    <div class="events-header">
+        <h5>Events</h5>
+        <fa-icon icon="calendar-alt"></fa-icon>
+        <button (click)="openModal(createEventModal)">
+            <span>+</span>
+            <span>+ Create new event</span>
+        </button>
+    </div>
+    <div class="events-body">
+        <div *ngIf="events.length > 0; else eventMessage">
+            <div class="events-body-item" @itemAnimation *ngFor="let event of events">
+                <mate-team-group-event-item
+                    [event]="event"
+                    (descriptionEvent)="showEventDescription($event, eventDescriptionModal)"
+                    (participateEvent)="updateEvent($event, false)"
+                    (cancelParticipationEvent)="cancelParticipation($event)"
+                    (teamEvent)="editEvent($event, teamModal)"
+                    (editEvent)="editEvent($event, editEventModal)"
+                    (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
+                >
+                </mate-team-group-event-item>
+            </div>
+        </div>
+        <ng-template #eventMessage>
+            <p class="events-body-message">
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                No active events in this group
             </p>
         </ng-template>
     </div>
@@ -98,41 +133,3 @@
     >
     </mate-team-edit-event-modal>
 </ng-template>
-
-<section class="events">
-    <div class="events-header">
-        <h5>Events</h5>
-        <fa-icon icon="calendar-alt"></fa-icon>
-        <button (click)="openModal(createEventModal)">
-            + Create new event
-        </button>
-    </div>
-    <div class="events-body">
-        <div *ngIf="events.length > 0; else eventMessage">
-            <div
-                class="events-body-item"
-                @itemAnimation
-                *ngFor="let event of events"
-            >
-                <mate-team-group-event-item
-                    [event]="event"
-                    (descriptionEvent)="
-                        showEventDescription($event, eventDescriptionModal)
-                    "
-                    (participateEvent)="updateEvent($event, false)"
-                    (cancelParticipationEvent)="cancelParticipation($event)"
-                    (teamEvent)="editEvent($event, teamModal)"
-                    (editEvent)="editEvent($event, editEventModal)"
-                    (deleteEvent)="deleteEvent($event, eventConfirmationModal)"
-                >
-                </mate-team-group-event-item>
-            </div>
-        </div>
-        <ng-template #eventMessage>
-            <p class="events-body-message">
-                <fa-icon icon="exclamation-circle"></fa-icon>
-                No active events in this group
-            </p>
-        </ng-template>
-    </div>
-</section>

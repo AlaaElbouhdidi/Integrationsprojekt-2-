@@ -5,7 +5,7 @@ import {
     FontAwesomeModule,
     FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -20,6 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class GroupStatisticsListModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faEdit);
+        library.addIcons(faEdit, faCalendarAlt);
     }
 }

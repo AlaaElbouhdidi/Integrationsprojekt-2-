@@ -1,6 +1,11 @@
 <form (ngSubmit)="applyChanges()" [formGroup]="editGroupForm">
-    <div class="form-input">
-        <input type="text" formControlName="name" placeholder="Name" required />
+    <div class="form-input" id="name-input">
+        <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            required
+        >
         <fa-icon icon="edit"></fa-icon>
     </div>
     <div class="form-input description">

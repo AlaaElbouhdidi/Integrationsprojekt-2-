@@ -33,7 +33,7 @@ export class GroupSettingComponent implements OnInit {
      */
     @Input() group = {} as Group;
 
-    @Output() manageGroup = new EventEmitter<any>();
+    @Output() manageGroup = new EventEmitter();
     @Output() deleteGroupEvent = new EventEmitter<boolean>();
     /**
      * Constructor of group

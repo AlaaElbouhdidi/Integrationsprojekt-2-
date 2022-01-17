@@ -1,4 +1,49 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+@import 'libs/styles/src/lib/modals';
+
+.statistics-header {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid white;
+    padding: 0.25rem 0.75rem;
+    color: $white;
+    h5 {
+        margin: 0 0.5rem 0 0;
+    }
+    fa-icon {
+        font-size: 1.35rem;
+        margin-right: 1rem;
+    }
+}
+.statistics-list {
+    margin-top: 1rem;
+    fa-icon[icon="edit"] {
+        transition: 0.25s;
+        cursor: pointer;
+        &:hover {
+            color: $successHover;
+        }
+        position: absolute;
+        padding: 0.5rem;
+        top: 0;
+        right: 0;
+        @include for-tablet-portrait-up {
+            position: static;
+            padding: 0;
+            margin-left: 1rem;
+        }
+    }
+}
+.statistics-message {
+    color: $white;
+    margin-top: 1rem;
+    fa-icon {
+        color: $warning;
+    }
+}
 .statistics-item {
+    @include flex-center-column;
     position: relative;
     color: #fff !important;
     background: #0b3760;
@@ -6,14 +51,30 @@
     padding: 1rem;
     box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
     width: 100%;
+    @include for-tablet-portrait-up {
+        display: block;
+    }
 }
-
+#winnerTeamText {
+    white-space: nowrap;
+}
+#noWinnerWarning {
+    @include for-tablet-portrait-up {
+        display: none;
+    }
+    @include for-tablet-landscape-up {
+        display: inline-block;
+    }
+}
 .statistics-item-text {
     margin-right: 2%;
 }
 
 .statistics-item-options {
-    float: right;
+    float: none;
+    @include for-tablet-portrait-up {
+        float: right;
+    }
 }
 
 button {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertService } from '@services';
+import { slideAnimation } from '@animations';
 
 /**
  * Register component
@@ -7,7 +8,8 @@ import { AlertService } from '@services';
 @Component({
     selector: 'mate-team-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
+    styleUrls: ['./register.component.scss'],
+    animations: [slideAnimation]
 })
 export class RegisterComponent {
     /**

@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Group, Event } from '@api-interfaces';
 import { AuthService, EventService, GroupService } from '@services';
 import { Observable } from 'rxjs';
+import { itemAnimation, slideAnimation } from '@animations';
 
 @Component({
     selector: 'mate-team-groups',
     templateUrl: './groups.component.html',
-    styleUrls: ['./groups.component.scss']
+    styleUrls: ['./groups.component.scss'],
+    animations: [itemAnimation, slideAnimation]
 })
 export class GroupsComponent {
     events: Observable<Event[]>;

@@ -11,6 +11,7 @@ import {
 } from '@services';
 import { GroupPollsEventsModule } from '../group-polls-events.module';
 import { Event, Poll } from '@api-interfaces';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GroupPollsEventsComponent', () => {
     let component: GroupPollsEventsComponent;
@@ -71,7 +72,7 @@ describe('GroupPollsEventsComponent', () => {
                 { provide: EventService, useValue: eventServiceMock },
                 { provide: TeamService, useValue: teamServiceMock }
             ],
-            imports: [GroupPollsEventsModule]
+            imports: [GroupPollsEventsModule, BrowserAnimationsModule]
         }).compileComponents();
     });
 

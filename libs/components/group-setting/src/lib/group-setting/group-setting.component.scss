@@ -12,11 +12,17 @@
 form {
     color: $dark;
 }
+#name-input {
+    margin-top: 0 !important;
+}
 .form-input {
     margin-top: 1rem !important;
 }
 .form-submit {
     @include flex-center;
+    @include for-phone-only {
+        flex-direction: column;
+    }
     text-align: center;
 }
 .discard {
@@ -30,12 +36,16 @@ form {
     border-radius: 0.25rem;
     width: 100%;
     transition: 0.25s;
+    @include for-phone-only {
+        margin-left: 0;
+    }
     &:hover {
         background: $gray-800;
     }
 }
 /* Form button */
 .form-btn {
+    margin-top: 1rem !important;
     @include flex-center-column;
     button {
         width: 100%;
@@ -52,8 +62,8 @@ form {
             background: $darkAccent;
         }
     }
-
     .delete {
+        margin: 1rem 0 0 0 !important;
         background: $error;
         &:hover {
             background: $errorHover;

@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import { EventService } from '@services';
+import { Component, OnInit } from '@angular/core';
+import { AlertService, EventService } from '@services';
 import { Event } from '@api-interfaces';
 import { Team } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { slideAnimation, itemAnimation } from '@animations';
 
 @Component({
     selector: 'mate-team-group-statistics-list',
     templateUrl: './group-statistics-list.component.html',
-    styleUrls: ['./group-statistics-list.component.scss']
+    styleUrls: ['./group-statistics-list.component.scss'],
+    animations: [slideAnimation, itemAnimation]
 })
-export class GroupStatisticsListComponent {
+export class GroupStatisticsListComponent implements OnInit {
     /**
      * Array of all events marked as done
      */
@@ -37,13 +39,9 @@ export class GroupStatisticsListComponent {
 
     constructor(
         public eventService: EventService,
-        private modalService: NgbModal
-    ) {
-        this.eventService
-            .getDoneEventsOfGroup()
-            .subscribe((events) => this.events.push(...events));
-        console.log('Render events');
-    }
+        private modalService: NgbModal,
+        private alertService: AlertService
+    ) {}
 
     /**
      * Gets all teams of specified event
@@ -71,12 +69,16 @@ export class GroupStatisticsListComponent {
      *
      * @param team {Team} the team which has been selected as winner
      */
-    setWinningTeam(team: Team) {
-        if (team.id == '') {
-            alert('Please select valid Team');
-        } else {
-            this.eventService.setWinningTeam(this.currentEventID, team.name);
+    async setWinningTeam(team: Team) {
+        if (!team.id) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: 'Please select a valid team'
+            });
+            return;
         }
+        await this.eventService.setWinningTeam(this.currentEventID, team.name);
+        this.closeModal();
     }
 
     /**
@@ -96,5 +98,11 @@ export class GroupStatisticsListComponent {
      */
     closeModal(): void {
         this.modalRef?.dismiss();
+    }
+
+    ngOnInit(): void {
+        this.eventService
+            .getDoneEventsOfGroup()
+            .subscribe((events) => (this.events = events));
     }
 }

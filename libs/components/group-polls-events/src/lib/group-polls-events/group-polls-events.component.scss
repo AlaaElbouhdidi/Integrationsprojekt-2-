@@ -29,6 +29,18 @@
             &:hover {
                 background: $successHover;
             }
+            span:nth-child(1) {
+                display: block;
+                @include for-tablet-portrait-up {
+                    display: none;
+                }
+            }
+            span:nth-child(2) {
+                display: none;
+                @include for-tablet-portrait-up {
+                    display: block;
+                }
+            }
         }
     }
 }

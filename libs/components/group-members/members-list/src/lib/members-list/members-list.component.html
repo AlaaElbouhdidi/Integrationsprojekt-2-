@@ -1,4 +1,4 @@
-<section class="members">
+<section class="members" @slideAnimation>
     <div class="members-header">
         <div class="members-header-searchbar">
             <fa-icon icon="search"></fa-icon>
@@ -19,11 +19,8 @@
         </button>
     </div>
     <div class="members-body">
-        <p *ngIf="term.length === 0">{{ membersList.length }} members found</p>
-        <div
-            class="members-body-item"
-            *ngFor="let i of membersList | filter: term"
-        >
+        <p *ngIf="term.length === 0">{{membersList.length}} members found</p>
+        <div class="members-body-item" *ngFor="let i of membersList | filter:term " @itemAnimation>
             <mate-team-members-list-item
                 [me]="currentUser"
                 [gAdmin]="gAdmin"
