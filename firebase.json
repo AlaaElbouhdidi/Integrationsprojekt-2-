@@ -32,7 +32,7 @@
         "rewrites": [
             {
                 "source": "**",
-                "destinatin": "/index.html"
+                "destination": "/index.html"
             }
         ]
     },
