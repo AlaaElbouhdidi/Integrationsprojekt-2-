@@ -174,18 +174,18 @@ export class GroupService {
     /**
      * delete a group
      */
-    async deleteGroup(gid: string): Promise<void> {
-        await this.afs
-            .collection(`groups/${gid}/members`)
-            .get()
-            .forEach((qs) => {
-                qs.docs.forEach((i) => {
-                    this.afs
-                        .collection(`groups/${gid}/members`)
-                        .doc(i.id)
-                        .delete();
-                });
-            });
+     async deleteGroup(gid: string): Promise<void> {
+
+        await this.afs.collection(`groups/${gid}/members`).get().forEach((qs) => {
+            qs.docs.forEach((i) =>{
+                this.afs.collection(`groups/${gid}/members`).doc(i.id).delete();
+            })
+        });
+        await this.afs.collection(`groups/${gid}/datePolls`).get().forEach((qs) => {
+            qs.docs.forEach((i) =>{
+                this.afs.collection(`groups/${gid}/datePolls`).doc(i.id).delete();
+            })
+        });
         await this.groupCollection.doc(gid).delete();
     }
 }
