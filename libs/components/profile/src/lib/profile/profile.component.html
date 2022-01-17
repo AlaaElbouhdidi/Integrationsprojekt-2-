@@ -56,25 +56,27 @@
             <div class="profile-wrapper">
                 <nav>
                     <ul>
-                        <li
-                            (click)="setActiveLink('profile')"
-                        >
-                            <a [class.selected-nav]="activeNavLink === 'profile'">
+                        <li (click)="setActiveLink('profile')">
+                            <a
+                                [class.selected-nav]="
+                                    activeNavLink === 'profile'
+                                "
+                            >
                                 <fa-icon icon="user"></fa-icon>
                                 Change profile
                             </a>
                         </li>
-                        <li
-                            (click)="setActiveLink('password')"
-                        >
-                            <a [class.selected-nav]="activeNavLink === 'password'">
+                        <li (click)="setActiveLink('password')">
+                            <a
+                                [class.selected-nav]="
+                                    activeNavLink === 'password'
+                                "
+                            >
                                 <fa-icon icon="lock"></fa-icon>
                                 Change password
                             </a>
                         </li>
-                        <li
-                            (click)="setActiveLink('email')"
-                        >
+                        <li (click)="setActiveLink('email')">
                             <a [class.selected-nav]="activeNavLink === 'email'">
                                 <fa-icon icon="envelope"></fa-icon>
                                 Change email

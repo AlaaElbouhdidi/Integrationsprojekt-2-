@@ -161,7 +161,11 @@ export class GroupService {
     /**
      * update the name or the description of a group
      */
-    async updateGroup(gid: string, name: string, description: string): Promise<void> {
+    async updateGroup(
+        gid: string,
+        name: string,
+        description: string
+    ): Promise<void> {
         await this.groupCollection.doc(gid).update({
             name: name,
             description: description
@@ -170,13 +174,18 @@ export class GroupService {
     /**
      * delete a group
      */
-     async deleteGroup(gid: string): Promise<void> {
-
-        await this.afs.collection(`groups/${gid}/members`).get().forEach((qs) => {
-            qs.docs.forEach((i) =>{
-                this.afs.collection(`groups/${gid}/members`).doc(i.id).delete();
-            })
-        })
+    async deleteGroup(gid: string): Promise<void> {
+        await this.afs
+            .collection(`groups/${gid}/members`)
+            .get()
+            .forEach((qs) => {
+                qs.docs.forEach((i) => {
+                    this.afs
+                        .collection(`groups/${gid}/members`)
+                        .doc(i.id)
+                        .delete();
+                });
+            });
         await this.groupCollection.doc(gid).delete();
     }
 }

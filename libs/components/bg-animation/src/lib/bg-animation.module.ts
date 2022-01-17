@@ -4,9 +4,7 @@ import { BgAnimationComponent } from './bg-animation/bg-animation.component';
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [
-      BgAnimationComponent
-    ],
+    declarations: [BgAnimationComponent],
     exports: [BgAnimationComponent]
 })
 export class BgAnimationModule {}

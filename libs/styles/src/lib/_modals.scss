@@ -71,11 +71,11 @@
             margin: 0;
             text-transform: uppercase;
         }
-        fa-icon[icon="arrow-circle-left"] {
+        fa-icon[icon='arrow-circle-left'] {
             color: $white;
             cursor: pointer;
         }
-        fa-icon[icon="times-circle"] {
+        fa-icon[icon='times-circle'] {
             color: $error;
             transition: 0.25s;
             cursor: pointer;

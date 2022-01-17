@@ -13,21 +13,17 @@
             type="text"
             formControlName="description"
             placeholder="Description"
-        >
+        />
         <fa-icon icon="info"></fa-icon>
     </div>
 
-    <div
-        class="form-error"
-        *ngIf="name.invalid && (name.dirty)"
-    >
-
-    <div class="form-error-message" *ngIf="name.errors?.required">
-        <p>
-            <fa-icon icon="exclamation-circle"></fa-icon>
-            Name required
-        </p>
-    </div>
+    <div class="form-error" *ngIf="name.invalid && name.dirty">
+        <div class="form-error-message" *ngIf="name.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Name required
+            </p>
+        </div>
         <div class="form-error-message" *ngIf="name.errors?.maxlength">
             <p>
                 <fa-icon icon="exclamation-circle"></fa-icon>
@@ -54,5 +50,4 @@
             Delete this group
         </button>
     </div>
-
 </form>

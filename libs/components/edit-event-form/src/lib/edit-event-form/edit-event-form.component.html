@@ -1,12 +1,6 @@
 <form (ngSubmit)="editEvent()" [formGroup]="editEventForm">
-
     <div class="form-input" id="event-name">
-        <input
-            type="text"
-            formControlName="name"
-            placeholder="Name"
-            required
-        >
+        <input type="text" formControlName="name" placeholder="Name" required />
         <fa-icon icon="angle-double-right"></fa-icon>
     </div>
 
@@ -29,12 +23,7 @@
     </div>
 
     <div class="form-input">
-        <input
-            type="date"
-            formControlName="date"
-            placeholder="Date"
-            required
-        >
+        <input type="date" formControlName="date" placeholder="Date" required />
         <fa-icon icon="angle-double-right"></fa-icon>
     </div>
 
@@ -58,14 +47,17 @@
             formControlName="description"
             placeholder="Description"
             spellcheck="false"
-            required>
+            required
+        >
         </textarea>
         <fa-icon icon="angle-double-right"></fa-icon>
     </div>
 
     <div
         class="form-error"
-        *ngIf="description.invalid && (description.dirty || description.touched)"
+        *ngIf="
+            description.invalid && (description.dirty || description.touched)
+        "
     >
         <div class="form-error-message" *ngIf="description.errors?.required">
             <p>
@@ -82,7 +74,7 @@
     </div>
 
     <div class="form-input-checkbox">
-        <input type="checkbox" id="eventDone" formControlName="done">
+        <input type="checkbox" id="eventDone" formControlName="done" />
         <label for="eventDone">Event finished</label>
     </div>
 
@@ -97,6 +89,4 @@
             Save
         </button>
     </div>
-
 </form>
-

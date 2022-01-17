@@ -84,8 +84,6 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@mate-team/imprint": ["libs/components/imprint/src/index.ts"],
-            "@mate-team/privacy": ["libs/components/privacy/src/index.ts"],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [
