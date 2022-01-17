@@ -33,7 +33,7 @@
         <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
     <div class="modal-body">
-        <div>
+        <div  *ngIf="teamsOfEvent.length > 0">
             <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="winningTeam">
                 <option *ngFor="let team of teamsOfEvent" [ngValue]="team">{{team.name}}</option>
             </select>
@@ -45,5 +45,9 @@
                 Set winner
             </button>
         </div>
+        <p class="statistics-message" *ngIf="teamsOfEvent.length === 0">
+            <fa-icon icon="exclamation-circle"></fa-icon>
+            No teams were added to this event
+        </p>
     </div>
 </ng-template>
