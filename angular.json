@@ -2187,33 +2187,6 @@
                 }
             }
         },
-        "privacy-e2e": {
-            "root": "apps/e2e/privacy-e2e",
-            "sourceRoot": "apps/e2e/privacy-e2e/src",
-            "projectType": "application",
-            "architect": {
-                "e2e": {
-                    "builder": "@nrwl/cypress:cypress",
-                    "options": {
-                        "cypressConfig": "apps/e2e/privacy-e2e/cypress.json",
-                        "devServerTarget": "privacy:storybook"
-                    },
-                    "configurations": {
-                        "ci": {
-                            "devServerTarget": "privacy:storybook:ci"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": [
-                            "apps/e2e/privacy-e2e/**/*.{js,ts}"
-                        ]
-                    }
-                }
-            }
-        },
         "profile": {
             "projectType": "library",
             "root": "libs/components/profile",
