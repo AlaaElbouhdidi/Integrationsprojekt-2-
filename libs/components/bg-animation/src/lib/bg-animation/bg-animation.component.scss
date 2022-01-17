@@ -16,7 +16,10 @@
         opacity: 8%;
         animation: rotateUp 20s infinite;
         &:nth-child(1) {
-            @include bg-animation(10rem, 2s);
+            @include bg-animation(4rem, 2s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(10rem, 2s);
+            }
         }
         &:nth-child(2) {
             left: 20%;
@@ -28,7 +31,10 @@
         }
         &:nth-child(4) {
             left: 40%;
-            @include bg-animation(7rem, 12s);
+            @include bg-animation(4rem, 12s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(7rem, 12s);
+            }
         }
         &:nth-child(5) {
             left: 50%;
@@ -40,7 +46,10 @@
         }
         &:nth-child(7) {
             left: 70%;
-            @include bg-animation(9rem, 6s);
+            @include bg-animation(2rem, 6s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(9rem, 6s);
+            }
         }
         &:nth-child(8) {
             left: 80%;
@@ -48,7 +57,10 @@
         }
         &:nth-child(9) {
             left: 90%;
-            @include bg-animation(8rem, 4s);
+            @include bg-animation(6rem, 4s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(8rem, 4s);
+            }
         }
         &:nth-child(10) {
             left: 100%;

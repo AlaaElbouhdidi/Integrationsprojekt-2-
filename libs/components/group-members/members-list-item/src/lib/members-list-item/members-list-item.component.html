@@ -16,17 +16,6 @@
             class="members-list-item-side-buttons"
             *ngIf="me.email !== member.email && gAdmin === me.uid"
         >
-            <!-- <fa-icon
-            *ngIf="!member.isAdmin"
-            (click)="onToggleIsAdmin(member)"
-            icon="user-cog"
-        ></fa-icon>
-        <fa-icon
-            *ngIf="member.isAdmin"
-            (click)="onToggleIsAdmin(member)"
-            matTooltip="Change Admin status"
-            icon="user-tie"
-        ></fa-icon> -->
             <fa-icon
                 mat-raised-button
                 matTooltip="Delete Member"

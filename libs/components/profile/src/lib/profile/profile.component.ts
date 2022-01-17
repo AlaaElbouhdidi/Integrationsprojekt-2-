@@ -8,6 +8,7 @@ import {
     ChangePasswordData,
     ChangeProfileData
 } from '@api-interfaces';
+import { slideAnimation } from '@animations';
 
 /**
  * Profile component
@@ -15,7 +16,8 @@ import {
 @Component({
     selector: 'mate-team-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss']
+    styleUrls: ['./profile.component.scss'],
+    animations: [slideAnimation]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     /**

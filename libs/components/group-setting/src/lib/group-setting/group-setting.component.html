@@ -1,5 +1,5 @@
 <form (ngSubmit)="applyChanges()" [formGroup]="editGroupForm">
-    <div class="form-input">
+    <div class="form-input" id="name-input">
         <input
             type="text"
             formControlName="name"
@@ -48,7 +48,6 @@
         <button class="discard" type="button" (click)="discard()">
             Discard
         </button>
-        
     </div>
     <div class="form-btn">
         <button class="delete" type="button" (click)="deleteGroup()">

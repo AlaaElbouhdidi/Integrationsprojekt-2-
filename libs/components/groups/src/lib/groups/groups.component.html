@@ -1,5 +1,5 @@
 <main>
-    <section class="groups">
+    <section class="groups" @slideAnimation>
         <div class="groups-header">
             <h5>
                 My groups
@@ -28,7 +28,7 @@
                     <button [class.active-button]="!orderByName" (click)="orderListByAdmin()">Admin</button>
                 </div>
             </div>
-            <div *ngFor="let group of groups | async | filter: term" class="groups-body-group-item">
+            <div *ngFor="let group of groups | async | filter: term" @itemAnimation class="groups-body-group-item">
                 <div class="groups-body-group-item-info">
                     <span>{{ group.name }}</span>
                     <p *ngIf="checkIfAdmin(group.admin)">

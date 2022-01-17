@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
-import {EventService} from "@services";
-import {Event} from "@api-interfaces";
-import {Team} from "@api-interfaces";
-import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit } from '@angular/core';
+import { AlertService, EventService } from '@services';
+import { Event } from '@api-interfaces';
+import { Team } from '@api-interfaces';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { slideAnimation, itemAnimation } from '@animations';
 
 @Component({
-  selector: 'mate-team-group-statistics-list',
-  templateUrl: './group-statistics-list.component.html',
-  styleUrls: ['./group-statistics-list.component.scss']
+    selector: 'mate-team-group-statistics-list',
+    templateUrl: './group-statistics-list.component.html',
+    styleUrls: ['./group-statistics-list.component.scss'],
+    animations: [slideAnimation, itemAnimation]
 })
-export class GroupStatisticsListComponent {
-
+export class GroupStatisticsListComponent implements OnInit {
     /**
      * Array of all events marked as done
      */
@@ -24,7 +25,7 @@ export class GroupStatisticsListComponent {
     /**
      * temporary ID of current event
      */
-    public currentEventID : string | undefined = '';
+    public currentEventID: string | undefined = '';
 
     /**
      * temporary selected winning team
@@ -36,10 +37,11 @@ export class GroupStatisticsListComponent {
      */
     modalRef: NgbModalRef | undefined;
 
-    constructor(public eventService: EventService, private modalService: NgbModal) {
-        this.eventService.getDoneEventsOfGroup().subscribe(events => this.events.push(...events));
-        console.log('Render events');
-    }
+    constructor(
+        public eventService: EventService,
+        private modalService: NgbModal,
+        private alertService: AlertService
+    ) {}
 
     /**
      * Gets all teams of specified event
@@ -48,7 +50,9 @@ export class GroupStatisticsListComponent {
      */
     getTeamsOfEvent(eventID: string | undefined) {
         this.currentEventID = eventID;
-        this.eventService.getTeamsOfEvent(eventID).subscribe(teams => this.teamsOfEvent.push(...teams));
+        this.eventService
+            .getTeamsOfEvent(eventID)
+            .subscribe((teams) => this.teamsOfEvent.push(...teams));
     }
 
     /**
@@ -65,12 +69,16 @@ export class GroupStatisticsListComponent {
      *
      * @param team {Team} the team which has been selected as winner
      */
-    setWinningTeam(team: Team) {
-        if(team.id == '') {
-            alert('Please select valid Team');
-        } else {
-            this.eventService.setWinningTeam(this.currentEventID, team.name);
+    async setWinningTeam(team: Team) {
+        if (!team.id) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: 'Please select a valid team'
+            });
+            return;
         }
+        await this.eventService.setWinningTeam(this.currentEventID, team.name);
+        this.closeModal();
     }
 
     /**
@@ -92,4 +100,9 @@ export class GroupStatisticsListComponent {
         this.modalRef?.dismiss();
     }
 
+    ngOnInit(): void {
+        this.eventService
+            .getDoneEventsOfGroup()
+            .subscribe((events) => (this.events = events));
+    }
 }

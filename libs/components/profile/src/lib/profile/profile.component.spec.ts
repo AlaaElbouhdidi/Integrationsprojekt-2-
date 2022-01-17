@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { ProfileModule } from '../profile.module';
 import { AuthService, UserService } from '@services';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProfileComponent', () => {
     let component: ProfileComponent;
@@ -41,7 +42,7 @@ describe('ProfileComponent', () => {
                 UserService,
                 { provide: UserService, useValue: userServiceMock }
             ],
-            imports: [ProfileModule]
+            imports: [ProfileModule, BrowserAnimationsModule]
         }).compileComponents();
     });
 

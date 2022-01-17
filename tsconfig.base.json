@@ -16,6 +16,7 @@
         "resolveJsonModule": true,
         "baseUrl": ".",
         "paths": {
+            "@animations": ["libs/styles/src/lib/animations.ts"],
             "@alert": ["libs/components/alert/src/index.ts"],
             "@api-interfaces": ["libs/api-interfaces/src/index.ts"],
             "@auth-handler": ["libs/components/auth-handler/src/index.ts"],

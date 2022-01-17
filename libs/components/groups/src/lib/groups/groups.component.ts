@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Group } from '@api-interfaces';
 import { AuthService, GroupService } from '@services';
+import { itemAnimation, slideAnimation } from '@animations';
 
 @Component({
     selector: 'mate-team-groups',
     templateUrl: './groups.component.html',
-    styleUrls: ['./groups.component.scss']
+    styleUrls: ['./groups.component.scss'],
+    animations: [itemAnimation, slideAnimation]
 })
 export class GroupsComponent {
     groups: Promise<Group[]>;

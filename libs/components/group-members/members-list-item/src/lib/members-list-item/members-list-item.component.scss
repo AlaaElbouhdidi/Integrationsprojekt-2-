@@ -8,6 +8,7 @@
     border: 0.25rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
@@ -31,11 +32,9 @@
             margin-right: 0.5rem;
         }
     }
-    @include flex-center;
     &-icon {
         width: 2rem;
         height: 2rem;
-        margin-right: 1rem;
     }
     &-side {
         margin-top: 1rem;
