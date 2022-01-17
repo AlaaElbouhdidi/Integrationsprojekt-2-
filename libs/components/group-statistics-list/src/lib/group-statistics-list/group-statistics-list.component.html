@@ -10,10 +10,10 @@
             <span class="statistics-item-text">{{event.date | date: 'mediumDate'}}</span>
             <span *ngIf="event.winnerTeam">
              <span>Winner:&nbsp;</span>
-        <span class="statistics-item-text">{{event.winnerTeam}}</span>
+        <span class="statistics-item-text" id="winnerTeamText">{{event.winnerTeam}}</span>
         </span>
             <span class="statistics-item-options">
-            <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
+            <span *ngIf="!event.winnerTeam" style="font-style: italic" id="noWinnerWarning">Please define winner Team&nbsp;&nbsp;</span>
         <fa-icon icon="edit" (click)="openModal(editModal); getTeamsOfEvent(event.id)"></fa-icon>
         </span>
         </div>
