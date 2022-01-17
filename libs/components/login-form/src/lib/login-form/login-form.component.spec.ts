@@ -13,20 +13,22 @@ describe('LoginFormComponent', () => {
 
     const authServiceMock = {
         login: jest.fn(),
-        loginWithGoogle: jest.fn(),
+        loginWithGoogle: jest.fn()
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock },
+                { provide: AuthService, useValue: authServiceMock }
             ],
             imports: [
                 FontAwesomeModule,
                 LoginFormModule,
-                RouterTestingModule.withRoutes([]),
-            ],
+                RouterTestingModule.withRoutes([
+                    { path: 'group', redirectTo: '/' }
+                ])
+            ]
         }).compileComponents();
     });
 

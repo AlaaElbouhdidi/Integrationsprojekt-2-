@@ -2,11 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegisterComponent } from './register.component';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @Component({
     selector: 'mate-team-register-form',
-    template: '<p>Mock Register Form Component</p>',
+    template: '<p>Mock Register Form Component</p>'
 })
 class MockRegisterFormComponent {}
+@Component({
+    selector: 'mate-team-bg-animation',
+    template: '<p>Mock Background Animation Component</p>'
+})
+class MockBgAnimationComponent {}
 
 describe('RegisterComponent', () => {
     let component: RegisterComponent;
@@ -14,7 +21,12 @@ describe('RegisterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [RegisterComponent, MockRegisterFormComponent],
+            declarations: [
+                RegisterComponent,
+                MockRegisterFormComponent,
+                MockBgAnimationComponent
+            ],
+            imports: [BrowserAnimationsModule]
         }).compileComponents();
     });
 

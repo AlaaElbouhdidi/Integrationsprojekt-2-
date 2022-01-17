@@ -5,6 +5,7 @@ import { LoginRoutingModule } from './login/login-routing.module';
 import { LoginFormModule } from '@login-form';
 import { AlertModule } from '@alert';
 import { EmailFormModule } from '@email-form';
+import { BgAnimationModule } from '@bg-animation';
 
 @NgModule({
     imports: [
@@ -13,9 +14,10 @@ import { EmailFormModule } from '@email-form';
         LoginFormModule,
         AlertModule,
         EmailFormModule,
+        BgAnimationModule
     ],
     declarations: [LoginComponent],
     exports: [LoginComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginModule {}

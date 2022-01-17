@@ -1,0 +1,53 @@
+<form (ngSubmit)="applyChanges()" [formGroup]="editGroupForm">
+    <div class="form-input" id="name-input">
+        <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            required
+        >
+        <fa-icon icon="edit"></fa-icon>
+    </div>
+    <div class="form-input description">
+        <input
+            type="text"
+            formControlName="description"
+            placeholder="Description"
+        />
+        <fa-icon icon="info"></fa-icon>
+    </div>
+
+    <div class="form-error" *ngIf="name.invalid && name.dirty">
+        <div class="form-error-message" *ngIf="name.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Name required
+            </p>
+        </div>
+        <div class="form-error-message" *ngIf="name.errors?.maxlength">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Maximum length of 15 characters exceeded
+            </p>
+        </div>
+    </div>
+
+    <div class="form-submit">
+        <button
+            type="submit"
+            class="green-btn"
+            [class.disabled-btn]="!editGroupForm.valid"
+            [disabled]="!editGroupForm.valid"
+        >
+            Apply changes
+        </button>
+        <button class="discard" type="button" (click)="discard()">
+            Discard
+        </button>
+    </div>
+    <div class="form-btn">
+        <button class="delete" type="button" (click)="deleteGroup()">
+            Delete this group
+        </button>
+    </div>
+</form>

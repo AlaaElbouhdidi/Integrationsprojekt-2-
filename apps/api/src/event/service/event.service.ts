@@ -57,7 +57,8 @@ export class EventService {
                 description: event.get('description'),
                 participants: event.get('participants'),
                 date: event.get('date'),
-                owner: event.get('owner')
+                groupID: event.get('groupID'),
+                done: event.get('done')
             };
             return eventData;
         } catch (e) {
@@ -93,7 +94,9 @@ export class EventService {
                             name: event.get('name'),
                             description: event.get('description'),
                             participants: event.get('participants'),
-                            date: event.get('date')
+                            date: event.get('date'),
+                            groupID: event.get('groupID'),
+                            done: event.get('done')
                         };
                         this.logger.log(`Successfully fetched event`);
                         this.logger.log(eventData);
@@ -134,7 +137,8 @@ export class EventService {
                         description: event.get('description'),
                         participants: event.get('participants'),
                         date: event.get('date'),
-                        owner: event.get('owner')
+                        groupID: event.get('groupID'),
+                        done: event.get('done')
                     };
                     this.logger.log(`Successfully fetched event with id ${id}`);
                     this.logger.log(eventData);
@@ -184,7 +188,8 @@ export class EventService {
                         description: event.get('description'),
                         participants: event.get('participants'),
                         date: event.get('date'),
-                        owner: event.get('owner')
+                        groupID: event.get('groupID'),
+                        done: event.get('done')
                     };
                     this.logger.debug(eventData);
                     this.logger.log(`Successfully updated event with id ${id}`);
@@ -226,7 +231,8 @@ export class EventService {
                         description: event.get('description'),
                         participants: event.get('participants'),
                         date: event.get('date'),
-                        owner: event.get('owner')
+                        groupID: event.get('groupID'),
+                        done: event.get('done')
                     };
                     await this.eventsRef.doc(id).delete();
                     this.logger.log(`Successfully deleted event with id ${id}`);

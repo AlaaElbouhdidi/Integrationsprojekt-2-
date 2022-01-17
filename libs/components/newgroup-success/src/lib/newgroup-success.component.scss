@@ -1,5 +1,7 @@
-@import '_variables';
-@import '_mixins';
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+@import 'libs/styles/src/lib/modals';
+
 .container {
     background: $white;
     color: $dark;
@@ -20,4 +22,39 @@
     @include for-tablet-portrait-up {
         width: 25rem;
     }
+}
+
+/* Form error messages */
+.form-error {
+    margin-top: 0.5rem;
+    text-align: right;
+}
+.form-error-message {
+    color: #910b0b;
+    font-size: 0.7rem;
+}
+button {
+    width: 100%;
+    padding: 0.75rem 0;
+    margin: 0.5rem;
+    background: $dark;
+    font-size: 1rem;
+    color: $white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: 0.25s;
+    &:hover {
+        background: $darkAccent;
+    }
+}
+#add {
+    background: $main;
+    &:hover {
+        background: $accent;
+    }
+}
+.disabled-btn {
+    opacity: 20%;
+    pointer-events: none;
 }

@@ -9,9 +9,11 @@
     padding: 0.5rem;
     @include flex-center;
     z-index: 10;
+    overflow: hidden;
     img {
         display: none;
         max-width: 32.5%;
+        z-index: 15;
         @include for-desktop-up {
             display: block;
         }
@@ -32,5 +34,7 @@
         align-items: center;
         justify-content: space-around;
         margin: 4rem 0;
+        animation: slide-in-up 0.25s forwards;
+        z-index: 15;
     }
 }

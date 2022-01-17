@@ -1,26 +1,29 @@
 <main class="auth-container">
-    <div class="profile">
+    <div class="profile" @slideAnimation>
         <div class="profile-container">
             <div class="profile-user">
-                <div class="profile-user-banner">
-                    <div class="profile-user-photo">
-                        <mate-team-user-icon
-                            [userIconString]="
-                                user!.photoURL ? user!.photoURL : ''
-                            "
-                        >
-                        </mate-team-user-icon>
-                    </div>
+                <div class="profile-user-banner-wrapper">
+                    <div class="profile-user-banner">
+                        <div class="profile-user-photo">
+                            <mate-team-user-icon
+                                [scaled]="true"
+                                [userIconString]="
+                                    user!.photoURL ? user!.photoURL : ''
+                                "
+                            >
+                            </mate-team-user-icon>
+                        </div>
 
-                    <div class="profile-user-name">
-                        <p>
-                            <fa-icon icon="user-tag"></fa-icon>
-                            {{
-                                user?.displayName === null
-                                    ? 'No name set'
-                                    : user?.displayName
-                            }}
-                        </p>
+                        <div class="profile-user-name">
+                            <p>
+                                <fa-icon icon="user-tag"></fa-icon>
+                                {{
+                                    user?.displayName === null
+                                        ? 'No name set'
+                                        : user?.displayName
+                                }}
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -51,52 +54,30 @@
             </div>
 
             <div class="profile-wrapper">
-                <select name="nav-selection-mobile" id="nav-selection">
-                    <option
-                        (click)="setActiveLink('profile')"
-                        [selected]="activeNavLink === 'profile'"
-                    >
-                        Change profile
-                    </option>
-                    <option
-                        (click)="setActiveLink('password')"
-                        [selected]="activeNavLink === 'password'"
-                    >
-                        Change password
-                    </option>
-                    <option
-                        (click)="setActiveLink('email')"
-                        [selected]="activeNavLink === 'email'"
-                    >
-                        Change email
-                    </option>
-                </select>
-
                 <nav>
                     <ul>
-                        <li
-                            (click)="setActiveLink('profile')"
-                            [class.selected-nav]="activeNavLink === 'profile'"
-                        >
-                            <a>
+                        <li (click)="setActiveLink('profile')">
+                            <a
+                                [class.selected-nav]="
+                                    activeNavLink === 'profile'
+                                "
+                            >
                                 <fa-icon icon="user"></fa-icon>
                                 Change profile
                             </a>
                         </li>
-                        <li
-                            (click)="setActiveLink('password')"
-                            [class.selected-nav]="activeNavLink === 'password'"
-                        >
-                            <a>
+                        <li (click)="setActiveLink('password')">
+                            <a
+                                [class.selected-nav]="
+                                    activeNavLink === 'password'
+                                "
+                            >
                                 <fa-icon icon="lock"></fa-icon>
                                 Change password
                             </a>
                         </li>
-                        <li
-                            (click)="setActiveLink('email')"
-                            [class.selected-nav]="activeNavLink === 'email'"
-                        >
-                            <a>
+                        <li (click)="setActiveLink('email')">
+                            <a [class.selected-nav]="activeNavLink === 'email'">
                                 <fa-icon icon="envelope"></fa-icon>
                                 Change email
                             </a>

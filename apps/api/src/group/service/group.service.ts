@@ -41,7 +41,7 @@ export class GroupService {
     ): Promise<Group> {
         try {
             const { uid } = user;
-            const { name, description, activity, member } = createGroupDto;
+            const { name, description, member } = createGroupDto;
             const creator: Member = {
                 uid,
                 isAdmin: true
@@ -49,7 +49,6 @@ export class GroupService {
             const data = {
                 name,
                 description,
-                activity,
                 member: [creator, ...member]
             };
             this.logger.log(data);
@@ -58,8 +57,8 @@ export class GroupService {
             const groupData: Group = {
                 id: group.id,
                 name: group.get('name'),
+                admin: group.get('admin'),
                 description: group.get('description'),
-                activity: group.get('activity'),
                 member: group.get('member')
             };
             return groupData;
@@ -96,8 +95,8 @@ export class GroupService {
                         const groupData: Group = {
                             id: group.id,
                             name: group.get('name'),
+                            admin: group.get('admin'),
                             description: group.get('description'),
-                            activity: group.get('activity'),
                             member: group.get('member')
                         };
                         this.logger.log(groupData);
@@ -137,8 +136,8 @@ export class GroupService {
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
-                        activity: group.get('activity'),
                         member: group.get('member')
                     };
                     this.logger.log(`Successfully fetched group with id ${id}`);
@@ -175,20 +174,18 @@ export class GroupService {
                         this.logger.error(message);
                         throw new NotFoundException(message);
                     }
-                    const { name, description, activity, member } =
-                        updateGroupDto;
+                    const { name, description, member } = updateGroupDto;
                     await this.groupsRef.doc(id).update({
                         name: name,
                         description: description,
-                        activity: activity,
                         member: member
                     });
                     const group = await this.groupsRef.doc(id).get();
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
-                        activity: group.get('activity'),
                         member: group.get('member')
                     };
                     this.logger.debug(groupData);
@@ -228,8 +225,8 @@ export class GroupService {
                     const groupData: Group = {
                         id: group.id,
                         name: group.get('name'),
+                        admin: group.get('admin'),
                         description: group.get('description'),
-                        activity: group.get('activity'),
                         member: group.get('member')
                     };
                     await this.groupsRef.doc(id).delete();

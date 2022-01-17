@@ -3,5 +3,6 @@
     [style.background-color]="iconBackground"
     [style.color]="iconColor"
 >
-    <fa-icon [icon]="icon"></fa-icon>
+    <fa-icon [icon]="icon" [style.transform]="scaled ? 'scale(3)' : 'scale(1)'">
+    </fa-icon>
 </div>

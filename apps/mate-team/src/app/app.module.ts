@@ -10,6 +10,7 @@ import { environment } from '@env';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const socketConfig: SocketIoConfig = {
     url: environment.clientUrl,
@@ -36,14 +37,16 @@ export const socketConfig: SocketIoConfig = {
         AngularFireModule.initializeApp(environment.firebase),
         FirestoreModule,
         SocketIoModule.forRoot(socketConfig),
-        HttpClientModule
+        HttpClientModule,
+        BrowserAnimationsModule
     ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true
-        }
+        },
+        BrowserAnimationsModule
     ],
     bootstrap: [AppComponent],
     exports: [ExternalUrlDirective]

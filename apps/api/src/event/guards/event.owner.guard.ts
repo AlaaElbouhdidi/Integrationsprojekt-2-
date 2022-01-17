@@ -45,9 +45,7 @@ export class EventOwnerGuard {
             if (isPublic) {
                 return true;
             }
-            const { user, params } = context.switchToHttp().getRequest();
-            const { owner } = await this.eventService.findOne(params.id);
-            return owner === user.uid;
+            return false;
         } catch (e) {
             if (e.status === 404) {
                 throw new NotFoundException(e.message);

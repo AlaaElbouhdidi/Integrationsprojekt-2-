@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { AlertService } from '@services';
 
+/**
+ * Alert component
+ */
 @Component({
     selector: 'mate-team-alert',
     templateUrl: './alert.component.html',
-    styleUrls: ['./alert.component.scss'],
+    styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements AfterViewInit {
     /**
@@ -20,6 +23,10 @@ export class AlertComponent implements AfterViewInit {
      */
     @Input() remainingTime = 5000;
 
+    /**
+     * Constructor of alert
+     * @param alertService {AlertService}
+     */
     constructor(private alertService: AlertService) {}
 
     /**

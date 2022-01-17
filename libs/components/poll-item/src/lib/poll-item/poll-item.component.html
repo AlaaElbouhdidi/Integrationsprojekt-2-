@@ -1,0 +1,74 @@
+<div class="poll-item" [@flipPollItem]="showResults ? 'open' : 'closed'">
+    <div class="poll-item-header">
+        <h5>{{ poll!.title }}</h5>
+        <fa-icon icon="trash" (click)="deletePoll()"> </fa-icon>
+    </div>
+    <div class="poll-item-body">
+        <form *ngIf="!showResults; else pollResults">
+            <div
+                class="poll-item-body-choice"
+                *ngFor="let choice of poll!.choices; let i = index"
+            >
+                <input
+                    class="choice-input"
+                    [disabled]="userVoted"
+                    type="radio"
+                    [value]="i"
+                    name="choice"
+                />
+                <p [class.disabled-text]="userVoted">
+                    {{ choice.date | date: 'mediumDate' }}
+                </p>
+            </div>
+        </form>
+        <ng-template #pollResults>
+            <div
+                class="poll-item-body-results"
+                *ngFor="let choice of poll!.choices"
+            >
+                <div class="poll-item-body-results-text">
+                    <p>{{ choice.date | date: 'mediumDate' }}</p>
+                    <p>
+                        {{ choice.votes ? choice.votes : 0 }}
+                        <span>Votes</span>
+                    </p>
+                </div>
+                <div
+                    class="poll-item-body-results-bar"
+                    [style.width]="calcBarWidth(choice.votes) + '%'"
+                ></div>
+            </div>
+        </ng-template>
+    </div>
+    <div class="poll-item-footer">
+        <div
+            class="poll-item-footer-choices-btn-wrapper"
+            *ngIf="!showResults; else resultsBtn"
+        >
+            <button
+                class="poll-item-footer-submit-btn"
+                [disabled]="userVoted"
+                [class.disabled-btn]="userVoted"
+                (click)="vote()"
+            >
+                {{ userVoted ? 'Already voted' : 'Vote' }}
+            </button>
+            <button
+                class="poll-item-footer-results-btn"
+                (click)="flipPollItem()"
+            >
+                Show results
+            </button>
+        </div>
+        <ng-template #resultsBtn>
+            <div class="poll-item-footer-results-btn-wrapper">
+                <button
+                    class="poll-item-footer-results-btn"
+                    (click)="flipPollItem()"
+                >
+                    Show Choices
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

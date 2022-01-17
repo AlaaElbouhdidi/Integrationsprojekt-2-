@@ -1,4 +1,4 @@
-import { Member, Team } from '@api-interfaces';
+import { Member } from '@api-interfaces';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -6,7 +6,7 @@ import {
     IsBoolean,
     IsNotEmpty,
     IsString,
-    ValidateNested,
+    ValidateNested
 } from 'class-validator';
 /**
  * The Data Transfer Object to create a team
@@ -19,7 +19,7 @@ export class CreateMemberDto implements Member {
     @IsString()
     @ApiProperty({
         example: 'TX5RYf6QIcW0WC8urdf8XUyNKMi2',
-        description: 'The uid of the team member',
+        description: 'The uid of the team member'
     })
     uid: string;
     /**
@@ -29,14 +29,14 @@ export class CreateMemberDto implements Member {
     @IsBoolean()
     @ApiProperty({
         example: false,
-        description: 'Whether the team member is an admin',
+        description: 'Whether the team member is an admin'
     })
     isAdmin: boolean;
 }
 /**
  * The Data Transfer Object to create the member property of a team
  **/
-export class CreateTeamDto implements Team {
+export class CreateTeamDto {
     /**
      * The member property of a team
      **/
@@ -46,7 +46,7 @@ export class CreateTeamDto implements Team {
     @Type(() => CreateMemberDto)
     @ApiProperty({
         description: 'The member of a team',
-        type: [CreateMemberDto],
+        type: [CreateMemberDto]
     })
     member: CreateMemberDto[];
     /**
@@ -56,7 +56,7 @@ export class CreateTeamDto implements Team {
     @IsString()
     @ApiProperty({
         example: 'Z47AQg1mEtZ0MEMxbV90',
-        description: 'The id of the group in which the team is created',
+        description: 'The id of the group in which the team is created'
     })
     groupId: string;
 }

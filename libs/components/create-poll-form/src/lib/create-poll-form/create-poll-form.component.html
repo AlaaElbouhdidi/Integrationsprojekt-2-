@@ -1,0 +1,88 @@
+<form (ngSubmit)="createPoll()" [formGroup]="createPollForm">
+    <div class="form-input" id="text-input">
+        <input
+            type="text"
+            formControlName="title"
+            placeholder="Title"
+            required
+        />
+        <fa-icon icon="angle-double-right"></fa-icon>
+    </div>
+
+    <div
+        class="form-error"
+        *ngIf="title.invalid && (title.dirty || title.touched)"
+    >
+        <div class="form-error-message" *ngIf="title.errors?.required">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Title required
+            </p>
+        </div>
+        <div class="form-error-message" *ngIf="title.errors?.maxlength">
+            <p>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                Maximum length of 50 characters exceeded
+            </p>
+        </div>
+    </div>
+
+    <div class="choices">
+        <p class="choices-header">Date choices:</p>
+
+        <div class="choices-date-wrapper">
+            <div class="form-input date-input">
+                <input
+                    type="date"
+                    formControlName="date"
+                    placeholder="Date"
+                    required
+                />
+                <fa-icon icon="angle-double-right"></fa-icon>
+            </div>
+            <button
+                id="add-poll-choice-btn"
+                type="button"
+                class="green-btn"
+                [class.disabled-btn]="!date.valid || choices.length > 4"
+                [disabled]="!date.valid || choices.length > 4"
+                (click)="addDateAsChoice()"
+            >
+                Add date
+            </button>
+        </div>
+
+        <div
+            class="form-error"
+            *ngIf="date.invalid && (date.dirty || date.touched)"
+        >
+            <div class="form-error-message">
+                <p>
+                    <fa-icon icon="exclamation-circle"></fa-icon>
+                    Date required
+                </p>
+            </div>
+        </div>
+
+        <ul *ngIf="choices.length > 0">
+            <li *ngFor="let choice of choices; let i = index">
+                <span>{{ i + 1 }}.</span>
+                <span>{{ choice.date | date: 'mediumDate' }}</span>
+                <fa-icon icon="trash" (click)="deleteDateAsChoice(i)">
+                </fa-icon>
+            </li>
+        </ul>
+    </div>
+
+    <div class="form-submit">
+        <button
+            id="create-poll-submit-btn"
+            type="submit"
+            class="green-btn"
+            [class.disabled-btn]="title.invalid || choices.length === 0"
+            [disabled]="title.invalid || choices.length === 0"
+        >
+            Create poll
+        </button>
+    </div>
+</form>

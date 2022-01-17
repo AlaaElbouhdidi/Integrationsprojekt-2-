@@ -1,0 +1,65 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+.team-list {
+    margin: 1rem 0;
+    &-item {
+        &-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: $main;
+            color: $white;
+            text-align: center;
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            margin: 0.5rem 0;
+            fa-icon {
+                cursor: pointer;
+                transition: 0.25s;
+            }
+            fa-icon[icon='user-plus'] {
+                &:hover {
+                    color: $success;
+                }
+            }
+            fa-icon[icon='trash'] {
+                &:hover {
+                    color: $error;
+                }
+            }
+        }
+        &-body {
+            &-user {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem;
+                &-data {
+                    @include flex-center;
+                    &-icon {
+                        width: 2rem;
+                        height: 2rem;
+                        margin-right: 1rem;
+                    }
+                }
+                fa-icon[icon='minus'] {
+                    cursor: pointer;
+                    transition: 0.25s;
+                    &:hover {
+                        color: $error;
+                    }
+                }
+            }
+        }
+        &-warning {
+            @include flex-center;
+            text-align: center;
+            fa-icon {
+                color: $warning;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}

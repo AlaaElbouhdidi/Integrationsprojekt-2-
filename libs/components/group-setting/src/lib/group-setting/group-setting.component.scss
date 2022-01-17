@@ -1,0 +1,77 @@
+@import 'libs/styles/src/lib/forms';
+@import 'libs/styles/src/lib/variables';
+/* Form error messages */
+.form-error {
+    margin-top: 0.5rem;
+    text-align: left;
+}
+.form-error-message {
+    color: #910b0b;
+    font-size: 0.7rem;
+}
+form {
+    color: $dark;
+}
+#name-input {
+    margin-top: 0 !important;
+}
+.form-input {
+    margin-top: 1rem !important;
+}
+.form-submit {
+    @include flex-center;
+    @include for-phone-only {
+        flex-direction: column;
+    }
+    text-align: center;
+}
+.discard {
+    border: none;
+    cursor: pointer;
+    background: $gray-600;
+    color: $white;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    transition: 0.25s;
+    @include for-phone-only {
+        margin-left: 0;
+    }
+    &:hover {
+        background: $gray-800;
+    }
+}
+/* Form button */
+.form-btn {
+    margin-top: 1rem !important;
+    @include flex-center-column;
+    button {
+        width: 100%;
+        padding: 0.75rem 0;
+        margin: 0.5rem;
+        background: $green;
+        font-size: 1rem;
+        color: $white;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        transition: 0.25s;
+        &:hover {
+            background: $darkAccent;
+        }
+    }
+    .delete {
+        margin: 1rem 0 0 0 !important;
+        background: $error;
+        &:hover {
+            background: $errorHover;
+        }
+    }
+}
+
+.disabled-btn {
+    opacity: 20%;
+    pointer-events: none;
+}

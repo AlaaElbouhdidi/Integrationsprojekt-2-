@@ -4,15 +4,18 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
+/**
+ * Login form component
+ */
 @Component({
     selector: 'mate-team-login-form',
     templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.scss'],
+    styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
     /**
@@ -45,8 +48,8 @@ export class LoginFormComponent {
             email: new FormControl('', [Validators.email, Validators.required]),
             password: new FormControl('', [
                 Validators.minLength(6),
-                Validators.required,
-            ]),
+                Validators.required
+            ])
         });
     }
 
@@ -75,16 +78,15 @@ export class LoginFormComponent {
             this.loginForm.reset();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully logged in',
+                message: 'Successfully logged in'
             });
-            await this.router.navigate(['/']);
-            window.location.reload();
+            await this.router.navigate(['/group']);
         } catch (e) {
             this.loading = false;
             this.loginForm.reset();
             this.alertService.addAlert({
                 type: 'error',
-                message: e.message,
+                message: e.message
             });
         }
     }
@@ -97,15 +99,14 @@ export class LoginFormComponent {
             await this.authService.loginWithGoogle();
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Successfully logged in with google',
+                message: 'Successfully logged in with google'
             });
-            await this.router.navigate(['/']);
-            window.location.reload();
+            await this.router.navigate(['/group']);
         } catch (e) {
             if (e.code !== 'auth/popup-closed-by-user') {
                 this.alertService.addAlert({
                     type: 'error',
-                    message: e.message,
+                    message: e.message
                 });
             }
         }

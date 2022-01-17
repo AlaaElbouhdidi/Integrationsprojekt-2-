@@ -1,5 +1,24 @@
 <div class="container">
     <h1>You have successfully added a group</h1>
     <img src="../../assets/svgs/team.png" alt="Man opening a door" />
-    <h6>Add your friends</h6>
+    <h6>Add your friends via email</h6>
+    <form action="" class="btn"></form>
+    <button id="add" (click)="openModal(newMember)">+ add members</button>
+    <button id="done" (click)="addMember(false)">Finish</button>
 </div>
+<ng-template #newMember>
+    <div class="modal-header">
+        <h5>
+            <fa-icon icon="user-plus"></fa-icon>
+            Add new member
+        </h5>
+        <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
+    </div>
+    <div class="modal-body">
+        <mate-team-invite-members
+            (sendInvitesEvent)="addMember($event)"
+            [gid]="gid"
+        >
+        </mate-team-invite-members>
+    </div>
+</ng-template>

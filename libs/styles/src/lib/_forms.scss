@@ -43,9 +43,10 @@
     }
     fa-icon {
         position: absolute;
-        top: 0.3rem;
+        top: 0.4rem;
         left: 0.5rem;
         font-size: 1.2rem;
+        color: $dark;
         transition: 0.25s;
     }
 }

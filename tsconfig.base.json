@@ -17,8 +17,10 @@
         "baseUrl": ".",
         "paths": {
             "@alert": ["libs/components/alert/src/index.ts"],
+            "@animations": ["libs/styles/src/lib/animations.ts"],
             "@api-interfaces": ["libs/api-interfaces/src/index.ts"],
             "@auth-handler": ["libs/components/auth-handler/src/index.ts"],
+            "@bg-animation": ["libs/components/bg-animation/src/index.ts"],
             "@change-email-form": [
                 "libs/components/change-email-form/src/index.ts"
             ],
@@ -28,12 +30,56 @@
             "@change-profile-form": [
                 "libs/components/change-profile-form/src/index.ts"
             ],
+            "@confirmation-modal": [
+                "libs/components/confirmation-modal/src/index.ts"
+            ],
             "@core": ["libs/core/src/index.ts"],
-            "@create-event": ["libs/components/create-event/src/index.ts"],
+            "@create-event-form": [
+                "libs/components/create-event-form/src/index.ts"
+            ],
+            "@create-event-modal": [
+                "libs/components/create-event-modal/src/index.ts"
+            ],
+            "@create-poll-form": [
+                "libs/components/create-poll-form/src/index.ts"
+            ],
+            "@edit-event-form": [
+                "libs/components/edit-event-form/src/index.ts"
+            ],
+            "@edit-event-modal": [
+                "libs/components/edit-event-modal/src/index.ts"
+            ],
             "@email-form": ["libs/components/email-form/src/index.ts"],
             "@env": ["libs/env/src/index.ts"],
+            "@event-description-modal": [
+                "libs/components/event-description-modal/src/index.ts"
+            ],
+            "@event-participants-list": [
+                "libs/components/event-participants-list/src/index.ts"
+            ],
+            "@events": ["libs/components/events/src/index.ts"],
             "@footer": ["libs/components/footer/src/index.ts"],
+            "@group": ["libs/components/group/src/index.ts"],
+            "@group-event-item": [
+                "libs/components/group-event-item/src/index.ts"
+            ],
+            "@group-members-list": [
+                "libs/components/group-members/members-list/src/index.ts"
+            ],
+            "@group-members-list-item": [
+                "libs/components/group-members/members-list-item/src/index.ts"
+            ],
+            "@group-polls-events": [
+                "libs/components/group-polls-events/src/index.ts"
+            ],
+            "@group-setting": ["libs/components/group-setting/src/index.ts"],
+            "@group-statistics-list": [
+                "libs/components/group-statistics-list/src/index.ts"
+            ],
+            "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
+            "@imprint": ["libs/components/imprint/src/index.ts"],
+            "@invite-members": ["libs/components/invite-members/src/index.ts"],
             "@landingpage": ["libs/components/landingpage/src/index.ts"],
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
@@ -46,12 +92,17 @@
             "@password-reset-form": [
                 "libs/components/password-reset-form/src/index.ts"
             ],
+            "@poll-item": ["libs/components/poll-item/src/index.ts"],
+            "@privacy": ["libs/components/privacy/src/index.ts"],
             "@profile": ["libs/components/profile/src/index.ts"],
             "@register": ["libs/components/register/src/index.ts"],
             "@register-form": ["libs/components/register-form/src/index.ts"],
             "@services": ["libs/services/src/index.ts"],
             "@slideshow": ["libs/components/slideshow/src/index.ts"],
             "@styles": ["libs/styles/src/index.ts"],
+            "@team-form": ["libs/components/team-form/src/index.ts"],
+            "@team-list": ["libs/components/team-list/src/index.ts"],
+            "@team-modal": ["libs/components/team-modal/src/index.ts"],
             "@user-icon": ["libs/components/user-icon/src/index.ts"]
         }
     },

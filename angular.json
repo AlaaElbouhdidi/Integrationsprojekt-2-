@@ -260,6 +260,30 @@
                 }
             }
         },
+        "bg-animation": {
+            "projectType": "library",
+            "root": "libs/components/bg-animation",
+            "sourceRoot": "libs/components/bg-animation/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/bg-animation/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/bg-animation/src/**/*.ts",
+                            "libs/components/bg-animation/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "change-email-form": {
             "projectType": "library",
             "root": "libs/components/change-email-form",
@@ -446,6 +470,30 @@
                 }
             }
         },
+        "confirmation-modal": {
+            "projectType": "library",
+            "root": "libs/components/confirmation-modal",
+            "sourceRoot": "libs/components/confirmation-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/confirmation-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/confirmation-modal/src/**/*.ts",
+                            "libs/components/confirmation-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "core": {
             "projectType": "library",
             "root": "libs/core",
@@ -470,16 +518,16 @@
                 }
             }
         },
-        "create-event": {
+        "create-event-form": {
             "projectType": "library",
-            "root": "libs/components/create-event",
-            "sourceRoot": "libs/components/create-event/src",
+            "root": "libs/components/create-event-form",
+            "sourceRoot": "libs/components/create-event-form/src",
             "prefix": "mate-team",
             "architect": {
                 "test": {
                     "builder": "@nrwl/jest:jest",
                     "options": {
-                        "jestConfig": "libs/components/create-event/jest.config.js",
+                        "jestConfig": "libs/components/create-event-form/jest.config.js",
                         "passWithNoTests": true
                     }
                 },
@@ -487,65 +535,104 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "libs/components/create-event/src/**/*.ts",
-                            "libs/components/create-event/src/**/*.html"
+                            "libs/components/create-event-form/src/**/*.ts",
+                            "libs/components/create-event-form/src/**/*.html"
                         ]
-                    }
-                },
-                "storybook": {
-                    "builder": "@nrwl/storybook:storybook",
-                    "options": {
-                        "uiFramework": "@storybook/angular",
-                        "port": 4400,
-                        "config": {
-                            "configFolder": "libs/components/create-event/.storybook"
-                        }
-                    },
-                    "configurations": {
-                        "ci": {
-                            "quiet": true
-                        }
-                    }
-                },
-                "build-storybook": {
-                    "builder": "@nrwl/storybook:build",
-                    "options": {
-                        "uiFramework": "@storybook/angular",
-                        "outputPath": "dist/storybook/create-event",
-                        "config": {
-                            "configFolder": "libs/components/create-event/.storybook"
-                        }
-                    },
-                    "configurations": {
-                        "ci": {
-                            "quiet": true
-                        }
                     }
                 }
             }
         },
-        "create-event-e2e": {
-            "root": "apps/e2e/create-event-e2e",
-            "sourceRoot": "apps/e2e/create-event-e2e/src",
-            "projectType": "application",
+        "create-event-modal": {
+            "projectType": "library",
+            "root": "libs/components/create-event-modal",
+            "sourceRoot": "libs/components/create-event-modal/src",
+            "prefix": "mate-team",
             "architect": {
-                "e2e": {
-                    "builder": "@nrwl/cypress:cypress",
+                "test": {
+                    "builder": "@nrwl/jest:jest",
                     "options": {
-                        "cypressConfig": "apps/e2e/create-event-e2e/cypress.json",
-                        "devServerTarget": "create-event:storybook"
-                    },
-                    "configurations": {
-                        "ci": {
-                            "devServerTarget": "create-event:storybook:ci"
-                        }
+                        "jestConfig": "libs/components/create-event-modal/jest.config.js",
+                        "passWithNoTests": true
                     }
                 },
                 "lint": {
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": [
-                            "apps/e2e/create-event-e2e/**/*.{js,ts}"
+                            "libs/components/create-event-modal/src/**/*.ts",
+                            "libs/components/create-event-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "create-poll-form": {
+            "projectType": "library",
+            "root": "libs/components/create-poll-form",
+            "sourceRoot": "libs/components/create-poll-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/create-poll-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/create-poll-form/src/**/*.ts",
+                            "libs/components/create-poll-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "edit-event-form": {
+            "projectType": "library",
+            "root": "libs/components/edit-event-form",
+            "sourceRoot": "libs/components/edit-event-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/edit-event-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/edit-event-form/src/**/*.ts",
+                            "libs/components/edit-event-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "edit-event-modal": {
+            "projectType": "library",
+            "root": "libs/components/edit-event-modal",
+            "sourceRoot": "libs/components/edit-event-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/edit-event-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/edit-event-modal/src/**/*.ts",
+                            "libs/components/edit-event-modal/src/**/*.html"
                         ]
                     }
                 }
@@ -655,6 +742,54 @@
                 }
             }
         },
+        "event-description-modal": {
+            "projectType": "library",
+            "root": "libs/components/event-description-modal",
+            "sourceRoot": "libs/components/event-description-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/event-description-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/event-description-modal/src/**/*.ts",
+                            "libs/components/event-description-modal/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "event-participants-list": {
+            "projectType": "library",
+            "root": "libs/components/event-participants-list",
+            "sourceRoot": "libs/components/event-participants-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/event-participants-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/event-participants-list/src/**/*.ts",
+                            "libs/components/event-participants-list/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "footer": {
             "projectType": "library",
             "root": "libs/components/footer",
@@ -735,6 +870,318 @@
                 }
             }
         },
+        "group-event-item": {
+            "projectType": "library",
+            "root": "libs/components/group-event-item",
+            "sourceRoot": "libs/components/group-event-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-event-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-event-item/src/**/*.ts",
+                            "libs/components/group-event-item/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "group-members-list": {
+            "projectType": "library",
+            "root": "libs/components/group-members/members-list",
+            "sourceRoot": "libs/components/group-members/members-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-members/members-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-members/members-list/src/**/*.ts",
+                            "libs/components/group-members/members-list/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "group-members-list-item": {
+            "projectType": "library",
+            "root": "libs/components/group-members/members-list-item",
+            "sourceRoot": "libs/components/group-members/members-list-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-members/members-list-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-members/members-list-item/src/**/*.ts",
+                            "libs/components/group-members/members-list-item/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "group-polls-events": {
+            "projectType": "library",
+            "root": "libs/components/group-polls-events",
+            "sourceRoot": "libs/components/group-polls-events/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-polls-events/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-polls-events/src/**/*.ts",
+                            "libs/components/group-polls-events/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/group-polls-events/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/group-polls-events",
+                        "config": {
+                            "configFolder": "libs/components/group-polls-events/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "group-polls-events-e2e": {
+            "root": "apps/e2e/group-polls-events-e2e",
+            "sourceRoot": "apps/e2e/group-polls-events-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/group-polls-events-e2e/cypress.json",
+                        "devServerTarget": "group-polls-events:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "group-polls-events:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/group-polls-events-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "group-setting": {
+            "projectType": "library",
+            "root": "libs/components/group-setting",
+            "sourceRoot": "libs/components/group-setting/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-setting/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-setting/src/**/*.ts",
+                            "libs/components/group-setting/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/group-setting/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/group-setting",
+                        "config": {
+                            "configFolder": "libs/components/group-setting/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "group-statistics-list": {
+            "projectType": "library",
+            "root": "libs/components/group-statistics-list",
+            "sourceRoot": "libs/components/group-statistics-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/group-statistics-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/group-statistics-list/src/**/*.ts",
+                            "libs/components/group-statistics-list/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/group-statistics-list/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/group-statistics-list",
+                        "config": {
+                            "configFolder": "libs/components/group-statistics-list/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "group-statistics-list-e2e": {
+            "root": "apps/e2e/group-statistics-list-e2e",
+            "sourceRoot": "apps/e2e/group-statistics-list-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/group-statistics-list-e2e/cypress.json",
+                        "devServerTarget": "group-statistics-list:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "group-statistics-list:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/group-statistics-list-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "groups": {
+            "projectType": "library",
+            "root": "libs/components/groups",
+            "sourceRoot": "libs/components/groups/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/groups/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/groups/src/**/*.ts",
+                            "libs/components/groups/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
         "header": {
             "projectType": "library",
             "root": "libs/components/header",
@@ -811,6 +1258,141 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["apps/e2e/header-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        },
+        "imprint": {
+            "projectType": "library",
+            "root": "libs/components/imprint",
+            "sourceRoot": "libs/components/imprint/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/imprint/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/imprint/src/**/*.ts",
+                            "libs/components/imprint/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/imprint/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/imprint",
+                        "config": {
+                            "configFolder": "libs/components/imprint/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "imprint-e2e": {
+            "root": "apps/e2e/imprint-e2e",
+            "sourceRoot": "apps/e2e/imprint-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/imprint-e2e/cypress.json",
+                        "devServerTarget": "imprint:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "imprint:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/imprint-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
+        "invite-members": {
+            "projectType": "library",
+            "root": "libs/components/invite-members",
+            "sourceRoot": "libs/components/invite-members/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/invite-members/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/invite-members/src/**/*.ts",
+                            "libs/components/invite-members/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/invite-members/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/invite-members",
+                        "config": {
+                            "configFolder": "libs/components/invite-members/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
                     }
                 }
             }
@@ -1527,6 +2109,84 @@
                 }
             }
         },
+        "poll-item": {
+            "projectType": "library",
+            "root": "libs/components/poll-item",
+            "sourceRoot": "libs/components/poll-item/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/poll-item/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/poll-item/src/**/*.ts",
+                            "libs/components/poll-item/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "privacy": {
+            "projectType": "library",
+            "root": "libs/components/privacy",
+            "sourceRoot": "libs/components/privacy/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/privacy/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/privacy/src/**/*.ts",
+                            "libs/components/privacy/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/privacy/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/privacy",
+                        "config": {
+                            "configFolder": "libs/components/privacy/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
         "profile": {
             "projectType": "library",
             "root": "libs/components/profile",
@@ -1894,6 +2554,78 @@
                         "lintFilePatterns": [
                             "libs/styles/src/**/*.ts",
                             "libs/styles/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-form": {
+            "projectType": "library",
+            "root": "libs/components/team-form",
+            "sourceRoot": "libs/components/team-form/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-form/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-form/src/**/*.ts",
+                            "libs/components/team-form/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-list": {
+            "projectType": "library",
+            "root": "libs/components/team-list",
+            "sourceRoot": "libs/components/team-list/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-list/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-list/src/**/*.ts",
+                            "libs/components/team-list/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "team-modal": {
+            "projectType": "library",
+            "root": "libs/components/team-modal",
+            "sourceRoot": "libs/components/team-modal/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/team-modal/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/team-modal/src/**/*.ts",
+                            "libs/components/team-modal/src/**/*.html"
                         ]
                     }
                 }

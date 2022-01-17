@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AlertService, AuthService } from '@services';
+import { AlertService, AuthService, UserService } from '@services';
 import firebase from 'firebase/compat';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,11 +8,16 @@ import {
     ChangePasswordData,
     ChangeProfileData
 } from '@api-interfaces';
+import { slideAnimation } from '@animations';
 
+/**
+ * Profile component
+ */
 @Component({
     selector: 'mate-team-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss']
+    styleUrls: ['./profile.component.scss'],
+    animations: [slideAnimation]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     /**
@@ -41,10 +46,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Constructor of the profile component
      * @param authService {AuthService}
      * @param alertService {AlertService}
+     * @param userService {UserService}
      */
     constructor(
         private authService: AuthService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private userService: UserService
     ) {}
 
     /**
@@ -107,6 +114,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 data.displayName,
                 data.photoURL
             );
+            await this.userService.updateProfile(
+                this.authService.getCurrentUser().uid,
+                data.displayName,
+                data.photoURL
+            );
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Successfully updated user profile.'
@@ -155,6 +167,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
      * Unsubscribe from observables
      */
     ngOnDestroy(): void {
+        this.destroy$.next(true);
         this.destroy$.complete();
     }
 }

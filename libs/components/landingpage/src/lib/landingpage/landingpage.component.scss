@@ -25,7 +25,7 @@ main {
 /* MOBILE VIEW */
 .mobile-container {
     display: flex;
-    @include for-tablet-landscape-up {
+    @include for-tablet-portrait-up {
         display: none;
     }
     p {
@@ -33,10 +33,12 @@ main {
         padding-top: 2%;
     }
     button {
-        font-size: 30px;
+        border: none;
+        border-radius: 0.25rem;
+        background: $main;
+        color: $white;
         padding: 5% 25%;
-        margin-bottom: 5%;
-        border-radius: 20px;
+        font-size: 1.75rem;
     }
 }
 .content {
@@ -50,31 +52,49 @@ main {
 .desktop-container {
     display: none;
     color: $white;
+    @include for-tablet-portrait-up {
+        @include flex-center-column;
+    }
     @include for-tablet-landscape-up {
-        display: flex;
+        flex-direction: row;
     }
 }
 .slideshow-container {
     width: 50%;
+    z-index: 15;
 }
 .text-container {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 15;
+    text-align: center;
+    margin-bottom: 4rem;
+    white-space: nowrap;
+    @include for-tablet-landscape-up {
+        margin-bottom: 0;
+    }
+    &-body {
+        animation: textInAnimation 0.5s forwards;
+        opacity: 0;
+        animation-delay: 0.25s;
+    }
     h1 {
         font-size: 3.5rem;
         span {
             color: $accent;
         }
+        animation: textInAnimation 0.25s forwards;
+        opacity: 0;
         @include for-desktop-up {
             font-size: 4rem;
         }
     }
     h2 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         @include for-desktop-up {
-            font-size: 2.9rem;
+            font-size: 2.5rem;
         }
     }
     p {
@@ -94,5 +114,15 @@ main {
         &:hover {
             background: $accent;
         }
+    }
+}
+@keyframes textInAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(-2rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

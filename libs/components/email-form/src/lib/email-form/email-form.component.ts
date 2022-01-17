@@ -4,15 +4,18 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
+    Validators
 } from '@angular/forms';
 import { AlertService, AuthService } from '@services';
 import { Router } from '@angular/router';
 
+/**
+ * Email form component
+ */
 @Component({
     selector: 'mate-team-email-form',
     templateUrl: './email-form.component.html',
-    styleUrls: ['./email-form.component.scss'],
+    styleUrls: ['./email-form.component.scss']
 })
 export class EmailFormComponent {
     /**
@@ -42,7 +45,7 @@ export class EmailFormComponent {
         private router: Router
     ) {
         this.emailForm = this.fb.group({
-            email: new FormControl('', [Validators.email, Validators.required]),
+            email: new FormControl('', [Validators.email, Validators.required])
         });
     }
 
@@ -69,18 +72,20 @@ export class EmailFormComponent {
             await this.authService.resetPassword(this.email.value);
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Email for password reset has been sent',
+                message: 'Email for password reset has been sent'
             });
             this.loading = false;
             this.emailForm.reset();
             await this.router.navigate(['/']);
         } catch (e) {
-            this.loading = false;
-            this.emailForm.reset();
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message,
-            });
+            if (e instanceof Error) {
+                this.loading = false;
+                this.emailForm.reset();
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
         }
     }
 }

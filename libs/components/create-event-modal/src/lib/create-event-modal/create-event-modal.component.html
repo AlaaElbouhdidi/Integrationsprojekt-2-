@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h5>
+        <fa-icon icon="calendar-alt"></fa-icon>
+        CREATE EVENT
+    </h5>
+    <fa-icon
+        id="dismiss-modal-icon"
+        icon="times-circle"
+        (click)="dismissModalEvent.emit()"
+    >
+    </fa-icon>
+</div>
+<div class="modal-body">
+    <mate-team-create-event-form
+        (createEventEvent)="createEventEvent.emit($event)"
+    >
+    </mate-team-create-event-form>
+</div>

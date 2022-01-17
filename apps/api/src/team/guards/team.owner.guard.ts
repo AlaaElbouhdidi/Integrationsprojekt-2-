@@ -60,15 +60,16 @@ export class TeamOwnerGuard {
                 );
                 return admins.length > 0;
             }
-            const { groupId } = await this.teamService.findOne(params.id);
-            const group = await this.groupService.findOne(groupId);
-            if (!group.member.length) {
-                return true;
-            }
-            const admins = group.member?.filter(
-                (member) => member.uid === user.uid && member.isAdmin
-            );
-            return admins.length > 0;
+            // const { groupId } = await this.teamService.findOne(params.id);
+            // const group = await this.groupService.findOne(groupId);
+            // if (!group.member.length) {
+            //     return true;
+            // }
+            // const admins = group.member?.filter(
+            //     (member) => member.uid === user.uid && member.isAdmin
+            // );
+            // return admins.length > 0;
+            return false;
         } catch (e) {
             if (e.status === 404) {
                 throw new NotFoundException(e.message);

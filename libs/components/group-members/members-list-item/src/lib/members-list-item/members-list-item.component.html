@@ -1,0 +1,34 @@
+<div [class.this-is-me]="me.email === member.email" class="members-list-item">
+    <div class="members-list-item-icon">
+        <mate-team-user-icon [userIconString]="member.user?.photoURL || ''">
+        </mate-team-user-icon>
+    </div>
+    <div class="members-list-item-name">
+        <p>{{ member.user?.displayName }}</p>
+        <p
+            class="error-dn"
+            *ngIf="member.user?.displayName === '' || !member.user?.displayName"
+        >
+            no display name yet
+        </p>
+    </div>
+    <div class="members-list-item-email">
+        <p>{{ member.email }}</p>
+    </div>
+    <div class="members-list-item-side">
+        <div
+            class="members-list-item-side-buttons"
+            *ngIf="me.email !== member.email && gAdmin === me.uid"
+        >
+            <fa-icon
+                mat-raised-button
+                matTooltip="Delete Member"
+                (click)="onDeleteMember(member)"
+                icon="user-times"
+            ></fa-icon>
+        </div>
+        <div *ngIf="gAdmin === member.uid" class="members-list-item-side-admin">
+            <p>~Admin</p>
+        </div>
+    </div>
+</div>

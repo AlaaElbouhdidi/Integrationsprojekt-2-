@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
+/**
+ * Slideshow component
+ */
 @Component({
     selector: 'mate-team-slideshow',
     templateUrl: './slideshow.component.html',
@@ -9,8 +12,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
         trigger('slideTextAnimation', [
             transition(':enter', [
                 style({ opacity: 0 }),
-                animate('200ms', style({ opacity: 1 })),
-            ]),
+                animate('200ms', style({ opacity: 1 }))
+            ])
         ]),
         trigger('slideAnimation', [
             transition(':enter', [
@@ -18,10 +21,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
                 animate(
                     '200ms',
                     style({ opacity: 1, transform: 'translateY(0)' })
-                ),
-            ]),
-        ]),
-    ],
+                )
+            ])
+        ])
+    ]
 })
 export class SlideshowComponent implements OnDestroy {
     /**
@@ -43,18 +46,18 @@ export class SlideshowComponent implements OnDestroy {
         {
             src: 'assets/svgs/online_calender.svg',
             alt: 'Woman standing next to a calender',
-            text: 'Manage events and create polls to easier decide dates',
+            text: 'Manage events and create polls to easier decide dates'
         },
         {
             src: '/assets/svgs/connection_teams.svg',
             alt: 'Different icons with users',
-            text: 'Build up your team and connect with your mates',
+            text: 'Build up your team and connect with your mates'
         },
         {
             src: '/assets/svgs/winners.svg',
             alt: 'Two people celebrating next to a trophy',
-            text: 'Track your results and see who leads the leaderboard',
-        },
+            text: 'Track your results and see who won the event'
+        }
     ];
 
     /**
@@ -75,6 +78,8 @@ export class SlideshowComponent implements OnDestroy {
     }
 
     /**
+     * Set the slide interval
+     *
      * @returns {NodeJS.Timeout} Interval of the slideshow
      */
     setSlideInterval(): ReturnType<typeof setInterval> {

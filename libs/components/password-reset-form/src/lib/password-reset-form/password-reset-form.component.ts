@@ -7,6 +7,9 @@ import {
     Validators
 } from '@angular/forms';
 
+/**
+ * Password reset form component
+ */
 @Component({
     selector: 'mate-team-password-reset-form',
     templateUrl: './password-reset-form.component.html',

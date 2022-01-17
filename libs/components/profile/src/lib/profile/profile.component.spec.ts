@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProfileComponent } from './profile.component';
 import { of } from 'rxjs';
 import { ProfileModule } from '../profile.module';
-import { AuthService } from '@services';
+import { AuthService, UserService } from '@services';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProfileComponent', () => {
     let component: ProfileComponent;
@@ -24,14 +25,24 @@ describe('ProfileComponent', () => {
         updateEmail: jest.fn(),
         updateProfile: jest.fn()
     };
+    const userServiceMock = {
+        user: {
+            providerData: [{ providerId: 'password' }]
+        },
+        getUser: jest.fn(),
+        updateProfile: jest.fn()
+    };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             providers: [
                 AuthService,
-                { provide: AuthService, useValue: authServiceMock }
+                { provide: AuthService, useValue: authServiceMock },
+
+                UserService,
+                { provide: UserService, useValue: userServiceMock }
             ],
-            imports: [ProfileModule]
+            imports: [ProfileModule, BrowserAnimationsModule]
         }).compileComponents();
     });
 

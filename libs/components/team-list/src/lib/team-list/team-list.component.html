@@ -1,0 +1,38 @@
+<section class="team-list">
+    <div class="team-list-item" *ngFor="let team of teams">
+        <div class="team-list-item-header">
+            <fa-icon icon="user-plus" (click)="addUserToTeam(team)"></fa-icon>
+            <p>{{ team.name }}</p>
+            <fa-icon icon="trash" (click)="deleteTeam(team)"></fa-icon>
+        </div>
+        <div class="team-list-item-body" *ngIf="team.participants.length > 0">
+            <div
+                class="team-list-item-body-user"
+                *ngFor="let participant of team.participants"
+            >
+                <div class="team-list-item-body-user-data">
+                    <div class="team-list-item-body-user-data-icon">
+                        <mate-team-user-icon
+                            [userIconString]="
+                                participant.icon ? participant.icon : ''
+                            "
+                        >
+                        </mate-team-user-icon>
+                    </div>
+                    <p>{{ participant.displayName }}</p>
+                </div>
+                <fa-icon
+                    icon="minus"
+                    (click)="removeUserFromTeam(team, participant)"
+                ></fa-icon>
+            </div>
+        </div>
+        <div
+            class="team-list-item-warning"
+            *ngIf="team.participants.length === 0"
+        >
+            <fa-icon icon="exclamation-circle"></fa-icon>
+            <p>No users in this team</p>
+        </div>
+    </div>
+</section>

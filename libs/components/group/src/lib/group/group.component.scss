@@ -1,0 +1,100 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+@import 'libs/styles/src/lib/modals';
+main {
+    min-height: calc(100vh - 6rem);
+    width: 100%;
+    background: $dark;
+    padding: 1rem 0.5rem;
+    @include for-tablet-portrait-up {
+        padding: 2rem;
+    }
+    @include for-tablet-landscape-up {
+        padding: 2rem 5rem;
+    }
+    @include for-desktop-up {
+        padding: 3rem 10rem;
+    }
+    h1 {
+        margin-top: 2rem;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: $white;
+        animation: textInAnimation 0.25s forwards;
+    }
+    h6 {
+        margin-bottom: 1rem;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: $white;
+        animation: textInAnimation 0.25s forwards;
+    }
+    nav {
+        ul {
+            list-style: none;
+            padding: 0;
+            @include for-tablet-portrait-up {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            li {
+                margin: 0.35rem 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                @include for-tablet-landscape-up {
+                    margin: 0 2rem;
+                }
+                &:hover fa-icon {
+                    transform: translateY(-1.5rem);
+                    opacity: 0;
+                }
+                fa-icon {
+                    position: absolute;
+                    top: 0;
+                    transition: 0.25s;
+                }
+                fa-icon[icon='user-friends'] {
+                    left: -1.9rem;
+                }
+                fa-icon[icon='table'] {
+                    left: -1.6rem;
+                }
+                fa-icon[icon='calendar-alt'] {
+                    left: -1.6rem;
+                }
+                fa-icon[icon='cog'] {
+                    left: -1.6rem;
+                }
+                a {
+                    color: $white;
+                    cursor: pointer;
+                    text-decoration: none;
+                    font-size: 1rem;
+                    white-space: nowrap;
+                    @include for-tablet-portrait-up {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+.active-link {
+    border-bottom: 2px solid $white;
+    fa-icon {
+        color: $white;
+    }
+}
+@keyframes textInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

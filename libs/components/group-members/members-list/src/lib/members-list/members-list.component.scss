@@ -1,0 +1,62 @@
+@import 'libs/styles/src/lib/modals';
+.members {
+    color: $white;
+    margin: 2rem 0;
+    &-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        border-left: 2px solid white;
+        padding: 0.25rem 0.75rem;
+        &-searchbar {
+            position: relative;
+            margin-right: 1rem;
+            input {
+                padding-left: 2rem;
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid $white;
+                color: $white;
+                padding-bottom: 0.25rem;
+            }
+            fa-icon {
+                position: absolute;
+                top: 0;
+                left: 0.25rem;
+                color: $white;
+            }
+        }
+        button {
+            padding: 0 0.75rem;
+            border: none;
+            background: $success;
+            color: $white;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: 0.25s;
+            span:nth-child(1) {
+                display: block;
+                @include for-tablet-portrait-up {
+                    display: none;
+                }
+            }
+            span:nth-child(2) {
+                display: none;
+                @include for-tablet-portrait-up {
+                    display: block;
+                }
+            }
+            &:hover {
+                background: $successHover;
+            }
+        }
+    }
+}
+.members {
+    &-body {
+        width: 100%;
+        &-item {
+            margin-top: 1rem;
+        }
+    }
+}

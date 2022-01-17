@@ -2,6 +2,9 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { IconService } from '@services';
 
+/**
+ * User icon component
+ */
 @Component({
     selector: 'mate-team-user-icon',
     templateUrl: './user-icon.component.html',
@@ -24,6 +27,10 @@ export class UserIconComponent implements OnInit, OnChanges {
      * Icon background color
      */
     iconBackground = '#ffffff';
+    /**
+     * Determines if user icon is scaled
+     */
+    @Input() scaled = false;
 
     /**
      * Constructor of icon service

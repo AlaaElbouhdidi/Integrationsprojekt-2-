@@ -1,0 +1,47 @@
+<div class="group-event-item">
+    <div class="group-event-item-info">
+        <div class="group-event-item-info-title">
+            <fa-icon icon="calendar-day"></fa-icon>
+            <p>{{ event.name }}</p>
+        </div>
+        <div class="group-event-item-info-date">
+            <fa-icon icon="clock"></fa-icon>
+            <p>{{ event.date | date: 'mediumDate' }}</p>
+        </div>
+    </div>
+    <div class="group-event-item-buttons">
+        <button
+            class="group-event-item-buttons-description"
+            (click)="showTeams()"
+        >
+            <span id="teams-full">Teams</span>
+            <span id="teams-single">T</span>
+        </button>
+        <button
+            class="group-event-item-buttons-description"
+            (click)="showDescription()"
+        >
+            <span id="description-full">Description</span>
+            <span id="description-single">D</span>
+        </button>
+        <button
+            class="group-event-item-buttons-participate"
+            *ngIf="!participating; else cancelParticipationBtn"
+            [disabled]="participating"
+            [class.disabled-btn]="participating"
+            (click)="participate()"
+        >
+            Participate
+        </button>
+        <ng-template #cancelParticipationBtn>
+            <button
+                class="group-event-item-buttons-cancel"
+                (click)="cancelParticipation()"
+            >
+                Cancel participation
+            </button>
+        </ng-template>
+        <fa-icon icon="edit" (click)="edit()"> </fa-icon>
+        <fa-icon icon="trash" (click)="delete()"> </fa-icon>
+    </div>
+</div>

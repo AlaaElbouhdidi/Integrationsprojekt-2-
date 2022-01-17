@@ -3,36 +3,37 @@
 
 .slideshow {
     @include flex-center-column;
-}
-.slideshow-slides {
-    max-height: 40rem;
-    width: 100%;
-    text-align: center;
-    color: $white;
-    img {
-        max-height: 250px;
-        @include for-desktop-up {
-            max-height: 350px;
+    &-slides {
+        max-height: 40rem;
+        width: 100%;
+        text-align: center;
+        color: $white;
+        img {
+            max-height: 250px;
+            @include for-desktop-up {
+                max-height: 350px;
+            }
+        }
+        p {
+            margin-top: 2rem;
+            font-size: 1rem;
+            white-space: nowrap;
+            @include for-desktop-up {
+                font-size: 1.25rem;
+            }
         }
     }
-    p {
+    &-pointers {
+        @include flex-center;
         margin-top: 2rem;
-        font-size: 1rem;
-        @include for-desktop-up {
-            font-size: 1.25rem;
+        div {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 1px solid $white;
+            margin: 0 2rem;
+            cursor: pointer;
         }
-    }
-}
-.slideshow-pointers {
-    @include flex-center;
-    margin-top: 2rem;
-    div {
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 50%;
-        border: 1px solid $white;
-        margin: 0 2rem;
-        cursor: pointer;
     }
 }
 .selected {

@@ -13,7 +13,6 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { StylesModule } from '@styles';
 import { AuthHandlerModule } from '@auth-handler';
 import { SlideshowModule } from '@slideshow';
-import { CreateEventModule } from '@create-event';
 import { ProfileModule } from '@profile';
 import {
     FontAwesomeModule,
@@ -31,6 +30,7 @@ import {
     faHippo,
     faOtter
 } from '@fortawesome/free-solid-svg-icons';
+import { GroupModule } from '@group';
 
 @NgModule({
     exports: [
@@ -43,13 +43,13 @@ import {
         RegisterFormModule,
         AlertModule,
         ProfileModule,
+        GroupModule,
         LoginModule,
         LandingpageModule,
         FooterModule,
         AuthHandlerModule,
         AngularFireFunctionsModule,
         StylesModule,
-        CreateEventModule,
         FontAwesomeModule
     ]
 })

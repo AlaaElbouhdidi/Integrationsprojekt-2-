@@ -40,10 +40,15 @@
         }
     }
 }
+@mixin bg-animation($size, $animation-delay) {
+    width: $size;
+    height: $size;
+    animation-delay: $animation-delay;
+}
 
 // Media Queries
 @mixin for-phone-only {
-    @media (min-width: 599px) {
+    @media (max-width: 400px) {
         @content;
     }
 }

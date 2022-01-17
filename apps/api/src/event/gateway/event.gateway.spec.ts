@@ -6,7 +6,7 @@ describe('EventGateway', () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [EventGateway],
+            providers: [EventGateway]
         }).compile();
 
         gateway = module.get<EventGateway>(EventGateway);

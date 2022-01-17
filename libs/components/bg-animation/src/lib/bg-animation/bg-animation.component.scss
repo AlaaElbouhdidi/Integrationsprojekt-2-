@@ -1,0 +1,80 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/mixins';
+
+.bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 12;
+    &-obj {
+        position: absolute;
+        bottom: -6rem;
+        left: 0;
+        background: $light;
+        opacity: 8%;
+        animation: rotateUp 20s infinite;
+        &:nth-child(1) {
+            @include bg-animation(4rem, 2s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(10rem, 2s);
+            }
+        }
+        &:nth-child(2) {
+            left: 20%;
+            @include bg-animation(2rem, 8s);
+        }
+        &:nth-child(3) {
+            left: 30%;
+            @include bg-animation(5rem, 16s);
+        }
+        &:nth-child(4) {
+            left: 40%;
+            @include bg-animation(4rem, 12s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(7rem, 12s);
+            }
+        }
+        &:nth-child(5) {
+            left: 50%;
+            @include bg-animation(3rem, 18s);
+        }
+        &:nth-child(6) {
+            left: 60%;
+            @include bg-animation(6rem, 0s);
+        }
+        &:nth-child(7) {
+            left: 70%;
+            @include bg-animation(2rem, 6s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(9rem, 6s);
+            }
+        }
+        &:nth-child(8) {
+            left: 80%;
+            @include bg-animation(4rem, 14s);
+        }
+        &:nth-child(9) {
+            left: 90%;
+            @include bg-animation(6rem, 4s);
+            @include for-tablet-portrait-up {
+                @include bg-animation(8rem, 4s);
+            }
+        }
+        &:nth-child(10) {
+            left: 100%;
+            @include bg-animation(1rem, 10s);
+        }
+    }
+}
+@keyframes rotateUp {
+    0% {
+        transform: translateY(0);
+        opacity: 8%;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+    }
+}

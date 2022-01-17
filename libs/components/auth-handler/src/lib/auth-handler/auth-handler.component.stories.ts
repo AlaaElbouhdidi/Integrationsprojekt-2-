@@ -15,16 +15,16 @@ export default {
             imports: [
                 RouterTestingModule,
                 AuthHandlerModule,
-                AngularFireModule.initializeApp(environment.firebase),
+                AngularFireModule.initializeApp(environment.firebase)
             ],
-            providers: [AuthService, AngularFireAuth],
-        }),
-    ],
+            providers: [AuthService, AngularFireAuth]
+        })
+    ]
 } as Meta<AuthHandlerComponent>;
 
 const Template: Story<AuthHandlerComponent> = (args: AuthHandlerComponent) => ({
     component: AuthHandlerComponent,
-    props: args,
+    props: args
 });
 
 export const Primary = Template.bind({});

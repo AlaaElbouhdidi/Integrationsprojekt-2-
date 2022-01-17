@@ -4,18 +4,18 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import {
     FontAwesomeModule,
-    FaIconLibrary,
+    FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { StylesModule } from '@styles';
 
 @NgModule({
     imports: [CommonModule, RouterModule, FontAwesomeModule, StylesModule],
     declarations: [HeaderComponent],
-    exports: [HeaderComponent],
+    exports: [HeaderComponent]
 })
 export class HeaderModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(faUserCircle);
+        library.addIcons(faUserCircle, faLayerGroup);
     }
 }
