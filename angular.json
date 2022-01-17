@@ -1262,6 +1262,87 @@
                 }
             }
         },
+        "imprint": {
+            "projectType": "library",
+            "root": "libs/components/imprint",
+            "sourceRoot": "libs/components/imprint/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/imprint/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/imprint/src/**/*.ts",
+                            "libs/components/imprint/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/imprint/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/imprint",
+                        "config": {
+                            "configFolder": "libs/components/imprint/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "imprint-e2e": {
+            "root": "apps/e2e/imprint-e2e",
+            "sourceRoot": "apps/e2e/imprint-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/imprint-e2e/cypress.json",
+                        "devServerTarget": "imprint:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "imprint:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/imprint-e2e/**/*.{js,ts}"
+                        ]
+                    }
+                }
+            }
+        },
         "invite-members": {
             "projectType": "library",
             "root": "libs/components/invite-members",
@@ -2047,6 +2128,87 @@
                         "lintFilePatterns": [
                             "libs/components/poll-item/src/**/*.ts",
                             "libs/components/poll-item/src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        },
+        "privacy": {
+            "projectType": "library",
+            "root": "libs/components/privacy",
+            "sourceRoot": "libs/components/privacy/src",
+            "prefix": "mate-team",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/components/privacy/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/components/privacy/src/**/*.ts",
+                            "libs/components/privacy/src/**/*.html"
+                        ]
+                    }
+                },
+                "storybook": {
+                    "builder": "@nrwl/storybook:storybook",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "port": 4400,
+                        "config": {
+                            "configFolder": "libs/components/privacy/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                },
+                "build-storybook": {
+                    "builder": "@nrwl/storybook:build",
+                    "options": {
+                        "uiFramework": "@storybook/angular",
+                        "outputPath": "dist/storybook/privacy",
+                        "config": {
+                            "configFolder": "libs/components/privacy/.storybook"
+                        }
+                    },
+                    "configurations": {
+                        "ci": {
+                            "quiet": true
+                        }
+                    }
+                }
+            }
+        },
+        "privacy-e2e": {
+            "root": "apps/e2e/privacy-e2e",
+            "sourceRoot": "apps/e2e/privacy-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/e2e/privacy-e2e/cypress.json",
+                        "devServerTarget": "privacy:storybook"
+                    },
+                    "configurations": {
+                        "ci": {
+                            "devServerTarget": "privacy:storybook:ci"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "apps/e2e/privacy-e2e/**/*.{js,ts}"
                         ]
                     }
                 }
