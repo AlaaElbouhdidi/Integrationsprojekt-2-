@@ -1,11 +1,7 @@
 <form class="app-form" [formGroup]="newGroupForm" (ngSubmit)="newGroup()">
     <h1>Create a new group</h1>
     <div class="form-input">
-        <input
-            required
-            type="text"
-            formControlName="name"
-            placeholder="Name" />
+        <input required type="text" formControlName="name" placeholder="Name" />
         <fa-icon icon="angle-double-right"></fa-icon>
     </div>
     <div

@@ -12,13 +12,15 @@
     <div class="group-event-item-buttons">
         <button
             class="group-event-item-buttons-description"
-            (click)="showTeams()" >
+            (click)="showTeams()"
+        >
             <span id="teams-full">Teams</span>
             <span id="teams-single">T</span>
         </button>
         <button
             class="group-event-item-buttons-description"
-            (click)="showDescription()" >
+            (click)="showDescription()"
+        >
             <span id="description-full">Description</span>
             <span id="description-single">D</span>
         </button>
@@ -39,13 +41,7 @@
                 Cancel participation
             </button>
         </ng-template>
-        <fa-icon
-            icon="edit"
-            (click)="edit()">
-        </fa-icon>
-        <fa-icon
-            icon="trash"
-            (click)="delete()" >
-        </fa-icon>
+        <fa-icon icon="edit" (click)="edit()"> </fa-icon>
+        <fa-icon icon="trash" (click)="delete()"> </fa-icon>
     </div>
 </div>

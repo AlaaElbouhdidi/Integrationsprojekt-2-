@@ -72,10 +72,10 @@ export class GroupSettingComponent implements OnInit {
      * tthe to be edited group
      */
     applyChanges() {
-      const data = {
-        name: this.name.value,
-        description: this.description.value
-      }
+        const data = {
+            name: this.name.value,
+            description: this.description.value
+        };
         this.manageGroup.emit(data);
     }
     /**

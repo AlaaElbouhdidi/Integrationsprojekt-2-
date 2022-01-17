@@ -4,7 +4,10 @@ import { InviteMembersComponent } from './invite-members/invite-members.componen
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+    FontAwesomeModule,
+    FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
 import {
     faExclamationCircle,
     faAngleDoubleRight,
@@ -19,19 +22,11 @@ import {
         MatIconModule,
         FontAwesomeModule
     ],
-    declarations: [
-      InviteMembersComponent
-    ],
-    exports: [
-      InviteMembersComponent
-    ]
+    declarations: [InviteMembersComponent],
+    exports: [InviteMembersComponent]
 })
 export class InviteMembersModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(
-            faExclamationCircle,
-            faAngleDoubleRight,
-            faInfoCircle
-        );
+        library.addIcons(faExclamationCircle, faAngleDoubleRight, faInfoCircle);
     }
 }

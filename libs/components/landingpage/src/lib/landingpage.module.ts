@@ -8,7 +8,12 @@ import { BgAnimationModule } from '@bg-animation';
 
 @NgModule({
     declarations: [LandingpageComponent],
-    imports: [CommonModule, LandingpageRoutingModule, SlideshowModule, BgAnimationModule],
+    imports: [
+        CommonModule,
+        LandingpageRoutingModule,
+        SlideshowModule,
+        BgAnimationModule
+    ],
     providers: [AuthService],
     exports: [LandingpageComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

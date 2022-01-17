@@ -33,8 +33,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     /**
      * Admin statu of the current user
      */
-     group: Group = {} as Group;
-
+    group: Group = {} as Group;
 
     /**
      * Modal reference
@@ -43,7 +42,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     /**
      * Reference for the confirmation modal
      */
-     confirmationModalRef: NgbModalRef | undefined;
+    confirmationModalRef: NgbModalRef | undefined;
 
     /**
      * Constructor of group
@@ -82,15 +81,15 @@ export class GroupComponent implements OnInit, OnDestroy {
     closeModal(): void {
         this.modalRef?.dismiss();
     }
-    async deleteGroup( modal: unknown): Promise<void> {
+    async deleteGroup(modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
             return;
         }
         try {
             await this.groupService.deleteGroup(this.groupId);
-        this.closeModal();
-        this.router.navigateByUrl('/')
+            this.closeModal();
+            this.router.navigateByUrl('/');
         } catch (e: any) {
             this.alertService.addAlert({
                 type: 'error',
@@ -102,9 +101,12 @@ export class GroupComponent implements OnInit, OnDestroy {
      * manage the Group
      */
     async manageGroup(data: any) {
-        if(data){
-
-            await this.groupService.updateGroup(this.groupId, data.name, data.description);
+        if (data) {
+            await this.groupService.updateGroup(
+                this.groupId,
+                data.name,
+                data.description
+            );
             window.location.reload();
         }
         this.closeModal();
@@ -122,21 +124,22 @@ export class GroupComponent implements OnInit, OnDestroy {
                     param.get('id') === null ? '' : (param.get('id') as string);
                 if (this.groupId != null) {
                     this.groupService.getGroupById(this.groupId).then((g) => {
-                        if(g) {
+                        if (g) {
                             this.group = g;
-                        if (g?.admin == this.authService.getCurrentUser().uid)
-                            this.isAdmin = true;
+                            if (
+                                g?.admin ==
+                                this.authService.getCurrentUser().uid
+                            )
+                                this.isAdmin = true;
                         }
                     });
                 }
             });
-        this.router.events
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    this.activeRoute = this.router.url;
-                }
-            });
+        this.router.events.pipe(takeUntil(this.destroy$)).subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.activeRoute = this.router.url;
+            }
+        });
     }
 
     /**
@@ -154,8 +157,10 @@ export class GroupComponent implements OnInit, OnDestroy {
      * @param content {unknown} The modal to open
      * @returns {Promise<boolean>} A promise containing true if modal is closed and false if modal is dismissed
      */
-     async openConfirmationModal(content: unknown): Promise<boolean> {
-        this.confirmationModalRef = this.modalService.open(content, { windowClass: 'light-modal' });
+    async openConfirmationModal(content: unknown): Promise<boolean> {
+        this.confirmationModalRef = this.modalService.open(content, {
+            windowClass: 'light-modal'
+        });
         try {
             await this.confirmationModalRef.result;
             return true;

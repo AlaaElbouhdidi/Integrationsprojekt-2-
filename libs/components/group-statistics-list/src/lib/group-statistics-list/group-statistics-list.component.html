@@ -1,14 +1,19 @@
 <div class="statistics-list" *ngFor="let event of this.events">
     <div class="statistics-item">
-        <span class="statistics-item-text">{{event.name}}</span>
-        <span class="statistics-item-text">{{event.date}}</span>
+        <span class="statistics-item-text">{{ event.name }}</span>
+        <span class="statistics-item-text">{{ event.date }}</span>
         <span *ngIf="event.winnerTeam">
-             <span>Winner:&nbsp;</span>
-        <span class="statistics-item-text">{{event.winnerTeam}}</span>
+            <span>Winner:&nbsp;</span>
+            <span class="statistics-item-text">{{ event.winnerTeam }}</span>
         </span>
         <span class="statistics-item-options">
-            <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
-        <fa-icon icon="edit" (click)="openModal(editModal); getTeamsOfEvent(event.id)"></fa-icon>
+            <span *ngIf="!event.winnerTeam" style="font-style: italic"
+                >Please define winner Team&nbsp;&nbsp;</span
+            >
+            <fa-icon
+                icon="edit"
+                (click)="openModal(editModal); getTeamsOfEvent(event.id)"
+            ></fa-icon>
         </span>
     </div>
 </div>
@@ -23,11 +28,22 @@
     </div>
     <div class="modal-body">
         <div class="mb-3">
-            <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="winningTeam">
-                <option *ngFor="let team of teamsOfEvent" [ngValue]="team">{{team.name}}</option>
+            <select
+                class="form-select"
+                id="exampleFormControlSelect1"
+                [(ngModel)]="winningTeam"
+            >
+                <option *ngFor="let team of teamsOfEvent" [ngValue]="team">
+                    {{ team.name }}
+                </option>
             </select>
-            <button type="button" class="btn btn-success w-100" (click)="setWinningTeam(winningTeam)">Set winner</button>
+            <button
+                type="button"
+                class="btn btn-success w-100"
+                (click)="setWinningTeam(winningTeam)"
+            >
+                Set winner
+            </button>
         </div>
     </div>
 </ng-template>
-

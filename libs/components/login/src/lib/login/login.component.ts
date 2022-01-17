@@ -17,7 +17,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
                     style({ opacity: 1, transform: 'translateY(0)' })
                 )
             ])
-        ]),
+        ])
     ]
 })
 export class LoginComponent {

@@ -1,12 +1,16 @@
 <div [class.this-is-me]="me.email === member.email" class="members-list-item">
     <div class="members-list-item-icon">
-        <mate-team-user-icon
-            [userIconString]="member.user?.photoURL || '' ">
+        <mate-team-user-icon [userIconString]="member.user?.photoURL || ''">
         </mate-team-user-icon>
     </div>
     <div class="members-list-item-name">
         <p>{{ member.user?.displayName }}</p>
-        <p class="error-dn" *ngIf="member.user?.displayName === '' || !member.user?.displayName ">no display name yet</p>
+        <p
+            class="error-dn"
+            *ngIf="member.user?.displayName === '' || !member.user?.displayName"
+        >
+            no display name yet
+        </p>
     </div>
     <div class="members-list-item-email">
         <p>{{ member.email }}</p>

@@ -14,12 +14,12 @@
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                         [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)"
-                    >
+                    />
                     <fa-icon icon="angle-double-right"></fa-icon>
                     <div class="form-error" *ngIf="isInvalid">
                         <div class="form-error-message">
                             <fa-icon icon="exclamation-circle"></fa-icon>
-                            <p>{{errorMessage}}</p>
+                            <p>{{ errorMessage }}</p>
                         </div>
                     </div>
                 </div>
@@ -39,12 +39,12 @@
             <button
                 class="add-member-btn"
                 type="button"
-                [disabled]="(emails.length < 1)"
-                [class.disabled-btn]="(emails.length < 1)"
-                (click)="sendInvites()" >
-                {{emails.length > 1 ? 'Add members' : 'Add member'}}
+                [disabled]="emails.length < 1"
+                [class.disabled-btn]="emails.length < 1"
+                (click)="sendInvites()"
+            >
+                {{ emails.length > 1 ? 'Add members' : 'Add member' }}
             </button>
-
         </mat-form-field>
     </div>
 </div>

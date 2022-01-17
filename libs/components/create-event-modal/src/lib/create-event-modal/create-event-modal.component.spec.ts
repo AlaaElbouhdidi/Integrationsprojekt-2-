@@ -10,8 +10,7 @@ describe('CreateEventModalComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [CreateEventModalModule]
-    })
-    .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -26,7 +25,9 @@ describe('CreateEventModalComponent', () => {
 
     it('should emit dismiss modal event on icon click', () => {
         jest.spyOn(component.dismissModalEvent, 'emit');
-        const icon = fixture.debugElement.nativeElement.querySelector('#dismiss-modal-icon');
+        const icon = fixture.debugElement.nativeElement.querySelector(
+            '#dismiss-modal-icon'
+        );
         icon.click();
         expect(component.dismissModalEvent.emit).toHaveBeenCalled();
     });

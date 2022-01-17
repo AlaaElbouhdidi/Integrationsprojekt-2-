@@ -72,6 +72,9 @@
                 "libs/components/group-polls-events/src/index.ts"
             ],
             "@group-setting": ["libs/components/group-setting/src/index.ts"],
+            "@group-statistics-list": [
+                "libs/components/group-statistics-list/src/index.ts"
+            ],
             "@groups": ["libs/components/groups/src/index.ts"],
             "@header": ["libs/components/header/src/index.ts"],
             "@invite-members": ["libs/components/invite-members/src/index.ts"],
@@ -79,9 +82,6 @@
             "@loader": ["libs/components/loader/src/index.ts"],
             "@login": ["libs/components/login/src/index.ts"],
             "@login-form": ["libs/components/login-form/src/index.ts"],
-            "@group-statistics-list": [
-                "libs/components/group-statistics-list/src/index.ts"
-            ],
             "@newgroup": ["libs/components/newgroup/src/index.ts"],
             "@newgroup-form": ["libs/components/newgroup-form/src/index.ts"],
             "@newgroup-success": [

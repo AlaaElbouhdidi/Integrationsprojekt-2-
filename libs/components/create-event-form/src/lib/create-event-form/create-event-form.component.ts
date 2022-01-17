@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 import { CreateEventFormData } from '@api-interfaces';
 
 /**
@@ -24,9 +30,7 @@ export class CreateEventFormComponent {
      * Constructor of create event form
      * @param fb {FormBuilder}
      */
-    constructor(
-        private fb: FormBuilder
-    ) {
+    constructor(private fb: FormBuilder) {
         this.createEventForm = this.fb.group({
             name: new FormControl('', [
                 Validators.maxLength(20),
@@ -36,9 +40,7 @@ export class CreateEventFormComponent {
                 Validators.maxLength(255),
                 Validators.required
             ]),
-            date: new FormControl('', [
-                Validators.required
-            ])
+            date: new FormControl('', [Validators.required])
         });
     }
 
@@ -70,8 +72,8 @@ export class CreateEventFormComponent {
         const event: CreateEventFormData = {
             name: this.name.value,
             description: this.description.value,
-            date: this.date.value,
-        }
+            date: this.date.value
+        };
         this.createEventEvent.emit(event);
         this.createEventForm.reset();
     }

@@ -26,9 +26,7 @@
     </ng-container>
 
     <ng-container *ngIf="showTeams">
-        <mate-team-team-form
-            (createTeamEvent)="createTeam($event)"
-        >
+        <mate-team-team-form (createTeamEvent)="createTeam($event)">
         </mate-team-team-form>
         <mate-team-team-list
             [teams]="teams"

@@ -4,6 +4,7 @@ import { EventService } from './event.service';
 import { GroupService } from '../group/group.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Event } from '@api-interfaces';
+import { AuthService } from '../auth/auth.service';
 
 describe('EventService', () => {
     let service: EventService;
@@ -38,11 +39,13 @@ describe('EventService', () => {
     const angularFirestoreMock = {
         collection: jest.fn().mockReturnValue(eventCollectionMock)
     };
+    const authServiceMock = { }
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 { provide: GroupService, useValue: groupServiceMock },
+                { provide: AuthService, useValue: authServiceMock},
                 { provide: AngularFirestore, useValue: angularFirestoreMock }
             ]
         });

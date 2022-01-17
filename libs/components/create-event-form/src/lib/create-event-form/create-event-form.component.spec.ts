@@ -11,8 +11,7 @@ describe('CreateEventFormComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [CreateEventFormModule]
-        })
-        .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -40,7 +39,7 @@ describe('CreateEventFormComponent', () => {
     });
 
     it('should emit event on form submit', () => {
-        jest.spyOn(component.createEventEvent,'emit');
+        jest.spyOn(component.createEventEvent, 'emit');
         component.createEvent();
         expect(component.createEventEvent.emit).toHaveBeenCalled();
     });

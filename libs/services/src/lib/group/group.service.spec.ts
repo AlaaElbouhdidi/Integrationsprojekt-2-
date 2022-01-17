@@ -22,13 +22,13 @@ describe('GroupService', () => {
     const angularFireStoreMock = {
         collection: jest.fn().mockReturnValue(groupCollectionMock)
     };
-    const authServiceMock = {}
+    const authServiceMock = {};
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 { provide: AngularFirestore, useValue: angularFireStoreMock },
-                { provide: AuthService, useValue: authServiceMock}
+                { provide: AuthService, useValue: authServiceMock }
             ]
         });
         service = TestBed.inject(GroupService);

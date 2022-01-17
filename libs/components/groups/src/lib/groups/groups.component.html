@@ -1,9 +1,31 @@
 <main>
+    <section class="events">
+        <div class="events-header">
+            <h5>Upcoming events</h5>
+            <fa-icon icon="calendar-alt"></fa-icon>
+        </div>
+        <div class="events-container">
+            <div *ngFor="let event of events | async">
+                <div class="event">
+                    <h6>{{ event.name }}</h6>
+                    <div>
+                        <fa-icon icon="clock"></fa-icon>
+                        {{ event.date | date }}
+                    </div>
+                    <div>
+                        <button
+                            [routerLink]="'/group/' + event.groupID + '/events'"
+                        >
+                            More infos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="groups">
         <div class="groups-header">
-            <h5>
-                My groups
-            </h5>
+            <h5>My groups</h5>
             <fa-icon icon="user-friends"></fa-icon>
             <button routerLink="/newgroup">
                 <span class="groups-header-small-btn">+</span>
@@ -20,15 +42,28 @@
                         [(ngModel)]="term"
                         placeholder="Search"
                         autofocus
-                    >
+                    />
                 </div>
                 <div class="groups-body-search-order">
                     <span>Order by: </span>
-                    <button [class.active-button]="orderByName" (click)="orderListByName()">Name</button>
-                    <button [class.active-button]="!orderByName" (click)="orderListByAdmin()">Admin</button>
+                    <button
+                        [class.active-button]="orderByName"
+                        (click)="orderListByName()"
+                    >
+                        Name
+                    </button>
+                    <button
+                        [class.active-button]="!orderByName"
+                        (click)="orderListByAdmin()"
+                    >
+                        Admin
+                    </button>
                 </div>
             </div>
-            <div *ngFor="let group of groups | async | filter: term" class="groups-body-group-item">
+            <div
+                *ngFor="let group of groups | async | filter: term"
+                class="groups-body-group-item"
+            >
                 <div class="groups-body-group-item-info">
                     <span>{{ group.name }}</span>
                     <p *ngIf="checkIfAdmin(group.admin)">
@@ -36,9 +71,10 @@
                         (~Admin)
                     </p>
                 </div>
-                <button [routerLink]="'/group/' + group.id + '/events'">Open</button>
+                <button [routerLink]="'/group/' + group.id + '/events'">
+                    Open
+                </button>
             </div>
         </div>
     </section>
 </main>
-
