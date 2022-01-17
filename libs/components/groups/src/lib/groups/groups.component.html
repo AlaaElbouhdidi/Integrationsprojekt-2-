@@ -1,11 +1,11 @@
 <main>
-    <section class="events">
+    <section class="events" @slideAnimation>
         <div class="events-header">
             <h5>Upcoming events</h5>
             <fa-icon icon="calendar-alt"></fa-icon>
         </div>
         <div class="events-container">
-            <div *ngFor="let event of events | async">
+            <div *ngFor="let event of events | async" @itemAnimation>
                 <div class="event">
                     <h6>{{ event.name }}</h6>
                     <div>
@@ -21,9 +21,13 @@
                     </div>
                 </div>
             </div>
+            <p class="events-container-message" *ngIf="(events | async)?.length === 0" @itemAnimation>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                No upcoming events
+            </p>
         </div>
     </section>
-    <section class="groups">
+    <section class="groups" @slideAnimation>
         <div class="groups-header">
             <h5>My groups</h5>
             <fa-icon icon="user-friends"></fa-icon>
@@ -72,6 +76,10 @@
                     Open
                 </button>
             </div>
+            <p class="groups-body-message" *ngIf="(groups | async)?.length === 0" @itemAnimation>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                No groups
+            </p>
         </div>
     </section>
 </main>

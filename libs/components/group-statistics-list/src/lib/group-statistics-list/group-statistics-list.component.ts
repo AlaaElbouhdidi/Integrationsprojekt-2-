@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AlertService, EventService } from '@services';
 import { Event } from '@api-interfaces';
 import { Team } from '@api-interfaces';
@@ -9,7 +9,8 @@ import { slideAnimation, itemAnimation } from '@animations';
     selector: 'mate-team-group-statistics-list',
     templateUrl: './group-statistics-list.component.html',
     styleUrls: ['./group-statistics-list.component.scss'],
-    animations: [slideAnimation, itemAnimation]
+    animations: [slideAnimation, itemAnimation],
+    encapsulation: ViewEncapsulation.None
 })
 export class GroupStatisticsListComponent implements OnInit {
     /**
