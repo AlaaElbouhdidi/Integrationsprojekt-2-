@@ -9,6 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     template: '<p>Mock Register Form Component</p>'
 })
 class MockRegisterFormComponent {}
+@Component({
+    selector: 'mate-team-bg-animation',
+    template: '<p>Mock Background Animation Component</p>'
+})
+class MockBgAnimationComponent {}
 
 describe('RegisterComponent', () => {
     let component: RegisterComponent;
@@ -16,8 +21,12 @@ describe('RegisterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [RegisterComponent, MockRegisterFormComponent],
-            imports: [BrowserAnimationsModule]
+            declarations: [
+                RegisterComponent,
+                MockRegisterFormComponent,
+                MockBgAnimationComponent,
+                BrowserAnimationsModule
+            ]
         }).compileComponents();
     });
 

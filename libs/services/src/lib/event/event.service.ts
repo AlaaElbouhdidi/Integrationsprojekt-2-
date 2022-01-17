@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {Event, Team} from '@api-interfaces';
+import { Event, Team } from '@api-interfaces';
 import { GroupService } from '../group/group.service';
 import { Observable } from 'rxjs';
 
@@ -64,10 +64,32 @@ export class EventService {
             .valueChanges({ idField: 'id' });
     }
 
+    /**
+     * Get teams of a specified event
+     *
+     * @param eventID {string | undefined} ID of event
+     * @returns {Observable<Team[]>} Observable containing array of teams
+     */
     getTeamsOfEvent(eventID: string | undefined): Observable<Team[]> {
         return this.afs
             .collection<Event>('events/' + eventID + '/teams')
             .valueChanges({ idField: 'id' });
+    }
+
+    /**
+     * Sets winningTeam of a specified event
+     *
+     * @param eventID {string | undefined} ID of event
+     * @param teamName {string} Name of winning team to be set
+     */
+    setWinningTeam(
+        eventID: string | undefined,
+        teamName: string
+    ): Promise<void> {
+        return this.afs
+            .collection<Event>('events')
+            .doc(eventID)
+            .update({ winnerTeam: teamName });
     }
 
     /**
@@ -76,9 +98,7 @@ export class EventService {
      * @param event {Event} The event to create
      */
     async createEvent(event: Event): Promise<void> {
-        await this.afs
-            .collection<Event>('events')
-            .add(event)
+        await this.afs.collection<Event>('events').add(event);
     }
 
     /**

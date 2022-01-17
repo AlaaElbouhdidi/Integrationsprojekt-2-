@@ -8,9 +8,10 @@ import {
 import {
     faEdit
 } from '@fortawesome/free-solid-svg-icons';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-    imports: [CommonModule, FontAwesomeModule],
+    imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, FormsModule],
     declarations: [
       GroupStatisticsListComponent
     ],
