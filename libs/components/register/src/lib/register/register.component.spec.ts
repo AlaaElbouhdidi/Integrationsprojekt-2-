@@ -24,9 +24,9 @@ describe('RegisterComponent', () => {
             declarations: [
                 RegisterComponent,
                 MockRegisterFormComponent,
-                MockBgAnimationComponent,
-                BrowserAnimationsModule
-            ]
+                MockBgAnimationComponent
+            ],
+            imports: [BrowserAnimationsModule]
         }).compileComponents();
     });
 

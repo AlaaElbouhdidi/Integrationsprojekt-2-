@@ -75,6 +75,7 @@ export class GroupStatisticsListComponent implements OnInit {
                 type: 'error',
                 message: 'Please select a valid team'
             });
+            return;
         }
         await this.eventService.setWinningTeam(this.currentEventID, team.name);
         this.closeModal();

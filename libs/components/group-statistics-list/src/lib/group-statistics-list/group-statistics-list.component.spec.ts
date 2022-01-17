@@ -6,6 +6,7 @@ import { EventService } from '@services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Event, Team } from '@api-interfaces';
 import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GroupStatisticsListComponent', () => {
     let component: GroupStatisticsListComponent;
@@ -46,7 +47,7 @@ describe('GroupStatisticsListComponent', () => {
                 { provide: EventService, useValue: eventServiceMock },
                 { provide: NgbModal, useValue: modalServiceMock }
             ],
-            imports: [GroupStatisticsListModule]
+            imports: [GroupStatisticsListModule, BrowserAnimationsModule]
         }).compileComponents();
     });
 
@@ -66,14 +67,11 @@ describe('GroupStatisticsListComponent', () => {
         expect(component.events).toEqual([eventMock]);
     });
 
-    it('should not set winning team if team id is empty', () => {
-        teamMock.id = '';
-        fixture.detectChanges();
-        jest.spyOn(window, 'alert').mockImplementation(() => {
-            console.log('alert opened');
-        });
+    it('should not set winning team if no team id', () => {
+        const mockCopy = { ...teamMock };
+        delete mockCopy.id;
         const spy = jest.spyOn(eventServiceMock, 'setWinningTeam');
-        component.setWinningTeam(teamMock);
+        component.setWinningTeam(mockCopy);
         expect(spy).not.toHaveBeenCalled();
     });
 
