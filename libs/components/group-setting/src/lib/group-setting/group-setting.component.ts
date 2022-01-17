@@ -33,7 +33,7 @@ export class GroupSettingComponent implements OnInit {
      */
     @Input() group = {} as Group;
 
-    @Output() manageGroup = new EventEmitter<any>();
+    @Output() manageGroup = new EventEmitter();
     @Output() deleteGroupEvent = new EventEmitter<boolean>();
     /**
      * Constructor of group
@@ -72,10 +72,10 @@ export class GroupSettingComponent implements OnInit {
      * tthe to be edited group
      */
     applyChanges() {
-      const data = {
-        name: this.name.value,
-        description: this.description.value
-      }
+        const data = {
+            name: this.name.value,
+            description: this.description.value
+        };
         this.manageGroup.emit(data);
     }
     /**

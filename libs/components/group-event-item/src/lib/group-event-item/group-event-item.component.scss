@@ -65,7 +65,8 @@
             background: $white;
             color: $dark;
             margin-top: 0.5rem;
-            #teams-full, #description-full {
+            #teams-full,
+            #description-full {
                 display: block;
                 @include for-tablet-portrait-up {
                     display: none;
@@ -74,7 +75,8 @@
                     display: block;
                 }
             }
-            #teams-single, #description-single {
+            #teams-single,
+            #description-single {
                 display: none;
                 @include for-tablet-portrait-up {
                     display: block;

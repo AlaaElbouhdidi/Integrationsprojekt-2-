@@ -16,9 +16,6 @@ export class MembersListItemComponent {
      * Determines if user is admin
      */
 
-    constructor() // eslint-disable-next-line @typescript-eslint/no-empty-function
-    {}
-
     onDeleteMember(member: Member) {
         this.oDeleteMember.emit(member);
     }

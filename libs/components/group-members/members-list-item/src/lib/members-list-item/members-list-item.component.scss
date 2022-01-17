@@ -17,13 +17,14 @@
         flex-direction: row;
         justify-content: space-between;
     }
-    &-name, &-email {
+    &-name,
+    &-email {
         @include flex-center;
         p {
             margin-left: 0;
             margin: auto;
         }
-        .error-dn{
+        .error-dn {
             font-style: italic;
             margin: auto;
             font-size: small;

@@ -6,10 +6,7 @@ import {
     FontAwesomeModule,
     FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
-import {
-    faUserCircle,
-    faLayerGroup
-} from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { StylesModule } from '@styles';
 
 @NgModule({
@@ -19,9 +16,6 @@ import { StylesModule } from '@styles';
 })
 export class HeaderModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(
-            faUserCircle,
-            faLayerGroup
-        );
+        library.addIcons(faUserCircle, faLayerGroup);
     }
 }

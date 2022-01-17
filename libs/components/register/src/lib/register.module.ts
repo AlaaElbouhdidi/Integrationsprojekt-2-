@@ -15,6 +15,6 @@ import { BgAnimationModule } from '@bg-animation';
         RegisterFormModule,
         BgAnimationModule
     ],
-    exports: [RegisterComponent],
+    exports: [RegisterComponent]
 })
 export class RegisterModule {}

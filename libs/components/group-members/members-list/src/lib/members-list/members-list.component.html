@@ -2,9 +2,18 @@
     <div class="members-header">
         <div class="members-header-searchbar">
             <fa-icon icon="search"></fa-icon>
-            <input type="text" name="term" [(ngModel)]="term" placeholder="Search..." autofocus >
+            <input
+                type="text"
+                name="term"
+                [(ngModel)]="term"
+                placeholder="Search..."
+                autofocus
+            />
         </div>
-        <button *ngIf="gAdmin === currentUser.uid" (click)="openModal(newMember)">
+        <button
+            *ngIf="gAdmin === currentUser.uid"
+            (click)="openModal(newMember)"
+        >
             <span>+</span>
             <span>+ Add new member</span>
         </button>

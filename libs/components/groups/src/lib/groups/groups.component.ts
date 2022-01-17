@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Group } from '@api-interfaces';
-import { AuthService, GroupService } from '@services';
+import { Group, Event } from '@api-interfaces';
+import { AuthService, EventService, GroupService } from '@services';
+import { Observable } from 'rxjs';
 import { itemAnimation, slideAnimation } from '@animations';
 
 @Component({
@@ -10,6 +11,7 @@ import { itemAnimation, slideAnimation } from '@animations';
     animations: [itemAnimation, slideAnimation]
 })
 export class GroupsComponent {
+    events: Observable<Event[]>;
     groups: Promise<Group[]>;
     /**
      * keyword to filter the list of members
@@ -18,9 +20,11 @@ export class GroupsComponent {
     orderByName = true;
     constructor(
         public groupService: GroupService,
+        public eventService: EventService,
         private authService: AuthService
     ) {
         this.groups = this.groupService.getUserGroups();
+        this.events = this.eventService.getUpcomingEvents();
     }
 
     checkIfAdmin(adminId: string): boolean {

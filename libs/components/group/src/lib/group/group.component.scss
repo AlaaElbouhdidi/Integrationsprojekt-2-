@@ -15,7 +15,7 @@ main {
     @include for-desktop-up {
         padding: 3rem 10rem;
     }
-    h1{
+    h1 {
         margin-top: 2rem;
         align-items: center;
         display: flex;
@@ -23,7 +23,7 @@ main {
         color: $white;
         animation: textInAnimation 0.25s forwards;
     }
-    h6{
+    h6 {
         margin-bottom: 1rem;
         align-items: center;
         display: flex;
@@ -58,16 +58,16 @@ main {
                     top: 0;
                     transition: 0.25s;
                 }
-                fa-icon[icon="user-friends"] {
+                fa-icon[icon='user-friends'] {
                     left: -1.9rem;
                 }
-                fa-icon[icon="table"] {
+                fa-icon[icon='table'] {
                     left: -1.6rem;
                 }
-                fa-icon[icon="calendar-alt"] {
+                fa-icon[icon='calendar-alt'] {
                     left: -1.6rem;
                 }
-                fa-icon[icon="cog"] {
+                fa-icon[icon='cog'] {
                     left: -1.6rem;
                 }
                 a {

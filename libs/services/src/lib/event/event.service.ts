@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Event, Team } from '@api-interfaces';
 import { GroupService } from '../group/group.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 /**
  * Event service
@@ -18,7 +19,8 @@ export class EventService {
      */
     constructor(
         private afs: AngularFirestore,
-        private groupService: GroupService
+        private groupService: GroupService,
+        private authService: AuthService
     ) {}
 
     /**
@@ -48,7 +50,28 @@ export class EventService {
             )
             .valueChanges({ idField: 'id' });
     }
-
+    /**
+     * Get all active events of a group
+     *
+     * @returns {Observable<Event[]>} Observable containing array of events
+     */
+    getUpcomingEvents(): Observable<Event[]> {
+        const { uid } = this.authService.getCurrentUser();
+        const participant = {
+            displayName: '',
+            icon: '',
+            uid
+        };
+        console.log(participant);
+        return this.afs
+            .collection<Event>('events', (ref) =>
+                ref
+                    .where('participants', 'array-contains', participant)
+                    .where('done', '==', false)
+                    .limit(5)
+            )
+            .valueChanges();
+    }
     /**
      * Get all active events of a group
      *
