@@ -1,3 +1,37 @@
+@import 'libs/styles/src/lib/variables';
+@import 'libs/styles/src/lib/modals';
+
+.statistics-header {
+    display: flex;
+    align-items: center;
+    border-left: 2px solid white;
+    padding: 0.25rem 0.75rem;
+    color: $white;
+    h5 {
+        margin: 0 0.5rem 0 0;
+    }
+    fa-icon {
+        font-size: 1.35rem;
+        margin-right: 1rem;
+    }
+}
+.statistics-list {
+    margin-top: 1rem;
+    fa-icon[icon="edit"] {
+        transition: 0.25s;
+        cursor: pointer;
+        &:hover {
+            color: $successHover;
+        }
+    }
+}
+.statistics-message {
+    color: $white;
+    margin-top: 1rem;
+    fa-icon {
+        color: $warning;
+    }
+}
 .statistics-item {
     position: relative;
     color: #fff !important;

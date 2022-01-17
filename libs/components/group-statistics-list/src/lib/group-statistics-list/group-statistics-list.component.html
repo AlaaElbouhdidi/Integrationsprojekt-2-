@@ -1,16 +1,27 @@
-<div class="statistics-list" *ngFor="let event of this.events">
-    <div class="statistics-item">
-        <span class="statistics-item-text">{{event.name}}</span>
-        <span class="statistics-item-text">{{event.date}}</span>
-        <span *ngIf="event.winnerTeam">
+<div class="statistics" @slideAnimation>
+    <div class="statistics-header">
+        <h5>Finished events</h5>
+        <fa-icon icon="calendar-alt"></fa-icon>
+    </div>
+
+    <div class="statistics-list" *ngFor="let event of this.events" @itemAnimation>
+        <div class="statistics-item">
+            <span class="statistics-item-text">{{event.name}}</span>
+            <span class="statistics-item-text">{{event.date | date: 'mediumDate'}}</span>
+            <span *ngIf="event.winnerTeam">
              <span>Winner:&nbsp;</span>
         <span class="statistics-item-text">{{event.winnerTeam}}</span>
         </span>
-        <span class="statistics-item-options">
+            <span class="statistics-item-options">
             <span *ngIf="!event.winnerTeam" style="font-style: italic">Please define winner Team&nbsp;&nbsp;</span>
         <fa-icon icon="edit" (click)="openModal(editModal); getTeamsOfEvent(event.id)"></fa-icon>
         </span>
+        </div>
     </div>
+    <p class="statistics-message" *ngIf="events.length === 0">
+        <fa-icon icon="exclamation-circle"></fa-icon>
+        No finished events in this group
+    </p>
 </div>
 
 <ng-template #editModal>
@@ -22,7 +33,7 @@
         <fa-icon icon="times-circle" (click)="closeModal()"> </fa-icon>
     </div>
     <div class="modal-body">
-        <div class="mb-3">
+        <div>
             <select class="form-select" id="exampleFormControlSelect1" [(ngModel)]="winningTeam">
                 <option *ngFor="let team of teamsOfEvent" [ngValue]="team">{{team.name}}</option>
             </select>
