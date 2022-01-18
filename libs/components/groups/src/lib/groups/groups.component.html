@@ -64,7 +64,7 @@
             </button>
         </div>
         <div class="groups-body">
-            <div class="groups-body-search">
+            <div class="groups-body-search" *ngIf="(groups | async)?.length !== 0">
                 <div class="groups-body-search-input">
                     <fa-icon icon="search"></fa-icon>
                     <input
