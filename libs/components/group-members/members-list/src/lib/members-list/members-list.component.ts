@@ -81,7 +81,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
             return;
         }
         try {
+            if (!m.uid) {
+                return;
+            }
             await this.groupService.deleteMember(this.gid, m);
+            await this.groupService.removeUserGroupReference(this.gid, m.uid);
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Member successfully deleted'

@@ -89,7 +89,7 @@ export class InviteMembersComponent {
             for (const email of this.emails) {
                 const user = await this.userService.getUser(email);
                 try {
-                    await this.userService.sendUserGroupInvitation(
+                    await this.groupService.sendUserGroupInvitation(
                         user,
                         this.gid
                     );

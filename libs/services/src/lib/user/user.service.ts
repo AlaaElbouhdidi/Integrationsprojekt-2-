@@ -33,7 +33,8 @@ export class UserService {
                         email: doc.get('email'),
                         photoURL: doc.get('photoURL'),
                         displayName: doc.get('displayName'),
-                        invitations: doc.get('invitations')
+                        invitations: doc.get('invitations'),
+                        groups: doc.get('groups')
                     };
                 });
             });
@@ -57,30 +58,6 @@ export class UserService {
                 }
             });
         return user;
-    }
-
-    async sendUserGroupInvitation(user: User, groupId: string) {
-        let { invitations } = user;
-        if (!invitations) {
-            invitations = [];
-        }
-        await this.afs
-            .collection('users')
-            .doc(user.uid)
-            .set(
-                {
-                    invitations: [...invitations, groupId]
-                },
-                { merge: true }
-            );
-    }
-
-    async declineUserGroupInvitation(groupId: string): Promise<void> {
-        console.log('decline');
-    }
-
-    async acceptUserGroupInvitation(): Promise<void> {
-        console.log('accept');
     }
 
     async updateProfile(

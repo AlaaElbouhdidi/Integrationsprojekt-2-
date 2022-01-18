@@ -7,6 +7,7 @@ import {
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { UserService } from '../user/user.service';
 
 /**
  * Group service
@@ -27,8 +28,14 @@ export class GroupService {
     /**
      * Constructor of group service
      * @param afs {AngularFirestore}
+     * @param authService {AuthService},
+     * @param userService {UserService}
      */
-    constructor(public afs: AngularFirestore, public authService: AuthService) {
+    constructor(
+        public afs: AngularFirestore,
+        public authService: AuthService,
+        private userService: UserService
+    ) {
         this.groupCollection = this.afs.collection('groups');
     }
 
@@ -45,23 +52,7 @@ export class GroupService {
             .ref.get()
             .then((group) => group.data());
     }
-    // getOwnedGroups() {
-    //     const { uid } = this.authService.getCurrentUser();
-    //     const groupCollection = this.afs.collection<Group>('groups', (ref) =>
-    //         ref.where('admin', '==', uid)
-    //     );
-    //     return groupCollection.snapshotChanges().pipe(
-    //         map((groups) =>
-    //             groups.map((g) => {
-    //                 const data = g.payload.doc.data() as Group;
-    //                 const id = g.payload.doc.id;
-    //                 const group: Group = { id, ...data };
-    //                 console.log(group);
-    //                 return group;
-    //             })
-    //         )
-    //     );
-    // }
+
     async getUserGroups() {
         const { uid } = this.authService.getCurrentUser();
         const user = (
@@ -111,6 +102,99 @@ export class GroupService {
         return groupInvitations;
     }
 
+    async sendUserGroupInvitation(user: User, groupId: string) {
+        let { invitations } = user;
+        if (!invitations) {
+            invitations = [];
+        }
+        await this.afs
+            .collection('users')
+            .doc(user.uid)
+            .set(
+                {
+                    invitations: [...invitations, groupId]
+                },
+                { merge: true }
+            );
+    }
+
+    async declineUserGroupInvitation(groupId: string): Promise<void> {
+        const currentUser = this.authService.getCurrentUser();
+        const user = await this.afs
+            .collection('users')
+            .doc(currentUser.uid)
+            .ref.get()
+            .then((doc) => {
+                return doc.data() as User;
+            });
+        let { invitations } = user;
+        if (!invitations) {
+            invitations = [];
+        }
+        const updatedInvitations = invitations.filter(
+            (groupInvitationId) => groupInvitationId !== groupId
+        );
+        await this.afs.collection('users').doc(currentUser.uid).set({
+            invitations: updatedInvitations
+        });
+    }
+
+    async acceptUserGroupInvitation(groupId: string): Promise<void> {
+        const currentUser = this.authService.getCurrentUser();
+        const user = await this.afs
+            .collection('users')
+            .doc(currentUser.uid)
+            .ref.get()
+            .then((doc) => {
+                return doc.data() as User;
+            });
+        let { invitations, groups } = user;
+        if (!invitations) {
+            invitations = [];
+        }
+        if (!groups) {
+            groups = [];
+        }
+        const updatedInvitations = invitations.filter(
+            (groupInvitationId) => groupInvitationId !== groupId
+        );
+        await this.afs
+            .collection('users')
+            .doc(currentUser.uid)
+            .set(
+                {
+                    invitations: updatedInvitations,
+                    groups: [...groups, groupId]
+                },
+                { merge: true }
+            );
+        await this.addMemberToGroup(groupId, {
+            uid: user.uid,
+            isAdmin: false,
+            email: user.email
+        });
+    }
+
+    async removeUserGroupReference(
+        groupId: string,
+        userId: string
+    ): Promise<void> {
+        const user = await this.userService.getUserByUid(userId);
+        let { groups } = user;
+        if (!groups) {
+            groups = [];
+        }
+        const updatedGroupsReferences = groups.filter(
+            (groupReference) => groupReference !== groupId
+        );
+        await this.afs.collection('users').doc(user.uid).set(
+            {
+                groups: updatedGroupsReferences
+            },
+            { merge: true }
+        );
+    }
+
     toggleSuccess(gid: string): void {
         if (gid != '') {
             this.success = true;
@@ -152,7 +236,11 @@ export class GroupService {
         return groupId;
     }
     async addMemberToGroup(gid: string, m: Member): Promise<void> {
-        this.groupCollection.doc(gid).collection('members').doc(m.email).set(m);
+        await this.groupCollection
+            .doc(gid)
+            .collection('members')
+            .doc(m.email)
+            .set(m);
     }
     async isAlreadyMember(gid: string, email: string): Promise<boolean> {
         const q = await this.afs

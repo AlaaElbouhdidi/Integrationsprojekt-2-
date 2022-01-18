@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { Group, Event } from '@api-interfaces';
-import { AuthService, EventService, GroupService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    EventService,
+    GroupService,
+    UserService
+} from '@services';
 import { Observable } from 'rxjs';
 import { itemAnimation, slideAnimation } from '@animations';
 
@@ -22,7 +28,9 @@ export class GroupsComponent {
     constructor(
         public groupService: GroupService,
         public eventService: EventService,
-        private authService: AuthService
+        private authService: AuthService,
+        private userService: UserService,
+        private alertService: AlertService
     ) {
         this.groups = this.groupService.getUserGroups();
         this.events = this.eventService.getUpcomingEvents();
@@ -42,11 +50,35 @@ export class GroupsComponent {
         this.orderByName = false;
     }
 
-    declineInvitation(): void {
-        console.log('decline');
+    async declineInvitation(groupId: string): Promise<void> {
+        try {
+            await this.groupService.declineUserGroupInvitation(groupId);
+            window.location.reload();
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Invitation declined'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
     }
 
-    acceptInvitation(): void {
-        console.log('accept');
+    async acceptInvitation(groupId: string): Promise<void> {
+        try {
+            await this.groupService.acceptUserGroupInvitation(groupId);
+            window.location.reload();
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Invitation accepted'
+            });
+        } catch (e) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
     }
 }

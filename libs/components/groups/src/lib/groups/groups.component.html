@@ -10,16 +10,20 @@
                     <p>{{invitation.name}}</p>
                 </div>
                 <div class="invitations-body-item-buttons">
-                    <button class="invitations-body-item-buttons-accept" (click)="declineInvitation()">
+                    <button class="invitations-body-item-buttons-accept" (click)="acceptInvitation(invitation.id!)">
                         <fa-icon icon="check"></fa-icon>
                         Accept
                     </button>
-                    <button class="invitations-body-item-buttons-decline" (click)="acceptInvitation()">
+                    <button class="invitations-body-item-buttons-decline" (click)="declineInvitation(invitation.id!)">
                         <fa-icon icon="times"></fa-icon>
                         Decline
                     </button>
                 </div>
             </div>
+            <p class="invitations-body-message" *ngIf="(invitations | async)?.length === 0" @itemAnimation>
+                <fa-icon icon="exclamation-circle"></fa-icon>
+                No group invitations
+            </p>
         </div>
     </section>
     <section class="events" @slideAnimation>

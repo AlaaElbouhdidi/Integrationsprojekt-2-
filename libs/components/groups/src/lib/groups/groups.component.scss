@@ -229,6 +229,13 @@ main {
 .invitations-body {
     display: flex;
     flex-direction: column;
+    &-message {
+        color: $white;
+        margin: 0;
+        fa-icon {
+            color: $warning;
+        }
+    }
 }
 .invitations-body-item {
     display: flex;
