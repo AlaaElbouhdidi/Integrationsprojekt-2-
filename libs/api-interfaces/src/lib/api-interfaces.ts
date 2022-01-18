@@ -253,6 +253,7 @@ export interface User {
     photoURL?: string;
     groups?: string[];
     displayName?: string;
+    invitations?: string[];
 }
 
 export enum Activity {

@@ -87,6 +87,30 @@ export class GroupService {
         return userGroups;
     }
 
+    async getUserInvitations(): Promise<Group[]> {
+        const { uid } = this.authService.getCurrentUser();
+        const user = (
+            await this.afs.collection(`/users`).doc<User>(uid).ref.get()
+        ).data();
+        const groupInvitations: Group[] = [];
+        if (!user) {
+            return [];
+        }
+        const { invitations } = user;
+        if (!invitations) {
+            return [];
+        }
+        for (const invitation of invitations) {
+            const group = (
+                await this.groupCollection.doc(invitation).ref.get()
+            ).data();
+            if (group) {
+                groupInvitations.push({ ...group, id: invitation });
+            }
+        }
+        return groupInvitations;
+    }
+
     toggleSuccess(gid: string): void {
         if (gid != '') {
             this.success = true;
@@ -174,18 +198,29 @@ export class GroupService {
     /**
      * delete a group
      */
-     async deleteGroup(gid: string): Promise<void> {
-
-        await this.afs.collection(`groups/${gid}/members`).get().forEach((qs) => {
-            qs.docs.forEach((i) =>{
-                this.afs.collection(`groups/${gid}/members`).doc(i.id).delete();
-            })
-        });
-        await this.afs.collection(`groups/${gid}/datePolls`).get().forEach((qs) => {
-            qs.docs.forEach((i) =>{
-                this.afs.collection(`groups/${gid}/datePolls`).doc(i.id).delete();
-            })
-        });
+    async deleteGroup(gid: string): Promise<void> {
+        await this.afs
+            .collection(`groups/${gid}/members`)
+            .get()
+            .forEach((qs) => {
+                qs.docs.forEach((i) => {
+                    this.afs
+                        .collection(`groups/${gid}/members`)
+                        .doc(i.id)
+                        .delete();
+                });
+            });
+        await this.afs
+            .collection(`groups/${gid}/datePolls`)
+            .get()
+            .forEach((qs) => {
+                qs.docs.forEach((i) => {
+                    this.afs
+                        .collection(`groups/${gid}/datePolls`)
+                        .doc(i.id)
+                        .delete();
+                });
+            });
         await this.groupCollection.doc(gid).delete();
     }
 }

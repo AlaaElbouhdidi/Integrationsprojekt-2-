@@ -1,4 +1,27 @@
 <main>
+    <section class="invitations">
+        <div class="invitations-header">
+            <h5>Group invitations</h5>
+            <fa-icon icon="paper-plane"></fa-icon>
+        </div>
+        <div class="invitations-body">
+            <div class="invitations-body-item" *ngFor="let invitation of invitations | async" @itemAnimation>
+                <div class="invitations-body-item-info">
+                    <p>{{invitation.name}}</p>
+                </div>
+                <div class="invitations-body-item-buttons">
+                    <button class="invitations-body-item-buttons-accept" (click)="declineInvitation()">
+                        <fa-icon icon="check"></fa-icon>
+                        Accept
+                    </button>
+                    <button class="invitations-body-item-buttons-decline" (click)="acceptInvitation()">
+                        <fa-icon icon="times"></fa-icon>
+                        Decline
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="events" @slideAnimation>
         <div class="events-header">
             <h5>Upcoming events</h5>

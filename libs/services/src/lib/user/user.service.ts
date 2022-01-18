@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '@api-interfaces';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../auth/auth.service';
 
 /**
  * User service
@@ -12,8 +13,12 @@ export class UserService {
     /**
      * Constructor of user service
      * @param afs {AngularFirestore}
+     * @param authService {AuthService}
      */
-    constructor(private afs: AngularFirestore) {}
+    constructor(
+        private afs: AngularFirestore,
+        private authService: AuthService
+    ) {}
 
     async getUser(email: string): Promise<User> {
         let user: User = {} as User;
@@ -27,7 +32,8 @@ export class UserService {
                         uid: doc.id,
                         email: doc.get('email'),
                         photoURL: doc.get('photoURL'),
-                        displayName: doc.get('displayName')
+                        displayName: doc.get('displayName'),
+                        invitations: doc.get('invitations')
                     };
                 });
             });
@@ -51,6 +57,30 @@ export class UserService {
                 }
             });
         return user;
+    }
+
+    async sendUserGroupInvitation(user: User, groupId: string) {
+        let { invitations } = user;
+        if (!invitations) {
+            invitations = [];
+        }
+        await this.afs
+            .collection('users')
+            .doc(user.uid)
+            .set(
+                {
+                    invitations: [...invitations, groupId]
+                },
+                { merge: true }
+            );
+    }
+
+    async declineUserGroupInvitation(groupId: string): Promise<void> {
+        console.log('decline');
+    }
+
+    async acceptUserGroupInvitation(): Promise<void> {
+        console.log('accept');
     }
 
     async updateProfile(

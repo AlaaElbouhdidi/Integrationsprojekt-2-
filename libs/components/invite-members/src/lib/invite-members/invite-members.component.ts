@@ -1,7 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Member } from '@api-interfaces';
 import { AuthService, GroupService, UserService } from '@services';
 
 @Component({
@@ -32,7 +31,7 @@ export class InviteMembersComponent {
      * Constructor which initializes the reactive register form
      * @param groupService {GroupService}
      * @param authService {AuthService}
-     * @param authService {UserService}
+     * @param userService {UserService}
      */
     constructor(
         private groupService: GroupService,
@@ -85,34 +84,20 @@ export class InviteMembersComponent {
         }
     }
 
-    async sendInvites() {
+    async sendInvites(): Promise<void> {
         if (this.emails) {
-            for (const e of this.emails) {
-                const m: Member = {
-                    isAdmin: false,
-                    email: e
-                };
-                await this.userService.getUser(e).then((u) => {
-                    m.uid = u.uid;
-                });
-                this.groupService.addMemberToGroup(this.gid, m);
+            for (const email of this.emails) {
+                const user = await this.userService.getUser(email);
+                try {
+                    await this.userService.sendUserGroupInvitation(
+                        user,
+                        this.gid
+                    );
+                    this.sendInvitesEvent.emit(true);
+                } catch (e) {
+                    this.sendInvitesEvent.emit(false);
+                }
             }
-            this.sendInvitesEvent.emit(true);
         }
     }
-    /* sendSignInEmail(email: string) {
-      const actionCodeSettings = {
-          url: 'http://mate-team.de/login',
-          handleCodeInApp: true
-      };
-      const auth = getAuth();
-      sendSignInLinkToEmail(auth, email, actionCodeSettings)
-          .then(() => {
-              window.localStorage.setItem('emailForSignIn', email);
-          })
-          .catch((error) => {
-              const errorMessage = error.message;
-              console.error(errorMessage);
-          });
-  } */
 }

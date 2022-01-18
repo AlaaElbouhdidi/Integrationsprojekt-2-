@@ -62,7 +62,8 @@ main {
         }
     }
     .groups,
-    .events {
+    .events,
+    .invitations {
         color: $white;
         margin: 2rem 0;
         &-header {
@@ -221,6 +222,50 @@ main {
                     width: auto;
                     padding: 0 4rem;
                 }
+            }
+        }
+    }
+}
+.invitations-body {
+    display: flex;
+    flex-direction: column;
+}
+.invitations-body-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $darkAccent;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    margin-bottom: 1rem;
+    &-info {
+        margin-right: 1rem;
+        p {
+            margin: 0;
+        }
+    }
+    &-buttons {
+        button {
+            border: none;
+            transition: 0.25s;
+            padding: 0 0.75rem;
+            border-radius: 0.25rem;
+            color: $white;
+            fa-icon {
+                font-size: 0.9rem;
+            }
+        }
+        &-accept {
+            background: $success;
+            margin-right: 1rem;
+            &:hover {
+                background: $successHover;
+            }
+        }
+        &-decline {
+            background: $error;
+            &:hover {
+                background: $errorHover;
             }
         }
     }
