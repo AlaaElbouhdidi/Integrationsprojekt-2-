@@ -21,7 +21,7 @@
             >
             </mate-team-user-icon>
         </div>
-        <p>{{ participant.displayName }}</p>
+        <p>{{ participant.displayName ? participant.displayName : 'No display name' }}</p>
     </div>
     <div
         class="event-participants-list-warning"
