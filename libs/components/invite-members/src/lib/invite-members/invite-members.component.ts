@@ -1,7 +1,12 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { AuthService, GroupService, UserService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    GroupService,
+    UserService
+} from '@services';
 
 @Component({
     selector: 'mate-team-invite-members',
@@ -32,11 +37,13 @@ export class InviteMembersComponent {
      * @param groupService {GroupService}
      * @param authService {AuthService}
      * @param userService {UserService}
+     * @param alertService {AlertService}
      */
     constructor(
         private groupService: GroupService,
         private authService: AuthService,
-        private userService: UserService
+        private userService: UserService,
+        private alertService: AlertService
     ) {}
 
     async add(event: MatChipInputEvent): Promise<void> {
@@ -54,6 +61,13 @@ export class InviteMembersComponent {
                     this.gid,
                     e
                 );
+                const alreadyInvited =
+                    await this.groupService.invitationAlreadySent(e, this.gid);
+                if (alreadyInvited) {
+                    this.isInvalid = true;
+                    this.errorMessage = `${e} has already been invited`;
+                    return;
+                }
                 if (res) {
                     this.isInvalid = true;
                     this.errorMessage = `${e} is already assigned to the group`;
@@ -89,6 +103,14 @@ export class InviteMembersComponent {
             for (const email of this.emails) {
                 const user = await this.userService.getUser(email);
                 try {
+                    const invited =
+                        await this.groupService.invitationAlreadySent(
+                            email,
+                            this.gid
+                        );
+                    if (invited) {
+                        continue;
+                    }
                     await this.groupService.sendUserGroupInvitation(
                         user,
                         this.gid

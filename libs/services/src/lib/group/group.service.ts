@@ -118,6 +118,17 @@ export class GroupService {
             );
     }
 
+    async invitationAlreadySent(
+        email: string,
+        groupId: string
+    ): Promise<boolean> {
+        let { invitations } = await this.userService.getUser(email);
+        if (!invitations) {
+            return false;
+        }
+        return invitations.some((invitation) => invitation === groupId);
+    }
+
     async declineUserGroupInvitation(groupId: string): Promise<void> {
         const currentUser = this.authService.getCurrentUser();
         const user = await this.afs
@@ -246,15 +257,13 @@ export class GroupService {
             .set(m);
     }
     async isAlreadyMember(gid: string, email: string): Promise<boolean> {
-        const q = await this.afs
+        return await this.afs
             .collection('groups/' + gid + '/members/')
             .ref.where('email', '==', email)
             .get()
             .then((qs) => {
-                if (qs.size > 0) return true;
-                else return false;
+                return qs.size > 0;
             });
-        return q;
     }
     getAllMembers(gid: string): Observable<Member[]> {
         return this.afs

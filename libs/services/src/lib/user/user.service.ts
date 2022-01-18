@@ -53,7 +53,9 @@ export class UserService {
                         uid: doc.id,
                         email: doc.get('email'),
                         photoURL: doc.get('photoURL'),
-                        displayName: doc.get('displayName')
+                        displayName: doc.get('displayName'),
+                        invitations: doc.get('invitations'),
+                        groups: doc.get('groups')
                     };
                 }
             });
