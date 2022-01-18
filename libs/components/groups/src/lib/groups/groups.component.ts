@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Group, Event } from '@api-interfaces';
 import {
     AlertService,
@@ -18,7 +18,7 @@ import { itemAnimation, slideAnimation } from '@animations';
     styleUrls: ['./groups.component.scss'],
     animations: [itemAnimation, slideAnimation]
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit, OnDestroy {
     /**
      * Destroy subject
      * @private
@@ -119,8 +119,7 @@ export class GroupsComponent implements OnInit {
      */
     sortByDate(events: Event[]): Event[] {
         return events.sort((a, b) => {
-            // @ts-ignore
-            return new Date(b.date) - new Date(a.date);
+            return b.date.localeCompare(a.date);
         });
     }
 

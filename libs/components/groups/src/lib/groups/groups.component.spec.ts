@@ -4,6 +4,7 @@ import { GroupsModule } from '../groups.module';
 import { GroupsComponent } from './groups.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 describe('GroupsComponent', () => {
     let component: GroupsComponent;
@@ -18,7 +19,7 @@ describe('GroupsComponent', () => {
         getCurrentUser: jest.fn().mockReturnValue({ uid: 'userId' })
     };
     const eventServiceMock = {
-        getUpcomingEvents: jest.fn()
+        getUpcomingEvents: jest.fn().mockReturnValue(of([]))
     };
 
     beforeEach(async () => {
