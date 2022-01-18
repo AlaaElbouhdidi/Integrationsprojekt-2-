@@ -17,7 +17,7 @@
                     name="choice"
                 />
                 <p [class.disabled-text]="userVoted">
-                    {{ choice.date | date: 'mediumDate' }}
+                    {{ choice.date | date: 'short' }}
                 </p>
             </div>
         </form>
@@ -27,7 +27,7 @@
                 *ngFor="let choice of poll!.choices"
             >
                 <div class="poll-item-body-results-text">
-                    <p>{{ choice.date | date: 'mediumDate' }}</p>
+                    <p>{{ choice.date | date: 'short' }}</p>
                     <p>
                         {{ choice.votes ? choice.votes : 0 }}
                         <span>Votes</span>

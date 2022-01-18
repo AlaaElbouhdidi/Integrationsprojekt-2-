@@ -33,7 +33,7 @@
         <div class="choices-date-wrapper">
             <div class="form-input date-input">
                 <input
-                    type="date"
+                    type="datetime-local"
                     formControlName="date"
                     placeholder="Date"
                     required
@@ -67,7 +67,7 @@
         <ul *ngIf="choices.length > 0">
             <li *ngFor="let choice of choices; let i = index">
                 <span>{{ i + 1 }}.</span>
-                <span>{{ choice.date | date: 'mediumDate' }}</span>
+                <span>{{ choice.date | date: 'short' }}</span>
                 <fa-icon icon="trash" (click)="deleteDateAsChoice(i)">
                 </fa-icon>
             </li>
