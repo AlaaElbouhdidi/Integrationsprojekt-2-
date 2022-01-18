@@ -134,9 +134,12 @@ export class GroupService {
         const updatedInvitations = invitations.filter(
             (groupInvitationId) => groupInvitationId !== groupId
         );
-        await this.afs.collection('users').doc(currentUser.uid).set({
-            invitations: updatedInvitations
-        });
+        await this.afs.collection('users').doc(currentUser.uid).set(
+            {
+                invitations: updatedInvitations
+            },
+            { merge: true }
+        );
     }
 
     async acceptUserGroupInvitation(groupId: string): Promise<void> {
