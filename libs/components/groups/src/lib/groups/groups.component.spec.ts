@@ -9,7 +9,10 @@ describe('GroupsComponent', () => {
     let component: GroupsComponent;
     let fixture: ComponentFixture<GroupsComponent>;
     const groupServiceMock = {
-        getUserGroups: jest.fn()
+        getUserGroups: jest.fn(),
+        getUserInvitations: jest.fn(),
+        declineUserGroupInvitation: jest.fn(),
+        acceptUserGroupInvitation: jest.fn
     };
     const authServiceMock = {
         getCurrentUser: jest.fn().mockReturnValue({ uid: 'userId' })
@@ -17,6 +20,7 @@ describe('GroupsComponent', () => {
     const eventServiceMock = {
         getUpcomingEvents: jest.fn()
     };
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
@@ -26,7 +30,7 @@ describe('GroupsComponent', () => {
             ],
             providers: [
                 { provide: GroupService, useValue: groupServiceMock },
-                { provide: EventService, useValue: eventServiceMock},
+                { provide: EventService, useValue: eventServiceMock },
                 { provide: AuthService, useValue: authServiceMock }
             ]
         }).compileComponents();

@@ -81,7 +81,11 @@ export class MembersListComponent implements OnInit, OnDestroy {
             return;
         }
         try {
+            if (!m.uid) {
+                return;
+            }
             await this.groupService.deleteMember(this.gid, m);
+            await this.groupService.removeUserGroupReference(this.gid, m.uid);
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Member successfully deleted'
@@ -95,6 +99,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
             }
         }
     }
+
     toggleIsAdmin(m: Member) {
         this.groupService.toggleIsAdmin(this.gid, m);
         this.alertService.addAlert({
@@ -102,14 +107,20 @@ export class MembersListComponent implements OnInit, OnDestroy {
             message: 'Member updated'
         });
     }
-    addMember(success: boolean) {
+
+    sendInvitation(success: boolean) {
         if (success) {
             this.alertService.addAlert({
                 type: 'success',
-                message: 'Members successfully added'
+                message: 'Invitation successfully send'
             });
-            this.closeModal();
+        } else {
+            this.alertService.addAlert({
+                type: 'error',
+                message: 'Error occurred while sending invitation'
+            });
         }
+        this.closeModal();
     }
     /**
      * Opens a modal where the user can add members

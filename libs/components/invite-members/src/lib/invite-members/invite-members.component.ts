@@ -1,8 +1,12 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Member } from '@api-interfaces';
-import { AuthService, GroupService, UserService } from '@services';
+import {
+    AlertService,
+    AuthService,
+    GroupService,
+    UserService
+} from '@services';
 
 @Component({
     selector: 'mate-team-invite-members',
@@ -32,12 +36,14 @@ export class InviteMembersComponent {
      * Constructor which initializes the reactive register form
      * @param groupService {GroupService}
      * @param authService {AuthService}
-     * @param authService {UserService}
+     * @param userService {UserService}
+     * @param alertService {AlertService}
      */
     constructor(
         private groupService: GroupService,
         private authService: AuthService,
-        private userService: UserService
+        private userService: UserService,
+        private alertService: AlertService
     ) {}
 
     async add(event: MatChipInputEvent): Promise<void> {
@@ -55,6 +61,13 @@ export class InviteMembersComponent {
                     this.gid,
                     e
                 );
+                const alreadyInvited =
+                    await this.groupService.invitationAlreadySent(e, this.gid);
+                if (alreadyInvited) {
+                    this.isInvalid = true;
+                    this.errorMessage = `${e} has already been invited`;
+                    return;
+                }
                 if (res) {
                     this.isInvalid = true;
                     this.errorMessage = `${e} is already assigned to the group`;
@@ -85,34 +98,28 @@ export class InviteMembersComponent {
         }
     }
 
-    async sendInvites() {
+    async sendInvites(): Promise<void> {
         if (this.emails) {
-            for (const e of this.emails) {
-                const m: Member = {
-                    isAdmin: false,
-                    email: e
-                };
-                await this.userService.getUser(e).then((u) => {
-                    m.uid = u.uid;
-                });
-                this.groupService.addMemberToGroup(this.gid, m);
+            for (const email of this.emails) {
+                const user = await this.userService.getUser(email);
+                try {
+                    const invited =
+                        await this.groupService.invitationAlreadySent(
+                            email,
+                            this.gid
+                        );
+                    if (invited) {
+                        continue;
+                    }
+                    await this.groupService.sendUserGroupInvitation(
+                        user,
+                        this.gid
+                    );
+                    this.sendInvitesEvent.emit(true);
+                } catch (e) {
+                    this.sendInvitesEvent.emit(false);
+                }
             }
-            this.sendInvitesEvent.emit(true);
         }
     }
-    /* sendSignInEmail(email: string) {
-      const actionCodeSettings = {
-          url: 'http://mate-team.de/login',
-          handleCodeInApp: true
-      };
-      const auth = getAuth();
-      sendSignInLinkToEmail(auth, email, actionCodeSettings)
-          .then(() => {
-              window.localStorage.setItem('emailForSignIn', email);
-          })
-          .catch((error) => {
-              const errorMessage = error.message;
-              console.error(errorMessage);
-          });
-  } */
 }
