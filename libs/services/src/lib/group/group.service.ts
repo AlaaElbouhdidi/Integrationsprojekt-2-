@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Event, Group, Member, Participant, User } from '@api-interfaces';
+import { Event, Group, Member, Participant, Team, User } from '@api-interfaces';
 import {
     AngularFirestore,
     AngularFirestoreCollection
@@ -324,7 +324,7 @@ export class GroupService {
                 displayName: user.displayName ? user.displayName : '',
                 icon: user.photoURL ? user.photoURL : ''
             };
-
+            const eventIds: string[] = [];
             await this.afs
                 .collection<Event>('events')
                 .ref.where('groupID', '==', gid)
@@ -333,6 +333,7 @@ export class GroupService {
                 .then((qs) => {
                     qs.docs.forEach((doc) => {
                         const id = doc.id;
+                        eventIds.push(id);
                         const updatedParticipants = doc
                             .data()
                             .participants.filter(
@@ -346,6 +347,35 @@ export class GroupService {
                         );
                     });
                 });
+
+            eventIds.forEach((id) => {
+                this.afs
+                    .collection('events')
+                    .doc(id)
+                    .collection<Team>('teams')
+                    .ref.get()
+                    .then((qs) => {
+                        qs.docs.forEach((doc) => {
+                            const teamId = doc.id;
+                            const updatedTeamParticipants = doc
+                                .data()
+                                .participants.filter(
+                                    (participant) => participant.uid !== m.uid
+                                );
+                            this.afs
+                                .collection('events')
+                                .doc(id)
+                                .collection('teams')
+                                .doc(teamId)
+                                .set(
+                                    {
+                                        participants: updatedTeamParticipants
+                                    },
+                                    { merge: true }
+                                );
+                        });
+                    });
+            });
         }
     }
     toggleIsAdmin(gid: string, m: Member) {

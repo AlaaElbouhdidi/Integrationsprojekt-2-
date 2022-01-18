@@ -142,7 +142,17 @@ export class EventService {
      *
      * @param eventId {string} The id of the event to delete
      */
-    deleteEvent(eventId: string): Promise<void> {
-        return this.afs.collection<Event>('events').doc(eventId).delete();
+    async deleteEvent(eventId: string): Promise<void> {
+        await this.afs
+            .collection<Event>('events')
+            .doc(eventId)
+            .collection('teams')
+            .ref.get()
+            .then((qs) => {
+                qs.docs.forEach((doc) => {
+                    this.afs.collection<Event>('events').doc(doc.id).delete();
+                });
+            });
+        await this.afs.collection<Event>('events').doc(eventId).delete();
     }
 }
