@@ -1,5 +1,5 @@
 <main>
-    <section class="invitations">
+    <section class="invitations" @slideAnimation>
         <div class="invitations-header">
             <h5>Group invitations</h5>
             <fa-icon icon="paper-plane"></fa-icon>
@@ -12,11 +12,11 @@
                 <div class="invitations-body-item-buttons">
                     <button class="invitations-body-item-buttons-accept" (click)="acceptInvitation(invitation.id!)">
                         <fa-icon icon="check"></fa-icon>
-                        Accept
+                        <span>Accept</span>
                     </button>
                     <button class="invitations-body-item-buttons-decline" (click)="declineInvitation(invitation.id!)">
                         <fa-icon icon="times"></fa-icon>
-                        Decline
+                        <span>Decline</span>
                     </button>
                 </div>
             </div>
@@ -74,21 +74,6 @@
                         placeholder="Search"
                         autofocus
                     />
-                </div>
-                <div class="groups-body-search-order">
-                    <span>Order by: </span>
-                    <button
-                        [class.active-button]="orderByName"
-                        (click)="orderListByName()"
-                    >
-                        Name
-                    </button>
-                    <button
-                        [class.active-button]="!orderByName"
-                        (click)="orderListByAdmin()"
-                    >
-                        Admin
-                    </button>
                 </div>
             </div>
             <div *ngFor="let group of groups | async | filter: term" @itemAnimation class="groups-body-group-item">

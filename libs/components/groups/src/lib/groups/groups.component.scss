@@ -19,6 +19,11 @@ main {
         margin-bottom: 1rem;
         display: flex;
         width: 100%;
+        overflow-x: auto;
+        flex-direction: column;
+        @include for-tablet-portrait-up {
+            flex-direction: row;
+        }
         &-message {
             color: $white;
             margin: 0;
@@ -27,14 +32,16 @@ main {
             }
         }
         .event {
+            min-width: 15rem;
             padding: 1rem;
             box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
             background: $darkAccent;
-            margin-right: 2rem;
             text-align: center;
-            div {
-                margin: 1rem;
+            margin-bottom: 1rem;
+            @include for-tablet-portrait-up {
+                margin-right: 1rem;
             }
+
             button {
                 padding: 0 0.75rem;
                 border: none;
@@ -122,14 +129,6 @@ main {
                 flex-direction: row;
                 justify-content: flex-start;
             }
-            &-order {
-                display: flex;
-                align-items: center;
-                margin-top: 1rem;
-                @include for-tablet-portrait-up {
-                    margin: 0;
-                }
-            }
             &-input {
                 color: $white;
                 position: relative;
@@ -167,9 +166,6 @@ main {
                 cursor: pointer;
                 transition: 0.25s;
             }
-        }
-        &-search-order > * {
-            margin-right: 1rem;
         }
         &-group-item {
             width: 100%;
@@ -241,10 +237,14 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
     background: $darkAccent;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     margin-bottom: 1rem;
+    @include for-tablet-portrait-up {
+        flex-direction: row;
+    }
     &-info {
         margin-right: 1rem;
         p {
@@ -252,14 +252,28 @@ main {
         }
     }
     &-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @include for-tablet-portrait-up {
+            flex-direction: row;
+            width: auto;
+        }
         button {
             border: none;
+            width: 100%;
+            margin-top: 0.5rem;
             transition: 0.25s;
             padding: 0 0.75rem;
             border-radius: 0.25rem;
             color: $white;
+            @include for-tablet-portrait-up {
+                margin-top: 0;
+                width: auto;
+            }
             fa-icon {
                 font-size: 0.9rem;
+                margin-right: 0.25rem;
             }
         }
         &-accept {
