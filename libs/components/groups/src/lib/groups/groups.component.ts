@@ -4,12 +4,14 @@ import {
     AlertService,
     AuthService,
     EventService,
-    GroupService,
-    UserService
+    GroupService
 } from '@services';
 import { Observable } from 'rxjs';
 import { itemAnimation, slideAnimation } from '@animations';
 
+/**
+ * Groups component
+ */
 @Component({
     selector: 'mate-team-groups',
     templateUrl: './groups.component.html',
@@ -17,19 +19,34 @@ import { itemAnimation, slideAnimation } from '@animations';
     animations: [itemAnimation, slideAnimation]
 })
 export class GroupsComponent {
+    /**
+     * Events
+     */
     events: Observable<Event[]>;
+    /**
+     * Groups
+     */
     groups: Promise<Group[]>;
+    /**
+     * Invitations
+     */
     invitations: Promise<Group[]>;
     /**
      * keyword to filter the list of members
      */
     term = '';
-    orderByName = true;
+
+    /**
+     * Constructor groups component
+     * @param groupService {GroupService}
+     * @param eventService {EventService}
+     * @param authService {AuthService}
+     * @param alertService {AlertService}
+     */
     constructor(
         public groupService: GroupService,
         public eventService: EventService,
         private authService: AuthService,
-        private userService: UserService,
         private alertService: AlertService
     ) {
         this.groups = this.groupService.getUserGroups();
@@ -37,19 +54,22 @@ export class GroupsComponent {
         this.invitations = this.groupService.getUserInvitations();
     }
 
+    /**
+     * Check if user is admin
+     *
+     * @param adminId {string} The id of the group admin
+     * @returns {boolean} Indicates if user is admin
+     */
     checkIfAdmin(adminId: string): boolean {
         const userId = this.authService.getCurrentUser().uid;
         return userId === adminId;
     }
 
-    orderListByName() {
-        this.orderByName = true;
-    }
-
-    orderListByAdmin() {
-        this.orderByName = false;
-    }
-
+    /**
+     * Decline invitation of a group
+     *
+     * @param groupId {string} The id of the group to decline the invitation for
+     */
     async declineInvitation(groupId: string): Promise<void> {
         try {
             await this.groupService.declineUserGroupInvitation(groupId);
@@ -66,6 +86,11 @@ export class GroupsComponent {
         }
     }
 
+    /**
+     * Accept invitation of a group
+     *
+     * @param groupId {string} The id of the group to accept the invitation for
+     */
     async acceptInvitation(groupId: string): Promise<void> {
         try {
             await this.groupService.acceptUserGroupInvitation(groupId);

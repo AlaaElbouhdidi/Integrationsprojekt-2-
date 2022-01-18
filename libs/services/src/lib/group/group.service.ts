@@ -20,6 +20,9 @@ export class GroupService {
      * ID of the current group
      */
     currentGroupId = '';
+    /**
+     * Group Collection
+     */
     groupCollection: AngularFirestoreCollection<Group>;
 
     private success = false;
@@ -53,7 +56,12 @@ export class GroupService {
             .then((group) => group.data());
     }
 
-    async getUserGroups() {
+    /**
+     * Get groups of the user
+     *
+     * @returns {Promise<Group[]>} A promise containing the group of the user
+     */
+    async getUserGroups(): Promise<Group[]> {
         const { uid } = this.authService.getCurrentUser();
         const user = (
             await this.afs.collection(`/users`).doc<User>(uid).ref.get()
@@ -78,6 +86,11 @@ export class GroupService {
         return userGroups;
     }
 
+    /**
+     * Get invitations to groups of a user
+     *
+     * @returns {Promise<Group[]>} The groups of which the user has invitations for
+     */
     async getUserInvitations(): Promise<Group[]> {
         const { uid } = this.authService.getCurrentUser();
         const user = (
@@ -102,7 +115,13 @@ export class GroupService {
         return groupInvitations;
     }
 
-    async sendUserGroupInvitation(user: User, groupId: string) {
+    /**
+     * Send an invitation to a user for a group
+     *
+     * @param user {User} The user to which to send the invitation
+     * @param groupId {string} The id of the group to which the invitation belongs
+     */
+    async sendUserGroupInvitation(user: User, groupId: string): Promise<void> {
         let { invitations } = user;
         if (!invitations) {
             invitations = [];
@@ -118,17 +137,28 @@ export class GroupService {
             );
     }
 
+    /**
+     * Check if user has been already invited to group
+     *
+     * @param email {string} The email of the user to check
+     * @param groupId {string} The id of the group to check the invitation for
+     */
     async invitationAlreadySent(
         email: string,
         groupId: string
     ): Promise<boolean> {
-        let { invitations } = await this.userService.getUser(email);
+        const { invitations } = await this.userService.getUser(email);
         if (!invitations) {
             return false;
         }
         return invitations.some((invitation) => invitation === groupId);
     }
 
+    /**
+     * Decline an invitation for a group
+     *
+     * @param groupId {string} The id of the group to decline the invitation for
+     */
     async declineUserGroupInvitation(groupId: string): Promise<void> {
         const currentUser = this.authService.getCurrentUser();
         const user = await this.afs
@@ -153,6 +183,11 @@ export class GroupService {
         );
     }
 
+    /**
+     * Accept an invitation for a group
+     *
+     * @param groupId {string} The id of the group to accept the invitation for
+     */
     async acceptUserGroupInvitation(groupId: string): Promise<void> {
         const currentUser = this.authService.getCurrentUser();
         const user = await this.afs
@@ -189,6 +224,12 @@ export class GroupService {
         });
     }
 
+    /**
+     * Remove a group reference from a user
+     *
+     * @param groupId {string} The id of the group whose reference will be removed
+     * @param userId {string} The user where the reference will be removed
+     */
     async removeUserGroupReference(
         groupId: string,
         userId: string
