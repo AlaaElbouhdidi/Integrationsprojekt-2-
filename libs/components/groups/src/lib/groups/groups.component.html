@@ -32,12 +32,12 @@
             <fa-icon icon="calendar-alt"></fa-icon>
         </div>
         <div class="events-container">
-            <div *ngFor="let event of events | async" @itemAnimation>
+            <div *ngFor="let event of sortedEvents" @itemAnimation>
                 <div class="event">
                     <h6>{{ event.name }}</h6>
                     <div>
                         <fa-icon icon="clock"></fa-icon>
-                        {{ event.date | date }}
+                        {{ event.date | date: 'short' }}
                     </div>
                     <div>
                         <button
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <p class="events-container-message" *ngIf="(events | async)?.length === 0" @itemAnimation>
+            <p class="events-container-message" *ngIf="sortedEvents.length === 0" @itemAnimation>
                 <fa-icon icon="exclamation-circle"></fa-icon>
                 No upcoming events
             </p>
@@ -64,7 +64,7 @@
             </button>
         </div>
         <div class="groups-body">
-            <div class="groups-body-search">
+            <div class="groups-body-search" *ngIf="(groups | async)?.length !== 0">
                 <div class="groups-body-search-input">
                     <fa-icon icon="search"></fa-icon>
                     <input

@@ -10,6 +10,7 @@ import { GroupPollsEventsModule } from '@group-polls-events';
 import { GroupPollsEventsComponent } from '../../../../group-polls-events/src/lib/group-polls-events/group-polls-events.component';
 import { GroupsComponent } from '@groups';
 import { GroupStatisticsListComponent } from '@group-statistics-list';
+import { GroupGuardGuard } from './group-guard.guard';
 
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
@@ -17,8 +18,8 @@ const route = {
     path: 'group/:id',
     component: GroupComponent,
     ...canActivate(redirectUnauthenticatedToHome),
+    canActivate: [GroupGuardGuard],
     children: [
-        // components get replaced by each individual group nav component (events, chat, statistics, members)
         {
             path: 'events',
             component: GroupPollsEventsComponent

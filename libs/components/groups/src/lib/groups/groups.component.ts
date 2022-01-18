@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Group, Event } from '@api-interfaces';
 import {
     AlertService,
@@ -6,7 +6,7 @@ import {
     EventService,
     GroupService
 } from '@services';
-import { Observable } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { itemAnimation, slideAnimation } from '@animations';
 
 /**
@@ -18,11 +18,16 @@ import { itemAnimation, slideAnimation } from '@animations';
     styleUrls: ['./groups.component.scss'],
     animations: [itemAnimation, slideAnimation]
 })
-export class GroupsComponent {
+export class GroupsComponent implements OnInit, OnDestroy {
     /**
-     * Events
+     * Destroy subject
+     * @private
      */
-    events: Observable<Event[]>;
+    private destroy$ = new Subject();
+    /**
+     * Events sorted by datetime
+     */
+    sortedEvents: Event[] = [];
     /**
      * Groups
      */
@@ -50,7 +55,6 @@ export class GroupsComponent {
         private alertService: AlertService
     ) {
         this.groups = this.groupService.getUserGroups();
-        this.events = this.eventService.getUpcomingEvents();
         this.invitations = this.groupService.getUserInvitations();
     }
 
@@ -105,5 +109,37 @@ export class GroupsComponent {
                 message: e.message
             });
         }
+    }
+
+    /**
+     * Sort events by date
+     *
+     * @param events {Event[]} The events to sort
+     * @returns {Event[]} The events sorted by date
+     */
+    sortByDate(events: Event[]): Event[] {
+        return events.sort((a, b) => {
+            return b.date.localeCompare(a.date);
+        });
+    }
+
+    /**
+     * Get upcoming events
+     */
+    ngOnInit(): void {
+        this.eventService
+            .getUpcomingEvents()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((events) => {
+                this.sortedEvents = this.sortByDate(events);
+            });
+    }
+
+    /**
+     * Unsubscribe from observables
+     */
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.complete();
     }
 }

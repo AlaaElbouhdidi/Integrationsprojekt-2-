@@ -17,7 +17,8 @@ import {
     faClock,
     faCheck,
     faTimes,
-    faPaperPlane
+    faPaperPlane,
+    faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
@@ -47,7 +48,8 @@ export class GroupsModule {
             faClock,
             faCheck,
             faTimes,
-            faPaperPlane
+            faPaperPlane,
+            faExclamationCircle
         );
     }
 }

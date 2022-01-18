@@ -19,7 +19,7 @@
         </button>
     </div>
     <div class="members-body">
-        <p *ngIf="term.length === 0">{{membersList.length}} members found</p>
+        <p *ngIf="term.length === 0">{{membersList.length}} {{membersList.length === 1 ? 'member' : 'members'}} found</p>
         <div class="members-body-item" *ngFor="let i of membersList | filter:term " @itemAnimation>
             <mate-team-members-list-item
                 [me]="currentUser"

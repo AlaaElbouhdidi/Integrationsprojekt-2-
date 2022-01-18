@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Group, Member, User } from '@api-interfaces';
+import { Event, Group, Member, Participant, Team, User } from '@api-interfaces';
 import {
     AngularFirestore,
     AngularFirestoreCollection
@@ -311,11 +311,72 @@ export class GroupService {
             .collection<Member>(`groups/${gid}/members`)
             .valueChanges({ idField: 'id' });
     }
-    deleteMember(gid: string, m: Member) {
-        this.afs
+    async deleteMember(gid: string, m: Member): Promise<void> {
+        await this.afs
             .collection<Member>(`groups/${gid}/members`)
             .doc(m.email)
             .delete();
+
+        if (m.email && m.uid) {
+            const user = await this.userService.getUser(m.email);
+            const participant: Participant = {
+                uid: user.uid,
+                displayName: user.displayName ? user.displayName : '',
+                icon: user.photoURL ? user.photoURL : ''
+            };
+            const eventIds: string[] = [];
+            await this.afs
+                .collection<Event>('events')
+                .ref.where('groupID', '==', gid)
+                .where('participants', 'array-contains', participant)
+                .get()
+                .then((qs) => {
+                    qs.docs.forEach((doc) => {
+                        const id = doc.id;
+                        eventIds.push(id);
+                        const updatedParticipants = doc
+                            .data()
+                            .participants.filter(
+                                (participant) => participant.uid !== m.uid
+                            );
+                        this.afs.collection('events').doc(id).set(
+                            {
+                                participants: updatedParticipants
+                            },
+                            { merge: true }
+                        );
+                    });
+                });
+
+            eventIds.forEach((id) => {
+                this.afs
+                    .collection('events')
+                    .doc(id)
+                    .collection<Team>('teams')
+                    .ref.get()
+                    .then((qs) => {
+                        qs.docs.forEach((doc) => {
+                            const teamId = doc.id;
+                            const updatedTeamParticipants = doc
+                                .data()
+                                .participants.filter(
+                                    (participant) => participant.uid !== m.uid
+                                );
+                            this.afs
+                                .collection('events')
+                                .doc(id)
+                                .collection('teams')
+                                .doc(teamId)
+                                .set(
+                                    {
+                                        participants: updatedTeamParticipants
+                                    },
+                                    { merge: true }
+                                );
+                        });
+                    });
+            });
+        }
     }
     toggleIsAdmin(gid: string, m: Member) {
         this.afs
