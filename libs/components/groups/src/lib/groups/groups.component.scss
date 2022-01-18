@@ -59,7 +59,7 @@ main {
                 @include for-tablet-portrait-up {
                     width: auto;
                     padding: 0 3rem;
-                    margin-top: 0;
+                    margin-top: 0.5rem;
                 }
                 @include for-tablet-landscape-up {
                     width: auto;

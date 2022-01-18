@@ -15,6 +15,7 @@
                         [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)"
                     />
+                    <button>Add email</button>
                     <fa-icon icon="angle-double-right"></fa-icon>
                     <div class="form-error" *ngIf="isInvalid">
                         <div class="form-error-message">
@@ -43,7 +44,7 @@
                 [class.disabled-btn]="emails.length < 1"
                 (click)="sendInvites()"
             >
-                {{ emails.length > 1 ? 'Add members' : 'Add member' }}
+                {{ emails.length > 1 ? 'Send invites' : 'Send invite' }}
             </button>
         </mat-form-field>
     </div>
