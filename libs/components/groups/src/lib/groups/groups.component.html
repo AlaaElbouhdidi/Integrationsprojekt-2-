@@ -89,7 +89,6 @@
                     <button class="open-btn" [routerLink]="'/group/' + group.id + '/events'">
                         Open
                     </button>
-                    <button class="leave-btn" (click)="leaveGroup(group)" *ngIf="!checkIfAdmin(group.admin)">Leave</button>
                 </div>
             </div>
             <p class="groups-body-message" *ngIf="(groups | async)?.length === 0" @itemAnimation>
