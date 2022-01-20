@@ -246,23 +246,6 @@ export class AuthService {
     }
 
     /**
-     * Gets user for guard
-     *
-     * @returns {User | null} User or null if no user found
-     */
-    getUserForGuard(): User | null {
-        const auth = getAuth();
-        const user = auth.currentUser;
-        if (user !== null) {
-            return {
-                uid: user.uid,
-                email: user.email ? user.email : ''
-            };
-        }
-        return null;
-    }
-
-    /**
      * Check if email is already registered
      *
      * @param email {string} The email to check

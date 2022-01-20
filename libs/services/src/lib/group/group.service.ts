@@ -87,6 +87,16 @@ export class GroupService {
     }
 
     /**
+     * Get user data changes
+     *
+     * @returns {Observable<User | undefined>} Observable containing the user data
+     */
+    userDataChanges(): Observable<User | undefined> {
+        const user = this.authService.getCurrentUser();
+        return this.afs.collection<User>('/users').doc(user.uid).valueChanges();
+    }
+
+    /**
      * Get invitations to groups of a user
      *
      * @returns {Promise<Group[]>} The groups of which the user has invitations for
@@ -309,20 +319,18 @@ export class GroupService {
     getAllMembers(gid: string): Observable<Member[]> {
         return this.afs
             .collection<Member>(`groups/${gid}/members`)
-            .valueChanges({ idField: 'id' });
+            .valueChanges();
     }
     async deleteMember(gid: string, m: Member): Promise<void> {
         await this.afs
             .collection<Member>(`groups/${gid}/members`)
             .doc(m.email)
             .delete();
-
-        if (m.email && m.uid) {
-            const user = await this.userService.getUser(m.email);
+        if (m.uid) {
             const participant: Participant = {
-                uid: user.uid,
-                displayName: user.displayName ? user.displayName : '',
-                icon: user.photoURL ? user.photoURL : ''
+                uid: m.uid,
+                displayName: '',
+                icon: ''
             };
             const eventIds: string[] = [];
             await this.afs
@@ -380,9 +388,9 @@ export class GroupService {
     }
     toggleIsAdmin(gid: string, m: Member) {
         this.afs
-            .collection<Member>(`groups/${gid}/members`)
-            .doc(m.email)
-            .update({ isAdmin: !m.isAdmin });
+            .collection(`groups`)
+            .doc(gid)
+            .update({ admin:  m.uid});
     }
     /**
      * update the name or the description of a group

@@ -49,7 +49,7 @@ main {
                 @include for-tablet-landscape-up {
                     margin: 0 2rem;
                 }
-                &:hover fa-icon {
+                &:hover:not(.leave) fa-icon {
                     transform: translateY(-1.5rem);
                     opacity: 0;
                 }
@@ -69,6 +69,13 @@ main {
                 }
                 fa-icon[icon='cog'] {
                     left: -1.6rem;
+                }
+                fa-icon[icon='sign-out-alt'] {
+                    left: -1.6rem;
+                    position: relative;
+                    &:hover {
+                        color: $error;
+                    }
                 }
                 a {
                     color: $white;

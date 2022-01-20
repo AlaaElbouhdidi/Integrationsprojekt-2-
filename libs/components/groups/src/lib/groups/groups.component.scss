@@ -111,6 +111,11 @@ main {
                     background: $successHover;
                 }
             }
+            .not-verified{
+                font-size: small;
+                font-style: italic;
+                color: $success;
+            }
         }
     }
     .groups-body {
@@ -195,28 +200,48 @@ main {
                     }
                 }
             }
-            button {
-                padding: 0 0.75rem;
-                border: none;
-                background: $white;
-                color: $black;
-                border-radius: 0.25rem;
-                cursor: pointer;
+            &-buttons {
+                @include flex-center-column;
                 width: 100%;
-                margin-top: 0.5rem;
-                transition: 0.25s;
-                &:hover {
-                    background: $main;
-                    color: $white;
-                }
                 @include for-tablet-portrait-up {
+                    flex-direction: row;
+                    justify-content: flex-end;
                     width: auto;
-                    padding: 0 3rem;
-                    margin-top: 0;
                 }
-                @include for-tablet-landscape-up {
-                    width: auto;
-                    padding: 0 4rem;
+                button {
+                    padding: 0 0.75rem;
+                    border: none;
+                    border-radius: 0.25rem;
+                    cursor: pointer;
+                    margin-top: 0.5rem;
+                    transition: 0.25s;
+                    width: 100%;
+                    @include for-tablet-portrait-up {
+                        width: auto;
+                        padding: 0 2rem;
+                        margin-top: 0;
+                    }
+                    @include for-tablet-landscape-up {
+                        padding: 0 4rem;
+                    }
+                }
+                .open-btn {
+                    background: $white;
+                    color: $dark;
+                    &:hover {
+                        background: $main;
+                        color: $white;
+                    }
+                }
+                .leave-btn {
+                    background: $error;
+                    color: $white;
+                    @include for-tablet-portrait-up {
+                        margin-left: 1rem;
+                    }
+                    &:hover {
+                        background: $errorHover;
+                    }
                 }
             }
         }
