@@ -29,6 +29,7 @@
         <mate-team-team-form (createTeamEvent)="createTeam($event)">
         </mate-team-team-form>
         <mate-team-team-list
+            *ngIf="teams.length > 0"
             [teams]="teams"
             (addUserToTeamEvent)="showParticipantsList($event)"
             (removeUserFromTeamEvent)="updateTeam($event)"
