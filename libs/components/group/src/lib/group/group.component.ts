@@ -214,7 +214,7 @@ export class GroupComponent implements OnInit, OnDestroy {
      */
     async openConfirmationModal(content: unknown): Promise<boolean> {
         this.confirmationModalRef = this.modalService.open(content, {
-            windowClass: 'light-modal'
+            windowClass: 'dark-modal'
         });
         try {
             await this.confirmationModalRef.result;
