@@ -39,13 +39,13 @@ describe('EventService', () => {
     const angularFirestoreMock = {
         collection: jest.fn().mockReturnValue(eventCollectionMock)
     };
-    const authServiceMock = { }
+    const authServiceMock = {};
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 { provide: GroupService, useValue: groupServiceMock },
-                { provide: AuthService, useValue: authServiceMock},
+                { provide: AuthService, useValue: authServiceMock },
                 { provide: AngularFirestore, useValue: angularFirestoreMock }
             ]
         });
@@ -77,12 +77,6 @@ describe('EventService', () => {
     it('should call firestore update method when updating an event', () => {
         const spy = jest.spyOn(eventDocumentMock, 'update');
         service.updateEvent('eventID', eventMock);
-        expect(spy).toHaveBeenCalled();
-    });
-
-    it('should call firestore delete method when deleting an event', () => {
-        const spy = jest.spyOn(eventDocumentMock, 'delete');
-        service.deleteEvent('eventID');
         expect(spy).toHaveBeenCalled();
     });
 });

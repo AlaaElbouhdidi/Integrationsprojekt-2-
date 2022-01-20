@@ -21,11 +21,10 @@
                 title="My groups"
                 routerLink="/group"
             ></fa-icon>
-            <fa-icon
-                icon="user-circle"
-                title="Profile"
-                routerLink="/profile"
-            ></fa-icon>
+            <div class="icon" routerLink="/profile">
+                <mate-team-user-icon [userIconString]="myPhotoURL || ''">
+                </mate-team-user-icon>
+            </div>
             <a (click)="logout()">Logout</a>
         </nav>
     </ng-template>

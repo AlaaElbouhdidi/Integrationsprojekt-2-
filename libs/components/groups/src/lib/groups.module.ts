@@ -14,7 +14,11 @@ import {
     faUserFriends,
     faStar,
     faCalendarAlt,
-    faClock
+    faClock,
+    faCheck,
+    faTimes,
+    faPaperPlane,
+    faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
@@ -41,7 +45,11 @@ export class GroupsModule {
             faCircle,
             faStar,
             faCalendarAlt,
-            faClock
+            faClock,
+            faCheck,
+            faTimes,
+            faPaperPlane,
+            faExclamationCircle
         );
     }
 }

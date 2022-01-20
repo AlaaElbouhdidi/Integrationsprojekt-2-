@@ -35,6 +35,20 @@
                 color: $main !important;
             }
         }
+        button {
+            width: 100%;
+            transition: 0.25s;
+            background: $main;
+            cursor: pointer;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+            color: $white;
+            background: $main;
+            &:hover {
+                background: $darkAccent;
+            }
+        }
         .form-error {
             margin-top: 0.5rem;
             margin-left: 0.2rem;

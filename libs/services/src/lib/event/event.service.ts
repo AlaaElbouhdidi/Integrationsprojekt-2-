@@ -16,6 +16,7 @@ export class EventService {
      * Constructor of event service
      * @param afs {AngularFirestore}
      * @param groupService {GroupService}
+     * @param authService {AuthService}
      */
     constructor(
         private afs: AngularFirestore,
@@ -62,7 +63,6 @@ export class EventService {
             icon: '',
             uid
         };
-        console.log(participant);
         return this.afs
             .collection<Event>('events', (ref) =>
                 ref
@@ -142,7 +142,22 @@ export class EventService {
      *
      * @param eventId {string} The id of the event to delete
      */
-    deleteEvent(eventId: string): Promise<void> {
-        return this.afs.collection<Event>('events').doc(eventId).delete();
+    async deleteEvent(eventId: string): Promise<void> {
+        await this.afs
+            .collection<Event>('events')
+            .doc(eventId)
+            .collection('teams')
+            .ref.get()
+            .then((qs) => {
+                qs.docs.forEach((doc) => {
+                    this.afs
+                        .collection<Event>('events')
+                        .doc(eventId)
+                        .collection('teams')
+                        .doc(doc.id)
+                        .delete();
+                });
+            });
+        await this.afs.collection<Event>('events').doc(eventId).delete();
     }
 }

@@ -33,6 +33,8 @@ header {
         }
     }
     nav {
+        display: flex;
+        align-items: center;
         a {
             color: $white;
             transition: 0.25s;
@@ -43,14 +45,22 @@ header {
             }
         }
         fa-icon {
+            margin: auto;
             cursor: pointer;
             transition: 0.25s;
             &:hover {
                 color: $light;
             }
         }
-        fa-icon[icon='user-circle'] {
+        .icon{
+            transition: 0.25s;
+            width: 2rem;
+            height: 2rem;
             margin: 0 1rem;
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.1) rotate(360deg);
+            }
             @include for-tablet-portrait-up {
                 margin: 0 3rem;
             }
@@ -78,3 +88,4 @@ header {
         }
     }
 }
+

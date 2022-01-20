@@ -29,9 +29,7 @@ export class AuthService {
      * Auth state Subject
      * @private
      */
-    private readonly authState = new BehaviorSubject<firebase.User | null>(
-        null
-    );
+    private authState = new BehaviorSubject<firebase.User | null>(null);
     /**
      * Auth state observable
      */
@@ -170,6 +168,19 @@ export class AuthService {
     }
 
     /**
+     * Refreshes the current user if signed in
+     */
+    async reloadUser(): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            return;
+        }
+        await user.reload();
+        const refreshedUser = firebase.auth().currentUser;
+        this.authState.next(refreshedUser);
+    }
+
+    /**
      * Update email of current authenticated user
      *
      * @param newEmail {string} The new email of the user
@@ -244,6 +255,12 @@ export class AuthService {
         }
         throw new Error();
     }
+
+    /**
+     * Check if email is already registered
+     *
+     * @param email {string} The email to check
+     */
     async emailIsAlreadyRegistred(email: string): Promise<number> {
         const res = await firebase
             .auth()

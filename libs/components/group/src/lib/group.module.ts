@@ -12,7 +12,8 @@ import {
     faUserFriends,
     faTable,
     faCalendarAlt,
-    faCog
+    faCog,
+    faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { MembersListModule } from '@group-members-list';
 import { GroupsModule } from '@groups';
@@ -38,7 +39,8 @@ export class GroupModule {
             faUserFriends,
             faTable,
             faCalendarAlt,
-            faCog
+            faCog,
+            faSignOutAlt
         );
     }
 }

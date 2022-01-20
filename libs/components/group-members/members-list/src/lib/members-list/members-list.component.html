@@ -19,14 +19,14 @@
         </button>
     </div>
     <div class="members-body">
-        <p *ngIf="term.length === 0">{{membersList.length}} members found</p>
+        <p *ngIf="term.length === 0">{{membersList.length}} {{membersList.length === 1 ? 'member' : 'members'}} found</p>
         <div class="members-body-item" *ngFor="let i of membersList | filter:term " @itemAnimation>
             <mate-team-members-list-item
                 [me]="currentUser"
                 [gAdmin]="gAdmin"
                 [member]="i"
                 (oDeleteMember)="deleteMember(i, deleteConfirmationModal)"
-                (oToggleIsAdmin)="toggleIsAdmin(i)"
+                (oToggleIsAdmin)="toggleIsAdmin(i, unAdminConfirmationModal)"
             ></mate-team-members-list-item>
         </div>
     </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="modal-body">
         <mate-team-invite-members
-            (sendInvitesEvent)="addMember($event)"
+            (sendInvitesEvent)="sendInvitation($event)"
             [gid]="gid"
         >
         </mate-team-invite-members>
@@ -55,6 +55,15 @@
         (dismissModalEvent)="dismissConfirmationModal()"
         [title]="'DELETE MEMBER'"
         [text]="'Are you sure you want to delete this member?'"
+    >
+    </mate-team-confirmation-modal>
+</ng-template>
+<ng-template #unAdminConfirmationModal>
+    <mate-team-confirmation-modal
+        (closeModalEvent)="closeConfirmationModal($event)"
+        (dismissModalEvent)="dismissConfirmationModal()"
+        [title]="'UPDATE ADMIN'"
+        [text]="'Are you sure you want to change the admin? You will no longer be an admin'"
     >
     </mate-team-confirmation-modal>
 </ng-template>
