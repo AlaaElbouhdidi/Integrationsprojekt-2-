@@ -62,7 +62,7 @@
                 <span class="groups-header-small-btn">+</span>
                 <span class="groups-header-full-btn">+ Create new group</span>
             </button>
-            <span class="not-verified" *ngIf="!isVerified">Verify your email to use our features</span>
+            <span class="not-verified" *ngIf="!isVerified">Verify your email to create a group</span>
         </div>
         <div class="groups-body">
             <div class="groups-body-search" *ngIf="(groups | async)?.length !== 0">
@@ -89,7 +89,6 @@
                     <button class="open-btn" [routerLink]="'/group/' + group.id + '/events'">
                         Open
                     </button>
-                    <button class="leave-btn" (click)="leaveGroup(group)" *ngIf="!checkIfAdmin(group.admin)">Leave</button>
                 </div>
             </div>
             <p class="groups-body-message" *ngIf="(groups | async)?.length === 0" @itemAnimation>

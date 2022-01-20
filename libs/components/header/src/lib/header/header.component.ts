@@ -23,7 +23,7 @@ export class HeaderComponent implements OnDestroy {
     /**
      * Subscription of the auth state
      */
-     myPhotoURL = '';
+    myPhotoURL = '';
 
     /**
      * Constructor which subscribes the auth state
@@ -41,10 +41,9 @@ export class HeaderComponent implements OnDestroy {
                 state
                     ? (this.authenticated = true)
                     : (this.authenticated = false);
-                    if(state) this.myPhotoURL = state.photoURL || '';
+                if (state) this.myPhotoURL = state.photoURL || '';
             }
         );
-        
     }
 
     /**

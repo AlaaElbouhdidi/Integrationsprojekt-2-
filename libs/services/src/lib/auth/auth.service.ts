@@ -29,9 +29,7 @@ export class AuthService {
      * Auth state Subject
      * @private
      */
-    private readonly authState = new BehaviorSubject<firebase.User | null>(
-        null
-    );
+    private authState = new BehaviorSubject<firebase.User | null>(null);
     /**
      * Auth state observable
      */
@@ -167,6 +165,19 @@ export class AuthService {
             displayName: displayName,
             photoURL: photoURL
         });
+    }
+
+    /**
+     * Refreshes the current user if signed in
+     */
+    async reloadUser(): Promise<void> {
+        const user = getAuth().currentUser;
+        if (!user) {
+            return;
+        }
+        await user.reload();
+        const refreshedUser = firebase.auth().currentUser;
+        this.authState.next(refreshedUser);
     }
 
     /**

@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlertService, AuthService, EventService, GroupService, UserService } from '@services';
+import { AuthService, EventService, GroupService, UserService } from '@services';
 import { GroupsModule } from '../groups.module';
 import { GroupsComponent } from './groups.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { User } from '@api-interfaces';
 
 describe('GroupsComponent', () => {
     let component: GroupsComponent;
@@ -14,7 +15,7 @@ describe('GroupsComponent', () => {
         getUserInvitations: jest.fn(),
         declineUserGroupInvitation: jest.fn(),
         acceptUserGroupInvitation: jest.fn,
-        userDataChanges: jest.fn().mockReturnValue(of([]))
+        userDataChanges: jest.fn().mockReturnValue(of({} as User))
     };
     const authServiceMock = {
         getCurrentUser: jest.fn().mockReturnValue({ uid: 'userId' })
@@ -23,7 +24,7 @@ describe('GroupsComponent', () => {
         getUpcomingEvents: jest.fn().mockReturnValue(of([]))
     };
     const userServiceMock = {
-        getUserByUid: jest.fn().mockReturnValue(of([]))
+        getUserByUid: jest.fn()
     };
 
     beforeEach(async () => {

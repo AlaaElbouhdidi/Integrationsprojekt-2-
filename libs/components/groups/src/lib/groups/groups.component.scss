@@ -233,16 +233,6 @@ main {
                         color: $white;
                     }
                 }
-                .leave-btn {
-                    background: $error;
-                    color: $white;
-                    @include for-tablet-portrait-up {
-                        margin-left: 1rem;
-                    }
-                    &:hover {
-                        background: $errorHover;
-                    }
-                }
             }
         }
     }

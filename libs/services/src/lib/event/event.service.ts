@@ -150,7 +150,12 @@ export class EventService {
             .ref.get()
             .then((qs) => {
                 qs.docs.forEach((doc) => {
-                    this.afs.collection<Event>('events').doc(doc.id).delete();
+                    this.afs
+                        .collection<Event>('events')
+                        .doc(eventId)
+                        .collection('teams')
+                        .doc(doc.id)
+                        .delete();
                 });
             });
         await this.afs.collection<Event>('events').doc(eventId).delete();

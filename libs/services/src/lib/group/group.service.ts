@@ -431,6 +431,33 @@ export class GroupService {
                         .delete();
                 });
             });
+        await this.afs
+            .collection('events')
+            .ref.where('groupID', '==', gid)
+            .get()
+            .then((qs) => {
+                qs.forEach(async (eventDoc) => {
+                    await this.afs
+                        .collection<Event>('events')
+                        .doc(eventDoc.id)
+                        .collection('teams')
+                        .ref.get()
+                        .then((qs) => {
+                            qs.docs.forEach((teamDoc) => {
+                                this.afs
+                                    .collection<Event>('events')
+                                    .doc(eventDoc.id)
+                                    .collection('teams')
+                                    .doc(teamDoc.id)
+                                    .delete();
+                            });
+                        });
+                    await this.afs
+                        .collection('events')
+                        .doc(eventDoc.id)
+                        .delete();
+                });
+            });
         await this.groupCollection.doc(gid).delete();
     }
 }

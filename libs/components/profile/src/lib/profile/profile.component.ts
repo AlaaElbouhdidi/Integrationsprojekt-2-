@@ -119,6 +119,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 data.displayName,
                 data.photoURL
             );
+            await this.authService.reloadUser();
             this.alertService.addAlert({
                 type: 'success',
                 message: 'Successfully updated user profile.'

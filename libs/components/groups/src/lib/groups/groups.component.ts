@@ -52,7 +52,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     /**
      * check is Account is verified
      */
-     isVerified = false;
+    isVerified = false;
 
     /**
      * Constructor groups component
@@ -138,35 +138,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
         return events.sort((a, b) => {
             return b.date.localeCompare(a.date);
         });
-    }
-
-    async leaveGroup(group: Group): Promise<void> {
-        const user = this.authService.getCurrentUser();
-        if (!user || !group.id) {
-            return;
-        }
-        if (this.checkIfAdmin(group.admin)) {
-            return;
-        }
-        try {
-            await this.groupService.deleteMember(group.id, {
-                uid: user.uid,
-                email: user.email
-            });
-            await this.groupService.removeUserGroupReference(
-                group.id,
-                user.uid
-            );
-            this.alertService.addAlert({
-                type: 'success',
-                message: 'Group and all corresponding events successfully left'
-            });
-        } catch (e) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
-        }
     }
 
     /**
