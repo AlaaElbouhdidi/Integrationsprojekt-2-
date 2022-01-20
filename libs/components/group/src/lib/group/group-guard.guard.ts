@@ -6,8 +6,9 @@ import {
     RouterStateSnapshot,
     UrlTree
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { AlertService, AuthService, GroupService } from '@services';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 /**
  * Group guard
@@ -22,12 +23,14 @@ export class GroupGuardGuard implements CanActivate {
      * @param groupService {GroupService}
      * @param alertService {AlertService}
      * @param router {Router}
+     * @param auth {AngularFireAuth}
      */
     constructor(
         private authService: AuthService,
         private groupService: GroupService,
         private alertService: AlertService,
-        private router: Router
+        private router: Router,
+        private auth: AngularFireAuth
     ) {}
 
     /**
@@ -43,35 +46,28 @@ export class GroupGuardGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        const user = this.authService.getUserForGuard();
-        if (!user) {
-            this.router.navigate(['/group']);
-            return false;
-        }
-        const groupId = route.paramMap.get('id');
-        if (!groupId || !user.email) {
-            this.router.navigate(['/group']);
-            return false;
-        }
-        return this.groupService
-            .isAlreadyMember(groupId, user.email)
-            .then((data) => {
-                if (data) {
-                    return true;
+        return this.auth.authState.pipe(
+            take(1),
+            switchMap(async (authState) => {
+                if (!authState) {
+                    await this.router.navigate(['/group']);
+                    return false;
                 }
-                this.alertService.addAlert({
-                    type: 'warn',
-                    message:
-                        'You are no member of this group anymore. Please reload your page.'
-                });
-                return false;
+                const groupId = route.paramMap.get('id');
+                if (!groupId || !authState.email) {
+                    await this.router.navigate(['/group']);
+                    return false;
+                }
+                const data = await this.groupService.isAlreadyMember(
+                    groupId,
+                    authState.email
+                );
+                if (!data) {
+                    await this.router.navigate(['/group']);
+                    return false;
+                }
+                return data;
             })
-            .catch((e) => {
-                this.alertService.addAlert({
-                    type: 'error',
-                    message: e.message
-                });
-                return false;
-            });
+        );
     }
 }
