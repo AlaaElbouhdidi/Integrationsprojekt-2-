@@ -58,10 +58,11 @@
         <div class="groups-header">
             <h5>My groups</h5>
             <fa-icon icon="user-friends"></fa-icon>
-            <button routerLink="/newgroup">
+            <button *ngIf="isVerified" routerLink="/newgroup">
                 <span class="groups-header-small-btn">+</span>
                 <span class="groups-header-full-btn">+ Create new group</span>
             </button>
+            <span class="not-verified" *ngIf="!isVerified">Verify your email to use our features</span>
         </div>
         <div class="groups-body">
             <div class="groups-body-search" *ngIf="(groups | async)?.length !== 0">

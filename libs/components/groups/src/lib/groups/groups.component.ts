@@ -49,6 +49,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
      * Indicates if events are done loading
      */
     eventsLoading = true;
+    /**
+     * check is Account is verified
+     */
+     isVerified = false;
 
     /**
      * Constructor groups component
@@ -178,6 +182,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
             });
 
         const user = this.authService.getCurrentUser();
+        this.isVerified = user.emailVerified || false;
         this.userOnInit = await this.userService.getUserByUid(user.uid);
 
         this.groupService

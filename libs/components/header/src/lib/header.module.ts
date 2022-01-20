@@ -7,10 +7,11 @@ import {
     FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
 import { faUserCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { UserIconModule } from '@user-icon';
 import { StylesModule } from '@styles';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FontAwesomeModule, StylesModule],
+    imports: [CommonModule, RouterModule, FontAwesomeModule, StylesModule, UserIconModule],
     declarations: [HeaderComponent],
     exports: [HeaderComponent]
 })

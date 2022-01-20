@@ -319,7 +319,7 @@ export class GroupService {
     getAllMembers(gid: string): Observable<Member[]> {
         return this.afs
             .collection<Member>(`groups/${gid}/members`)
-            .valueChanges({ idField: 'id' });
+            .valueChanges();
     }
     async deleteMember(gid: string, m: Member): Promise<void> {
         await this.afs
@@ -388,9 +388,9 @@ export class GroupService {
     }
     toggleIsAdmin(gid: string, m: Member) {
         this.afs
-            .collection<Member>(`groups/${gid}/members`)
-            .doc(m.email)
-            .update({ isAdmin: !m.isAdmin });
+            .collection(`groups`)
+            .doc(gid)
+            .update({ admin:  m.uid});
     }
     /**
      * update the name or the description of a group

@@ -1,10 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-    AuthService,
-    EventService,
-    GroupService,
-    UserService
-} from '@services';
+import { AuthService, EventService, GroupService, UserService } from '@services';
 import { GroupsModule } from '../groups.module';
 import { GroupsComponent } from './groups.component';
 import { RouterTestingModule } from '@angular/router/testing';

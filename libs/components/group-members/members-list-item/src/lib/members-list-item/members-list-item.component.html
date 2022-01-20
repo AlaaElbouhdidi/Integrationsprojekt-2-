@@ -21,8 +21,15 @@
             *ngIf="me.email !== member.email && gAdmin === me.uid"
         >
             <fa-icon
+                *ngIf="gAdmin === me.uid"
+                (click)="onToggleIsAdmin(member)"
+                title="Change Admin status"
+                icon="user-tie"
+            ></fa-icon>
+
+            <fa-icon
                 mat-raised-button
-                matTooltip="Delete Member"
+                title="Delete Member"
                 (click)="onDeleteMember(member)"
                 icon="user-times"
             ></fa-icon>

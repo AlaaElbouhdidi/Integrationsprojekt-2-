@@ -81,6 +81,9 @@ export class GroupComponent implements OnInit, OnDestroy {
     closeModal(): void {
         this.modalRef?.dismiss();
     }
+    /**
+     * delete a group if Admin
+     */
     async deleteGroup(modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
@@ -91,6 +94,41 @@ export class GroupComponent implements OnInit, OnDestroy {
             this.closeModal();
             this.router.navigateByUrl('/');
         } catch (e: any) {
+            this.alertService.addAlert({
+                type: 'error',
+                message: e.message
+            });
+        }
+    }
+    /**
+     * Leave a group if not Admin
+     */
+    async leaveGroup(modal: unknown): Promise<void> {
+        const result = await this.openConfirmationModal(modal);
+        const user = this.authService.getCurrentUser();
+        if (!result) {
+            return;
+        }
+        if (!user || !this.groupId) {
+            return;
+        }
+        if (this.isAdmin) {
+            return;
+        }
+        try {
+            await this.groupService.deleteMember(this.groupId, {
+                uid: user.uid,
+                email: user.email
+            });
+            await this.groupService.removeUserGroupReference(
+                this.groupId,
+                user.uid
+            );
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Group and all corresponding events successfully left'
+            });
+        } catch (e) {
             this.alertService.addAlert({
                 type: 'error',
                 message: e.message
