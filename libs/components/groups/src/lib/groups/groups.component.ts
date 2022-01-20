@@ -76,8 +76,12 @@ export class GroupsComponent implements OnInit, OnDestroy {
      * @returns {boolean} Indicates if user is admin
      */
     checkIfAdmin(adminId: string): boolean {
-        const userId = this.authService.getCurrentUser().uid;
-        return userId === adminId;
+        try {
+            const userId = this.authService.getCurrentUser().uid;
+            return userId === adminId;
+        } catch (e) {
+            return false;
+        }
     }
 
     /**
