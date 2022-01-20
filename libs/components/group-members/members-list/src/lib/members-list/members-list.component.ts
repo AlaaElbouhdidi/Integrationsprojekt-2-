@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User, Member } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -69,7 +69,8 @@ export class MembersListComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private userService: UserService,
         private alertService: AlertService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         this.currentUser = this.authService.getCurrentUser() || '';
         this.gid = this.route.parent?.snapshot.params['id'] || '';
@@ -100,12 +101,34 @@ export class MembersListComponent implements OnInit, OnDestroy {
         }
     }
 
-    toggleIsAdmin(m: Member) {
-        this.groupService.toggleIsAdmin(this.gid, m);
-        this.alertService.addAlert({
-            type: 'success',
-            message: 'Member updated'
-        });
+    async toggleIsAdmin(m: Member, modal: unknown) {
+        const result = await this.openConfirmationModal(modal);
+        if (!result) {
+            return;
+        }
+        try {
+            if (!m.uid) {
+                return;
+            }
+            await this.groupService.toggleIsAdmin(this.gid, m);
+            this.alertService.addAlert({
+                type: 'success',
+                message: 'Admin successfully updated'
+            });
+            const currentUrl = this.router.url;
+            this.router
+                .navigateByUrl('/', { skipLocationChange: true })
+                .then(() => {
+                    this.router.navigate([currentUrl]);
+                });
+        } catch (e) {
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+            }
+        }
     }
 
     sendInvitation(success: boolean) {
@@ -172,7 +195,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
      */
     async ngOnInit(): Promise<void> {
         try {
-            await this.groupService
+            this.groupService
                 .getAllMembers(this.gid)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((items) => {

@@ -111,6 +111,11 @@ main {
                     background: $successHover;
                 }
             }
+            .not-verified{
+                font-size: small;
+                font-style: italic;
+                color: $success;
+            }
         }
     }
     .groups-body {
