@@ -74,43 +74,45 @@ export class InviteMembersComponent {
      * @param event {MatChipInputEvent} Event
      */
     async add(event: MatChipInputEvent): Promise<void> {
-        const e = (event.value || '').trim();
+        const email = (event.value || '').trim();
         //Check if the email is valid
         const validRegex =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         // Add an email
-        if (e.match(validRegex)) {
+        if (email.match(validRegex)) {
             // Check if the email is already registred via only Email or via password
-            const state = await this.authService.emailIsAlreadyRegistred(e);
-            if (state === 0 || state === 1) {
+            if (await this.authService.emailIsAlreadyRegistered(email)) {
                 // Check if the email is already assigned to this group
                 const res = await this.groupService.isAlreadyMember(
                     this.gid,
-                    e
+                    email
                 );
                 const alreadyInvited =
-                    await this.groupService.invitationAlreadySent(e, this.gid);
+                    await this.groupService.invitationAlreadySent(
+                        email,
+                        this.gid
+                    );
                 if (alreadyInvited) {
                     this.isInvalid = true;
-                    this.errorMessage = `${e} has already been invited`;
+                    this.errorMessage = `${email} has already been invited`;
                     return;
                 }
                 if (res) {
                     this.isInvalid = true;
-                    this.errorMessage = `${e} is already assigned to the group`;
+                    this.errorMessage = `${email} is already assigned to the group`;
                 } else {
                     this.isInvalid = false;
                     this.errorMessage = '';
-                    this.emails.push(e);
+                    this.emails.push(email);
                 }
             } else {
                 this.isInvalid = true;
-                this.errorMessage = `${e} is is not registred`;
+                this.errorMessage = `${email} is is not registred`;
             }
         } else {
-            if (e != '') {
+            if (email != '') {
                 this.isInvalid = true;
-                this.errorMessage = `${e} is not correctly formatted`;
+                this.errorMessage = `${email} is not correctly formatted`;
             }
         }
         // Clear the input value

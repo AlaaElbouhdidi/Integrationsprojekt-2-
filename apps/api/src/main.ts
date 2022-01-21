@@ -19,12 +19,12 @@ export const createUser = functions
     .region('europe-west1')
     .auth.user()
     .onCreate((user: admin.auth.UserRecord) => {
-        const { uid, displayName, email } = user;
+        const { uid, displayName, email, photoURL } = user;
         return admin
             .firestore()
             .collection('users')
             .doc(uid)
-            .set({ uid, displayName, email });
+            .set({ uid, displayName, email, photoURL });
     });
 /**
  * The Cloud Function Auth Trigger that deletes a the user record in the database

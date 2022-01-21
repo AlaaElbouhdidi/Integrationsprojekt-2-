@@ -261,6 +261,23 @@ export class AuthService {
      *
      * @param email {string} The email to check
      */
+    async emailIsAlreadyRegistered(email: string): Promise<boolean> {
+        return (
+            (
+                await firebase
+                    .firestore()
+                    .collection('users')
+                    .where('email', '==', email)
+                    .get()
+            ).size === 1
+        );
+    }
+
+    /**
+     * Check if email is already registered
+     *
+     * @param email {string} The email to check
+     */
     async emailIsAlreadyRegistred(email: string): Promise<number> {
         const res = await firebase
             .auth()
