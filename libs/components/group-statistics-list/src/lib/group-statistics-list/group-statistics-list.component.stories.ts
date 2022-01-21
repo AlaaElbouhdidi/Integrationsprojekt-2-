@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<GroupStatisticsListComponent>;
 
+/**
+ * Template
+ *
+ * @param args {GroupStatisticsListComponent}
+ * @constructor
+ */
 const Template: Story<GroupStatisticsListComponent> = (
     args: GroupStatisticsListComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<GroupStatisticsListComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

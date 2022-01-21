@@ -6,15 +6,24 @@ export default {
     component: LoginComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<LoginComponent>;
 
+/**
+ * Template
+ *
+ * @param args {LoginComponent}
+ * @constructor
+ */
 const Template: Story<LoginComponent> = (args: LoginComponent) => ({
     component: LoginComponent,
-    props: args,
+    props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

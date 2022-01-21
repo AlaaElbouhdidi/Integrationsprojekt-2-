@@ -6,15 +6,24 @@ export default {
     component: LoaderComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<LoaderComponent>;
 
+/**
+ * Template
+ *
+ * @param args {LoaderComponent}
+ * @constructor
+ */
 const Template: Story<LoaderComponent> = (args: LoaderComponent) => ({
     component: LoaderComponent,
-    props: args,
+    props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

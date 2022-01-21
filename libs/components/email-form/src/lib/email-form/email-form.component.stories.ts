@@ -17,10 +17,19 @@ export default {
     ]
 } as Meta<EmailFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {EmailFormComponent}
+ * @constructor
+ */
 const Template: Story<EmailFormComponent> = (args: EmailFormComponent) => ({
     component: EmailFormComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

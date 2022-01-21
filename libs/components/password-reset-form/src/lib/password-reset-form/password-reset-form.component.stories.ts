@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<PasswordResetFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {PasswordResetFormComponent}
+ * @constructor
+ */
 const Template: Story<PasswordResetFormComponent> = (
     args: PasswordResetFormComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<PasswordResetFormComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};
