@@ -11,10 +11,19 @@ export default {
     ]
 } as Meta<SlideshowComponent>;
 
+/**
+ * Template
+ *
+ * @param args {SlideshowComponent}
+ * @constructor
+ */
 const Template: Story<SlideshowComponent> = (args: SlideshowComponent) => ({
     component: SlideshowComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

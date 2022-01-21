@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<ChangePasswordFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {ChangePasswordFormComponent}
+ * @constructor
+ */
 const Template: Story<ChangePasswordFormComponent> = (
     args: ChangePasswordFormComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<ChangePasswordFormComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

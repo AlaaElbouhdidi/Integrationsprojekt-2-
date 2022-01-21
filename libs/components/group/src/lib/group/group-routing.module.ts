@@ -12,8 +12,14 @@ import { GroupsComponent } from '@groups';
 import { GroupStatisticsListComponent } from '@group-statistics-list';
 import { GroupGuardGuard } from './group-guard.guard';
 
+/**
+ * Redirect unauthenticated user to landing page
+ */
 const redirectUnauthenticatedToHome = () => redirectUnauthorizedTo(['/']);
 
+/**
+ * Group route children
+ */
 const route = {
     path: 'group/:id',
     component: GroupComponent,
@@ -34,11 +40,19 @@ const route = {
         }
     ]
 };
+
+/**
+ * Group route
+ */
 const group = {
     path: 'group',
     component: GroupsComponent,
     ...canActivate(redirectUnauthenticatedToHome)
 };
+
+/**
+ * Routes
+ */
 const routes = [group, route];
 
 @NgModule({

@@ -31,7 +31,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class AppComponent {
     /**
      * Constructor of app component
-     * @param alertService {AlertService}
+     * @param alertService {AlertService} The alert service to display alerts with
      */
     constructor(public alertService: AlertService) {}
 }

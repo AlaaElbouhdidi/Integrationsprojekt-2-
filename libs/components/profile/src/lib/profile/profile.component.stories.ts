@@ -11,10 +11,19 @@ export default {
     ]
 } as Meta<ProfileComponent>;
 
+/**
+ * Template
+ *
+ * @param args {ProfileComponent}
+ * @constructor
+ */
 const Template: Story<ProfileComponent> = (args: ProfileComponent) => ({
     component: ProfileComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

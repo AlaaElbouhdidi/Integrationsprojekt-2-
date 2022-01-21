@@ -8,15 +8,30 @@ import {
     UserService
 } from '@services';
 
+/**
+ * Invite members component
+ */
 @Component({
     selector: 'mate-team-invite-members',
     templateUrl: './invite-members.component.html',
     styleUrls: ['./invite-members.component.scss']
 })
 export class InviteMembersComponent {
+    /**
+     * Selectable
+     */
     selectable = true;
+    /**
+     * Removable
+     */
     removable = true;
+    /**
+     * Add on blur
+     */
     addOnBlur = true;
+    /**
+     * separator key codes
+     */
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
     /**
      * the state of the input
@@ -26,12 +41,19 @@ export class InviteMembersComponent {
      * the error message when the state is wrong
      */
     errorMessage = '';
+    /**
+     * Emails
+     */
     emails: string[] = [];
     /**
      * created group id
      */
     @Input() gid = '';
+    /**
+     * Send invites event
+     */
     @Output() sendInvitesEvent = new EventEmitter<boolean>();
+
     /**
      * Constructor which initializes the reactive register form
      * @param groupService {GroupService}
@@ -46,6 +68,11 @@ export class InviteMembersComponent {
         private alertService: AlertService
     ) {}
 
+    /**
+     * Add email to list for group invitations
+     *
+     * @param event {MatChipInputEvent} Event
+     */
     async add(event: MatChipInputEvent): Promise<void> {
         const e = (event.value || '').trim();
         //Check if the email is valid
@@ -90,6 +117,11 @@ export class InviteMembersComponent {
         event.chipInput?.clear();
     }
 
+    /**
+     * Remove an email
+     *
+     * @param email {string} The email to remove
+     */
     remove(email: string): void {
         const index = this.emails.indexOf(email);
 
@@ -98,6 +130,9 @@ export class InviteMembersComponent {
         }
     }
 
+    /**
+     * Send group invites to specified emails
+     */
     async sendInvites(): Promise<void> {
         if (this.emails) {
             for (const email of this.emails) {

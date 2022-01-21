@@ -6,15 +6,24 @@ export default {
     component: LandingpageComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<LandingpageComponent>;
 
+/**
+ * Template
+ *
+ * @param args {LandingpageComponent}
+ * @constructor
+ */
 const Template: Story<LandingpageComponent> = (args: LandingpageComponent) => ({
     component: LandingpageComponent,
-    props: args,
+    props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

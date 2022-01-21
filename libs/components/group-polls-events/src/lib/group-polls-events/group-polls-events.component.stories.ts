@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<GroupPollsEventsComponent>;
 
+/**
+ * Template
+ *
+ * @param args {GroupPollsEventsComponent}
+ * @constructor
+ */
 const Template: Story<GroupPollsEventsComponent> = (
     args: GroupPollsEventsComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<GroupPollsEventsComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

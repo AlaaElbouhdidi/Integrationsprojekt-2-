@@ -3,6 +3,9 @@
  */
 import { Environment } from '@api-interfaces';
 
+/**
+ * Environment
+ */
 export const environment: Environment = {
     firebase: {
         apiKey: 'AIzaSyCF0w37bc980S6avy5lVCYZqHTw4RYkGjc',

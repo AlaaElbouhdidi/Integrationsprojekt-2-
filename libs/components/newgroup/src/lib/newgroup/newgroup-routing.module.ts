@@ -7,6 +7,9 @@ import {
 } from '@angular/fire/compat/auth-guard';
 import { map, pipe } from 'rxjs';
 
+/**
+ * Redirect unverified user to group view
+ */
 const redirectUnverifiedUser = () =>
     pipe(
         emailVerified,
@@ -19,6 +22,9 @@ const redirectUnverifiedUser = () =>
         })
     );
 
+/**
+ * Routes
+ */
 const routes: Routes = [
     {
         path: '',

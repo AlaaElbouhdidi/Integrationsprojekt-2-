@@ -6,17 +6,26 @@ export default {
     component: RegisterFormComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<RegisterFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {RegisterFormComponent}
+ * @constructor
+ */
 const Template: Story<RegisterFormComponent> = (
     args: RegisterFormComponent
 ) => ({
     component: RegisterFormComponent,
-    props: args,
+    props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

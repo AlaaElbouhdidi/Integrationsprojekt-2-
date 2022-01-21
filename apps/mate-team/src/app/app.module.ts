@@ -12,6 +12,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/**
+ * Socket configuration
+ */
 export const socketConfig: SocketIoConfig = {
     url: environment.clientUrl,
     options: {
@@ -53,6 +56,11 @@ export const socketConfig: SocketIoConfig = {
 })
 export class AppModule {}
 
+/**
+ * Get the id token from local storage
+ *
+ * @returns {string} The id token
+ */
 export function getIdToken(): string {
     return localStorage.getItem('idToken')?.replace('"', '') || 'undefined';
 }

@@ -20,6 +20,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { LoaderModule } from '@loader';
 
+/**
+ * Members list routes
+ */
 export const membersListRoutes: Route[] = [];
 
 @NgModule({

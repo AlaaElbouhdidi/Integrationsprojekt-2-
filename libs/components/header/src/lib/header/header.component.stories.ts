@@ -6,15 +6,24 @@ export default {
     component: HeaderComponent,
     decorators: [
         moduleMetadata({
-            imports: [],
-        }),
-    ],
+            imports: []
+        })
+    ]
 } as Meta<HeaderComponent>;
 
+/**
+ * Template
+ *
+ * @param args {HeaderComponent}
+ * @constructor
+ */
 const Template: Story<HeaderComponent> = (args: HeaderComponent) => ({
     component: HeaderComponent,
-    props: args,
+    props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

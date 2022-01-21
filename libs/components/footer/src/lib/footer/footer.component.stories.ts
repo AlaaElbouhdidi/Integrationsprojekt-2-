@@ -13,10 +13,19 @@ export default {
     ]
 } as Meta<FooterComponent>;
 
+/**
+ * Template
+ *
+ * @param args
+ * @constructor
+ */
 const Template: Story<FooterComponent> = (args: FooterComponent) => ({
     component: FooterComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

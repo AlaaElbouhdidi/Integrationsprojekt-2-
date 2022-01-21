@@ -8,8 +8,17 @@ import {
 import { Observable } from 'rxjs';
 import { getIdToken } from './app.module';
 
+/**
+ * JWT Interceptor
+ */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+    /**
+     * Intercept requests
+     *
+     * @param request {HttpRequest<unknown>}
+     * @param next {HttpEvent<unknown>}
+     */
     intercept(
         request: HttpRequest<unknown>,
         next: HttpHandler
