@@ -2,8 +2,14 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
+/**
+ * External url provider
+ */
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 
+/**
+ * App routes
+ */
 const routes: Routes = [
     {
         path: '',

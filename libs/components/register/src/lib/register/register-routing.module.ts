@@ -6,14 +6,23 @@ import {
     canActivate
 } from '@angular/fire/compat/auth-guard';
 
+/**
+ * Redirect authenticated user to group view
+ */
 const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/group']);
 
+/**
+ * Register route
+ */
 const route = {
     path: 'register',
     component: RegisterComponent,
     ...canActivate(redirectAuthenticatedToHome)
 };
 
+/**
+ * Routes
+ */
 const routes: Routes = [route];
 
 @NgModule({

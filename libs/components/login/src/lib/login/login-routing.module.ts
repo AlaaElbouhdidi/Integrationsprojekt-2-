@@ -6,14 +6,23 @@ import {
     redirectLoggedInTo
 } from '@angular/fire/compat/auth-guard';
 
+/**
+ * Redirect authenticated user to group view
+ */
 const redirectAuthenticatedToHome = () => redirectLoggedInTo(['/group']);
 
+/**
+ * Login route
+ */
 const route = {
     path: 'login',
     component: LoginComponent,
     ...canActivate(redirectAuthenticatedToHome)
 };
 
+/**
+ * Routes
+ */
 const routes: Routes = [route];
 
 @NgModule({
