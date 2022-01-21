@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { Group } from '@api-interfaces';
 import { GroupService } from '@services';
 
+/**
+ * Group setting component
+ */
 @Component({
     selector: 'mate-team-group-setting',
     templateUrl: './group-setting.component.html',
@@ -32,14 +35,19 @@ export class GroupSettingComponent implements OnInit {
      * the to be edited group
      */
     @Input() group = {} as Group;
-
+    /**
+     * Manage group event
+     */
     @Output() manageGroup = new EventEmitter();
+    /**
+     * Delete group event
+     */
     @Output() deleteGroupEvent = new EventEmitter<boolean>();
+
     /**
      * Constructor of group
      * @param router {Router}
      * @param groupService {GroupService}
-     * @param modalService {NgbModal}
      * @param fb {FormBuilder}
      */
     constructor(
@@ -55,12 +63,14 @@ export class GroupSettingComponent implements OnInit {
             description: new FormControl(null, Validators.maxLength(200))
         });
     }
+
     /**
      * @returns {AbstractControl} The name input control of the form
      */
     get name(): AbstractControl {
         return this.editGroupForm.controls.name;
     }
+
     /**
      * @returns {AbstractControl} The desription input control of the form
      */
@@ -69,28 +79,33 @@ export class GroupSettingComponent implements OnInit {
     }
 
     /**
-     * tthe to be edited group
+     * Emit manage group event with data
      */
-    applyChanges() {
+    applyChanges(): void {
         const data = {
             name: this.name.value,
             description: this.description.value
         };
         this.manageGroup.emit(data);
     }
+
     /**
-     * tthe to be edited group
+     * Emit manage group event with false value
      */
-    discard() {
+    discard(): void {
         this.manageGroup.emit(false);
     }
+
     /**
-     * the to be edited group
+     * Emit delete group event
      */
-    deleteGroup() {
+    deleteGroup(): void {
         this.deleteGroupEvent.emit(true);
     }
 
+    /**
+     * Component init
+     */
     ngOnInit(): void {
         this.editGroupForm.patchValue({
             name: this.group.name,

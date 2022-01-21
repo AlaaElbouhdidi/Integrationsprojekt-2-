@@ -28,6 +28,11 @@ export class EventParticipantsListComponent implements OnInit {
      */
     searchInput = '';
 
+    /**
+     * Constructor
+     * @param userService {UserService}
+     * @param alertService {AlertService}
+     */
     constructor(
         private userService: UserService,
         private alertService: AlertService

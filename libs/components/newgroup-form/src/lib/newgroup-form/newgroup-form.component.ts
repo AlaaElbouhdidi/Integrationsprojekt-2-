@@ -8,6 +8,10 @@ import {
 } from '@angular/forms';
 import { Member } from '@api-interfaces';
 import { AlertService, AuthService, GroupService } from '@services';
+
+/**
+ * New group form component
+ */
 @Component({
     selector: 'mate-team-newgroup-form',
     templateUrl: './newgroup-form.component.html',
@@ -22,6 +26,7 @@ export class NewgroupFormComponent implements OnInit {
      * Loading state
      */
     loading = false;
+
     /**
      * Constructor which initializes the reactive register form
      * @param fb {FormBuilder}
@@ -40,20 +45,23 @@ export class NewgroupFormComponent implements OnInit {
             description: new FormControl('')
         });
     }
+
     /**
      * @returns {AbstractControl} The name input control of the form
      */
     get name(): AbstractControl {
         return this.newGroupForm.controls.name;
     }
+
     /**
-     * @returns {AbstractControl} The desription input control of the form
+     * @returns {AbstractControl} The description input control of the form
      */
     get description(): AbstractControl {
         return this.newGroupForm.controls.description;
     }
+
     /**
-     * @returns {Member} The signed in user as the admin and the member of the to be created group
+     * @returns {Member} The signed-in user as the admin and the member of the to be created group
      */
     get member(): Member {
         const u = this.authService.getCurrentUser();
@@ -95,8 +103,9 @@ export class NewgroupFormComponent implements OnInit {
             });
         }
     }
+
     /**
-     * initialize the component handles success and error cases
+     * Initialize the component handles success and error cases
      */
     async ngOnInit(): Promise<void> {
         try {

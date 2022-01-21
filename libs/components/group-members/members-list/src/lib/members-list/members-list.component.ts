@@ -11,6 +11,9 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 import { itemAnimation, slideAnimation } from '@animations';
 
+/**
+ * Members list component
+ */
 @Component({
     selector: 'mate-team-members-list',
     templateUrl: './members-list.component.html',
@@ -62,6 +65,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
      * @param route {ActivatedRoute}
      * @param modalService {NgbModal}
      * @param userService {UserService}
+     * @param router {Router}
      */
     constructor(
         private groupService: GroupService,
@@ -76,6 +80,12 @@ export class MembersListComponent implements OnInit, OnDestroy {
         this.gid = this.route.parent?.snapshot.params['id'] || '';
     }
 
+    /**
+     * Delete a member
+     *
+     * @param m {Member} The member to delete
+     * @param modal {unknown} The modal reference of the confirmation modal
+     */
     async deleteMember(m: Member, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
@@ -101,7 +111,13 @@ export class MembersListComponent implements OnInit, OnDestroy {
         }
     }
 
-    async toggleIsAdmin(m: Member, modal: unknown) {
+    /**
+     * Update the admin of a group
+     *
+     * @param m {Member} The new admin of the group
+     * @param modal {unknown} The modal reference of the confirmation modal
+     */
+    async toggleIsAdmin(m: Member, modal: unknown): Promise<void> {
         const result = await this.openConfirmationModal(modal);
         if (!result) {
             return;
@@ -131,7 +147,12 @@ export class MembersListComponent implements OnInit, OnDestroy {
         }
     }
 
-    sendInvitation(success: boolean) {
+    /**
+     * Send invitation alert
+     *
+     * @param success {boolean} Indicating if sending invitation was successful
+     */
+    sendInvitation(success: boolean): void {
         if (success) {
             this.alertService.addAlert({
                 type: 'success',
@@ -150,7 +171,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
      *
      * @param content {unknown} The modal reference
      */
-    openModal(content: unknown) {
+    openModal(content: unknown): void {
         this.modalRef = this.modalService.open(content, {
             windowClass: 'dark-modal'
         });
@@ -161,7 +182,12 @@ export class MembersListComponent implements OnInit, OnDestroy {
     closeModal(): void {
         this.modalRef?.dismiss();
     }
-    /**fixed lint of added events and groups componentsise containing true if modal is closed and false if modal is dismissed
+
+    /**
+     * Open a confirmation modal
+     *
+     * @param content {unknown} The reference of the modal to open
+     * @returns Promise containing true if modal is closed and false if modal is dismissed
      */
     async openConfirmationModal(content: unknown): Promise<boolean> {
         this.confirmationModalRef = this.modalService.open(content, {
@@ -190,6 +216,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     closeConfirmationModal(ind: boolean): void {
         this.confirmationModalRef?.close(ind);
     }
+
     /**
      * Get members of group on component init
      */
@@ -225,6 +252,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
             }
         }
     }
+
     /**
      * Unsubscribe from observables
      */

@@ -3,6 +3,9 @@ import { AlertService, GroupService } from '@services';
 import { Subscription } from 'rxjs';
 import { slideAnimation } from '@animations';
 
+/**
+ * New group component
+ */
 @Component({
     selector: 'mate-team-newgroup',
     templateUrl: './newgroup.component.html',
@@ -10,8 +13,15 @@ import { slideAnimation } from '@animations';
     animations: [slideAnimation]
 })
 export class NewgroupComponent implements OnDestroy {
+    /**
+     * Success
+     */
     success = false;
+    /**
+     * Subscription
+     */
     subscription: Subscription;
+
     /**
      * Constructor of register component
      * @param alertService {AlertService}
@@ -25,8 +35,11 @@ export class NewgroupComponent implements OnDestroy {
             .onToggle()
             .subscribe((value) => (this.success = value != ''));
     }
-    ngOnDestroy() {
-        // Unsubscribe to ensure no memory leaks
+
+    /**
+     * Unsubscribe from subscriptions
+     */
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 }
