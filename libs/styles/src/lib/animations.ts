@@ -1,5 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
+/**
+ * Slide and fade in animation from the bottom
+ */
 export const slideAnimation = trigger('slideAnimation', [
     transition(':enter', [
         style({ opacity: 0, transform: 'translateY(2rem)' }),
@@ -7,6 +10,9 @@ export const slideAnimation = trigger('slideAnimation', [
     ])
 ]);
 
+/**
+ * Fade in animation for items
+ */
 export const itemAnimation = trigger('itemAnimation', [
     transition(':enter', [
         style({ opacity: 0 }),

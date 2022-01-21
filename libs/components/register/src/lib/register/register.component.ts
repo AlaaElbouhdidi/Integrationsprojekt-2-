@@ -14,7 +14,7 @@ import { slideAnimation } from '@animations';
 export class RegisterComponent {
     /**
      * Constructor of register component
-     * @param alertService {AlertService}
+     * @param alertService {AlertService} The alert service for displaying alerts
      */
     constructor(public alertService: AlertService) {}
 }

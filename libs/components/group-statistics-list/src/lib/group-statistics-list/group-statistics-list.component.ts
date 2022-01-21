@@ -5,6 +5,9 @@ import { Team } from '@api-interfaces';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { slideAnimation, itemAnimation } from '@animations';
 
+/**
+ * Group statistics list component
+ */
 @Component({
     selector: 'mate-team-group-statistics-list',
     templateUrl: './group-statistics-list.component.html',
@@ -38,6 +41,12 @@ export class GroupStatisticsListComponent implements OnInit {
      */
     modalRef: NgbModalRef | undefined;
 
+    /**
+     * Constructor of group statistics list
+     * @param eventService {EventService} The event service to handle events
+     * @param modalService {NgbModal}
+     * @param alertService {AlertService}
+     */
     constructor(
         public eventService: EventService,
         private modalService: NgbModal,
@@ -49,7 +58,7 @@ export class GroupStatisticsListComponent implements OnInit {
      *
      * @param eventID {string | undefined} ID of the current selected event
      */
-    getTeamsOfEvent(eventID: string | undefined) {
+    getTeamsOfEvent(eventID: string | undefined): void {
         this.currentEventID = eventID;
         this.eventService
             .getTeamsOfEvent(eventID)
@@ -61,7 +70,7 @@ export class GroupStatisticsListComponent implements OnInit {
      *
      * @param winnerID {string | undefined} ID of the winning team
      */
-    setWinner(winnerID: string | undefined) {
+    setWinner(winnerID: string | undefined): void {
         this.winningTeam.id = winnerID;
     }
 
@@ -70,7 +79,7 @@ export class GroupStatisticsListComponent implements OnInit {
      *
      * @param team {Team} the team which has been selected as winner
      */
-    async setWinningTeam(team: Team) {
+    async setWinningTeam(team: Team): Promise<void> {
         if (!team.id) {
             this.alertService.addAlert({
                 type: 'error',
@@ -101,6 +110,9 @@ export class GroupStatisticsListComponent implements OnInit {
         this.modalRef?.dismiss();
     }
 
+    /**
+     * Get finished events of group
+     */
     ngOnInit(): void {
         this.eventService
             .getDoneEventsOfGroup()

@@ -20,6 +20,12 @@ export class UserService {
         private authService: AuthService
     ) {}
 
+    /**
+     * Get a user by email
+     *
+     * @param email {string} The email of the user to get
+     * @returns {Promise<User>} The user
+     */
     async getUser(email: string): Promise<User> {
         let user: User = {} as User;
         await this.afs
@@ -41,6 +47,12 @@ export class UserService {
         return user;
     }
 
+    /**
+     * Get user by uid
+     *
+     * @param uid {string} The uid if the user to get
+     * @returns {Promise<User>} The user
+     */
     async getUserByUid(uid: string): Promise<User> {
         let user: User = {} as User;
         await this.afs
@@ -62,6 +74,13 @@ export class UserService {
         return user;
     }
 
+    /**
+     * Update the profile of a user
+     *
+     * @param uid {string} The uid of the user to update
+     * @param displayName {string} The new display name data
+     * @param photoURL {string} The new photo url data
+     */
     async updateProfile(
         uid: string,
         displayName?: string,

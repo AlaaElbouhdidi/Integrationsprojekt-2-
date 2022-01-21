@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<ChangeEmailFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {ChangeEmailFormComponent}
+ * @constructor
+ */
 const Template: Story<ChangeEmailFormComponent> = (
     args: ChangeEmailFormComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<ChangeEmailFormComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

@@ -11,10 +11,19 @@ export default {
     ]
 } as Meta<NewgroupComponent>;
 
+/**
+ * Template
+ *
+ * @param args {NewgroupComponent}
+ * @constructor
+ */
 const Template: Story<NewgroupComponent> = (args: NewgroupComponent) => ({
     component: NewgroupComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

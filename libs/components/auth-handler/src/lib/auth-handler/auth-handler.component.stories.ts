@@ -22,10 +22,19 @@ export default {
     ]
 } as Meta<AuthHandlerComponent>;
 
+/**
+ * Template
+ *
+ * @param args {AuthHandlerComponent}
+ * @constructor
+ */
 const Template: Story<AuthHandlerComponent> = (args: AuthHandlerComponent) => ({
     component: AuthHandlerComponent,
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};

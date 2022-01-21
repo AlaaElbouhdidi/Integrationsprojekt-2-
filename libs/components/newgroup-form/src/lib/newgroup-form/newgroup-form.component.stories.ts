@@ -11,6 +11,12 @@ export default {
     ]
 } as Meta<NewgroupFormComponent>;
 
+/**
+ * Template
+ *
+ * @param args {NewgroupFormComponent}
+ * @constructor
+ */
 const Template: Story<NewgroupFormComponent> = (
     args: NewgroupFormComponent
 ) => ({
@@ -18,5 +24,8 @@ const Template: Story<NewgroupFormComponent> = (
     props: args
 });
 
+/**
+ * Primary
+ */
 export const Primary = Template.bind({});
 Primary.args = {};
