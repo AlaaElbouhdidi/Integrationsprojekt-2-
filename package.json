@@ -41,7 +41,7 @@
         "all:build:dev": "nx run-many --target=build --all --parallel --configuration=development --skip-nx-cache",
         "all:build:prod": "nx run-many --target=build --all --parallel --skip-nx-cache",
         "all:lint": "nx run-many --target=lint --all --parallel --skip-nx-cache",
-        "all:doc": "nx run-many --target=compodoc --all --parallel --skip-nx-cache",
+        "all:doc": "npx compodoc -p apps/mate-team/tsconfig.compodoc.json -d dist/apps/api/docs/mate-team/",
         "all:build": "nx run-many --target=build --all --parallel --skip-nx-cache",
         "all:test": "nx run-many --target=test --all --parallel --skip-nx-cache",
         "all:e2e": "nx run-many --target=e2e --all --parallel --skip-nx-cache",
