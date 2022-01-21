@@ -64,6 +64,7 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
                 }
                 if (params['mode'] === 'verifyEmail') {
                     await this.handleEmailAction('verify');
+                    window.location.reload();
                 }
                 if (params['mode'] === 'recoverEmail') {
                     await this.handleEmailAction('recover');
@@ -79,11 +80,13 @@ export class AuthHandlerComponent implements OnInit, OnDestroy {
             await this.authService.verifyPasswordResetCode(this.code);
             this.codeChecked = true;
         } catch (e) {
-            this.alertService.addAlert({
-                type: 'error',
-                message: e.message
-            });
-            await this.router.navigate(['/']);
+            if (e instanceof Error) {
+                this.alertService.addAlert({
+                    type: 'error',
+                    message: e.message
+                });
+                await this.router.navigate(['/']);
+            }
         }
     }
 
