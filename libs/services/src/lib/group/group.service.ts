@@ -4,7 +4,6 @@ import {
     AngularFirestore,
     AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
-
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from '../user/user.service';
@@ -24,8 +23,15 @@ export class GroupService {
      * Group Collection
      */
     groupCollection: AngularFirestoreCollection<Group>;
-
+    /**
+     * Success
+     * @private
+     */
     private success = false;
+    /**
+     * Subject
+     * @private
+     */
     private subject = new BehaviorSubject<string>('');
 
     /**
@@ -152,6 +158,7 @@ export class GroupService {
      *
      * @param email {string} The email of the user to check
      * @param groupId {string} The id of the group to check the invitation for
+     * @returns {Promise<boolean>} True if invitation already sent, false if not
      */
     async invitationAlreadySent(
         email: string,
@@ -260,16 +267,34 @@ export class GroupService {
         );
     }
 
+    /**
+     * Toggle success
+     *
+     * @param gid {string} The id of the group
+     */
     toggleSuccess(gid: string): void {
         if (gid != '') {
             this.success = true;
         }
         this.subject.next(gid);
     }
+
+    /**
+     * On toggle
+     *
+     * @returns {Observable<string>} Observable containing string value
+     */
     onToggle(): Observable<string> {
         return this.subject.asObservable();
     }
 
+    /**
+     * Add a new group
+     *
+     * @param g {Group} The group to add
+     * @param m {Member} The members to add to the new group
+     * @returns {Promise<string>} The id of the added group
+     */
     async addNewGroup(g: Group, m: Member): Promise<string> {
         const groupId = await this.groupCollection.add(g).then((ref) => {
             this.groupCollection
@@ -300,6 +325,13 @@ export class GroupService {
         }
         return groupId;
     }
+
+    /**
+     * Add a member to a group
+     *
+     * @param gid {string} The id of the group to which the member gets added
+     * @param m {Member} The member to add
+     */
     async addMemberToGroup(gid: string, m: Member): Promise<void> {
         await this.groupCollection
             .doc(gid)
@@ -307,6 +339,14 @@ export class GroupService {
             .doc(m.email)
             .set(m);
     }
+
+    /**
+     * Checks if a user is already a member of a group
+     *
+     * @param gid {string} The id of the group to check
+     * @param email {string} The email of the user to check
+     * @returns {Promise<boolean>} Returns true if user is already member, false if not
+     */
     async isAlreadyMember(gid: string, email: string): Promise<boolean> {
         return await this.afs
             .collection('groups/' + gid + '/members/')
@@ -316,11 +356,25 @@ export class GroupService {
                 return qs.size > 0;
             });
     }
+
+    /**
+     * Get all members of a group
+     *
+     * @param gid {string} The id of the group to get the members of
+     * @returns {Observable<Member[]>} Observable containing the members of the group
+     */
     getAllMembers(gid: string): Observable<Member[]> {
         return this.afs
             .collection<Member>(`groups/${gid}/members`)
             .valueChanges();
     }
+
+    /**
+     * Delete a member from a group
+     *
+     * @param gid {string} The id of the group to delete the member from
+     * @param m {Member} The member to delete
+     */
     async deleteMember(gid: string, m: Member): Promise<void> {
         await this.afs
             .collection<Member>(`groups/${gid}/members`)
@@ -386,14 +440,23 @@ export class GroupService {
             });
         }
     }
-    toggleIsAdmin(gid: string, m: Member) {
-        this.afs
-            .collection(`groups`)
-            .doc(gid)
-            .update({ admin:  m.uid});
-    }
+
     /**
-     * update the name or the description of a group
+     * Update the admin of a group
+     *
+     * @param gid {string} The id of the group to update the admin of
+     * @param m {Member} The member to set as new admin
+     */
+    toggleIsAdmin(gid: string, m: Member) {
+        this.afs.collection(`groups`).doc(gid).update({ admin: m.uid });
+    }
+
+    /**
+     * Update the name or the description of a group
+     *
+     * @param gid {string} The id of the group to update
+     * @param name {string} The new name data
+     * @param description {string} The new description data
      */
     async updateGroup(
         gid: string,
@@ -405,8 +468,11 @@ export class GroupService {
             description: description
         });
     }
+
     /**
-     * delete a group
+     * Delete a group
+     *
+     * @param gid {string} The id of the group to delete
      */
     async deleteGroup(gid: string): Promise<void> {
         await this.afs
