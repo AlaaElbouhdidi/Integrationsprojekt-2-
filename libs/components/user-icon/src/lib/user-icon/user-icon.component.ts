@@ -56,6 +56,12 @@ export class UserIconComponent implements OnInit, OnChanges {
         if (this.userIconString.length === 0) {
             return;
         }
+        if (this.userIconString.startsWith('https')) {
+            this.iconColor = '#0c2d48';
+            this.icon = 'user';
+            this.iconBackground = '#ffffff';
+            return;
+        }
         this.setIconValues();
     }
 
@@ -64,6 +70,12 @@ export class UserIconComponent implements OnInit, OnChanges {
      */
     ngOnInit(): void {
         if (this.userIconString.length === 0) {
+            return;
+        }
+        if (this.userIconString.startsWith('https')) {
+            this.iconColor = '#0c2d48';
+            this.icon = 'user';
+            this.iconBackground = '#ffffff';
             return;
         }
         this.setIconValues();
