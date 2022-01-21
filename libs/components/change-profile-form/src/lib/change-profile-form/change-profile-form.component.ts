@@ -162,6 +162,19 @@ export class ChangeProfileFormComponent implements OnInit {
                 iconBackground: '#ffffff'
             });
         } else {
+            if (this.userIconString.startsWith('https')) {
+                const iconColor = '#0c2d48';
+                const icon = 'user';
+                const iconBackground = '#ffffff';
+                this.changeProfileForm.reset({
+                    displayName: this.userDisplayName,
+                    iconColor: iconColor,
+                    iconBackground: iconBackground
+                });
+                this.selectedIcon = icon;
+                this.updatePreviewIcon();
+                return;
+            }
             const [icon, iconColor, iconBackground] =
                 this.iconService.decodeIconString(this.userIconString);
             this.changeProfileForm.reset({
