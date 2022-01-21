@@ -99,7 +99,14 @@ export interface Poll {
      */
     usersVoted: string[];
 }
+
+/**
+ * Environment
+ */
 export interface Environment {
+    /**
+     * Firebase
+     */
     firebase: {
         projectId: string;
         appId: string;
@@ -108,16 +115,43 @@ export interface Environment {
         authDomain: string;
         messagingSenderId: string;
     };
+    /**
+     * Production
+     */
     production: boolean;
+    /**
+     * Port
+     */
     port: number;
+    /**
+     * API Url
+     */
     apiUrl: string;
+    /**
+     * Client URL
+     */
     clientUrl: string;
 }
 
+/**
+ * Member of a group
+ */
 export interface Member {
+    /**
+     * The unique identifier of the member
+     */
     uid?: string;
+    /**
+     * Indicates if user is admin of group
+     */
     isAdmin?: boolean;
+    /**
+     * Email of the member
+     */
     email?: string;
+    /**
+     * User data of the member
+     */
     user?: User;
 }
 
@@ -195,22 +229,67 @@ export interface Participant {
     icon: string;
 }
 
+/**
+ * Group
+ */
 export interface Group {
+    /**
+     * The id of the group
+     */
     id?: string;
+    /**
+     * The name of the group
+     */
     name?: string;
+    /**
+     * The description of the groupo
+     */
     description?: string;
+    /**
+     * The id of the group admin
+     */
     admin: string;
-    member?: Member[]; // Array of uid's
+    /**
+     * The members of the group
+     */
+    member?: Member[];
 }
 
+/**
+ * Game
+ */
 export interface Game {
+    /**
+     * The id of a game
+     */
     id?: string;
+    /**
+     * The group id of a game
+     */
     groupId: string;
+    /**
+     * The activity of a game
+     */
     activity: Activity;
+    /**
+     * First team id
+     */
     firstTeamId: string;
+    /**
+     * Second team id
+     */
     secondTeamId: string;
+    /**
+     * Date of the game
+     */
     date: Date;
+    /**
+     * First team score
+     */
     firstTeamScore?: number;
+    /**
+     * Second team score
+     */
     secondTeamScore?: number;
 }
 
@@ -246,16 +325,46 @@ export interface UpdateTeamParticipantsData {
     participant: Participant;
 }
 
+/**
+ * User
+ */
 export interface User {
+    /**
+     * The unique identifier of the user
+     */
     uid: string;
+    /**
+     * The email of the user
+     */
     email?: string;
+    /**
+     * Indicates if user has email verified
+     */
     emailVerified?: boolean;
+    /**
+     * The photo url of the user
+     */
     photoURL?: string;
+    /**
+     * List of group ids in which the user is a member or admin
+     */
     groups?: string[];
+    /**
+     * Display name of the user
+     */
     displayName?: string;
+    /**
+     * List of group ids from group to which the user is invited
+     */
     invitations?: string[];
 }
 
+/**
+ * Activity
+ */
 export enum Activity {
+    /**
+     * Soccer
+     */
     soccer = 'SOCCER_ACTIVITY'
 }

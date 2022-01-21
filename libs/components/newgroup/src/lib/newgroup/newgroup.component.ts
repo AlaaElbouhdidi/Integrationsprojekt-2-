@@ -24,7 +24,7 @@ export class NewgroupComponent implements OnDestroy {
 
     /**
      * Constructor of register component
-     * @param alertService {AlertService}
+     * @param alertService {AlertService} The alert service to display alerts with
      * @param groupService {GroupService}
      */
     constructor(

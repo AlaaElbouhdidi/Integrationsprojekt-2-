@@ -36,8 +36,8 @@ export class GroupService {
 
     /**
      * Constructor of group service
-     * @param afs {AngularFirestore}
-     * @param authService {AuthService},
+     * @param afs {AngularFirestore} The angular firestore
+     * @param authService {AuthService} The auth service to handle user authentication
      * @param userService {UserService}
      */
     constructor(

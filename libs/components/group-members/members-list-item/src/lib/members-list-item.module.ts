@@ -14,6 +14,9 @@ import {
     faUserTimes
 } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * Members list item routes
+ */
 export const membersListItemRoutes: Route[] = [];
 
 @NgModule({

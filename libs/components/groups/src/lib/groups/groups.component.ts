@@ -56,8 +56,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
     /**
      * Constructor groups component
-     * @param groupService {GroupService}
-     * @param eventService {EventService}
+     * @param groupService {GroupService} The group service to handle groups
+     * @param eventService {EventService} The event service to handle events
      * @param authService {AuthService}
      * @param alertService {AlertService}
      * @param userService {UserService}

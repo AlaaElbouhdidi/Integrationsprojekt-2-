@@ -43,7 +43,7 @@ export class GroupStatisticsListComponent implements OnInit {
 
     /**
      * Constructor of group statistics list
-     * @param eventService {EventService}
+     * @param eventService {EventService} The event service to handle events
      * @param modalService {NgbModal}
      * @param alertService {AlertService}
      */
