@@ -1,5 +1,7 @@
 # MateTeam
 
+![Screen-Recording-2022-03-02-at-17 29 08](https://user-images.githubusercontent.com/64467713/156405671-91ef5625-c0c3-44c8-a290-844f056f8832.gif)
+
 MateTeam is a team management site for you and your friends.
 
 * Manage your own groups or join existing
